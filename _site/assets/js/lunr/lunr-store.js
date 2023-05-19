@@ -10,4 +10,10 @@ var store = [{
         "tags": ["update"],
         "url": "/blog/welcome/",
         "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "Converting NiFi XML to JSON with NiFi",
+        "excerpt":"I wanted to work with some old nifi xml templates in DataFlow which requires new nifi json flow definition files. To get these templates converted I had to import them to an operational nifi, drag them onto the screen, and download the flow definition file I needed. This seemed like...","categories": ["blog"],
+        "tags": ["nifi"],
+        "url": "/blog/dataflow-xml-to-json/",
+        "teaser": "/assets/images/2023-05-19-dataflow-xml-to-json.png"
       }]
