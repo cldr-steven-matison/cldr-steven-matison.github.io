@@ -16,4 +16,10 @@ var store = [{
         "tags": ["nifi"],
         "url": "/blog/dataflow-xml-to-json/",
         "teaser": "/assets/images/2023-05-19-dataflow-xml-to-json.png"
+      },{
+        "title": "Contributing to NiFi-11608",
+        "excerpt":"Today I finished my second Pull Request on the Apache NiFi Project for JIRA NiFi 11608. This JIRA describes an issue with PutBigQuery proccessor evaluating expression language inside the processor’s properties for the Dataset and Tablename. I came into the issue when a community user posted a question asking why...","categories": ["blog"],
+        "tags": ["nifi"],
+        "url": "/blog/NIFI-11608/",
+        "teaser": "/assets/images/2023-05-31-NIFI%2011608-1.png"
       }]
