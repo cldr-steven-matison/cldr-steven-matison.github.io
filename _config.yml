@@ -105,7 +105,7 @@ analytics:
 # Site Author
 author:
   name             : "Steven Matison"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/SRM.png"
   bio              : "Hello, My name is Steven Matison and I am a Senior Solutions Engineer at Cloudera, Inc.  Check out my journey with Cloudera Data Platform (CDP)."
   location         : "Florida"
   email            : 
