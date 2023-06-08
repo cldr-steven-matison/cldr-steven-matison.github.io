@@ -28,4 +28,10 @@ var store = [{
         "tags": ["nifi"],
         "url": "/blog/Modern-NiFi-and-SSL/",
         "teaser": "/assets/images/2023-06-01-Modern%20NiFi%20and%20SSL.png"
+      },{
+        "title": "NiFi 1.22 Release Voting",
+        "excerpt":"In my previous post Contributing to NiFi-11608 I share a JIRA and associated PR I worked on which was included in the next 1.22 release of NiFi. As part of the release process nifi community members are allowed to vote. Here are the commands from my terminal to build, test,...","categories": ["blog"],
+        "tags": ["nifi"],
+        "url": "/blog/NiFi-1.22-Release-Voting/",
+        "teaser": "/assets/images/nifi-logo.png"
       }]
