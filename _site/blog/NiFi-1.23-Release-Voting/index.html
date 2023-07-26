@@ -1,4 +1,312 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2023-07-26T13:30:29-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">NiFi 1.23 Release Voting</title><link href="https://cldr-steven-matison.github.io//blog/NiFi-1.23-Release-Voting/" rel="alternate" type="text/html" title="NiFi 1.23 Release Voting" /><published>2023-07-26T00:00:00-04:00</published><updated>2023-07-26T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/NiFi%201.23%20Release%20Voting</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/NiFi-1.23-Release-Voting/"><![CDATA[<p>I have been so busy working on customer projects and with my intern that I have not had time to blog.   As time is flying by, here we are with another NiFi release voting process.  NiFi 1.23 is ready.  Here are the steps I executed on my machine to build and test NiFi 1.23</p>
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>NiFi 1.23 Release Voting - Cloudera Solutions Engineer</title>
+<meta name="description" content="I have been so busy working on customer projects and with my intern that I have not had time to blog.   As time is flying by, here we are with another NiFi release voting process.  NiFi 1.23 is ready.  Here are the steps I executed on my machine to build and test NiFi 1.23">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="NiFi 1.23 Release Voting">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/NiFi-1.23-Release-Voting/">
+
+
+  <meta property="og:description" content="I have been so busy working on customer projects and with my intern that I have not had time to blog.   As time is flying by, here we are with another NiFi release voting process.  NiFi 1.23 is ready.  Here are the steps I executed on my machine to build and test NiFi 1.23">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/nifi-logo.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-07-26T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/NiFi-1.23-Release-Voting/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io//"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <a class="site-title" href="/">
+          Cloudera Solutions Engineer
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&pageNum=1">Community</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io//">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io//" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Hello, My name is Steven Matison and I am a Senior Solutions Engineer at Cloudera, Inc.  Check out my journey with Cloudera Data Platform (CDP).</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="NiFi 1.23 Release Voting">
+    <meta itemprop="description" content="I have been so busy working on customer projects and with my intern that I have not had time to blog.   As time is flying by, here we are with another NiFi release voting process.  NiFi 1.23 is ready.  Here are the steps I executed on my machine to build and test NiFi 1.23">
+    <meta itemprop="datePublished" content="2023-07-26T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io//blog/NiFi-1.23-Release-Voting/" class="u-url" itemprop="url">NiFi 1.23 Release Voting
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          27 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>I have been so busy working on customer projects and with my intern that I have not had time to blog.   As time is flying by, here we are with another NiFi release voting process.  NiFi 1.23 is ready.  Here are the steps I executed on my machine to build and test NiFi 1.23</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wget</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">dist</span><span class="p">.</span><span class="nf">apache</span><span class="p">.</span><span class="nf">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nifi</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.23</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.23</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">release</span><span class="p">.</span><span class="nf">zip</span>
 <span class="n">wget</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">dist</span><span class="p">.</span><span class="nf">apache</span><span class="p">.</span><span class="nf">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nifi</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.23</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.23</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">release</span><span class="p">.</span><span class="nf">zip</span><span class="p">.</span><span class="nf">asc</span>
@@ -808,211 +1116,322 @@
 <span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">Total</span> <span class="ss">time:  </span><span class="mo">01</span><span class="p">:</span><span class="mi">17</span> <span class="n">h</span>
 <span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">Finished</span> <span class="ss">at: </span><span class="mi">2023</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">26</span><span class="no">T12</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mo">04</span><span class="o">-</span><span class="mo">04</span><span class="p">:</span><span class="mo">00</span>
 <span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-</code></pre></div></div>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><summary type="html"><![CDATA[I have been so busy working on customer projects and with my intern that I have not had time to blog. As time is flying by, here we are with another NiFi release voting process. NiFi 1.23 is ready. Here are the steps I executed on my machine to build and test NiFi 1.23]]></summary></entry><entry><title type="html">NiFi 1.22 Release Voting</title><link href="https://cldr-steven-matison.github.io//blog/NiFi-1.22-Release-Voting/" rel="alternate" type="text/html" title="NiFi 1.22 Release Voting" /><published>2023-06-08T00:00:00-04:00</published><updated>2023-06-08T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/NiFi%201.22%20Release%20Voting</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/NiFi-1.22-Release-Voting/"><![CDATA[<p>In my previous post <a href="https://cldr-steven-matison.github.io/blog/NIFI-11608/">Contributing to NiFi-11608</a> I share a JIRA and associated PR I worked on which was included in the next 1.22 release of NiFi.   As part of the release process nifi community members are allowed to vote.   Here are the commands from my terminal to build, test, and deploy an instance of nifi 1.22 for my release voting.</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wget</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">dist</span><span class="p">.</span><span class="nf">apache</span><span class="p">.</span><span class="nf">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nifi</span><span class="o">/</span><span class="no">KEYS</span>
-<span class="n">gpg</span> <span class="o">--</span><span class="n">import</span> <span class="no">KEYS</span>
-<span class="n">brew</span> <span class="n">install</span> <span class="n">gpg</span>
-<span class="n">gpg</span> <span class="o">--</span><span class="n">import</span> <span class="no">KEYS</span>
-<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">~</span><span class="sr">/.m2/</span><span class="n">repository</span><span class="o">/*</span>
-<span class="n">wget</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">dist</span><span class="p">.</span><span class="nf">apache</span><span class="p">.</span><span class="nf">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nifi</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">release</span><span class="p">.</span><span class="nf">zip</span><span class="p">\</span>
-<span class="n">wget</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">dist</span><span class="p">.</span><span class="nf">apache</span><span class="p">.</span><span class="nf">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nifi</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">release</span><span class="p">.</span><span class="nf">zip</span><span class="p">.</span><span class="nf">asc</span><span class="p">\</span>
-<span class="n">wget</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">dist</span><span class="p">.</span><span class="nf">apache</span><span class="p">.</span><span class="nf">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nifi</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">release</span><span class="p">.</span><span class="nf">zip</span><span class="p">.</span><span class="nf">sha256</span><span class="p">\</span>
-<span class="n">wget</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">dist</span><span class="p">.</span><span class="nf">apache</span><span class="p">.</span><span class="nf">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nifi</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">release</span><span class="p">.</span><span class="nf">zip</span><span class="p">.</span><span class="nf">sha512</span>
-<span class="n">gpg</span> <span class="o">--</span><span class="n">verify</span> <span class="o">-</span><span class="n">v</span> <span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">release</span><span class="p">.</span><span class="nf">zip</span><span class="p">.</span><span class="nf">asc</span>
-<span class="n">shasum</span> <span class="o">-</span><span class="n">a</span> <span class="mi">256</span> <span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">release</span><span class="p">.</span><span class="nf">zip</span><span class="p">\</span>
-<span class="n">shasum</span> <span class="o">-</span><span class="n">a</span> <span class="mi">512</span> <span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">release</span><span class="p">.</span><span class="nf">zip</span>
-<span class="n">unzip</span> <span class="o">-</span><span class="no">DD</span> <span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">source</span><span class="o">-</span><span class="n">release</span><span class="p">.</span><span class="nf">zip</span>
-<span class="n">cd</span> <span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span>
-<span class="no">JAVA_HOME</span><span class="o">=</span><span class="sb">`/usr/libexec/java_home -v 17`</span> <span class="n">mvn</span> <span class="n">clean</span> <span class="n">install</span> <span class="o">-</span><span class="no">DskipTests</span>
-<span class="n">cd</span> <span class="n">nifi</span><span class="o">-</span><span class="n">assembly</span><span class="o">/</span><span class="n">target</span><span class="o">/</span>
-<span class="n">unzip</span> <span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">bin</span><span class="p">.</span><span class="nf">zip</span>
-<span class="p">.</span><span class="nf">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">nifi</span><span class="p">.</span><span class="nf">sh</span> <span class="n">start</span>
-<span class="n">tail</span> <span class="o">-</span><span class="n">f</span> <span class="p">.</span><span class="nf">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">logs</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="n">app</span><span class="p">.</span><span class="nf">log</span>
 </code></pre></div></div>
 
-<p class="notice--warning"><strong>Watch out!</strong> Notice here I am specifying the version of java I want to build with, as my maven 3.9.2 rolls with java 20 and nifi 1.22 is not ready for 20 yet.</p>
+        
+      </section>
 
-<p>First build no tests</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">BUILD</span> <span class="no">SUCCESS</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">Total</span> <span class="ss">time:  </span><span class="mi">48</span><span class="p">:</span><span class="mi">20</span> <span class="n">min</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">Finished</span> <span class="ss">at: </span><span class="mi">2023</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mo">07</span><span class="no">T16</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mi">15</span><span class="o">-</span><span class="mo">04</span><span class="p">:</span><span class="mo">00</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-
-
-
-</code></pre></div></div>
-
-<p>My second build w/ tests:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">BUILD</span> <span class="no">SUCCESS</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">Total</span> <span class="ss">time:  </span><span class="mi">20</span><span class="p">:</span><span class="mi">19</span> <span class="n">min</span> <span class="p">(</span><span class="no">Wall</span> <span class="no">Clock</span><span class="p">)</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">Finished</span> <span class="ss">at: </span><span class="mi">2023</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mo">07</span><span class="no">T16</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">35</span><span class="o">-</span><span class="mo">04</span><span class="p">:</span><span class="mo">00</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-</code></pre></div></div>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><summary type="html"><![CDATA[In my previous post Contributing to NiFi-11608 I share a JIRA and associated PR I worked on which was included in the next 1.22 release of NiFi. As part of the release process nifi community members are allowed to vote. Here are the commands from my terminal to build, test, and deploy an instance of nifi 1.22 for my release voting.]]></summary></entry><entry><title type="html">NIFI SSL in Modern Versions of NiFi</title><link href="https://cldr-steven-matison.github.io//blog/Modern-NiFi-and-SSL/" rel="alternate" type="text/html" title="NIFI SSL in Modern Versions of NiFi" /><published>2023-06-01T00:00:00-04:00</published><updated>2023-06-01T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Modern%20NiFi%20and%20SSL</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Modern-NiFi-and-SSL/"><![CDATA[<p>My original experiences with NiFi and SSL were not something I would call fun or easy.  Literally hours and days were spent configuring nifi cluster nodes to communicate with each other using SSL and enabling https Nifi UI.  Adding access and authentication controls was even more hard work. Last but not least, configuring SSL Context Services to communicate with external https endpoints was always a challenge.   I am happy to report that it is very easy to install modern versions of NiFi.  Out of the box these versions comes fully secured with ssl and an initial user and password for login. No more fully exposed IP addresses w/ nifi canvas ready for abuse.  Join me as I explore a new nifi install and create 2 sample SSL Context Services.</p>
-
-<p>You can read the full article over at the Cloudera Community:</p>
-
-<p><a href="https://community.cloudera.com/t5/Community-Articles/NIFI-SSL-in-Modern-Versions-of-NiFi/ta-p/371937">NIFI SSL in Modern Versions of NiFi</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><summary type="html"><![CDATA[My original experiences with NiFi and SSL were not something I would call fun or easy. Literally hours and days were spent configuring nifi cluster nodes to communicate with each other using SSL and enabling https Nifi UI. Adding access and authentication controls was even more hard work. Last but not least, configuring SSL Context Services to communicate with external https endpoints was always a challenge. I am happy to report that it is very easy to install modern versions of NiFi. Out of the box these versions comes fully secured with ssl and an initial user and password for login. No more fully exposed IP addresses w/ nifi canvas ready for abuse. Join me as I explore a new nifi install and create 2 sample SSL Context Services.]]></summary></entry><entry><title type="html">Contributing to NiFi-11608</title><link href="https://cldr-steven-matison.github.io//blog/NIFI-11608/" rel="alternate" type="text/html" title="Contributing to NiFi-11608" /><published>2023-05-31T00:00:00-04:00</published><updated>2023-05-31T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/NIFI%2011608</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/NIFI-11608/"><![CDATA[<p>Today I finished my second Pull Request on the Apache NiFi Project for <a href="https://issues.apache.org/jira/projects/NIFI/issues/NIFI-11608">JIRA NiFi 11608</a>.  This JIRA describes an issue with PutBigQuery proccessor evaluating expression language inside the processor’s properties for the Dataset and Tablename.    I came into the issue when a community user posted a question asking why it was working in PutBigQueryBatch but not in PutBigQuery.</p>
-
-<p>You can find the PR here: <a href="https://github.com/apache/nifi/pull/7316">NiFi-11608</a></p>
-
-<p>Here are some useful commands I needed while building:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mvn</span> <span class="n">clean</span> <span class="n">install</span> <span class="o">-</span><span class="no">T2C</span> <span class="o">-</span><span class="n">am</span> <span class="o">-</span><span class="n">pl</span> <span class="ss">:nifi</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="n">nar</span>
-<span class="n">mvn</span> <span class="n">clean</span> <span class="n">install</span> <span class="o">-</span><span class="no">T2C</span> <span class="o">-</span><span class="n">am</span> <span class="o">-</span><span class="n">pl</span> <span class="ss">:nifi</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="n">nar</span> <span class="o">-</span><span class="no">DskipTests</span>
-
-</code></pre></div></div>
-
-<p>With a successful Build:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">Reactor</span> <span class="no">Summary</span> <span class="k">for</span> <span class="n">nifi</span> <span class="mf">2.0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="p">:</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> 
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span> <span class="o">...............................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.764</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">commons</span> <span class="o">.......................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.047</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">api</span> <span class="o">...........................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">6.779</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">framework</span><span class="o">-</span><span class="n">api</span> <span class="o">.................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">9.400</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">property</span><span class="o">-</span><span class="n">utils</span> <span class="o">................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">5.337</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">utils</span> <span class="o">.........................................</span> <span class="no">SUCCESS</span> <span class="p">[</span> <span class="mf">15.698</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">provenance</span><span class="o">-</span><span class="n">utils</span> <span class="o">.........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.718</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">deprecation</span><span class="o">-</span><span class="n">log</span> <span class="o">...............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">6.319</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">parameter</span> <span class="o">.....................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">8.521</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">uuid5</span> <span class="o">.........................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.476</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">expression</span><span class="o">-</span><span class="n">language</span> <span class="o">...........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">9.995</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">xml</span><span class="o">-</span><span class="n">processing</span> <span class="o">................................</span> <span class="no">SUCCESS</span> <span class="p">[</span> <span class="mf">14.941</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">json</span><span class="o">-</span><span class="n">utils</span> <span class="o">....................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">8.432</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">properties</span> <span class="o">....................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">8.851</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">security</span><span class="o">-</span><span class="n">utils</span><span class="o">-</span><span class="n">api</span> <span class="o">............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">4.559</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">security</span><span class="o">-</span><span class="n">utils</span> <span class="o">................................</span> <span class="no">SUCCESS</span> <span class="p">[</span> <span class="mf">12.868</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">record</span> <span class="o">........................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">8.626</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">security</span><span class="o">-</span><span class="n">kerberos</span><span class="o">-</span><span class="n">api</span> <span class="o">.........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.031</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">security</span><span class="o">-</span><span class="n">socket</span><span class="o">-</span><span class="n">ssl</span> <span class="o">...........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">3.519</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">security</span><span class="o">-</span><span class="n">ssl</span> <span class="o">..................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">5.460</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">c2</span> <span class="o">.................................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.049</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">c2</span><span class="o">-</span><span class="n">protocol</span> <span class="o">........................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.057</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">c2</span><span class="o">-</span><span class="n">protocol</span><span class="o">-</span><span class="n">component</span><span class="o">-</span><span class="n">api</span> <span class="o">..........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">3.423</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">nar</span><span class="o">-</span><span class="n">bundles</span> <span class="o">...................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.426</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">framework</span><span class="o">-</span><span class="n">bundle</span> <span class="o">..............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.053</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">framework</span> <span class="o">.....................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.022</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">dto</span> <span class="o">....................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">6.467</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">site</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">site</span><span class="o">-</span><span class="n">client</span> <span class="o">...........................</span> <span class="no">SUCCESS</span> <span class="p">[</span> <span class="mf">22.009</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">api</span> <span class="o">................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.726</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">api</span> <span class="o">....................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.929</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">nar</span><span class="o">-</span><span class="n">utils</span> <span class="o">.....................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">3.693</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">py4j</span><span class="o">-</span><span class="n">bundle</span> <span class="o">...................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.044</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">python</span><span class="o">-</span><span class="n">framework</span><span class="o">-</span><span class="n">api</span> <span class="o">..........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.981</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">manifest</span> <span class="o">......................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.050</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">extension</span><span class="o">-</span><span class="n">manifest</span><span class="o">-</span><span class="n">model</span> <span class="o">......................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.625</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">extension</span><span class="o">-</span><span class="n">manifest</span><span class="o">-</span><span class="n">parser</span> <span class="o">.....................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">4.428</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">manifest</span><span class="o">-</span><span class="n">core</span> <span class="o">.........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">3.493</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">framework</span><span class="o">-</span><span class="n">nar</span><span class="o">-</span><span class="n">utils</span> <span class="o">...........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.533</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">mock</span><span class="o">-</span><span class="n">authorizer</span> <span class="o">...............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.890</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">framework</span><span class="o">-</span><span class="n">authorization</span> <span class="o">.......................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.488</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">framework</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">api</span> <span class="o">............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">3.129</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">mock</span> <span class="o">..........................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.370</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">standard</span><span class="o">-</span><span class="n">services</span> <span class="o">.............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.037</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">serialization</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">..............</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.108</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">schema</span><span class="o">-</span><span class="n">registry</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">...................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.676</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">extension</span><span class="o">-</span><span class="n">utils</span> <span class="o">...............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.044</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">utils</span> <span class="o">..................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.026</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">standard</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">utils</span> <span class="o">.........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">3.707</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">schema</span><span class="o">-</span><span class="n">inference</span><span class="o">-</span><span class="n">utils</span> <span class="o">........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.380</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">json</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">utils</span> <span class="o">.............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.080</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">jetty</span><span class="o">-</span><span class="n">bundle</span> <span class="o">..................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.610</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">kerberos</span><span class="o">-</span><span class="n">credentials</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">..............</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.404</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">kerberos</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">.....................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.386</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">distributed</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">..........</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.366</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">ssl</span><span class="o">-</span><span class="n">context</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">.......................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.798</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">http</span><span class="o">-</span><span class="n">context</span><span class="o">-</span><span class="n">map</span><span class="o">-</span><span class="n">api</span> <span class="o">..........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.404</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">dbcp</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">..............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.252</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">hbase</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">......................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.881</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">oauth2</span><span class="o">-</span><span class="n">provider</span><span class="o">-</span><span class="n">api</span> <span class="o">...........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">5.617</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">rules</span><span class="o">-</span><span class="n">engine</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">......................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.989</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">lookup</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.089</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">proxy</span><span class="o">-</span><span class="n">configuration</span><span class="o">-</span><span class="n">api</span> <span class="o">.......................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.717</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">sink</span><span class="o">-</span><span class="n">api</span> <span class="o">...............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.844</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">provider</span><span class="o">-</span><span class="n">bundle</span> <span class="o">....................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.030</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">provider</span><span class="o">-</span><span class="n">api</span> <span class="o">.......................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.877</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">service</span><span class="o">-</span><span class="n">api</span> <span class="o">...............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.312</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">standard</span><span class="o">-</span><span class="n">services</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">nar</span> <span class="o">.....................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.262</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">avro</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">utils</span> <span class="o">.............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">3.744</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">mock</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">utils</span> <span class="o">.............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.034</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">listed</span><span class="o">-</span><span class="n">entity</span> <span class="o">.................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.504</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">syslog</span><span class="o">-</span><span class="n">utils</span> <span class="o">..................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.623</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">serialization</span><span class="o">-</span><span class="n">services</span><span class="o">-</span><span class="n">bundle</span> <span class="o">..........</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.029</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">record</span><span class="o">-</span><span class="n">serialization</span><span class="o">-</span><span class="n">services</span> <span class="o">.................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">6.567</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="n">bundle</span> <span class="o">....................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.046</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="n">services</span><span class="o">-</span><span class="n">api</span> <span class="o">..............................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">3.218</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="n">services</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">nar</span> <span class="o">..........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">0.281</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">conflict</span><span class="o">-</span><span class="n">resolution</span> <span class="o">...........................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">2.504</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="n">processors</span> <span class="o">................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">7.915</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="n">parameter</span><span class="o">-</span><span class="n">providers</span> <span class="o">.......................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">4.214</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="n">nifi</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="n">nar</span> <span class="o">.......................................</span> <span class="no">SUCCESS</span> <span class="p">[</span>  <span class="mf">1.291</span> <span class="n">s</span><span class="p">]</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">BUILD</span> <span class="no">SUCCESS</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">Total</span> <span class="ss">time:  </span><span class="mo">01</span><span class="p">:</span><span class="mi">18</span> <span class="n">min</span> <span class="p">(</span><span class="no">Wall</span> <span class="no">Clock</span><span class="p">)</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="no">Finished</span> <span class="ss">at: </span><span class="mi">2023</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">31</span><span class="no">T07</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mo">01</span><span class="o">-</span><span class="mo">04</span><span class="p">:</span><span class="mo">00</span>
-<span class="p">[</span><span class="no">INFO</span><span class="p">]</span> <span class="o">------------------------------------------------------------------------</span>
-</code></pre></div></div>
-
-<p>I was able to copy the new nifi-gcp-nar straight into a local nifi on my desktop and test it directly:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="n">cp</span> <span class="p">.</span><span class="nf">m2</span><span class="o">/</span><span class="n">repository</span><span class="o">/</span><span class="n">org</span><span class="o">/</span><span class="n">apache</span><span class="o">/</span><span class="n">nifi</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="n">nar</span><span class="o">/</span><span class="mf">2.0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="n">nar</span><span class="o">-</span><span class="mf">2.0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="p">.</span><span class="nf">nar</span> <span class="sr">/Users/s</span><span class="n">teven</span><span class="p">.</span><span class="nf">matison</span><span class="o">/</span><span class="n">nifi</span><span class="o">-</span><span class="mf">1.21</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span>
-</code></pre></div></div>
-<p class="notice--success"><strong>Wow!</strong> I have to say, this new drop in nar functionality they added to NiFi is super helpful.  Way to go to the NiFi Team for this big win!!</p>
-
-<p>With the new nar added to the nifi lib I can see the original processor and my new processor:</p>
-
-<figure>
+      <footer class="page__meta">
+        
+        
   
-<img src="/assets/images/2023-05-31-NIFI%2011608.png" alt="Foo" />
 
-  <figcaption>
-</figcaption>
-</figure>
 
-<p class="notice--warning"><strong>Watch out!</strong> PutBigQueryBatch and PutBiqQueryStreaming are going away in nifi 2.0, so getting the PutBigQuery processor working was a much needed contribution.</p>
-
-<p>Now I can begin to test the new processor side by side with the old processor:</p>
-
-<figure>
   
-<img src="/assets/images/2023-05-31-NIFI%2011608-1.png" alt="Foo" />
 
-  <figcaption>
-</figcaption>
-</figure>
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
+    
+    </span>
+  </p>
 
-<p>Contributing to the open source project NiFi is very important to me here @ Cloudera.   I am a firm believer in the open source community and look for chances to be helpful in this space.    Watch for more to come as I work on more NiFi projects and document them here in my blog.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><summary type="html"><![CDATA[Today I finished my second Pull Request on the Apache NiFi Project for JIRA NiFi 11608. This JIRA describes an issue with PutBigQuery proccessor evaluating expression language inside the processor’s properties for the Dataset and Tablename. I came into the issue when a community user posted a question asking why it was working in PutBigQueryBatch but not in PutBigQuery.]]></summary></entry><entry><title type="html">Converting NiFi XML to JSON with NiFi</title><link href="https://cldr-steven-matison.github.io//blog/dataflow-xml-to-json/" rel="alternate" type="text/html" title="Converting NiFi XML to JSON with NiFi" /><published>2023-05-19T00:00:00-04:00</published><updated>2023-05-19T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/dataflow-xml-to-json</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/dataflow-xml-to-json/"><![CDATA[<p>I wanted to work with some old nifi xml templates in DataFlow which requires new nifi json flow definition files.  To get these templates converted I had to import them to an operational nifi, drag them onto the screen, and download the flow definition file I needed.  This seemed like a job for NiFi, not for me.   Since templates are going away,  I would suspect someday to see the upload template feature to go away in future nifi releases.  This potentially leaves a gap that I realized I could build an API to fill.</p>
 
-<p>Enter NIFI Rest API <a href="https://nifi.apache.org/docs/nifi-docs/rest-api/index.html">docs</a></p>
 
-<p>After a few working sessions I was able to come up with a nifi api using HandleHttpRequest/HandleHttpResponse with 4 internal Nifi Rest API calls using InvokeHttp.   You simply post an XML file to this api and the api will respond with HTTP 200 and the JSON flow definition file.</p>
 
-<figure>
   
-<img src="/assets/images/2023-05-19-dataflow-xml-to-json.png" alt="Foo" />
 
-  <figcaption>
-</figcaption>
-</figure>
 
-<p>You can find the Flow Definition File for my flow here:</p>
+  
 
-<p><a href="https://github.com/cldr-steven-matison/NiFi-Templates/blob/main/NiFi_Template_XML_to_Flow_Definition_JSON.json">NiFi_Template_XML_to_Flow_Definition_JSON</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><summary type="html"><![CDATA[I wanted to work with some old nifi xml templates in DataFlow which requires new nifi json flow definition files. To get these templates converted I had to import them to an operational nifi, drag them onto the screen, and download the flow definition file I needed. This seemed like a job for NiFi, not for me. Since templates are going away, I would suspect someday to see the upload template feature to go away in future nifi releases. This potentially leaves a gap that I realized I could build an API to fill.]]></summary></entry><entry><title type="html">Newest NiFi @Cloudera</title><link href="https://cldr-steven-matison.github.io//blog/dataflow/" rel="alternate" type="text/html" title="Newest NiFi @Cloudera" /><published>2023-05-18T00:00:00-04:00</published><updated>2023-05-18T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/dataflow</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/dataflow/"><![CDATA[<p>I wrote my first @Cloudera Community article on how to Operationalize NiFi with CDP Public Cloud’s DataFlow Data Service.   NiFi is something I have been excited about for a very long time.   A major focus of this blog and my social media content will be around all of the new cool things Cloudera is doing with NiFi.</p>
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
 
-<p>You can read the full article over at the Cloudera Community:</p>
 
-<p><a href="https://community.cloudera.com/t5/Community-Articles/Operationalize-NiFi-data-flows-with-Cloudera-DataFlow/ta-p/370577">Operationalize NiFi data flows with Cloudera DataFlow</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><summary type="html"><![CDATA[I wrote my first @Cloudera Community article on how to Operationalize NiFi with CDP Public Cloud’s DataFlow Data Service. NiFi is something I have been excited about for a very long time. A major focus of this blog and my social media content will be around all of the new cool things Cloudera is doing with NiFi.]]></summary></entry><entry><title type="html">Welcome to My Cloudera Blog!</title><link href="https://cldr-steven-matison.github.io//blog/welcome/" rel="alternate" type="text/html" title="Welcome to My Cloudera Blog!" /><published>2023-05-17T00:00:00-04:00</published><updated>2023-05-17T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/welcome</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/welcome/"><![CDATA[<p>This is my first post for my new GitHub Pages deployed website.   This was something I did in my previous role @Datastax and you can find that page <a href="https://ds-steven-matison.github.io">here</a>.  Please give me some time to get familar with the Minimal Mistakes theme and the changes in capability and functionality with this jekyll github.io page.</p>
+        
 
-<p>In this blog I am going share all of the things that I have found around me in the Cloudera Data Platform.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="update" /><summary type="html"><![CDATA[This is my first post for my new GitHub Pages deployed website. This was something I did in my previous role @Datastax and you can find that page here. Please give me some time to get familar with the Minimal Mistakes theme and the changes in capability and functionality with this jekyll github.io page.]]></summary></entry></feed>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-07-26T00:00:00-04:00">July 26, 2023</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=NiFi+1.23+Release+Voting%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-1.23-Release-Voting%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-1.23-Release-Voting%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-1.23-Release-Voting%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/NiFi-1.22-Release-Voting/" class="pagination--pager" title="NiFi 1.22 Release Voting
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/nifi-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/NiFi-1.22-Release-Voting/" rel="permalink">NiFi 1.22 Release Voting
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">In my previous post Contributing to NiFi-11608 I share a JIRA and associated PR I worked on which was included in the next 1.22 release of NiFi.   As part of...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2023-06-01-Modern%20NiFi%20and%20SSL.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Modern-NiFi-and-SSL/" rel="permalink">NIFI SSL in Modern Versions of NiFi
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">My original experiences with NiFi and SSL were not something I would call fun or easy.  Literally hours and days were spent configuring nifi cluster nodes to...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2023-05-31-NIFI%2011608-1.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/NIFI-11608/" rel="permalink">Contributing to NiFi-11608
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Today I finished my second Pull Request on the Apache NiFi Project for JIRA NiFi 11608.  This JIRA describes an issue with PutBigQuery proccessor evaluating ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2023-05-19-dataflow-xml-to-json.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/dataflow-xml-to-json/" rel="permalink">Converting NiFi XML to JSON with NiFi
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">I wanted to work with some old nifi xml templates in DataFlow which requires new nifi json flow definition files.  To get these templates converted I had to ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
