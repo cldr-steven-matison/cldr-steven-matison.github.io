@@ -40,4 +40,10 @@ var store = [{
         "tags": ["nifi"],
         "url": "/blog/NiFi-1.23-Release-Voting/",
         "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "NiFi For Dummies Second Edition",
+        "excerpt":"Last year I had the amazing opportunity to transpose Mark Payne’s 4 video series on NiFi Best Practices into text for the Second Edition of the NiFi For Dummies book. You can find those Nifi Best Practices starting first video here: If you are looking for the NiFi For Dummies...","categories": ["blog"],
+        "tags": ["nifi"],
+        "url": "/blog/NiFi-For-Dummies/",
+        "teaser": "/assets/images/thumb-apache-nifi-for-dummies.png"
       }]
