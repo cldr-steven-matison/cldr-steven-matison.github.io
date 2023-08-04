@@ -42,7 +42,7 @@ var store = [{
         "teaser": "/assets/images/nifi-logo.png"
       },{
         "title": "NiFi For Dummies Second Edition",
-        "excerpt":"Last year I had the amazing opportunity to transpose Mark Payne’s 4 video series on NiFi Best Practices into text for the Second Edition of the NiFi For Dummies book. You can find those Nifi Best Practices starting first video here: If you are looking for the NiFi For Dummies...","categories": ["blog"],
+        "excerpt":"Last year I had the amazing opportunity to transpose Mark Payne’s 4 video series on NiFi Best Practices into text for the Second Edition of the NiFi For Dummies book. You can find those Nifi Best Practices videos here: Apache NiFi Anti-Patterns Part 1 Apache NiFi Anti-Patterns Part 2 Apache...","categories": ["blog"],
         "tags": ["nifi"],
         "url": "/blog/NiFi-For-Dummies/",
         "teaser": "/assets/images/thumb-apache-nifi-for-dummies.png"
