@@ -46,4 +46,10 @@ var store = [{
         "tags": ["nifi"],
         "url": "/blog/NiFi-For-Dummies/",
         "teaser": "/assets/images/thumb-apache-nifi-for-dummies.png"
+      },{
+        "title": "NiFi 1.23.1 Release Voting",
+        "excerpt":"Once again, here we are with another NiFi release voting process. NiFi 1.23.1 is ready. At this point after 3 releases, the process is easy for me to duplicate. Below are the steps I executed on my machine to build and test NiFi 1.23.1: wget https://dist.apache.org/repos/dist/dev/nifi/nifi-1.23.1/nifi-1.23.1-source-release.zip wget https://dist.apache.org/repos/dist/dev/nifi/nifi-1.23.1/nifi-1.23.1-source-release.zip.asc wget https://dist.apache.org/repos/dist/dev/nifi/nifi-1.23.1/nifi-1.23.1-source-release.zip.sha256...","categories": ["blog"],
+        "tags": ["nifi"],
+        "url": "/blog/NiFi-1.23.1-Release-Voting/",
+        "teaser": "/assets/images/nifi-logo.png"
       }]
