@@ -52,4 +52,10 @@ var store = [{
         "tags": ["nifi"],
         "url": "/blog/NiFi-1.23.1-Release-Voting/",
         "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "CDP Sql Stream Builder Iceberg Demo",
+        "excerpt":"CDP 7.1.9 came out recently alongside CSA 1.11.  These releases brought some new features around flink and iceberg and I had the opportunity to create a sample project showing the capability.   SSB-Iceberg-Demo  ","categories": ["blog"],
+        "tags": ["ssb"],
+        "url": "/blog/SSB-Iceberg-Demo/",
+        "teaser": "/assets/images/2023-05-18-dataflow.png"
       }]
