@@ -18,6 +18,7 @@ I finally got a chance to test out the CDP Data In Motion Trial within Cloudera'
 
 One more click into DataFlow and I have access to all the newest NiFi features:
 
+  * Deployment Dashboard
   * DataFlow Catalog
   * ReadyFlow Gallery
   * (New) Flow Designer
