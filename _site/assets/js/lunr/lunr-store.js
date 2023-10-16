@@ -58,4 +58,10 @@ var store = [{
         "tags": ["ssb"],
         "url": "/blog/SSB-Iceberg-Demo/",
         "teaser": "/assets/images/2023-05-18-dataflow.png"
+      },{
+        "title": "Cloudera Public Cloud 5 Day Trial",
+        "excerpt":"I finally got a chance to test out the CDP Data In Motion Trial within Cloudera’s new 5 Day Public Cloud Trial. I followed the link below and within 24 hours after signing up I got an email with a link to get started. Three simple clicks later I am...","categories": ["blog"],
+        "tags": ["nifi"],
+        "url": "/blog/CDP-5-Day-Trial/",
+        "teaser": "/assets/images/2023-10-16-cdptrial.png"
       }]
