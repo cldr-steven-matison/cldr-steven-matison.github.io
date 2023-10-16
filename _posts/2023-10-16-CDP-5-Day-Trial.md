@@ -32,7 +32,7 @@ One more click into DataFlow and I have access to all the newest NiFi features:
 
 To get started with your free five day trial of CDP Public Cloud DataFlow Data Services follow this link:
 
-[5 Day Tial](https://console.us-west-1.cdp.cloudera.com/trial/register.html#/)
+[CDP Public Cloud 5 Day Trial](https://console.us-west-1.cdp.cloudera.com/trial/register.html#/)
 
 Here is a guide you can follow as well:
 
