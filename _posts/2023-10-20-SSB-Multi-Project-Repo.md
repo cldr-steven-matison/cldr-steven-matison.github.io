@@ -10,7 +10,7 @@ tags:
   - flink
 ---
 
-I think I am always learning something new with Cloudera's Flink tool, [Sql Stream Builder](https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-intro.html).   I have been demo-ing in it for almost 2 years going back to a [Fraud Detection Demo](https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB) that Andre built, to multiple customer facing POCs, to current releases with Iceberg features for my customers.   Today a lightbulb went off in my head around the Github Source Control Integration and the Project Name.   I tried a commit to create a second project folder within the main repo as such:
+I think I am always learning something new with Cloudera's Flink tool, [Sql Stream Builder](https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-intro.html).   I have been demo-ing in it for almost 2 years going back to a [Fraud Detection Demo](https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB) that Andre built, to multiple customer facing POCs, to current releases with Iceberg features for my customers.   Today a lightbulb went off in my head around the Github Source Control Integration and the Project Name.   I tried a commit to create a second project folder within the [SSBDemo](https://github.com/cldr-steven-matison/SSBDemo) main repo as such:
 
 
 <figure>
