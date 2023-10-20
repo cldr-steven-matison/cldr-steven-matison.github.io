@@ -64,4 +64,10 @@ var store = [{
         "tags": ["nifi"],
         "url": "/blog/CDP-5-Day-Trial/",
         "teaser": "/assets/images/2023-10-16-cdptrial.png"
+      },{
+        "title": "Cloudera SQL Stream Builder Multiple Project Repo",
+        "excerpt":"I think I am always learning something new with Cloudera’s Flink tool, Sql Stream Builder. I have been demo-ing in it for almost 2 years going back to a Fraud Detection Demo that Andre built, to multiple customer facing POCs, to current releases with Iceberg features for my customers. Today...","categories": ["blog"],
+        "tags": ["ssb","cdp","flink"],
+        "url": "/blog/SSB-Multi-Project-Repo/",
+        "teaser": "/assets/images/2023-10-20-SSB-Multi-Project-Repo-3.png"
       }]
