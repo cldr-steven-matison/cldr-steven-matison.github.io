@@ -1,7 +1,7 @@
 var store = [{
         "title": "Welcome to My Cloudera Blog!",
         "excerpt":"This is my first post for my new GitHub Pages deployed website. This was something I did in my previous role @Datastax and you can find that page here. Please give me some time to get familar with the Minimal Mistakes theme and the changes in capability and functionality with...","categories": ["blog"],
-        "tags": ["update"],
+        "tags": ["cdp"],
         "url": "/blog/welcome/",
         "teaser": "/assets/images/SRM.png"
       },{
@@ -70,4 +70,10 @@ var store = [{
         "tags": ["ssb","cdp","flink"],
         "url": "/blog/SSB-Multi-Project-Repo/",
         "teaser": "/assets/images/2023-10-20-SSB-Multi-Project-Repo-3.png"
+      },{
+        "title": "Cloudera SQL Stream Builder Compatibility between CDP Public Cloud and CDP Private Cloud.",
+        "excerpt":"In my previous post Cloudera SQL Stream Builder Multiple Project Repo I described how I was able to create a separate folder in the project repo to use for a cloud deployment. That worked great, but I am more happy to report that I was able to remove all the...","categories": ["blog"],
+        "tags": ["ssb","cdp","flink"],
+        "url": "/blog/SSB-CDP-PC-PVC-Compatibility/",
+        "teaser": "/assets/images/2023-11-03-SSB-Data-Hub-Service-Discovery.png"
       }]
