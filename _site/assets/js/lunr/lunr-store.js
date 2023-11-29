@@ -76,4 +76,16 @@ var store = [{
         "tags": ["ssb","cdp","flink"],
         "url": "/blog/SSB-CDP-PC-PVC-Compatibility/",
         "teaser": "/assets/images/2023-11-03-SSB-Data-Hub-Service-Discovery.png"
+      },{
+        "title": "NiFi 2.0 is Getting Hot",
+        "excerpt":"NiFi 2.0 is getting closer and closer to a reality as we approach the end of 2023. Version 2.0.0-M1 was released November 25, 2023 and is the first milestone version of Apache NiFi 2.0.0. This version includes over 900 issues resolved, with new features, numerous improvements, and bug fixes. Features...","categories": ["blog"],
+        "tags": ["nifi"],
+        "url": "/blog/NiFi-2.0/",
+        "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "Cloudera SQL Stream Builder Introducing DLQ",
+        "excerpt":"Yesterday one of my customers asked about the ability to control deserialization errors in SSB applications. Referencing our Dead Letter Queue Documentation within the Deserialize Tab we can see there are quite a few options for exception handling: Deserialization Failure Handler Policy This is actually a very important feature. In...","categories": ["blog"],
+        "tags": ["ssb","cdp","flink"],
+        "url": "/blog/SSB-Dead-Letter-Queue/",
+        "teaser": "/assets/images/2023-11-29-SSB-Dead-Letter-Queue.png"
       }]
