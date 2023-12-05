@@ -88,4 +88,10 @@ var store = [{
         "tags": ["ssb","cdp","flink"],
         "url": "/blog/SSB-Dead-Letter-Queue/",
         "teaser": "/assets/images/2023-11-29-SSB-Dead-Letter-Queue.png"
+      },{
+        "title": "Time Travel with Sql Stream Builder and Iceberg",
+        "excerpt":"I have been working on my SSB Iceberg Demo for going on 2 months now. This past week I have had a chance to build out some Iceberg Time Travel capabilities. I have the code and samples added to my SSB Iceberg Demo but a more interesting time travel story...","categories": ["blog"],
+        "tags": ["ssb","iceberg","flink"],
+        "url": "/blog/SSB-Iceberg-Time-Travel/",
+        "teaser": "/assets/images/iceberg.png"
       }]
