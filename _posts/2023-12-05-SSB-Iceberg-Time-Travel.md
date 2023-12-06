@@ -74,6 +74,10 @@ select * from fraudulent_txn_iceberg /*+OPTIONS('streaming'='true', 'monitor-int
 
 -- Select data from start snapshot to end snapshot
 select * from fraudulent_txn_iceberg /*+OPTIONS('start-snapshot-id'='4263825941508588099', 'end-snapshot-id'='3724519465921078641')*/;
+
+-- Select data from starting timestamp
+select * from fraudulent_txn_iceberg /*+OPTIONS('as-of-timestamp'='1699425703000')*/;
+-- convert snapshot history timestamp to unix time + 000 
 ```
 
 

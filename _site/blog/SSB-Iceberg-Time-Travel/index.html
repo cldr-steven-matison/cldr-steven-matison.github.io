@@ -367,6 +367,10 @@ DESCRIBE HISTORY fraudulent_txn_iceberg;
 
 <span class="o">--</span> <span class="nx">Select</span> <span class="nx">data</span> <span class="k">from</span> <span class="nx">start</span> <span class="nx">snapshot</span> <span class="nx">to</span> <span class="nx">end</span> <span class="nx">snapshot</span>
 <span class="nx">select</span> <span class="o">*</span> <span class="k">from</span> <span class="nx">fraudulent_txn_iceberg</span> <span class="cm">/*+OPTIONS('start-snapshot-id'='4263825941508588099', 'end-snapshot-id'='3724519465921078641')*/</span><span class="p">;</span>
+
+<span class="o">--</span> <span class="nx">Select</span> <span class="nx">data</span> <span class="k">from</span> <span class="nx">starting</span> <span class="nx">timestamp</span>
+<span class="nx">select</span> <span class="o">*</span> <span class="k">from</span> <span class="nx">fraudulent_txn_iceberg</span> <span class="cm">/*+OPTIONS('as-of-timestamp'='1699425703000')*/</span><span class="p">;</span>
+<span class="o">--</span> <span class="nx">convert</span> <span class="nx">snapshot</span> <span class="nx">history</span> <span class="nx">timestamp</span> <span class="nx">to</span> <span class="nx">unix</span> <span class="nx">time</span> <span class="o">+</span> <span class="mi">000</span> 
 </code></pre></div></div>
 
 <p>I think <a href="https://iceberg.apache.org/">Iceberg</a> is pretty cool and it is definitely here to stay.  If you need any more information or help with Cloudera Sql Stream Builder or Iceberg reach out as I am always willing to demo, run a hands on lab, or help you with yours.</p>
