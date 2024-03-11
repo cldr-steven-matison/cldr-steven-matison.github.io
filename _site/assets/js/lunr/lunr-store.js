@@ -94,4 +94,10 @@ var store = [{
         "tags": ["ssb","iceberg","flink"],
         "url": "/blog/SSB-Iceberg-Time-Travel/",
         "teaser": "/assets/images/iceberg.png"
+      },{
+        "title": "Release of CEM 2.1.2",
+        "excerpt":"Wow I have been so busy I have not had a chance to think about posting here. Here is a quick release I wanted to share. Release of CEM 2.1.2 Key Features Cloudera Manager integration Jetty and Spring upgrades Improved EFM caching Oracle database support Improved import/export functionality Agent class...","categories": ["blog"],
+        "tags": ["cem","nifi","minifi"],
+        "url": "/blog/CEM-2.1.2-Release/",
+        "teaser": "/assets/images/cem.png"
       }]
