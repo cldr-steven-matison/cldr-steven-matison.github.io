@@ -10,13 +10,12 @@ tags:
   - cfm
 ---
 
+Last week I had a chance to work out the installation of the Cloudera's CFM Operator.  In this post I am going to expose the lessons learned and command required to get this CFM Operator running on my macbook with [MiniKube](https://minikube.sigs.k8s.io/docs/start/).  Keep in mind, these Operators are GA for RedHat Openshift. This demonstration on how to locally install is for evaluation purposes and not meant for actual usage.
+
 <figure>
   <img src="/assets/images/cfm-op-deployment-architecture.jpg">
   <figcaption>CFM Deployment Architecture</figcaption>
 </figure>
-
-
-Last week I had a chance to work out the installation of the Cloudera's CFM Operator.  In this post I am going to expose the lessons learned and command required to get this CFM Operator running on my macbook with [MiniKube](https://minikube.sigs.k8s.io/docs/start/).  Keep in mind, these Operators are GA for RedHat Openshift. This demonstration on how to locally install is for evaluation purposes and not meant for actual usage.
 
 
 First, lets start with the main page for the CFM Operator:

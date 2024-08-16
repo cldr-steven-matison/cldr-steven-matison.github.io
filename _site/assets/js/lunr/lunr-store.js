@@ -108,7 +108,7 @@ var store = [{
         "teaser": "/assets/images/kubernetes-logo.png"
       },{
         "title": "Installing Cloudera CFM Kubernetes Operator",
-        "excerpt":"CFM Deployment Architecture Last week I had a chance to work out the installation of the Cloudera’s CFM Operator. In this post I am going to expose the lessons learned and command required to get this CFM Operator running on my macbook with MiniKube. Keep in mind, these Operators are...","categories": ["blog"],
+        "excerpt":"Last week I had a chance to work out the installation of the Cloudera’s CFM Operator. In this post I am going to expose the lessons learned and command required to get this CFM Operator running on my macbook with MiniKube. Keep in mind, these Operators are GA for RedHat...","categories": ["blog"],
         "tags": ["kubernetes","operator","cfm"],
         "url": "/blog/Install-CFM-Operator/",
         "teaser": "/assets/images/kubernetes-logo.png"
