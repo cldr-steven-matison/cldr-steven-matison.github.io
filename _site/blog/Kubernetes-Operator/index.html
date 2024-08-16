@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>NiFi For Dummies Second Edition - Cloudera Solutions Engineer</title>
-<meta name="description" content="Last year I had the amazing opportunity to transpose Mark Payne’s 4 video series on NiFi Best Practices into text for the Second Edition of the NiFi For Dummies book.   You can find those Nifi Best Practices videos here:">
+<!-- begin _includes/seo.html --><title>Release of Cloudera Kubernetes Operators - Cloudera Solutions Engineer</title>
+<meta name="description" content="I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="NiFi For Dummies Second Edition">
-<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/NiFi-For-Dummies/">
+<meta property="og:title" content="Release of Cloudera Kubernetes Operators">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Kubernetes-Operator/">
 
 
-  <meta property="og:description" content="Last year I had the amazing opportunity to transpose Mark Payne’s 4 video series on NiFi Best Practices into text for the Second Edition of the NiFi For Dummies book.   You can find those Nifi Best Practices videos here:">
-
-
-
-  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/thumb-apache-nifi-for-dummies.png">
+  <meta property="og:description" content="I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.">
 
 
 
-
-
-  <meta property="article:published_time" content="2023-08-04T00:00:00-04:00">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/kubernetes-logo.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2024-07-18T00:00:00-04:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/NiFi-For-Dummies/">
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Kubernetes-Operator/">
 
 
 
@@ -268,16 +268,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="NiFi For Dummies Second Edition">
-    <meta itemprop="description" content="Last year I had the amazing opportunity to transpose Mark Payne’s 4 video series on NiFi Best Practices into text for the Second Edition of the NiFi For Dummies book.   You can find those Nifi Best Practices videos here:">
-    <meta itemprop="datePublished" content="2023-08-04T00:00:00-04:00">
+    <meta itemprop="headline" content="Release of Cloudera Kubernetes Operators">
+    <meta itemprop="description" content="I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.">
+    <meta itemprop="datePublished" content="2024-07-18T00:00:00-04:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io//blog/NiFi-For-Dummies/" class="u-url" itemprop="url">NiFi For Dummies Second Edition
+            <a href="https://cldr-steven-matison.github.io//blog/Kubernetes-Operator/" class="u-url" itemprop="url">Release of Cloudera Kubernetes Operators
 </a>
           </h1>
           
@@ -294,7 +294,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          less than 1 minute read
+          1 minute read
         
       </span>
     
@@ -306,16 +306,39 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Last year I had the amazing opportunity to transpose Mark Payne’s 4 video series on NiFi Best Practices into text for the Second Edition of the NiFi For Dummies book.   You can find those Nifi Best Practices videos here:</p>
+        <p>I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.</p>
 
-<p><a href="https://www.youtube.com/watch?v=RjWstt7nRVY">Apache NiFi Anti-Patterns Part 1</a>
-<a href="https://www.youtube.com/watch?v=v1CoQk730qs">Apache NiFi Anti-Patterns Part 2</a>
-<a href="https://www.youtube.com/watch?v=by9P0Zi8Dk8">Apache NiFi Anti-Patterns Part 3</a>
-<a href="https://www.youtube.com/watch?v=pZq0EbfDBy4">Apache NiFi Anti-Patterns Part 4</a></p>
+<h1 id="cloudera-kubernetes-operators">Cloudera Kubernetes Operators</h1>
 
-<p>If you are looking for the NiFi For Dummies book you can download it here:</p>
+<h2 id="cfm---cloudera-flow-management-operator">CFM - Cloudera Flow Management Operator</h2>
+<p>Cloudera Flow Management (CFM) Operator allows you to deploy and manage NiFi clusters and NiFi Registry instances on Kubernetes. CFM Operator simplifies data collection, transformation, and delivery across your enterprise. Leveraging containerized infrastructure, the operator streamlines the orchestration of complex data flows.</p>
+<ul>
+  <li><a href="https://nifi.apache.org/">Apache NiFi</a></li>
+</ul>
 
-<p><a href="https://www.cloudera.com/campaign/apache-nifi-for-dummies.html">Apache NiFi For Dummies</a></p>
+<h2 id="csm---cloudera-streams-messaging-operator">CSM - Cloudera Streams Messaging Operator</h2>
+<p>CSM (Cloudera Streams Messaging) Operator allows you to deploy and manage Streams Messaging components as container applications on Kubernetes. CSM Operator simplifies the process of creating, managing, and troubleshooting Kafka deployments in a Kubernetes environment. CSM Operator includes several services and components such as Strimzi, Kafka, Cruise Control, and others.</p>
+<ul>
+  <li><a href="https://kafka.apache.org/">Apache Kafka</a></li>
+</ul>
+
+<h2 id="csa---cloudera-streams-analytics-operator">CSA - Cloudera Streams Analytics Operator</h2>
+<p>Cloudera Streaming Analytics (CSA) Operator allows you to deploy and manage the Streaming Analytics components of Cloudera Data Platform (CDP), Flink and SQL Stream Builder (SSB), as container applications on Kubernetes. CSA Operator is based on the Apache Flink Kubernetes Operator (Flink Operator), and offers the same set of features as the Flink Operator supports. By extending the Kubernetes API, the Flink Operator acts as a control plane to manage the deployment lifecycle of Flink applications using the operator pattern.</p>
+<ul>
+  <li><a href="https://flink.apache.org/">Apache Flink</a></li>
+</ul>
+
+<p>Check out this <a href="https://community.cloudera.com/t5/Community-Articles/Cloudera-Flow-Management-Operator-A-technical-deep-dive/ta-p/390473">Deep Technical Dive with Pierre Villard</a></p>
+
+<p>Find more about Cloudera DataFlow starting right <a href="https://www.cloudera.com/products/dataflow.html">here</a>.</p>
+
+<p>You can learn more about Cloudera Stream Processing right <a href="https://www.cloudera.com/products/stream-processing.html">here</a>.</p>
+
+<p>As always, check out the docs for each operator:</p>
+
+<p><a href="https://docs.cloudera.com/cfm-operator/2.8.0/index.html">CFM</a>
+<a href="https://docs.cloudera.com/csm-operator/1.0/index.html">CSM</a>
+<a href="https://docs.cloudera.com/csa-operator/1.0/index.html">CSA</a></p>
 
         
       </section>
@@ -332,7 +355,15 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
+      <a href="/tags/cfm" class="page__taxonomy-item p-category" rel="tag">cfm</a><span class="sep">, </span>
+    
+      <a href="/tags/csa" class="page__taxonomy-item p-category" rel="tag">csa</a><span class="sep">, </span>
+    
+      <a href="/tags/csm" class="page__taxonomy-item p-category" rel="tag">csm</a><span class="sep">, </span>
+    
+      <a href="/tags/kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      <a href="/tags/operator" class="page__taxonomy-item p-category" rel="tag">operator</a>
     
     </span>
   </p>
@@ -357,7 +388,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-08-04T00:00:00-04:00">August 4, 2023</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2024-07-18T00:00:00-04:00">July 18, 2024</time></p>
 
       </footer>
 
@@ -366,22 +397,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=NiFi+For+Dummies+Second+Edition%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-For-Dummies%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Release+of+Cloudera+Kubernetes+Operators%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FKubernetes-Operator%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-For-Dummies%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FKubernetes-Operator%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-For-Dummies%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FKubernetes-Operator%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/blog/NiFi-1.23-Release-Voting/" class="pagination--pager" title="NiFi 1.23 Release Voting
+      <a href="/blog/CEM-2.1.2-Release/" class="pagination--pager" title="Release of CEM 2.1.2
 ">Previous</a>
     
     
-      <a href="/blog/NiFi-1.23.1-Release-Voting/" class="pagination--pager" title="NiFi 1.23.1 Release Voting
+      <a href="/blog/Install-CFM-Operator/" class="pagination--pager" title="Installing Cloudera CFM Kubernetes Operator
 ">Next</a>
     
   </nav>
@@ -440,49 +471,6 @@
   CFM Deployment Architecture
 
 </p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/kubernetes-logo.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Kubernetes-Operator/" rel="permalink">Release of Cloudera Kubernetes Operators
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my la...</p>
   </article>
 </div>
 
@@ -570,6 +558,49 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">I have been working on my SSB Iceberg Demo for going on 2 months now.  This past week I have had a chance to build out some Iceberg Time Travel capabilities....</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2023-11-29-SSB-Dead-Letter-Queue.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/SSB-Dead-Letter-Queue/" rel="permalink">Cloudera SQL Stream Builder Introducing DLQ
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Yesterday one of my customers asked about the ability to control deserialization errors in SSB applications.  Referencing our Dead Letter Queue Documentation...</p>
   </article>
 </div>
 

@@ -100,4 +100,16 @@ var store = [{
         "tags": ["cem","nifi","minifi"],
         "url": "/blog/CEM-2.1.2-Release/",
         "teaser": "/assets/images/cem.png"
+      },{
+        "title": "Release of Cloudera Kubernetes Operators",
+        "excerpt":"I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog. Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators. Cloudera Kubernetes Operators CFM...","categories": ["blog"],
+        "tags": ["kubernetes","operator","csm","cfm","csa"],
+        "url": "/blog/Kubernetes-Operator/",
+        "teaser": "/assets/images/kubernetes-logo.png"
+      },{
+        "title": "Installing Cloudera CFM Kubernetes Operator",
+        "excerpt":"CFM Deployment Architecture Last week I had a chance to work out the installation of the Cloudera’s CFM Operator. In this post I am going to expose the lessons learned and command required to get this CFM Operator running on my macbook with MiniKube. Keep in mind, these Operators are...","categories": ["blog"],
+        "tags": ["kubernetes","operator","cfm"],
+        "url": "/blog/Install-CFM-Operator/",
+        "teaser": "/assets/images/kubernetes-logo.png"
       }]
