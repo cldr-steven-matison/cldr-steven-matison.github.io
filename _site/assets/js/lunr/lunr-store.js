@@ -112,4 +112,10 @@ var store = [{
         "tags": ["kubernetes","operator","cfm"],
         "url": "/blog/Install-CFM-Operator/",
         "teaser": "/assets/images/kubernetes-logo.png"
+      },{
+        "title": "Cloudera Streaming Analytics 1.13 for Private Cloud Base",
+        "excerpt":"The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and...","categories": ["blog"],
+        "tags": ["csa","flink","cdp"],
+        "url": "/blog/CSA-1.13-Release/",
+        "teaser": "/assets/images/cem.png"
       }]
