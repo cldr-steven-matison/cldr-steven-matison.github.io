@@ -118,4 +118,10 @@ var store = [{
         "tags": ["csa","flink","cdp"],
         "url": "/blog/CSA-1.13-Release/",
         "teaser": "/assets/images/csa-architecture.png"
+      },{
+        "title": "Cloudera Streams Messaging Operator 1.1",
+        "excerpt":"Moving rapidly here at Cloudera and the Streams Messaging Operator. Happy to announce the latest release of Cloudera Streams Messaging Operator for Apache Kafka is now ready. Lots of features including Kafka Replication without Mirrormaker 2. See What’s New with Cloudera Streams Messaging Operator 1.1. Release of Cloudera Streams Messaging...","categories": ["blog"],
+        "tags": ["csm","cloudera","streams messaging","operator"],
+        "url": "/blog/Cloudera-Streams-Messaging-Operator-1.1/",
+        "teaser": "/assets/images/Cloudera%20Streams%20Messaging%20Operator.png"
       }]

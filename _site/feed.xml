@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2024-08-19T09:44:44-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streaming Analytics 1.13 for Private Cloud Base</title><link href="https://cldr-steven-matison.github.io//blog/CSA-1.13-Release/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics 1.13 for Private Cloud Base" /><published>2024-08-19T00:00:00-04:00</published><updated>2024-08-19T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/CSA-1.13-Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CSA-1.13-Release/"><![CDATA[<p>The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2024-09-06T08:36:35-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streams Messaging Operator 1.1</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Operator-1.1/" rel="alternate" type="text/html" title="Cloudera Streams Messaging Operator 1.1" /><published>2024-09-06T00:00:00-04:00</published><updated>2024-09-06T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Operator%201.1</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Operator-1.1/"><![CDATA[<p>Moving rapidly here at Cloudera and the Streams Messaging Operator.  Happy to announce the latest release of Cloudera Streams Messaging Operator for Apache Kafka is now ready.   Lots of features including Kafka Replication without Mirrormaker 2.</p>
+
+<p>See <a href="https://docs.cloudera.com/csm-operator/1.1/release-notes/topics/csm-op-rn.html">What’s New</a> with Cloudera Streams Messaging Operator 1.1.</p>
+
+<h1 id="release-of-cloudera-streams-messaging-operator-11">Release of Cloudera Streams Messaging Operator 1.1</h1>
+
+<h2 id="key-features-for-this-release">Key Features For This Release</h2>
+
+<ol>
+  <li>Rebase to Strimzi 0.41.0</li>
+  <li>Kafka Connect Support</li>
+  <li>Kafka Replication Support</li>
+</ol>
+
+<p>For a complete list of features, fixes, issues, and unsupported features for this release see the <a href="https://docs.cloudera.com/csm-operator/1.1/release-notes/topics/csm-op-rn.html">Release Notes</a>.</p>
+
+<p>Check out this <a href="https://community.cloudera.com/t5/What-s-New-Cloudera/Cloudera-Streams-Messaging-Operator-1-1/ba-p/393138">Cloudera Community Post</a> from @araujo.</p>
+
+<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.1/installation/topics/csm-op-install-overview.html">Installation Information</a>.</p>
+
+<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.1/upgrade/topics/csm-op-upgrade.html">Upgrade Information</a>.</p>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.1/index.html">Cloudera Streams Messaging Operator 1.1 Docs</a>.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="cloudera" /><category term="streams messaging" /><category term="operator" /><summary type="html"><![CDATA[Moving rapidly here at Cloudera and the Streams Messaging Operator. Happy to announce the latest release of Cloudera Streams Messaging Operator for Apache Kafka is now ready. Lots of features including Kafka Replication without Mirrormaker 2.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics 1.13 for Private Cloud Base</title><link href="https://cldr-steven-matison.github.io//blog/CSA-1.13-Release/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics 1.13 for Private Cloud Base" /><published>2024-08-19T00:00:00-04:00</published><updated>2024-08-19T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/CSA-1.13-Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CSA-1.13-Release/"><![CDATA[<p>The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.</p>
 
 <p>See <a href="https://docs.cloudera.com/csa/latest/release-notes/topics/csa-what-new.html">What’s New</a>.</p>
 
@@ -380,32 +402,4 @@ DESCRIBE HISTORY fraudulent_txn_iceberg;
 
 <p><a href="https://docs.cloudera.com/csa/1.11.0/index.html">Cloudera Streaming Analytics DOCS</a></p>
 
-<p>CDP <a href="https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-intro.html">SSB</a> <a href="https://docs.cloudera.com/csa/1.11.0/index.html">CSA</a> <a href="https://flink.apache.org/">Flink</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="ssb" /><category term="cdp" /><category term="flink" /><summary type="html"><![CDATA[I think I am always learning something new with Cloudera’s Flink tool, Sql Stream Builder. I have been demo-ing in it for almost 2 years going back to a Fraud Detection Demo that Andre built, to multiple customer facing POCs, to current releases with Iceberg features for my customers. Today a lightbulb went off in my head around the Github Source Control Integration and the Project Name. I tried a commit to create a second project folder within the SSBDemo main repo as such:]]></summary></entry><entry><title type="html">Cloudera Public Cloud 5 Day Trial</title><link href="https://cldr-steven-matison.github.io//blog/CDP-5-Day-Trial/" rel="alternate" type="text/html" title="Cloudera Public Cloud 5 Day Trial" /><published>2023-10-16T00:00:00-04:00</published><updated>2023-10-16T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/CDP-5-Day-Trial</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CDP-5-Day-Trial/"><![CDATA[<p>I finally got a chance to test out the CDP Data In Motion Trial within Cloudera’s new 5 Day Public Cloud Trial.  I followed the link below and within 24 hours after signing up I got an email with a link to get started.  Three simple clicks later I am logged in to the familiar landing page for Cloudera Public Cloud:</p>
-
-<figure>
-  <img src="/assets/images/2023-10-16-cdptrial.png" />
-  <figcaption>Cloudera Data Platform Data Services</figcaption>
-</figure>
-
-<p>One more click into DataFlow and I have access to all the newest NiFi features:</p>
-
-<ul>
-  <li>Deployment Dashboard</li>
-  <li>DataFlow Catalog</li>
-  <li>ReadyFlow Gallery</li>
-  <li>(New) Flow Designer</li>
-  <li>(New) DataFlow Functions</li>
-</ul>
-
-<figure>
-  <img src="/assets/images/2023-10-16-dataflow.png" />
-  <figcaption>Cloudera DataFlow Data Service</figcaption>
-</figure>
-
-<p>To get started with your free five day trial of CDP Public Cloud DataFlow Data Services follow this link:</p>
-
-<p><a href="https://console.us-west-1.cdp.cloudera.com/trial/register.html#/">CDP Public Cloud 5 Day Trial</a></p>
-
-<p>Here is a guide you can follow as well:</p>
-
-<p><a href="https://github.com/cdp-trial-patterns/data-in-motion">CDP Data In Motion Trial Github</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><summary type="html"><![CDATA[I finally got a chance to test out the CDP Data In Motion Trial within Cloudera’s new 5 Day Public Cloud Trial. I followed the link below and within 24 hours after signing up I got an email with a link to get started. Three simple clicks later I am logged in to the familiar landing page for Cloudera Public Cloud:]]></summary></entry></feed>
+<p>CDP <a href="https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-intro.html">SSB</a> <a href="https://docs.cloudera.com/csa/1.11.0/index.html">CSA</a> <a href="https://flink.apache.org/">Flink</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="ssb" /><category term="cdp" /><category term="flink" /><summary type="html"><![CDATA[I think I am always learning something new with Cloudera’s Flink tool, Sql Stream Builder. I have been demo-ing in it for almost 2 years going back to a Fraud Detection Demo that Andre built, to multiple customer facing POCs, to current releases with Iceberg features for my customers. Today a lightbulb went off in my head around the Github Source Control Integration and the Project Name. I tried a commit to create a second project folder within the SSBDemo main repo as such:]]></summary></entry></feed>
