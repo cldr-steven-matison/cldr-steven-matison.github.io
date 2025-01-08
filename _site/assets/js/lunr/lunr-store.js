@@ -124,4 +124,22 @@ var store = [{
         "tags": ["csm","cloudera","streams messaging","operator"],
         "url": "/blog/Cloudera-Streams-Messaging-Operator-1.1/",
         "teaser": "/assets/images/Cloudera%20Streams%20Messaging%20Operator.png"
+      },{
+        "title": "Introducing Cloudera’s Unified Runtime with 7.3.1",
+        "excerpt":"We are thrilled to announce Cloudera’s first-ever unified release: Cloudera 7.3.1! This is a single software release available for both cloud and on-premises environments that enable capabilities, workloads, and governance to work and feel the same everywhere. With the cohesion of Cloudera on cloud 7.2.18 and Cloudera on premises 7.1.9...","categories": ["blog"],
+        "tags": ["cloudera","cdp"],
+        "url": "/blog/Cloudera-Unified-Runtime-7.3.1/",
+        "teaser": "/assets/images/Cloudera-Data-Platform.png"
+      },{
+        "title": "Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1",
+        "excerpt":"The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.14 for Cloudera Public Cloud and Private Cloud Base 7.3.1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user...","categories": ["blog"],
+        "tags": ["csa","flink","cdp"],
+        "url": "/blog/CSA-1.14-Release/",
+        "teaser": "/assets/images/csa-architecture.png"
+      },{
+        "title": "Cloudera Streams Messaging - Kubernetes Operator 1.2",
+        "excerpt":"Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements. Release Highlights Rebase on Kafka...","categories": ["blog"],
+        "tags": ["csm","kafka","kubernetes","cdp"],
+        "url": "/blog/CSM-Kubernetes-Operator1-2-Release/",
+        "teaser": "/assets/images/csm-op-deployment-architecture.jpg"
       }]

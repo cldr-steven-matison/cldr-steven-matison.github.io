@@ -1,0 +1,706 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Introducing Cloudera’s Unified Runtime with 7.3.1 - Cloudera Solutions Engineer</title>
+<meta name="description" content="We are thrilled to announce Cloudera’s first-ever unified release: Cloudera 7.3.1!  This is a single software release available for both cloud and on-premises environments that enable capabilities, workloads, and governance to work and feel the same everywhere.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Introducing Cloudera’s Unified Runtime with 7.3.1">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-Unified-Runtime-7.3.1/">
+
+
+  <meta property="og:description" content="We are thrilled to announce Cloudera’s first-ever unified release: Cloudera 7.3.1!  This is a single software release available for both cloud and on-premises environments that enable capabilities, workloads, and governance to work and feel the same everywhere.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/Cloudera-Data-Platform.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2024-12-12T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Cloudera-Unified-Runtime-7.3.1/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io//"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <a class="site-title" href="/">
+          Cloudera Solutions Engineer
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&pageNum=1">Community</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io//">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io//" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Hello, My name is Steven Matison and I am a Senior Solutions Engineer at Cloudera, Inc.  Check out my journey with Cloudera Data Platform (CDP).</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introducing Cloudera’s Unified Runtime with 7.3.1">
+    <meta itemprop="description" content="We are thrilled to announce Cloudera’s first-ever unified release: Cloudera 7.3.1!  This is a single software release available for both cloud and on-premises environments that enable capabilities, workloads, and governance to work and feel the same everywhere.">
+    <meta itemprop="datePublished" content="2024-12-12T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-Unified-Runtime-7.3.1/" class="u-url" itemprop="url">Introducing Cloudera’s Unified Runtime with 7.3.1
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>We are thrilled to announce Cloudera’s first-ever unified release: Cloudera 7.3.1!  This is a single software release available for both cloud and on-premises environments that enable capabilities, workloads, and governance to work and feel the same everywhere.</p>
+
+<p>With the cohesion of Cloudera on cloud 7.2.18 and Cloudera on premises 7.1.9 into a streamlined 7.3.1 version, customers can now benefit from our accelerated pace of innovation with simpler versioning. This unified release provides a consistent feature set across all deployment environments – whether on-premises or in the cloud.</p>
+
+<p>This milestone release unleashes the power of true hybrid capabilities for data management, enabling data and analytics running on-premises and across multiple clouds to be managed cohesively and federated into a unified whole. Cloudera is the only platform transforming customers’ data management and data journeys by enabling the seamless movement of data and workloads across all environments.</p>
+
+<p><b><i>Welcome to the future of hybrid data solutions with Cloudera!</i></b></p>
+
+<h1 id="release-highlights">Release Highlights:</h1>
+
+<ul>
+  <li>
+    <p>Hive and Iceberg integration: The integration of Apache Hive with Apache Iceberg brings modern, open-table format capabilities to Hive’s powerful data warehousing features. With increased performance and scalability, Hive users can easily work with large, complex datasets across both cloud and on-premises environments. Iceberg’s support for schema evolution, time travel, and ACID compliance allows Hive users to manage data changes seamlessly and query historical data snapshots without compromising on performance. This powerful combination streamlines data management, enhances flexibility, and opens new doors for efficient data operations in hybrid environments.</p>
+  </li>
+  <li>
+    <p>Graviton support (tech preview): This release supports AWS Graviton processors, allowing our platform to harness the powerful, cost-efficient capabilities of Arm-based EC2 instances. Customers can now achieve up to 40% better price performance for data-intensive workloads, making large-scale data processing both faster and more accessible. Graviton support not only enhances processing speeds and reduces operational costs, but it also aligns with our commitment to flexible, cloud-optimized performance.</p>
+  </li>
+  <li>
+    <p>SQL Assistant:  Hue now leverages Large Language Models (LLMs) to transform data interaction with its SQL AI assistant. Generate SQL queries from natural language, optimize, explain, and fix them effortlessly. Compatible with OpenAI’s GPT, Amazon Bedrock, and Azure’s OpenAI, Hue offers the flexibility to choose the AI service that suits you best.</p>
+  </li>
+  <li>
+    <p>Support for Amazon S3 Express One Zone Storage: Cloud connectors now offer high-performance, single-availability Zone storage with consistent single-digit millisecond access. By storing data in the same Availability Zone as your compute resources, you can optimize performance, reduce costs, and accelerate workloads. This storage class supports hundreds of thousands of requests per second for seamless scalability.</p>
+  </li>
+  <li>
+    <p>Improved security posture: This release addresses 225+ total Common Vulnerabilities and Exposures (CVEs) which reflects our strong commitment to safeguarding data and ensuring a secure, resilient environment for our users. Each CVE resolution bolsters the integrity and stability of our platform, protecting against potential threats across all deployment environments – whether on-premises or in the cloud, or hybrid.</p>
+  </li>
+</ul>
+
+<h1 id="additional-features">Additional Features:</h1>
+<ol>
+  <li>Zero Downtime Upgrade (ZDU):  Building on the success of ZDU in version 7.1.9, by supporting ZDU in 7.3.1, we continue to simplify the upgrade process for hassle-free upgrades while maintaining high availability and minimizing disruptions to critical operations.</li>
+  <li>Ozone HBase integration (tech preview): This integration provides an object storage solution for Apache HBase. On Ozone, HBase can now efficiently handle massive tables and provide random, realtime read/write access to your Big Data on S3 compliant storage.</li>
+  <li>Cloudera Replication Manager Enhancements:
+    <ul>
+      <li>Advanced Iceberg replication to support Iceberg V2 tables created by Hive, Impala, and Spark</li>
+      <li>Atlas Replication (tech preview) allows users to replicate Atlas metadata and data lineage for Hive external tables and Iceberg tables from on-premises to on-premises.</li>
+      <li>RM extends ozone replication from data only to metadata; ozone metadata replication can be scheduled via Hive external table replication.</li>
+    </ul>
+  </li>
+  <li>Spark 3 Standardization:  For customers moving from Spark 2, this release simplifies the transition through enhanced tooling to ease the migration process. By upgrading to Spark 3, users can unlock superior performance, better resource utilization, and the ability to seamlessly integrate with modern data and AI workloads across hybrid and multi-cloud environments.</li>
+  <li>Unifying Cloudera On Cloud 7.2.18 and Cloudera On-Premises 7.1.9 now ensure feature consistency across deployment environments. For example, multi-authentication support for SAML and LDAP in the Apache Hive component is now available on Cloudera on-premises, while the OpenJPA 3 upgrade for Apache Oozie is now available on Cloudera On Cloud. For a complete list of new features on either platform, please refer to the release notes.</li>
+</ol>
+
+<h1 id="multi-python-support">Multi Python Support</h1>
+<ul>
+  <li>Python 3.9: RHEL/Oracle 8.x, RHEL/Oracle 9.x, and Ubuntu 20.</li>
+  <li>Python 3.10: SLES 15 SP4 and SP5, and Ubuntu 22</li>
+</ul>
+
+<h1 id="upgrade-paths-to-cloudera-731">Upgrade Paths to Cloudera 7.3.1</h1>
+<ul>
+  <li>Cloudera on-premise: Direct upgrades (including downgrades and rollbacks) are supported from versions 7.1.9 SP1, 7.1.8, and 7.1.7 SP3.</li>
+  <li>Cloudera on Cloud: Direct upgrades are supported from 7.2.18.0, 7.2.18.100, 7.2.18.300, and 7.2.17.200 through 7.2.17.500.</li>
+  <li>Upgrades from other versions not listed above may require a two-hop upgrade.</li>
+</ul>
+
+<h1 id="operating-system-database-and-jdk-support">Operating System, Database and JDK Support</h1>
+<p>RHEL 8.10: The latest release supports RHEL 8.10 for Cloudera on cloud.
+JDK 17:  The latest release introduces JDK 17 support for Cloudera on cloud, delivering enhanced performance, security, and compatibility for modern cloud-native applications.
+PostgreSQL 14: This support is now present for Cloudera on cloud.</p>
+
+<h1 id="removed-components">Removed Components</h1>
+<p>The following components have been removed and are no longer available in Cloudera 7.3.1:</p>
+<ul>
+  <li>Apache Spark 2 (see <a href="https://docs.cloudera.com/cdp-private-cloud-base/7.1.9/runtime-release-notes/topics/rt-pvc-deprecated-spark2.html">Deprecation notice</a> for Apache Spark 2)</li>
+  <li>Apache Livy 2 (see <a href="https://docs.cloudera.com/cdp-private-cloud-base/7.3.1/private-release-notes/topics/rt-deprecated-livy2.html">Deprecation notice</a> for Apache Livy 2)</li>
+  <li>Apache Zeppelin (see <a href="https://docs.cloudera.com/cdp-private-cloud-base/7.3.1/private-release-notes/topics/rt-deprecated-livy2.html">Deprecation notice</a> for Apache Zeppelin)</li>
+</ul>
+
+<h1 id="cloudera-data-services-on-premises-support">Cloudera Data Services On Premises Support</h1>
+<p>Cloudera Data Services on premises are currently not supported with 7.3.1 and support will be coming down the road in subsequent CHFs and service packs.  Customers using Cloudera Data Services on premises are suggested to stay with 7.1.9, as upgrading to 7.3.1 will break compatibility. These customers should upgrade to 7.3.1 at a future date when support is available.</p>
+
+<p>Check out Cloudera Runtime <a href="https://docs.cloudera.com/cdp-private-cloud-base/7.3.1/private-release-notes/topics/rt-runtime-overview.html">Release Notes</a></p>
+
+<p>Check out Public Cloud Runtime <a href="https://docs.cloudera.com/runtime/7.3.1/index.html">Release Notes</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/cdp-private-cloud-base/7.3.1/private-release-notes/topics/fixed_common_vulnerabilities_exposures_731.html">Fixed CVEs in 7.3.1</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/cdp" class="page__taxonomy-item p-category" rel="tag">cdp</a><span class="sep">, </span>
+    
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2024-12-12T00:00:00-05:00">December 12, 2024</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Introducing+Cloudera%E2%80%99s+Unified+Runtime+with+7.3.1%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Unified-Runtime-7.3.1%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Unified-Runtime-7.3.1%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Unified-Runtime-7.3.1%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Cloudera-Streams-Messaging-Operator-1.1/" class="pagination--pager" title="Cloudera Streams Messaging Operator 1.1
+">Previous</a>
+    
+    
+      <a href="/blog/CSA-1.14-Release/" class="pagination--pager" title="Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csm-op-deployment-architecture.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/CSM-Kubernetes-Operator1-2-Release/" rel="permalink">Cloudera Streams Messaging - Kubernetes Operator 1.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csa-architecture.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/CSA-1.14-Release/" rel="permalink">Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.14 for Cloudera Public Cloud and Private Cloud Base 7.3.1. T...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Cloudera%20Streams%20Messaging%20Operator.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Streams-Messaging-Operator-1.1/" rel="permalink">Cloudera Streams Messaging Operator 1.1
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Moving rapidly here at Cloudera and the Streams Messaging Operator.  Happy to announce the latest release of Cloudera Streams Messaging Operator for Apache K...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csa-architecture.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/CSA-1.13-Release/" rel="permalink">Cloudera Streaming Analytics 1.13 for Private Cloud Base
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release i...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

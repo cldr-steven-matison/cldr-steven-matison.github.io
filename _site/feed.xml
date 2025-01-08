@@ -1,4 +1,233 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2024-09-06T08:36:35-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streams Messaging Operator 1.1</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Operator-1.1/" rel="alternate" type="text/html" title="Cloudera Streams Messaging Operator 1.1" /><published>2024-09-06T00:00:00-04:00</published><updated>2024-09-06T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Operator%201.1</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Operator-1.1/"><![CDATA[<p>Moving rapidly here at Cloudera and the Streams Messaging Operator.  Happy to announce the latest release of Cloudera Streams Messaging Operator for Apache Kafka is now ready.   Lots of features including Kafka Replication without Mirrormaker 2.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-01-08T11:45:15-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.2</title><link href="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-2-Release/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.2" /><published>2024-12-23T00:00:00-05:00</published><updated>2024-12-23T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-2-Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-2-Release/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.</p>
+
+<h2 id="release-highlights">Release Highlights</h2>
+
+<ul>
+  <li>Rebase on Kafka 3.8:
+    <ul>
+      <li>For more information, see the Kafka 3.8 <a href="https://archive.apache.org/dist/kafka/3.8.0/RELEASE_NOTES.html">Release Notes</a> and <a href="https://kafka.apache.org/documentation/#upgrade_380_notable">list of notable changes</a>.</li>
+    </ul>
+  </li>
+  <li>Rebase on Strimzi 0.43.0:
+    <ul>
+      <li>For more information, see the Strimzi 0.43.0 <a href="https://github.com/strimzi/strimzi-kafka-operator/releases/tag/0.43.0">Release Notes</a>.</li>
+    </ul>
+  </li>
+  <li>Apache Ranger authorization: Support for Apache Ranger authorization is now available. Customers can now integrate Kafka clusters, deployed with Cloudera Streams Messaging - Kubernetes Operator, with a remote Ranger service that is running on Cloudera Private Cloud Base. If configured, the Ranger service can provide authorization for your Kafka cluster.
+    <ul>
+      <li>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.2/kafka-security/topics/csm-op-authz-ranger.html">Apache Ranger authorization</a>.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Improvements to Kafka replication: Rebased and backported changes to make Kafka replication more resilient and reliable when handling heartbeats and offset translation.</p>
+  </li>
+  <li>Performance improvements for the Cloudera diagnostics tool: The report.sh tool, used by clients to provide Cloudera support with key information when dealing with support cases now runs its subprocesses in parallel, accelerating run times.
+    <ul>
+      <li>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.2/monitoring-diagnostics/topics/csm-op-diagnostics.html">Diagnostics</a>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>For the complete list of fixes and improvements read these <a href="https://docs.cloudera.com/csm-operator/1.2/release-notes/topics/csm-op-rn.html">Release Notes</a>.</p>
+
+<p>Getting to the new release
+To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out this <a href="https://docs.cloudera.com/csm-operator/1.2/upgrade/topics/csm-op-upgrade.html">upgrade guide</a>. Please note, if you are installing for the first time use this installation overview.</p>
+
+<h2 id="use-cases">Use Cases</h2>
+<ul>
+  <li>
+    <p>Flexible, agile, and rapid Kafka deployments: Deploy Apache Kafka in seconds on existing Kubernetes infrastructure. Cloudera Streams Messaging - Kubernetes Operator has very lightweight dependencies and system requirements for Kafka-centric deployments. It simplifies and standardizes Kafka deployments and provides auto-scaling support for variable workloads.</p>
+  </li>
+  <li>
+    <p>Operational efficiency with simple upgrades: The complexity of Kafka rolling upgrades is handled by Cloudera Streams Messaging - Kubernetes Operator, making them simpler and safer to execute.</p>
+  </li>
+  <li>
+    <p>Loading and unloading data from Kafka: Kafka Connect gives Kafka users a simple way to access data quickly from a source and feed it to a Kafka topic. It also allows them to get data from a topic and copy it to an external destination. The operator includes Kafka Connect support to give our customers a tool for moving data in and out of Kafka, efficiently.</p>
+  </li>
+  <li>
+    <p>Replicating data to other sites: Disaster resilience is an important aspect of any Kafka production deployment. Cloudera Streams Messaging - Kubernetes Operator supports configuring and running Kafka replication flows across any two Kafka clusters. These clusters could be in the same or in different data centers to provide increased resilience against disasters.</p>
+  </li>
+  <li>
+    <p>Kafka migrations: Customers can migrate or replicate data between containerized Kafka clusters and on-prem or cloud-based clusters.  Using Cloudera Streams Messaging - Kubernetes Operator, data can be replicated in any direction and between two or more clusters at a time.</p>
+  </li>
+</ul>
+
+<p>Check out what is new in <a href="https://docs.cloudera.com/csm-operator/1.2/release-notes/topics/csm-op-rn.html#ariaid-title2">Cloudera Streams Messaging Kubernetes Operator 1.2</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.2/overview/topics/csm-op-deployment-architecture.html">Deployment Architecture</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.2/installation/topics/csm-op-install-overview.html">Installation Information</a></p>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.2/index.html">DOCS</a> for the CSM Operator.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cdp" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1</title><link href="https://cldr-steven-matison.github.io//blog/CSA-1.14-Release/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1" /><published>2024-12-16T00:00:00-05:00</published><updated>2024-12-16T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/CSA-1.14-Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CSA-1.14-Release/"><![CDATA[<p>The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.14 for Cloudera Public Cloud and Private Cloud Base 7.3.1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.</p>
+
+<p>See <a href="https://docs.cloudera.com/csa/latest/release-notes/topics/csa-what-new.html">What’s New</a>.</p>
+
+<h2 id="release-highlights">Release Highlights</h2>
+<ul>
+  <li>Rebase to Apache Flink 1.19.1: Streaming analytics deployments, including SQL Stream Builder, now support Apache Flink 1.19.1, which includes the Apache Flink improvements below. For more information on these improvements and deprecations, please check the Apache Flink 1.19.1 release announcement.
+    <ul>
+      <li>Custom Parallelism for Table/SQL Sources: The DataGen connector now supports setting of custom parallelism for performance tuning via the scan.parallelism option. Support for other connectors will come in future releases.</li>
+      <li>Configure Different State Time to Live (TTLs) Using SQL Hint: Users have now a more flexible way to specify custom time-to-live (TTL) values for state of regular joins and group aggregations directly within their queries by utilizing the STATE_TTL hint.</li>
+      <li>Named Parameters: Named parameters can now be used when calling a function or stored procedure in Flink SQL.</li>
+      <li>Support for SESSION Window Table-Valued Functions (TVFs) in Streaming Mode: Users can now use SESSION Window table-valued functions (TVF) in streaming mode.</li>
+      <li>Support for Changelog Inputs for Window TVF Aggregation: Window aggregation operators can now handle changelog streams (e.g., Change Data Capture [CDC] data sources, etc.).</li>
+      <li>New UDF Type: AsyncScalarFunction: The new AsyncScalarFunction is a user-defined asynchronous ScalarFunction that allows for issuing concurrent function calls asynchronously.</li>
+      <li>MiniBatch Optimization for Regular Joins: The new mini-batch optimization can be used in regular joins to reduce intermediate results, especially in cascading join scenarios.</li>
+      <li>Dynamic Source Parallelism Inference for Batch Jobs: Allows source connectors to dynamically infer the parallelism based on the actual amount of data to consume.</li>
+      <li>Standard Yet Another Markup Language (YAML) for Apache Flink Configuration: Apache Flink has officially introduced full support for the standard YAML 1.2 syntax in the configuration file.</li>
+      <li>Profiling JobManager/TaskManager on Apache Flink Web: Support for triggering profiling at the JobManager/TaskManager level.</li>
+      <li>New Config Options for Administrator Java Virtual Machine (JVM) Options: A set of administrator JVM options are available to prepend the user-set JVM options with default values for platform-wide JVM tuning.</li>
+      <li>Using Larger Checkpointing Interval When Source is Processing Backlog: Users can set the execution.checkpointing.interval-during-backlog to use a larger checkpoint interval to enhance the throughput while the job is processing backlog if the source is backlog-aware.</li>
+      <li>CheckpointsCleaner Clean Individual Checkpoint States in Parallel: Now, when disposing of no longer needed checkpoints, every state handle/state file will be disposed in parallel for better performance.</li>
+      <li>Trigger Checkpoints through Command Line Client: The command line interface supports triggering a checkpoint manually.</li>
+      <li>New Interfaces to SinkV2 That Are Consistent with Source API.</li>
+      <li>New Committer Metrics to Track the Status of Committables.</li>
+    </ul>
+  </li>
+  <li>Support for Python User-Defined Functions (UDFs) in SQL Stream Builder: The current Javascript UDFs in SQL Stream Builder will not work in Java 17 and later versions due to the deprecation and removal of the Nashorn engine from the Java Development Kit (JDK). The addition of Python UDFs to SQL Stream Builder will allow customers to use Python to create new UDFs that will continue to be supported on future JDKs. Javascript UDFs are being deprecated in this release and will be removed in a future release. Cloudera recommends that customers start using Python UDFs for all new development and start migrating their JavaScript UDFs to Python UDFs to prepare for future upgrades.</li>
+</ul>
+
+<p>Note: Currently, Cloudera Streaming Analytics 1.14 only supports JDK versions 8 and 11.</p>
+
+<ul>
+  <li>
+    <p>SQL Stream Builder support for load balancing via Knox for HA deployments: Knox now automatically discovers and provides a load balanced endpoint for SQL Stream Builder when multiple instances of the streaming engine are deployed.</p>
+  </li>
+  <li>
+    <p>Global logging configuration for Configuring logs for all SSB jobs: A new global settings view enables default logging configurations to be set by the administrator. These settings will be applied to all streaming jobs by default and can be overridden at the job level. This ensures that a consistent logging standard can be applied by default for all users and developers.</p>
+  </li>
+</ul>
+
+<p>Please see the <a href="https://docs.cloudera.com/csa/1.14.0/release-notes/topics/csa-what-new.html">Release Notes</a> for the complete list of fixes and improvements.</p>
+
+<h1 id="use-cases">Use Cases</h1>
+<ul>
+  <li>
+    <p>Event-Driven Applications: Stateful applications that ingest events from one or more event streams and react to incoming events by triggering computations, state updates, or external actions.</p>
+
+    <p>Apache Flink excels in handling the concept of time and state for these applications and can scale to manage very large data volumes (up to several terabytes) with exactly once consistency guarantees. Moreover, Apache Flink’s support for event-time, highly customizable window logic, and fine-grained control of time as provided by the ProcessFunction enable the implementation of advanced business logic. Moreover, Apache Flink features a library for Complex Event Processing (CEP) to detect patterns in data streams.</p>
+
+    <p>However, Apache Flink’s outstanding feature for event-driven applications is its support for savepoints. A savepoint is a consistent state image that can be used as a starting point for compatible applications. Given a savepoint, an application can be updated or adapt its scale, or multiple versions of an application can be started for A/B testing.</p>
+
+    <p>Examples:</p>
+    <ul>
+      <li>Fraud detection</li>
+      <li>Anomaly detection</li>
+      <li>Rule-based alerting</li>
+      <li>Business process monitoring</li>
+      <li>Web application (social network)</li>
+    </ul>
+  </li>
+  <li>
+    <p>Data Analytics Applications: With a sophisticated stream processing engine, analytics can also be performed in real-time. Streaming queries or applications ingest real-time event streams and continuously produce and update results as events are consumed. The results are written to an external database or maintained as internal state. A dashboard application can read the latest results from the external database or directly query the internal state of the application.</p>
+
+    <p>Apache Flink supports streaming as well as batch analytical applications.</p>
+
+    <p>Examples:</p>
+    <ul>
+      <li>Quality monitoring of telco networks</li>
+      <li>Analysis of product updates &amp; experiment evaluation in mobile applications</li>
+      <li>Ad-hoc analysis of live data in consumer technology</li>
+      <li>Large-scale graph analysis</li>
+    </ul>
+  </li>
+  <li>
+    <p>Data Pipeline Applications: Streaming data pipelines serve a similar purpose as Extract-transform-load (ETL) jobs. They transform and enrich data and can move it from one storage system to another. However, they operate in a continuous streaming mode instead of being periodically triggered. Hence, they can read records from sources that continuously produce data and move it with low latency to their destination.</p>
+
+    <p>Examples:</p>
+    <ul>
+      <li>Real-time search index building in e-commerce</li>
+      <li>Continuous ETL in e-commerce</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="getting-to-the-new-release">Getting to the new release</h1>
+<p>To upgrade to Cloudera Streaming Analytics 1.14, first ensure that your Cloudera Private Cloud Base environment is already upgraded to version 7.3.1 SP1 and then follow the instructions in the Cloudera Streaming Analytics <a href="https://docs.cloudera.com/csa/1.14.0/installation/topics/csa-upgrade.html">upgrade guide</a>.</p>
+
+<p>Check out <a href="https://docs.cloudera.com/csa/1.14.0/index.html">CSA 1.14</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/csa/1.14.0/release-notes/topics/csa-what-new.html">Release Notes</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/csa/1.14.0/download/topics/csa-download-location.html">Download Information</a></p>
+
+<p>As always, check out the <a href="https://docs.cloudera.com/csa/1.14.0/index.html">CSA 1.14 Docs</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csa" /><category term="flink" /><category term="cdp" /><summary type="html"><![CDATA[The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.14 for Cloudera Public Cloud and Private Cloud Base 7.3.1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.]]></summary></entry><entry><title type="html">Introducing Cloudera’s Unified Runtime with 7.3.1</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Unified-Runtime-7.3.1/" rel="alternate" type="text/html" title="Introducing Cloudera’s Unified Runtime with 7.3.1" /><published>2024-12-12T00:00:00-05:00</published><updated>2024-12-12T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Unified%20Runtime%207.3.1</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Unified-Runtime-7.3.1/"><![CDATA[<p>We are thrilled to announce Cloudera’s first-ever unified release: Cloudera 7.3.1!  This is a single software release available for both cloud and on-premises environments that enable capabilities, workloads, and governance to work and feel the same everywhere.</p>
+
+<p>With the cohesion of Cloudera on cloud 7.2.18 and Cloudera on premises 7.1.9 into a streamlined 7.3.1 version, customers can now benefit from our accelerated pace of innovation with simpler versioning. This unified release provides a consistent feature set across all deployment environments – whether on-premises or in the cloud.</p>
+
+<p>This milestone release unleashes the power of true hybrid capabilities for data management, enabling data and analytics running on-premises and across multiple clouds to be managed cohesively and federated into a unified whole. Cloudera is the only platform transforming customers’ data management and data journeys by enabling the seamless movement of data and workloads across all environments.</p>
+
+<p><b><i>Welcome to the future of hybrid data solutions with Cloudera!</i></b></p>
+
+<h1 id="release-highlights">Release Highlights:</h1>
+
+<ul>
+  <li>
+    <p>Hive and Iceberg integration: The integration of Apache Hive with Apache Iceberg brings modern, open-table format capabilities to Hive’s powerful data warehousing features. With increased performance and scalability, Hive users can easily work with large, complex datasets across both cloud and on-premises environments. Iceberg’s support for schema evolution, time travel, and ACID compliance allows Hive users to manage data changes seamlessly and query historical data snapshots without compromising on performance. This powerful combination streamlines data management, enhances flexibility, and opens new doors for efficient data operations in hybrid environments.</p>
+  </li>
+  <li>
+    <p>Graviton support (tech preview): This release supports AWS Graviton processors, allowing our platform to harness the powerful, cost-efficient capabilities of Arm-based EC2 instances. Customers can now achieve up to 40% better price performance for data-intensive workloads, making large-scale data processing both faster and more accessible. Graviton support not only enhances processing speeds and reduces operational costs, but it also aligns with our commitment to flexible, cloud-optimized performance.</p>
+  </li>
+  <li>
+    <p>SQL Assistant:  Hue now leverages Large Language Models (LLMs) to transform data interaction with its SQL AI assistant. Generate SQL queries from natural language, optimize, explain, and fix them effortlessly. Compatible with OpenAI’s GPT, Amazon Bedrock, and Azure’s OpenAI, Hue offers the flexibility to choose the AI service that suits you best.</p>
+  </li>
+  <li>
+    <p>Support for Amazon S3 Express One Zone Storage: Cloud connectors now offer high-performance, single-availability Zone storage with consistent single-digit millisecond access. By storing data in the same Availability Zone as your compute resources, you can optimize performance, reduce costs, and accelerate workloads. This storage class supports hundreds of thousands of requests per second for seamless scalability.</p>
+  </li>
+  <li>
+    <p>Improved security posture: This release addresses 225+ total Common Vulnerabilities and Exposures (CVEs) which reflects our strong commitment to safeguarding data and ensuring a secure, resilient environment for our users. Each CVE resolution bolsters the integrity and stability of our platform, protecting against potential threats across all deployment environments – whether on-premises or in the cloud, or hybrid.</p>
+  </li>
+</ul>
+
+<h1 id="additional-features">Additional Features:</h1>
+<ol>
+  <li>Zero Downtime Upgrade (ZDU):  Building on the success of ZDU in version 7.1.9, by supporting ZDU in 7.3.1, we continue to simplify the upgrade process for hassle-free upgrades while maintaining high availability and minimizing disruptions to critical operations.</li>
+  <li>Ozone HBase integration (tech preview): This integration provides an object storage solution for Apache HBase. On Ozone, HBase can now efficiently handle massive tables and provide random, realtime read/write access to your Big Data on S3 compliant storage.</li>
+  <li>Cloudera Replication Manager Enhancements:
+    <ul>
+      <li>Advanced Iceberg replication to support Iceberg V2 tables created by Hive, Impala, and Spark</li>
+      <li>Atlas Replication (tech preview) allows users to replicate Atlas metadata and data lineage for Hive external tables and Iceberg tables from on-premises to on-premises.</li>
+      <li>RM extends ozone replication from data only to metadata; ozone metadata replication can be scheduled via Hive external table replication.</li>
+    </ul>
+  </li>
+  <li>Spark 3 Standardization:  For customers moving from Spark 2, this release simplifies the transition through enhanced tooling to ease the migration process. By upgrading to Spark 3, users can unlock superior performance, better resource utilization, and the ability to seamlessly integrate with modern data and AI workloads across hybrid and multi-cloud environments.</li>
+  <li>Unifying Cloudera On Cloud 7.2.18 and Cloudera On-Premises 7.1.9 now ensure feature consistency across deployment environments. For example, multi-authentication support for SAML and LDAP in the Apache Hive component is now available on Cloudera on-premises, while the OpenJPA 3 upgrade for Apache Oozie is now available on Cloudera On Cloud. For a complete list of new features on either platform, please refer to the release notes.</li>
+</ol>
+
+<h1 id="multi-python-support">Multi Python Support</h1>
+<ul>
+  <li>Python 3.9: RHEL/Oracle 8.x, RHEL/Oracle 9.x, and Ubuntu 20.</li>
+  <li>Python 3.10: SLES 15 SP4 and SP5, and Ubuntu 22</li>
+</ul>
+
+<h1 id="upgrade-paths-to-cloudera-731">Upgrade Paths to Cloudera 7.3.1</h1>
+<ul>
+  <li>Cloudera on-premise: Direct upgrades (including downgrades and rollbacks) are supported from versions 7.1.9 SP1, 7.1.8, and 7.1.7 SP3.</li>
+  <li>Cloudera on Cloud: Direct upgrades are supported from 7.2.18.0, 7.2.18.100, 7.2.18.300, and 7.2.17.200 through 7.2.17.500.</li>
+  <li>Upgrades from other versions not listed above may require a two-hop upgrade.</li>
+</ul>
+
+<h1 id="operating-system-database-and-jdk-support">Operating System, Database and JDK Support</h1>
+<p>RHEL 8.10: The latest release supports RHEL 8.10 for Cloudera on cloud.
+JDK 17:  The latest release introduces JDK 17 support for Cloudera on cloud, delivering enhanced performance, security, and compatibility for modern cloud-native applications.
+PostgreSQL 14: This support is now present for Cloudera on cloud.</p>
+
+<h1 id="removed-components">Removed Components</h1>
+<p>The following components have been removed and are no longer available in Cloudera 7.3.1:</p>
+<ul>
+  <li>Apache Spark 2 (see <a href="https://docs.cloudera.com/cdp-private-cloud-base/7.1.9/runtime-release-notes/topics/rt-pvc-deprecated-spark2.html">Deprecation notice</a> for Apache Spark 2)</li>
+  <li>Apache Livy 2 (see <a href="https://docs.cloudera.com/cdp-private-cloud-base/7.3.1/private-release-notes/topics/rt-deprecated-livy2.html">Deprecation notice</a> for Apache Livy 2)</li>
+  <li>Apache Zeppelin (see <a href="https://docs.cloudera.com/cdp-private-cloud-base/7.3.1/private-release-notes/topics/rt-deprecated-livy2.html">Deprecation notice</a> for Apache Zeppelin)</li>
+</ul>
+
+<h1 id="cloudera-data-services-on-premises-support">Cloudera Data Services On Premises Support</h1>
+<p>Cloudera Data Services on premises are currently not supported with 7.3.1 and support will be coming down the road in subsequent CHFs and service packs.  Customers using Cloudera Data Services on premises are suggested to stay with 7.1.9, as upgrading to 7.3.1 will break compatibility. These customers should upgrade to 7.3.1 at a future date when support is available.</p>
+
+<p>Check out Cloudera Runtime <a href="https://docs.cloudera.com/cdp-private-cloud-base/7.3.1/private-release-notes/topics/rt-runtime-overview.html">Release Notes</a></p>
+
+<p>Check out Public Cloud Runtime <a href="https://docs.cloudera.com/runtime/7.3.1/index.html">Release Notes</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/cdp-private-cloud-base/7.3.1/private-release-notes/topics/fixed_common_vulnerabilities_exposures_731.html">Fixed CVEs in 7.3.1</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="cdp" /><summary type="html"><![CDATA[We are thrilled to announce Cloudera’s first-ever unified release: Cloudera 7.3.1! This is a single software release available for both cloud and on-premises environments that enable capabilities, workloads, and governance to work and feel the same everywhere.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging Operator 1.1</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Operator-1.1/" rel="alternate" type="text/html" title="Cloudera Streams Messaging Operator 1.1" /><published>2024-09-06T00:00:00-04:00</published><updated>2024-09-06T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Operator%201.1</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Operator-1.1/"><![CDATA[<p>Moving rapidly here at Cloudera and the Streams Messaging Operator.  Happy to announce the latest release of Cloudera Streams Messaging Operator for Apache Kafka is now ready.   Lots of features including Kafka Replication without Mirrormaker 2.</p>
 
 <p>See <a href="https://docs.cloudera.com/csm-operator/1.1/release-notes/topics/csm-op-rn.html">What’s New</a> with Cloudera Streams Messaging Operator 1.1.</p>
 
@@ -327,79 +556,4 @@ DESCRIBE HISTORY fraudulent_txn_iceberg;
 
 <p><a href="https://docs.cloudera.com/csa/1.11.0/index.html">Cloudera Streaming Analytics DOCS</a></p>
 
-<p>CDP <a href="https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-intro.html">SSB</a> <a href="https://docs.cloudera.com/csa/1.11.0/index.html">CSA</a> <a href="https://flink.apache.org/">Flink</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="ssb" /><category term="cdp" /><category term="flink" /><summary type="html"><![CDATA[Yesterday one of my customers asked about the ability to control deserialization errors in SSB applications. Referencing our Dead Letter Queue Documentation within the Deserialize Tab we can see there are quite a few options for exception handling:]]></summary></entry><entry><title type="html">NiFi 2.0 is Getting Hot</title><link href="https://cldr-steven-matison.github.io//blog/NiFi-2.0/" rel="alternate" type="text/html" title="NiFi 2.0 is Getting Hot" /><published>2023-11-25T00:00:00-05:00</published><updated>2023-11-25T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/NiFi-2.0</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/NiFi-2.0/"><![CDATA[<p>NiFi 2.0 is getting closer and closer to a reality as we approach the end of 2023.   Version 2.0.0-M1 was released November 25, 2023 and is the first milestone version of Apache NiFi 2.0.0. This version includes over 900 issues resolved, with new features, numerous improvements, and bug fixes.</p>
-
-<p>Features I am hearing the most about already in the community are:</p>
-
-<ol>
-  <li>Initial version of native Python API for Processors</li>
-  <li>Stateless Execution mode for Process Groups</li>
-  <li>Kubernetes-based Leader Election and State Management extensions</li>
-  <li>Python-based Processors for interacting with ChatGPT and Vector Databases</li>
-</ol>
-
-<p>To prepare for NiFi Adoption be sure to give a read of Pierre Villard’s blog <a href="https://medium.com/cloudera-inc/getting-ready-for-apache-nifi-2-0-5a5e6a67f450">Getting Ready for NiFi 2.0</a>.</p>
-
-<p>Please refer to the <a href="https://cwiki.apache.org/confluence/display/NIFI/Deprecated+Components+and+Features">Deprecated Components and Features</a> documentation for items removed in this version.</p>
-
-<p><a href="https://cwiki.apache.org/confluence/display/NIFI/Migrating+Deprecated+Components+and+Features+for+2.0.0">Migrating Deprecated Components and Features</a> for 2.0.0 includes current progress on the steps necesary for migrating certain components and features.</p>
-
-<p><a href="https://cwiki.apache.org/confluence/display/NIFI/Release+Notes#ReleaseNotes-Version2.0.0-M1">Release Notes</a></p>
-
-<p><a href="https://cwiki.apache.org/confluence/display/NIFI/Migration+Guidance">Migration Guidance</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><summary type="html"><![CDATA[NiFi 2.0 is getting closer and closer to a reality as we approach the end of 2023. Version 2.0.0-M1 was released November 25, 2023 and is the first milestone version of Apache NiFi 2.0.0. This version includes over 900 issues resolved, with new features, numerous improvements, and bug fixes.]]></summary></entry><entry><title type="html">Cloudera SQL Stream Builder Compatibility between CDP Public Cloud and CDP Private Cloud.</title><link href="https://cldr-steven-matison.github.io//blog/SSB-CDP-PC-PVC-Compatibility/" rel="alternate" type="text/html" title="Cloudera SQL Stream Builder Compatibility between CDP Public Cloud and CDP Private Cloud." /><published>2023-11-02T00:00:00-04:00</published><updated>2023-11-02T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/SSB-CDP-PC-PVC-Compatibility</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/SSB-CDP-PC-PVC-Compatibility/"><![CDATA[<p>In my previous post <a href="https://cldr-steven-matison.github.io/blog/SSB-Multi-Project-Repo/">Cloudera SQL Stream Builder Multiple Project Repo</a> I described how I was able to create a separate folder in the project repo to use for a cloud deployment.   That worked great, but I am more happy to report that I was able to remove all the differences so another project folder is not needed.   The SSB-Iceberg-Demo project will now import into any SQL Stream Builder on Private Cloud or Public cloud and not require any modifications to the sample jobs.</p>
-
-<p>A few things to note when deploying on CDP Public Cloud</p>
-
-<ol>
-  <li>You need 2 Data Hubs:   <a href="https://docs.cloudera.com/cdf-datahub/7.2.17/concepts-streaming-analytics.html">Streaming Analytics Light Duty with Apache Flink</a> &amp; <a href="https://docs.cloudera.com/cdf-datahub/7.2.17/concepts-streams-messaging.html">Streams Messaging Light Duty: Apache Kafka, Schema Registry, Streams Messaging Manager, Streams Replication Manager, Cruise Control</a></li>
-  <li>There are differences in the <a href="https://github.com/cldr-steven-matison/NiFi-Templates/blob/main/SSB-Iceberg-Demo-PC-DataFlow.json">nifi flow</a>.  Those differences are the addition of a Default SSL Context Service.  For my testing I created a DataFlow catalog flow SSB-Iceberg-Demo.  You can deploy the flow in <a href="https://docs.cloudera.com/dataflow/cloud/index.html">DataFlow</a>, in <a href="https://docs.cloudera.com/cdf-datahub/7.2.17/concepts-flow-management.html">DataHub</a>, or any other nifi.</li>
-  <li>You can easily complete the keytab setup with your username and password.  Downloading, uploading keytab not required.</li>
-  <li>You will need to make a Kafa Data Source against your Kafka Data Hub.  You just need your brokers.</li>
-  <li>CDP PC will auto discover your environment’s services. Check out the <a href="https://docs.cloudera.com/cdf-datahub/7.2.17/how-to-ssb/topics/csa-ssb-auto-discovery.html">Data Hub Service Discovery</a>.</li>
-</ol>
-
-<figure>
-  <img src="/assets/images/2023-11-03-SSB-Data-Hub-Service-Discovery.png" />
-  <figcaption>Data Hub Service Discovery</figcaption>
-</figure>
-
-<p>Check out Streaming SQL Console</p>
-
-<p><a href="https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-key-features.html">CDP Public Cloud SSB</a></p>
-
-<p>As always, check out the docs:</p>
-
-<p><a href="https://docs.cloudera.com/csa/1.11.0/index.html">Cloudera Streaming Analytics DOCS</a></p>
-
-<p>CDP <a href="https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-intro.html">SSB</a> <a href="https://docs.cloudera.com/csa/1.11.0/index.html">CSA</a> <a href="https://flink.apache.org/">Flink</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="ssb" /><category term="cdp" /><category term="flink" /><summary type="html"><![CDATA[In my previous post Cloudera SQL Stream Builder Multiple Project Repo I described how I was able to create a separate folder in the project repo to use for a cloud deployment. That worked great, but I am more happy to report that I was able to remove all the differences so another project folder is not needed. The SSB-Iceberg-Demo project will now import into any SQL Stream Builder on Private Cloud or Public cloud and not require any modifications to the sample jobs.]]></summary></entry><entry><title type="html">Cloudera SQL Stream Builder Multiple Project Repo</title><link href="https://cldr-steven-matison.github.io//blog/SSB-Multi-Project-Repo/" rel="alternate" type="text/html" title="Cloudera SQL Stream Builder Multiple Project Repo" /><published>2023-10-20T00:00:00-04:00</published><updated>2023-10-20T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/SSB-Multi-Project-Repo</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/SSB-Multi-Project-Repo/"><![CDATA[<p>I think I am always learning something new with Cloudera’s Flink tool, <a href="https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-intro.html">Sql Stream Builder</a>.   I have been demo-ing in it for almost 2 years going back to a <a href="https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB">Fraud Detection Demo</a> that Andre built, to multiple customer facing POCs, to current releases with Iceberg features for my customers.   Today a lightbulb went off in my head around the Github Source Control Integration and the Project Name.   I tried a commit to create a second project folder within the <a href="https://github.com/cldr-steven-matison/SSBDemo">SSBDemo</a> main repo as such:</p>
-
-<figure>
-  <img src="/assets/images/2023-10-20-SSB-Multi-Project-Repo-1.png" />
-  <figcaption>Screen Shot of Repo</figcaption>
-</figure>
-
-<p>Next, I go into the Streaing SQL Console and Import this Repo as a Project.  This time I choose the SSBDemo-Cloud.</p>
-
-<figure>
-  <img src="/assets/images/2023-10-20-SSB-Multi-Project-Repo-2.png" />
-  <figcaption>Screen Shot Repot Import</figcaption>
-</figure>
-
-<p>And ofcourse, it works.</p>
-
-<figure>
-  <img src="/assets/images/2023-10-20-SSB-Multi-Project-Repo-3.png" />
-  <figcaption>Screen Shot Import Success</figcaption>
-</figure>
-
-<p>I can now use one main repo to host multiple deployments.  In this example, I need some project differences for the CDP Public Cloud version of my projects.  Will expose those differences in future post.</p>
-
-<p>Check out Streaming SQL Console</p>
-
-<p><a href="https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-key-features.html">CDP Public Cloud SSB</a></p>
-
-<p>As always, check out the docs:</p>
-
-<p><a href="https://docs.cloudera.com/csa/1.11.0/index.html">Cloudera Streaming Analytics DOCS</a></p>
-
-<p>CDP <a href="https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-intro.html">SSB</a> <a href="https://docs.cloudera.com/csa/1.11.0/index.html">CSA</a> <a href="https://flink.apache.org/">Flink</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="ssb" /><category term="cdp" /><category term="flink" /><summary type="html"><![CDATA[I think I am always learning something new with Cloudera’s Flink tool, Sql Stream Builder. I have been demo-ing in it for almost 2 years going back to a Fraud Detection Demo that Andre built, to multiple customer facing POCs, to current releases with Iceberg features for my customers. Today a lightbulb went off in my head around the Github Source Control Integration and the Project Name. I tried a commit to create a second project folder within the SSBDemo main repo as such:]]></summary></entry></feed>
+<p>CDP <a href="https://docs.cloudera.com/csa/1.11.0/ssb-overview/topics/csa-ssb-intro.html">SSB</a> <a href="https://docs.cloudera.com/csa/1.11.0/index.html">CSA</a> <a href="https://flink.apache.org/">Flink</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="ssb" /><category term="cdp" /><category term="flink" /><summary type="html"><![CDATA[Yesterday one of my customers asked about the ability to control deserialization errors in SSB applications. Referencing our Dead Letter Queue Documentation within the Deserialize Tab we can see there are quite a few options for exception handling:]]></summary></entry></feed>

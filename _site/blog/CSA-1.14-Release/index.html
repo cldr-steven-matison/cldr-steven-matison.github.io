@@ -1,0 +1,725 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1 - Cloudera Solutions Engineer</title>
+<meta name="description" content="The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.14 for Cloudera Public Cloud and Private Cloud Base 7.3.1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/CSA-1.14-Release/">
+
+
+  <meta property="og:description" content="The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.14 for Cloudera Public Cloud and Private Cloud Base 7.3.1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/csa-architecture.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2024-12-16T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/CSA-1.14-Release/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io//"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <a class="site-title" href="/">
+          Cloudera Solutions Engineer
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&pageNum=1">Community</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io//">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io//" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Hello, My name is Steven Matison and I am a Senior Solutions Engineer at Cloudera, Inc.  Check out my journey with Cloudera Data Platform (CDP).</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1">
+    <meta itemprop="description" content="The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.14 for Cloudera Public Cloud and Private Cloud Base 7.3.1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.">
+    <meta itemprop="datePublished" content="2024-12-16T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io//blog/CSA-1.14-Release/" class="u-url" itemprop="url">Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.14 for Cloudera Public Cloud and Private Cloud Base 7.3.1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.</p>
+
+<p>See <a href="https://docs.cloudera.com/csa/latest/release-notes/topics/csa-what-new.html">What’s New</a>.</p>
+
+<h2 id="release-highlights">Release Highlights</h2>
+<ul>
+  <li>Rebase to Apache Flink 1.19.1: Streaming analytics deployments, including SQL Stream Builder, now support Apache Flink 1.19.1, which includes the Apache Flink improvements below. For more information on these improvements and deprecations, please check the Apache Flink 1.19.1 release announcement.
+    <ul>
+      <li>Custom Parallelism for Table/SQL Sources: The DataGen connector now supports setting of custom parallelism for performance tuning via the scan.parallelism option. Support for other connectors will come in future releases.</li>
+      <li>Configure Different State Time to Live (TTLs) Using SQL Hint: Users have now a more flexible way to specify custom time-to-live (TTL) values for state of regular joins and group aggregations directly within their queries by utilizing the STATE_TTL hint.</li>
+      <li>Named Parameters: Named parameters can now be used when calling a function or stored procedure in Flink SQL.</li>
+      <li>Support for SESSION Window Table-Valued Functions (TVFs) in Streaming Mode: Users can now use SESSION Window table-valued functions (TVF) in streaming mode.</li>
+      <li>Support for Changelog Inputs for Window TVF Aggregation: Window aggregation operators can now handle changelog streams (e.g., Change Data Capture [CDC] data sources, etc.).</li>
+      <li>New UDF Type: AsyncScalarFunction: The new AsyncScalarFunction is a user-defined asynchronous ScalarFunction that allows for issuing concurrent function calls asynchronously.</li>
+      <li>MiniBatch Optimization for Regular Joins: The new mini-batch optimization can be used in regular joins to reduce intermediate results, especially in cascading join scenarios.</li>
+      <li>Dynamic Source Parallelism Inference for Batch Jobs: Allows source connectors to dynamically infer the parallelism based on the actual amount of data to consume.</li>
+      <li>Standard Yet Another Markup Language (YAML) for Apache Flink Configuration: Apache Flink has officially introduced full support for the standard YAML 1.2 syntax in the configuration file.</li>
+      <li>Profiling JobManager/TaskManager on Apache Flink Web: Support for triggering profiling at the JobManager/TaskManager level.</li>
+      <li>New Config Options for Administrator Java Virtual Machine (JVM) Options: A set of administrator JVM options are available to prepend the user-set JVM options with default values for platform-wide JVM tuning.</li>
+      <li>Using Larger Checkpointing Interval When Source is Processing Backlog: Users can set the execution.checkpointing.interval-during-backlog to use a larger checkpoint interval to enhance the throughput while the job is processing backlog if the source is backlog-aware.</li>
+      <li>CheckpointsCleaner Clean Individual Checkpoint States in Parallel: Now, when disposing of no longer needed checkpoints, every state handle/state file will be disposed in parallel for better performance.</li>
+      <li>Trigger Checkpoints through Command Line Client: The command line interface supports triggering a checkpoint manually.</li>
+      <li>New Interfaces to SinkV2 That Are Consistent with Source API.</li>
+      <li>New Committer Metrics to Track the Status of Committables.</li>
+    </ul>
+  </li>
+  <li>Support for Python User-Defined Functions (UDFs) in SQL Stream Builder: The current Javascript UDFs in SQL Stream Builder will not work in Java 17 and later versions due to the deprecation and removal of the Nashorn engine from the Java Development Kit (JDK). The addition of Python UDFs to SQL Stream Builder will allow customers to use Python to create new UDFs that will continue to be supported on future JDKs. Javascript UDFs are being deprecated in this release and will be removed in a future release. Cloudera recommends that customers start using Python UDFs for all new development and start migrating their JavaScript UDFs to Python UDFs to prepare for future upgrades.</li>
+</ul>
+
+<p>Note: Currently, Cloudera Streaming Analytics 1.14 only supports JDK versions 8 and 11.</p>
+
+<ul>
+  <li>
+    <p>SQL Stream Builder support for load balancing via Knox for HA deployments: Knox now automatically discovers and provides a load balanced endpoint for SQL Stream Builder when multiple instances of the streaming engine are deployed.</p>
+  </li>
+  <li>
+    <p>Global logging configuration for Configuring logs for all SSB jobs: A new global settings view enables default logging configurations to be set by the administrator. These settings will be applied to all streaming jobs by default and can be overridden at the job level. This ensures that a consistent logging standard can be applied by default for all users and developers.</p>
+  </li>
+</ul>
+
+<p>Please see the <a href="https://docs.cloudera.com/csa/1.14.0/release-notes/topics/csa-what-new.html">Release Notes</a> for the complete list of fixes and improvements.</p>
+
+<h1 id="use-cases">Use Cases</h1>
+<ul>
+  <li>
+    <p>Event-Driven Applications: Stateful applications that ingest events from one or more event streams and react to incoming events by triggering computations, state updates, or external actions.</p>
+
+    <p>Apache Flink excels in handling the concept of time and state for these applications and can scale to manage very large data volumes (up to several terabytes) with exactly once consistency guarantees. Moreover, Apache Flink’s support for event-time, highly customizable window logic, and fine-grained control of time as provided by the ProcessFunction enable the implementation of advanced business logic. Moreover, Apache Flink features a library for Complex Event Processing (CEP) to detect patterns in data streams.</p>
+
+    <p>However, Apache Flink’s outstanding feature for event-driven applications is its support for savepoints. A savepoint is a consistent state image that can be used as a starting point for compatible applications. Given a savepoint, an application can be updated or adapt its scale, or multiple versions of an application can be started for A/B testing.</p>
+
+    <p>Examples:</p>
+    <ul>
+      <li>Fraud detection</li>
+      <li>Anomaly detection</li>
+      <li>Rule-based alerting</li>
+      <li>Business process monitoring</li>
+      <li>Web application (social network)</li>
+    </ul>
+  </li>
+  <li>
+    <p>Data Analytics Applications: With a sophisticated stream processing engine, analytics can also be performed in real-time. Streaming queries or applications ingest real-time event streams and continuously produce and update results as events are consumed. The results are written to an external database or maintained as internal state. A dashboard application can read the latest results from the external database or directly query the internal state of the application.</p>
+
+    <p>Apache Flink supports streaming as well as batch analytical applications.</p>
+
+    <p>Examples:</p>
+    <ul>
+      <li>Quality monitoring of telco networks</li>
+      <li>Analysis of product updates &amp; experiment evaluation in mobile applications</li>
+      <li>Ad-hoc analysis of live data in consumer technology</li>
+      <li>Large-scale graph analysis</li>
+    </ul>
+  </li>
+  <li>
+    <p>Data Pipeline Applications: Streaming data pipelines serve a similar purpose as Extract-transform-load (ETL) jobs. They transform and enrich data and can move it from one storage system to another. However, they operate in a continuous streaming mode instead of being periodically triggered. Hence, they can read records from sources that continuously produce data and move it with low latency to their destination.</p>
+
+    <p>Examples:</p>
+    <ul>
+      <li>Real-time search index building in e-commerce</li>
+      <li>Continuous ETL in e-commerce</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="getting-to-the-new-release">Getting to the new release</h1>
+<p>To upgrade to Cloudera Streaming Analytics 1.14, first ensure that your Cloudera Private Cloud Base environment is already upgraded to version 7.3.1 SP1 and then follow the instructions in the Cloudera Streaming Analytics <a href="https://docs.cloudera.com/csa/1.14.0/installation/topics/csa-upgrade.html">upgrade guide</a>.</p>
+
+<p>Check out <a href="https://docs.cloudera.com/csa/1.14.0/index.html">CSA 1.14</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/csa/1.14.0/release-notes/topics/csa-what-new.html">Release Notes</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/csa/1.14.0/download/topics/csa-download-location.html">Download Information</a></p>
+
+<p>As always, check out the <a href="https://docs.cloudera.com/csa/1.14.0/index.html">CSA 1.14 Docs</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/cdp" class="page__taxonomy-item p-category" rel="tag">cdp</a><span class="sep">, </span>
+    
+      <a href="/tags/csa" class="page__taxonomy-item p-category" rel="tag">csa</a><span class="sep">, </span>
+    
+      <a href="/tags/flink" class="page__taxonomy-item p-category" rel="tag">flink</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2024-12-16T00:00:00-05:00">December 16, 2024</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streaming+Analytics+1.14+for+Cloudera+Data+Platform+7.3.1%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSA-1.14-Release%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSA-1.14-Release%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSA-1.14-Release%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Cloudera-Unified-Runtime-7.3.1/" class="pagination--pager" title="Introducing Cloudera’s Unified Runtime with 7.3.1
+">Previous</a>
+    
+    
+      <a href="/blog/CSM-Kubernetes-Operator1-2-Release/" class="pagination--pager" title="Cloudera Streams Messaging - Kubernetes Operator 1.2
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csm-op-deployment-architecture.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/CSM-Kubernetes-Operator1-2-Release/" rel="permalink">Cloudera Streams Messaging - Kubernetes Operator 1.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Cloudera-Data-Platform.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Unified-Runtime-7.3.1/" rel="permalink">Introducing Cloudera’s Unified Runtime with 7.3.1
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">We are thrilled to announce Cloudera’s first-ever unified release: Cloudera 7.3.1!  This is a single software release available for both cloud and on-premise...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Cloudera%20Streams%20Messaging%20Operator.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Streams-Messaging-Operator-1.1/" rel="permalink">Cloudera Streams Messaging Operator 1.1
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Moving rapidly here at Cloudera and the Streams Messaging Operator.  Happy to announce the latest release of Cloudera Streams Messaging Operator for Apache K...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csa-architecture.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/CSA-1.13-Release/" rel="permalink">Cloudera Streaming Analytics 1.13 for Private Cloud Base
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release i...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
