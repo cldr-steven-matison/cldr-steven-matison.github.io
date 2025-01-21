@@ -148,4 +148,10 @@ var store = [{
         "tags": ["cloudera","spark","kubernetes","cdp"],
         "url": "/blog/Cloudera-Migration-Assistant-3.5.0/",
         "teaser": "/assets/images/Cloudera-Data-Platform.png"
+      },{
+        "title": "Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1",
+        "excerpt":"The Data in Motion (DiM) team is pleased to announce the release of Cloudera Flow Management 4.0.0 as a Technical Preview for running Apache NiFi 2.0 with Cloudera Manager on Cloudera 7.1.9 and 7.3.1 Private Cloud Base clusters (all service packs). This release offers a number of new features and...","categories": ["blog"],
+        "tags": ["cloudera","nifi"],
+        "url": "/blog/Cloudera-Flow-Management-4.0.0/",
+        "teaser": "/assets/images/nifi-logo.png"
       }]
