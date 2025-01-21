@@ -142,4 +142,10 @@ var store = [{
         "tags": ["csm","kafka","kubernetes","cdp"],
         "url": "/blog/CSM-Kubernetes-Operator1-2-Release/",
         "teaser": "/assets/images/csm-op-deployment-architecture.jpg"
+      },{
+        "title": "Cloudera Migration Assistant 3.5.0",
+        "excerpt":"Cloudera is excited to announce the General Availability of Cloudera Migration Assistant with the release of the 3.5.0 version. Cloudera’s go-to migration tool now supports migrating Spark2 and Spark3 workloads from Cloudera on premises to Cloudera on cloud, as well as automated execution of migrated workloads with Livy, for a...","categories": ["blog"],
+        "tags": ["cloudera","spark","kubernetes","cdp"],
+        "url": "/blog/Cloudera-Migration-Assistant-3.5.0/",
+        "teaser": "/assets/images/Cloudera-Data-Platform.png"
       }]
