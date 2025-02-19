@@ -1,4 +1,150 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-01-21T11:34:01-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-4.0.0/" rel="alternate" type="text/html" title="Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1" /><published>2025-01-21T00:00:00-05:00</published><updated>2025-01-21T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-4.0.0</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-4.0.0/"><![CDATA[<p>The Data in Motion (DiM) team is pleased to announce the release of Cloudera Flow Management 4.0.0 as a Technical Preview for running Apache NiFi 2.0 with Cloudera Manager on Cloudera 7.1.9 and 7.3.1 Private Cloud Base clusters (all service packs).</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-02-19T15:36:42-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera DataFlow - Nifi 2.0 Python Processors</title><link href="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/" rel="alternate" type="text/html" title="Cloudera DataFlow - Nifi 2.0 Python Processors" /><published>2025-02-19T00:00:00-05:00</published><updated>2025-02-19T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/"><![CDATA[<p>Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor.  This customer already has deep experience with nifi, python, and even custom java processors.   As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors.  I also have not had to manage any nifi file systems behind these custom processors.   This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience.   Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code.  Not anymore with NiFi 2.0…</p>
+
+<p>In this blog I am going to show how easy it is to feed python source code on s3 into a nifi data flow without all those sharpe edges.</p>
+
+<p>First,  I need to research the upstream <a href="https://nifi.apache.org/nifi-docs/python-developer-guide.html">documentation</a> for examples.  This one is a great starting point CreateFlowfile:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">from</span> <span class="n">nifiapi</span><span class="p">.</span><span class="nf">flowfilesource</span> <span class="n">import</span> <span class="no">FlowFileSource</span><span class="p">,</span> <span class="no">FlowFileSourceResult</span>
+
+<span class="k">class</span> <span class="nc">CreateFlowFile</span><span class="p">(</span><span class="no">FlowFileSource</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Java</span><span class="p">:</span>
+        <span class="n">implements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'org.apache.nifi.python.processor.FlowFileSource'</span><span class="p">]</span>
+
+    <span class="k">class</span> <span class="nc">ProcessorDetails</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s1">'0.0.1-SNAPSHOT'</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s1">'''A Python processor that creates FlowFiles.'''</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">pass</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="k">return</span> <span class="no">FlowFileSourceResult</span><span class="p">(</span><span class="n">relationship</span> <span class="o">=</span> <span class="s1">'success'</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'greeting'</span><span class="p">:</span> <span class="s1">'hello'</span><span class="p">},</span> <span class="n">contents</span> <span class="o">=</span> <span class="s1">'Hello World!'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Next I need to build out the basic samples that validate the documented process works to deploy a custom python processor.  I delivered the above code to s3 and use that in my deployment:</p>
+
+<figure>
+  <img src="/assets/images/nifi-python-processor-storage-location-1.png" />
+  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
+</figure>
+
+<p>I am further automating this configuration so the deployment looks like this:</p>
+<figure>
+  <img src="/assets/images/nifi-python-processor-storage-location-2.png" />
+  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
+</figure>
+
+<p>Now when I deploy this flow, this processor is available:</p>
+
+<figure>
+  <img src="/assets/images/nifi-python-processor-createflowfile.png" />
+  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
+</figure>
+
+<p>Next, I can focus on modifying the working example for my Fraud Detection use case.   That sample script is well tested and its python source code has been used within an ExecuteScript Processor.  I just need to make some very basic changes to merge my example python processor with the same python from my ExecuteScript processor.</p>
+
+<p>My final python processor</p>
+
+<figure>
+  <img src="/assets/images/nifi-python-processor-transaction-generator.png" />
+  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
+</figure>
+
+<p>And the source code is closely as follows:</p>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1"># TransactionGenerator.py</span>
+<span class="n">from</span> <span class="n">nifiapi</span><span class="p">.</span><span class="nf">flowfilesource</span> <span class="n">import</span> <span class="no">FlowFileSource</span><span class="p">,</span> <span class="no">FlowFileSourceResult</span>
+<span class="n">import</span> <span class="n">sys</span>
+<span class="n">import</span> <span class="n">os</span>
+<span class="n">import</span> <span class="n">socket</span>
+<span class="n">import</span> <span class="n">logging</span>
+<span class="n">import</span> <span class="n">string</span>
+<span class="n">import</span> <span class="n">datetime</span>
+<span class="n">import</span> <span class="n">random</span>
+<span class="n">import</span> <span class="n">uuid</span>
+<span class="n">import</span> <span class="n">csv</span>
+<span class="n">import</span> <span class="n">json</span>
+<span class="n">import</span> <span class="n">math</span>
+<span class="n">import</span> <span class="n">time</span>
+<span class="n">from</span> <span class="n">random</span> <span class="n">import</span> <span class="n">randint</span>
+<span class="n">from</span> <span class="n">random</span> <span class="n">import</span> <span class="n">uniform</span>
+
+<span class="c1"># Add some data = Amounts and Cities.</span>
+<span class="no">AMOUNTS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span><span class="mi">500</span><span class="p">]</span>
+<span class="no">CITIES</span> <span class="o">=</span> <span class="p">[</span>                                                                                                                                                                                                                                                     
+    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">48.8534</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">2.3488</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Paris"</span><span class="p">},</span>                                                                                                                                                                                                    
+    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">43.2961743</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">5.3699525</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Marseille"</span><span class="p">},</span>                                                                                                                                                                                                 
+    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">45.7578137</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">4.8320114</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Lyon"</span><span class="p">},</span>                                                                                                                                                                                                      
+    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">50.6365654</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">3.0635282</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Lille"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">44.841225</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5800364</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Bordeaux"</span><span class="p">}</span>
+<span class="p">]</span>   
+
+<span class="k">class</span> <span class="nc">TransactionGenerator</span><span class="p">(</span><span class="no">FlowFileSource</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Java</span><span class="p">:</span>
+        <span class="n">implements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'org.apache.nifi.python.processor.FlowFileSource'</span><span class="p">]</span>
+
+    <span class="k">class</span> <span class="nc">ProcessorDetails</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s1">'0.0.1-SNAPSHOT'</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s1">'''A Python processor that creates credit card transactions for the Fraud Demo.'''</span>
+
+    <span class="c1"># Define geo functions</span>
+    <span class="k">def</span> <span class="nf">create_random_point</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">distance</span><span class="o">/</span><span class="mi">111300</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">pi</span> <span class="o">*</span> <span class="n">v</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x0</span><span class="o">+</span><span class="n">x1</span><span class="p">,</span> <span class="n">y0</span> <span class="o">+</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_geopoint</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="nf">create_random_point</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_latlon</span><span class="p">(</span><span class="nb">self</span><span class="p">):</span>                                                                    
+        <span class="n">geo</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="no">CITIES</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="nf">create_geopoint</span><span class="p">(</span><span class="n">geo</span><span class="p">[</span><span class="s1">'lat'</span><span class="p">],</span> <span class="n">geo</span><span class="p">[</span><span class="s1">'lon'</span><span class="p">]),</span><span class="n">geo</span><span class="p">[</span><span class="s1">'city'</span><span class="p">]</span>        
+
+    <span class="k">def</span> <span class="nf">create_fintran</span><span class="p">(</span><span class="nb">self</span><span class="p">):</span>
+     
+        <span class="n">latlon</span><span class="p">,</span><span class="n">city</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">get_latlon</span><span class="p">()</span>
+        <span class="n">tsbis</span><span class="o">=</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()).</span><span class="nf">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-%d %H:%M:%S "</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">str</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">.</span><span class="nf">strptime</span><span class="p">(</span><span class="n">tsbis</span><span class="p">,</span> <span class="s2">"%Y-%m-%d %H:%M:%S "</span><span class="p">))</span>
+        <span class="n">fintran</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s1">'ts'</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+          <span class="s1">'account_id'</span> <span class="p">:</span> <span class="n">str</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)),</span>
+          <span class="s1">'transaction_id'</span> <span class="p">:</span> <span class="n">str</span><span class="p">(</span><span class="n">uuid</span><span class="p">.</span><span class="nf">uuid1</span><span class="p">()),</span>
+          <span class="s1">'amount'</span> <span class="p">:</span> <span class="n">random</span><span class="p">.</span><span class="nf">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2000</span><span class="p">),</span>  
+          <span class="s1">'lat'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+          <span class="s1">'lon'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">}</span>    
+        <span class="k">return</span> <span class="p">(</span><span class="n">fintran</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_fraudtran</span><span class="p">(</span><span class="n">fintran</span><span class="p">):</span>
+        <span class="n">latlon</span><span class="p">,</span><span class="n">city</span> <span class="o">=</span> <span class="n">get_latlon</span><span class="p">()</span>
+        <span class="n">tsbis</span> <span class="o">=</span> <span class="n">str</span><span class="p">((</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="mi">600</span><span class="p">))).</span><span class="nf">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-%d %H:%M:%S "</span><span class="p">))</span>
+        <span class="n">fraudtran</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s1">'ts'</span> <span class="p">:</span> <span class="n">tsbis</span><span class="p">,</span>
+          <span class="s1">'account_id'</span> <span class="p">:</span> <span class="n">fintran</span><span class="p">[</span><span class="s1">'account_id'</span><span class="p">],</span>
+          <span class="s1">'transaction_id'</span> <span class="p">:</span> <span class="s1">'xxx'</span> <span class="o">+</span> <span class="n">str</span><span class="p">(</span><span class="n">fintran</span><span class="p">[</span><span class="s1">'transaction_id'</span><span class="p">]),</span>
+          <span class="s1">'amount'</span> <span class="p">:</span> <span class="n">random</span><span class="p">.</span><span class="nf">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2000</span><span class="p">),</span>      
+          <span class="s1">'lat'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+          <span class="s1">'lon'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">}</span>    
+        <span class="k">return</span> <span class="p">(</span><span class="n">fraudtran</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">pass</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="n">fintran</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">create_fintran</span><span class="p">()</span>   
+        <span class="n">fintransaction</span> <span class="o">=</span>  <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">fintran</span><span class="p">)</span>
+        <span class="k">return</span> <span class="no">FlowFileSourceResult</span><span class="p">(</span><span class="n">relationship</span> <span class="o">=</span> <span class="s1">'success'</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'NiFi'</span><span class="p">:</span> <span class="s1">'PythonProcessor'</span><span class="p">},</span> <span class="n">contents</span> <span class="o">=</span> <span class="n">fintransaction</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Not bad, I know have an example to share with my customer, and I can modify my demos and hands on labs to use this processor instead of ExecuteScript.</p>
+
+<p>Check out the Cloudera DataFlow <a href="https://docs.cloudera.com/dataflow/cloud/custom-processors/topics/cdf-bp-custom-python-processors.html">DOCS</a> for custom python processors.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="dataflow" /><category term="nifi" /><summary type="html"><![CDATA[Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor. This customer already has deep experience with nifi, python, and even custom java processors. As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors. I also have not had to manage any nifi file systems behind these custom processors. This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience. Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code. Not anymore with NiFi 2.0…]]></summary></entry><entry><title type="html">Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-4.0.0/" rel="alternate" type="text/html" title="Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1" /><published>2025-01-21T00:00:00-05:00</published><updated>2025-01-21T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-4.0.0</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-4.0.0/"><![CDATA[<p>The Data in Motion (DiM) team is pleased to announce the release of Cloudera Flow Management 4.0.0 as a Technical Preview for running Apache NiFi 2.0 with Cloudera Manager on Cloudera 7.1.9 and 7.3.1 Private Cloud Base clusters (all service packs).</p>
 
 <p>This release offers a number of new features and improves stability and security through bug fixes and upgraded dependencies.</p>
 
@@ -478,29 +624,4 @@ PostgreSQL 14: This support is now present for Cloudera on cloud.</p>
 
 <p><a href="https://docs.cloudera.com/cfm-operator/2.8.0/index.html">CFM</a>
 <a href="https://docs.cloudera.com/csm-operator/1.0/index.html">CSM</a>
-<a href="https://docs.cloudera.com/csa-operator/1.0/index.html">CSA</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="kubernetes" /><category term="operator" /><category term="csm" /><category term="cfm" /><category term="csa" /><summary type="html"><![CDATA[I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog. Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.]]></summary></entry><entry><title type="html">Release of CEM 2.1.2</title><link href="https://cldr-steven-matison.github.io//blog/CEM-2.1.2-Release/" rel="alternate" type="text/html" title="Release of CEM 2.1.2" /><published>2024-03-11T00:00:00-04:00</published><updated>2024-03-11T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/CEM-2.1.2-Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CEM-2.1.2-Release/"><![CDATA[<p>Wow I have been so busy I have not had a chance to think about posting here.   Here is a quick release I wanted to share.</p>
-
-<h2 id="release-of-cem-212">Release of CEM 2.1.2</h2>
-
-<p>Key Features</p>
-
-<ol>
-  <li>Cloudera Manager integration</li>
-  <li>Jetty and Spring upgrades</li>
-  <li>Improved EFM caching</li>
-  <li>Oracle database support</li>
-  <li>Improved import/export functionality</li>
-  <li>Agent class delete option</li>
-</ol>
-
-<p><a href="https://www.cloudera.com/products/edge-management.html">Cloudera Edge Management CEM</a> is a very useful UI to manage, control and monitor data collection and processing at the edge.  CEM provides two capabilities; Edge Data Collection and Edge Flow Management.</p>
-
-<p>Check out <a href="https://docs.cloudera.com/cem/2.1.2/overview/topics/cem-cem-overview.html">Cloudera Edge Management Overview</a></p>
-
-<p>Check out <a href="https://docs.cloudera.com/cem/2.1.2/release-notes/topics/cem-whats-new.html">Release Notes</a></p>
-
-<p>Check out <a href="https://docs.cloudera.com/cem/2.1.2/release-notes/topics/cem-download-locations.html">Download Information</a>.</p>
-
-<p>As always, check out the docs:</p>
-
-<p><a href="https://docs.cloudera.com/cem/2.1.2/edge-flow-manager.html">Edge Flow Manager Documentation</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cem" /><category term="nifi" /><category term="minifi" /><summary type="html"><![CDATA[Wow I have been so busy I have not had a chance to think about posting here. Here is a quick release I wanted to share.]]></summary></entry></feed>
+<a href="https://docs.cloudera.com/csa-operator/1.0/index.html">CSA</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="kubernetes" /><category term="operator" /><category term="csm" /><category term="cfm" /><category term="csa" /><summary type="html"><![CDATA[I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog. Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.]]></summary></entry></feed>

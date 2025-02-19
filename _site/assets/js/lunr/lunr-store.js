@@ -154,4 +154,10 @@ var store = [{
         "tags": ["cloudera","nifi"],
         "url": "/blog/Cloudera-Flow-Management-4.0.0/",
         "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "Cloudera DataFlow - Nifi 2.0 Python Processors",
+        "excerpt":"Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor. This customer already has deep experience with nifi, python, and even custom java processors. As a user of...","categories": ["blog"],
+        "tags": ["cloudera","dataflow","nifi"],
+        "url": "/blog/NIFI-2-Python-Processor/",
+        "teaser": "/assets/images/nifi-python-processor.png"
       }]

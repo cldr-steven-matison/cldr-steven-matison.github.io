@@ -1,0 +1,777 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Cloudera DataFlow - Nifi 2.0 Python Processors - Cloudera Solutions Engineer</title>
+<meta name="description" content="Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor.  This customer already has deep experience with nifi, python, and even custom java processors.   As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors.  I also have not had to manage any nifi file systems behind these custom processors.   This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience.   Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code.  Not anymore with NiFi 2.0…">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Cloudera DataFlow - Nifi 2.0 Python Processors">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/">
+
+
+  <meta property="og:description" content="Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor.  This customer already has deep experience with nifi, python, and even custom java processors.   As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors.  I also have not had to manage any nifi file systems behind these custom processors.   This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience.   Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code.  Not anymore with NiFi 2.0…">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/nifi-python-processor.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2025-02-19T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io//"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <a class="site-title" href="/">
+          Cloudera Solutions Engineer
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&pageNum=1">Community</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io//">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io//" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Hello, My name is Steven Matison and I am a Senior Solutions Engineer at Cloudera, Inc.  Check out my journey with Cloudera Data Platform (CDP).</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Cloudera DataFlow - Nifi 2.0 Python Processors">
+    <meta itemprop="description" content="Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor.  This customer already has deep experience with nifi, python, and even custom java processors.   As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors.  I also have not had to manage any nifi file systems behind these custom processors.   This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience.   Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code.  Not anymore with NiFi 2.0…">
+    <meta itemprop="datePublished" content="2025-02-19T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/" class="u-url" itemprop="url">Cloudera DataFlow - Nifi 2.0 Python Processors
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor.  This customer already has deep experience with nifi, python, and even custom java processors.   As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors.  I also have not had to manage any nifi file systems behind these custom processors.   This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience.   Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code.  Not anymore with NiFi 2.0…</p>
+
+<p>In this blog I am going to show how easy it is to feed python source code on s3 into a nifi data flow without all those sharpe edges.</p>
+
+<p>First,  I need to research the upstream <a href="https://nifi.apache.org/nifi-docs/python-developer-guide.html">documentation</a> for examples.  This one is a great starting point CreateFlowfile:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">from</span> <span class="n">nifiapi</span><span class="p">.</span><span class="nf">flowfilesource</span> <span class="n">import</span> <span class="no">FlowFileSource</span><span class="p">,</span> <span class="no">FlowFileSourceResult</span>
+
+<span class="k">class</span> <span class="nc">CreateFlowFile</span><span class="p">(</span><span class="no">FlowFileSource</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Java</span><span class="p">:</span>
+        <span class="n">implements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'org.apache.nifi.python.processor.FlowFileSource'</span><span class="p">]</span>
+
+    <span class="k">class</span> <span class="nc">ProcessorDetails</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s1">'0.0.1-SNAPSHOT'</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s1">'''A Python processor that creates FlowFiles.'''</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">pass</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="k">return</span> <span class="no">FlowFileSourceResult</span><span class="p">(</span><span class="n">relationship</span> <span class="o">=</span> <span class="s1">'success'</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'greeting'</span><span class="p">:</span> <span class="s1">'hello'</span><span class="p">},</span> <span class="n">contents</span> <span class="o">=</span> <span class="s1">'Hello World!'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Next I need to build out the basic samples that validate the documented process works to deploy a custom python processor.  I delivered the above code to s3 and use that in my deployment:</p>
+
+<figure>
+  <img src="/assets/images/nifi-python-processor-storage-location-1.png" />
+  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
+</figure>
+
+<p>I am further automating this configuration so the deployment looks like this:</p>
+<figure>
+  <img src="/assets/images/nifi-python-processor-storage-location-2.png" />
+  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
+</figure>
+
+<p>Now when I deploy this flow, this processor is available:</p>
+
+<figure>
+  <img src="/assets/images/nifi-python-processor-createflowfile.png" />
+  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
+</figure>
+
+<p>Next, I can focus on modifying the working example for my Fraud Detection use case.   That sample script is well tested and its python source code has been used within an ExecuteScript Processor.  I just need to make some very basic changes to merge my example python processor with the same python from my ExecuteScript processor.</p>
+
+<p>My final python processor</p>
+
+<figure>
+  <img src="/assets/images/nifi-python-processor-transaction-generator.png" />
+  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
+</figure>
+
+<p>And the source code is closely as follows:</p>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1"># TransactionGenerator.py</span>
+<span class="n">from</span> <span class="n">nifiapi</span><span class="p">.</span><span class="nf">flowfilesource</span> <span class="n">import</span> <span class="no">FlowFileSource</span><span class="p">,</span> <span class="no">FlowFileSourceResult</span>
+<span class="n">import</span> <span class="n">sys</span>
+<span class="n">import</span> <span class="n">os</span>
+<span class="n">import</span> <span class="n">socket</span>
+<span class="n">import</span> <span class="n">logging</span>
+<span class="n">import</span> <span class="n">string</span>
+<span class="n">import</span> <span class="n">datetime</span>
+<span class="n">import</span> <span class="n">random</span>
+<span class="n">import</span> <span class="n">uuid</span>
+<span class="n">import</span> <span class="n">csv</span>
+<span class="n">import</span> <span class="n">json</span>
+<span class="n">import</span> <span class="n">math</span>
+<span class="n">import</span> <span class="n">time</span>
+<span class="n">from</span> <span class="n">random</span> <span class="n">import</span> <span class="n">randint</span>
+<span class="n">from</span> <span class="n">random</span> <span class="n">import</span> <span class="n">uniform</span>
+
+<span class="c1"># Add some data = Amounts and Cities.</span>
+<span class="no">AMOUNTS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span><span class="mi">500</span><span class="p">]</span>
+<span class="no">CITIES</span> <span class="o">=</span> <span class="p">[</span>                                                                                                                                                                                                                                                     
+    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">48.8534</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">2.3488</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Paris"</span><span class="p">},</span>                                                                                                                                                                                                    
+    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">43.2961743</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">5.3699525</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Marseille"</span><span class="p">},</span>                                                                                                                                                                                                 
+    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">45.7578137</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">4.8320114</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Lyon"</span><span class="p">},</span>                                                                                                                                                                                                      
+    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">50.6365654</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">3.0635282</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Lille"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">44.841225</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5800364</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Bordeaux"</span><span class="p">}</span>
+<span class="p">]</span>   
+
+<span class="k">class</span> <span class="nc">TransactionGenerator</span><span class="p">(</span><span class="no">FlowFileSource</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Java</span><span class="p">:</span>
+        <span class="n">implements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'org.apache.nifi.python.processor.FlowFileSource'</span><span class="p">]</span>
+
+    <span class="k">class</span> <span class="nc">ProcessorDetails</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s1">'0.0.1-SNAPSHOT'</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s1">'''A Python processor that creates credit card transactions for the Fraud Demo.'''</span>
+
+    <span class="c1"># Define geo functions</span>
+    <span class="k">def</span> <span class="nf">create_random_point</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">distance</span><span class="o">/</span><span class="mi">111300</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">pi</span> <span class="o">*</span> <span class="n">v</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x0</span><span class="o">+</span><span class="n">x1</span><span class="p">,</span> <span class="n">y0</span> <span class="o">+</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_geopoint</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="nf">create_random_point</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_latlon</span><span class="p">(</span><span class="nb">self</span><span class="p">):</span>                                                                    
+        <span class="n">geo</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="no">CITIES</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="nf">create_geopoint</span><span class="p">(</span><span class="n">geo</span><span class="p">[</span><span class="s1">'lat'</span><span class="p">],</span> <span class="n">geo</span><span class="p">[</span><span class="s1">'lon'</span><span class="p">]),</span><span class="n">geo</span><span class="p">[</span><span class="s1">'city'</span><span class="p">]</span>        
+
+    <span class="k">def</span> <span class="nf">create_fintran</span><span class="p">(</span><span class="nb">self</span><span class="p">):</span>
+     
+        <span class="n">latlon</span><span class="p">,</span><span class="n">city</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">get_latlon</span><span class="p">()</span>
+        <span class="n">tsbis</span><span class="o">=</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()).</span><span class="nf">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-%d %H:%M:%S "</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">str</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">.</span><span class="nf">strptime</span><span class="p">(</span><span class="n">tsbis</span><span class="p">,</span> <span class="s2">"%Y-%m-%d %H:%M:%S "</span><span class="p">))</span>
+        <span class="n">fintran</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s1">'ts'</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+          <span class="s1">'account_id'</span> <span class="p">:</span> <span class="n">str</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)),</span>
+          <span class="s1">'transaction_id'</span> <span class="p">:</span> <span class="n">str</span><span class="p">(</span><span class="n">uuid</span><span class="p">.</span><span class="nf">uuid1</span><span class="p">()),</span>
+          <span class="s1">'amount'</span> <span class="p">:</span> <span class="n">random</span><span class="p">.</span><span class="nf">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2000</span><span class="p">),</span>  
+          <span class="s1">'lat'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+          <span class="s1">'lon'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">}</span>    
+        <span class="k">return</span> <span class="p">(</span><span class="n">fintran</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_fraudtran</span><span class="p">(</span><span class="n">fintran</span><span class="p">):</span>
+        <span class="n">latlon</span><span class="p">,</span><span class="n">city</span> <span class="o">=</span> <span class="n">get_latlon</span><span class="p">()</span>
+        <span class="n">tsbis</span> <span class="o">=</span> <span class="n">str</span><span class="p">((</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="mi">600</span><span class="p">))).</span><span class="nf">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-%d %H:%M:%S "</span><span class="p">))</span>
+        <span class="n">fraudtran</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s1">'ts'</span> <span class="p">:</span> <span class="n">tsbis</span><span class="p">,</span>
+          <span class="s1">'account_id'</span> <span class="p">:</span> <span class="n">fintran</span><span class="p">[</span><span class="s1">'account_id'</span><span class="p">],</span>
+          <span class="s1">'transaction_id'</span> <span class="p">:</span> <span class="s1">'xxx'</span> <span class="o">+</span> <span class="n">str</span><span class="p">(</span><span class="n">fintran</span><span class="p">[</span><span class="s1">'transaction_id'</span><span class="p">]),</span>
+          <span class="s1">'amount'</span> <span class="p">:</span> <span class="n">random</span><span class="p">.</span><span class="nf">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2000</span><span class="p">),</span>      
+          <span class="s1">'lat'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+          <span class="s1">'lon'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">}</span>    
+        <span class="k">return</span> <span class="p">(</span><span class="n">fraudtran</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">pass</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="n">fintran</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">create_fintran</span><span class="p">()</span>   
+        <span class="n">fintransaction</span> <span class="o">=</span>  <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">fintran</span><span class="p">)</span>
+        <span class="k">return</span> <span class="no">FlowFileSourceResult</span><span class="p">(</span><span class="n">relationship</span> <span class="o">=</span> <span class="s1">'success'</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'NiFi'</span><span class="p">:</span> <span class="s1">'PythonProcessor'</span><span class="p">},</span> <span class="n">contents</span> <span class="o">=</span> <span class="n">fintransaction</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Not bad, I know have an example to share with my customer, and I can modify my demos and hands on labs to use this processor instead of ExecuteScript.</p>
+
+<p>Check out the Cloudera DataFlow <a href="https://docs.cloudera.com/dataflow/cloud/custom-processors/topics/cdf-bp-custom-python-processors.html">DOCS</a> for custom python processors.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/dataflow" class="page__taxonomy-item p-category" rel="tag">dataflow</a><span class="sep">, </span>
+    
+      <a href="/tags/nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-02-19T00:00:00-05:00">February 19, 2025</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+DataFlow+-+Nifi+2.0+Python+Processors%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNIFI-2-Python-Processor%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNIFI-2-Python-Processor%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNIFI-2-Python-Processor%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Cloudera-Flow-Management-4.0.0/" class="pagination--pager" title="Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/nifi-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Flow-Management-4.0.0/" rel="permalink">Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data in Motion (DiM) team is pleased to announce the release of Cloudera Flow Management 4.0.0 as a Technical Preview for running Apache NiFi 2.0 with Cl...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Cloudera-Data-Platform.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Migration-Assistant-3.5.0/" rel="permalink">Cloudera Migration Assistant 3.5.0
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Cloudera is excited to announce the General Availability of Cloudera Migration Assistant with the release of the 3.5.0 version. Cloudera’s go-to migration to...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csm-op-deployment-architecture.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/CSM-Kubernetes-Operator1-2-Release/" rel="permalink">Cloudera Streams Messaging - Kubernetes Operator 1.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csa-architecture.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/CSA-1.14-Release/" rel="permalink">Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.14 for Cloudera Public Cloud and Private Cloud Base 7.3.1. T...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
