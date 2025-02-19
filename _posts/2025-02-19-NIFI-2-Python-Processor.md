@@ -158,6 +158,6 @@ class TransactionGenerator(FlowFileSource):
         return FlowFileSourceResult(relationship = 'success', attributes = {'NiFi': 'PythonProcessor'}, contents = fintransaction)
 ```
 
-Not bad, I know have an example to share with my customer, and I can modify my demos and hands on labs to use this processor instead of ExecuteScript.
+Not bad, I now have an example to share with my customer, and I can modify my demos and hands on labs to use this processor instead of ExecuteScript.
 
 Check out the Cloudera DataFlow [DOCS](https://docs.cloudera.com/dataflow/cloud/custom-processors/topics/cdf-bp-custom-python-processors.html) for custom python processors.
