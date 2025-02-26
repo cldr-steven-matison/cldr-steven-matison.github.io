@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-02-26T13:49:13-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Apache NiFi Operator</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/" rel="alternate" type="text/html" title="Cloudera Apache NiFi Operator" /><published>2025-02-26T00:00:00-05:00</published><updated>2025-02-26T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Apache%20NiFi%20Operator</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/"><![CDATA[<p>In a previous article (<a href="https://cldr-steven-matison.github.io/blog/Install-CFM-Operator/">Installing Cloudera CFM Kubernetes Operator</a>) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-02-26T13:52:35-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Apache NiFi Operator</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/" rel="alternate" type="text/html" title="Cloudera Apache NiFi Operator" /><published>2025-02-26T00:00:00-05:00</published><updated>2025-02-26T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Apache%20NiFi%20Operator</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/"><![CDATA[<p>In a previous article (<a href="https://cldr-steven-matison.github.io/blog/Install-CFM-Operator/">Installing Cloudera CFM Kubernetes Operator</a>) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.</p>
 
 <figure>
   <img src="/assets/images/cfm-op-deployment-architecture.jpg" />
@@ -44,13 +44,11 @@
 
 <p>💡 It is important to know, if your kubernetes secret is less than 12 characters, it will be ignored and nifi will still role with an auto generated username and password.💡</p>
 
-<h1 id="ingressa-and-uiconnection">Ingressa and uiConnection</h1>
+<h1 id="ingress-and-uiconnection">Ingress and uiConnection</h1>
 
 <p>The most important part of the Apache NiFi Operator installation are the steps required to expose the NiFI UI.</p>
 
-<ol>
-  <li>Route</li>
-</ol>
+<h2 id="route">Route</h2>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
     type: </span><span class="no">Route</span>
@@ -67,9 +65,7 @@
         termination: </span><span class="n">passthrough</span>
 </code></pre></div></div>
 
-<ol>
-  <li>Ingress</li>
-</ol>
+<h2 id="ingress">Ingress</h2>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
     type: </span><span class="no">Ingress</span>
@@ -89,9 +85,7 @@
       <span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="n">ssl</span><span class="o">-</span><span class="ss">redirect: </span><span class="s2">"true"</span>
 </code></pre></div></div>
 
-<ol>
-  <li>Service</li>
-</ol>
+<h2 id="service">Service</h2>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
     type: </span><span class="no">Service</span>

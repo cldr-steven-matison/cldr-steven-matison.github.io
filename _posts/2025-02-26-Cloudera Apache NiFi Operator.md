@@ -61,11 +61,11 @@ kubectl create secret generic nifi-credential --from-literal=username="username"
 
 💡 It is important to know, if your kubernetes secret is less than 12 characters, it will be ignored and nifi will still role with an auto generated username and password.💡 
 
-# Ingressa and uiConnection 
+# Ingress and uiConnection 
 
 The most important part of the Apache NiFi Operator installation are the steps required to expose the NiFI UI.   
 
-1.  Route
+## Route
 
 ```ruby
   uiConnection:
@@ -83,7 +83,7 @@ The most important part of the Apache NiFi Operator installation are the steps r
         termination: passthrough
 ```
 
-2.  Ingress
+## Ingress
 
 ```ruby
   uiConnection:
@@ -105,7 +105,7 @@ uiConnection:
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
 ```
 
-3.  Service
+##  Service
 
 ```ruby
   uiConnection:

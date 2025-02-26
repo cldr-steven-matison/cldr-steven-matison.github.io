@@ -352,13 +352,11 @@
 
 <p>💡 It is important to know, if your kubernetes secret is less than 12 characters, it will be ignored and nifi will still role with an auto generated username and password.💡</p>
 
-<h1 id="ingressa-and-uiconnection">Ingressa and uiConnection</h1>
+<h1 id="ingress-and-uiconnection">Ingress and uiConnection</h1>
 
 <p>The most important part of the Apache NiFi Operator installation are the steps required to expose the NiFI UI.</p>
 
-<ol>
-  <li>Route</li>
-</ol>
+<h2 id="route">Route</h2>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
     type: </span><span class="no">Route</span>
@@ -375,9 +373,7 @@
         termination: </span><span class="n">passthrough</span>
 </code></pre></div></div>
 
-<ol>
-  <li>Ingress</li>
-</ol>
+<h2 id="ingress">Ingress</h2>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
     type: </span><span class="no">Ingress</span>
@@ -397,9 +393,7 @@
       <span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="n">ssl</span><span class="o">-</span><span class="ss">redirect: </span><span class="s2">"true"</span>
 </code></pre></div></div>
 
-<ol>
-  <li>Service</li>
-</ol>
+<h2 id="service">Service</h2>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
     type: </span><span class="no">Service</span>
