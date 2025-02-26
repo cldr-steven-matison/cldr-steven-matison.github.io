@@ -28,14 +28,14 @@ First, lets start with the most recent version of the documenation for the Cloud
 
 # User Authentication
 
-There are several ways that you can role nifi user authentication.  First, no auth at all.  Just access the ui and NiFi is there.  Second, a self generated username and password upon install. Third, provide a kubernetes secret with your desired username and passowrd.  Last but not least, [LDAP](https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-config-nifi-ic-ldap.html) which I will cover in a future post specifically.
+There are several ways that you can role nifi user authentication.  First, no auth at all.  Just access the ui and NiFi is there.  Second, a self generated username and password upon install. Third, provide a kubernetes secret with your desired username and password.  Last but not least, [LDAP](https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-config-nifi-ic-ldap.html) which I will cover in a future post specifically.
 
 
 
 [Configuring Authentication Docs](https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-auth.html)
 
 
-1. Auto Generated Password and Security
+1. Auto Generated Password
 
 ```ruby
 spec:
@@ -119,7 +119,7 @@ It is important to know when to delete your nifi deployment and apply again for 
 
 # Customizations For NiFi Sizing
 
-When testing deployment processors in a small environment, it may be required to provide some limits on the resources nifi needs.  
+When testing deployment processes in a small or limited kubernetes environment, it may be required to provide some limits on the resources nifi needs.  
 
  ```ruby
 resources:

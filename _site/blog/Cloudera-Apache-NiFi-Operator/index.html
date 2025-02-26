@@ -321,12 +321,12 @@
 
 <h1 id="user-authentication">User Authentication</h1>
 
-<p>There are several ways that you can role nifi user authentication.  First, no auth at all.  Just access the ui and NiFi is there.  Second, a self generated username and password upon install. Third, provide a kubernetes secret with your desired username and passowrd.  Last but not least, <a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-config-nifi-ic-ldap.html">LDAP</a> which I will cover in a future post specifically.</p>
+<p>There are several ways that you can role nifi user authentication.  First, no auth at all.  Just access the ui and NiFi is there.  Second, a self generated username and password upon install. Third, provide a kubernetes secret with your desired username and password.  Last but not least, <a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-config-nifi-ic-ldap.html">LDAP</a> which I will cover in a future post specifically.</p>
 
 <p><a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-auth.html">Configuring Authentication Docs</a></p>
 
 <ol>
-  <li>Auto Generated Password and Security</li>
+  <li>Auto Generated Password</li>
 </ol>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">spec:
@@ -405,7 +405,7 @@
 
 <h1 id="customizations-for-nifi-sizing">Customizations For NiFi Sizing</h1>
 
-<p>When testing deployment processors in a small environment, it may be required to provide some limits on the resources nifi needs.</p>
+<p>When testing deployment processes in a small or limited kubernetes environment, it may be required to provide some limits on the resources nifi needs.</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">resources:
     nifi:
