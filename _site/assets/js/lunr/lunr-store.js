@@ -160,4 +160,10 @@ var store = [{
         "tags": ["cloudera","dataflow","nifi"],
         "url": "/blog/NIFI-2-Python-Processor/",
         "teaser": "/assets/images/nifi-python-processor.png"
+      },{
+        "title": "Cloudera Apache NiFi Operator",
+        "excerpt":"In a previous article (Installing Cloudera CFM Kubernetes Operator) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube. In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS. CFM Deployment Architecture...","categories": ["blog"],
+        "tags": ["kubernetes","operator","nifi"],
+        "url": "/blog/Cloudera-Apache-NiFi-Operator/",
+        "teaser": "/assets/images/kubernetes-logo.png"
       }]

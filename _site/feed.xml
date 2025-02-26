@@ -1,4 +1,136 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-02-19T15:42:44-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera DataFlow - Nifi 2.0 Python Processors</title><link href="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/" rel="alternate" type="text/html" title="Cloudera DataFlow - Nifi 2.0 Python Processors" /><published>2025-02-19T00:00:00-05:00</published><updated>2025-02-19T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/"><![CDATA[<p>Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor.  This customer already has deep experience with nifi, python, and even custom java processors.   As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors.  I also have not had to manage any nifi file systems behind these custom processors.   This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience.   Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code.  Not anymore with NiFi 2.0…</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-02-26T13:49:13-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Apache NiFi Operator</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/" rel="alternate" type="text/html" title="Cloudera Apache NiFi Operator" /><published>2025-02-26T00:00:00-05:00</published><updated>2025-02-26T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Apache%20NiFi%20Operator</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/"><![CDATA[<p>In a previous article (<a href="https://cldr-steven-matison.github.io/blog/Install-CFM-Operator/">Installing Cloudera CFM Kubernetes Operator</a>) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.</p>
+
+<figure>
+  <img src="/assets/images/cfm-op-deployment-architecture.jpg" />
+  <figcaption>CFM Deployment Architecture</figcaption>
+</figure>
+
+<p>First, lets start with the most recent version of the documenation for the Cloudera Apache NiFi Operator:</p>
+
+<p><a href="https://docs.cloudera.com/cfm-operator/2.9.1/index.html">CFM Operator 2.9.1</a></p>
+
+<p>💡 There are already two new versions since my first article! 💡</p>
+
+<h1 id="user-authentication">User Authentication</h1>
+
+<p>There are several ways that you can role nifi user authentication.  First, no auth at all.  Just access the ui and NiFi is there.  Second, a self generated username and password upon install. Third, provide a kubernetes secret with your desired username and passowrd.  Last but not least, <a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-config-nifi-ic-ldap.html">LDAP</a> which I will cover in a future post specifically.</p>
+
+<p><a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-auth.html">Configuring Authentication Docs</a></p>
+
+<ol>
+  <li>Auto Generated Password and Security</li>
+</ol>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">spec:
+  security:
+    singleUserAuth:
+      enabled: </span><span class="kp">true</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Provided Credential</li>
+</ol>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">spec:
+  security:
+    singleUserAuth:
+      enabled: </span><span class="kp">true</span>
+      <span class="ss">credentialsSecretName: </span><span class="n">nifi</span><span class="o">-</span><span class="n">credential</span>
+
+</code></pre></div></div>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span> <span class="n">create</span> <span class="n">secret</span> <span class="n">generic</span> <span class="n">nifi</span><span class="o">-</span><span class="n">credential</span> <span class="o">--</span><span class="n">from</span><span class="o">-</span><span class="n">literal</span><span class="o">=</span><span class="n">username</span><span class="o">=</span><span class="s2">"username"</span> <span class="o">--</span><span class="n">from</span><span class="o">-</span><span class="n">literal</span><span class="o">=</span><span class="n">password</span><span class="o">=</span><span class="s2">"123456789101112"</span>
+</code></pre></div></div>
+
+<p>💡 It is important to know, if your kubernetes secret is less than 12 characters, it will be ignored and nifi will still role with an auto generated username and password.💡</p>
+
+<h1 id="ingressa-and-uiconnection">Ingressa and uiConnection</h1>
+
+<p>The most important part of the Apache NiFi Operator installation are the steps required to expose the NiFI UI.</p>
+
+<ol>
+  <li>Route</li>
+</ol>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
+    type: </span><span class="no">Route</span>
+    <span class="ss">routeConfig:
+      tls:
+        termination: </span><span class="n">passthrough</span>
+
+  <span class="ss">uiConnection:
+    type: </span><span class="no">Route</span>
+    <span class="ss">serviceConfig:
+      sessionAffinity: </span><span class="no">ClientIP</span>
+    <span class="ss">routeConfig:
+      tls:
+        termination: </span><span class="n">passthrough</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Ingress</li>
+</ol>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
+    type: </span><span class="no">Ingress</span>
+    <span class="ss">serviceConfig:
+      sessionAffinity: </span><span class="no">ClientIP</span>
+</code></pre></div></div>
+
+<p>When using an ingress, there are annotations that may or may not be needed depending on your kubernetes environment</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">uiConnection:
+    type: </span><span class="no">Ingress</span>
+    <span class="ss">annotations:
+      </span><span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="ss">affinity: </span><span class="n">cookie</span>
+      <span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="n">affinity</span><span class="o">-</span><span class="ss">mode: </span><span class="n">persistent</span>
+      <span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="n">backend</span><span class="o">-</span><span class="ss">protocol: </span><span class="no">HTTPS</span>
+      <span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="n">ssl</span><span class="o">-</span><span class="ss">passthrough: </span><span class="s2">"true"</span>
+      <span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="n">ssl</span><span class="o">-</span><span class="ss">redirect: </span><span class="s2">"true"</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Service</li>
+</ol>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
+    type: </span><span class="no">Service</span>
+</code></pre></div></div>
+
+<h1 id="when-to-delete-and-apply">When to Delete and Apply</h1>
+
+<p>It is important to know when to delete your nifi deployment and apply again for a fresh install.  When doing things like above with authentication and security the initial nifi installation takes different and appropriate paths.   When you change these things, delete nifi, wait for termination to complete, and then apply again in order to take a full fresh install.   Be careful when applying changes and expecting the changed yaml to fully re-install nifi.</p>
+
+<h1 id="customizations-for-nifi-sizing">Customizations For NiFi Sizing</h1>
+
+<p>When testing deployment processors in a small environment, it may be required to provide some limits on the resources nifi needs.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">resources:
+    nifi:
+      requests:
+        cpu: </span><span class="s2">"1"</span>
+        <span class="ss">memory: </span><span class="mi">2</span><span class="no">Gi</span>
+      <span class="ss">limits:
+        cpu: </span><span class="s2">"4"</span>
+        <span class="ss">memory: </span><span class="mi">4</span><span class="no">Gi</span>
+    <span class="ss">log:
+      requests:
+        cpu: </span><span class="mi">50</span><span class="n">m</span>
+        <span class="ss">memory: </span><span class="mi">128</span><span class="no">Mi</span>
+</code></pre></div></div>
+
+<p>Some important Sizing docs:</p>
+
+<p><a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-cr-resource.html">Resource Recommendations</a>
+<a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-cr-cluster.html">Configuring Cluster Size</a></p>
+
+<p>You can find a full example NiFI chart <a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-resource-example.html">here</a>.</p>
+
+<p>If you have gotten this far, then you may want to bookmark the <a href="https://docs.cloudera.com/cfm-operator/2.9.1/nifi-config-reference/topics/cfm-op-nifi-config-reference.html">NiFi Config Reference</a> and <a href="https://docs.cloudera.com/cfm-operator/2.9.1/connection-reference/topics/cfm-op-nifi-connection-reference.html">NiFi Connection Reference</a> which outline all of the yaml object types for the Cloudera Apache NiFi Operator.</p>
+
+<p>Check out this repo I created with my sample YAMLs <a href="https://github.com/cldr-steven-matison/ClouderaOperatorYAML">here</a>.</p>
+
+<p>If you are interested in getting your hands on Cloudera’s Apache NiFi Operator you can find more right <a href="https://www.cloudera.com/products/dataflow.html">here</a>.  You can also reach out to me directly if you are ready for demos, hands on labs, or licensed trials for your organization.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="kubernetes" /><category term="operator" /><category term="nifi" /><summary type="html"><![CDATA[In a previous article (Installing Cloudera CFM Kubernetes Operator) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube. In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.]]></summary></entry><entry><title type="html">Cloudera DataFlow - Nifi 2.0 Python Processors</title><link href="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/" rel="alternate" type="text/html" title="Cloudera DataFlow - Nifi 2.0 Python Processors" /><published>2025-02-19T00:00:00-05:00</published><updated>2025-02-19T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/"><![CDATA[<p>Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor.  This customer already has deep experience with nifi, python, and even custom java processors.   As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors.  I also have not had to manage any nifi file systems behind these custom processors.   This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience.   Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code.  Not anymore with NiFi 2.0…</p>
 
 <p>In this blog I am going to show how easy it is to feed python source code on s3 into a nifi data flow without all those sharpe edges.</p>
 
@@ -592,36 +724,4 @@ PostgreSQL 14: This support is now present for Cloudera on cloud.</p>
   <figcaption>CFM Operator and NiFi Deployment</figcaption>
 </figure>
 
-<p>If you are interested in getting your hands on the NiFi Operators you can find more about Cloudera DataFlow starting right <a href="https://www.cloudera.com/products/dataflow.html">here</a>.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="kubernetes" /><category term="operator" /><category term="cfm" /><summary type="html"><![CDATA[Last week I had a chance to work out the installation of the Cloudera’s CFM Operator. In this post I am going to expose the lessons learned and command required to get this CFM Operator running on my macbook with MiniKube. Keep in mind, these Operators are GA for RedHat Openshift. This demonstration on how to locally install is for evaluation purposes and not meant for actual usage.]]></summary></entry><entry><title type="html">Release of Cloudera Kubernetes Operators</title><link href="https://cldr-steven-matison.github.io//blog/Kubernetes-Operator/" rel="alternate" type="text/html" title="Release of Cloudera Kubernetes Operators" /><published>2024-07-18T00:00:00-04:00</published><updated>2024-07-18T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Kubernetes%20Operator</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Kubernetes-Operator/"><![CDATA[<p>I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.</p>
-
-<h1 id="cloudera-kubernetes-operators">Cloudera Kubernetes Operators</h1>
-
-<h2 id="cfm---cloudera-flow-management-operator">CFM - Cloudera Flow Management Operator</h2>
-<p>Cloudera Flow Management (CFM) Operator allows you to deploy and manage NiFi clusters and NiFi Registry instances on Kubernetes. CFM Operator simplifies data collection, transformation, and delivery across your enterprise. Leveraging containerized infrastructure, the operator streamlines the orchestration of complex data flows.</p>
-<ul>
-  <li><a href="https://nifi.apache.org/">Apache NiFi</a></li>
-</ul>
-
-<h2 id="csm---cloudera-streams-messaging-operator">CSM - Cloudera Streams Messaging Operator</h2>
-<p>CSM (Cloudera Streams Messaging) Operator allows you to deploy and manage Streams Messaging components as container applications on Kubernetes. CSM Operator simplifies the process of creating, managing, and troubleshooting Kafka deployments in a Kubernetes environment. CSM Operator includes several services and components such as Strimzi, Kafka, Cruise Control, and others.</p>
-<ul>
-  <li><a href="https://kafka.apache.org/">Apache Kafka</a></li>
-</ul>
-
-<h2 id="csa---cloudera-streams-analytics-operator">CSA - Cloudera Streams Analytics Operator</h2>
-<p>Cloudera Streaming Analytics (CSA) Operator allows you to deploy and manage the Streaming Analytics components of Cloudera Data Platform (CDP), Flink and SQL Stream Builder (SSB), as container applications on Kubernetes. CSA Operator is based on the Apache Flink Kubernetes Operator (Flink Operator), and offers the same set of features as the Flink Operator supports. By extending the Kubernetes API, the Flink Operator acts as a control plane to manage the deployment lifecycle of Flink applications using the operator pattern.</p>
-<ul>
-  <li><a href="https://flink.apache.org/">Apache Flink</a></li>
-</ul>
-
-<p>Check out this <a href="https://community.cloudera.com/t5/Community-Articles/Cloudera-Flow-Management-Operator-A-technical-deep-dive/ta-p/390473">Deep Technical Dive with Pierre Villard</a></p>
-
-<p>Find more about Cloudera DataFlow starting right <a href="https://www.cloudera.com/products/dataflow.html">here</a>.</p>
-
-<p>You can learn more about Cloudera Stream Processing right <a href="https://www.cloudera.com/products/stream-processing.html">here</a>.</p>
-
-<p>As always, check out the docs for each operator:</p>
-
-<p><a href="https://docs.cloudera.com/cfm-operator/2.8.0/index.html">CFM</a>
-<a href="https://docs.cloudera.com/csm-operator/1.0/index.html">CSM</a>
-<a href="https://docs.cloudera.com/csa-operator/1.0/index.html">CSA</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="kubernetes" /><category term="operator" /><category term="csm" /><category term="cfm" /><category term="csa" /><summary type="html"><![CDATA[I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog. Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.]]></summary></entry></feed>
+<p>If you are interested in getting your hands on the NiFi Operators you can find more about Cloudera DataFlow starting right <a href="https://www.cloudera.com/products/dataflow.html">here</a>.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="kubernetes" /><category term="operator" /><category term="cfm" /><summary type="html"><![CDATA[Last week I had a chance to work out the installation of the Cloudera’s CFM Operator. In this post I am going to expose the lessons learned and command required to get this CFM Operator running on my macbook with MiniKube. Keep in mind, these Operators are GA for RedHat Openshift. This demonstration on how to locally install is for evaluation purposes and not meant for actual usage.]]></summary></entry></feed>
