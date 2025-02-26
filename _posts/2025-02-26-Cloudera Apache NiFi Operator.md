@@ -138,8 +138,7 @@ resources:
 
 Some important Sizing docs:
 
-[Resource Recommendations](https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-cr-resource.html)
-[Configuring Cluster Size](https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-cr-cluster.html)
+[Resource Recommendations](https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-cr-resource.html) and [Configuring Cluster Size](https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-cr-cluster.html)
 
 You can find a full example NiFI chart [here](https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-resource-example.html).
 
