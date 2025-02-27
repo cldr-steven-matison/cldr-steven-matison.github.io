@@ -10,6 +10,9 @@ tags:
   - nifi
 ---
 
+:warning: This is a Work In Progress article, be sure to check back again soon if you see this notation. :warning:
+
+
 In a previous article ([Installing Cloudera CFM Kubernetes Operator](https://cldr-steven-matison.github.io/blog/Install-CFM-Operator/)) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.
 
 <figure>
@@ -31,9 +34,23 @@ First, lets start with the most recent version of the documenation for the Cloud
 There are several ways that you can role nifi user authentication.  First, no auth at all.  Just access the ui and NiFi is there.  Second, a self generated username and password upon install. Third, provide a kubernetes secret with your desired username and password.  Last but not least, [LDAP](https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-config-nifi-ic-ldap.html) which I will cover in a future post specifically.
 
 
-
 [Configuring Authentication Docs](https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-auth.html)
 
+
+In order to secure the login for the NiFi UI, it is required that NiFi installation itself be secured.  Be sure to complete this step w/ your security cert issuer and then provide the correct tag in the nifi yaml.   In this example I am using a self signed cert, which you can find in my YAML repo at the end of this page.
+
+```ruby
+kubectl apply -f self-signed-ca-issuer.yaml 
+```
+
+```ruby
+  security:
+    initialAdminIdentity: nifiadmin
+    nodeCertGen:
+      issuerRef:
+        name: self-signed-ca-issuer
+        kind: ClusterIssuer
+``` 
 
 1. Auto Generated Password
 

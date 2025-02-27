@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Cloudera Apache NiFi Operator - Cloudera Solutions Engineer</title>
-<meta name="description" content="In a previous article (Installing Cloudera CFM Kubernetes Operator) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.">
+<meta name="description" content=":warning: This is a Work In Progress article, be sure to check back again soon if you see this notation. :warning:">
 
 
   <meta name="author" content="Steven Matison">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/">
 
 
-  <meta property="og:description" content="In a previous article (Installing Cloudera CFM Kubernetes Operator) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.">
+  <meta property="og:description" content=":warning: This is a Work In Progress article, be sure to check back again soon if you see this notation. :warning:">
 
 
 
@@ -120,11 +120,14 @@
           Cloudera Solutions Engineer
           
         </a>
-        <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="https://community.cloudera.com/?type=everything&pageNum=1">Community</a>
-            </li><li class="masthead__menu-item">
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&amp;pageNum=1">Community</a>
+            </li>
+<li class="masthead__menu-item">
               <a href="/about/">About</a>
-            </li></ul>
+            </li>
+</ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
@@ -269,7 +272,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Cloudera Apache NiFi Operator">
-    <meta itemprop="description" content="In a previous article (Installing Cloudera CFM Kubernetes Operator) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.">
+    <meta itemprop="description" content=":warning: This is a Work In Progress article, be sure to check back again soon if you see this notation. :warning:">
     <meta itemprop="datePublished" content="2025-02-26T00:00:00-05:00">
     
 
@@ -294,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          2 minute read
+          3 minute read
         
       </span>
     
@@ -306,10 +309,12 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>In a previous article (<a href="https://cldr-steven-matison.github.io/blog/Install-CFM-Operator/">Installing Cloudera CFM Kubernetes Operator</a>) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.</p>
+        <p><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> This is a Work In Progress article, be sure to check back again soon if you see this notation. <img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"></p>
+
+<p>In a previous article (<a href="https://cldr-steven-matison.github.io/blog/Install-CFM-Operator/">Installing Cloudera CFM Kubernetes Operator</a>) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.</p>
 
 <figure>
-  <img src="/assets/images/cfm-op-deployment-architecture.jpg" />
+  <img src="/assets/images/cfm-op-deployment-architecture.jpg">
   <figcaption>CFM Deployment Architecture</figcaption>
 </figure>
 
@@ -324,6 +329,19 @@
 <p>There are several ways that you can role nifi user authentication.  First, no auth at all.  Just access the ui and NiFi is there.  Second, a self generated username and password upon install. Third, provide a kubernetes secret with your desired username and password.  Last but not least, <a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-config-nifi-ic-ldap.html">LDAP</a> which I will cover in a future post specifically.</p>
 
 <p><a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-auth.html">Configuring Authentication Docs</a></p>
+
+<p>In order to secure the login for the NiFi UI, it is required that NiFi installation itself be secured.  Be sure to complete this step w/ your security cert issuer and then provide the correct tag in the nifi yaml.   In this example I am using a self signed cert, which you can find in my YAML repo at the end of this page.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-</span><span class="n">f</span> <span class="nb">self</span><span class="o">-</span><span class="n">signed</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">issuer</span><span class="p">.</span><span class="nf">yaml</span> 
+</code></pre></div></div>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">security:
+    initialAdminIdentity: </span><span class="n">nifiadmin</span>
+    <span class="ss">nodeCertGen:
+      issuerRef:
+        name: </span><span class="nb">self</span><span class="o">-</span><span class="n">signed</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">issuer</span>
+        <span class="ss">kind: </span><span class="no">ClusterIssuer</span>
+</code></pre></div></div>
 
 <ol>
   <li>Auto Generated Password</li>
@@ -491,7 +509,7 @@
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Apache-NiFi-Operator%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Apache-NiFi-Operator%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Apache-NiFi-Operator%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -736,7 +754,7 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2025 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">© 2025 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 <script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
       </footer>
     </div>
