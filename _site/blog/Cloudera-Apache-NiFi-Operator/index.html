@@ -343,9 +343,9 @@
         <span class="ss">kind: </span><span class="no">ClusterIssuer</span>
 </code></pre></div></div>
 
-<ol>
-  <li>Auto Generated Password</li>
-</ol>
+<p>With the cert applied and referenced in the nifi.yaml, lets take a look at the requirements for enabling authentication methods.</p>
+
+<h2 id="auto-generated-password">Auto Generated Password</h2>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">spec:
   security:
@@ -353,9 +353,7 @@
       enabled: </span><span class="kp">true</span>
 </code></pre></div></div>
 
-<ol>
-  <li>Provided Credential</li>
-</ol>
+<h2 id="provided-credential">Provided Credential</h2>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">spec:
   security:

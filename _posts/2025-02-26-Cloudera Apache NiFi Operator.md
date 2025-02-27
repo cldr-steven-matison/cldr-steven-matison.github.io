@@ -52,7 +52,10 @@ kubectl apply -f self-signed-ca-issuer.yaml
         kind: ClusterIssuer
 ``` 
 
-1. Auto Generated Password
+With the cert applied and referenced in the nifi.yaml, lets take a look at the requirements for enabling authentication methods.
+
+
+## Auto Generated Password
 
 ```ruby
 spec:
@@ -61,7 +64,7 @@ spec:
       enabled: true
 ```
 
-2. Provided Credential
+## Provided Credential
 
 ```ruby
 spec:
