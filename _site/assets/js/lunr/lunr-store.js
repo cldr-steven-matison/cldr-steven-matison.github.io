@@ -162,7 +162,7 @@ var store = [{
         "teaser": "/assets/images/nifi-python-processor.png"
       },{
         "title": "Cloudera Apache NiFi Operator",
-        "excerpt":":warning: This is a Work In Progress article, be sure to check back again soon if you see this notation. :warning: In a previous article (Installing Cloudera CFM Kubernetes Operator) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube. In this article I am going to...","categories": ["blog"],
+        "excerpt":"In a previous article (Installing Cloudera CFM Kubernetes Operator) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube. In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS. CFM Deployment Architecture...","categories": ["blog"],
         "tags": ["kubernetes","operator","nifi"],
         "url": "/blog/Cloudera-Apache-NiFi-Operator/",
         "teaser": "/assets/images/kubernetes-logo.png"

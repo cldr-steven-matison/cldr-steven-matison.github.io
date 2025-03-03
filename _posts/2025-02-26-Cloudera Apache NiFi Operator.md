@@ -10,9 +10,6 @@ tags:
   - nifi
 ---
 
-:warning: This is a Work In Progress article, be sure to check back again soon if you see this notation. :warning:
-
-
 In a previous article ([Installing Cloudera CFM Kubernetes Operator](https://cldr-steven-matison.github.io/blog/Install-CFM-Operator/)) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.
 
 <figure>
@@ -135,7 +132,9 @@ uiConnection:
 
 # When to Delete and Apply
 
-It is important to know when to delete your nifi deployment and apply again for a fresh install.  When doing things like above with authentication and security the initial nifi installation takes different and appropriate paths.   When you change these things, delete nifi, wait for termination to complete, and then apply again in order to take a full fresh install.   Be careful when applying changes and expecting the changed yaml to fully re-install nifi.
+It is important to know when to delete your nifi deployment and apply again for a fresh install so be careful when applying changes and expecting the changed yaml to fully re-install nifi.
+
+When doing things like above with authentication and security the initial nifi installation takes different and appropriate paths.   Sometimes you may have to delete nifi, wait for termination to complete, and then apply again in order to take a full fresh install.
 
 # Customizations For NiFi Sizing
 
