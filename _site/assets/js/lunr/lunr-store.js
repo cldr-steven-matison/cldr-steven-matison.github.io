@@ -176,6 +176,6 @@ var store = [{
         "title": "Cloudera Streaming Analytics - Kubernetes Operator 1.2",
         "excerpt":"Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. This release includes the general availability of Cloudera SQL Stream Builder for Kubernetes, as well as a rebase to Apache Flink...","categories": ["blog"],
         "tags": ["csa","cloudera","flink","operator"],
-        "url": "/blog/Cloudera-Streams-Analytics-Operator-1.2/",
+        "url": "/blog/Cloudera-Streams-Analytics-Operator-1.3/",
         "teaser": "/assets/images/csa-architecture.png"
       }]
