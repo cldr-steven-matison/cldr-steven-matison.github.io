@@ -166,4 +166,16 @@ var store = [{
         "tags": ["kubernetes","operator","nifi"],
         "url": "/blog/Cloudera-Apache-NiFi-Operator/",
         "teaser": "/assets/images/kubernetes-logo.png"
+      },{
+        "title": "Cloudera Streams Messaging - Kubernetes Operator 1.2",
+        "excerpt":"Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements. Release Highlights Rebase on Kafka...","categories": ["blog"],
+        "tags": ["csm","kafka","kubernetes","cdp"],
+        "url": "/blog/CSM-Kubernetes-Operator1-3-Release/",
+        "teaser": "/assets/images/csm-op-deployment-architecture.jpg"
+      },{
+        "title": "Cloudera Streaming Analytics - Kubernetes Operator 1.2",
+        "excerpt":"Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. This release includes the general availability of Cloudera SQL Stream Builder for Kubernetes, as well as a rebase to Apache Flink...","categories": ["blog"],
+        "tags": ["csa","cloudera","flink","operator"],
+        "url": "/blog/Cloudera-Streams-Analytics-Operator-1.2/",
+        "teaser": "/assets/images/csa-architecture.png"
       }]

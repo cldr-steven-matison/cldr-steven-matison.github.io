@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Cloudera Streaming Analytics 1.13 for Private Cloud Base - Cloudera Solutions Engineer</title>
-<meta name="description" content="The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.">
+<!-- begin _includes/seo.html --><title>Cloudera Streams Messaging - Kubernetes Operator 1.2 - Cloudera Solutions Engineer</title>
+<meta name="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Cloudera Streaming Analytics 1.13 for Private Cloud Base">
-<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/CSA-1.13-Release/">
+<meta property="og:title" content="Cloudera Streams Messaging - Kubernetes Operator 1.2">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-3-Release/">
 
 
-  <meta property="og:description" content="The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.">
-
-
-
-  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/csa-architecture.png">
+  <meta property="og:description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.">
 
 
 
-
-
-  <meta property="article:published_time" content="2024-08-19T00:00:00-04:00">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/csm-op-deployment-architecture.jpg">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2025-03-11T00:00:00-04:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/CSA-1.13-Release/">
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-3-Release/">
 
 
 
@@ -268,16 +268,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Cloudera Streaming Analytics 1.13 for Private Cloud Base">
-    <meta itemprop="description" content="The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.">
-    <meta itemprop="datePublished" content="2024-08-19T00:00:00-04:00">
+    <meta itemprop="headline" content="Cloudera Streams Messaging - Kubernetes Operator 1.2">
+    <meta itemprop="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.">
+    <meta itemprop="datePublished" content="2025-03-11T00:00:00-04:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io//blog/CSA-1.13-Release/" class="u-url" itemprop="url">Cloudera Streaming Analytics 1.13 for Private Cloud Base
+            <a href="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-3-Release/" class="u-url" itemprop="url">Cloudera Streams Messaging - Kubernetes Operator 1.2
 </a>
           </h1>
           
@@ -294,7 +294,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          less than 1 minute read
+          2 minute read
         
       </span>
     
@@ -306,29 +306,67 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.</p>
+        <p>Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.</p>
 
-<p>See <a href="https://docs.cloudera.com/csa/latest/release-notes/topics/csa-what-new.html">What’s New</a>.</p>
+<h2 id="release-highlights">Release Highlights</h2>
 
-<h1 id="release-of-csa-113">Release of CSA 1.13</h1>
+<ul>
+  <li>Rebase on Kafka 3.8:
+    <ul>
+      <li>For more information, see the Kafka 3.8 <a href="https://archive.apache.org/dist/kafka/3.8.0/RELEASE_NOTES.html">Release Notes</a> and <a href="https://kafka.apache.org/documentation/#upgrade_380_notable">list of notable changes</a>.</li>
+    </ul>
+  </li>
+  <li>Rebase on Strimzi 0.43.0:
+    <ul>
+      <li>For more information, see the Strimzi 0.43.0 <a href="https://github.com/strimzi/strimzi-kafka-operator/releases/tag/0.43.0">Release Notes</a>.</li>
+    </ul>
+  </li>
+  <li>Apache Ranger authorization: Support for Apache Ranger authorization is now available. Customers can now integrate Kafka clusters, deployed with Cloudera Streams Messaging - Kubernetes Operator, with a remote Ranger service that is running on Cloudera Private Cloud Base. If configured, the Ranger service can provide authorization for your Kafka cluster.
+    <ul>
+      <li>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.2/kafka-security/topics/csm-op-authz-ranger.html">Apache Ranger authorization</a>.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Improvements to Kafka replication: Rebased and backported changes to make Kafka replication more resilient and reliable when handling heartbeats and offset translation.</p>
+  </li>
+  <li>Performance improvements for the Cloudera diagnostics tool: The report.sh tool, used by clients to provide Cloudera support with key information when dealing with support cases now runs its subprocesses in parallel, accelerating run times.
+    <ul>
+      <li>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.2/monitoring-diagnostics/topics/csm-op-diagnostics.html">Diagnostics</a>.</li>
+    </ul>
+  </li>
+</ul>
 
-<h2 id="key-features">Key Features</h2>
+<p>For the complete list of fixes and improvements read these <a href="https://docs.cloudera.com/csm-operator/1.2/release-notes/topics/csm-op-rn.html">Release Notes</a>.</p>
 
-<ol>
-  <li>Rebase to Apache Flink 1.19.1</li>
-  <li>Support for Python UDFs in SSB</li>
-  <li>Global logging configuration for SSB jobs</li>
-  <li>Customizable default Kafka TrustStore configuration in Streaming SQL Console</li>
-  <li>Cloudera LTS Platform Support</li>
-</ol>
+<p>Getting to the new release
+To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out this <a href="https://docs.cloudera.com/csm-operator/1.2/upgrade/topics/csm-op-upgrade.html">upgrade guide</a>. Please note, if you are installing for the first time use this installation overview.</p>
 
-<p>Check out <a href="https://docs.cloudera.com/csa/1.13.0/index.html">CSA 1.13</a></p>
+<h2 id="use-cases">Use Cases</h2>
+<ul>
+  <li>
+    <p>Flexible, agile, and rapid Kafka deployments: Deploy Apache Kafka in seconds on existing Kubernetes infrastructure. Cloudera Streams Messaging - Kubernetes Operator has very lightweight dependencies and system requirements for Kafka-centric deployments. It simplifies and standardizes Kafka deployments and provides auto-scaling support for variable workloads.</p>
+  </li>
+  <li>
+    <p>Operational efficiency with simple upgrades: The complexity of Kafka rolling upgrades is handled by Cloudera Streams Messaging - Kubernetes Operator, making them simpler and safer to execute.</p>
+  </li>
+  <li>
+    <p>Loading and unloading data from Kafka: Kafka Connect gives Kafka users a simple way to access data quickly from a source and feed it to a Kafka topic. It also allows them to get data from a topic and copy it to an external destination. The operator includes Kafka Connect support to give our customers a tool for moving data in and out of Kafka, efficiently.</p>
+  </li>
+  <li>
+    <p>Replicating data to other sites: Disaster resilience is an important aspect of any Kafka production deployment. Cloudera Streams Messaging - Kubernetes Operator supports configuring and running Kafka replication flows across any two Kafka clusters. These clusters could be in the same or in different data centers to provide increased resilience against disasters.</p>
+  </li>
+  <li>
+    <p>Kafka migrations: Customers can migrate or replicate data between containerized Kafka clusters and on-prem or cloud-based clusters.  Using Cloudera Streams Messaging - Kubernetes Operator, data can be replicated in any direction and between two or more clusters at a time.</p>
+  </li>
+</ul>
 
-<p>Check out <a href="https://docs.cloudera.com/csa/1.13.0/release-notes/topics/csa-what-new.html">Release Notes</a></p>
+<p>Check out what is new in <a href="https://docs.cloudera.com/csm-operator/1.2/release-notes/topics/csm-op-rn.html#ariaid-title2">Cloudera Streams Messaging Kubernetes Operator 1.2</a></p>
 
-<p>Check out <a href="https://docs.cloudera.com/csa/1.13.0/download/topics/csa-download-location.html">Download Information</a></p>
+<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.2/overview/topics/csm-op-deployment-architecture.html">Deployment Architecture</a></p>
 
-<p>As always, check out the <a href="https://docs.cloudera.com/csa/1.13.0/index.html">CSA 1.13 Docs</a></p>
+<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.2/installation/topics/csm-op-install-overview.html">Installation Information</a></p>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.2/index.html">DOCS</a> for the CSM Operator.</p>
 
         
       </section>
@@ -347,9 +385,11 @@
     
       <a href="/tags/cdp" class="page__taxonomy-item p-category" rel="tag">cdp</a><span class="sep">, </span>
     
-      <a href="/tags/csa" class="page__taxonomy-item p-category" rel="tag">csa</a><span class="sep">, </span>
+      <a href="/tags/csm" class="page__taxonomy-item p-category" rel="tag">csm</a><span class="sep">, </span>
     
-      <a href="/tags/flink" class="page__taxonomy-item p-category" rel="tag">flink</a>
+      <a href="/tags/kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
+    
+      <a href="/tags/kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a>
     
     </span>
   </p>
@@ -374,7 +414,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2024-08-19T00:00:00-04:00">August 19, 2024</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-03-11T00:00:00-04:00">March 11, 2025</time></p>
 
       </footer>
 
@@ -383,22 +423,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streaming+Analytics+1.13+for+Private+Cloud+Base%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSA-1.13-Release%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streams+Messaging+-+Kubernetes+Operator+1.2%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSM-Kubernetes-Operator1-3-Release%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSA-1.13-Release%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSM-Kubernetes-Operator1-3-Release%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSA-1.13-Release%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSM-Kubernetes-Operator1-3-Release%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/blog/Install-CFM-Operator/" class="pagination--pager" title="Installing Cloudera CFM Kubernetes Operator
+      <a href="/blog/Cloudera-Apache-NiFi-Operator/" class="pagination--pager" title="Cloudera Apache NiFi Operator
 ">Previous</a>
     
     
-      <a href="/blog/Cloudera-Streams-Messaging-Operator-1.1/" class="pagination--pager" title="Cloudera Streams Messaging Operator 1.1
+      <a href="/blog/Cloudera-Streams-Analytics-Operator-1.2/" class="pagination--pager" title="Cloudera Streaming Analytics - Kubernetes Operator 1.2
 ">Next</a>
     
   </nav>
@@ -453,49 +493,6 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.2, an integral component of Clo...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/csm-op-deployment-architecture.jpg" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/CSM-Kubernetes-Operator1-3-Release/" rel="permalink">Cloudera Streams Messaging - Kubernetes Operator 1.2
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera ...</p>
   </article>
 </div>
 
@@ -582,6 +579,49 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand withi...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/nifi-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Flow-Management-4.0.0/" rel="permalink">Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data in Motion (DiM) team is pleased to announce the release of Cloudera Flow Management 4.0.0 as a Technical Preview for running Apache NiFi 2.0 with Cl...</p>
   </article>
 </div>
 

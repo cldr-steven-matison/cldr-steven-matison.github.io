@@ -1,4 +1,153 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-03-03T09:54:41-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Apache NiFi Operator</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/" rel="alternate" type="text/html" title="Cloudera Apache NiFi Operator" /><published>2025-02-26T00:00:00-05:00</published><updated>2025-02-26T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Apache%20NiFi%20Operator</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/"><![CDATA[<p>In a previous article (<a href="https://cldr-steven-matison.github.io/blog/Install-CFM-Operator/">Installing Cloudera CFM Kubernetes Operator</a>) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-03-18T11:23:21-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streaming Analytics - Kubernetes Operator 1.2</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Analytics-Operator-1.2/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics - Kubernetes Operator 1.2" /><published>2025-03-13T00:00:00-04:00</published><updated>2025-03-13T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Analytics%20Operator%201.2</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Analytics-Operator-1.2/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. This release includes the general availability of Cloudera SQL Stream Builder for Kubernetes, as well as a rebase to Apache Flink 1.19.2. Other changes and updates are focused on enhancing security, usability, and making the product more robust.</p>
+
+<h1 id="release-highlights">Release Highlights</h1>
+
+<h2 id="rebase-on-flink-1192">Rebase on Flink 1.19.2</h2>
+<p>For more information, see the <a href="https://flink.apache.org/2025/02/12/apache-flink-1.19.2-release-announcement/">Flink 1.19.2 Release Announcement</a> and the <a href="https://docs.cloudera.com/csa-operator/1.2/release-notes/topics/csa-op-release-notes.html">Release Notes</a>.</p>
+
+<h2 id="general-availability-for-cloudera-sql-stream-builder">General availability for Cloudera SQL Stream Builder</h2>
+<p>Cloudera SQL Stream Builder, previously in Technical Preview, is now generally available in Cloudera Streaming Analytics - Kubernetes Operator.</p>
+
+<p>Cloudera SQL Stream Builder is a comprehensive interactive user interface for creating stateful stream processing jobs using SQL. For more information about SQL Stream Builder and its features, see the Getting started with SQL Stream Builder page.</p>
+
+<h2 id="ldap-authentication-in-sql-stream-builder">LDAP authentication in SQL Stream Builder</h2>
+<p>LDAP-based authentication is available for Cloudera SQL Stream Builder. For more information, refer to <a href="https://docs.cloudera.com/csa-operator/1.2/ssb-resource-management/topics/csa-op-ssb-security-configurations.html#pnavId3">LDAP authentication</a>.</p>
+
+<h2 id="custom-ruststores">Custom ruststores</h2>
+<p>You can now specify custom truststores when installing the Cloudera Streaming Analytics - Kubernetes Operator. For more information, refer to <a href="https://docs.cloudera.com/csa-operator/1.2/ssb-resource-management/topics/csa-op-ssb-security-configurations.html">Security configurations</a>.</p>
+
+<h2 id="secure-tls-connections-to-the-ssb-ui-and-api">Secure TLS connections to the SSB UI and API</h2>
+<p>Users can connect to Cloudera SQL Stream Builder and API via a TLS-encrypted channel. For more information, refer to <a href="https://docs.cloudera.com/csa-operator/1.2/flink-application-management/topics/csa-op-flink-ingress.html">Routing with ingress</a>.</p>
+
+<h2 id="using-python-udfs-for-table-transformations-and-webhook-connector">Using Python UDFs for table transformations and webhook connector</h2>
+<p>Due to the deprecation of Javascript User-defined Functions (UDFs) in Cloudera Streaming Analytics - Kubernetes Operator (see <a href="https://docs.cloudera.com/csa-operator/1.2/release-notes/topics/csa-op-ssb-deprecated.html">Deprecation notices</a>, support in Python UDFs for table transformations and the webhook connector have been added to Cloudera SQL Stream Builder. For more information, refer to Creating Python User-defined Functions.</p>
+
+<h2 id="configurable-requests-and-limits-for-all-resources">Configurable requests and limits for all resources</h2>
+<p>Resource requests/limits can now be defined in the resource configuration. For more information, refer to <a href="https://docs.cloudera.com/csa-operator/1.2/operator-management/topics/csa-op-resource-requests-limits.html">Resource requests and limits</a>.</p>
+
+<p>Please see the <a href="https://docs.cloudera.com/csa-operator/1.2/release-notes/topics/csa-op-release-notes.html">Release Notes</a> for the complete list of fixes and improvements.</p>
+
+<h1 id="getting-to-the-new-release">Getting to the New Release</h1>
+
+<p>To upgrade to Cloudera Streaming Analytics - Kubernetes Operator 1.2, check out this <a href="https://docs.cloudera.com/csa-operator/1.2/upgrade/topics/csa-op-upgrade.html">upgrade guide</a>. If you are installing for the first time use this <a href="https://docs.cloudera.com/csa-operator/1.2/installation/topics/csa-op-installation-overview.html">installation overview</a>.</p>
+
+<h1 id="use-cases">Use Cases</h1>
+
+<h2 id="event-driven-applications">Event-Driven Applications</h2>
+
+<p>Stateful applications that ingest events from one-or more-event streams and react to incoming events by triggering computations, state updates, or external actions.</p>
+
+<p>Apache Flink excels in handling the concept of time and state for these applications, and can scale to manage very large data volumes (up to several terabytes). It has a rich set of APIs, ranging from low-level controls to high-level functionality, like Flink SQL, enabling developers to choose the most suitable options for the implementation of advanced business logic.</p>
+
+<p>Apache Flink’s outstanding feature for event-driven applications is its support for savepoints. A savepoint is a consistent state image that can be used as a starting point for compatible applications. Given a savepoint, an application can be updated or adapt its scale, or multiple versions of an application can be started for A/B testing.</p>
+
+<h3 id="examples">Examples:</h3>
+<ul>
+  <li>Fraud detection</li>
+  <li>Anomaly detection</li>
+  <li>Rule-based alerting</li>
+  <li>Business process monitoring</li>
+  <li>Web application (social network)</li>
+</ul>
+
+<h2 id="data-analytics-applications">Data Analytics Applications</h2>
+
+<p>With a sophisticated stream processing engine, analytics can be performed in real-time. Streaming queries or applications ingest real-time event streams and continuously produce and update results as events are consumed. The results are written to an external database or maintained as internal state. A dashboard application can read the latest results from the external database or directly query the internal state of the application.</p>
+
+<p>Apache Flink supports streaming as well as batch analytical applications.</p>
+
+<h3 id="examples-1">Examples:</h3>
+<ul>
+  <li>Quality monitoring of telco networks</li>
+  <li>Analysis of product updates &amp; experiment evaluation in mobile applications</li>
+  <li>Ad-hoc analysis of live data in consumer technology</li>
+  <li>Large-scale graph analysis</li>
+</ul>
+
+<h2 id="data-pipeline-applications">Data Pipeline Applications</h2>
+
+<p>Streaming data pipelines serve a similar purpose as Extract-Transform-Load (ETL) jobs. They transform and enrich data and can move it from one storage system to another. However, they operate in a continuous streaming mode instead of being periodically triggered. Hence, they can read records from sources that continuously produce data and move it with low latency to their destination.</p>
+
+<h3 id="examples-2">Examples:</h3>
+<ul>
+  <li>Real-time search index building in e-commerce</li>
+  <li>Continuous ETL in e-commerce</li>
+</ul>
+
+<h1 id="public-resources">Public Resources</h1>
+<ul>
+  <li>New - <a href="https://docs.cloudera.com/csa-operator/1.2/release-notes/topics/csa-op-whats-new.html">What’s New in Cloudera Streaming Analytics - Kubernetes Operator 1.2</a></li>
+  <li>New - <a href="https://community.cloudera.com/t5/What-s-New-Cloudera/RELEASED-Cloudera-Streaming-Analytics-Kubernetes-Operator-1/ba-p/404000">What’s New post in Cloudera Community</a></li>
+  <li>New - <a href="https://www.linkedin.com/posts/asdaraujo_released-cloudera-streaming-analytics-activity-7305808650353168384-VyhY/?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAAGr4MBvsb8VE4Nc-F1aTnmfaw1pSofyBY">LinkedIn announcement (to share)</a></li>
+  <li>Updated - <a href="https://docs.cloudera.com/csa-operator/1.2/index.html">Cloudera Streaming Analytics - Kubernetes Operator Documentation</a></li>
+  <li><a href="https://www.cloudera.com/products/stream-processing.html">Cloudera Stream Processing Product Page</a></li>
+  <li><a href="https://docs.cloudera.com/index.html?tab=kubernetes-operators">Cloudera Kubernetes Operators documentation homepage</a></li>
+  <li><a href="https://docs.cloudera.com/csp-ce/latest/index.html">Cloudera Stream Processing Community Edition</a></li>
+  <li><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators (webinar recording)</a></li>
+  <li>Updated - <a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></li>
+</ul>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csa-operator/1.2/index.html">Cloudera Streaming Analytics - Kubernetes Operator 1.2</a>.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csa" /><category term="cloudera" /><category term="flink" /><category term="operator" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. This release includes the general availability of Cloudera SQL Stream Builder for Kubernetes, as well as a rebase to Apache Flink 1.19.2. Other changes and updates are focused on enhancing security, usability, and making the product more robust.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.2</title><link href="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-3-Release/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.2" /><published>2025-03-11T00:00:00-04:00</published><updated>2025-03-11T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-3-Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-3-Release/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.</p>
+
+<h2 id="release-highlights">Release Highlights</h2>
+
+<ul>
+  <li>Rebase on Kafka 3.8:
+    <ul>
+      <li>For more information, see the Kafka 3.8 <a href="https://archive.apache.org/dist/kafka/3.8.0/RELEASE_NOTES.html">Release Notes</a> and <a href="https://kafka.apache.org/documentation/#upgrade_380_notable">list of notable changes</a>.</li>
+    </ul>
+  </li>
+  <li>Rebase on Strimzi 0.43.0:
+    <ul>
+      <li>For more information, see the Strimzi 0.43.0 <a href="https://github.com/strimzi/strimzi-kafka-operator/releases/tag/0.43.0">Release Notes</a>.</li>
+    </ul>
+  </li>
+  <li>Apache Ranger authorization: Support for Apache Ranger authorization is now available. Customers can now integrate Kafka clusters, deployed with Cloudera Streams Messaging - Kubernetes Operator, with a remote Ranger service that is running on Cloudera Private Cloud Base. If configured, the Ranger service can provide authorization for your Kafka cluster.
+    <ul>
+      <li>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.2/kafka-security/topics/csm-op-authz-ranger.html">Apache Ranger authorization</a>.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Improvements to Kafka replication: Rebased and backported changes to make Kafka replication more resilient and reliable when handling heartbeats and offset translation.</p>
+  </li>
+  <li>Performance improvements for the Cloudera diagnostics tool: The report.sh tool, used by clients to provide Cloudera support with key information when dealing with support cases now runs its subprocesses in parallel, accelerating run times.
+    <ul>
+      <li>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.2/monitoring-diagnostics/topics/csm-op-diagnostics.html">Diagnostics</a>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>For the complete list of fixes and improvements read these <a href="https://docs.cloudera.com/csm-operator/1.2/release-notes/topics/csm-op-rn.html">Release Notes</a>.</p>
+
+<p>Getting to the new release
+To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out this <a href="https://docs.cloudera.com/csm-operator/1.2/upgrade/topics/csm-op-upgrade.html">upgrade guide</a>. Please note, if you are installing for the first time use this installation overview.</p>
+
+<h2 id="use-cases">Use Cases</h2>
+<ul>
+  <li>
+    <p>Flexible, agile, and rapid Kafka deployments: Deploy Apache Kafka in seconds on existing Kubernetes infrastructure. Cloudera Streams Messaging - Kubernetes Operator has very lightweight dependencies and system requirements for Kafka-centric deployments. It simplifies and standardizes Kafka deployments and provides auto-scaling support for variable workloads.</p>
+  </li>
+  <li>
+    <p>Operational efficiency with simple upgrades: The complexity of Kafka rolling upgrades is handled by Cloudera Streams Messaging - Kubernetes Operator, making them simpler and safer to execute.</p>
+  </li>
+  <li>
+    <p>Loading and unloading data from Kafka: Kafka Connect gives Kafka users a simple way to access data quickly from a source and feed it to a Kafka topic. It also allows them to get data from a topic and copy it to an external destination. The operator includes Kafka Connect support to give our customers a tool for moving data in and out of Kafka, efficiently.</p>
+  </li>
+  <li>
+    <p>Replicating data to other sites: Disaster resilience is an important aspect of any Kafka production deployment. Cloudera Streams Messaging - Kubernetes Operator supports configuring and running Kafka replication flows across any two Kafka clusters. These clusters could be in the same or in different data centers to provide increased resilience against disasters.</p>
+  </li>
+  <li>
+    <p>Kafka migrations: Customers can migrate or replicate data between containerized Kafka clusters and on-prem or cloud-based clusters.  Using Cloudera Streams Messaging - Kubernetes Operator, data can be replicated in any direction and between two or more clusters at a time.</p>
+  </li>
+</ul>
+
+<p>Check out what is new in <a href="https://docs.cloudera.com/csm-operator/1.2/release-notes/topics/csm-op-rn.html#ariaid-title2">Cloudera Streams Messaging Kubernetes Operator 1.2</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.2/overview/topics/csm-op-deployment-architecture.html">Deployment Architecture</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.2/installation/topics/csm-op-install-overview.html">Installation Information</a></p>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.2/index.html">DOCS</a> for the CSM Operator.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cdp" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.]]></summary></entry><entry><title type="html">Cloudera Apache NiFi Operator</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/" rel="alternate" type="text/html" title="Cloudera Apache NiFi Operator" /><published>2025-02-26T00:00:00-05:00</published><updated>2025-02-26T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Apache%20NiFi%20Operator</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/"><![CDATA[<p>In a previous article (<a href="https://cldr-steven-matison.github.io/blog/Install-CFM-Operator/">Installing Cloudera CFM Kubernetes Operator</a>) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.</p>
 
 <figure>
   <img src="/assets/images/cfm-op-deployment-architecture.jpg" />
@@ -581,153 +730,4 @@ PostgreSQL 14: This support is now present for Cloudera on cloud.</p>
 
 <p>Check out <a href="https://docs.cloudera.com/csm-operator/1.1/upgrade/topics/csm-op-upgrade.html">Upgrade Information</a>.</p>
 
-<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.1/index.html">Cloudera Streams Messaging Operator 1.1 Docs</a>.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="cloudera" /><category term="streams messaging" /><category term="operator" /><summary type="html"><![CDATA[Moving rapidly here at Cloudera and the Streams Messaging Operator. Happy to announce the latest release of Cloudera Streams Messaging Operator for Apache Kafka is now ready. Lots of features including Kafka Replication without Mirrormaker 2.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics 1.13 for Private Cloud Base</title><link href="https://cldr-steven-matison.github.io//blog/CSA-1.13-Release/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics 1.13 for Private Cloud Base" /><published>2024-08-19T00:00:00-04:00</published><updated>2024-08-19T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/CSA-1.13-Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CSA-1.13-Release/"><![CDATA[<p>The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.</p>
-
-<p>See <a href="https://docs.cloudera.com/csa/latest/release-notes/topics/csa-what-new.html">What’s New</a>.</p>
-
-<h1 id="release-of-csa-113">Release of CSA 1.13</h1>
-
-<h2 id="key-features">Key Features</h2>
-
-<ol>
-  <li>Rebase to Apache Flink 1.19.1</li>
-  <li>Support for Python UDFs in SSB</li>
-  <li>Global logging configuration for SSB jobs</li>
-  <li>Customizable default Kafka TrustStore configuration in Streaming SQL Console</li>
-  <li>Cloudera LTS Platform Support</li>
-</ol>
-
-<p>Check out <a href="https://docs.cloudera.com/csa/1.13.0/index.html">CSA 1.13</a></p>
-
-<p>Check out <a href="https://docs.cloudera.com/csa/1.13.0/release-notes/topics/csa-what-new.html">Release Notes</a></p>
-
-<p>Check out <a href="https://docs.cloudera.com/csa/1.13.0/download/topics/csa-download-location.html">Download Information</a></p>
-
-<p>As always, check out the <a href="https://docs.cloudera.com/csa/1.13.0/index.html">CSA 1.13 Docs</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csa" /><category term="flink" /><category term="cdp" /><summary type="html"><![CDATA[The Data In Motion team is pleased to announce the release of the Cloudera Streaming Analytics 1.13 for Cloudera Private Cloud Base 7.1.9 SP1. This release includes improvements to SQL Stream Builder as well as updates to Apache Flink 1.19.1. These changes are focused on enhancing the user experience and removing objections and blockers in the sales cycle.]]></summary></entry><entry><title type="html">Installing Cloudera CFM Kubernetes Operator</title><link href="https://cldr-steven-matison.github.io//blog/Install-CFM-Operator/" rel="alternate" type="text/html" title="Installing Cloudera CFM Kubernetes Operator" /><published>2024-08-16T00:00:00-04:00</published><updated>2024-08-16T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Install%20CFM%20Operator</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Install-CFM-Operator/"><![CDATA[<p>Last week I had a chance to work out the installation of the Cloudera’s CFM Operator.  In this post I am going to expose the lessons learned and command required to get this CFM Operator running on my macbook with <a href="https://minikube.sigs.k8s.io/docs/start/">MiniKube</a>.  Keep in mind, these Operators are GA for RedHat Openshift. This demonstration on how to locally install is for evaluation purposes and not meant for actual usage.</p>
-
-<figure>
-  <img src="/assets/images/cfm-op-deployment-architecture.jpg" />
-  <figcaption>CFM Deployment Architecture</figcaption>
-</figure>
-
-<p>First, lets start with the main page for the CFM Operator:</p>
-
-<p><a href="https://docs.cloudera.com/cfm-operator/2.8.0/index.html">CFM Operator 2.8</a></p>
-
-<p>Next lets take a look at some requirements:</p>
-
-<ol>
-  <li>Install Docker</li>
-  <li>Install MiniKube</li>
-  <li>Install Helm</li>
-  <li>Install cfmctl</li>
-</ol>
-
-<p>Now, onto the installation pages for detailed steps and instructions:</p>
-
-<ol>
-  <li><a href="https://docs.cloudera.com/cfm-operator/2.8.0/installation/topics/cfm-op-install-overview.html">Installing CFM Operator</a></li>
-  <li><a href="https://docs.cloudera.com/cfm-operator/2.8.0/nifi-deployment-configuration/topics/cfm-op-deploy-nifi-cluster.html">Installing Apache Nifi</a></li>
-  <li><a href="https://docs.cloudera.com/cfm-operator/2.8.0/registry-deployment-configuration/topics/cfm-op-nifi-registry-deployment.html">Installing Apache NiFi Registry</a></li>
-</ol>
-
-<p>All the commands for this learning session are as follows:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">minikube</span> <span class="n">start</span>
-<span class="n">helm</span> <span class="n">install</span> <span class="p">\\</span>
-  <span class="n">cert</span><span class="o">-</span><span class="n">manager</span> <span class="n">jetstack</span><span class="o">/</span><span class="n">cert</span><span class="o">-</span><span class="n">manager</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">namespace</span> <span class="n">cert</span><span class="o">-</span><span class="n">manager</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">create</span><span class="o">-</span><span class="n">namespace</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">version</span> <span class="n">v1</span><span class="o">.</span><span class="mf">15.2</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">set</span> <span class="n">crds</span><span class="p">.</span><span class="nf">enabled</span><span class="o">=</span><span class="kp">true</span>
-<span class="n">kubectl</span> <span class="n">create</span> <span class="n">namespace</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="nb">system</span>
-<span class="n">kubectl</span> <span class="n">create</span> <span class="n">secret</span> <span class="n">docker</span><span class="o">-</span><span class="n">registry</span> <span class="n">docker</span><span class="o">-</span><span class="n">pull</span><span class="o">-</span><span class="n">secret</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">namespace</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="nb">system</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">server</span> <span class="n">container</span><span class="p">.</span><span class="nf">repository</span><span class="p">.</span><span class="nf">cloudera</span><span class="p">.</span><span class="nf">com</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">username</span> <span class="p">[</span><span class="no">License</span> <span class="no">Username</span><span class="p">]</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">password</span> <span class="p">[</span><span class="no">License</span> <span class="no">Password</span><span class="p">]</span>
-<span class="p">.</span><span class="nf">/</span><span class="n">cfmctl</span> <span class="n">install</span> <span class="o">--</span><span class="n">license</span> <span class="p">.</span><span class="nf">/</span><span class="n">license</span><span class="p">.</span><span class="nf">txt</span> <span class="o">--</span><span class="n">image</span><span class="o">-</span><span class="n">repository</span> <span class="s2">"container.repository.cloudera.com/cloudera/cfm-operator"</span> <span class="o">--</span><span class="n">image</span><span class="o">-</span><span class="n">tag</span> <span class="s2">"2.8.0-b94"</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="nb">system</span>
-<span class="n">kubectl</span> <span class="n">create</span> <span class="n">namespace</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="n">cluster</span>
-<span class="n">kubectl</span> <span class="n">create</span> <span class="n">secret</span> <span class="n">docker</span><span class="o">-</span><span class="n">registry</span> <span class="n">docker</span><span class="o">-</span><span class="n">pull</span><span class="o">-</span><span class="n">secret</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">namespace</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="n">cluster</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">server</span> <span class="n">container</span><span class="p">.</span><span class="nf">repository</span><span class="p">.</span><span class="nf">cloudera</span><span class="p">.</span><span class="nf">com</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">username</span> <span class="p">[</span><span class="no">License</span> <span class="no">Username</span><span class="p">]</span> <span class="p">\\</span>
-  <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">password</span> <span class="p">[</span><span class="no">License</span> <span class="no">Password</span><span class="p">]</span>
-<span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-</span><span class="n">f</span> <span class="n">nifi</span><span class="p">.</span><span class="nf">yaml</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="n">cluster</span>
-</code></pre></div></div>
-
-<p>The source of my nifi.yaml:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">apiVersion: </span><span class="n">cfm</span><span class="p">.</span><span class="nf">cloudera</span><span class="p">.</span><span class="nf">com</span><span class="o">/</span><span class="n">v1alpha1</span>
-<span class="ss">kind: </span><span class="no">Nifi</span>
-<span class="ss">metadata:
-  name: </span><span class="n">mynifi</span>
-<span class="ss">spec:
-  replicas: </span><span class="mi">1</span>
-  <span class="ss">image:
-    repository: </span><span class="n">container</span><span class="p">.</span><span class="nf">repository</span><span class="p">.</span><span class="nf">cloudera</span><span class="p">.</span><span class="nf">com</span><span class="o">/</span><span class="n">cloudera</span><span class="o">/</span><span class="n">cfm</span><span class="o">-</span><span class="n">nifi</span><span class="o">-</span><span class="n">k8s</span>
-    <span class="ss">tag: </span><span class="mf">2.8</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">b94</span><span class="o">-</span><span class="n">nifi_1</span><span class="o">.</span><span class="mf">25.0</span><span class="o">.</span><span class="mf">2.3</span><span class="o">.</span><span class="mf">13.0</span><span class="o">-</span><span class="mi">36</span>
-    <span class="ss">pullSecret: </span><span class="n">docker</span><span class="o">-</span><span class="n">pull</span><span class="o">-</span><span class="n">secret</span>
-  <span class="ss">tiniImage:
-    repository: </span><span class="n">container</span><span class="p">.</span><span class="nf">repository</span><span class="p">.</span><span class="nf">cloudera</span><span class="p">.</span><span class="nf">com</span><span class="o">/</span><span class="n">cloudera</span><span class="o">/</span><span class="n">cfm</span><span class="o">-</span><span class="n">tini</span>
-    <span class="ss">tag: </span><span class="mf">2.8</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">b94</span>
-    <span class="ss">pullSecret: </span><span class="n">docker</span><span class="o">-</span><span class="n">pull</span><span class="o">-</span><span class="n">secret</span>
-  <span class="ss">hostName: </span><span class="n">mynifi</span><span class="p">.</span><span class="nf">localhost</span>
-  <span class="ss">uiConnection:
-    type: </span><span class="no">Ingress</span>
-  <span class="ss">configOverride:
-    nifiProperties:
-      upsert:
-        </span><span class="n">nifi</span><span class="p">.</span><span class="nf">cluster</span><span class="p">.</span><span class="nf">leader</span><span class="p">.</span><span class="nf">election</span><span class="p">.</span><span class="nf">implementation</span><span class="p">:</span> <span class="s2">"KubernetesLeaderElectionManager"</span>
-    <span class="ss">authorizers: </span><span class="o">|</span>
-      <span class="o">&lt;</span><span class="n">authorizers</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="n">authorizer</span><span class="o">&gt;</span>
-          <span class="o">&lt;</span><span class="n">identifier</span><span class="o">&gt;</span><span class="n">single</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">authorizer</span><span class="o">&lt;</span><span class="sr">/identifier&gt;
-          &lt;class&gt;org.apache.nifi.authorization.single.user.SingleUserAuthorizer&lt;/</span><span class="k">class</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="sr">/authorizer&gt;
-      &lt;/</span><span class="n">authorizers</span><span class="o">&gt;</span>
-    <span class="ss">loginIdentityProviders: </span><span class="o">|</span>
-      <span class="o">&lt;</span><span class="n">loginIdentityProviders</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="n">provider</span><span class="o">&gt;</span>
-          <span class="o">&lt;</span><span class="n">identifier</span><span class="o">&gt;</span><span class="n">single</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">provider</span><span class="o">&lt;</span><span class="sr">/identifier&gt;
-          &lt;class&gt;org.apache.nifi.authentication.single.user.SingleUserLoginIdentityProvider&lt;/</span><span class="k">class</span><span class="o">&gt;</span>
-          <span class="o">&lt;</span><span class="n">property</span> <span class="nb">name</span><span class="o">=</span><span class="s2">"Username"</span><span class="o">&gt;</span><span class="n">admin</span><span class="o">&lt;</span><span class="sr">/property&gt;
-          &lt;property name="Password"&gt;$2b$10$GRa8g9Z5rBENXPFNHFBosev9XmY6CSk0SdcBi5sQMRX92KD73asGG&lt;/</span><span class="n">property</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="sr">/provider&gt;
-      &lt;/</span><span class="n">loginIdentityProviders</span><span class="o">&gt;</span>
-  <span class="ss">stateManagement:
-   clusterProvider:
-     id: </span><span class="n">kubernetes</span><span class="o">-</span><span class="n">provider</span>
-     <span class="ss">class: </span><span class="n">org</span><span class="p">.</span><span class="nf">apache</span><span class="p">.</span><span class="nf">nifi</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">state</span><span class="p">.</span><span class="nf">provider</span><span class="o">.</span><span class="no">KubernetesConfigMapStateProvider</span>
-
-</code></pre></div></div>
-
-<p>Check out some commands I needed to see what was happening during install:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="o">--</span><span class="n">all</span><span class="o">-</span><span class="n">namespaces</span>
-<span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="o">--</span><span class="n">all</span><span class="o">-</span><span class="n">namespaces</span> <span class="o">-</span><span class="n">o</span> <span class="n">wide</span>
-<span class="n">kubectl</span> <span class="n">describe</span> <span class="n">pod</span> <span class="n">mynifi</span><span class="o">-</span><span class="mi">0</span> <span class="o">-</span><span class="n">n</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="n">cluster</span>
-<span class="n">kubectl</span> <span class="n">logs</span> <span class="o">-</span><span class="n">n</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="nb">system</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="mi">664598</span><span class="n">bf69</span><span class="o">-</span><span class="n">rm2lx</span>
-<span class="n">kubectl</span> <span class="n">get</span> <span class="n">events</span> <span class="o">-</span><span class="n">n</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span>
-<span class="n">kubectl</span> <span class="n">get</span> <span class="n">events</span> <span class="o">-</span><span class="n">n</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="nb">system</span>
-<span class="n">kubectl</span> <span class="n">get</span> <span class="n">events</span> <span class="o">-</span><span class="n">n</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="n">cluster</span>
-<span class="n">kubectl</span> <span class="n">get</span> <span class="n">secrets</span> <span class="o">-</span><span class="n">n</span> <span class="n">cfm</span><span class="o">-</span><span class="n">operator</span><span class="o">-</span><span class="nb">system</span>
-</code></pre></div></div>
-
-<p>Things to watch out for:</p>
-
-<ol>
-  <li>When copy/pasting commands make sure you fix return lines and \ syntax.</li>
-  <li>Be sure to get your correct License Username and Password with proper entitlements for these operators.</li>
-  <li>Allocate enough resources for your kubernetes cluster in docker. Recommend 16gb or more memory.</li>
-  <li>Ensure you have created the docker secret in both the operator and cluster namespaces.</li>
-</ol>
-
-<p>And last but not least, my full kubernetes cluster after install:</p>
-
-<figure>
-  <img src="/assets/images/cfm-kubectl-get-pods.png" />
-  <figcaption>CFM Operator and NiFi Deployment</figcaption>
-</figure>
-
-<p>If you are interested in getting your hands on the NiFi Operators you can find more about Cloudera DataFlow starting right <a href="https://www.cloudera.com/products/dataflow.html">here</a>.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="kubernetes" /><category term="operator" /><category term="cfm" /><summary type="html"><![CDATA[Last week I had a chance to work out the installation of the Cloudera’s CFM Operator. In this post I am going to expose the lessons learned and command required to get this CFM Operator running on my macbook with MiniKube. Keep in mind, these Operators are GA for RedHat Openshift. This demonstration on how to locally install is for evaluation purposes and not meant for actual usage.]]></summary></entry></feed>
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.1/index.html">Cloudera Streams Messaging Operator 1.1 Docs</a>.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="cloudera" /><category term="streams messaging" /><category term="operator" /><summary type="html"><![CDATA[Moving rapidly here at Cloudera and the Streams Messaging Operator. Happy to announce the latest release of Cloudera Streams Messaging Operator for Apache Kafka is now ready. Lots of features including Kafka Replication without Mirrormaker 2.]]></summary></entry></feed>
