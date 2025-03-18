@@ -310,30 +310,30 @@
 
 <h1 id="release-highlights">Release Highlights</h1>
 <h2 id="rebase-to-kafka-39">Rebase to Kafka 3.9</h2>
-<p>For more information, see the Kafka 3.9 Release Notes and the list of notable changes.</p>
+<p>For more information, see the <a href="https://archive.apache.org/dist/kafka/3.9.0/RELEASE_NOTES.html">Kafka 3.9 Release Notes</a> and the <a href="https://kafka.apache.org/documentation/#upgrade_390_notable">list of notable changes</a>.</p>
 
 <h2 id="rebase-to-strimzi-0450">Rebase to Strimzi 0.45.0</h2>
-<p>For more information, see the Strimzi 0.44.0 Release Notes and Strimzi 0.45.0 Release Notes.</p>
+<p>For more information, see the <a href="https://github.com/strimzi/strimzi-kafka-operator/releases/tag/0.44.0">Strimzi 0.44.0 Release Notes</a> and <a href="https://github.com/strimzi/strimzi-kafka-operator/releases/tag/0.45.0">Strimzi 0.45.0 Release Notes</a>.</p>
 
 <h2 id="kraft-kafka-raft-is-generally-available">KRaft (Kafka Raft) is generally available</h2>
 <p>You can now deploy Kafka clusters that use KRaft instead of ZooKeeper for metadata management. Additionally, you can migrate existing ZooKeeper-based Kafka clusters to use KRaft. 
 With the addition of KRaft, ZooKeeper is deprecated. Deploying new or using existing Kafka clusters running in ZooKeeper mode is deprecated. Additionally, ZooKeeper will be removed in a future release. When deploying new Kafka clusters, deploy them in KRaft mode. Cloudera encourages you to migrate existing clusters to KRaft. 
-For cluster deployment instructions, see Deploying a Kafka cluster.  For migration instructions, see Migrating Kafka clusters from ZooKeeper to KRaft.</p>
+For cluster deployment instructions, see <a href="https://docs.cloudera.com/csm-operator/1.3/kafka-deploy-configure/topics/csm-op-deploying-kafka.html#concept_oks_bgz_z1c">Deploying a Kafka cluster</a>.  For migration instructions, see <a href="https://docs.cloudera.com/csm-operator/1.3/upgrade/topics/csm-op-kraft-migration.html#concept_aty_ylh_j2c">Migrating Kafka clusters from ZooKeeper to KRaft</a>.</p>
 
 <h2 id="auto-rebalancing-when-scaling-the-cluster">Auto-rebalancing when scaling the cluster</h2>
 <p>You can now enable auto-rebalancing for Kafka clusters. If auto-rebalancing is enabled, the Strimzi Cluster Operator automatically initiates a rebalance with Cruise Control when you scale the Kafka cluster. 
-Cloudera recommends that you enable this feature as it makes scaling easier and faster. For more information, see  Scaling brokers.</p>
+Cloudera recommends that you enable this feature as it makes scaling easier and faster. For more information, see <a href="https://docs.cloudera.com/csm-operator/1.3/kafka-operations/topics/csm-op-scaling-brokers.html#concept_jt1_qhz_z1c">Scaling brokers</a>.</p>
 
 <h2 id="offset-management-through-kafkaconnector-resources-is-now-available">Offset management through KafkaConnector resources is now available</h2>
 <p>Connector offsets can now be managed directly by configuring your KafkaConnector resources. 
 Cloudera recommends that you use this feature over the Kafka Connect REST API to manage connector offsets.</p>
 
-<p>For more information, see Managing connector offsets and  Configuring data replication offsets. These are the recommended methods for managing replication offsets when replicating data with Kafka Connect-based replication has also changed.</p>
+<p>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.3/kafka-connect-operations/topics/csm-op-connect-managing-connectors.html#ariaid-title8">Managing connector offsets</a> and <a href="https://docs.cloudera.com/csm-operator/1.3/kafka-replication-deploy-configure/topics/csm-op-connect-configuring-replication-offsets.html#task_jfl_lsg_jcc">Configuring data replication offsets</a>. These are the recommended methods for managing replication offsets when replicating data with Kafka Connect-based replication has also changed.</p>
 
-<p>Please see the Release Notes for the complete list of fixes and improvements</p>
+<p>Please see the <a href="https://docs.cloudera.com/csm-operator/1.3/release-notes/topics/csm-op-rn.html#concept_ksn_nwn_cbc">Release Notes</a> for the complete list of fixes and improvements</p>
 
 <h2 id="getting-to-the-new-release">Getting to the New Release</h2>
-<p>To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.3, check out this upgrade guide. If you are installing for the first time use this installation overview.</p>
+<p>To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.3, check out this <a href="https://docs.cloudera.com/csm-operator/1.3/upgrade/topics/csm-op-upgrade.html">upgrade guide</a>. If you are installing for the first time use this <a href="https://docs.cloudera.com/csm-operator/1.3/installation/topics/csm-op-install-overview.html">installation overview</a>.</p>
 
 <h2 id="use-cases">Use Cases</h2>
 <p>Flexible, agile, and rapid Kafka deployments: Deploy Apache Kafka in seconds on existing Kubernetes infrastructure. Cloudera Streams Messaging-Kubernetes Operator has very lightweight dependencies and system requirements for Kafka-centric deployments. It simplifies and standardizes Kafka deployments and provides auto-scaling support for variable workloads.</p>
@@ -348,18 +348,18 @@ Cloudera recommends that you use this feature over the Kafka Connect REST API to
 
 <h2 id="public-resources">Public Resources</h2>
 <ul>
-  <li>New - <a href="">What’s New in Cloudera Streams Messaging - Kubernetes Operator 1.3</a></li>
-  <li>New - <a href="">What’s New post in Cloudera Community</a></li>
-  <li>New - <a href="">LinkedIn announcement</a> (to share)</li>
-  <li>Updated - <a href="">Cloudera Streams Messaging - Kubernetes Operator Documentation</a></li>
-  <li><a href="">Cloudera Stream Processing Product Page</a></li>
-  <li><a href="">Cloudera Kubernetes Operators documentation homepage</a></li>
-  <li><a href="">Cloudera Stream Processing Community Edition</a></li>
-  <li><a href="">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</li>
-  <li>Updated - <a href="">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></li>
+  <li>New - <a href="https://docs.cloudera.com/csm-operator/1.3/release-notes/topics/csm-op-rn.html#ariaid-title2">What’s New in Cloudera Streams Messaging - Kubernetes Operator 1.3</a></li>
+  <li>New - <a href="https://community.cloudera.com/t5/What-s-New-Cloudera/RELEASED-Cloudera-Streams-Messaging-Kubernetes-Operator-1-3/ba-p/403888">What’s New post in Cloudera Community</a></li>
+  <li>New - <a href="https://www.linkedin.com/posts/asdaraujo_released-cloudera-streams-messaging-kubernetes-activity-7305092097919897600-4KpQ/">LinkedIn announcement</a> (to share)</li>
+  <li>Updated - <a href="https://docs.cloudera.com/csm-operator/1.3/index.html">Cloudera Streams Messaging - Kubernetes Operator Documentation</a></li>
+  <li><a href="https://www.cloudera.com/products/stream-processing.html">Cloudera Stream Processing Product Page</a></li>
+  <li><a href="https://docs.cloudera.com/index.html?tab=kubernetes-operators">Cloudera Kubernetes Operators documentation homepage</a></li>
+  <li><a href="https://docs.cloudera.com/csp-ce/latest/index.html">Cloudera Stream Processing Community Edition</a></li>
+  <li><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</li>
+  <li>Updated - <a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Messaging Support Lifecycle Policy</a></li>
 </ul>
 
-<p>As always, check out the entire <a href="">DOCS</a> for the CSM Operator.</p>
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.3/index.html">DOCS</a> for the CSM Operator.</p>
 
         
       </section>
