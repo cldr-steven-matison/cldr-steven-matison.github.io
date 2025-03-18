@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Cloudera Streams Messaging - Kubernetes Operator 1.2 - Cloudera Solutions Engineer</title>
-<meta name="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.">
+<!-- begin _includes/seo.html --><title>Cloudera Streams Messaging - Kubernetes Operator 1.3 - Cloudera Solutions Engineer</title>
+<meta name="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive a rebase to Kafka 3.9, automatic cluster rebalance, better offset management capabilities for Kafka connectors, and more!">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,11 +22,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Cloudera Streams Messaging - Kubernetes Operator 1.2">
-<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-3-Release/">
+<meta property="og:title" content="Cloudera Streams Messaging - Kubernetes Operator 1.3">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.3/">
 
 
-  <meta property="og:description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.">
+  <meta property="og:description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive a rebase to Kafka 3.9, automatic cluster rebalance, better offset management capabilities for Kafka connectors, and more!">
 
 
 
@@ -47,7 +47,7 @@
   
 
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-3-Release/">
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.3/">
 
 
 
@@ -268,8 +268,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Cloudera Streams Messaging - Kubernetes Operator 1.2">
-    <meta itemprop="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.">
+    <meta itemprop="headline" content="Cloudera Streams Messaging - Kubernetes Operator 1.3">
+    <meta itemprop="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive a rebase to Kafka 3.9, automatic cluster rebalance, better offset management capabilities for Kafka connectors, and more!">
     <meta itemprop="datePublished" content="2025-03-11T00:00:00-04:00">
     
 
@@ -277,7 +277,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-3-Release/" class="u-url" itemprop="url">Cloudera Streams Messaging - Kubernetes Operator 1.2
+            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.3/" class="u-url" itemprop="url">Cloudera Streams Messaging - Kubernetes Operator 1.3
 </a>
           </h1>
           
@@ -294,7 +294,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          2 minute read
+          3 minute read
         
       </span>
     
@@ -306,67 +306,60 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.</p>
+        <p>Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive a rebase to Kafka 3.9, automatic cluster rebalance, better offset management capabilities for Kafka connectors, and more!</p>
 
-<h2 id="release-highlights">Release Highlights</h2>
+<h1 id="release-highlights">Release Highlights</h1>
+<h2 id="rebase-to-kafka-39">Rebase to Kafka 3.9</h2>
+<p>For more information, see the Kafka 3.9 Release Notes and the list of notable changes.</p>
 
-<ul>
-  <li>Rebase on Kafka 3.8:
-    <ul>
-      <li>For more information, see the Kafka 3.8 <a href="https://archive.apache.org/dist/kafka/3.8.0/RELEASE_NOTES.html">Release Notes</a> and <a href="https://kafka.apache.org/documentation/#upgrade_380_notable">list of notable changes</a>.</li>
-    </ul>
-  </li>
-  <li>Rebase on Strimzi 0.43.0:
-    <ul>
-      <li>For more information, see the Strimzi 0.43.0 <a href="https://github.com/strimzi/strimzi-kafka-operator/releases/tag/0.43.0">Release Notes</a>.</li>
-    </ul>
-  </li>
-  <li>Apache Ranger authorization: Support for Apache Ranger authorization is now available. Customers can now integrate Kafka clusters, deployed with Cloudera Streams Messaging - Kubernetes Operator, with a remote Ranger service that is running on Cloudera Private Cloud Base. If configured, the Ranger service can provide authorization for your Kafka cluster.
-    <ul>
-      <li>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.2/kafka-security/topics/csm-op-authz-ranger.html">Apache Ranger authorization</a>.</li>
-    </ul>
-  </li>
-  <li>
-    <p>Improvements to Kafka replication: Rebased and backported changes to make Kafka replication more resilient and reliable when handling heartbeats and offset translation.</p>
-  </li>
-  <li>Performance improvements for the Cloudera diagnostics tool: The report.sh tool, used by clients to provide Cloudera support with key information when dealing with support cases now runs its subprocesses in parallel, accelerating run times.
-    <ul>
-      <li>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.2/monitoring-diagnostics/topics/csm-op-diagnostics.html">Diagnostics</a>.</li>
-    </ul>
-  </li>
-</ul>
+<h2 id="rebase-to-strimzi-0450">Rebase to Strimzi 0.45.0</h2>
+<p>For more information, see the Strimzi 0.44.0 Release Notes and Strimzi 0.45.0 Release Notes.</p>
 
-<p>For the complete list of fixes and improvements read these <a href="https://docs.cloudera.com/csm-operator/1.2/release-notes/topics/csm-op-rn.html">Release Notes</a>.</p>
+<h2 id="kraft-kafka-raft-is-generally-available">KRaft (Kafka Raft) is generally available</h2>
+<p>You can now deploy Kafka clusters that use KRaft instead of ZooKeeper for metadata management. Additionally, you can migrate existing ZooKeeper-based Kafka clusters to use KRaft. 
+With the addition of KRaft, ZooKeeper is deprecated. Deploying new or using existing Kafka clusters running in ZooKeeper mode is deprecated. Additionally, ZooKeeper will be removed in a future release. When deploying new Kafka clusters, deploy them in KRaft mode. Cloudera encourages you to migrate existing clusters to KRaft. 
+For cluster deployment instructions, see Deploying a Kafka cluster.  For migration instructions, see Migrating Kafka clusters from ZooKeeper to KRaft.</p>
 
-<p>Getting to the new release
-To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out this <a href="https://docs.cloudera.com/csm-operator/1.2/upgrade/topics/csm-op-upgrade.html">upgrade guide</a>. Please note, if you are installing for the first time use this installation overview.</p>
+<h2 id="auto-rebalancing-when-scaling-the-cluster">Auto-rebalancing when scaling the cluster</h2>
+<p>You can now enable auto-rebalancing for Kafka clusters. If auto-rebalancing is enabled, the Strimzi Cluster Operator automatically initiates a rebalance with Cruise Control when you scale the Kafka cluster. 
+Cloudera recommends that you enable this feature as it makes scaling easier and faster. For more information, see  Scaling brokers.</p>
+
+<h2 id="offset-management-through-kafkaconnector-resources-is-now-available">Offset management through KafkaConnector resources is now available</h2>
+<p>Connector offsets can now be managed directly by configuring your KafkaConnector resources. 
+Cloudera recommends that you use this feature over the Kafka Connect REST API to manage connector offsets.</p>
+
+<p>For more information, see Managing connector offsets and  Configuring data replication offsets. These are the recommended methods for managing replication offsets when replicating data with Kafka Connect-based replication has also changed.</p>
+
+<p>Please see the Release Notes for the complete list of fixes and improvements</p>
+
+<h2 id="getting-to-the-new-release">Getting to the New Release</h2>
+<p>To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.3, check out this upgrade guide. If you are installing for the first time use this installation overview.</p>
 
 <h2 id="use-cases">Use Cases</h2>
+<p>Flexible, agile, and rapid Kafka deployments: Deploy Apache Kafka in seconds on existing Kubernetes infrastructure. Cloudera Streams Messaging-Kubernetes Operator has very lightweight dependencies and system requirements for Kafka-centric deployments. It simplifies and standardizes Kafka deployments and provides auto-scaling support for variable workloads.</p>
+
+<p>Operational efficiency with simple upgrades: The complexity of Kafka rolling upgrades is handled by Cloudera Streams Messaging - Kubernetes Operator, making them simpler and safer to execute.</p>
+
+<p>Loading and unloading data from Kafka: Kafka Connect gives Kafka users a simple way to access data quickly from a source and feed it to a Kafka topic. It also allows them to get data from a topic and copy it to an external destination. Cloudera Streams Messaging - Kubernetes Operator includes Kafka Connect support to give our customers a tool for moving data in and out of Kafka, efficiently.</p>
+
+<p>Replicating data to other sites: Disaster resilience is an important aspect of any Kafka production deployment. Cloudera Streams Messaging - Kubernetes Operator supports configuring and running Kafka replication flows across any two Kafka clusters. These clusters could be in different data centers to provide increased resilience against disasters.</p>
+
+<p>Kafka migrations: Customers can migrate or replicate data between containerized Kafka clusters and on-premises or cloud-based clusters.  Using Cloudera Streams Messaging - Kubernetes Operator, data can be replicated in any direction and between two or more clusters at a time.</p>
+
+<h2 id="public-resources">Public Resources</h2>
 <ul>
-  <li>
-    <p>Flexible, agile, and rapid Kafka deployments: Deploy Apache Kafka in seconds on existing Kubernetes infrastructure. Cloudera Streams Messaging - Kubernetes Operator has very lightweight dependencies and system requirements for Kafka-centric deployments. It simplifies and standardizes Kafka deployments and provides auto-scaling support for variable workloads.</p>
-  </li>
-  <li>
-    <p>Operational efficiency with simple upgrades: The complexity of Kafka rolling upgrades is handled by Cloudera Streams Messaging - Kubernetes Operator, making them simpler and safer to execute.</p>
-  </li>
-  <li>
-    <p>Loading and unloading data from Kafka: Kafka Connect gives Kafka users a simple way to access data quickly from a source and feed it to a Kafka topic. It also allows them to get data from a topic and copy it to an external destination. The operator includes Kafka Connect support to give our customers a tool for moving data in and out of Kafka, efficiently.</p>
-  </li>
-  <li>
-    <p>Replicating data to other sites: Disaster resilience is an important aspect of any Kafka production deployment. Cloudera Streams Messaging - Kubernetes Operator supports configuring and running Kafka replication flows across any two Kafka clusters. These clusters could be in the same or in different data centers to provide increased resilience against disasters.</p>
-  </li>
-  <li>
-    <p>Kafka migrations: Customers can migrate or replicate data between containerized Kafka clusters and on-prem or cloud-based clusters.  Using Cloudera Streams Messaging - Kubernetes Operator, data can be replicated in any direction and between two or more clusters at a time.</p>
-  </li>
+  <li>New - <a href="">What’s New in Cloudera Streams Messaging - Kubernetes Operator 1.3</a></li>
+  <li>New - <a href="">What’s New post in Cloudera Community</a></li>
+  <li>New - <a href="">LinkedIn announcement</a> (to share)</li>
+  <li>Updated - <a href="">Cloudera Streams Messaging - Kubernetes Operator Documentation</a></li>
+  <li><a href="">Cloudera Stream Processing Product Page</a></li>
+  <li><a href="">Cloudera Kubernetes Operators documentation homepage</a></li>
+  <li><a href="">Cloudera Stream Processing Community Edition</a></li>
+  <li><a href="">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</li>
+  <li>Updated - <a href="">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></li>
 </ul>
 
-<p>Check out what is new in <a href="https://docs.cloudera.com/csm-operator/1.2/release-notes/topics/csm-op-rn.html#ariaid-title2">Cloudera Streams Messaging Kubernetes Operator 1.2</a></p>
-
-<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.2/overview/topics/csm-op-deployment-architecture.html">Deployment Architecture</a></p>
-
-<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.2/installation/topics/csm-op-install-overview.html">Installation Information</a></p>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.2/index.html">DOCS</a> for the CSM Operator.</p>
+<p>As always, check out the entire <a href="">DOCS</a> for the CSM Operator.</p>
 
         
       </section>
@@ -383,7 +376,7 @@ To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out th
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/cdp" class="page__taxonomy-item p-category" rel="tag">cdp</a><span class="sep">, </span>
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
     
       <a href="/tags/csm" class="page__taxonomy-item p-category" rel="tag">csm</a><span class="sep">, </span>
     
@@ -423,11 +416,11 @@ To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out th
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streams+Messaging+-+Kubernetes+Operator+1.2%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSM-Kubernetes-Operator1-3-Release%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streams+Messaging+-+Kubernetes+Operator+1.3%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Streams-Messaging-Kubernetes-Operator-1.3%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSM-Kubernetes-Operator1-3-Release%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Streams-Messaging-Kubernetes-Operator-1.3%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSM-Kubernetes-Operator1-3-Release%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Streams-Messaging-Kubernetes-Operator-1.3%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -438,7 +431,7 @@ To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out th
 ">Previous</a>
     
     
-      <a href="/blog/Cloudera-Streams-Analytics-Operator-1.3/" class="pagination--pager" title="Cloudera Streaming Analytics - Kubernetes Operator 1.2
+      <a href="/blog/Cloudera-Streams-Analytics-Kubernetes-Operator-1.2/" class="pagination--pager" title="Cloudera Streaming Analytics - Kubernetes Operator 1.2
 ">Next</a>
     
   </nav>
@@ -467,7 +460,7 @@ To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out th
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/blog/Cloudera-Streams-Analytics-Operator-1.3/" rel="permalink">Cloudera Streaming Analytics - Kubernetes Operator 1.2
+        <a href="/blog/Cloudera-Streams-Analytics-Kubernetes-Operator-1.2/" rel="permalink">Cloudera Streaming Analytics - Kubernetes Operator 1.2
 </a>
       
     </h2>
