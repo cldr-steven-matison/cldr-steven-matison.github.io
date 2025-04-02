@@ -178,4 +178,10 @@ var store = [{
         "tags": ["csa","cloudera","flink","operator"],
         "url": "/blog/Cloudera-Streams-Analytics-Kubernetes-Operator-1.2/",
         "teaser": "/assets/images/csa-architecture.png"
+      },{
+        "title": "Cloudera Flow Migration Tool - Migrate Nifi 1.0 flows to NiFi 2.0",
+        "excerpt":"The Data in Motion (DiM) team is pleased to announce the release of the Cloudera Flow Management Migration Tool 1.0.0 in Technical Preview for assistance in migrating flows from Cloudera Flow Management 2.1.7 to Cloudera Flow Management 4.0. This release is a new product offering flow migration capabilities exclusive to...","categories": ["blog"],
+        "tags": ["nifi","cloudera"],
+        "url": "/blog/Nifi-1.0-to-Nifi-2.0-Migration-Tool/",
+        "teaser": "/assets/images/nifi-logo.png"
       }]
