@@ -184,4 +184,22 @@ var store = [{
         "tags": ["nifi","cloudera"],
         "url": "/blog/Nifi-1.0-to-Nifi-2.0-Migration-Tool/",
         "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1",
+        "excerpt":"The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1. This release focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink...","categories": ["blog"],
+        "tags": ["Cloudera Streaming Analytics","flink","cloudera"],
+        "url": "/blog/CSA-1.15-Release/",
+        "teaser": "/assets/images/csa-architecture.png"
+      },{
+        "title": "Cloudera Data Flow 2.10 for Cloudera on Cloud",
+        "excerpt":"The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud. This release introduces NiFi 2 as generally available in Data Flow. Along with seamless NiFi 2 migrations, this positions Data Flow as the ideal platform to migrate, build, and deploy...","categories": ["blog"],
+        "tags": ["Cloudera Data Flow","nifi"],
+        "url": "/blog/Cloudera-DataFlow-2.10/",
+        "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "Cloudera Flow Management - Kubernetes Operator 2.10",
+        "excerpt":"The Data In Motion Team is pleased to announce the release of Cloudera Flow Management - Kubernetes Operator version 2.10. This release introduces NiFi 2 to the Cloudera Flow Management - Kubernetes Operator. In addition, it includes features that help with developer productivity, flow stability, operational overhead, and quality of...","categories": ["blog"],
+        "tags": ["cloudera","nifi","kubernetes"],
+        "url": "/blog/Cloudera-Flow-Management-Kubernetes-Operator-2.10/",
+        "teaser": "/assets/images/kubernetes-logo.png"
       }]
