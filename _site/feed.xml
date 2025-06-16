@@ -1,4 +1,141 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-05-01T09:08:55-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Flow Management - Kubernetes Operator 2.10</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-2.10/" rel="alternate" type="text/html" title="Cloudera Flow Management - Kubernetes Operator 2.10" /><published>2025-04-30T00:00:00-04:00</published><updated>2025-04-30T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Flow%20Management%20Kubernetes%20Operator%202.10</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-2.10/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of Cloudera Flow Management - Kubernetes Operator version 2.10.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-06-16T11:02:52-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Data Services On Premises 1.5.5 General Availability</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Services-1.5.5-GA/" rel="alternate" type="text/html" title="Cloudera Data Services On Premises 1.5.5 General Availability" /><published>2025-06-11T00:00:00-04:00</published><updated>2025-06-11T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Data%20Services%201.5.5%20GA</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Services-1.5.5-GA/"><![CDATA[<p>Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera AI Workbench scalability and performance improvements, Cloudera Data Engineering Access Control Lists (ACLs), Cloudera Data Warehouse Hive query history, and a significant reduction in common vulnerabilities and exposures (CVE).</p>
+
+<h1 id="key-features-and-benefits-of-this-release">Key features and benefits of this release</h1>
+
+<ul>
+  <li>Cloudera AI Workbench:
+    <ul>
+      <li>AI Studios [Technical Preview]
+        <ul>
+          <li>Low-code tools simplify the development, customization, and deployment of generative AI solutions</li>
+        </ul>
+      </li>
+      <li>Cloudera Copilot [Technical Preview]
+        <ul>
+          <li>AI-powered coding assistant for seamless integration within JupyterLab ML Runtimes</li>
+        </ul>
+      </li>
+      <li>Model Hub [Technical Preview]
+        <ul>
+          <li>Catalog of top-performing LLM and generative AI models</li>
+        </ul>
+      </li>
+      <li>Spark in Cloudera AI Improvements</li>
+      <li>User and Team Sync enabled by default</li>
+      <li>Multiple Docker registry account support</li>
+      <li>Support for Cloudera Base 7.3.1.300 for Cloudera AI Workbench-only deployments</li>
+      <li>Removal of wildcard Certificate requirement through use of Cert Manager</li>
+    </ul>
+  </li>
+  <li>Cloudera AI Inference (New Data Service):
+    <ul>
+      <li>Technical Preview of our AI Inference service for on-premises</li>
+      <li>Capability to deploy both open-source and NVIDIA NIM-based LLMs on GPUs</li>
+    </ul>
+  </li>
+  <li>Cloudera Data Engineering:
+    <ul>
+      <li>Multi-tenant / Multi-team security model (ECS only)
+        <ul>
+          <li>New User Management Service (UMS)  roles for granular access controls: administrative delegation and access restrictions per VC  (by group &amp; user)</li>
+          <li>Application artifact ACLs:  Virtual cluster artifacts including jobs, job runs, resources, sessions, and repositories are now controlled by object level access control lists</li>
+        </ul>
+      </li>
+      <li>Streamlined onboarding
+        <ul>
+          <li>Self-service user onboarding:  Users that will execute applications on the cluster, can on-board their Kerberos credentials using a new self-service workflow.  Removes the need for the previous administrative utility scripts</li>
+          <li>Removal of wild card certificates: During service and VC creation, the system will automatically set up self-signed certs, which can later be updated with custom certificates by an administrator via UI/API/CLI. Third-party certificate manager Venafi is also supported</li>
+        </ul>
+      </li>
+      <li>Improved security posture via hardened Images
+        <ul>
+          <li>Spark runtimes now use Chainguard to reduce CVEs and include upgraded components, like Python 3.10 and 3.11</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Cloudera Data Warehouse:
+    <ul>
+      <li>Hive and Impala query history
+        <ul>
+          <li>A scalable solution for storing and analyzing historical Hive query data. It captures detailed information about completed queries, such as runtime, accessed tables, errors, and metadata, and stores it in an efficient Iceberg table format</li>
+        </ul>
+      </li>
+      <li>Cloudera Data Warehouse provides you with the option to enable logging Impala queries on an existing Virtual Warehouse or while creating a new Impala Virtual Warehouse</li>
+      <li>OpenTelemetry support for Hive</li>
+      <li>Enhancements for Hue SQL AI Assistant including support for Cloudera AI Inference  connectivity, multi-database querying, and user input validation controls</li>
+    </ul>
+  </li>
+  <li>Cloudera Data Visualization:
+    <ul>
+      <li>Version 7.2.9 is now available, bringing improvements for job and user management, dataset versioning, and AI Visual creation</li>
+    </ul>
+  </li>
+  <li>Data Services Platform:
+    <ul>
+      <li>Automated certificate management via cert manager integration (ECS only)
+        <ul>
+          <li>Cert-manager is an open-source tool for Kubernetes that automates the provisioning, management, and renewal of TLS certificates. It gives customers an option to not use wildcard certificates by default and instead use their certificate issuers to provision certificates</li>
+        </ul>
+      </li>
+      <li>Istio support (ECS only)
+        <ul>
+          <li>Istio integration in Cloudera’s platform enables Cloudera Data Engineering’s ACL features as well as Cloudera AI Inferencing authorization capabilities.The Control plane uses Istio in ambient mode, while Cloudera AI and Cloudera Data Engineering are currently using Istio in sidecar mode</li>
+        </ul>
+      </li>
+      <li>Improved ECS upgrade reliability via prechecks
+        <ul>
+          <li>Host Health Status, EcsHostDnsInspection, Security Software Inspection, Control plane health check, Docker registry health check</li>
+        </ul>
+      </li>
+      <li>Better quota management and resource utilization for multi-base cluster deployment
+        <ul>
+          <li>Manage and allocate quotas: setup, at time of the service or workload, sets the logical boundaries (quotas)</li>
+          <li>Enforce quotas: applies the logical boundaries, runtime, queues new workloads that do not fit in quota</li>
+          <li>Enables multiple Base clusters to interact with a single control plane</li>
+        </ul>
+      </li>
+      <li>Cloudera support for Apache Iceberg version 1.5.2</li>
+      <li>Certifications include 7.1.9 Service Pack 1 Cumulative Hot Fix (CHF) 5, Red Hat Enterprise Linux 9.5, Openshift Container Platform 4.17, Rancher Kubernetes Engine 2 1.30</li>
+    </ul>
+  </li>
+  <li>CVEs:
+    <ul>
+      <li>91% reduction in total CVEs in those images, bringing the count down from 98,000 (in 1.5.4 Cumulative Hot Fix 1) to 8,000</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="support-matrix-and-upgrade-paths">Support Matrix and Upgrade Paths</h1>
+<p>To upgrade to the 1.5.5 release, you must ensure Cloudera Manager is upgraded to 7.13.1.300 with a supported base cluster version - 7.1.7 SP3, 7.1.9, 7.1.9 SP1. In case a customer intends to use cert manager for data services, it can only be supported via a fresh installation on 1.5.5 ECS; upgrades are not supported at this time.1.5.5 will be upgradeable from 1.5.3, 1.5.4, 1.5.4 CHF1, 1.5.4 CHF2, 1.5.4 CHF3, 1.5.4 SP1, and 1.5.4 SP2.</p>
+
+<p>For Cloudera AI Workbench-only cluster deployments, the 1.5.5 release is certified to work with Cloudera Base 7.3.1.300 release. 7.3.1 certification for other data services will follow soon.</p>
+
+<h1 id="links">Links</h1>
+<ul>
+  <li><a href="https://docs.cloudera.com/cdp-private-cloud-data-services/1.5.5/release-notes/topics/cdppvc-release-notes.html">Release notes</a></li>
+  <li><a href="https://docs.cloudera.com/cdp-private-cloud-data-services/1.5.5/release-notes/topics/cdppvc-1-5-5-Repository-Locations.html">Download</a></li>
+  <li><a href="https://supportmatrix.cloudera.com/">Support Matrix</a></li>
+  <li><a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Support lifecycle policy</a></li>
+</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><summary type="html"><![CDATA[Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera AI Workbench scalability and performance improvements, Cloudera Data Engineering Access Control Lists (ACLs), Cloudera Data Warehouse Hive query history, and a significant reduction in common vulnerabilities and exposures (CVE).]]></summary></entry><entry><title type="html">Cloudera Flow Management Migration Tool 3.0.0 for NiFi 1 to NiFi 2 migrations now GA</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Nifi-2.0-Migration-Tool-GA/" rel="alternate" type="text/html" title="Cloudera Flow Management Migration Tool 3.0.0 for NiFi 1 to NiFi 2 migrations now GA" /><published>2025-06-02T00:00:00-04:00</published><updated>2025-06-02T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Nifi%202.0%20Migration%20Tool%20GA</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Nifi-2.0-Migration-Tool-GA/"><![CDATA[<p>The Data in Motion team is pleased to announce the generally available (GA) release of Cloudera Flow Management Migration Tool 3.0.0.  This tool assists Cloudera customers in migrating from Cloudera Flow Management 2.1.7 Service Pack 2 (powered by NiFi 1) to Cloudera Flow Management 4.10.0 (powered by NiFi 2).</p>
+
+<h1 id="key-features-and-benefits-of-this-release">Key features and benefits of this release</h1>
+
+<ul>
+  <li>Streamlined NiFi 1 to NiFi 2 migrations: The Cloudera Flow Management Migration Tool dramatically simplifies migrating data flows designed for NiFi 1 to run in NiFi 2, and helps you transition to Cloudera Flow Management 4.x more efficiently.  It facilitates migrations in compliance with the NiFi 1.28-to-2.3 GA ruleset to ensure a smooth and effective migration experience, covering missing, modified, and replaced components. The tool also automates complex and repetitive tasks in updating flow configurations, reducing manual effort.</li>
+  <li>Aligned with NiFi 2 features: This command-line tool transforms variables and components to align with NiFi 2 features.</li>
+  <li>Improved flexibility: This release allows you to migrate a flow in its “flow.json.gz” form, where no unzipping/rezipping need to take place.</li>
+</ul>
+
+<h1 id="support-matrix-and-upgrade-paths">Support Matrix and Upgrade Paths</h1>
+
+<p>Cloudera Flow Management Migration Tool 3.0.0 is a standalone product that supports the conversion of flows from Cloudera Flow Management 2.1.7 Service Pack 2 to run on Cloudera Flow Management 4.10.0.0 instances. This release supports on-premises environments.</p>
+
+<h1 id="links">Links</h1>
+<ul>
+  <li><a href="https://docs.cloudera.com/cfm/4.10.0/cfm-migration-tool/topics/cfm-mt-release-notes.html">Release notes</a></li>
+  <li><a href="https://archive.cloudera.com/p/cfm-migration-tool/">Download</a></li>
+</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><category term="cloudera" /><summary type="html"><![CDATA[The Data in Motion team is pleased to announce the generally available (GA) release of Cloudera Flow Management Migration Tool 3.0.0. This tool assists Cloudera customers in migrating from Cloudera Flow Management 2.1.7 Service Pack 2 (powered by NiFi 1) to Cloudera Flow Management 4.10.0 (powered by NiFi 2).]]></summary></entry><entry><title type="html">Cloudera Flow Management - Kubernetes Operator 2.10</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-2.10/" rel="alternate" type="text/html" title="Cloudera Flow Management - Kubernetes Operator 2.10" /><published>2025-04-30T00:00:00-04:00</published><updated>2025-04-30T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Flow%20Management%20Kubernetes%20Operator%202.10</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-2.10/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of Cloudera Flow Management - Kubernetes Operator version 2.10.</p>
 
 <p>This release introduces NiFi 2 to the Cloudera Flow Management - Kubernetes Operator. In addition, it includes features that help with developer productivity, flow stability, operational overhead, and quality of life.</p>
 
@@ -597,52 +734,4 @@ Cloudera recommends that you use this feature over the Kafka Connect REST API to
 
 <p>Not bad, I now have an example to share with my customer, and I can modify my demos and hands on labs to use this processor instead of ExecuteScript.</p>
 
-<p>Check out the Cloudera DataFlow <a href="https://docs.cloudera.com/dataflow/cloud/custom-processors/topics/cdf-bp-custom-python-processors.html">DOCS</a> for custom python processors.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="dataflow" /><category term="nifi" /><summary type="html"><![CDATA[Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor. This customer already has deep experience with nifi, python, and even custom java processors. As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors. I also have not had to manage any nifi file systems behind these custom processors. This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience. Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code. Not anymore with NiFi 2.0…]]></summary></entry><entry><title type="html">Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-4.0.0/" rel="alternate" type="text/html" title="Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1" /><published>2025-01-21T00:00:00-05:00</published><updated>2025-01-21T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-4.0.0</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-4.0.0/"><![CDATA[<p>The Data in Motion (DiM) team is pleased to announce the release of Cloudera Flow Management 4.0.0 as a Technical Preview for running Apache NiFi 2.0 with Cloudera Manager on Cloudera 7.1.9 and 7.3.1 Private Cloud Base clusters (all service packs).</p>
-
-<p>This release offers a number of new features and improves stability and security through bug fixes and upgraded dependencies.</p>
-
-<h1 id="key-features-for-this-release">Key features for this release</h1>
-<ul>
-  <li>NiFi 2.0: Apache NiFi 2.0 comes with a number of structural and security improvements that allow for more robust deployments as well as upgraded libraries providing several security enhancements and addressing many common vulnerabilities.</li>
-  <li>Native Python processor development: NiFi 2.0 provides a Python SDK for which processors can be rapidly developed in Python and deployed in flows. Some common document parsing processors written in Python are included in the release.</li>
-  <li>Flow Analysis Rules Engine: NiFi 2.0 provides a rules engine for developing flow analysis rules that recommend and enforce Best Practices for flow design. CFM 4.0 provides several Flow Analysis Rules for such aspects as thread management and recommended components.</li>
-  <li>Critical Component Support: CFM 4 includes several components that were removed in Apache NiFi 2.0 such as Hive, Iceberg, Ranger, and Kudu. CFM 4.0 continues to support all aspects of the Cloudera Data Platform (CDP), and going forward, Cloudera’s distribution of NiFi 2.0 will be the only possibility to get access to and support for these components.</li>
-  <li>Updates and Patches: And, as usual, bug fixes, security patches, performance improvements, etc.</li>
-</ul>
-
-<h1 id="support-matrix-and-upgrade-paths">Support Matrix and Upgrade Paths</h1>
-<p>Users will be able in the future to exercise the upcoming migration tool to convert existing flows to run on CFM 4 instances. CFM 4 is supported on CDP 7.1.9 and CDP 7.3.1.</p>
-
-<h1 id="use-cases">Use Cases</h1>
-
-<p>Leverage NiFi 2.0 capabilities with Cloudera enhancements:</p>
-<ul>
-  <li>Try out new NiFi 2 capabilities with Cloudera’s first NiFi 2 based on-prem release (in Technical Preview)</li>
-  <li>Flow administrators can enforce Best Practices for flow designers to ensure robust, reliable solutions</li>
-  <li>Create RAG pipelines for GenAI, Data Engineering, and Machine Learning model scoring using new processors and integrations</li>
-</ul>
-
-<p>Check out the <a href="https://docs.cloudera.com/cfm/4.0.0/release-notes/topics/cfm-whats-new.html">Release Notes</a></p>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/cfm/4.0.0/index.html">DOCS</a> for the Cloudera Flow Management.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><summary type="html"><![CDATA[The Data in Motion (DiM) team is pleased to announce the release of Cloudera Flow Management 4.0.0 as a Technical Preview for running Apache NiFi 2.0 with Cloudera Manager on Cloudera 7.1.9 and 7.3.1 Private Cloud Base clusters (all service packs).]]></summary></entry><entry><title type="html">Cloudera Migration Assistant 3.5.0</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Migration-Assistant-3.5.0/" rel="alternate" type="text/html" title="Cloudera Migration Assistant 3.5.0" /><published>2025-01-16T00:00:00-05:00</published><updated>2025-01-16T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Migration-Assistant%203.5.0</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Migration-Assistant-3.5.0/"><![CDATA[<p>Cloudera is excited to announce the General Availability of Cloudera Migration Assistant with the release of the 3.5.0 version. Cloudera’s go-to migration tool now supports migrating Spark2 and Spark3 workloads from Cloudera on premises to Cloudera on cloud, as well as automated execution of migrated workloads with Livy, for a seamless workload migration audit experience.</p>
-
-<p>Cloudera’s vision is to make Cloudera Migration Assistant the de facto standard tool for cloud migration to Cloudera on cloud, enabling a streamlined, assisted, automated experience.</p>
-
-<h1 id="key-features-and-capabilities">Key Features and Capabilities:</h1>
-
-<ul>
-  <li>Redesigned Migration View: The main user interface of Cloudera Migration Assistant got a significant update for easier navigation throughout the migration process.</li>
-  <li>Automatic Discovery: Cloudera Migration Assistant detects HDFS files as well as HMS and HBase tables in source clusters for a seamless migration setup.</li>
-  <li>Workload Identification: Supports migration of SQL, Oozie, and Spark workloads, ensuring comprehensive coverage.</li>
-  <li>Dependency Mapping and Planning: Assists in identifying dependencies and planning migration strategies with precision.</li>
-  <li>Controlled Execution: Enables managed and observable execution of complex migrations for greater transparency.</li>
-  <li>Reduced Manual Effort: Streamlined automation reduces the need for manual intervention, increasing efficiency.</li>
-</ul>
-
-<p>Version 3.5.0 introduces new functionalities, implements a more modern architecture, increases product security posture, and adopts a streamlined development process to deliver updates to market more quickly. For organizations looking to migrate from legacy Cloudera Distribution of Hadoop (CDH) or Hortonworks Data Platform (HDP) deployments, version 3.4.1 remains the Cloudera Migration Assistant of choice.</p>
-
-<p>To further explore Cloudera Migration Assistant, check out the resources below.</p>
-
-<p>Check out the <a href="https://docs.cloudera.com/cdp-public-cloud/cloud/cma-cdh-cdppc-migration/topics/cma-tool-overview.html#ariaid-title3">Release Notes</a></p>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/cdp-public-cloud/cloud/cma-cdh-cdppc-migration/topics/cma-tool-overview.html#unique_448263855">DOCS</a> for the Cloudera Migration Assistant.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="spark" /><category term="kubernetes" /><category term="cdp" /><summary type="html"><![CDATA[Cloudera is excited to announce the General Availability of Cloudera Migration Assistant with the release of the 3.5.0 version. Cloudera’s go-to migration tool now supports migrating Spark2 and Spark3 workloads from Cloudera on premises to Cloudera on cloud, as well as automated execution of migrated workloads with Livy, for a seamless workload migration audit experience.]]></summary></entry></feed>
+<p>Check out the Cloudera DataFlow <a href="https://docs.cloudera.com/dataflow/cloud/custom-processors/topics/cdf-bp-custom-python-processors.html">DOCS</a> for custom python processors.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="dataflow" /><category term="nifi" /><summary type="html"><![CDATA[Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor. This customer already has deep experience with nifi, python, and even custom java processors. As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors. I also have not had to manage any nifi file systems behind these custom processors. This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience. Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code. Not anymore with NiFi 2.0…]]></summary></entry></feed>

@@ -202,4 +202,16 @@ var store = [{
         "tags": ["cloudera","nifi","kubernetes"],
         "url": "/blog/Cloudera-Flow-Management-Kubernetes-Operator-2.10/",
         "teaser": "/assets/images/kubernetes-logo.png"
+      },{
+        "title": "Cloudera Flow Management Migration Tool 3.0.0 for NiFi 1 to NiFi 2 migrations now GA",
+        "excerpt":"The Data in Motion team is pleased to announce the generally available (GA) release of Cloudera Flow Management Migration Tool 3.0.0. This tool assists Cloudera customers in migrating from Cloudera Flow Management 2.1.7 Service Pack 2 (powered by NiFi 1) to Cloudera Flow Management 4.10.0 (powered by NiFi 2). Key...","categories": ["blog"],
+        "tags": ["nifi","cloudera"],
+        "url": "/blog/Cloudera-Nifi-2.0-Migration-Tool-GA/",
+        "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "Cloudera Data Services On Premises 1.5.5 General Availability",
+        "excerpt":"Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera...","categories": ["blog"],
+        "tags": ["cloudera"],
+        "url": "/blog/Cloudera-Data-Services-1.5.5-GA/",
+        "teaser": "/assets/images/Cloudera-Data-Platform.png"
       }]
