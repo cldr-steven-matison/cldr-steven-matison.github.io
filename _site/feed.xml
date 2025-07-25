@@ -1,4 +1,205 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-06-16T11:02:52-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Data Services On Premises 1.5.5 General Availability</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Services-1.5.5-GA/" rel="alternate" type="text/html" title="Cloudera Data Services On Premises 1.5.5 General Availability" /><published>2025-06-11T00:00:00-04:00</published><updated>2025-06-11T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Data%20Services%201.5.5%20GA</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Services-1.5.5-GA/"><![CDATA[<p>Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera AI Workbench scalability and performance improvements, Cloudera Data Engineering Access Control Lists (ACLs), Cloudera Data Warehouse Hive query history, and a significant reduction in common vulnerabilities and exposures (CVE).</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-07-25T08:43:36-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.4</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.4" /><published>2025-07-24T00:00:00-04:00</published><updated>2025-07-24T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Kubernetes%20Operator%201.4</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/"><![CDATA[<p>The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful new capabilities.</p>
+
+<h1 id="release-highlights">Release Highlights</h1>
+
+<h2 id="introducing-cloudera-surveyor-your-new-go-to-for-seamless-kafka-management-on-kubernetes">Introducing Cloudera Surveyor: Your New Go-To for Seamless Kafka Management on Kubernetes</h2>
+<p>Cloudera Surveyor is a brand-new, intuitive graphical interface built to streamline the monitoring and management of your Apache Kafka clusters running on Kubernetes. As a core component delivered with Cloudera Streams Messaging - Kubernetes Operator 1.4, Surveyor empowers you with:</p>
+
+<ul>
+  <li>Effortless Management: Move beyond the command line with a modern, easy-to-use UI for all your Kafka operations.</li>
+  <li>Multi-Cluster Visibility: Manage and monitor multiple Kafka clusters from a single, centralized console.</li>
+  <li>Actionable Insights: Get real-time health and performance metrics that help you quickly identify and resolve issues.</li>
+  <li>Enhanced Security: Benefit from built-in TLS, robust LDAP authentication, and enforcement of Kafka ACLs.</li>
+  <li>Enterprise Scalability: Designed to handle large-scale deployments, Surveyor scales to manage hundreds of Kafka clusters, brokers, and topics.</li>
+  <li>Broad Kafka Compatibility: Manage diverse Kafka deployments consistently across on-premises, cloud, or Kubernetes environments.</li>
+</ul>
+
+<h2 id="cloudera-streams-messaging---kubernetes-operator-14-the-foundation-for-your-kubernetes-native-kafka">Cloudera Streams Messaging - Kubernetes Operator 1.4: The Foundation for Your Kubernetes-Native Kafka</h2>
+<p>Cloudera Streams Messaging - Kubernetes Operator 1.4 provides the robust and reliable foundation necessary for deploying and managing Kafka clusters, including the new Cloudera Surveyor. This update brings continued stability and improvements to your containerized Kafka deployments, ensuring a seamless experience for upgrades and operations within your Kubernetes environments.</p>
+
+<h2 id="unified-data-in-motion-portfolio-beyond-kafka">Unified Data In Motion Portfolio: Beyond Kafka</h2>
+<p>This launch further strengthens Cloudera’s comprehensive Data In Motion portfolio. While Cloudera Streams Messaging - Kubernetes Operator and Cloudera Surveyor significantly enhance your Kafka experience, our solutions span the entire real-time data lifecycle. Our portfolio also includes powerful offerings for data ingestion and transformation with Apache NiFi, and advanced stream processing and analytics with Apache Flink, providing a complete ecosystem for your event-driven architectures.</p>
+
+<h2 id="who-benefits-from-cloudera-surveyor-and-when">Who Benefits from Cloudera Surveyor and When?</h2>
+<p>Cloudera Surveyor is designed to bring clarity, control, and efficiency to anyone managing Apache Kafka on Kubernetes, whether you’re an administrator, a DevOps engineer, or a developer.</p>
+
+<h3 id="for-kafka-administrators--sres-site-reliability-engineers">For Kafka Administrators &amp; SREs (Site Reliability Engineers):</h3>
+<ul>
+  <li>Daily Operations &amp; Health Monitoring: Easily oversee the health of all your Kafka clusters, brokers, and topics from a single dashboard. Quickly spot anomalies, monitor resource utilization, and ensure the continuous availability of your streaming infrastructure.</li>
+  <li>Proactive Troubleshooting: When issues arise, drill down into performance metrics, consumer group lag, and topic details with an intuitive UI. Identify bottlenecks, misconfigurations, or problematic consumers faster, significantly reducing mean time to resolution (MTTR).</li>
+  <li>Scaling &amp; Capacity Planning: Gain insights into topic growth, partition distribution, and broker load to inform your scaling decisions and optimize resource allocation across your Kubernetes environment.</li>
+</ul>
+
+<h3 id="for-devops--platform-engineers">For DevOps &amp; Platform Engineers:</h3>
+<ul>
+  <li>Streamlined Deployments &amp; Upgrades: While Cloudera Streams Messaging - Kubernetes Operator handles the heavy lifting, Surveyor provides immediate visual confirmation of your deployed Kafka clusters, enabling quick validation post-deployment or upgrade.</li>
+  <li>Consistent Multi-Cluster Management: For organizations running numerous Kafka clusters (e.g., for different departments, environments, or applications), Surveyor offers a centralized management plane, drastically simplifying oversight and ensuring consistent configurations and security policies.</li>
+</ul>
+
+<h3 id="for-developers-working-with-kafka">For Developers working with Kafka:</h3>
+<ul>
+  <li>Understanding Topic &amp; Consumer Behavior: Quickly inspect topics, view message counts, and monitor consumer group progress. This is invaluable for debugging applications, verifying data flow, and understanding how new features or changes impact the Kafka ecosystem during development and testing phases.</li>
+  <li>Security &amp; Access Management: Easily review and manage Kafka ACLs directly through the UI, ensuring that applications and users have appropriate access to topics and consumer groups, without resorting to complex command-line operations.</li>
+</ul>
+
+<h2 id="resources">Resources</h2>
+<p>Ready to explore Cloudera Streams Messaging - Kubernetes Operator 1.4 and Cloudera Surveyor? Find out more here:</p>
+
+<p>New - <a href="https://docs.cloudera.com/csm-operator/1.4/surveyor-overview/topics/csm-op-surveyor-overview.html">Cloudera Surveyor Documentation</a></p>
+
+<p>New - <a href="https://docs.cloudera.com/csm-operator/1.4/release-notes/topics/csm-op-rn.html#concept_ksn_nwn_cbc">Cloudera Streams Messaging - Kubernetes Operator 1.4 Release Notes</a></p>
+
+<p><a href="https://www.cloudera.com/products/stream-processing.html">Cloudera Streaming Product Page</a></p>
+
+<p><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</p>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.4/index.html">DOCS</a> for the CSM Operator.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful new capabilities.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics - Kubernetes Operator 1.3</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics - Kubernetes Operator 1.3" /><published>2025-07-22T00:00:00-04:00</published><updated>2025-07-22T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Analytics%20-%20Kubernetes%20Operator%201.3</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.</p>
+
+<p>This release includes rebases to Apache Flink 1.20 and Apache Flink Kubernetes Operator 1.11.0. Other changes and updates are focused on enhancing security, usability, and making the product more robust.</p>
+
+<h3 id="release-highlights">Release Highlights</h3>
+
+<ul>
+  <li>
+    <p><strong>Rebase to Flink 1.20</strong>
+  For more information, see the <a href="https://flink.apache.org/news/2024/07/22/flink-1.20-release.html">Flink 1.20 Release Notes</a> and the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Flink 1.20 Documentation</a>.</p>
+  </li>
+  <li>
+    <p><strong>Rebase to Flink Kubernetes Operator 1.11.0</strong>
+  For more information, see the <a href="https://github.com/apache/flink-kubernetes-operator/releases/tag/v1.11.0">Flink Kubernetes Operator 1.11.0 Release Notes</a> and the <a href="https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-release-1.11/">Flink Kubernetes Operator 1.11.0 Documentation</a>.</p>
+  </li>
+  <li>
+    <p><strong>Flink OpenTelemetry Metrics Reporter (Technical Preview)</strong>
+  The OpenTelemetry metrics reporter is now included, in Tech Preview, in the operator image. It makes it easier and more efficient to aggregate job metrics to a central service like Prometheus or any OpenTelemetry-compatible service, and aggregate metrics using open standards. To learn more about using the OpenTelemetry reporter with Flink, see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/deployment/metric_reporters/opentelemetry/">Monitoring Flink with OpenTelemetry</a>.</p>
+  </li>
+  <li>
+    <p><strong>Flink image with Hadoop, Hive, Iceberg, and Kudu connectors</strong>
+  Cloudera now offers alternative images for Cloudera Streaming Analytics - Kubernetes Operator that include popular connectors and their dependencies. This makes it easier to launch jobs right after installation and saves time because there’s no need to create custom images. For more information, refer to the Operator’s <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/concepts/csa-k8s-operator-images.html">Documentation</a>.</p>
+  </li>
+  <li>
+    <p><strong>Basic authentication for Flink UI and rest API</strong>
+  The Operator now includes the Flink Basic Authentication Handler, enabling users to secure their deployments without the need for external or third-party JARs.</p>
+  </li>
+</ul>
+
+<p>Please see the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/release-notes/csa-k8s-operator-rn.html">Release Notes</a> for the complete list of fixes and improvements.</p>
+
+<h3 id="getting-the-new-release">Getting the New Release</h3>
+
+<ul>
+  <li>To upgrade to Cloudera Streaming Analytics - Kubernetes Operator 1.3, check out the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/installation/csa-k8s-operator-upgrade.html">Upgrade Guide</a>.</li>
+  <li>If you are installing this operator for the first time, consult the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/installation/csa-k8s-operator-install.html">Installation Guide</a>.</li>
+</ul>
+
+<h3 id="use-cases">Use Cases</h3>
+
+<ul>
+  <li><strong>Event-Driven Applications:</strong> Stateful applications that ingest events from one or more event streams and react to incoming events by triggering computations, state updates, or external actions. Apache Flink excels in handling the concept of time and state for these applications, and can scale to manage very large data volumes (up to several terabytes). It has a rich set of APIs, ranging from low-level controls to high-level functionality, like Flink SQL, enabling developers to choose the most suitable options for the implementation of advanced business logic. One of Apache Flink’s most popular features for event-driven applications is its support for savepoints. A savepoint is a consistent state image that can be used as a starting point for compatible applications. With a savepoint, an application can be updated or adapt its scale, or multiple versions of an application can be started for A/B testing.
+  <strong>Examples:</strong>
+    <ul>
+      <li>Fraud detection</li>
+      <li>Anomaly detection</li>
+      <li>Rule-based alerting</li>
+      <li>Business process monitoring</li>
+      <li>Web application (social network)</li>
+    </ul>
+  </li>
+  <li><strong>Data Analytics Applications:</strong> With a sophisticated stream processing engine, analytics can be performed in real time. Streaming queries or applications ingest real-time event streams and continuously produce and update results as events are consumed. The results are written to an external database or maintained as internal state. A dashboard application can read the latest results from the external database or directly query the internal state of the application. Apache Flink supports streaming as well as batch analytical applications.
+  <strong>Examples:</strong>
+    <ul>
+      <li>Quality monitoring of telco networks</li>
+      <li>Analysis of product updates and experiment evaluation in mobile applications</li>
+      <li>Ad-hoc analysis of live data in consumer technology</li>
+      <li>Large-scale graph analysis</li>
+    </ul>
+  </li>
+  <li><strong>Data Pipeline Applications:</strong> Streaming data pipelines serve a similar purpose as Extract-Transform-Load (ETL) jobs. They transform and enrich data and can move it from one storage system to another. However, they operate in a continuous streaming mode instead of being periodically triggered. Hence, they can read records from sources that continuously produce data and move it with low latency to their destination.
+  <strong>Examples:</strong>
+    <ul>
+      <li>Real-time search index building in e-commerce</li>
+      <li>Continuous ETL in e-commerce</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="resources">Resources</h3>
+
+<ul>
+  <li><a href="https://www.cloudera.com/products/streaming-analytics.html">New - Cloudera Streaming Analytics Community Page</a></li>
+  <li><a href="https://www.cloudera.com/products/streaming-analytics/kubernetes-operator.html">New - Cloudera Streaming Analytics - Kubernetes Operator Product Page</a></li>
+  <li><a href="https://blog.cloudera.com/cloudera-streaming-analytics-kubernetes-operator-1-3-release/">New - Cloudera Streaming Analytics - Kubernetes Operator 1.3 Blog Post</a> (to share)</li>
+  <li><a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/index.html">Updated - Cloudera Streaming Analytics - Kubernetes Operator Documentation</a></li>
+  <li><a href="https://www.cloudera.com/webinars/streaming-analytics-overview.html">Cloudera Streaming Analytics Overview (webinar recording)</a></li>
+</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><category term="kubernetes" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.]]></summary></entry><entry><title type="html">Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-2.2.9-General-Availability/" rel="alternate" type="text/html" title="Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400" /><published>2025-07-18T00:00:00-04:00</published><updated>2025-07-18T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-2.2.9%20General%20Availability</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-2.2.9-General-Availability/"><![CDATA[<p>The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 2.2.9 supporting Apache NiFi 2.3.0 and 1.28.1 for Cloudera Data Platform 7.3.1.400.</p>
+
+<p>This release offers a number of new features and improvements as well as upgraded dependencies.</p>
+
+<h3 id="key-features-for-this-release">Key features for this release</h3>
+
+<ul>
+  <li><strong>NiFi 2.3:</strong> Cloudera Flow Management 2.2.9 for DataHub contains an image based on Apache NiFi 2.3.0 and adds several new features not available in previous versions of Apache NiFi.
+    <ul>
+      <li><strong>New Features and Components in Apache NiFi 2.3:</strong>
+        <ul>
+          <li>Support for copying and pasting flow definitions between separate NiFi deployments</li>
+          <li>Several new processors integrating with Box, allowing users to leverage Box as a cloud storage solution</li>
+          <li>GetS3ObjectTags - Retrieves object tags for a file in S3</li>
+          <li>PEMEncodedSSLContextProvider - an SSLContext Provider configurable using PEM Private Key and Certificate files, providing a more secure solution for TLS-based connections</li>
+          <li>StandardDatabaseDialectService - A controller service to generate SQL statements for the specified database dialect (MySQL, Oracle, e.g.), providing a simpler approach for configuring database-related processors to support various SQL dialects</li>
+        </ul>
+      </li>
+      <li><strong>New Components in Cloudera Flow Management 2.2.9 for DataHub (based on Apache NiFi 2.3.0):</strong>
+        <ul>
+          <li>SawmillTransformRecord and SawmillTransformJSON - Uses the Sawmill transformation DSL to transform incoming FlowFiles, providing an additional and powerful method to transform FlowFile content</li>
+          <li>New controller services providing better integration with Cloudera Flow Management Registry</li>
+          <li>PhoenixThickConnectionPool and PhoenixThinConnectionPool - Database Connection Pool controller services integrating with Phoenix (SQL on HBase) either using the thin or thick driver (both included), enabling more connections from NiFi, such as to Cloudera Operational Database</li>
+          <li>RESTCatalogService (in Technical Preview) - Catalog controller service for integrating with external REST-based Iceberg catalogs such as Apache Polaris</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>New GenAI Python Processors:</strong> Cloudera Flow Management 2.2.9 for DataHub adds four new Python processors to help develop RAG pipelines. PromptClaude, TokenCount, PromptAzureOpenAI, and PromptOpenAI are included in the release. For the associated applications, users can design a full RAG pipeline.</p>
+  </li>
+  <li>
+    <p><strong>New Flow Analysis Rules:</strong> Cloudera Flow Management 2.2.9 for DataHub adds two new Flow Analysis Rules: RequireMergeBeforePutIceberg and RestrictFlowFileExpiration. The former ensures FlowFiles will not be too small as to affect the performance of Iceberg; the latter restricts the minimum time for a FlowFile to expire in the system and be removed, which helps prevent data loss if FlowFiles remain idle in a connection past the specified threshold.</p>
+  </li>
+  <li>
+    <p><strong>Critical Component Support:</strong> CFM 2.2.9 includes the Solr, Spark, and Elasticsearch Beats components that were removed in Apache NiFi 2.0. For users with existing flows that use these, or looking to take advantage of them in new flows, Cloudera’s distribution of NiFi 2.0 will be the only way to gain access to and support for these components.</p>
+  </li>
+  <li><strong>Updates and Patches:</strong> For additional stability, performance, and security.</li>
+</ul>
+
+<h3 id="support-matrix-and-upgrade-paths">Support Matrix and Upgrade Paths</h3>
+
+<p>To upgrade, users should:</p>
+
+<ol>
+  <li>Upgrade their CFM DataHubs to Cloudera Flow Management 2.2.9 (based on Apache NiFi 1.28.1) first</li>
+  <li>Then utilize the Cloudera Flow Management Migration tool to convert existing Cloudera Flow Management flows to run on Cloudera Flow Management 2.2.9 (based on Apache NiFi 2.3.0) instances.</li>
+</ol>
+
+<p>Cloudera Flow Management 2.2.9 for DataHub is supported on Cloudera Cloudera Data Platform 7.3.1 Service Pack 2. In-place upgrades from Cloudera Flow Management for DataHub (based on Apache NiFi 1.x) to Cloudera Flow Management for DataHub (based on Apache NiFi 2.x) are not supported; flows must be migrated then transferred to the Cloudera Flow Management 4 instance(s).</p>
+
+<h3 id="use-cases">Use Cases</h3>
+
+<p>Leverage NiFi 2.x capabilities with Cloudera enhancements:</p>
+
+<ul>
+  <li>Exercise NiFi 2 capabilities in production with Cloudera’s first NiFi 2 based Generally Available release for DataHub.</li>
+  <li>Flow administrators can enforce best practices for flow designers to ensure robust, reliable solutions using the Flow Analysis Rules Engine and Cloudera-provided flow analysis rules.</li>
+  <li>Create RAG pipelines for GenAI, Data Engineering, and Machine Learning model scoring using new processors and integrations.</li>
+</ul>
+
+<h3 id="links">Links</h3>
+
+<p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new.html">Release Notes</a></p>
+
+<p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new-flow-management.html">What’s New with Nifi 1</a></p>
+
+<p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new-flow-management-nifi2.html">What’s New with  Nifi 2</a></p>
+
+<p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new-edge-management.html">What’s New with MiNiFi</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><summary type="html"><![CDATA[The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 2.2.9 supporting Apache NiFi 2.3.0 and 1.28.1 for Cloudera Data Platform 7.3.1.400.]]></summary></entry><entry><title type="html">Cloudera Data Services On Premises 1.5.5 General Availability</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Services-1.5.5-GA/" rel="alternate" type="text/html" title="Cloudera Data Services On Premises 1.5.5 General Availability" /><published>2025-06-11T00:00:00-04:00</published><updated>2025-06-11T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Data%20Services%201.5.5%20GA</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Services-1.5.5-GA/"><![CDATA[<p>Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera AI Workbench scalability and performance improvements, Cloudera Data Engineering Access Control Lists (ACLs), Cloudera Data Warehouse Hive query history, and a significant reduction in common vulnerabilities and exposures (CVE).</p>
 
 <h1 id="key-features-and-benefits-of-this-release">Key features and benefits of this release</h1>
 
@@ -164,7 +365,36 @@
 <h2 id="links">Links</h2>
 <p><a href="https://docs.cloudera.com/cfm-operator/2.9.0/release-notes/topics/cfm-op-whats-new.html">Release notes</a></p>
 
-<p><a href="https://docs.cloudera.com/cfm-operator/2.9.0/index.html">Documentation</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="kubernetes" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Flow Management - Kubernetes Operator version 2.10.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1</title><link href="https://cldr-steven-matison.github.io//blog/CSA-1.15-Release/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1" /><published>2025-04-30T00:00:00-04:00</published><updated>2025-04-30T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/CSA-1.15-Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CSA-1.15-Release/"><![CDATA[<p>The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera  7.3.1. This release  focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink 1.20.1.</p>
+<p><a href="https://docs.cloudera.com/cfm-operator/2.9.0/index.html">Documentation</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="kubernetes" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Flow Management - Kubernetes Operator version 2.10.]]></summary></entry><entry><title type="html">Cloudera Data Flow 2.10 for Cloudera on Cloud</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-DataFlow-2.10/" rel="alternate" type="text/html" title="Cloudera Data Flow 2.10 for Cloudera on Cloud" /><published>2025-04-30T00:00:00-04:00</published><updated>2025-04-30T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20DataFlow%202.10</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-DataFlow-2.10/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.</p>
+
+<p>This release introduces NiFi 2 as generally available in Data Flow. Along with seamless NiFi 2 migrations, this  positions Data Flow as the ideal platform to migrate, build, and deploy NiFi 2 flows with minimal operational effort. In addition, it includes features that improve developer productivity, operational costs and security.</p>
+
+<h2 id="release-highlights">Release Highlights</h2>
+<ul>
+  <li>Build and deploy on NiFi 2: Users can now develop flows in the Flow Designer as NiFi 2.3 flows by default. NiFi 2.3 will also be available as the NiFi 2 runtime for Flow Deployments. This marks the general availability of NiFi 2 in Data Flow.</li>
+  <li>Time and cost savings on NiFi 2 migrations: Self-service migration is powered by Data Flow Catalog and Flow Designer. Users can organize NiFi 1 flows in Catalog, start migrations with one click, and make any required changes in Flow Designer. A comprehensive visual migration report clearly highlights items that require manual updates, while enabling users to effectively keep track of their progress.</li>
+  <li>Improved developer productivity: Users can accelerate deployment processes by importing and referencing Shared Parameter Groups during deployment. This streamlined workflow significantly reduces development and deployment complexity and accelerates time to value for users by eliminating manual copy&amp;paste of parameter values.</li>
+  <li>Improved cost efficiency: Users can now specify tailored storage capacity, IOPS, and throughput sizes  for their NiFi repositories, making smaller deployments more cost-efficient.</li>
+  <li>Strengthened security: Collections enhance security by enabling precise role based access control for cataloged flows. Users can organize cataloged flows into Collections and tightly manage user access to each Collection.</li>
+  <li>Secured inbound connections: Users can specify trusted IP addresses for flows with inbound connections, which will limit traffic to only the specified IP addresses.</li>
+  <li>Better notifications: Users can now stay better informed with enhanced, customizable notifications:
+    <ul>
+      <li>Subscribe to deployment-specific alerts and customize notifications by event severity.</li>
+      <li>Set up KPI-level subscriptions and notifications, including a URL that directs you to the affected NiFi component on the NiFi Canvas.</li>
+      <li>Create distribution lists to ensure team-wide notification delivery.</li>
+      <li>Integrate notifications directly with Slack (Technical Preview).</li>
+    </ul>
+  </li>
+  <li>Platform upgrades: Added support for Kubernetes 1.31 and NiFi 1.28.</li>
+</ul>
+
+<h2 id="upgrading-to-the-new-release">Upgrading to the New Release</h2>
+<p>Customers can perform an in-place upgrade from supported Cloudera Data Flow  versions to 2.10. Alternatively, disabling and re-enabling an existing Data Flow environment will result in the re-enabled environment running the latest version.</p>
+
+<h2 id="links">Links</h2>
+<p><a href="https://docs.cloudera.com/dataflow/cloud/release-notes/topics/cdf-whats-new.html">Release notes</a></p>
+
+<p><a href="https://docs.cloudera.com/dataflow/cloud/index.html">Documentation</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Data Flow" /><category term="nifi" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1</title><link href="https://cldr-steven-matison.github.io//blog/CSA-1.15-Release/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1" /><published>2025-04-30T00:00:00-04:00</published><updated>2025-04-30T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/CSA-1.15-Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CSA-1.15-Release/"><![CDATA[<p>The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera  7.3.1. This release  focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink 1.20.1.</p>
 
 <p>See <a href="https://docs.cloudera.com/csa/latest/release-notes/topics/csa-what-new.html">What’s New</a>.</p>
 
@@ -262,36 +492,7 @@
 
 <p><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</p>
 
-<p><a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><summary type="html"><![CDATA[The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1. This release focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink 1.20.1.]]></summary></entry><entry><title type="html">Cloudera Data Flow 2.10 for Cloudera on Cloud</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-DataFlow-2.10/" rel="alternate" type="text/html" title="Cloudera Data Flow 2.10 for Cloudera on Cloud" /><published>2025-04-30T00:00:00-04:00</published><updated>2025-04-30T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20DataFlow%202.10</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-DataFlow-2.10/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.</p>
-
-<p>This release introduces NiFi 2 as generally available in Data Flow. Along with seamless NiFi 2 migrations, this  positions Data Flow as the ideal platform to migrate, build, and deploy NiFi 2 flows with minimal operational effort. In addition, it includes features that improve developer productivity, operational costs and security.</p>
-
-<h2 id="release-highlights">Release Highlights</h2>
-<ul>
-  <li>Build and deploy on NiFi 2: Users can now develop flows in the Flow Designer as NiFi 2.3 flows by default. NiFi 2.3 will also be available as the NiFi 2 runtime for Flow Deployments. This marks the general availability of NiFi 2 in Data Flow.</li>
-  <li>Time and cost savings on NiFi 2 migrations: Self-service migration is powered by Data Flow Catalog and Flow Designer. Users can organize NiFi 1 flows in Catalog, start migrations with one click, and make any required changes in Flow Designer. A comprehensive visual migration report clearly highlights items that require manual updates, while enabling users to effectively keep track of their progress.</li>
-  <li>Improved developer productivity: Users can accelerate deployment processes by importing and referencing Shared Parameter Groups during deployment. This streamlined workflow significantly reduces development and deployment complexity and accelerates time to value for users by eliminating manual copy&amp;paste of parameter values.</li>
-  <li>Improved cost efficiency: Users can now specify tailored storage capacity, IOPS, and throughput sizes  for their NiFi repositories, making smaller deployments more cost-efficient.</li>
-  <li>Strengthened security: Collections enhance security by enabling precise role based access control for cataloged flows. Users can organize cataloged flows into Collections and tightly manage user access to each Collection.</li>
-  <li>Secured inbound connections: Users can specify trusted IP addresses for flows with inbound connections, which will limit traffic to only the specified IP addresses.</li>
-  <li>Better notifications: Users can now stay better informed with enhanced, customizable notifications:
-    <ul>
-      <li>Subscribe to deployment-specific alerts and customize notifications by event severity.</li>
-      <li>Set up KPI-level subscriptions and notifications, including a URL that directs you to the affected NiFi component on the NiFi Canvas.</li>
-      <li>Create distribution lists to ensure team-wide notification delivery.</li>
-      <li>Integrate notifications directly with Slack (Technical Preview).</li>
-    </ul>
-  </li>
-  <li>Platform upgrades: Added support for Kubernetes 1.31 and NiFi 1.28.</li>
-</ul>
-
-<h2 id="upgrading-to-the-new-release">Upgrading to the New Release</h2>
-<p>Customers can perform an in-place upgrade from supported Cloudera Data Flow  versions to 2.10. Alternatively, disabling and re-enabling an existing Data Flow environment will result in the re-enabled environment running the latest version.</p>
-
-<h2 id="links">Links</h2>
-<p><a href="https://docs.cloudera.com/dataflow/cloud/release-notes/topics/cdf-whats-new.html">Release notes</a></p>
-
-<p><a href="https://docs.cloudera.com/dataflow/cloud/index.html">Documentation</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Data Flow" /><category term="nifi" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.]]></summary></entry><entry><title type="html">Cloudera Flow Migration Tool - Migrate Nifi 1.0 flows to NiFi 2.0</title><link href="https://cldr-steven-matison.github.io//blog/Nifi-1.0-to-Nifi-2.0-Migration-Tool/" rel="alternate" type="text/html" title="Cloudera Flow Migration Tool - Migrate Nifi 1.0 flows to NiFi 2.0" /><published>2025-03-23T00:00:00-04:00</published><updated>2025-03-23T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Nifi%201.0%20to%20Nifi%202.0%20Migration%20Tool</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Nifi-1.0-to-Nifi-2.0-Migration-Tool/"><![CDATA[<p>The Data in Motion (DiM) team is pleased to announce the release of the Cloudera Flow Management Migration Tool 1.0.0 in Technical Preview for assistance in migrating flows from Cloudera Flow Management 2.1.7 to Cloudera Flow Management 4.0.</p>
+<p><a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><summary type="html"><![CDATA[The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1. This release focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink 1.20.1.]]></summary></entry><entry><title type="html">Cloudera Flow Migration Tool - Migrate Nifi 1.0 flows to NiFi 2.0</title><link href="https://cldr-steven-matison.github.io//blog/Nifi-1.0-to-Nifi-2.0-Migration-Tool/" rel="alternate" type="text/html" title="Cloudera Flow Migration Tool - Migrate Nifi 1.0 flows to NiFi 2.0" /><published>2025-03-23T00:00:00-04:00</published><updated>2025-03-23T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Nifi%201.0%20to%20Nifi%202.0%20Migration%20Tool</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Nifi-1.0-to-Nifi-2.0-Migration-Tool/"><![CDATA[<p>The Data in Motion (DiM) team is pleased to announce the release of the Cloudera Flow Management Migration Tool 1.0.0 in Technical Preview for assistance in migrating flows from Cloudera Flow Management 2.1.7 to Cloudera Flow Management 4.0.</p>
 
 <p>This release is a new product offering flow migration capabilities exclusive to Cloudera customers.</p>
 
@@ -397,341 +598,4 @@
   <li>Updated - <a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></li>
 </ul>
 
-<p>As always, check out the entire <a href="https://docs.cloudera.com/csa-operator/1.2/index.html">Cloudera Streaming Analytics - Kubernetes Operator 1.2</a>.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csa" /><category term="cloudera" /><category term="flink" /><category term="operator" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. This release includes the general availability of Cloudera SQL Stream Builder for Kubernetes, as well as a rebase to Apache Flink 1.19.2. Other changes and updates are focused on enhancing security, usability, and making the product more robust.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.3</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.3/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.3" /><published>2025-03-11T00:00:00-04:00</published><updated>2025-03-11T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Kubernetes%20Operator%201.3</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.3/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive a rebase to Kafka 3.9, automatic cluster rebalance, better offset management capabilities for Kafka connectors, and more!</p>
-
-<h1 id="release-highlights">Release Highlights</h1>
-<h2 id="rebase-to-kafka-39">Rebase to Kafka 3.9</h2>
-<p>For more information, see the <a href="https://archive.apache.org/dist/kafka/3.9.0/RELEASE_NOTES.html">Kafka 3.9 Release Notes</a> and the <a href="https://kafka.apache.org/documentation/#upgrade_390_notable">list of notable changes</a>.</p>
-
-<h2 id="rebase-to-strimzi-0450">Rebase to Strimzi 0.45.0</h2>
-<p>For more information, see the <a href="https://github.com/strimzi/strimzi-kafka-operator/releases/tag/0.44.0">Strimzi 0.44.0 Release Notes</a> and <a href="https://github.com/strimzi/strimzi-kafka-operator/releases/tag/0.45.0">Strimzi 0.45.0 Release Notes</a>.</p>
-
-<h2 id="kraft-kafka-raft-is-generally-available">KRaft (Kafka Raft) is generally available</h2>
-<p>You can now deploy Kafka clusters that use KRaft instead of ZooKeeper for metadata management. Additionally, you can migrate existing ZooKeeper-based Kafka clusters to use KRaft. 
-With the addition of KRaft, ZooKeeper is deprecated. Deploying new or using existing Kafka clusters running in ZooKeeper mode is deprecated. Additionally, ZooKeeper will be removed in a future release. When deploying new Kafka clusters, deploy them in KRaft mode. Cloudera encourages you to migrate existing clusters to KRaft. 
-For cluster deployment instructions, see <a href="https://docs.cloudera.com/csm-operator/1.3/kafka-deploy-configure/topics/csm-op-deploying-kafka.html#concept_oks_bgz_z1c">Deploying a Kafka cluster</a>.  For migration instructions, see <a href="https://docs.cloudera.com/csm-operator/1.3/upgrade/topics/csm-op-kraft-migration.html#concept_aty_ylh_j2c">Migrating Kafka clusters from ZooKeeper to KRaft</a>.</p>
-
-<h2 id="auto-rebalancing-when-scaling-the-cluster">Auto-rebalancing when scaling the cluster</h2>
-<p>You can now enable auto-rebalancing for Kafka clusters. If auto-rebalancing is enabled, the Strimzi Cluster Operator automatically initiates a rebalance with Cruise Control when you scale the Kafka cluster. 
-Cloudera recommends that you enable this feature as it makes scaling easier and faster. For more information, see <a href="https://docs.cloudera.com/csm-operator/1.3/kafka-operations/topics/csm-op-scaling-brokers.html#concept_jt1_qhz_z1c">Scaling brokers</a>.</p>
-
-<h2 id="offset-management-through-kafkaconnector-resources-is-now-available">Offset management through KafkaConnector resources is now available</h2>
-<p>Connector offsets can now be managed directly by configuring your KafkaConnector resources. 
-Cloudera recommends that you use this feature over the Kafka Connect REST API to manage connector offsets.</p>
-
-<p>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.3/kafka-connect-operations/topics/csm-op-connect-managing-connectors.html#ariaid-title8">Managing connector offsets</a> and <a href="https://docs.cloudera.com/csm-operator/1.3/kafka-replication-deploy-configure/topics/csm-op-connect-configuring-replication-offsets.html#task_jfl_lsg_jcc">Configuring data replication offsets</a>. These are the recommended methods for managing replication offsets when replicating data with Kafka Connect-based replication has also changed.</p>
-
-<p>Please see the <a href="https://docs.cloudera.com/csm-operator/1.3/release-notes/topics/csm-op-rn.html#concept_ksn_nwn_cbc">Release Notes</a> for the complete list of fixes and improvements</p>
-
-<h2 id="getting-to-the-new-release">Getting to the New Release</h2>
-<p>To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.3, check out this <a href="https://docs.cloudera.com/csm-operator/1.3/upgrade/topics/csm-op-upgrade.html">upgrade guide</a>. If you are installing for the first time use this <a href="https://docs.cloudera.com/csm-operator/1.3/installation/topics/csm-op-install-overview.html">installation overview</a>.</p>
-
-<h2 id="use-cases">Use Cases</h2>
-<p>Flexible, agile, and rapid Kafka deployments: Deploy Apache Kafka in seconds on existing Kubernetes infrastructure. Cloudera Streams Messaging-Kubernetes Operator has very lightweight dependencies and system requirements for Kafka-centric deployments. It simplifies and standardizes Kafka deployments and provides auto-scaling support for variable workloads.</p>
-
-<p>Operational efficiency with simple upgrades: The complexity of Kafka rolling upgrades is handled by Cloudera Streams Messaging - Kubernetes Operator, making them simpler and safer to execute.</p>
-
-<p>Loading and unloading data from Kafka: Kafka Connect gives Kafka users a simple way to access data quickly from a source and feed it to a Kafka topic. It also allows them to get data from a topic and copy it to an external destination. Cloudera Streams Messaging - Kubernetes Operator includes Kafka Connect support to give our customers a tool for moving data in and out of Kafka, efficiently.</p>
-
-<p>Replicating data to other sites: Disaster resilience is an important aspect of any Kafka production deployment. Cloudera Streams Messaging - Kubernetes Operator supports configuring and running Kafka replication flows across any two Kafka clusters. These clusters could be in different data centers to provide increased resilience against disasters.</p>
-
-<p>Kafka migrations: Customers can migrate or replicate data between containerized Kafka clusters and on-premises or cloud-based clusters.  Using Cloudera Streams Messaging - Kubernetes Operator, data can be replicated in any direction and between two or more clusters at a time.</p>
-
-<h2 id="public-resources">Public Resources</h2>
-<ul>
-  <li>New - <a href="https://docs.cloudera.com/csm-operator/1.3/release-notes/topics/csm-op-rn.html#ariaid-title2">What’s New in Cloudera Streams Messaging - Kubernetes Operator 1.3</a></li>
-  <li>New - <a href="https://community.cloudera.com/t5/What-s-New-Cloudera/RELEASED-Cloudera-Streams-Messaging-Kubernetes-Operator-1-3/ba-p/403888">What’s New post in Cloudera Community</a></li>
-  <li>New - <a href="https://www.linkedin.com/posts/asdaraujo_released-cloudera-streams-messaging-kubernetes-activity-7305092097919897600-4KpQ/">LinkedIn announcement</a> (to share)</li>
-  <li>Updated - <a href="https://docs.cloudera.com/csm-operator/1.3/index.html">Cloudera Streams Messaging - Kubernetes Operator Documentation</a></li>
-  <li><a href="https://www.cloudera.com/products/stream-processing.html">Cloudera Stream Processing Product Page</a></li>
-  <li><a href="https://docs.cloudera.com/index.html?tab=kubernetes-operators">Cloudera Kubernetes Operators documentation homepage</a></li>
-  <li><a href="https://docs.cloudera.com/csp-ce/latest/index.html">Cloudera Stream Processing Community Edition</a></li>
-  <li><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</li>
-  <li>Updated - <a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Messaging Support Lifecycle Policy</a></li>
-</ul>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.3/index.html">DOCS</a> for the CSM Operator.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive a rebase to Kafka 3.9, automatic cluster rebalance, better offset management capabilities for Kafka connectors, and more!]]></summary></entry><entry><title type="html">Cloudera Apache NiFi Operator</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/" rel="alternate" type="text/html" title="Cloudera Apache NiFi Operator" /><published>2025-02-26T00:00:00-05:00</published><updated>2025-02-26T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Apache%20NiFi%20Operator</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Apache-NiFi-Operator/"><![CDATA[<p>In a previous article (<a href="https://cldr-steven-matison.github.io/blog/Install-CFM-Operator/">Installing Cloudera CFM Kubernetes Operator</a>) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube.  In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.</p>
-
-<figure>
-  <img src="/assets/images/cfm-op-deployment-architecture.jpg" />
-  <figcaption>CFM Deployment Architecture</figcaption>
-</figure>
-
-<p>First, lets start with the most recent version of the documenation for the Cloudera Apache NiFi Operator:</p>
-
-<p><a href="https://docs.cloudera.com/cfm-operator/2.9.1/index.html">CFM Operator 2.9.1</a></p>
-
-<p>💡 There are already two new versions since my first article! 💡</p>
-
-<h1 id="user-authentication">User Authentication</h1>
-
-<p>There are several ways that you can role nifi user authentication.  First, no auth at all.  Just access the ui and NiFi is there.  Second, a self generated username and password upon install. Third, provide a kubernetes secret with your desired username and password.  Last but not least, <a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-config-nifi-ic-ldap.html">LDAP</a> which I will cover in a future post specifically.</p>
-
-<p><a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-auth.html">Configuring Authentication Docs</a></p>
-
-<p>In order to secure the login for the NiFi UI, it is required that NiFi installation itself be secured.  Be sure to complete this step w/ your security cert issuer and then provide the correct tag in the nifi yaml.   In this example I am using a self signed cert, which you can find in my YAML repo at the end of this page.</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span> <span class="n">apply</span> <span class="o">-</span><span class="n">f</span> <span class="nb">self</span><span class="o">-</span><span class="n">signed</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">issuer</span><span class="p">.</span><span class="nf">yaml</span> 
-</code></pre></div></div>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">security:
-    initialAdminIdentity: </span><span class="n">nifiadmin</span>
-    <span class="ss">nodeCertGen:
-      issuerRef:
-        name: </span><span class="nb">self</span><span class="o">-</span><span class="n">signed</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">issuer</span>
-        <span class="ss">kind: </span><span class="no">ClusterIssuer</span>
-</code></pre></div></div>
-
-<p>With the cert applied and referenced in the nifi.yaml, lets take a look at the requirements for enabling authentication methods.</p>
-
-<h2 id="auto-generated-password">Auto Generated Password</h2>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">spec:
-  security:
-    singleUserAuth:
-      enabled: </span><span class="kp">true</span>
-</code></pre></div></div>
-
-<h2 id="provided-credential">Provided Credential</h2>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">spec:
-  security:
-    singleUserAuth:
-      enabled: </span><span class="kp">true</span>
-      <span class="ss">credentialsSecretName: </span><span class="n">nifi</span><span class="o">-</span><span class="n">credential</span>
-
-</code></pre></div></div>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span> <span class="n">create</span> <span class="n">secret</span> <span class="n">generic</span> <span class="n">nifi</span><span class="o">-</span><span class="n">credential</span> <span class="o">--</span><span class="n">from</span><span class="o">-</span><span class="n">literal</span><span class="o">=</span><span class="n">username</span><span class="o">=</span><span class="s2">"username"</span> <span class="o">--</span><span class="n">from</span><span class="o">-</span><span class="n">literal</span><span class="o">=</span><span class="n">password</span><span class="o">=</span><span class="s2">"123456789101112"</span>
-</code></pre></div></div>
-
-<p>💡 It is important to know, if your kubernetes secret is less than 12 characters, it will be ignored and nifi will still role with an auto generated username and password.💡</p>
-
-<h1 id="ingress-and-uiconnection">Ingress and uiConnection</h1>
-
-<p>The most important part of the Apache NiFi Operator installation are the steps required to expose the NiFI UI.</p>
-
-<h2 id="route">Route</h2>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
-    type: </span><span class="no">Route</span>
-    <span class="ss">routeConfig:
-      tls:
-        termination: </span><span class="n">passthrough</span>
-
-  <span class="ss">uiConnection:
-    type: </span><span class="no">Route</span>
-    <span class="ss">serviceConfig:
-      sessionAffinity: </span><span class="no">ClientIP</span>
-    <span class="ss">routeConfig:
-      tls:
-        termination: </span><span class="n">passthrough</span>
-</code></pre></div></div>
-
-<h2 id="ingress">Ingress</h2>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
-    type: </span><span class="no">Ingress</span>
-    <span class="ss">serviceConfig:
-      sessionAffinity: </span><span class="no">ClientIP</span>
-</code></pre></div></div>
-
-<p>When using an ingress, there are annotations that may or may not be needed depending on your kubernetes environment</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">uiConnection:
-    type: </span><span class="no">Ingress</span>
-    <span class="ss">annotations:
-      </span><span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="ss">affinity: </span><span class="n">cookie</span>
-      <span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="n">affinity</span><span class="o">-</span><span class="ss">mode: </span><span class="n">persistent</span>
-      <span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="n">backend</span><span class="o">-</span><span class="ss">protocol: </span><span class="no">HTTPS</span>
-      <span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="n">ssl</span><span class="o">-</span><span class="ss">passthrough: </span><span class="s2">"true"</span>
-      <span class="n">nginx</span><span class="p">.</span><span class="nf">ingress</span><span class="p">.</span><span class="nf">kubernetes</span><span class="p">.</span><span class="nf">io</span><span class="o">/</span><span class="n">ssl</span><span class="o">-</span><span class="ss">redirect: </span><span class="s2">"true"</span>
-</code></pre></div></div>
-
-<h2 id="service">Service</h2>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="ss">uiConnection:
-    type: </span><span class="no">Service</span>
-</code></pre></div></div>
-
-<h1 id="when-to-delete-and-apply">When to Delete and Apply</h1>
-
-<p>It is important to know when to delete your nifi deployment and apply again for a fresh install so be careful when applying changes and expecting the changed yaml to fully re-install nifi.</p>
-
-<p>When doing things like above with authentication and security the initial nifi installation takes different and appropriate paths.   Sometimes you may have to delete nifi, wait for termination to complete, and then apply again in order to take a full fresh install.</p>
-
-<h1 id="customizations-for-nifi-sizing">Customizations For NiFi Sizing</h1>
-
-<p>When testing deployment processes in a small or limited kubernetes environment, it may be required to provide some limits on the resources nifi needs.</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">resources:
-    nifi:
-      requests:
-        cpu: </span><span class="s2">"1"</span>
-        <span class="ss">memory: </span><span class="mi">2</span><span class="no">Gi</span>
-      <span class="ss">limits:
-        cpu: </span><span class="s2">"4"</span>
-        <span class="ss">memory: </span><span class="mi">4</span><span class="no">Gi</span>
-    <span class="ss">log:
-      requests:
-        cpu: </span><span class="mi">50</span><span class="n">m</span>
-        <span class="ss">memory: </span><span class="mi">128</span><span class="no">Mi</span>
-</code></pre></div></div>
-
-<p>Some important Sizing docs:</p>
-
-<p><a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-cr-resource.html">Resource Recommendations</a> and <a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-configure-nifi-cr-cluster.html">Configuring Cluster Size</a></p>
-
-<p>You can find a full example NiFI chart <a href="https://docs.cloudera.com/cfm-operator/2.9.1/configure-nifi-cr/topics/cfm-op-resource-example.html">here</a>.</p>
-
-<p>If you have gotten this far, then you may want to bookmark the <a href="https://docs.cloudera.com/cfm-operator/2.9.1/nifi-config-reference/topics/cfm-op-nifi-config-reference.html">NiFi Config Reference</a> and <a href="https://docs.cloudera.com/cfm-operator/2.9.1/connection-reference/topics/cfm-op-nifi-connection-reference.html">NiFi Connection Reference</a> which outline all of the yaml object types for the Cloudera Apache NiFi Operator.</p>
-
-<p>Check out this repo I created with my sample YAMLs <a href="https://github.com/cldr-steven-matison/ClouderaOperatorYAML">here</a>.</p>
-
-<p>If you are interested in getting your hands on Cloudera’s Apache NiFi Operator you can find more right <a href="https://www.cloudera.com/products/dataflow.html">here</a>.  You can also reach out to me directly if you are ready for demos, hands on labs, or licensed trials for your organization.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="kubernetes" /><category term="operator" /><category term="nifi" /><summary type="html"><![CDATA[In a previous article (Installing Cloudera CFM Kubernetes Operator) I exposed steps necessary to deploy the Cloudera Apache NiFi Operator on MiniKube. In this article I am going to share some tips and tricks I have learned after completing this install in Openshift, Rancher, and recently EKS.]]></summary></entry><entry><title type="html">Cloudera DataFlow - Nifi 2.0 Python Processors</title><link href="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/" rel="alternate" type="text/html" title="Cloudera DataFlow - Nifi 2.0 Python Processors" /><published>2025-02-19T00:00:00-05:00</published><updated>2025-02-19T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/NIFI-2-Python-Processor/"><![CDATA[<p>Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor.  This customer already has deep experience with nifi, python, and even custom java processors.   As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors.  I also have not had to manage any nifi file systems behind these custom processors.   This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience.   Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code.  Not anymore with NiFi 2.0…</p>
-
-<p>In this blog I am going to show how easy it is to feed python source code on s3 into a nifi data flow without all those sharpe edges.</p>
-
-<p>First,  I need to research the upstream <a href="https://nifi.apache.org/nifi-docs/python-developer-guide.html">documentation</a> for examples.  This one is a great starting point CreateFlowfile:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">from</span> <span class="n">nifiapi</span><span class="p">.</span><span class="nf">flowfilesource</span> <span class="n">import</span> <span class="no">FlowFileSource</span><span class="p">,</span> <span class="no">FlowFileSourceResult</span>
-
-<span class="k">class</span> <span class="nc">CreateFlowFile</span><span class="p">(</span><span class="no">FlowFileSource</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">Java</span><span class="p">:</span>
-        <span class="n">implements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'org.apache.nifi.python.processor.FlowFileSource'</span><span class="p">]</span>
-
-    <span class="k">class</span> <span class="nc">ProcessorDetails</span><span class="p">:</span>
-        <span class="n">version</span> <span class="o">=</span> <span class="s1">'0.0.1-SNAPSHOT'</span>
-        <span class="n">description</span> <span class="o">=</span> <span class="s1">'''A Python processor that creates FlowFiles.'''</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">pass</span>
-
-    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-        <span class="k">return</span> <span class="no">FlowFileSourceResult</span><span class="p">(</span><span class="n">relationship</span> <span class="o">=</span> <span class="s1">'success'</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'greeting'</span><span class="p">:</span> <span class="s1">'hello'</span><span class="p">},</span> <span class="n">contents</span> <span class="o">=</span> <span class="s1">'Hello World!'</span><span class="p">)</span>
-</code></pre></div></div>
-<p>Next I need to build out the basic samples that validate the documented process works to deploy a custom python processor.  I delivered the above code to s3 and use that in my deployment:</p>
-
-<figure>
-  <img src="/assets/images/nifi-python-processor-storage-location-1.png" />
-  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
-</figure>
-
-<p>I am further automating this configuration so the deployment looks like this:</p>
-<figure>
-  <img src="/assets/images/nifi-python-processor-storage-location-2.png" />
-  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
-</figure>
-
-<p>Now when I deploy this flow, this processor is available:</p>
-
-<figure>
-  <img src="/assets/images/nifi-python-processor-createflowfile.png" />
-  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
-</figure>
-
-<p>Next, I can focus on modifying the working example for my Fraud Detection use case.   That sample script is well tested and its python source code has been used within an ExecuteScript Processor.  I just need to make some very basic changes to merge my example python processor with the same python from my ExecuteScript processor.</p>
-
-<p>My final python processor</p>
-
-<figure>
-  <img src="/assets/images/nifi-python-processor-transaction-generator.png" />
-  <figcaption>Cloudera DataFlow Custom Python Processsor Storage Location</figcaption>
-</figure>
-
-<p>And the source code is closely as follows:</p>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="c1"># TransactionGenerator.py</span>
-<span class="n">from</span> <span class="n">nifiapi</span><span class="p">.</span><span class="nf">flowfilesource</span> <span class="n">import</span> <span class="no">FlowFileSource</span><span class="p">,</span> <span class="no">FlowFileSourceResult</span>
-<span class="n">import</span> <span class="n">sys</span>
-<span class="n">import</span> <span class="n">os</span>
-<span class="n">import</span> <span class="n">socket</span>
-<span class="n">import</span> <span class="n">logging</span>
-<span class="n">import</span> <span class="n">string</span>
-<span class="n">import</span> <span class="n">datetime</span>
-<span class="n">import</span> <span class="n">random</span>
-<span class="n">import</span> <span class="n">uuid</span>
-<span class="n">import</span> <span class="n">csv</span>
-<span class="n">import</span> <span class="n">json</span>
-<span class="n">import</span> <span class="n">math</span>
-<span class="n">import</span> <span class="n">time</span>
-<span class="n">from</span> <span class="n">random</span> <span class="n">import</span> <span class="n">randint</span>
-<span class="n">from</span> <span class="n">random</span> <span class="n">import</span> <span class="n">uniform</span>
-
-<span class="c1"># Add some data = Amounts and Cities.</span>
-<span class="no">AMOUNTS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span><span class="mi">500</span><span class="p">]</span>
-<span class="no">CITIES</span> <span class="o">=</span> <span class="p">[</span>                                                                                                                                                                                                                                                     
-    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">48.8534</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">2.3488</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Paris"</span><span class="p">},</span>                                                                                                                                                                                                    
-    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">43.2961743</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">5.3699525</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Marseille"</span><span class="p">},</span>                                                                                                                                                                                                 
-    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">45.7578137</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">4.8320114</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Lyon"</span><span class="p">},</span>                                                                                                                                                                                                      
-    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">50.6365654</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="mf">3.0635282</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Lille"</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">"lat"</span><span class="p">:</span> <span class="mf">44.841225</span><span class="p">,</span> <span class="s2">"lon"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5800364</span><span class="p">,</span> <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Bordeaux"</span><span class="p">}</span>
-<span class="p">]</span>   
-
-<span class="k">class</span> <span class="nc">TransactionGenerator</span><span class="p">(</span><span class="no">FlowFileSource</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">Java</span><span class="p">:</span>
-        <span class="n">implements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'org.apache.nifi.python.processor.FlowFileSource'</span><span class="p">]</span>
-
-    <span class="k">class</span> <span class="nc">ProcessorDetails</span><span class="p">:</span>
-        <span class="n">version</span> <span class="o">=</span> <span class="s1">'0.0.1-SNAPSHOT'</span>
-        <span class="n">description</span> <span class="o">=</span> <span class="s1">'''A Python processor that creates credit card transactions for the Fraud Demo.'''</span>
-
-    <span class="c1"># Define geo functions</span>
-    <span class="k">def</span> <span class="nf">create_random_point</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">distance</span><span class="o">/</span><span class="mi">111300</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
-        <span class="n">w</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">pi</span> <span class="o">*</span> <span class="n">v</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">x0</span><span class="o">+</span><span class="n">x1</span><span class="p">,</span> <span class="n">y0</span> <span class="o">+</span><span class="n">y</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">create_geopoint</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="nf">create_random_point</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">get_latlon</span><span class="p">(</span><span class="nb">self</span><span class="p">):</span>                                                                    
-        <span class="n">geo</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="no">CITIES</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="nf">create_geopoint</span><span class="p">(</span><span class="n">geo</span><span class="p">[</span><span class="s1">'lat'</span><span class="p">],</span> <span class="n">geo</span><span class="p">[</span><span class="s1">'lon'</span><span class="p">]),</span><span class="n">geo</span><span class="p">[</span><span class="s1">'city'</span><span class="p">]</span>        
-
-    <span class="k">def</span> <span class="nf">create_fintran</span><span class="p">(</span><span class="nb">self</span><span class="p">):</span>
-     
-        <span class="n">latlon</span><span class="p">,</span><span class="n">city</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">get_latlon</span><span class="p">()</span>
-        <span class="n">tsbis</span><span class="o">=</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()).</span><span class="nf">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-%d %H:%M:%S "</span><span class="p">)</span>
-        <span class="n">date</span> <span class="o">=</span> <span class="n">str</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">.</span><span class="nf">strptime</span><span class="p">(</span><span class="n">tsbis</span><span class="p">,</span> <span class="s2">"%Y-%m-%d %H:%M:%S "</span><span class="p">))</span>
-        <span class="n">fintran</span> <span class="o">=</span> <span class="p">{</span>
-          <span class="s1">'ts'</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
-          <span class="s1">'account_id'</span> <span class="p">:</span> <span class="n">str</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)),</span>
-          <span class="s1">'transaction_id'</span> <span class="p">:</span> <span class="n">str</span><span class="p">(</span><span class="n">uuid</span><span class="p">.</span><span class="nf">uuid1</span><span class="p">()),</span>
-          <span class="s1">'amount'</span> <span class="p">:</span> <span class="n">random</span><span class="p">.</span><span class="nf">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2000</span><span class="p">),</span>  
-          <span class="s1">'lat'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-          <span class="s1">'lon'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="p">}</span>    
-        <span class="k">return</span> <span class="p">(</span><span class="n">fintran</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">create_fraudtran</span><span class="p">(</span><span class="n">fintran</span><span class="p">):</span>
-        <span class="n">latlon</span><span class="p">,</span><span class="n">city</span> <span class="o">=</span> <span class="n">get_latlon</span><span class="p">()</span>
-        <span class="n">tsbis</span> <span class="o">=</span> <span class="n">str</span><span class="p">((</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="mi">600</span><span class="p">))).</span><span class="nf">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-%d %H:%M:%S "</span><span class="p">))</span>
-        <span class="n">fraudtran</span> <span class="o">=</span> <span class="p">{</span>
-          <span class="s1">'ts'</span> <span class="p">:</span> <span class="n">tsbis</span><span class="p">,</span>
-          <span class="s1">'account_id'</span> <span class="p">:</span> <span class="n">fintran</span><span class="p">[</span><span class="s1">'account_id'</span><span class="p">],</span>
-          <span class="s1">'transaction_id'</span> <span class="p">:</span> <span class="s1">'xxx'</span> <span class="o">+</span> <span class="n">str</span><span class="p">(</span><span class="n">fintran</span><span class="p">[</span><span class="s1">'transaction_id'</span><span class="p">]),</span>
-          <span class="s1">'amount'</span> <span class="p">:</span> <span class="n">random</span><span class="p">.</span><span class="nf">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2000</span><span class="p">),</span>      
-          <span class="s1">'lat'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-          <span class="s1">'lon'</span> <span class="p">:</span> <span class="n">latlon</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="p">}</span>    
-        <span class="k">return</span> <span class="p">(</span><span class="n">fraudtran</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">pass</span>
-
-    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-        <span class="n">fintran</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">create_fintran</span><span class="p">()</span>   
-        <span class="n">fintransaction</span> <span class="o">=</span>  <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">fintran</span><span class="p">)</span>
-        <span class="k">return</span> <span class="no">FlowFileSourceResult</span><span class="p">(</span><span class="n">relationship</span> <span class="o">=</span> <span class="s1">'success'</span><span class="p">,</span> <span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'NiFi'</span><span class="p">:</span> <span class="s1">'PythonProcessor'</span><span class="p">},</span> <span class="n">contents</span> <span class="o">=</span> <span class="n">fintransaction</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Not bad, I now have an example to share with my customer, and I can modify my demos and hands on labs to use this processor instead of ExecuteScript.</p>
-
-<p>Check out the Cloudera DataFlow <a href="https://docs.cloudera.com/dataflow/cloud/custom-processors/topics/cdf-bp-custom-python-processors.html">DOCS</a> for custom python processors.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="dataflow" /><category term="nifi" /><summary type="html"><![CDATA[Recently a task came up for one of my customers whom asked how to rebuild python processes they have running with ExecuteScript or ExecuteStreamCommand within NiFi 2.0 as a new python processor. This customer already has deep experience with nifi, python, and even custom java processors. As a user of Cloudera Dataflow it has been a very long time since I have had to build and make my own nifi processors. I also have not had to manage any nifi file systems behind these custom processors. This is because Cloudera DataFlow allows me to nifi without all the hard parts of the old nifi experience. Historically making a custom nifi processor was super complicated java and required developer tools, IDEs and deep programming knowledge around the inner workings of nifi source code. Not anymore with NiFi 2.0…]]></summary></entry></feed>
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csa-operator/1.2/index.html">Cloudera Streaming Analytics - Kubernetes Operator 1.2</a>.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csa" /><category term="cloudera" /><category term="flink" /><category term="operator" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. This release includes the general availability of Cloudera SQL Stream Builder for Kubernetes, as well as a rebase to Apache Flink 1.19.2. Other changes and updates are focused on enhancing security, usability, and making the product more robust.]]></summary></entry></feed>

@@ -214,4 +214,22 @@ var store = [{
         "tags": ["cloudera"],
         "url": "/blog/Cloudera-Data-Services-1.5.5-GA/",
         "teaser": "/assets/images/Cloudera-Data-Platform.png"
+      },{
+        "title": "Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400",
+        "excerpt":"The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 2.2.9 supporting Apache NiFi 2.3.0 and 1.28.1 for Cloudera Data Platform 7.3.1.400. This release offers a number of new features and improvements as well as upgraded dependencies. Key features for this release...","categories": ["blog"],
+        "tags": ["cloudera","nifi"],
+        "url": "/blog/Cloudera-Flow-Management-2.2.9-General-Availability/",
+        "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "Cloudera Streaming Analytics - Kubernetes Operator 1.3",
+        "excerpt":"Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators. This release includes rebases to Apache Flink 1.20 and Apache Flink Kubernetes Operator 1.11.0. Other changes and updates are focused on...","categories": ["blog"],
+        "tags": ["Cloudera Streaming Analytics","flink","cloudera","kubernetes"],
+        "url": "/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/",
+        "teaser": "/assets/images/csa-architecture.png"
+      },{
+        "title": "Cloudera Streams Messaging - Kubernetes Operator 1.4",
+        "excerpt":"The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful...","categories": ["blog"],
+        "tags": ["csm","kafka","kubernetes","cloudera"],
+        "url": "/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/",
+        "teaser": "/assets/images/csm-op-deployment-architecture.jpg"
       }]
