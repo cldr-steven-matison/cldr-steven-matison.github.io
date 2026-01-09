@@ -1,4 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2025-07-25T08:43:36-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.4</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.4" /><published>2025-07-24T00:00:00-04:00</published><updated>2025-07-24T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Kubernetes%20Operator%201.4</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/"><![CDATA[<p>The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful new capabilities.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-01-09T08:32:31-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Get Up To Speed With Cloudera AI 2026</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI/" rel="alternate" type="text/html" title="Get Up To Speed With Cloudera AI 2026" /><published>2026-01-09T00:00:00-05:00</published><updated>2026-01-09T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-AI</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI/"><![CDATA[<p>Happy New Year!!!   It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space.   Now, what kind of human would I be if i wasnt using AI to talk about AI?   First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI.  Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.</p>
+
+<p>:hourglass:<b>0 to 100 mph Lets go!!</b></p>
+
+<p>My prompt:</p>
+
+<p><b><i>
+  Write a short summary of how cloudera went from machine learning to ai in the last 3 to 5 years
+</i></b></p>
+
+<p>Gemini Reply, with human edits:</p>
+
+<h1 id="clouderas-evolution-from-big-data-to-enterprise-ai-20212026">Cloudera’s Evolution: From Big Data to Enterprise AI (2021–2026)</h1>
+
+<p>In the last 3 to 5 years, Cloudera has undergone a major strategic transformation, shifting from a focus on <strong>Big Data and Machine Learning (ML)</strong> to becoming a comprehensive <strong>Enterprise AI platform</strong>.</p>
+
+<p>This transition was driven by the market’s move from predictive models to <strong>Generative AI (GenAI)</strong> and the need for businesses to run AI on their own data without compromising security.</p>
+
+<hr />
+
+<h3 id="the-strategic-pivot-20212023">The Strategic Pivot (2021–2023)</h3>
+<p>Cloudera began moving away from its legacy as a Hadoop-based “Big Data” company toward the <strong>Cloudera Data Platform (CDP)</strong>, a hybrid data cloud. During this phase:</p>
+<ul>
+  <li><strong>From ML to AI:</strong> The company rebranded “Cloudera Machine Learning” to <strong>Cloudera AI</strong>. This signaled a shift toward embedding intelligence into business processes rather than just building isolated models.</li>
+  <li><strong>The Data Lakehouse:</strong> They popularized the “Open Data Lakehouse” (built on <strong>Apache Iceberg</strong>), which provided the structured, governed foundation necessary for large-scale AI.</li>
+</ul>
+
+<h3 id="the-generative-ai--agentic-era-20242025">The Generative AI &amp; Agentic Era (2024–2025)</h3>
+<p>With the explosion of GenAI, Cloudera shifted its product roadmap to support Large Language Models (LLMs) and autonomous agents.</p>
+<ul>
+  <li><strong>Strategic Acquisitions:</strong>
+    <ul>
+      <li><strong>Verta (May 2024):</strong> Acquired for its AI operational platform to strengthen model management and “ModelOps.”</li>
+      <li><strong>Octopai (Nov 2024):</strong> Added automated data lineage to ensure AI models use trustworthy, traceable data.</li>
+      <li><strong>Taikun (Aug 2025):</strong> Integrated Kubernetes management to allow AI workloads to run seamlessly across any cloud or on-prem environment.</li>
+    </ul>
+  </li>
+  <li><strong>AI-Specific Tools:</strong> They launched <strong>Cloudera AI Studios</strong> and <strong>AMPs</strong> (Accelerators for Machine Learning Projects), providing templates for RAG (Retrieval-Augmented Generation) and AI agents.</li>
+</ul>
+
+<h2 id="resources">Resources</h2>
+
+<p>As promised, please find the following resources and references that I have collected to help you get up to speed with Cloudera and AI.</p>
+
+<p><a href="https://www.cloudera.com/products/machine-learning/ai-studios/product-tour.html">Agent Studio Product Tour</a></p>
+
+<p><a href="https://app.getreprise.com/launch/W6G3ON6/">Agent Studio</a></p>
+
+<p><a href="https://app.getreprise.com/launch/9yKdqN6/">Hybrid Product Tour - Evolve25</a></p>
+
+<p><a href="https://www.cloudera.com/products/machine-learning.html">Cloudera AI</a></p>
+
+<p><a href="https://www.cloudera.com/why-cloudera/enterprise-ai.html">Enterprise AI</a></p>
+
+<p><a href="https://www.cloudera.com/products/machine-learning/ai-workbench.html">Cloudera AI Workbench</a></p>
+
+<p><a href="https://www.cloudera.com/products/machine-learning/ai-studios.html">Cloudera AI Studios</a></p>
+
+<p><a href="https://www.cloudera.com/campaign/the-future-of-enterprise-ai-agents.html?internal_keyplay=AI&amp;internal_campaign=Thought-Leadership-Reports---AlwaysOn-FY26-Q1-GLOBAL-CT-Report-The-Future-of-Enterprise-AI-Agents&amp;cid=701Ui00000SH4IQIA1&amp;internal_link=p11">The Future of AI Agents</a></p>
+
+<p><a href="https://www.cloudera.com/campaign/the-evolution-of-ai-the-state-of-enterprise-ai-and-data-architecture.html?internal_keyplay=AI&amp;internal_campaign=Thought-Leadership-Reports---AlwaysOn-FY26-GLOBAL-CT-Report-State-of-Enterprise-AI-Survey&amp;cid=701Ui00000cKCojIAG&amp;internal_link=p11">The State of Enterprise AI and Data Architecture</a></p>
+
+<p><a href="https://www.cloudera.com/content/dam/www/marketing/resources/ebooks/unleashing-the-power-of-generative-ai-in-your-business.pdf.landing.html">Unleashing the Power of Generative AI in Your Business</a></p>
+
+<p><a href="https://www.cloudera.com/blog/business/context-is-the-hard-part-practical-lessons-in-building-agentic-ai-system.html">Context Is the Hard Part: Practical Lessons in Building Agentic AI Systems</a></p>
+
+<p><a href="https://www.cloudera.com/blog/business/deliver-repeatable-measurable-and-enterprise-ready-ai-for-life-sciences.html">Deliver Repeatable, Measurable, and Enterprise-Ready AI for Life Sciences</a></p>
+
+<p><a href="https://www.cloudera.com/blog/business/2026-predictions-the-architecture-governance-and-ai-trends-every-enterprise-must-prepare-for.html">2026 Predictions: The Architecture, Governance, and AI Trends Every Enterprise Must Prepare For</a></p>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/product/topics/ml-product-overview.html">DOCS</a> for Cloudera Ai.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera and AI,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="agent" /><category term="ai studio" /><category term="cml" /><category term="amp" /><category term="ai workbench" /><summary type="html"><![CDATA[Happy New Year!!! It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space. Now, what kind of human would I be if i wasnt using AI to talk about AI? First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI. Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.4</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.4" /><published>2025-07-24T00:00:00-04:00</published><updated>2025-07-24T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Kubernetes%20Operator%201.4</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/"><![CDATA[<p>The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful new capabilities.</p>
 
 <h1 id="release-highlights">Release Highlights</h1>
 
@@ -509,93 +581,4 @@
 
 <h1 id="links">Links</h1>
 <p><a href="https://docs.cloudera.com/cfm/4.0.0/cfm-migration-tool/topics/cfm-mt-release-notes.html">Release notes</a>
-<a href="https://archive.cloudera.com/p/cfm-migration-tool/">Download</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><category term="cloudera" /><summary type="html"><![CDATA[The Data in Motion (DiM) team is pleased to announce the release of the Cloudera Flow Management Migration Tool 1.0.0 in Technical Preview for assistance in migrating flows from Cloudera Flow Management 2.1.7 to Cloudera Flow Management 4.0.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics - Kubernetes Operator 1.2</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Analytics-Kubernetes-Operator-1.2/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics - Kubernetes Operator 1.2" /><published>2025-03-13T00:00:00-04:00</published><updated>2025-03-13T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Analytics%20Kubernetes%20Operator%201.2</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Analytics-Kubernetes-Operator-1.2/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. This release includes the general availability of Cloudera SQL Stream Builder for Kubernetes, as well as a rebase to Apache Flink 1.19.2. Other changes and updates are focused on enhancing security, usability, and making the product more robust.</p>
-
-<h1 id="release-highlights">Release Highlights</h1>
-
-<h2 id="rebase-on-flink-1192">Rebase on Flink 1.19.2</h2>
-<p>For more information, see the <a href="https://flink.apache.org/2025/02/12/apache-flink-1.19.2-release-announcement/">Flink 1.19.2 Release Announcement</a> and the <a href="https://docs.cloudera.com/csa-operator/1.2/release-notes/topics/csa-op-release-notes.html">Release Notes</a>.</p>
-
-<h2 id="general-availability-for-cloudera-sql-stream-builder">General availability for Cloudera SQL Stream Builder</h2>
-<p>Cloudera SQL Stream Builder, previously in Technical Preview, is now generally available in Cloudera Streaming Analytics - Kubernetes Operator.</p>
-
-<p>Cloudera SQL Stream Builder is a comprehensive interactive user interface for creating stateful stream processing jobs using SQL. For more information about SQL Stream Builder and its features, see the Getting started with SQL Stream Builder page.</p>
-
-<h2 id="ldap-authentication-in-sql-stream-builder">LDAP authentication in SQL Stream Builder</h2>
-<p>LDAP-based authentication is available for Cloudera SQL Stream Builder. For more information, refer to <a href="https://docs.cloudera.com/csa-operator/1.2/ssb-resource-management/topics/csa-op-ssb-security-configurations.html#pnavId3">LDAP authentication</a>.</p>
-
-<h2 id="custom-ruststores">Custom ruststores</h2>
-<p>You can now specify custom truststores when installing the Cloudera Streaming Analytics - Kubernetes Operator. For more information, refer to <a href="https://docs.cloudera.com/csa-operator/1.2/ssb-resource-management/topics/csa-op-ssb-security-configurations.html">Security configurations</a>.</p>
-
-<h2 id="secure-tls-connections-to-the-ssb-ui-and-api">Secure TLS connections to the SSB UI and API</h2>
-<p>Users can connect to Cloudera SQL Stream Builder and API via a TLS-encrypted channel. For more information, refer to <a href="https://docs.cloudera.com/csa-operator/1.2/flink-application-management/topics/csa-op-flink-ingress.html">Routing with ingress</a>.</p>
-
-<h2 id="using-python-udfs-for-table-transformations-and-webhook-connector">Using Python UDFs for table transformations and webhook connector</h2>
-<p>Due to the deprecation of Javascript User-defined Functions (UDFs) in Cloudera Streaming Analytics - Kubernetes Operator (see <a href="https://docs.cloudera.com/csa-operator/1.2/release-notes/topics/csa-op-ssb-deprecated.html">Deprecation notices</a>, support in Python UDFs for table transformations and the webhook connector have been added to Cloudera SQL Stream Builder. For more information, refer to Creating Python User-defined Functions.</p>
-
-<h2 id="configurable-requests-and-limits-for-all-resources">Configurable requests and limits for all resources</h2>
-<p>Resource requests/limits can now be defined in the resource configuration. For more information, refer to <a href="https://docs.cloudera.com/csa-operator/1.2/operator-management/topics/csa-op-resource-requests-limits.html">Resource requests and limits</a>.</p>
-
-<p>Please see the <a href="https://docs.cloudera.com/csa-operator/1.2/release-notes/topics/csa-op-release-notes.html">Release Notes</a> for the complete list of fixes and improvements.</p>
-
-<h1 id="getting-to-the-new-release">Getting to the New Release</h1>
-
-<p>To upgrade to Cloudera Streaming Analytics - Kubernetes Operator 1.2, check out this <a href="https://docs.cloudera.com/csa-operator/1.2/upgrade/topics/csa-op-upgrade.html">upgrade guide</a>. If you are installing for the first time use this <a href="https://docs.cloudera.com/csa-operator/1.2/installation/topics/csa-op-installation-overview.html">installation overview</a>.</p>
-
-<h1 id="use-cases">Use Cases</h1>
-
-<h2 id="event-driven-applications">Event-Driven Applications</h2>
-
-<p>Stateful applications that ingest events from one-or more-event streams and react to incoming events by triggering computations, state updates, or external actions.</p>
-
-<p>Apache Flink excels in handling the concept of time and state for these applications, and can scale to manage very large data volumes (up to several terabytes). It has a rich set of APIs, ranging from low-level controls to high-level functionality, like Flink SQL, enabling developers to choose the most suitable options for the implementation of advanced business logic.</p>
-
-<p>Apache Flink’s outstanding feature for event-driven applications is its support for savepoints. A savepoint is a consistent state image that can be used as a starting point for compatible applications. Given a savepoint, an application can be updated or adapt its scale, or multiple versions of an application can be started for A/B testing.</p>
-
-<h3 id="examples">Examples:</h3>
-<ul>
-  <li>Fraud detection</li>
-  <li>Anomaly detection</li>
-  <li>Rule-based alerting</li>
-  <li>Business process monitoring</li>
-  <li>Web application (social network)</li>
-</ul>
-
-<h2 id="data-analytics-applications">Data Analytics Applications</h2>
-
-<p>With a sophisticated stream processing engine, analytics can be performed in real-time. Streaming queries or applications ingest real-time event streams and continuously produce and update results as events are consumed. The results are written to an external database or maintained as internal state. A dashboard application can read the latest results from the external database or directly query the internal state of the application.</p>
-
-<p>Apache Flink supports streaming as well as batch analytical applications.</p>
-
-<h3 id="examples-1">Examples:</h3>
-<ul>
-  <li>Quality monitoring of telco networks</li>
-  <li>Analysis of product updates &amp; experiment evaluation in mobile applications</li>
-  <li>Ad-hoc analysis of live data in consumer technology</li>
-  <li>Large-scale graph analysis</li>
-</ul>
-
-<h2 id="data-pipeline-applications">Data Pipeline Applications</h2>
-
-<p>Streaming data pipelines serve a similar purpose as Extract-Transform-Load (ETL) jobs. They transform and enrich data and can move it from one storage system to another. However, they operate in a continuous streaming mode instead of being periodically triggered. Hence, they can read records from sources that continuously produce data and move it with low latency to their destination.</p>
-
-<h3 id="examples-2">Examples:</h3>
-<ul>
-  <li>Real-time search index building in e-commerce</li>
-  <li>Continuous ETL in e-commerce</li>
-</ul>
-
-<h1 id="public-resources">Public Resources</h1>
-<ul>
-  <li>New - <a href="https://docs.cloudera.com/csa-operator/1.2/release-notes/topics/csa-op-whats-new.html">What’s New in Cloudera Streaming Analytics - Kubernetes Operator 1.2</a></li>
-  <li>New - <a href="https://community.cloudera.com/t5/What-s-New-Cloudera/RELEASED-Cloudera-Streaming-Analytics-Kubernetes-Operator-1/ba-p/404000">What’s New post in Cloudera Community</a></li>
-  <li>New - <a href="https://www.linkedin.com/posts/asdaraujo_released-cloudera-streaming-analytics-activity-7305808650353168384-VyhY/?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAAGr4MBvsb8VE4Nc-F1aTnmfaw1pSofyBY">LinkedIn announcement (to share)</a></li>
-  <li>Updated - <a href="https://docs.cloudera.com/csa-operator/1.2/index.html">Cloudera Streaming Analytics - Kubernetes Operator Documentation</a></li>
-  <li><a href="https://www.cloudera.com/products/stream-processing.html">Cloudera Stream Processing Product Page</a></li>
-  <li><a href="https://docs.cloudera.com/index.html?tab=kubernetes-operators">Cloudera Kubernetes Operators documentation homepage</a></li>
-  <li><a href="https://docs.cloudera.com/csp-ce/latest/index.html">Cloudera Stream Processing Community Edition</a></li>
-  <li><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators (webinar recording)</a></li>
-  <li>Updated - <a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></li>
-</ul>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/csa-operator/1.2/index.html">Cloudera Streaming Analytics - Kubernetes Operator 1.2</a>.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csa" /><category term="cloudera" /><category term="flink" /><category term="operator" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. This release includes the general availability of Cloudera SQL Stream Builder for Kubernetes, as well as a rebase to Apache Flink 1.19.2. Other changes and updates are focused on enhancing security, usability, and making the product more robust.]]></summary></entry></feed>
+<a href="https://archive.cloudera.com/p/cfm-migration-tool/">Download</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><category term="cloudera" /><summary type="html"><![CDATA[The Data in Motion (DiM) team is pleased to announce the release of the Cloudera Flow Management Migration Tool 1.0.0 in Technical Preview for assistance in migrating flows from Cloudera Flow Management 2.1.7 to Cloudera Flow Management 4.0.]]></summary></entry></feed>

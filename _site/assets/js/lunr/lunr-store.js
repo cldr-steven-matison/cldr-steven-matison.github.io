@@ -232,4 +232,10 @@ var store = [{
         "tags": ["csm","kafka","kubernetes","cloudera"],
         "url": "/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/",
         "teaser": "/assets/images/csm-op-deployment-architecture.jpg"
+      },{
+        "title": "Get Up To Speed With Cloudera AI 2026",
+        "excerpt":"Happy New Year!!! It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space. Now, what kind of human would I be if...","categories": ["blog"],
+        "tags": ["cloudera","ai","agent","ai studio","cml","amp","ai workbench"],
+        "url": "/blog/Cloudera-AI/",
+        "teaser": "/assets/images/clouderaai.png"
       }]

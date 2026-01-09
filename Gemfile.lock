@@ -45,7 +45,7 @@ GEM
     ffi (1.15.5)
     forwardable-extended (2.6.0)
     gemoji (4.1.0)
-    google-protobuf (3.23.0-arm64-darwin)
+    google-protobuf (3.23.0)
     html-pipeline (2.14.3)
       activesupport (>= 2)
       nokogiri (>= 1.4)
@@ -129,6 +129,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  arm64-darwin-25
 
 DEPENDENCIES
   bundler
