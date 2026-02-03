@@ -238,4 +238,10 @@ var store = [{
         "tags": ["cloudera","ai","agent","ai studio","cml","amp","ai workbench"],
         "url": "/blog/Cloudera-AI/",
         "teaser": "/assets/images/clouderaai.png"
+      },{
+        "title": "Introducing Cloudera Data Lineage",
+        "excerpt":"In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader. A Brief History: From Hadoop to Hybrid AI Cloudera’s journey began in 2008...","categories": ["blog"],
+        "tags": ["cloudera","octopai","data","lineage"],
+        "url": "/blog/Cloudera-Data-Lineage/",
+        "teaser": "/assets/images/cloudera_data_lineage.png"
       }]

@@ -1,6 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-01-09T08:32:31-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Get Up To Speed With Cloudera AI 2026</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI/" rel="alternate" type="text/html" title="Get Up To Speed With Cloudera AI 2026" /><published>2026-01-09T00:00:00-05:00</published><updated>2026-01-09T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-AI</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI/"><![CDATA[<p>Happy New Year!!!   It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space.   Now, what kind of human would I be if i wasnt using AI to talk about AI?   First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI.  Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-02-03T08:26:21-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Introducing Cloudera Data Lineage</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/" rel="alternate" type="text/html" title="Introducing Cloudera Data Lineage" /><published>2026-02-03T00:00:00-05:00</published><updated>2026-02-03T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/"><![CDATA[<p>In a significant move to conquer “metadata chaos,” <strong>Cloudera</strong> officially acquired <strong>Octopai</strong> in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.</p>
 
-<p>:hourglass:<b>0 to 100 mph Lets go!!</b></p>
+<hr />
+
+<h2 id="a-brief-history-from-hadoop-to-hybrid-ai">A Brief History: From Hadoop to Hybrid AI</h2>
+
+<p>Cloudera’s journey began in 2008 as a visionary in the Apache Hadoop ecosystem, eventually merging with its primary rival, Hortonworks, in 2019. Since then, the company has pivoted aggressively toward the <strong>Cloudera Data Platform (CDP)</strong>, a hybrid solution that manages data across on-premises and multi-cloud environments.</p>
+
+<p>Octopai, founded in 2016, carved out a niche as the gold standard for automated data discovery and lineage. By the time of the merger, Octopai was already famous for its ability to map complex data environments in seconds—something that traditionally took manual weeks or months. By bringing Octopai into the fold, Cloudera has essentially added the “GPS” to its massive data warehouse and lakehouse offerings, allowing users to see exactly where their data comes from and where it is going.</p>
+
+<hr />
+
+<h2 id="cloudera-data-lineage-powering-the-era-of-convergence">Cloudera Data Lineage: Powering the “Era of Convergence”</h2>
+
+<p>Now fully integrated as <strong>Cloudera Data Lineage</strong>, the platform has received a massive overhaul to support the modern data estate. Cloudera has introduced over <strong>60 native connectors</strong> designed to bridge the gap between traditional big data systems and real-time streaming architectures.</p>
+
+<h3 id="deep-integration-with-nifi-and-kafka">Deep Integration with NiFi and Kafka</h3>
+<p>A standout update is the deep integration with <strong>Apache NiFi (Cloudera DataFlow)</strong> and <strong>Apache Kafka</strong>. The new NiFi connectors allow for <strong>“cross-system lineage,”</strong> meaning as data is ingested from the edge and transformed through various processors, the lineage is captured automatically. This prevents the “black box” effect often seen in data-in-motion.</p>
+
+<p>Similarly, the <strong>Kafka connectors</strong> enable organizations to track ephemeral streaming data, ensuring that real-time insights are just as governed and auditable as static data in HDFS or S3.</p>
+
+<h3 id="ai-driven-governance">AI-Driven Governance</h3>
+<p>Beyond just connectivity, Cloudera has added the <strong>Octomize AI agent</strong>, which uses generative AI to help data teams optimize SQL queries and automatically document data flows. These features transform Cloudera Data Lineage from a simple map into an active intelligence layer, essential for meeting the strict requirements of GDPR, HIPAA, and the governance needs of enterprise-scale AI.</p>
+
+<blockquote>
+  <p><strong>Key Takeaway:</strong> The fusion of Octopai’s metadata discovery engine with Cloudera’s big data backbone provides Cloudera Data Lineage; a unified view of data health, from the first spark of ingestion to the final AI model.</p>
+</blockquote>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/octopai/latest/index.html">DOCS</a> for Cloudera Data Lineage.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="octopai" /><category term="data" /><category term="lineage" /><summary type="html"><![CDATA[In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.]]></summary></entry><entry><title type="html">Get Up To Speed With Cloudera AI 2026</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI/" rel="alternate" type="text/html" title="Get Up To Speed With Cloudera AI 2026" /><published>2026-01-09T00:00:00-05:00</published><updated>2026-01-09T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-AI</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI/"><![CDATA[<p>Happy New Year!!!   It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space.   Now, what kind of human would I be if i wasnt using AI to talk about AI?   First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI.  Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.</p>
+
+<p><b>0 to 100 mph Lets go!!</b></p>
 
 <p>My prompt:</p>
 
@@ -564,21 +594,4 @@
 
 <p><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</p>
 
-<p><a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><summary type="html"><![CDATA[The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1. This release focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink 1.20.1.]]></summary></entry><entry><title type="html">Cloudera Flow Migration Tool - Migrate Nifi 1.0 flows to NiFi 2.0</title><link href="https://cldr-steven-matison.github.io//blog/Nifi-1.0-to-Nifi-2.0-Migration-Tool/" rel="alternate" type="text/html" title="Cloudera Flow Migration Tool - Migrate Nifi 1.0 flows to NiFi 2.0" /><published>2025-03-23T00:00:00-04:00</published><updated>2025-03-23T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Nifi%201.0%20to%20Nifi%202.0%20Migration%20Tool</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Nifi-1.0-to-Nifi-2.0-Migration-Tool/"><![CDATA[<p>The Data in Motion (DiM) team is pleased to announce the release of the Cloudera Flow Management Migration Tool 1.0.0 in Technical Preview for assistance in migrating flows from Cloudera Flow Management 2.1.7 to Cloudera Flow Management 4.0.</p>
-
-<p>This release is a new product offering flow migration capabilities exclusive to Cloudera customers.</p>
-
-<h1 id="key-features">Key Features</h1>
-
-<ul>
-  <li>The Cloudera Flow Management Migration Tool helps you transition to Cloudera Flow Management 4.x more efficiently. It simplifies and accelerates the migration of flows from Cloudera Flow Management 2.x powered by NiFi 1 to Cloudera Flow Management 4.x powered by NiFi 2. The tool automates complex and repetitive tasks in updating flow configurations, reducing manual effort and ensuring compatibility with NiFi 2 features.</li>
-  <li>You can use this command-line tool to transform variables and components to align with NiFi 2 features.</li>
-  <li>This initial release supports on-premises environments and facilitates migrations from Cloudera Flow Management 2.1.7.1000 to Cloudera Flow Management 4.0.0, in compliance with the NiFi 1.26-to-2.0 General Availability (GA) ruleset.</li>
-</ul>
-
-<h1 id="support-matrix-and-upgrade-paths">Support Matrix and Upgrade Paths</h1>
-<p>As a new standalone product in Technical Preview, the migration tool supports the conversion of flows from CFM 2.1.7 Service Pack 1 to run on CFM 4.0.0.0 instances.</p>
-
-<h1 id="links">Links</h1>
-<p><a href="https://docs.cloudera.com/cfm/4.0.0/cfm-migration-tool/topics/cfm-mt-release-notes.html">Release notes</a>
-<a href="https://archive.cloudera.com/p/cfm-migration-tool/">Download</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><category term="cloudera" /><summary type="html"><![CDATA[The Data in Motion (DiM) team is pleased to announce the release of the Cloudera Flow Management Migration Tool 1.0.0 in Technical Preview for assistance in migrating flows from Cloudera Flow Management 2.1.7 to Cloudera Flow Management 4.0.]]></summary></entry></feed>
+<p><a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><summary type="html"><![CDATA[The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1. This release focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink 1.20.1.]]></summary></entry></feed>

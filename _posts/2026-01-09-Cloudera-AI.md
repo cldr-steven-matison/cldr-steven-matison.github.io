@@ -16,7 +16,7 @@ tags:
 
 Happy New Year!!!   It's been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space.   Now, what kind of human would I be if i wasnt using AI to talk about AI?   First, let's ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI.  Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.  
 
-:hourglass:<b>0 to 100 mph Lets go!!</b>
+<b>0 to 100 mph Lets go!!</b>
 
 
 My prompt:  
