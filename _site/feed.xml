@@ -1,4 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-02-03T08:26:21-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Introducing Cloudera Data Lineage</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/" rel="alternate" type="text/html" title="Introducing Cloudera Data Lineage" /><published>2026-02-03T00:00:00-05:00</published><updated>2026-02-03T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/"><![CDATA[<p>In a significant move to conquer “metadata chaos,” <strong>Cloudera</strong> officially acquired <strong>Octopai</strong> in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-02-05T07:54:49-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
+
+<p>Powered by <strong>NVIDIA NIM</strong>, the Cloudera AI Inference service provides the control and performance that enterprises need to accelerate innovation without compromising data security.</p>
+
+<hr />
+
+<h2 id="empowering-true-private-ai">Empowering True Private AI</h2>
+<p>Cloudera AI Inference for on-premises is engineered for organizations that demand absolute control over their intellectual property and data sovereignty.</p>
+
+<ul>
+  <li><strong>Complete Data Privacy:</strong> Ensure that sensitive data, prompts, and model responses never leave your secure corporate network, meeting strict regulatory requirements.</li>
+  <li><strong>Air-Gapped Readiness:</strong> Full support for highly secure, air-gapped environments, providing the tools and documentation necessary to import and manage models without external connectivity.</li>
+  <li><strong>Storage Flexibility:</strong> Full support to any S3-compatible object storage.</li>
+</ul>
+
+<hr />
+
+<h2 id="predictable-tco-for-production-ai">Predictable TCO for Production AI</h2>
+<p>As enterprises move from experimentation to steady-state production, the on-premises service offers a significantly lower total cost of ownership (TCO) compared to token-based cloud APIs*.</p>
+
+<p>The AI Inference on-premises service lowers long-term TCO by providing ownership of GPU infrastructure, which pays off fast when inference happens 24/7.</p>
+
+<h2 id="feature-highlights-for-production-grade-ai">Feature Highlights for Production-Grade AI</h2>
+<ul>
+  <li><strong>Optimized Performance:</strong> Prebuilt and optimized engines, including <strong>TensorRT-LLM</strong> and <strong>vLLM</strong>, ensure low-latency, high-throughput inferencing.</li>
+  <li><strong>Seamless Integration:</strong> Integrate with existing MLOps workflows and CI/CD pipelines using OpenAI-compatible APIs for large language models (LLMs) and Open Inference Protocol APIs for traditional models.</li>
+  <li><strong>Comprehensive Monitoring:</strong> Track performance metrics such as latency, throughput, and resource utilization in real-time to ensure operational continuity.</li>
+</ul>
+
+<hr />
+
+<h2 id="get-started-today">Get Started Today</h2>
+<p>The Cloudera AI Inference service enables enterprises to achieve high-performance, private AI with a significantly lower TCO than cloud-based APIs. By keeping workloads on-premises, customers ensure absolute data sovereignty and predictable costs for production-scale GenAI.</p>
+
+<p>To get started, visit the <strong>Model Hub</strong> to select from a catalog of optimized models ready for deployment within your secure environment.</p>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/1.5.5/index.html">DOCS</a> for Cloudera Data Lineage.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="inference" /><category term="onpremise" /><summary type="html"><![CDATA[We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.]]></summary></entry><entry><title type="html">Introducing Cloudera Data Lineage</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/" rel="alternate" type="text/html" title="Introducing Cloudera Data Lineage" /><published>2026-02-03T00:00:00-05:00</published><updated>2026-02-03T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/"><![CDATA[<p>In a significant move to conquer “metadata chaos,” <strong>Cloudera</strong> officially acquired <strong>Octopai</strong> in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.</p>
 
 <hr />
 
@@ -496,102 +534,4 @@
 <h2 id="links">Links</h2>
 <p><a href="https://docs.cloudera.com/dataflow/cloud/release-notes/topics/cdf-whats-new.html">Release notes</a></p>
 
-<p><a href="https://docs.cloudera.com/dataflow/cloud/index.html">Documentation</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Data Flow" /><category term="nifi" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1</title><link href="https://cldr-steven-matison.github.io//blog/CSA-1.15-Release/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1" /><published>2025-04-30T00:00:00-04:00</published><updated>2025-04-30T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/CSA-1.15-Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/CSA-1.15-Release/"><![CDATA[<p>The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera  7.3.1. This release  focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink 1.20.1.</p>
-
-<p>See <a href="https://docs.cloudera.com/csa/latest/release-notes/topics/csa-what-new.html">What’s New</a>.</p>
-
-<h2 id="release-highlights">Release Highlights</h2>
-<ul>
-  <li>Cloudera platform support
-    <ul>
-      <li>Cloudera Streaming Analytics 1.15 is supported on Cloudera 7.3.1.100 (Cumulative Hot Fix 1). Ensure that you review the 7.3.1.100 Release Notes and Support Matrix to understand which operating system, database, and JDK versions are supported for Cloudera Streaming Analytics as well.</li>
-    </ul>
-  </li>
-  <li>Rebase to Apache Flink 1.20
-    <ul>
-      <li>Streaming analytics deployments, including SQL Stream Builder, now support Apache Flink 1.20. For more information on what is included in the Apache Flink 1.20 version, see the Apache Flink 1.20 Release Announcement and Release Notes.</li>
-    </ul>
-  </li>
-  <li>Support for batch-mode queries in Cloudera SQL Stream Builder
-    <ul>
-      <li>Users can select and use “batch” as the runtime mode for production execution mode jobs that are running in an isolated Flink cluster. For more information, see  Executing SQL jobs in production mode.</li>
-    </ul>
-  </li>
-  <li>OpenTelemetry Metrics Reporter (Technical Preview)
-    <ul>
-      <li>Cloudera Streaming Analytics now includes, in Technical Preview, the OpenTelemetry Metrics Reporter to aggregate metrics to a third-party tool using open standards. To learn more about using the OpenTelemetry reporter with Flink, see the documentation for Flink and Cloudera SQL Stream Builder, as well as the Apache Flink Documentation.</li>
-    </ul>
-  </li>
-  <li>Python for table transformations and webhook connector
-    <ul>
-      <li>Support in Python UDFs for table transformations and the webhook connector have been added to Cloudera SQL Stream Builder and Flink. To learn more, see the Webhook Connector documentation</li>
-    </ul>
-  </li>
-</ul>
-
-<p>Please see the <a href="https://docs.cloudera.com/csa/1.15.0/release-notes/topics/csa-what-new.html">Release Notes</a> for the complete list of fixes and improvements.</p>
-
-<h2 id="getting-to-the-new-release">Getting to the New Release</h2>
-<p>To upgrade to Cloudera Streaming Analytics 1.15.0 on Cloudera on premises, check out <a href="https://docs.cloudera.com/csa/1.15.0/installation/topics/csa-upgrade.html">this upgrade guide</a>. If you are using Cloudera on cloud, refer to the Upgrade advisor documentation.</p>
-
-<h1 id="use-cases">Use Cases</h1>
-<ul>
-  <li>
-    <p>Event-Driven Applications: Stateful applications that ingest events from one or more event streams and react to incoming events by triggering computations, state updates, or external actions.</p>
-
-    <p>Apache Flink excels in handling the concept of time and state for these applications and can scale to manage very large data volumes (up to several terabytes) with exactly once consistency guarantees. Moreover, Apache Flink’s support for event-time, highly customizable window logic, and fine-grained control of time as provided by the ProcessFunction enable the implementation of advanced business logic. Moreover, Apache Flink features a library for Complex Event Processing (CEP) to detect patterns in data streams.</p>
-
-    <p>However, Apache Flink’s outstanding feature for event-driven applications is its support for savepoints. A savepoint is a consistent state image that can be used as a starting point for compatible applications. Given a savepoint, an application can be updated or adapt its scale, or multiple versions of an application can be started for A/B testing.</p>
-
-    <p>Examples:</p>
-    <ul>
-      <li>Fraud detection</li>
-      <li>Anomaly detection</li>
-      <li>Rule-based alerting</li>
-      <li>Business process monitoring</li>
-      <li>Web application (social network)</li>
-    </ul>
-  </li>
-  <li>
-    <p>Data Analytics Applications: With a sophisticated stream processing engine, analytics can also be performed in real-time. Streaming queries or applications ingest real-time event streams and continuously produce and update results as events are consumed. The results are written to an external database or maintained as internal state. A dashboard application can read the latest results from the external database or directly query the internal state of the application.</p>
-
-    <p>Apache Flink supports streaming as well as batch analytical applications.</p>
-
-    <p>Examples:</p>
-    <ul>
-      <li>Quality monitoring of telco networks</li>
-      <li>Analysis of product updates &amp; experiment evaluation in mobile applications</li>
-      <li>Ad-hoc analysis of live data in consumer technology</li>
-      <li>Large-scale graph analysis</li>
-    </ul>
-  </li>
-  <li>
-    <p>Data Pipeline Applications: Streaming data pipelines serve a similar purpose as Extract-transform-load (ETL) jobs. They transform and enrich data and can move it from one storage system to another. However, they operate in a continuous streaming mode instead of being periodically triggered. Hence, they can read records from sources that continuously produce data and move it with low latency to their destination.</p>
-
-    <p>Examples:</p>
-    <ul>
-      <li>Real-time search index building in e-commerce</li>
-      <li>Continuous ETL in e-commerce</li>
-    </ul>
-  </li>
-</ul>
-
-<h1 id="resources">Resources</h1>
-
-<p>Check out <a href="https://docs.cloudera.com/csa/1.15.0/index.html">Cloudera Streaming Analytics 1.15</a></p>
-
-<p>Check out <a href="https://docs.cloudera.com/csa/1.15.0/release-notes/topics/csa-what-new.html">Release Notes</a></p>
-
-<p>Check out <a href="https://docs.cloudera.com/csa/1.15.0/download/topics/csa-download-location.html">Download Information</a></p>
-
-<p>As always, check out the <a href="https://docs.cloudera.com/csa/1.15.0/index.html">Cloudera Streaming Analytics 1.15 Docs</a></p>
-
-<p><a href="https://www.cloudera.com/products/stream-processing.html">Cloudera Stream Processing Product Page</a></p>
-
-<p><a href="https://docs.cloudera.com/index.html?tab=kubernetes-operators">Cloudera Kubernetes Operators documentation homepage</a></p>
-
-<p><a href="https://docs.cloudera.com/csp-ce/latest/index.html">Cloudera Stream Processing Community Edition</a></p>
-
-<p><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</p>
-
-<p><a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><summary type="html"><![CDATA[The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1. This release focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink 1.20.1.]]></summary></entry></feed>
+<p><a href="https://docs.cloudera.com/dataflow/cloud/index.html">Documentation</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Data Flow" /><category term="nifi" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.]]></summary></entry></feed>

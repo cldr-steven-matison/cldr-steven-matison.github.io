@@ -244,4 +244,10 @@ var store = [{
         "tags": ["cloudera","octopai","data","lineage"],
         "url": "/blog/Cloudera-Data-Lineage/",
         "teaser": "/assets/images/cloudera_data_lineage.png"
+      },{
+        "title": "Cloudera AI Inference Service GA Onpremise",
+        "excerpt":"We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers. Powered by NVIDIA...","categories": ["blog"],
+        "tags": ["cloudera","ai","inference","onpremise"],
+        "url": "/blog/Cloudera-AI-Inference/",
+        "teaser": "/assets/images/cloudera_ai_inference.png"
       }]
