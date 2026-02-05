@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Cloudera Streams Messaging - Kubernetes Operator 1.2 - Cloudera Solutions Engineer</title>
-<meta name="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.">
+<!-- begin _includes/seo.html --><title>Trino SQL Engine in Cloudera Data Warehouse for On-Premises - Cloudera Solutions Engineer</title>
+<meta name="description" content="Trino SQL Engine in Cloudera Data Warehouse (CDW) Now General Availability (GA) for On-Premises">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Cloudera Streams Messaging - Kubernetes Operator 1.2">
-<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-2-Release/">
+<meta property="og:title" content="Trino SQL Engine in Cloudera Data Warehouse for On-Premises">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Trino-for-Cloudera-Data-Warehouse/">
 
 
-  <meta property="og:description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.">
-
-
-
-  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/csm-op-deployment-architecture.jpg">
+  <meta property="og:description" content="Trino SQL Engine in Cloudera Data Warehouse (CDW) Now General Availability (GA) for On-Premises">
 
 
 
-
-
-  <meta property="article:published_time" content="2024-12-23T00:00:00-05:00">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/cloudera_trino.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2026-01-30T00:00:00-05:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-2-Release/">
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Trino-for-Cloudera-Data-Warehouse/">
 
 
 
@@ -268,16 +268,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Cloudera Streams Messaging - Kubernetes Operator 1.2">
-    <meta itemprop="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.">
-    <meta itemprop="datePublished" content="2024-12-23T00:00:00-05:00">
+    <meta itemprop="headline" content="Trino SQL Engine in Cloudera Data Warehouse for On-Premises">
+    <meta itemprop="description" content="Trino SQL Engine in Cloudera Data Warehouse (CDW) Now General Availability (GA) for On-Premises">
+    <meta itemprop="datePublished" content="2026-01-30T00:00:00-05:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io//blog/CSM-Kubernetes-Operator1-2-Release/" class="u-url" itemprop="url">Cloudera Streams Messaging - Kubernetes Operator 1.2
+            <a href="https://cldr-steven-matison.github.io//blog/Trino-for-Cloudera-Data-Warehouse/" class="u-url" itemprop="url">Trino SQL Engine in Cloudera Data Warehouse for On-Premises
 </a>
           </h1>
           
@@ -306,67 +306,78 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Cloudera’s Data In Motion Team is pleased to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.2, an integral component of Cloudera Streaming - Kubernetes Operator. With this release, customers receive better security integration and an update to Kafka 3.8, besides other improvements.</p>
+        <h2 id="trino-sql-engine-in-cloudera-data-warehouse-cdw-now-general-availability-ga-for-on-premises">Trino SQL Engine in Cloudera Data Warehouse (CDW) Now General Availability (GA) for On-Premises</h2>
 
-<h2 id="release-highlights">Release Highlights</h2>
+<p>We’re excited to announce the general availability of the <strong>Trino SQL Engine in Cloudera Data Warehouse</strong> for On-Premises environments (Data Services 1.5.5 SP2).</p>
 
+<p>This release brings a fully managed, containerized Trino experience to your data estate. It delivers a high-performance, distributed SQL query engine wrapped in an enterprise-grade <strong>Virtual Warehouse</strong>, eliminating the complexity of manual configuration while offering auto-scaling, auto-suspend, and seamless Cloudera integration.</p>
+
+<hr />
+
+<h2 id="key-benefits">Key Benefits</h2>
 <ul>
-  <li>Rebase on Kafka 3.8:
-    <ul>
-      <li>For more information, see the Kafka 3.8 <a href="https://archive.apache.org/dist/kafka/3.8.0/RELEASE_NOTES.html">Release Notes</a> and <a href="https://kafka.apache.org/documentation/#upgrade_380_notable">list of notable changes</a>.</li>
-    </ul>
-  </li>
-  <li>Rebase on Strimzi 0.43.0:
-    <ul>
-      <li>For more information, see the Strimzi 0.43.0 <a href="https://github.com/strimzi/strimzi-kafka-operator/releases/tag/0.43.0">Release Notes</a>.</li>
-    </ul>
-  </li>
-  <li>Apache Ranger authorization: Support for Apache Ranger authorization is now available. Customers can now integrate Kafka clusters, deployed with Cloudera Streams Messaging - Kubernetes Operator, with a remote Ranger service that is running on Cloudera Private Cloud Base. If configured, the Ranger service can provide authorization for your Kafka cluster.
-    <ul>
-      <li>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.2/kafka-security/topics/csm-op-authz-ranger.html">Apache Ranger authorization</a>.</li>
-    </ul>
-  </li>
-  <li>
-    <p>Improvements to Kafka replication: Rebased and backported changes to make Kafka replication more resilient and reliable when handling heartbeats and offset translation.</p>
-  </li>
-  <li>Performance improvements for the Cloudera diagnostics tool: The report.sh tool, used by clients to provide Cloudera support with key information when dealing with support cases now runs its subprocesses in parallel, accelerating run times.
-    <ul>
-      <li>For more information, see <a href="https://docs.cloudera.com/csm-operator/1.2/monitoring-diagnostics/topics/csm-op-diagnostics.html">Diagnostics</a>.</li>
-    </ul>
-  </li>
+  <li><strong>Seamless Data Federation:</strong> Connect to 30+ data sources to analyze data where it lives without complex ETL.</li>
+  <li><strong>Elastic Scalability &amp; Cost Control:</strong> Automatically scale workers based on load and utilize auto-suspend to eliminate idle compute costs.</li>
+  <li><strong>Unified Security:</strong> Full integration with <strong>Apache Ranger</strong> ensures rigorous data protection policies.</li>
+  <li><strong>Simplified Operations:</strong> New UI for connector management and built-in diagnostic tools.</li>
 </ul>
 
-<p>For the complete list of fixes and improvements read these <a href="https://docs.cloudera.com/csm-operator/1.2/release-notes/topics/csm-op-rn.html">Release Notes</a>.</p>
+<hr />
 
-<p>Getting to the new release
-To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out this <a href="https://docs.cloudera.com/csm-operator/1.2/upgrade/topics/csm-op-upgrade.html">upgrade guide</a>. Please note, if you are installing for the first time use this installation overview.</p>
+<h2 id="feature-highlights">Feature Highlights</h2>
 
-<h2 id="use-cases">Use Cases</h2>
+<h3 id="1-universal-connectivity--storage">1. Universal Connectivity &amp; Storage</h3>
 <ul>
-  <li>
-    <p>Flexible, agile, and rapid Kafka deployments: Deploy Apache Kafka in seconds on existing Kubernetes infrastructure. Cloudera Streams Messaging - Kubernetes Operator has very lightweight dependencies and system requirements for Kafka-centric deployments. It simplifies and standardizes Kafka deployments and provides auto-scaling support for variable workloads.</p>
-  </li>
-  <li>
-    <p>Operational efficiency with simple upgrades: The complexity of Kafka rolling upgrades is handled by Cloudera Streams Messaging - Kubernetes Operator, making them simpler and safer to execute.</p>
-  </li>
-  <li>
-    <p>Loading and unloading data from Kafka: Kafka Connect gives Kafka users a simple way to access data quickly from a source and feed it to a Kafka topic. It also allows them to get data from a topic and copy it to an external destination. The operator includes Kafka Connect support to give our customers a tool for moving data in and out of Kafka, efficiently.</p>
-  </li>
-  <li>
-    <p>Replicating data to other sites: Disaster resilience is an important aspect of any Kafka production deployment. Cloudera Streams Messaging - Kubernetes Operator supports configuring and running Kafka replication flows across any two Kafka clusters. These clusters could be in the same or in different data centers to provide increased resilience against disasters.</p>
-  </li>
-  <li>
-    <p>Kafka migrations: Customers can migrate or replicate data between containerized Kafka clusters and on-prem or cloud-based clusters.  Using Cloudera Streams Messaging - Kubernetes Operator, data can be replicated in any direction and between two or more clusters at a time.</p>
-  </li>
+  <li><strong>Certified Enterprise Connectors:</strong> Fully supported for Oracle, Snowflake, AWS Redshift, PostgreSQL, MySQL, Hive (HMS), Iceberg, and MariaDB.</li>
+  <li><strong>Expansive Ecosystem:</strong> Support for Kafka, MongoDB, Delta Lake, Google BigQuery, Druid, and MS SQL Server.</li>
+  <li><strong>Teradata Connector:</strong> Now available in <strong>Tech Preview</strong>.</li>
+  <li><strong>Connector Management UI:</strong> User-friendly interface to create, configure, and test connectors before deployment.</li>
+  <li><strong>Hybrid Storage:</strong> Full read/write to <strong>Ozone (OFS protocol)</strong> with local SSD caching for maximum performance.</li>
 </ul>
 
-<p>Check out what is new in <a href="https://docs.cloudera.com/csm-operator/1.2/release-notes/topics/csm-op-rn.html#ariaid-title2">Cloudera Streams Messaging Kubernetes Operator 1.2</a></p>
+<h3 id="2-automated-lifecycle-management">2. Automated Lifecycle Management</h3>
+<ul>
+  <li><strong>Virtual Warehouses:</strong> Easily manage the lifecycle of Trino coordinators and workers.</li>
+  <li><strong>Intelligent Auto-Scaling:</strong> Custom scaling parameters (min/max workers) to handle peak loads.</li>
+  <li><strong>Graceful Shutdown:</strong> Auto-suspend for “T-shirt sizes” (XS to L) ensures resources are released without interrupting queries.</li>
+  <li><strong>Disaster Recovery:</strong> Full Backup and Restore support for virtual warehouses and connectors.</li>
+</ul>
 
-<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.2/overview/topics/csm-op-deployment-architecture.html">Deployment Architecture</a></p>
+<h3 id="3-enterprise-security--governance">3. Enterprise Security &amp; Governance</h3>
+<ul>
+  <li><strong>Fine-Grained Access:</strong> Ranger integration for authorization, dynamic column masking, and row filtering.</li>
+  <li><strong>Secure Connectivity:</strong> Support for LDAP authentication and a dedicated <strong>Secrets Management</strong> system for external credentials.</li>
+</ul>
 
-<p>Check out <a href="https://docs.cloudera.com/csm-operator/1.2/installation/topics/csm-op-install-overview.html">Installation Information</a></p>
+<h3 id="4-empowering-all-users">4. Empowering All Users</h3>
+<ul>
+  <li><strong>Talk-to-Your-Data:</strong> AI SQL Assistance allows users to generate optimized Trino SQL from natural language.</li>
+  <li><strong>Analyst Ready:</strong> Full Trino syntax support and autocomplete within the <strong>Hue SQL Editor</strong>.</li>
+  <li><strong>Developer Friendly:</strong> Includes CDW CLI and a built-in Coordinator Web UI for deep-dive monitoring.</li>
+  <li><strong>Visual Insights:</strong> Native integration with <strong>Cloudera Data Visualization</strong>.</li>
+</ul>
 
-<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.2/index.html">DOCS</a> for the CSM Operator.</p>
+<hr />
+
+<h2 id="primary-use-cases">Primary Use Cases</h2>
+<ul>
+  <li><strong>Federated Data Access:</strong> Connect to external sources like Snowflake and Postgres with <strong>zero-copy data</strong>.</li>
+  <li><strong>Interactive Reporting:</strong> Use distributed SQL and SSD caching to power low-latency dashboards.</li>
+  <li><strong>Cost-Efficient Ad Hoc Analytics:</strong> Spin up “right-sized” warehouses that automatically shut down after analysis is complete.</li>
+</ul>
+
+<hr />
+
+<h2 id="links">Links</h2>
+<ul>
+  <li><a href="https://docs.cloudera.com/data-warehouse/1.5.5/release-notes/topics/dw-private-cloud-whats-new-155-sp2.html">Release Notes</a></li>
+  <li><a href="https://docs.cloudera.com/data-warehouse/1.5.5/release-notes/topics/dw-private-cloud-whats-new-155-sp2.html#dw-private-cloud-whats-new-155-sp2__Trino_155_sp2">What’sNew</a></li>
+  <li><a href="https://docs.cloudera.com/data-warehouse/1.5.5/administration/topics/dw-trino-connectors.html">Trino Documentation</a></li>
+</ul>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/data-warehouse/1.5.5/index.html">DOCS</a> for Cloudera Data Warehouse.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera please reach out to schedule a discussion.</p>
 
         
       </section>
@@ -383,13 +394,9 @@ To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out th
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/cdp" class="page__taxonomy-item p-category" rel="tag">cdp</a><span class="sep">, </span>
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
     
-      <a href="/tags/csm" class="page__taxonomy-item p-category" rel="tag">csm</a><span class="sep">, </span>
-    
-      <a href="/tags/kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
-    
-      <a href="/tags/kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a>
+      <a href="/tags/trino" class="page__taxonomy-item p-category" rel="tag">trino</a>
     
     </span>
   </p>
@@ -414,7 +421,7 @@ To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out th
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2024-12-23T00:00:00-05:00">December 23, 2024</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-01-30T00:00:00-05:00">January 30, 2026</time></p>
 
       </footer>
 
@@ -423,22 +430,22 @@ To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out th
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streams+Messaging+-+Kubernetes+Operator+1.2%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSM-Kubernetes-Operator1-2-Release%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Trino+SQL+Engine+in+Cloudera+Data+Warehouse+for+On-Premises%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FTrino-for-Cloudera-Data-Warehouse%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSM-Kubernetes-Operator1-2-Release%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FTrino-for-Cloudera-Data-Warehouse%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCSM-Kubernetes-Operator1-2-Release%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FTrino-for-Cloudera-Data-Warehouse%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/blog/CSA-1.14-Release/" class="pagination--pager" title="Cloudera Streaming Analytics 1.14 for Cloudera Data Platform 7.3.1
+      <a href="/blog/Cloudera-Data-Lineage-Enhancements/" class="pagination--pager" title="Cloudera Data Lineage Enhancements
 ">Previous</a>
     
     
-      <a href="/blog/Cloudera-Migration-Assistant-3.5.0/" class="pagination--pager" title="Cloudera Migration Assistant 3.5.0
+      <a href="/blog/Cloudera-Data-Lineage/" class="pagination--pager" title="Introducing Cloudera Data Lineage
 ">Next</a>
     
   </nav>
@@ -548,50 +555,6 @@ To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out th
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/cloudera_trino.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Trino-for-Cloudera-Data-Warehouse/" rel="permalink">Trino SQL Engine in Cloudera Data Warehouse for On-Premises
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Trino SQL Engine in Cloudera Data Warehouse (CDW) Now General Availability (GA) for On-Premises
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
         <img src="/assets/images/cloudera_data_lineage_2.png" alt="">
       </div>
     
@@ -624,6 +587,49 @@ To upgrade to Cloudera Streams Messaging - Kubernetes Operator 1.2, check out th
 
     <p class="archive__item-excerpt" itemprop="description">Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more!
 </p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/clouderaai.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-AI/" rel="permalink">Get Up To Speed With Cloudera AI 2026
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Happy New Year!!!   It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cl...</p>
   </article>
 </div>
 

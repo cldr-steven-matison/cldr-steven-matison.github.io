@@ -46,7 +46,7 @@ The Cloudera AI Inference service enables enterprises to achieve high-performanc
 To get started, visit the **Model Hub** to select from a catalog of optimized models ready for deployment within your secure environment.
 
 
-As always, check out the entire [DOCS](https://docs.cloudera.com/machine-learning/1.5.5/index.html) for Cloudera Data Lineage.
+As always, check out the entire [DOCS](https://docs.cloudera.com/machine-learning/1.5.5/index.html) for Cloudera AI.
 
 
 If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI Inference please reach out to schedule a discussion.

@@ -1,7 +1,7 @@
 ---
 title:  "Cloudera Data Lineage Enhancements"
 header:
-  teaser: "/assets/images/cloudera_data_lineage.png"
+  teaser: "/assets/images/cloudera_data_lineage_2.png"
 categories: 
   - blog
 tags:

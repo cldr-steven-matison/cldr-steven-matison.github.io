@@ -243,7 +243,13 @@ var store = [{
         "excerpt":"Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more! The Cloudera Data Lineage Team is thrilled to announce a significant expansion of Cloudera Data Lineage. This release introduces deeper integrations for Databricks, enhanced security protocols for enterprise workloads, and expanded lineage support for Snowflake. Our goal is to provide a...","categories": ["blog"],
         "tags": ["cloudera","octopai","data","lineage"],
         "url": "/blog/Cloudera-Data-Lineage-Enhancements/",
-        "teaser": "/assets/images/cloudera_data_lineage.png"
+        "teaser": "/assets/images/cloudera_data_lineage_2.png"
+      },{
+        "title": "Trino SQL Engine in Cloudera Data Warehouse for On-Premises",
+        "excerpt":"Trino SQL Engine in Cloudera Data Warehouse (CDW) Now General Availability (GA) for On-Premises We’re excited to announce the general availability of the Trino SQL Engine in Cloudera Data Warehouse for On-Premises environments (Data Services 1.5.5 SP2). This release brings a fully managed, containerized Trino experience to your data estate....","categories": ["blog"],
+        "tags": ["cloudera","trino"],
+        "url": "/blog/Trino-for-Cloudera-Data-Warehouse/",
+        "teaser": "/assets/images/cloudera_trino.png"
       },{
         "title": "Introducing Cloudera Data Lineage",
         "excerpt":"In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader. A Brief History: From Hadoop to Hybrid AI Cloudera’s journey began in 2008...","categories": ["blog"],
