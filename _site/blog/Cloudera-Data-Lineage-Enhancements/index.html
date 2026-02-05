@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Cloudera Streaming Analytics - Kubernetes Operator 1.3 - Cloudera Solutions Engineer</title>
-<meta name="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.">
+<!-- begin _includes/seo.html --><title>Cloudera Data Lineage Enhancements - Cloudera Solutions Engineer</title>
+<meta name="description" content="Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more!">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Cloudera Streaming Analytics - Kubernetes Operator 1.3">
-<meta property="og:url" content="http://localhost:4000/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/">
+<meta property="og:title" content="Cloudera Data Lineage Enhancements">
+<meta property="og:url" content="http://localhost:4000/blog/Cloudera-Data-Lineage-Enhancements/">
 
 
-  <meta property="og:description" content="Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.">
-
-
-
-  <meta property="og:image" content="http://localhost:4000/assets/images/csa-architecture.png">
+  <meta property="og:description" content="Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more!">
 
 
 
-
-
-  <meta property="article:published_time" content="2025-07-22T00:00:00-04:00">
+  <meta property="og:image" content="http://localhost:4000/assets/images/cloudera_data_lineage.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2026-01-15T00:00:00-05:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/">
+
+<link rel="canonical" href="http://localhost:4000/blog/Cloudera-Data-Lineage-Enhancements/">
 
 
 
@@ -268,16 +268,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Cloudera Streaming Analytics - Kubernetes Operator 1.3">
-    <meta itemprop="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.">
-    <meta itemprop="datePublished" content="2025-07-22T00:00:00-04:00">
+    <meta itemprop="headline" content="Cloudera Data Lineage Enhancements">
+    <meta itemprop="description" content="Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more!">
+    <meta itemprop="datePublished" content="2026-01-15T00:00:00-05:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/" class="u-url" itemprop="url">Cloudera Streaming Analytics - Kubernetes Operator 1.3
+            <a href="http://localhost:4000/blog/Cloudera-Data-Lineage-Enhancements/" class="u-url" itemprop="url">Cloudera Data Lineage Enhancements
 </a>
           </h1>
           
@@ -294,7 +294,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          3 minute read
+          2 minute read
         
       </span>
     
@@ -306,84 +306,78 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.</p>
+        <h3 id="cloudera-connectivity-spark-kafka-nifi-databricks-ai-and-more">Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more!</h3>
 
-<p>This release includes rebases to Apache Flink 1.20 and Apache Flink Kubernetes Operator 1.11.0. Other changes and updates are focused on enhancing security, usability, and making the product more robust.</p>
+<p>The Cloudera Data Lineage Team is thrilled to announce a significant expansion of Cloudera Data Lineage. This release introduces deeper integrations for <strong>Databricks</strong>, enhanced security protocols for enterprise workloads, and expanded lineage support for <strong>Snowflake</strong>.</p>
 
-<h3 id="release-highlights">Release Highlights</h3>
+<p>Our goal is to provide a seamless, high-performance environment that bridges the gap between raw data and actionable insights. By integrating AI-driven SQL conversion and strengthening our connector suite, we are empowering teams to work faster, more securely, and with greater visibility across the entire data lifecycle.</p>
 
+<hr />
+
+<h2 id="new-features">New Features</h2>
+<p>This release focuses on three core pillars: advanced cloud-data integration, enterprise-grade security, and robust pipeline connectivity.</p>
+
+<h3 id="1-enterprise-grade-authentication">1. Enterprise-Grade Authentication</h3>
+<p>Prioritizing support for Cloudera authentication protocols:</p>
 <ul>
-  <li>
-    <p><strong>Rebase to Flink 1.20</strong>
-  For more information, see the <a href="https://flink.apache.org/news/2024/07/22/flink-1.20-release.html">Flink 1.20 Release Notes</a> and the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Flink 1.20 Documentation</a>.</p>
-  </li>
-  <li>
-    <p><strong>Rebase to Flink Kubernetes Operator 1.11.0</strong>
-  For more information, see the <a href="https://github.com/apache/flink-kubernetes-operator/releases/tag/v1.11.0">Flink Kubernetes Operator 1.11.0 Release Notes</a> and the <a href="https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-release-1.11/">Flink Kubernetes Operator 1.11.0 Documentation</a>.</p>
-  </li>
-  <li>
-    <p><strong>Flink OpenTelemetry Metrics Reporter (Technical Preview)</strong>
-  The OpenTelemetry metrics reporter is now included, in Tech Preview, in the operator image. It makes it easier and more efficient to aggregate job metrics to a central service like Prometheus or any OpenTelemetry-compatible service, and aggregate metrics using open standards. To learn more about using the OpenTelemetry reporter with Flink, see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/deployment/metric_reporters/opentelemetry/">Monitoring Flink with OpenTelemetry</a>.</p>
-  </li>
-  <li>
-    <p><strong>Flink image with Hadoop, Hive, Iceberg, and Kudu connectors</strong>
-  Cloudera now offers alternative images for Cloudera Streaming Analytics - Kubernetes Operator that include popular connectors and their dependencies. This makes it easier to launch jobs right after installation and saves time because there’s no need to create custom images. For more information, refer to the Operator’s <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/concepts/csa-k8s-operator-images.html">Documentation</a>.</p>
-  </li>
-  <li>
-    <p><strong>Basic authentication for Flink UI and rest API</strong>
-  The Operator now includes the Flink Basic Authentication Handler, enabling users to secure their deployments without the need for external or third-party JARs.</p>
-  </li>
+  <li><strong>Spark Lineage + Kerberos:</strong> Secure your Spark lineage leveraging secure integration with industry-standard Kerberos authentication.</li>
+  <li><strong>Secure Hive &amp; Impala:</strong> Supported authentication protocols for secure integration.</li>
 </ul>
 
-<p>Please see the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/release-notes/csa-k8s-operator-rn.html">Release Notes</a> for the complete list of fixes and improvements.</p>
-
-<h3 id="getting-the-new-release">Getting the New Release</h3>
-
+<h3 id="2-databricks-ecosystem--ai-intelligence">2. Databricks Ecosystem &amp; AI Intelligence</h3>
+<p><em>This release positions our Lineage as a more robust solution over the native Databricks offering!</em></p>
 <ul>
-  <li>To upgrade to Cloudera Streaming Analytics - Kubernetes Operator 1.3, check out the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/installation/csa-k8s-operator-upgrade.html">Upgrade Guide</a>.</li>
-  <li>If you are installing this operator for the first time, consult the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/installation/csa-k8s-operator-install.html">Installation Guide</a>.</li>
+  <li><strong>Unity Catalog Integration:</strong> Lowering the barrier for complex data catalog analysis.</li>
+  <li><strong>Enhanced Delta Live Tables:</strong> Deepened support for Databricks Delta Tables to ensure high-performance ACID transactions and metadata handling.</li>
+  <li><strong>AI &amp; Python Support:</strong> Supported lineage for <strong>Databricks Notebooks AI</strong> (outside Unity Catalog) and <strong>Python jobs</strong> operated by the Databricks compute engine.</li>
+  <li><strong>Multi-Metastore Connector:</strong> Seamlessly bridge Hive metadata with Databricks environments via the HMS Connector.</li>
 </ul>
 
-<h3 id="use-cases">Use Cases</h3>
-
+<h3 id="3-streaming-connectivity--lineage">3. Streaming, Connectivity &amp; Lineage</h3>
 <ul>
-  <li><strong>Event-Driven Applications:</strong> Stateful applications that ingest events from one or more event streams and react to incoming events by triggering computations, state updates, or external actions. Apache Flink excels in handling the concept of time and state for these applications, and can scale to manage very large data volumes (up to several terabytes). It has a rich set of APIs, ranging from low-level controls to high-level functionality, like Flink SQL, enabling developers to choose the most suitable options for the implementation of advanced business logic. One of Apache Flink’s most popular features for event-driven applications is its support for savepoints. A savepoint is a consistent state image that can be used as a starting point for compatible applications. With a savepoint, an application can be updated or adapt its scale, or multiple versions of an application can be started for A/B testing.
-  <strong>Examples:</strong>
-    <ul>
-      <li>Fraud detection</li>
-      <li>Anomaly detection</li>
-      <li>Rule-based alerting</li>
-      <li>Business process monitoring</li>
-      <li>Web application (social network)</li>
-    </ul>
-  </li>
-  <li><strong>Data Analytics Applications:</strong> With a sophisticated stream processing engine, analytics can be performed in real time. Streaming queries or applications ingest real-time event streams and continuously produce and update results as events are consumed. The results are written to an external database or maintained as internal state. A dashboard application can read the latest results from the external database or directly query the internal state of the application. Apache Flink supports streaming as well as batch analytical applications.
-  <strong>Examples:</strong>
-    <ul>
-      <li>Quality monitoring of telco networks</li>
-      <li>Analysis of product updates and experiment evaluation in mobile applications</li>
-      <li>Ad-hoc analysis of live data in consumer technology</li>
-      <li>Large-scale graph analysis</li>
-    </ul>
-  </li>
-  <li><strong>Data Pipeline Applications:</strong> Streaming data pipelines serve a similar purpose as Extract-Transform-Load (ETL) jobs. They transform and enrich data and can move it from one storage system to another. However, they operate in a continuous streaming mode instead of being periodically triggered. Hence, they can read records from sources that continuously produce data and move it with low latency to their destination.
-  <strong>Examples:</strong>
-    <ul>
-      <li>Real-time search index building in e-commerce</li>
-      <li>Continuous ETL in e-commerce</li>
-    </ul>
-  </li>
+  <li><strong>Snowflake Stage Enhancement:</strong> Improved support for pipeline lineage and end-to-end visibility.</li>
+  <li><strong>Apache Kafka &amp; Kafka Connect:</strong> New, robust connectors to support Kafka lineage.</li>
+  <li><strong>DataStage Sequencers:</strong> Enhanced analysis for IBM InfoSphere DataStage Sequencer jobs—<strong>an industry-first integration!</strong></li>
+  <li><strong>Apache NiFi Connector:</strong> Full support for NiFi integration with Apache Knox authentication.</li>
 </ul>
 
-<h3 id="resources">Resources</h3>
-
+<h3 id="4-internal-operations">4. Internal Operations</h3>
 <ul>
-  <li><a href="https://www.cloudera.com/products/streaming-analytics.html">New - Cloudera Streaming Analytics Community Page</a></li>
-  <li><a href="https://www.cloudera.com/products/streaming-analytics/kubernetes-operator.html">New - Cloudera Streaming Analytics - Kubernetes Operator Product Page</a></li>
-  <li><a href="https://blog.cloudera.com/cloudera-streaming-analytics-kubernetes-operator-1-3-release/">New - Cloudera Streaming Analytics - Kubernetes Operator 1.3 Blog Post</a> (to share)</li>
-  <li><a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/index.html">Updated - Cloudera Streaming Analytics - Kubernetes Operator Documentation</a></li>
-  <li><a href="https://www.cloudera.com/webinars/streaming-analytics-overview.html">Cloudera Streaming Analytics Overview (webinar recording)</a></li>
+  <li><strong>Gainsight Rollout (Internal Only):</strong> Deploying Gainsight to better track customer success metrics and platform health.</li>
 </ul>
+
+<hr />
+
+<h2 id="use-cases">Use Cases</h2>
+<h3 id="for-data-engineers--analysts">For Data Engineers &amp; Analysts</h3>
+<p>Solve “metadata management” chaos by using Cloudera Data Lineage as a risk-mitigation tool that automatically maps the entire lineage across Cloudera and external systems (Databricks, Oracle, Snowflake).</p>
+<ul>
+  <li><strong>End-to-End Lineage:</strong> Audit and trace data flow with 100% confidence.</li>
+  <li><strong>Seamless Ingestion:</strong> Build real-time pipelines using new Kafka and NiFi connectors without custom coding.</li>
+</ul>
+
+<h3 id="for-enterprise-security-teams">For Enterprise Security Teams</h3>
+<ul>
+  <li><strong>Unified Governance:</strong> 5 Cloudera connectors enable governance that follows the data regardless of where it is stored.</li>
+  <li><strong>Single Source of Truth:</strong> Reduce “data silos” and gain insight into migration success with full Databricks lineage.</li>
+</ul>
+
+<hr />
+
+<h2 id="roadmap-coming-soon">Roadmap: Coming Soon</h2>
+<p>We are continuing to accelerate our release cycle. Upcoming features include:</p>
+<ul>
+  <li><strong>Trino Integration:</strong> Enabling a more holistic UDF solution.</li>
+  <li><strong>MS Fabric Support.</strong></li>
+  <li><strong>Revamped Universal Connector (Connector Factory):</strong> Enhanced support for inner-system lineage and frequency refresh.</li>
+</ul>
+
+<hr />
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/octopai/latest/index.html">DOCS</a> for Cloudera Data Lineage.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>
+
 
         
       </section>
@@ -402,11 +396,11 @@
     
       <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
     
-      <a href="/tags/Cloudera Streaming Analytics" class="page__taxonomy-item p-category" rel="tag">Cloudera Streaming Analytics</a><span class="sep">, </span>
+      <a href="/tags/data" class="page__taxonomy-item p-category" rel="tag">data</a><span class="sep">, </span>
     
-      <a href="/tags/flink" class="page__taxonomy-item p-category" rel="tag">flink</a><span class="sep">, </span>
+      <a href="/tags/lineage" class="page__taxonomy-item p-category" rel="tag">lineage</a><span class="sep">, </span>
     
-      <a href="/tags/kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a>
+      <a href="/tags/octopai" class="page__taxonomy-item p-category" rel="tag">octopai</a>
     
     </span>
   </p>
@@ -431,7 +425,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-07-22T00:00:00-04:00">July 22, 2025</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-01-15T00:00:00-05:00">January 15, 2026</time></p>
 
       </footer>
 
@@ -440,22 +434,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streaming+Analytics+-+Kubernetes+Operator+1.3%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2FCloudera-Streaming-Analytics-Kubernetes-Operator-1.3%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Data+Lineage+Enhancements%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2FCloudera-Data-Lineage-Enhancements%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fblog%2FCloudera-Streaming-Analytics-Kubernetes-Operator-1.3%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fblog%2FCloudera-Data-Lineage-Enhancements%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2FCloudera-Streaming-Analytics-Kubernetes-Operator-1.3%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2FCloudera-Data-Lineage-Enhancements%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/blog/Cloudera-Flow-Management-2.2.9-General-Availability/" class="pagination--pager" title="Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400
+      <a href="/blog/Cloudera-AI/" class="pagination--pager" title="Get Up To Speed With Cloudera AI 2026
 ">Previous</a>
     
     
-      <a href="/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/" class="pagination--pager" title="Cloudera Streams Messaging - Kubernetes Operator 1.4
+      <a href="/blog/Cloudera-Data-Lineage/" class="pagination--pager" title="Introducing Cloudera Data Lineage
 ">Next</a>
     
   </nav>
@@ -565,50 +559,6 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/cloudera_data_lineage.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Cloudera-Data-Lineage-Enhancements/" rel="permalink">Cloudera Data Lineage Enhancements
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more!
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
         <img src="/assets/images/clouderaai.png" alt="">
       </div>
     
@@ -640,6 +590,49 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">Happy New Year!!!   It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cl...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csm-op-deployment-architecture.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/" rel="permalink">Cloudera Streams Messaging - Kubernetes Operator 1.4
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! T...</p>
   </article>
 </div>
 

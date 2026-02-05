@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-02-05T07:54:49-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-02-05T08:06:12-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="http://localhost:4000/blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>http://localhost:4000/blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="http://localhost:4000/blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
 
 <p>Powered by <strong>NVIDIA NIM</strong>, the Cloudera AI Inference service provides the control and performance that enterprises need to accelerate innovation without compromising data security.</p>
 
@@ -36,7 +36,7 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/1.5.5/index.html">DOCS</a> for Cloudera Data Lineage.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="inference" /><category term="onpremise" /><summary type="html"><![CDATA[We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.]]></summary></entry><entry><title type="html">Introducing Cloudera Data Lineage</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/" rel="alternate" type="text/html" title="Introducing Cloudera Data Lineage" /><published>2026-02-03T00:00:00-05:00</published><updated>2026-02-03T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/"><![CDATA[<p>In a significant move to conquer “metadata chaos,” <strong>Cloudera</strong> officially acquired <strong>Octopai</strong> in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI Inference please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="inference" /><category term="onpremise" /><summary type="html"><![CDATA[We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.]]></summary></entry><entry><title type="html">Introducing Cloudera Data Lineage</title><link href="http://localhost:4000/blog/Cloudera-Data-Lineage/" rel="alternate" type="text/html" title="Introducing Cloudera Data Lineage" /><published>2026-02-03T00:00:00-05:00</published><updated>2026-02-03T00:00:00-05:00</updated><id>http://localhost:4000/blog/Cloudera-Data-Lineage</id><content type="html" xml:base="http://localhost:4000/blog/Cloudera-Data-Lineage/"><![CDATA[<p>In a significant move to conquer “metadata chaos,” <strong>Cloudera</strong> officially acquired <strong>Octopai</strong> in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.</p>
 
 <hr />
 
@@ -66,7 +66,77 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/octopai/latest/index.html">DOCS</a> for Cloudera Data Lineage.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="octopai" /><category term="data" /><category term="lineage" /><summary type="html"><![CDATA[In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.]]></summary></entry><entry><title type="html">Get Up To Speed With Cloudera AI 2026</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI/" rel="alternate" type="text/html" title="Get Up To Speed With Cloudera AI 2026" /><published>2026-01-09T00:00:00-05:00</published><updated>2026-01-09T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-AI</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI/"><![CDATA[<p>Happy New Year!!!   It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space.   Now, what kind of human would I be if i wasnt using AI to talk about AI?   First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI.  Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="octopai" /><category term="data" /><category term="lineage" /><summary type="html"><![CDATA[In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.]]></summary></entry><entry><title type="html">Cloudera Data Lineage Enhancements</title><link href="http://localhost:4000/blog/Cloudera-Data-Lineage-Enhancements/" rel="alternate" type="text/html" title="Cloudera Data Lineage Enhancements" /><published>2026-01-15T00:00:00-05:00</published><updated>2026-01-15T00:00:00-05:00</updated><id>http://localhost:4000/blog/Cloudera-Data-Lineage-Enhancements</id><content type="html" xml:base="http://localhost:4000/blog/Cloudera-Data-Lineage-Enhancements/"><![CDATA[<h3 id="cloudera-connectivity-spark-kafka-nifi-databricks-ai-and-more">Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more!</h3>
+
+<p>The Cloudera Data Lineage Team is thrilled to announce a significant expansion of Cloudera Data Lineage. This release introduces deeper integrations for <strong>Databricks</strong>, enhanced security protocols for enterprise workloads, and expanded lineage support for <strong>Snowflake</strong>.</p>
+
+<p>Our goal is to provide a seamless, high-performance environment that bridges the gap between raw data and actionable insights. By integrating AI-driven SQL conversion and strengthening our connector suite, we are empowering teams to work faster, more securely, and with greater visibility across the entire data lifecycle.</p>
+
+<hr />
+
+<h2 id="new-features">New Features</h2>
+<p>This release focuses on three core pillars: advanced cloud-data integration, enterprise-grade security, and robust pipeline connectivity.</p>
+
+<h3 id="1-enterprise-grade-authentication">1. Enterprise-Grade Authentication</h3>
+<p>Prioritizing support for Cloudera authentication protocols:</p>
+<ul>
+  <li><strong>Spark Lineage + Kerberos:</strong> Secure your Spark lineage leveraging secure integration with industry-standard Kerberos authentication.</li>
+  <li><strong>Secure Hive &amp; Impala:</strong> Supported authentication protocols for secure integration.</li>
+</ul>
+
+<h3 id="2-databricks-ecosystem--ai-intelligence">2. Databricks Ecosystem &amp; AI Intelligence</h3>
+<p><em>This release positions our Lineage as a more robust solution over the native Databricks offering!</em></p>
+<ul>
+  <li><strong>Unity Catalog Integration:</strong> Lowering the barrier for complex data catalog analysis.</li>
+  <li><strong>Enhanced Delta Live Tables:</strong> Deepened support for Databricks Delta Tables to ensure high-performance ACID transactions and metadata handling.</li>
+  <li><strong>AI &amp; Python Support:</strong> Supported lineage for <strong>Databricks Notebooks AI</strong> (outside Unity Catalog) and <strong>Python jobs</strong> operated by the Databricks compute engine.</li>
+  <li><strong>Multi-Metastore Connector:</strong> Seamlessly bridge Hive metadata with Databricks environments via the HMS Connector.</li>
+</ul>
+
+<h3 id="3-streaming-connectivity--lineage">3. Streaming, Connectivity &amp; Lineage</h3>
+<ul>
+  <li><strong>Snowflake Stage Enhancement:</strong> Improved support for pipeline lineage and end-to-end visibility.</li>
+  <li><strong>Apache Kafka &amp; Kafka Connect:</strong> New, robust connectors to support Kafka lineage.</li>
+  <li><strong>DataStage Sequencers:</strong> Enhanced analysis for IBM InfoSphere DataStage Sequencer jobs—<strong>an industry-first integration!</strong></li>
+  <li><strong>Apache NiFi Connector:</strong> Full support for NiFi integration with Apache Knox authentication.</li>
+</ul>
+
+<h3 id="4-internal-operations">4. Internal Operations</h3>
+<ul>
+  <li><strong>Gainsight Rollout (Internal Only):</strong> Deploying Gainsight to better track customer success metrics and platform health.</li>
+</ul>
+
+<hr />
+
+<h2 id="use-cases">Use Cases</h2>
+<h3 id="for-data-engineers--analysts">For Data Engineers &amp; Analysts</h3>
+<p>Solve “metadata management” chaos by using Cloudera Data Lineage as a risk-mitigation tool that automatically maps the entire lineage across Cloudera and external systems (Databricks, Oracle, Snowflake).</p>
+<ul>
+  <li><strong>End-to-End Lineage:</strong> Audit and trace data flow with 100% confidence.</li>
+  <li><strong>Seamless Ingestion:</strong> Build real-time pipelines using new Kafka and NiFi connectors without custom coding.</li>
+</ul>
+
+<h3 id="for-enterprise-security-teams">For Enterprise Security Teams</h3>
+<ul>
+  <li><strong>Unified Governance:</strong> 5 Cloudera connectors enable governance that follows the data regardless of where it is stored.</li>
+  <li><strong>Single Source of Truth:</strong> Reduce “data silos” and gain insight into migration success with full Databricks lineage.</li>
+</ul>
+
+<hr />
+
+<h2 id="roadmap-coming-soon">Roadmap: Coming Soon</h2>
+<p>We are continuing to accelerate our release cycle. Upcoming features include:</p>
+<ul>
+  <li><strong>Trino Integration:</strong> Enabling a more holistic UDF solution.</li>
+  <li><strong>MS Fabric Support.</strong></li>
+  <li><strong>Revamped Universal Connector (Connector Factory):</strong> Enhanced support for inner-system lineage and frequency refresh.</li>
+</ul>
+
+<hr />
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/octopai/latest/index.html">DOCS</a> for Cloudera Data Lineage.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="octopai" /><category term="data" /><category term="lineage" /><summary type="html"><![CDATA[Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more!]]></summary></entry><entry><title type="html">Get Up To Speed With Cloudera AI 2026</title><link href="http://localhost:4000/blog/Cloudera-AI/" rel="alternate" type="text/html" title="Get Up To Speed With Cloudera AI 2026" /><published>2026-01-09T00:00:00-05:00</published><updated>2026-01-09T00:00:00-05:00</updated><id>http://localhost:4000/blog/Cloudera-AI</id><content type="html" xml:base="http://localhost:4000/blog/Cloudera-AI/"><![CDATA[<p>Happy New Year!!!   It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space.   Now, what kind of human would I be if i wasnt using AI to talk about AI?   First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI.  Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.</p>
 
 <p><b>0 to 100 mph Lets go!!</b></p>
 
@@ -138,7 +208,7 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/product/topics/ml-product-overview.html">DOCS</a> for Cloudera Ai.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera and AI,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="agent" /><category term="ai studio" /><category term="cml" /><category term="amp" /><category term="ai workbench" /><summary type="html"><![CDATA[Happy New Year!!! It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space. Now, what kind of human would I be if i wasnt using AI to talk about AI? First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI. Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.4</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.4" /><published>2025-07-24T00:00:00-04:00</published><updated>2025-07-24T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Kubernetes%20Operator%201.4</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/"><![CDATA[<p>The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful new capabilities.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera and AI,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="agent" /><category term="ai studio" /><category term="cml" /><category term="amp" /><category term="ai workbench" /><summary type="html"><![CDATA[Happy New Year!!! It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space. Now, what kind of human would I be if i wasnt using AI to talk about AI? First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI. Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.4</title><link href="http://localhost:4000/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.4" /><published>2025-07-24T00:00:00-04:00</published><updated>2025-07-24T00:00:00-04:00</updated><id>http://localhost:4000/blog/Cloudera%20Streams%20Messaging%20Kubernetes%20Operator%201.4</id><content type="html" xml:base="http://localhost:4000/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/"><![CDATA[<p>The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful new capabilities.</p>
 
 <h1 id="release-highlights">Release Highlights</h1>
 
@@ -193,7 +263,7 @@
 
 <p><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</p>
 
-<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.4/index.html">DOCS</a> for the CSM Operator.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful new capabilities.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics - Kubernetes Operator 1.3</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics - Kubernetes Operator 1.3" /><published>2025-07-22T00:00:00-04:00</published><updated>2025-07-22T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Analytics%20-%20Kubernetes%20Operator%201.3</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.</p>
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.4/index.html">DOCS</a> for the CSM Operator.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful new capabilities.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics - Kubernetes Operator 1.3</title><link href="http://localhost:4000/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics - Kubernetes Operator 1.3" /><published>2025-07-22T00:00:00-04:00</published><updated>2025-07-22T00:00:00-04:00</updated><id>http://localhost:4000/blog/Cloudera%20Streaming%20Analytics%20-%20Kubernetes%20Operator%201.3</id><content type="html" xml:base="http://localhost:4000/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.</p>
 
 <p>This release includes rebases to Apache Flink 1.20 and Apache Flink Kubernetes Operator 1.11.0. Other changes and updates are focused on enhancing security, usability, and making the product more robust.</p>
 
@@ -270,7 +340,7 @@
   <li><a href="https://blog.cloudera.com/cloudera-streaming-analytics-kubernetes-operator-1-3-release/">New - Cloudera Streaming Analytics - Kubernetes Operator 1.3 Blog Post</a> (to share)</li>
   <li><a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/index.html">Updated - Cloudera Streaming Analytics - Kubernetes Operator Documentation</a></li>
   <li><a href="https://www.cloudera.com/webinars/streaming-analytics-overview.html">Cloudera Streaming Analytics Overview (webinar recording)</a></li>
-</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><category term="kubernetes" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.]]></summary></entry><entry><title type="html">Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-2.2.9-General-Availability/" rel="alternate" type="text/html" title="Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400" /><published>2025-07-18T00:00:00-04:00</published><updated>2025-07-18T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-2.2.9%20General%20Availability</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-2.2.9-General-Availability/"><![CDATA[<p>The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 2.2.9 supporting Apache NiFi 2.3.0 and 1.28.1 for Cloudera Data Platform 7.3.1.400.</p>
+</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><category term="kubernetes" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.]]></summary></entry><entry><title type="html">Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400</title><link href="http://localhost:4000/blog/Cloudera-Flow-Management-2.2.9-General-Availability/" rel="alternate" type="text/html" title="Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400" /><published>2025-07-18T00:00:00-04:00</published><updated>2025-07-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/Cloudera-Flow-Management-2.2.9%20General%20Availability</id><content type="html" xml:base="http://localhost:4000/blog/Cloudera-Flow-Management-2.2.9-General-Availability/"><![CDATA[<p>The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 2.2.9 supporting Apache NiFi 2.3.0 and 1.28.1 for Cloudera Data Platform 7.3.1.400.</p>
 
 <p>This release offers a number of new features and improvements as well as upgraded dependencies.</p>
 
@@ -339,7 +409,7 @@
 
 <p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new-flow-management-nifi2.html">What’s New with  Nifi 2</a></p>
 
-<p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new-edge-management.html">What’s New with MiNiFi</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><summary type="html"><![CDATA[The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 2.2.9 supporting Apache NiFi 2.3.0 and 1.28.1 for Cloudera Data Platform 7.3.1.400.]]></summary></entry><entry><title type="html">Cloudera Data Services On Premises 1.5.5 General Availability</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Services-1.5.5-GA/" rel="alternate" type="text/html" title="Cloudera Data Services On Premises 1.5.5 General Availability" /><published>2025-06-11T00:00:00-04:00</published><updated>2025-06-11T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Data%20Services%201.5.5%20GA</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Services-1.5.5-GA/"><![CDATA[<p>Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera AI Workbench scalability and performance improvements, Cloudera Data Engineering Access Control Lists (ACLs), Cloudera Data Warehouse Hive query history, and a significant reduction in common vulnerabilities and exposures (CVE).</p>
+<p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new-edge-management.html">What’s New with MiNiFi</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><summary type="html"><![CDATA[The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 2.2.9 supporting Apache NiFi 2.3.0 and 1.28.1 for Cloudera Data Platform 7.3.1.400.]]></summary></entry><entry><title type="html">Cloudera Data Services On Premises 1.5.5 General Availability</title><link href="http://localhost:4000/blog/Cloudera-Data-Services-1.5.5-GA/" rel="alternate" type="text/html" title="Cloudera Data Services On Premises 1.5.5 General Availability" /><published>2025-06-11T00:00:00-04:00</published><updated>2025-06-11T00:00:00-04:00</updated><id>http://localhost:4000/blog/Cloudera%20Data%20Services%201.5.5%20GA</id><content type="html" xml:base="http://localhost:4000/blog/Cloudera-Data-Services-1.5.5-GA/"><![CDATA[<p>Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera AI Workbench scalability and performance improvements, Cloudera Data Engineering Access Control Lists (ACLs), Cloudera Data Warehouse Hive query history, and a significant reduction in common vulnerabilities and exposures (CVE).</p>
 
 <h1 id="key-features-and-benefits-of-this-release">Key features and benefits of this release</h1>
 
@@ -458,7 +528,7 @@
   <li><a href="https://docs.cloudera.com/cdp-private-cloud-data-services/1.5.5/release-notes/topics/cdppvc-1-5-5-Repository-Locations.html">Download</a></li>
   <li><a href="https://supportmatrix.cloudera.com/">Support Matrix</a></li>
   <li><a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Support lifecycle policy</a></li>
-</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><summary type="html"><![CDATA[Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera AI Workbench scalability and performance improvements, Cloudera Data Engineering Access Control Lists (ACLs), Cloudera Data Warehouse Hive query history, and a significant reduction in common vulnerabilities and exposures (CVE).]]></summary></entry><entry><title type="html">Cloudera Flow Management Migration Tool 3.0.0 for NiFi 1 to NiFi 2 migrations now GA</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Nifi-2.0-Migration-Tool-GA/" rel="alternate" type="text/html" title="Cloudera Flow Management Migration Tool 3.0.0 for NiFi 1 to NiFi 2 migrations now GA" /><published>2025-06-02T00:00:00-04:00</published><updated>2025-06-02T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Nifi%202.0%20Migration%20Tool%20GA</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Nifi-2.0-Migration-Tool-GA/"><![CDATA[<p>The Data in Motion team is pleased to announce the generally available (GA) release of Cloudera Flow Management Migration Tool 3.0.0.  This tool assists Cloudera customers in migrating from Cloudera Flow Management 2.1.7 Service Pack 2 (powered by NiFi 1) to Cloudera Flow Management 4.10.0 (powered by NiFi 2).</p>
+</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><summary type="html"><![CDATA[Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera AI Workbench scalability and performance improvements, Cloudera Data Engineering Access Control Lists (ACLs), Cloudera Data Warehouse Hive query history, and a significant reduction in common vulnerabilities and exposures (CVE).]]></summary></entry><entry><title type="html">Cloudera Flow Management Migration Tool 3.0.0 for NiFi 1 to NiFi 2 migrations now GA</title><link href="http://localhost:4000/blog/Cloudera-Nifi-2.0-Migration-Tool-GA/" rel="alternate" type="text/html" title="Cloudera Flow Management Migration Tool 3.0.0 for NiFi 1 to NiFi 2 migrations now GA" /><published>2025-06-02T00:00:00-04:00</published><updated>2025-06-02T00:00:00-04:00</updated><id>http://localhost:4000/blog/Cloudera%20Nifi%202.0%20Migration%20Tool%20GA</id><content type="html" xml:base="http://localhost:4000/blog/Cloudera-Nifi-2.0-Migration-Tool-GA/"><![CDATA[<p>The Data in Motion team is pleased to announce the generally available (GA) release of Cloudera Flow Management Migration Tool 3.0.0.  This tool assists Cloudera customers in migrating from Cloudera Flow Management 2.1.7 Service Pack 2 (powered by NiFi 1) to Cloudera Flow Management 4.10.0 (powered by NiFi 2).</p>
 
 <h1 id="key-features-and-benefits-of-this-release">Key features and benefits of this release</h1>
 
@@ -476,62 +546,102 @@
 <ul>
   <li><a href="https://docs.cloudera.com/cfm/4.10.0/cfm-migration-tool/topics/cfm-mt-release-notes.html">Release notes</a></li>
   <li><a href="https://archive.cloudera.com/p/cfm-migration-tool/">Download</a></li>
-</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><category term="cloudera" /><summary type="html"><![CDATA[The Data in Motion team is pleased to announce the generally available (GA) release of Cloudera Flow Management Migration Tool 3.0.0. This tool assists Cloudera customers in migrating from Cloudera Flow Management 2.1.7 Service Pack 2 (powered by NiFi 1) to Cloudera Flow Management 4.10.0 (powered by NiFi 2).]]></summary></entry><entry><title type="html">Cloudera Flow Management - Kubernetes Operator 2.10</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-2.10/" rel="alternate" type="text/html" title="Cloudera Flow Management - Kubernetes Operator 2.10" /><published>2025-04-30T00:00:00-04:00</published><updated>2025-04-30T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Flow%20Management%20Kubernetes%20Operator%202.10</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-2.10/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of Cloudera Flow Management - Kubernetes Operator version 2.10.</p>
+</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><category term="cloudera" /><summary type="html"><![CDATA[The Data in Motion team is pleased to announce the generally available (GA) release of Cloudera Flow Management Migration Tool 3.0.0. This tool assists Cloudera customers in migrating from Cloudera Flow Management 2.1.7 Service Pack 2 (powered by NiFi 1) to Cloudera Flow Management 4.10.0 (powered by NiFi 2).]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1</title><link href="http://localhost:4000/blog/CSA-1.15-Release/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1" /><published>2025-04-30T00:00:00-04:00</published><updated>2025-04-30T00:00:00-04:00</updated><id>http://localhost:4000/blog/CSA-1.15-Release</id><content type="html" xml:base="http://localhost:4000/blog/CSA-1.15-Release/"><![CDATA[<p>The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera  7.3.1. This release  focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink 1.20.1.</p>
 
-<p>This release introduces NiFi 2 to the Cloudera Flow Management - Kubernetes Operator. In addition, it includes features that help with developer productivity, flow stability, operational overhead, and quality of life.</p>
-
-<h2 id="release-highlights">Release Highlights</h2>
-<ul>
-  <li>NiFi 2 general availability: NiFi 2 is now an available option when deploying NiFi in a Kubernetes cluster using the Cloudera Flow Management - Kubernetes Operator.</li>
-  <li>FIPS mode: Customers can now declare additional security providers, such  as CryptoComply for Java and Bouncy Castle, to ensure FIPS (Federal Information Processing Standard) compliance.</li>
-  <li>Out of memory (OOM) recovery: The Operator can now recover proactively from OOM events in NiFi based on user-provided configuration parameters.</li>
-  <li>Cluster scheduling: The NiFi custom resource now contains a schedule spec that can define the times during which a NiFi cluster will run.</li>
-  <li>Environment variables: In the NiFi spec, users can set custom environment variables on the NiFi container for use in Flows or Python scripts.</li>
-  <li>NAR volume providers: NARs can be landed in a networked filesystem or object storage and provided to NiFi by way of a CSI driver, i.e. EFS or S3.</li>
-  <li>OIDC authentication: Support for OpenID Connect authentication has been added to the NiFi Registry spec. This enables integration of the NiFi Registry with Keycloak.</li>
-  <li>Additional CA bundles reference: Additional CA certificates can now be provided by a Secret or ConfigMap reference instead of in-line in the NiFi spec yaml, greatly reducing file length and improving readability.</li>
-  <li>Additional proxy hosts: A NiFi spec field has been added, and multiple hostnames can now be provided to NiFi. This allows configuration of alternate DNS names for the NiFi service beyond the hostName spec field.</li>
-  <li>Platform upgrades: Added support for Kubernetes 1.31, NiFi 1.28, and NiFi 2.3.</li>
-  <li>Bug fixes:</li>
-  <li>NiFi Registry resources not cleaned up on delete, i.e. PVCs and Certificate Secrets.</li>
-  <li>NiFi Registry hostname not added to Node Certificate.</li>
-  <li>NiFi Registry users and authorizations incorrectly persisted.</li>
-  <li>NiFi not restarting when additional CA bundles are provided.</li>
-</ul>
-
-<h2 id="upgrading-to-the-new-release">Upgrading to the New Release</h2>
-<p>Reference the latest operator version in the Helm Install command. More details can be found in the <a href="https://docs.cloudera.com/cfm-operator/2.9.0/installation/topics/cfm-op-install-cfm-op.html">installation instructions</a>.</p>
-
-<h2 id="links">Links</h2>
-<p><a href="https://docs.cloudera.com/cfm-operator/2.9.0/release-notes/topics/cfm-op-whats-new.html">Release notes</a></p>
-
-<p><a href="https://docs.cloudera.com/cfm-operator/2.9.0/index.html">Documentation</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="kubernetes" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Flow Management - Kubernetes Operator version 2.10.]]></summary></entry><entry><title type="html">Cloudera Data Flow 2.10 for Cloudera on Cloud</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-DataFlow-2.10/" rel="alternate" type="text/html" title="Cloudera Data Flow 2.10 for Cloudera on Cloud" /><published>2025-04-30T00:00:00-04:00</published><updated>2025-04-30T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20DataFlow%202.10</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-DataFlow-2.10/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.</p>
-
-<p>This release introduces NiFi 2 as generally available in Data Flow. Along with seamless NiFi 2 migrations, this  positions Data Flow as the ideal platform to migrate, build, and deploy NiFi 2 flows with minimal operational effort. In addition, it includes features that improve developer productivity, operational costs and security.</p>
+<p>See <a href="https://docs.cloudera.com/csa/latest/release-notes/topics/csa-what-new.html">What’s New</a>.</p>
 
 <h2 id="release-highlights">Release Highlights</h2>
 <ul>
-  <li>Build and deploy on NiFi 2: Users can now develop flows in the Flow Designer as NiFi 2.3 flows by default. NiFi 2.3 will also be available as the NiFi 2 runtime for Flow Deployments. This marks the general availability of NiFi 2 in Data Flow.</li>
-  <li>Time and cost savings on NiFi 2 migrations: Self-service migration is powered by Data Flow Catalog and Flow Designer. Users can organize NiFi 1 flows in Catalog, start migrations with one click, and make any required changes in Flow Designer. A comprehensive visual migration report clearly highlights items that require manual updates, while enabling users to effectively keep track of their progress.</li>
-  <li>Improved developer productivity: Users can accelerate deployment processes by importing and referencing Shared Parameter Groups during deployment. This streamlined workflow significantly reduces development and deployment complexity and accelerates time to value for users by eliminating manual copy&amp;paste of parameter values.</li>
-  <li>Improved cost efficiency: Users can now specify tailored storage capacity, IOPS, and throughput sizes  for their NiFi repositories, making smaller deployments more cost-efficient.</li>
-  <li>Strengthened security: Collections enhance security by enabling precise role based access control for cataloged flows. Users can organize cataloged flows into Collections and tightly manage user access to each Collection.</li>
-  <li>Secured inbound connections: Users can specify trusted IP addresses for flows with inbound connections, which will limit traffic to only the specified IP addresses.</li>
-  <li>Better notifications: Users can now stay better informed with enhanced, customizable notifications:
+  <li>Cloudera platform support
     <ul>
-      <li>Subscribe to deployment-specific alerts and customize notifications by event severity.</li>
-      <li>Set up KPI-level subscriptions and notifications, including a URL that directs you to the affected NiFi component on the NiFi Canvas.</li>
-      <li>Create distribution lists to ensure team-wide notification delivery.</li>
-      <li>Integrate notifications directly with Slack (Technical Preview).</li>
+      <li>Cloudera Streaming Analytics 1.15 is supported on Cloudera 7.3.1.100 (Cumulative Hot Fix 1). Ensure that you review the 7.3.1.100 Release Notes and Support Matrix to understand which operating system, database, and JDK versions are supported for Cloudera Streaming Analytics as well.</li>
     </ul>
   </li>
-  <li>Platform upgrades: Added support for Kubernetes 1.31 and NiFi 1.28.</li>
+  <li>Rebase to Apache Flink 1.20
+    <ul>
+      <li>Streaming analytics deployments, including SQL Stream Builder, now support Apache Flink 1.20. For more information on what is included in the Apache Flink 1.20 version, see the Apache Flink 1.20 Release Announcement and Release Notes.</li>
+    </ul>
+  </li>
+  <li>Support for batch-mode queries in Cloudera SQL Stream Builder
+    <ul>
+      <li>Users can select and use “batch” as the runtime mode for production execution mode jobs that are running in an isolated Flink cluster. For more information, see  Executing SQL jobs in production mode.</li>
+    </ul>
+  </li>
+  <li>OpenTelemetry Metrics Reporter (Technical Preview)
+    <ul>
+      <li>Cloudera Streaming Analytics now includes, in Technical Preview, the OpenTelemetry Metrics Reporter to aggregate metrics to a third-party tool using open standards. To learn more about using the OpenTelemetry reporter with Flink, see the documentation for Flink and Cloudera SQL Stream Builder, as well as the Apache Flink Documentation.</li>
+    </ul>
+  </li>
+  <li>Python for table transformations and webhook connector
+    <ul>
+      <li>Support in Python UDFs for table transformations and the webhook connector have been added to Cloudera SQL Stream Builder and Flink. To learn more, see the Webhook Connector documentation</li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="upgrading-to-the-new-release">Upgrading to the New Release</h2>
-<p>Customers can perform an in-place upgrade from supported Cloudera Data Flow  versions to 2.10. Alternatively, disabling and re-enabling an existing Data Flow environment will result in the re-enabled environment running the latest version.</p>
+<p>Please see the <a href="https://docs.cloudera.com/csa/1.15.0/release-notes/topics/csa-what-new.html">Release Notes</a> for the complete list of fixes and improvements.</p>
 
-<h2 id="links">Links</h2>
-<p><a href="https://docs.cloudera.com/dataflow/cloud/release-notes/topics/cdf-whats-new.html">Release notes</a></p>
+<h2 id="getting-to-the-new-release">Getting to the New Release</h2>
+<p>To upgrade to Cloudera Streaming Analytics 1.15.0 on Cloudera on premises, check out <a href="https://docs.cloudera.com/csa/1.15.0/installation/topics/csa-upgrade.html">this upgrade guide</a>. If you are using Cloudera on cloud, refer to the Upgrade advisor documentation.</p>
 
-<p><a href="https://docs.cloudera.com/dataflow/cloud/index.html">Documentation</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Data Flow" /><category term="nifi" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.]]></summary></entry></feed>
+<h1 id="use-cases">Use Cases</h1>
+<ul>
+  <li>
+    <p>Event-Driven Applications: Stateful applications that ingest events from one or more event streams and react to incoming events by triggering computations, state updates, or external actions.</p>
+
+    <p>Apache Flink excels in handling the concept of time and state for these applications and can scale to manage very large data volumes (up to several terabytes) with exactly once consistency guarantees. Moreover, Apache Flink’s support for event-time, highly customizable window logic, and fine-grained control of time as provided by the ProcessFunction enable the implementation of advanced business logic. Moreover, Apache Flink features a library for Complex Event Processing (CEP) to detect patterns in data streams.</p>
+
+    <p>However, Apache Flink’s outstanding feature for event-driven applications is its support for savepoints. A savepoint is a consistent state image that can be used as a starting point for compatible applications. Given a savepoint, an application can be updated or adapt its scale, or multiple versions of an application can be started for A/B testing.</p>
+
+    <p>Examples:</p>
+    <ul>
+      <li>Fraud detection</li>
+      <li>Anomaly detection</li>
+      <li>Rule-based alerting</li>
+      <li>Business process monitoring</li>
+      <li>Web application (social network)</li>
+    </ul>
+  </li>
+  <li>
+    <p>Data Analytics Applications: With a sophisticated stream processing engine, analytics can also be performed in real-time. Streaming queries or applications ingest real-time event streams and continuously produce and update results as events are consumed. The results are written to an external database or maintained as internal state. A dashboard application can read the latest results from the external database or directly query the internal state of the application.</p>
+
+    <p>Apache Flink supports streaming as well as batch analytical applications.</p>
+
+    <p>Examples:</p>
+    <ul>
+      <li>Quality monitoring of telco networks</li>
+      <li>Analysis of product updates &amp; experiment evaluation in mobile applications</li>
+      <li>Ad-hoc analysis of live data in consumer technology</li>
+      <li>Large-scale graph analysis</li>
+    </ul>
+  </li>
+  <li>
+    <p>Data Pipeline Applications: Streaming data pipelines serve a similar purpose as Extract-transform-load (ETL) jobs. They transform and enrich data and can move it from one storage system to another. However, they operate in a continuous streaming mode instead of being periodically triggered. Hence, they can read records from sources that continuously produce data and move it with low latency to their destination.</p>
+
+    <p>Examples:</p>
+    <ul>
+      <li>Real-time search index building in e-commerce</li>
+      <li>Continuous ETL in e-commerce</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="resources">Resources</h1>
+
+<p>Check out <a href="https://docs.cloudera.com/csa/1.15.0/index.html">Cloudera Streaming Analytics 1.15</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/csa/1.15.0/release-notes/topics/csa-what-new.html">Release Notes</a></p>
+
+<p>Check out <a href="https://docs.cloudera.com/csa/1.15.0/download/topics/csa-download-location.html">Download Information</a></p>
+
+<p>As always, check out the <a href="https://docs.cloudera.com/csa/1.15.0/index.html">Cloudera Streaming Analytics 1.15 Docs</a></p>
+
+<p><a href="https://www.cloudera.com/products/stream-processing.html">Cloudera Stream Processing Product Page</a></p>
+
+<p><a href="https://docs.cloudera.com/index.html?tab=kubernetes-operators">Cloudera Kubernetes Operators documentation homepage</a></p>
+
+<p><a href="https://docs.cloudera.com/csp-ce/latest/index.html">Cloudera Stream Processing Community Edition</a></p>
+
+<p><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</p>
+
+<p><a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Cloudera Stream Processing &amp; Analytics Support Lifecycle Policy</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><summary type="html"><![CDATA[The Data In Motion team is pleased to announce the release of Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1. This release focuses on enhancing the user experience and adding new important features to the product, and includes improvements to SQL Stream Builder as well as a rebase to Apache Flink 1.20.1.]]></summary></entry></feed>
