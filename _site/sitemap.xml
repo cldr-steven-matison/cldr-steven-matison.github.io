@@ -181,6 +181,10 @@
 <lastmod>2026-02-20T00:00:00-05:00</lastmod>
 </url>
 <url>
+<loc>https://cldr-steven-matison.github.io//blog/Schema-Registry/</loc>
+<lastmod>2026-02-23T00:00:00-05:00</lastmod>
+</url>
+<url>
 <loc>https://cldr-steven-matison.github.io//about/</loc>
 <lastmod>2022-05-27T11:59:26-04:00</lastmod>
 </url>
@@ -222,5 +226,8 @@
 </url>
 <url>
 <loc>https://cldr-steven-matison.github.io//page9/</loc>
+</url>
+<url>
+<loc>https://cldr-steven-matison.github.io//page10/</loc>
 </url>
 </urlset>

@@ -268,4 +268,10 @@ var store = [{
         "tags": ["csm","kafka","kubernetes","cloudera"],
         "url": "/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/",
         "teaser": "/assets/images/csm-op-deployment-architecture.jpg"
+      },{
+        "title": "Cloudera Streams Messaging - Schema Registry",
+        "excerpt":"How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6 In this quick blog post I am going to show you how to install the CSM Operator’s Schema Registry and expost the UI using my macbook and minikube. First, lets skip the “hard install” docs, and work...","categories": ["blog"],
+        "tags": ["csm","schema","registry","cloudera"],
+        "url": "/blog/Schema-Registry/",
+        "teaser": "/assets/images/schemaregistry.png"
       }]

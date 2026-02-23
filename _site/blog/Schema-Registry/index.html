@@ -1,0 +1,716 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Cloudera Streams Messaging - Schema Registry - Cloudera Solutions Engineer</title>
+<meta name="description" content="How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Cloudera Streams Messaging - Schema Registry">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Schema-Registry/">
+
+
+  <meta property="og:description" content="How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/schemaregistry.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-02-23T00:00:00-05:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Schema-Registry/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io//"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <a class="site-title" href="/">
+          Cloudera Solutions Engineer
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&pageNum=1">Community</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io//">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io//" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Hello, My name is Steven Matison and I am a Senior Solutions Engineer at Cloudera, Inc.  Check out my journey with Cloudera Data Platform (CDP).</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Cloudera Streams Messaging - Schema Registry">
+    <meta itemprop="description" content="How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6">
+    <meta itemprop="datePublished" content="2026-02-23T00:00:00-05:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io//blog/Schema-Registry/" class="u-url" itemprop="url">Cloudera Streams Messaging - Schema Registry
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h1 id="how-to-get-to-schema-registry-ui-with-cloudera-streams-messaging-operator-16">How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6</h1>
+
+<p>In this quick blog post I am going to show you how to install the CSM Operator’s Schema Registry and expost the UI using my macbook and minikube.</p>
+
+<p>First, lets skip the “hard install” <a href="https://docs.cloudera.com/csm-operator/1.6/installation/topics/csm-op-install-schema-registry-overview.html#ariaid-title2">docs</a>, and work with the basic evaluation <a href="https://docs.cloudera.com/csm-operator/1.6/installation/topics/csm-op-install-schema-registry-overview.html#ariaid-title3">docs</a>.  I just want to evaluate that this works and that I can get to and see the Schema Registry UI.</p>
+
+<p>We will need the following contents for sr-values.yaml:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">tls:
+  enabled: </span><span class="kp">false</span>
+
+<span class="ss">authentication:
+  oauth:
+    enabled: </span><span class="kp">false</span>
+
+<span class="ss">authorization:
+  simple:
+    enabled: </span><span class="kp">false</span>
+
+<span class="ss">database:
+  type: </span><span class="k">in</span><span class="o">-</span><span class="n">memory</span>
+
+<span class="ss">service:
+  type: </span><span class="no">NodePort</span>
+</code></pre></div></div>
+
+<p>Having been through some of the troubles exposing UIs previouly, I was very happy to find minikube making exposing the service with NodePort easy.  In the docs you will find this command:</p>
+
+<hr />
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span> <span class="n">get</span> <span class="n">service</span> <span class="n">schema</span><span class="o">-</span><span class="n">registry</span><span class="o">-</span><span class="n">service</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+</code></pre></div></div>
+
+<p>I was even happier for AI to share with me this command:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span> <span class="n">service</span> <span class="n">schema</span><span class="o">-</span><span class="n">registry</span><span class="o">-</span><span class="n">service</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+</code></pre></div></div>
+
+<p>which swiftly moved me from terminal to the UI:</p>
+
+<p><img src="https://cldr-steven-matison.github.io//assets/images/schemaregistry.png" alt="" /></p>
+
+<p>You can still do port forward too:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span> <span class="n">port</span><span class="o">-</span><span class="n">forward</span> <span class="n">service</span><span class="o">/</span><span class="n">schema</span><span class="o">-</span><span class="n">registry</span><span class="o">-</span><span class="n">service</span> <span class="mi">9090</span><span class="p">:</span><span class="mi">9090</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+</code></pre></div></div>
+
+<p>#</p>
+<blockquote>
+  <p><strong>Note:</strong> Check out my full command stream for the session above:</p>
+</blockquote>
+
+<p class="notice--warning"><strong>Watch out!</strong> Be careful with upstream documentation copy paste code boxes with \\ and return lines they will often times mess you up.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">minikube</span> <span class="n">start</span>
+<span class="n">minikube</span> <span class="n">addons</span> <span class="n">enable</span> <span class="n">ingress</span>
+<span class="n">helm</span> <span class="n">registry</span> <span class="n">login</span> <span class="n">container</span><span class="p">.</span><span class="nf">repository</span><span class="p">.</span><span class="nf">cloudera</span><span class="p">.</span><span class="nf">com</span><span class="p">\</span>
+<span class="n">kubectl</span> <span class="n">create</span> <span class="n">secret</span> <span class="n">docker</span><span class="o">-</span><span class="n">registry</span> <span class="n">docker</span><span class="o">-</span><span class="n">pull</span><span class="o">-</span><span class="n">secret</span> <span class="p">\\</span><span class="n">n</span> <span class="o">--</span><span class="n">namespace</span> <span class="s2">"csm-operator"</span> <span class="p">\\</span><span class="n">n</span> <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">server</span> <span class="s2">"container.repository.cloudera.com"</span> <span class="p">\\</span><span class="n">n</span> <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">username</span> <span class="s2">"username"</span> <span class="p">\\</span><span class="n">n</span> <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">password</span> <span class="s2">"password"</span>
+<span class="n">kubectl</span> <span class="n">create</span> <span class="n">secret</span> <span class="n">docker</span><span class="o">-</span><span class="n">registry</span> <span class="n">docker</span><span class="o">-</span><span class="n">pull</span><span class="o">-</span><span class="n">secret</span> <span class="o">--</span><span class="n">namespace</span> <span class="s2">"csm-operator"</span> <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">server</span> <span class="s2">"container.repository.cloudera.com"</span> <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">username</span> <span class="s2">"username"</span> <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">password</span> <span class="s2">"password"</span>
+<span class="n">cp</span> <span class="no">Documents</span><span class="o">/</span><span class="n">steven_matison_2025_2026_Licenseinfo</span><span class="o">/</span><span class="n">steven_matison_2025_2026_cloudera_license</span><span class="p">.</span><span class="nf">txt</span> <span class="p">.</span><span class="nf">/</span><span class="n">license</span><span class="p">.</span><span class="nf">txt</span>
+<span class="n">helm</span> <span class="n">install</span> <span class="n">strimzi</span><span class="o">-</span><span class="n">cluster</span><span class="o">-</span><span class="n">operator</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span> <span class="o">--</span><span class="n">set</span> <span class="s1">'image.imagePullSecrets[0].name=docker-pull-secret'</span> <span class="o">--</span><span class="n">set</span><span class="o">-</span><span class="n">file</span> <span class="n">clouderaLicense</span><span class="p">.</span><span class="nf">fileContent</span><span class="o">=</span><span class="p">.</span><span class="nf">/</span><span class="n">license</span><span class="p">.</span><span class="nf">txt</span> <span class="o">--</span><span class="n">set</span> <span class="n">watchAnyNamespace</span><span class="o">=</span><span class="kp">true</span> <span class="n">oci</span><span class="ss">:/</span><span class="o">/</span><span class="n">container</span><span class="p">.</span><span class="nf">repository</span><span class="p">.</span><span class="nf">cloudera</span><span class="p">.</span><span class="nf">com</span><span class="o">/</span><span class="n">cloudera</span><span class="o">-</span><span class="n">helm</span><span class="o">/</span><span class="n">csm</span><span class="o">-</span><span class="n">operator</span><span class="o">/</span><span class="n">strimzi</span><span class="o">-</span><span class="n">kafka</span><span class="o">-</span><span class="n">operator</span> <span class="o">--</span><span class="n">version</span> <span class="mf">1.6</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">b99</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">deployments</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">nano</span> <span class="n">sr</span><span class="o">-</span><span class="n">values</span><span class="p">.</span><span class="nf">yaml</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">deployments</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">kafka</span> <span class="o">-</span><span class="n">n</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">helm</span> <span class="n">uninstall</span> <span class="n">schema</span><span class="o">-</span><span class="n">registry</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">helm</span> <span class="n">install</span> <span class="n">schema</span><span class="o">-</span><span class="n">registry</span> <span class="p">\\</span>
+  <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span> <span class="p">\\</span>
+  <span class="o">--</span><span class="n">values</span> <span class="n">sr</span><span class="o">-</span><span class="n">values</span><span class="p">.</span><span class="nf">yaml</span> <span class="p">\\</span>
+  <span class="o">--</span><span class="n">set</span> <span class="s1">'image.imagePullSecrets[0].name=docker-pull-secret'</span> <span class="p">\\</span>
+  <span class="n">oci</span><span class="ss">:/</span><span class="o">/</span><span class="n">container</span><span class="p">.</span><span class="nf">repository</span><span class="p">.</span><span class="nf">cloudera</span><span class="p">.</span><span class="nf">com</span><span class="o">/</span><span class="n">cloudera</span><span class="o">-</span><span class="n">helm</span><span class="o">/</span><span class="n">csm</span><span class="o">-</span><span class="n">operator</span><span class="o">/</span><span class="n">schema</span><span class="o">-</span><span class="n">registry</span> <span class="p">\\</span>
+  <span class="o">--</span><span class="n">version</span> <span class="mf">1.6</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">b99</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">deployments</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">service</span> <span class="n">schema</span><span class="o">-</span><span class="n">registry</span><span class="o">-</span><span class="n">service</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">minikube</span> <span class="n">service</span> <span class="n">schema</span><span class="o">-</span><span class="n">registry</span><span class="o">-</span><span class="n">service</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">history</span>
+<span class="nb">exit</span>
+</code></pre></div></div>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.6/index.html">DOCS</a> for the CSM Operator.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/csm" class="page__taxonomy-item p-category" rel="tag">csm</a><span class="sep">, </span>
+    
+      <a href="/tags/registry" class="page__taxonomy-item p-category" rel="tag">registry</a><span class="sep">, </span>
+    
+      <a href="/tags/schema" class="page__taxonomy-item p-category" rel="tag">schema</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-02-23T00:00:00-05:00">February 23, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streams+Messaging+-+Schema+Registry%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FSchema-Registry%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FSchema-Registry%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FSchema-Registry%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/" class="pagination--pager" title="Cloudera Streams Messaging - Kubernetes Operator 1.6
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csm-op-deployment-architecture.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/" rel="permalink">Cloudera Streams Messaging - Kubernetes Operator 1.6
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/cloudera_ai_inference.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-AI-Inference/" rel="permalink">Cloudera AI Inference Service GA Onpremise
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/cloudera_data_lineage.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Data-Lineage/" rel="permalink">Introducing Cloudera Data Lineage
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s e...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/cloudera_trino.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Trino-for-Cloudera-Data-Warehouse/" rel="permalink">Trino SQL Engine in Cloudera Data Warehouse for On-Premises
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Trino SQL Engine in Cloudera Data Warehouse (CDW) Now General Availability (GA) for On-Premises
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
