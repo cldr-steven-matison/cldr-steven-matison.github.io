@@ -61,7 +61,6 @@ You can still do port forward too:
 kubectl port-forward service/schema-registry-service 9090:9090 --namespace csm-operator
 ```
 
-#
 > **Note:** Check out my full command stream for the session above:
 
 **Watch out!** Be careful with upstream documentation copy paste code boxes with \\\\ and return lines they will often times mess you up.
@@ -74,16 +73,14 @@ minikube addons enable ingress
 helm registry login container.repository.cloudera.com\
 kubectl create secret docker-registry docker-pull-secret \\n --namespace "csm-operator" \\n --docker-server "container.repository.cloudera.com" \\n --docker-username "username" \\n --docker-password "password"
 kubectl create secret docker-registry docker-pull-secret --namespace "csm-operator" --docker-server "container.repository.cloudera.com" --docker-username "username" --docker-password "password"
-cp Documents/steven_matison_2025_2026_Licenseinfo/steven_matison_2025_2026_cloudera_license.txt ./license.txt
+cp path/to/my_license.txt ./license.txt
 helm install strimzi-cluster-operator --namespace csm-operator --set 'image.imagePullSecrets[0].name=docker-pull-secret' --set-file clouderaLicense.fileContent=./license.txt --set watchAnyNamespace=true oci://container.repository.cloudera.com/cloudera-helm/csm-operator/strimzi-kafka-operator --version 1.6.0-b99
 kubectl get deployments --namespace csm-operator
-kubectl get pods --namespace csm-operator
 kubectl get pods --namespace csm-operator
 nano sr-values.yaml
 kubectl get pods --namespace csm-operator
 kubectl get deployments --namespace csm-operator
 kubectl get kafka -n csm-operator
-helm uninstall schema-registry --namespace csm-operator
 helm install schema-registry \\
   --namespace csm-operator \\
   --values sr-values.yaml \\
@@ -93,9 +90,6 @@ helm install schema-registry \\
 kubectl get deployments --namespace csm-operator
 kubectl get service schema-registry-service --namespace csm-operator
 minikube service schema-registry-service --namespace csm-operator
-history
-exit
 ```
-
 
 As always, check out the entire [DOCS](https://docs.cloudera.com/csm-operator/1.6/index.html) for the CSM Operator.
