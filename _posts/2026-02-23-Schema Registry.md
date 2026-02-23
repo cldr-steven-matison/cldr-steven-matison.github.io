@@ -48,7 +48,7 @@ kubectl get service schema-registry-service --namespace csm-operator
 I was even happier for AI to share with me this command:
 
 ```ruby
-kubectl service schema-registry-service --namespace csm-operator
+minikube service schema-registry-service --namespace csm-operator
 ```
 
 which swiftly moved me from terminal to the UI:
