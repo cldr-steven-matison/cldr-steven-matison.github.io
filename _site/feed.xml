@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-02-05T08:27:37-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-02-23T08:10:14-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.6</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.6" /><published>2026-02-20T00:00:00-05:00</published><updated>2026-02-20T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Kubernetes%20Operator%201.6</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/"><![CDATA[<h1 id="announcing-cloudera-streams-messaging---operator-for-kubernetes-v16">Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6</h1>
+
+<p>The Cloudera’s Data In Motion Team is pleased to announce the release of the <strong>Cloudera Streams Messaging Operator for Kubernetes v1.6</strong>.</p>
+
+<p>This release centers on a major platform rebase to the latest Kafka standards, official certification for the Apache Iceberg Sink Connector, the introduction of Schema Registry support, and the transition to the stable Strimzi v1 API for enhanced environment stability.</p>
+
+<hr />
+
+<h2 id="release-highlights">Release Highlights</h2>
+
+<h3 id="1-rebase-to-strimzi-0491-and-kafka-411">1. Rebase to Strimzi 0.49.1 and Kafka 4.1.1</h3>
+<p>The Operator is now based on <strong>Strimzi 0.49.1</strong> (up from 0.47.0) and <strong>Apache Kafka 4.1.1</strong> (up from 4.0.1). This rebase brings the latest performance optimizations and feature sets from the upstream community, ensuring your streaming infrastructure remains at the cutting edge.</p>
+
+<h3 id="2-introduction-of-cloudera-schema-registry">2. Introduction of Cloudera Schema Registry</h3>
+<p>Schema Registry is now available as a standalone application to efficiently store and manage schemas for your streaming data.</p>
+<ul>
+  <li><strong>Format Support:</strong> Avro and JSON schema formats.</li>
+  <li><strong>Consistency:</strong> Provides schema evolution capabilities with configurable compatibility modes.</li>
+  <li><strong>Access:</strong> Central repository for applications to validate data via REST API and client libraries.</li>
+</ul>
+
+<h3 id="3-apache-iceberg-sink-connector-certification">3. Apache Iceberg Sink Connector Certification</h3>
+<p>To empower modern data lakehouse architectures, the <strong>Apache Iceberg Sink Connector</strong> is now officially certified. While installed from external repositories (like Maven Central), it is a validated part of the Cloudera ecosystem, enabling seamless ingestion into Iceberg tables.</p>
+
+<h3 id="4-cloudera-surveyor-enhancements">4. Cloudera Surveyor Enhancements</h3>
+<p>Significant upgrades provide deeper visibility into your cluster’s physical layer:</p>
+<ul>
+  <li><strong>New Broker Monitoring:</strong> Dedicated Brokers and Broker Details pages to monitor health, disk usage, and alerts. Track topic partitions and manage log directories directly from the UI.</li>
+  <li><strong>Automatic Key Generation:</strong> Surveyor now automatically generates cryptographically secure 128-byte keys by default (except in FIPS mode), eliminating manual configuration steps.</li>
+</ul>
+
+<h3 id="5-strimzi-v1-api-stability">5. Strimzi v1 API Stability</h3>
+<p>Version 1.6 introduces the <strong>v1 API</strong> version for all Strimzi Custom Resource Definitions (CRDs), providing a stable, production-ready foundation for managing Kafka resources.</p>
+
+<hr />
+
+<h2 id="getting-the-new-release">Getting the New Release</h2>
+<ul>
+  <li><strong>Upgrading:</strong> To upgrade to v1.6, please check the <a href="https://docs.cloudera.com/csm-operator/1.6/upgrade/topics/csm-op-upgrade-overview.html">Upgrade Guide</a>.</li>
+  <li><strong>First-time Install:</strong> If you are installing the operator for the first time, consult the <a href="https://docs.cloudera.com/csm-operator/1.6/installation/topics/csm-op-install-overview.html">Installation Overview</a>.</li>
+</ul>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+<ul>
+  <li><a href="https://docs.cloudera.com/csm-operator/1.6/release-notes/topics/csm-op-rn.html#concept_ksn_nwn_cbc">Cloudera Streams Messaging - Kubernetes Operator 1.6 Release Notes</a></li>
+  <li><a href="https://community.cloudera.com/t5/What-s-New-Cloudera/Announcing-Cloudera-Streams-Messaging-Operator-for/ba-p/413559">Cloudera Community Announcement Post</a></li>
+  <li><a href="https://github.com/strimzi/strimzi-kafka-operator/releases/tag/0.49.1">Strimzi 0.49.1 Release Notes</a></li>
+  <li><a href="https://archive.apache.org/dist/kafka/4.1.1/RELEASE_NOTES.html">Kafka 4.1.1 Release Notes</a></li>
+  <li><a href="http://docs.cloudera.com/csm-operator/1.6/schema-registry-overview/topics/csm-op-schema-registry-overview.html">Schema Registry Documentation</a></li>
+  <li><a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Updated Support Lifecycle Policy</a></li>
+</ul>
+
+<blockquote>
+  <p><strong>Note:</strong> For specific technical questions, please refer to the internal documentation or the Cloudera Community forums.</p>
+</blockquote>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.6/index.html">DOCS</a> for the CSM Operator.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6]]></summary></entry><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
 
 <p>Powered by <strong>NVIDIA NIM</strong>, the Cloudera AI Inference service provides the control and performance that enterprises need to accelerate innovation without compromising data security.</p>
 
@@ -599,22 +657,4 @@
   <li><a href="https://docs.cloudera.com/cdp-private-cloud-data-services/1.5.5/release-notes/topics/cdppvc-1-5-5-Repository-Locations.html">Download</a></li>
   <li><a href="https://supportmatrix.cloudera.com/">Support Matrix</a></li>
   <li><a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">Support lifecycle policy</a></li>
-</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><summary type="html"><![CDATA[Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera AI Workbench scalability and performance improvements, Cloudera Data Engineering Access Control Lists (ACLs), Cloudera Data Warehouse Hive query history, and a significant reduction in common vulnerabilities and exposures (CVE).]]></summary></entry><entry><title type="html">Cloudera Flow Management Migration Tool 3.0.0 for NiFi 1 to NiFi 2 migrations now GA</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Nifi-2.0-Migration-Tool-GA/" rel="alternate" type="text/html" title="Cloudera Flow Management Migration Tool 3.0.0 for NiFi 1 to NiFi 2 migrations now GA" /><published>2025-06-02T00:00:00-04:00</published><updated>2025-06-02T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Nifi%202.0%20Migration%20Tool%20GA</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Nifi-2.0-Migration-Tool-GA/"><![CDATA[<p>The Data in Motion team is pleased to announce the generally available (GA) release of Cloudera Flow Management Migration Tool 3.0.0.  This tool assists Cloudera customers in migrating from Cloudera Flow Management 2.1.7 Service Pack 2 (powered by NiFi 1) to Cloudera Flow Management 4.10.0 (powered by NiFi 2).</p>
-
-<h1 id="key-features-and-benefits-of-this-release">Key features and benefits of this release</h1>
-
-<ul>
-  <li>Streamlined NiFi 1 to NiFi 2 migrations: The Cloudera Flow Management Migration Tool dramatically simplifies migrating data flows designed for NiFi 1 to run in NiFi 2, and helps you transition to Cloudera Flow Management 4.x more efficiently.  It facilitates migrations in compliance with the NiFi 1.28-to-2.3 GA ruleset to ensure a smooth and effective migration experience, covering missing, modified, and replaced components. The tool also automates complex and repetitive tasks in updating flow configurations, reducing manual effort.</li>
-  <li>Aligned with NiFi 2 features: This command-line tool transforms variables and components to align with NiFi 2 features.</li>
-  <li>Improved flexibility: This release allows you to migrate a flow in its “flow.json.gz” form, where no unzipping/rezipping need to take place.</li>
-</ul>
-
-<h1 id="support-matrix-and-upgrade-paths">Support Matrix and Upgrade Paths</h1>
-
-<p>Cloudera Flow Management Migration Tool 3.0.0 is a standalone product that supports the conversion of flows from Cloudera Flow Management 2.1.7 Service Pack 2 to run on Cloudera Flow Management 4.10.0.0 instances. This release supports on-premises environments.</p>
-
-<h1 id="links">Links</h1>
-<ul>
-  <li><a href="https://docs.cloudera.com/cfm/4.10.0/cfm-migration-tool/topics/cfm-mt-release-notes.html">Release notes</a></li>
-  <li><a href="https://archive.cloudera.com/p/cfm-migration-tool/">Download</a></li>
-</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="nifi" /><category term="cloudera" /><summary type="html"><![CDATA[The Data in Motion team is pleased to announce the generally available (GA) release of Cloudera Flow Management Migration Tool 3.0.0. This tool assists Cloudera customers in migrating from Cloudera Flow Management 2.1.7 Service Pack 2 (powered by NiFi 1) to Cloudera Flow Management 4.10.0 (powered by NiFi 2).]]></summary></entry></feed>
+</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><summary type="html"><![CDATA[Cloudera is thrilled to announce the general availability (GA) of Data Services 1.5.5*. This is a significant milestone tailored to meet the security, reliability, and scalability requirements of many on-premises Data Services customers. Key capabilities of this release are: Cloudera AI Inference tech preview, cert-manager integration for non-wildcard certificates, Cloudera AI Workbench scalability and performance improvements, Cloudera Data Engineering Access Control Lists (ACLs), Cloudera Data Warehouse Hive query history, and a significant reduction in common vulnerabilities and exposures (CVE).]]></summary></entry></feed>

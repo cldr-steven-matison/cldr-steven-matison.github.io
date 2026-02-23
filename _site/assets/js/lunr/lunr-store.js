@@ -262,4 +262,10 @@ var store = [{
         "tags": ["cloudera","ai","inference","onpremise"],
         "url": "/blog/Cloudera-AI-Inference/",
         "teaser": "/assets/images/cloudera_ai_inference.png"
+      },{
+        "title": "Cloudera Streams Messaging - Kubernetes Operator 1.6",
+        "excerpt":"Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6 The Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streams Messaging Operator for Kubernetes v1.6. This release centers on a major platform rebase to the latest Kafka standards, official certification for the Apache Iceberg Sink...","categories": ["blog"],
+        "tags": ["csm","kafka","kubernetes","cloudera"],
+        "url": "/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/",
+        "teaser": "/assets/images/csm-op-deployment-architecture.jpg"
       }]
