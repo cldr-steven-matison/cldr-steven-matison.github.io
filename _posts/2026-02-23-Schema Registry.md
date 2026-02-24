@@ -63,7 +63,7 @@ kubectl port-forward service/schema-registry-service 9090:9090 --namespace csm-o
 
 > **Note:** Check out my full command stream for the session above:
 
-**Watch out!** Be careful with upstream documentation copy paste code boxes with \\\\ and return lines they will often times mess you up.
+:warning: **Watch out!** Be careful with upstream documentation copy paste code boxes with \\\\ and return lines they will often times mess you up.
 {: .notice--warning}
 
 
