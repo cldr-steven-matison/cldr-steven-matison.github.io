@@ -60,3 +60,5 @@ Version 1.6 introduces the **v1 API** version for all Strimzi Custom Resource De
 > **Note:** For specific technical questions, please refer to the internal documentation or the Cloudera Community forums.
 
 As always, check out the entire [DOCS](https://docs.cloudera.com/csm-operator/1.6/index.html) for the CSM Operator.
+
+If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streams Messaging Operator please reach out to schedule a discussion.

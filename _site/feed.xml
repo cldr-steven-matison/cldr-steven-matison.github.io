@@ -1,4 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-02-23T12:40:28-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streams Messaging - Schema Registry</title><link href="https://cldr-steven-matison.github.io//blog/Schema-Registry/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Schema Registry" /><published>2026-02-23T00:00:00-05:00</published><updated>2026-02-23T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Schema%20Registry</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Schema-Registry/"><![CDATA[<h1 id="how-to-get-to-schema-registry-ui-with-cloudera-streams-messaging-operator-16">How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-02-24T07:29:12-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streams Messaging - Surveyor</title><link href="https://cldr-steven-matison.github.io//blog/Surveyor/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Surveyor" /><published>2026-02-24T00:00:00-05:00</published><updated>2026-02-24T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Surveyor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Surveyor/"><![CDATA[<h1 id="introducing-cloudera-streams-messaging-surveyor">Introducing Cloudera Streams Messaging Surveyor</h1>
+
+<p>Recently released <a href="">CSM 1.6</a> brings Surveyor, Iceberg Connector, and Schema Registry.  In my previous blog post <a href="">Schema Registry</a>, I expose the steps to get to the UI.  Now let’s do the same with Surveyor.</p>
+
+<p>First, skip the “hard install” <a href="">docs</a>, and work with the basic evaluation <a href="">docs</a>.  We just want to evaluate that the operator works and that we can get to and see the Surveyor UI.</p>
+
+<p class="notice--warning">:trophy: <strong>Pro Tip!</strong> It is important to have a basic working install confidence.  Without you will quickly be blocked.  With confidence you can solve the difficulties you will encounter while installing these services in existing or alternative kubernetes platforms.</p>
+
+<p>We will need the following contents for values.yaml:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">clusterConfigs:
+  clusters:
+    </span><span class="o">-</span> <span class="ss">clusterName: </span><span class="n">my</span><span class="o">-</span><span class="n">cluster</span>
+      <span class="ss">tags:
+        </span><span class="o">-</span> <span class="n">csm1</span><span class="o">.</span><span class="mi">6</span>
+      <span class="ss">bootstrapServers: </span><span class="n">my</span><span class="o">-</span><span class="n">cluster</span><span class="o">-</span><span class="n">kafka</span><span class="o">-</span><span class="n">bootstrap</span><span class="p">.</span><span class="nf">csm</span><span class="o">-</span><span class="n">operator</span><span class="p">.</span><span class="nf">svc</span><span class="p">:</span><span class="mi">9092</span>
+      <span class="ss">adminOperationTimeout: </span><span class="no">PT1M</span>
+      <span class="ss">authorization:
+        enabled: </span><span class="kp">false</span>
+      <span class="ss">commonClientConfig:
+        </span><span class="n">security</span><span class="p">.</span><span class="nf">protocol</span><span class="p">:</span> <span class="no">PLAINTEXT</span>
+<span class="ss">surveyorConfig:
+  surveyor:
+    authentication:
+      enabled: </span><span class="kp">false</span>
+<span class="ss">tlsConfigs:
+  enabled: </span><span class="kp">false</span>
+
+
+</code></pre></div></div>
+
+<p>:bulb: Check out these two methods for getting your bootstrap servers:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span> <span class="n">get</span> <span class="n">kafka</span> <span class="n">my</span><span class="o">-</span><span class="n">cluster</span> <span class="o">-</span><span class="n">n</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span> <span class="o">-</span><span class="n">o</span> <span class="n">jsonpath</span><span class="o">=</span><span class="s1">'{.status.listeners[?(@.name=="plain")].bootstrapServers}'</span>
+</code></pre></div></div>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">minikube</span> <span class="n">service</span> <span class="n">my</span><span class="o">-</span><span class="n">cluster</span><span class="o">-</span><span class="n">kafka</span><span class="o">-</span><span class="n">bootstrap</span> <span class="o">--</span><span class="n">url</span> <span class="o">-</span><span class="n">n</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+</code></pre></div></div>
+
+<p>Last but not least, while working with Schema Registry I learned how to use the minikube service command:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">minikube</span> <span class="n">service</span> <span class="n">cloudera</span><span class="o">-</span><span class="n">surveyor</span><span class="o">-</span><span class="n">service</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+</code></pre></div></div>
+
+<p>which swiftly moved me from terminal to the UI:</p>
+
+<p><img src="https://cldr-steven-matison.github.io//assets/images/surveyor.png" alt="" /></p>
+
+<p>Also take a look at my full minikube cluster:</p>
+
+<p><img src="https://cldr-steven-matison.github.io//assets/images/csmk9s.png" alt="" /></p>
+
+<blockquote>
+  <p><strong>Note:</strong> Check out my full command stream for the session above:</p>
+</blockquote>
+
+<p class="notice--warning">:warning: <strong>Watch out!</strong> Be careful with upstream documentation copy paste code boxes with \\ and return lines they will often times mess you up.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">minikube</span> <span class="n">service</span> <span class="n">my</span><span class="o">-</span><span class="n">cluster</span><span class="o">-</span><span class="n">kafka</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">bootstrap</span> <span class="o">--</span><span class="n">url</span> <span class="o">-</span><span class="n">n</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">kafka</span> <span class="n">my</span><span class="o">-</span><span class="n">cluster</span> <span class="o">-</span><span class="n">n</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span> <span class="o">-</span><span class="n">o</span> <span class="n">jsonpath</span><span class="o">=</span><span class="s1">'{.status.listeners[?(@.name=="plain")].bootstrapServers}'</span>
+<span class="n">minikube</span> <span class="n">service</span> <span class="n">my</span><span class="o">-</span><span class="n">cluster</span><span class="o">-</span><span class="n">kafka</span><span class="o">-</span><span class="n">bootstrap</span> <span class="o">--</span><span class="n">url</span> <span class="o">-</span><span class="n">n</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">nano</span> <span class="n">values</span><span class="p">.</span><span class="nf">yaml</span>
+<span class="n">helm</span> <span class="n">uninstall</span> <span class="n">cloudera</span><span class="o">-</span><span class="n">surveyor</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">helm</span> <span class="n">install</span> <span class="n">cloudera</span><span class="o">-</span><span class="n">surveyor</span> <span class="p">\\</span>
+  <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span> <span class="p">\\</span>
+  <span class="o">--</span><span class="n">values</span> <span class="n">values</span><span class="p">.</span><span class="nf">yaml</span> <span class="p">\\</span>
+  <span class="o">--</span><span class="n">set</span> <span class="s1">'image.imagePullSecrets=docker-pull-secret'</span> <span class="p">\\</span>
+  <span class="o">--</span><span class="n">set</span><span class="o">-</span><span class="n">file</span> <span class="n">clouderaLicense</span><span class="p">.</span><span class="nf">fileContent</span><span class="o">=</span><span class="p">.</span><span class="nf">/</span><span class="n">license</span><span class="p">.</span><span class="nf">txt</span> <span class="p">\\</span>
+  <span class="n">oci</span><span class="ss">:/</span><span class="o">/</span><span class="n">container</span><span class="p">.</span><span class="nf">repository</span><span class="p">.</span><span class="nf">cloudera</span><span class="p">.</span><span class="nf">com</span><span class="o">/</span><span class="n">cloudera</span><span class="o">-</span><span class="n">helm</span><span class="o">/</span><span class="n">csm</span><span class="o">-</span><span class="n">operator</span><span class="o">/</span><span class="n">surveyor</span> <span class="p">\\</span>
+  <span class="o">--</span><span class="n">version</span> <span class="mf">1.6</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">b99</span><span class="p">\</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">deployments</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">minikube</span> <span class="n">service</span> <span class="n">cloudera</span><span class="o">-</span><span class="n">surveyor</span><span class="o">-</span><span class="n">service</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+<span class="n">k9s</span>
+<span class="n">helm</span> <span class="n">uninstall</span> <span class="n">cloudera</span><span class="o">-</span><span class="n">surveyor</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
+</code></pre></div></div>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.6/index.html">DOCS</a> for the CSM Operator.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streams Messaging Operator please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="surveyor" /><category term="cloudera" /><summary type="html"><![CDATA[Introducing Cloudera Streams Messaging Surveyor]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Schema Registry</title><link href="https://cldr-steven-matison.github.io//blog/Schema-Registry/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Schema Registry" /><published>2026-02-23T00:00:00-05:00</published><updated>2026-02-23T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Schema%20Registry</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Schema-Registry/"><![CDATA[<h1 id="how-to-get-to-schema-registry-ui-with-cloudera-streams-messaging-operator-16">How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6</h1>
 
 <p>In this quick blog post I am going to show you how to install the CSM Operator’s Schema Registry and expost the UI using my macbook and minikube.</p>
 
@@ -74,7 +153,9 @@
 <span class="n">minikube</span> <span class="n">service</span> <span class="n">schema</span><span class="o">-</span><span class="n">registry</span><span class="o">-</span><span class="n">service</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
 </code></pre></div></div>
 
-<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.6/index.html">DOCS</a> for the CSM Operator.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="schema" /><category term="registry" /><category term="cloudera" /><summary type="html"><![CDATA[How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.6</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.6" /><published>2026-02-20T00:00:00-05:00</published><updated>2026-02-20T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Kubernetes%20Operator%201.6</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/"><![CDATA[<h1 id="announcing-cloudera-streams-messaging---operator-for-kubernetes-v16">Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6</h1>
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.6/index.html">DOCS</a> for the CSM Operator.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streams Messaging Operator please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="schema" /><category term="registry" /><category term="cloudera" /><summary type="html"><![CDATA[How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.6</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.6" /><published>2026-02-20T00:00:00-05:00</published><updated>2026-02-20T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Kubernetes%20Operator%201.6</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/"><![CDATA[<h1 id="announcing-cloudera-streams-messaging---operator-for-kubernetes-v16">Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6</h1>
 
 <p>The Cloudera’s Data In Motion Team is pleased to announce the release of the <strong>Cloudera Streams Messaging Operator for Kubernetes v1.6</strong>.</p>
 
@@ -132,7 +213,9 @@
   <p><strong>Note:</strong> For specific technical questions, please refer to the internal documentation or the Cloudera Community forums.</p>
 </blockquote>
 
-<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.6/index.html">DOCS</a> for the CSM Operator.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6]]></summary></entry><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
+<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.6/index.html">DOCS</a> for the CSM Operator.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streams Messaging Operator please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6]]></summary></entry><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
 
 <p>Powered by <strong>NVIDIA NIM</strong>, the Cloudera AI Inference service provides the control and performance that enterprises need to accelerate innovation without compromising data security.</p>
 
@@ -545,73 +628,4 @@
   <li><a href="https://blog.cloudera.com/cloudera-streaming-analytics-kubernetes-operator-1-3-release/">New - Cloudera Streaming Analytics - Kubernetes Operator 1.3 Blog Post</a> (to share)</li>
   <li><a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/index.html">Updated - Cloudera Streaming Analytics - Kubernetes Operator Documentation</a></li>
   <li><a href="https://www.cloudera.com/webinars/streaming-analytics-overview.html">Cloudera Streaming Analytics Overview (webinar recording)</a></li>
-</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><category term="kubernetes" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.]]></summary></entry><entry><title type="html">Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-2.2.9-General-Availability/" rel="alternate" type="text/html" title="Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400" /><published>2025-07-18T00:00:00-04:00</published><updated>2025-07-18T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-2.2.9%20General%20Availability</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-2.2.9-General-Availability/"><![CDATA[<p>The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 2.2.9 supporting Apache NiFi 2.3.0 and 1.28.1 for Cloudera Data Platform 7.3.1.400.</p>
-
-<p>This release offers a number of new features and improvements as well as upgraded dependencies.</p>
-
-<h3 id="key-features-for-this-release">Key features for this release</h3>
-
-<ul>
-  <li><strong>NiFi 2.3:</strong> Cloudera Flow Management 2.2.9 for DataHub contains an image based on Apache NiFi 2.3.0 and adds several new features not available in previous versions of Apache NiFi.
-    <ul>
-      <li><strong>New Features and Components in Apache NiFi 2.3:</strong>
-        <ul>
-          <li>Support for copying and pasting flow definitions between separate NiFi deployments</li>
-          <li>Several new processors integrating with Box, allowing users to leverage Box as a cloud storage solution</li>
-          <li>GetS3ObjectTags - Retrieves object tags for a file in S3</li>
-          <li>PEMEncodedSSLContextProvider - an SSLContext Provider configurable using PEM Private Key and Certificate files, providing a more secure solution for TLS-based connections</li>
-          <li>StandardDatabaseDialectService - A controller service to generate SQL statements for the specified database dialect (MySQL, Oracle, e.g.), providing a simpler approach for configuring database-related processors to support various SQL dialects</li>
-        </ul>
-      </li>
-      <li><strong>New Components in Cloudera Flow Management 2.2.9 for DataHub (based on Apache NiFi 2.3.0):</strong>
-        <ul>
-          <li>SawmillTransformRecord and SawmillTransformJSON - Uses the Sawmill transformation DSL to transform incoming FlowFiles, providing an additional and powerful method to transform FlowFile content</li>
-          <li>New controller services providing better integration with Cloudera Flow Management Registry</li>
-          <li>PhoenixThickConnectionPool and PhoenixThinConnectionPool - Database Connection Pool controller services integrating with Phoenix (SQL on HBase) either using the thin or thick driver (both included), enabling more connections from NiFi, such as to Cloudera Operational Database</li>
-          <li>RESTCatalogService (in Technical Preview) - Catalog controller service for integrating with external REST-based Iceberg catalogs such as Apache Polaris</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p><strong>New GenAI Python Processors:</strong> Cloudera Flow Management 2.2.9 for DataHub adds four new Python processors to help develop RAG pipelines. PromptClaude, TokenCount, PromptAzureOpenAI, and PromptOpenAI are included in the release. For the associated applications, users can design a full RAG pipeline.</p>
-  </li>
-  <li>
-    <p><strong>New Flow Analysis Rules:</strong> Cloudera Flow Management 2.2.9 for DataHub adds two new Flow Analysis Rules: RequireMergeBeforePutIceberg and RestrictFlowFileExpiration. The former ensures FlowFiles will not be too small as to affect the performance of Iceberg; the latter restricts the minimum time for a FlowFile to expire in the system and be removed, which helps prevent data loss if FlowFiles remain idle in a connection past the specified threshold.</p>
-  </li>
-  <li>
-    <p><strong>Critical Component Support:</strong> CFM 2.2.9 includes the Solr, Spark, and Elasticsearch Beats components that were removed in Apache NiFi 2.0. For users with existing flows that use these, or looking to take advantage of them in new flows, Cloudera’s distribution of NiFi 2.0 will be the only way to gain access to and support for these components.</p>
-  </li>
-  <li><strong>Updates and Patches:</strong> For additional stability, performance, and security.</li>
-</ul>
-
-<h3 id="support-matrix-and-upgrade-paths">Support Matrix and Upgrade Paths</h3>
-
-<p>To upgrade, users should:</p>
-
-<ol>
-  <li>Upgrade their CFM DataHubs to Cloudera Flow Management 2.2.9 (based on Apache NiFi 1.28.1) first</li>
-  <li>Then utilize the Cloudera Flow Management Migration tool to convert existing Cloudera Flow Management flows to run on Cloudera Flow Management 2.2.9 (based on Apache NiFi 2.3.0) instances.</li>
-</ol>
-
-<p>Cloudera Flow Management 2.2.9 for DataHub is supported on Cloudera Cloudera Data Platform 7.3.1 Service Pack 2. In-place upgrades from Cloudera Flow Management for DataHub (based on Apache NiFi 1.x) to Cloudera Flow Management for DataHub (based on Apache NiFi 2.x) are not supported; flows must be migrated then transferred to the Cloudera Flow Management 4 instance(s).</p>
-
-<h3 id="use-cases">Use Cases</h3>
-
-<p>Leverage NiFi 2.x capabilities with Cloudera enhancements:</p>
-
-<ul>
-  <li>Exercise NiFi 2 capabilities in production with Cloudera’s first NiFi 2 based Generally Available release for DataHub.</li>
-  <li>Flow administrators can enforce best practices for flow designers to ensure robust, reliable solutions using the Flow Analysis Rules Engine and Cloudera-provided flow analysis rules.</li>
-  <li>Create RAG pipelines for GenAI, Data Engineering, and Machine Learning model scoring using new processors and integrations.</li>
-</ul>
-
-<h3 id="links">Links</h3>
-
-<p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new.html">Release Notes</a></p>
-
-<p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new-flow-management.html">What’s New with Nifi 1</a></p>
-
-<p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new-flow-management-nifi2.html">What’s New with  Nifi 2</a></p>
-
-<p><a href="https://docs.cloudera.com/cdf-datahub/7.3.1/release-notes/topics/cdf-datahub-whats-new-edge-management.html">What’s New with MiNiFi</a></p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><summary type="html"><![CDATA[The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 2.2.9 supporting Apache NiFi 2.3.0 and 1.28.1 for Cloudera Data Platform 7.3.1.400.]]></summary></entry></feed>
+</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><category term="kubernetes" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.]]></summary></entry></feed>

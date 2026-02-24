@@ -274,4 +274,10 @@ var store = [{
         "tags": ["csm","schema","registry","cloudera"],
         "url": "/blog/Schema-Registry/",
         "teaser": "/assets/images/schemaregistry.png"
+      },{
+        "title": "Cloudera Streams Messaging - Surveyor",
+        "excerpt":"Introducing Cloudera Streams Messaging Surveyor Recently released CSM 1.6 brings Surveyor, Iceberg Connector, and Schema Registry. In my previous blog post Schema Registry, I expose the steps to get to the UI. Now let’s do the same with Surveyor. First, skip the “hard install” docs, and work with the basic...","categories": ["blog"],
+        "tags": ["csm","kafka","surveyor","cloudera"],
+        "url": "/blog/Surveyor/",
+        "teaser": "/assets/images/surveyor.png"
       }]
