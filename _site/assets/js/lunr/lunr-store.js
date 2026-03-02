@@ -263,6 +263,12 @@ var store = [{
         "url": "/blog/Cloudera-AI-Inference/",
         "teaser": "/assets/images/cloudera_ai_inference.png"
       },{
+        "title": "Cloudera AI January Release",
+        "excerpt":"We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving. This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model...","categories": ["blog"],
+        "tags": ["cloudera","ai"],
+        "url": "/blog/Cloudera-AI-January-Release/",
+        "teaser": "/assets/images/cloudera_ai_inference.png"
+      },{
         "title": "Cloudera Streams Messaging - Kubernetes Operator 1.6",
         "excerpt":"Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6 The Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streams Messaging Operator for Kubernetes v1.6. This release centers on a major platform rebase to the latest Kafka standards, official certification for the Apache Iceberg Sink...","categories": ["blog"],
         "tags": ["csm","kafka","kubernetes","cloudera"],
@@ -280,4 +286,10 @@ var store = [{
         "tags": ["csm","kafka","surveyor","cloudera"],
         "url": "/blog/Surveyor/",
         "teaser": "/assets/images/surveyor.png"
+      },{
+        "title": "Cloudera AI January Release",
+        "excerpt":"We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving. This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model...","categories": ["blog"],
+        "tags": ["cloudera","ai"],
+        "url": "/blog/Cloudera-AI-January-Release/",
+        "teaser": "/assets/images/cloudera_ai_inference.png"
       }]

@@ -1,4 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-02-24T07:32:04-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streams Messaging - Surveyor</title><link href="https://cldr-steven-matison.github.io//blog/Surveyor/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Surveyor" /><published>2026-02-24T00:00:00-05:00</published><updated>2026-02-24T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Surveyor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Surveyor/"><![CDATA[<h1 id="introducing-cloudera-streams-messaging-surveyor">Introducing Cloudera Streams Messaging Surveyor</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-02T09:02:07-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
+
+<p>This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model endpoints.</p>
+
+<hr />
+
+<h2 id="key-features">Key Features</h2>
+
+<h3 id="1-robust-ai-inference-and-serving">1. Robust AI Inference and Serving</h3>
+<ul>
+  <li><strong>Production-Grade App Serving (Tech Preview):</strong> Host applications and agents directly within the Inference service. Apps now scale dynamically with model endpoints for a unified AI architecture.</li>
+  <li><strong>Extended Model Support:</strong> Direct deployment for <strong>XGBoost, PyTorch, and TensorFlow</strong> models straight from the Cloudera AI Registry.</li>
+  <li><strong>Advanced vLLM Task Specification:</strong> Manually specify model tasks (e.g., <code class="language-plaintext highlighter-rouge">EMBED</code>, <code class="language-plaintext highlighter-rouge">RANK</code>, or <code class="language-plaintext highlighter-rouge">CLASSIFICATION</code>) via the API during deployment to unlock broader vLLM architecture support.</li>
+  <li><strong>Guaranteed Compute (AWS):</strong> Support for <strong>AWS On-Demand Capacity Reservations</strong> and capacity blocks ensures compute availability for critical workloads.</li>
+</ul>
+
+<h3 id="2-accelerated-ai-workbench-performance">2. Accelerated AI Workbench Performance</h3>
+<ul>
+  <li><strong>Enhanced UI:</strong> Faster page load times due to memory and query optimizations across projects and jobs.</li>
+  <li><strong>Auto-Rollback Upgrades:</strong> Safer, “one-click” side-by-side upgrades for the workbench with built-in automatic rollback support in case of failure.</li>
+</ul>
+
+<h3 id="3-enhanced-ai-registry-and-catalog">3. Enhanced AI Registry and Catalog</h3>
+<ul>
+  <li><strong>Deep Lineage Tracking:</strong> The Registry now displays structured metadata (provider, model ID, checksum) for all models imported from <strong>Hugging Face</strong> and <strong>NVIDIA NGC</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="platform-updates">Platform Updates</h2>
+<ul>
+  <li><strong>Unified Administration:</strong> Consistent admin experience across the Workbench, Registry, and Inference services.</li>
+  <li><strong>Latest Kubernetes Support:</strong> Official support added for <strong>Amazon EKS 1.33</strong> and <strong>Azure AKS 1.33</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="public-links">Public Links</h2>
+<ul>
+  <li><a href="https://docs.cloudera.com/machine-learning/cloud/release-notes/topics/ml-whats-new.html#ml_workspace_resource_tags"><strong>Release Notes</strong></a>: Review the complete list of changes.</li>
+  <li><a href="https://www.cloudera.com/products/machine-learning.html"><strong>Cloudera AI Portfolio</strong></a>: Deep dive into the Cloudera <a href="https://www.cloudera.com/products/machine-learning/ai-inference-service.html">AI Inference Service</a> and <a href="https://www.cloudera.com/products/machine-learning/ai-workbench.html">AI Workbench</a>.</li>
+  <li><a href="https://www.cloudera.com/about/news-and-blogs/press-releases/2026-02-09-cloudera-unveils-next-phase-of-ai-inferencing-and-unified-data-access-capabilities.html"><strong>Press Release</strong></a>: Learn more about Cloudera AI Inference on-premises (GA).</li>
+</ul>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/index.html">DOCS</a> for Cloudera AI.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><summary type="html"><![CDATA[We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Surveyor</title><link href="https://cldr-steven-matison.github.io//blog/Surveyor/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Surveyor" /><published>2026-02-24T00:00:00-05:00</published><updated>2026-02-24T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Surveyor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Surveyor/"><![CDATA[<h1 id="introducing-cloudera-streams-messaging-surveyor">Introducing Cloudera Streams Messaging Surveyor</h1>
 
 <p>Recently released <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/">CSM 1.6</a> brings Surveyor, Iceberg Connector, and Schema Registry.  In my previous blog post <a href="https://cldr-steven-matison.github.io/blog/Schema-Registry/">Schema Registry</a>, I expose the steps to get to the UI.  Now let’s do the same with Surveyor.</p>
 
@@ -215,7 +261,53 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.6/index.html">DOCS</a> for the CSM Operator.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streams Messaging Operator please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6]]></summary></entry><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streams Messaging Operator please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6]]></summary></entry><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
+
+<p>This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model endpoints.</p>
+
+<hr />
+
+<h2 id="key-features">Key Features</h2>
+
+<h3 id="1-robust-ai-inference-and-serving">1. Robust AI Inference and Serving</h3>
+<ul>
+  <li><strong>Production-Grade App Serving (Tech Preview):</strong> Host applications and agents directly within the Inference service. Apps now scale dynamically with model endpoints for a unified AI architecture.</li>
+  <li><strong>Extended Model Support:</strong> Direct deployment for <strong>XGBoost, PyTorch, and TensorFlow</strong> models straight from the Cloudera AI Registry.</li>
+  <li><strong>Advanced vLLM Task Specification:</strong> Manually specify model tasks (e.g., <code class="language-plaintext highlighter-rouge">EMBED</code>, <code class="language-plaintext highlighter-rouge">RANK</code>, or <code class="language-plaintext highlighter-rouge">CLASSIFICATION</code>) via the API during deployment to unlock broader vLLM architecture support.</li>
+  <li><strong>Guaranteed Compute (AWS):</strong> Support for <strong>AWS On-Demand Capacity Reservations</strong> and capacity blocks ensures compute availability for critical workloads.</li>
+</ul>
+
+<h3 id="2-accelerated-ai-workbench-performance">2. Accelerated AI Workbench Performance</h3>
+<ul>
+  <li><strong>Enhanced UI:</strong> Faster page load times due to memory and query optimizations across projects and jobs.</li>
+  <li><strong>Auto-Rollback Upgrades:</strong> Safer, “one-click” side-by-side upgrades for the workbench with built-in automatic rollback support in case of failure.</li>
+</ul>
+
+<h3 id="3-enhanced-ai-registry-and-catalog">3. Enhanced AI Registry and Catalog</h3>
+<ul>
+  <li><strong>Deep Lineage Tracking:</strong> The Registry now displays structured metadata (provider, model ID, checksum) for all models imported from <strong>Hugging Face</strong> and <strong>NVIDIA NGC</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="platform-updates">Platform Updates</h2>
+<ul>
+  <li><strong>Unified Administration:</strong> Consistent admin experience across the Workbench, Registry, and Inference services.</li>
+  <li><strong>Latest Kubernetes Support:</strong> Official support added for <strong>Amazon EKS 1.33</strong> and <strong>Azure AKS 1.33</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="public-links">Public Links</h2>
+<ul>
+  <li><a href="https://docs.cloudera.com/machine-learning/cloud/release-notes/topics/ml-whats-new.html#ml_workspace_resource_tags"><strong>Release Notes</strong></a>: Review the complete list of changes.</li>
+  <li><a href="https://www.cloudera.com/products/machine-learning.html"><strong>Cloudera AI Portfolio</strong></a>: Deep dive into the Cloudera <a href="https://www.cloudera.com/products/machine-learning/ai-inference-service.html">AI Inference Service</a> and <a href="https://www.cloudera.com/products/machine-learning/ai-workbench.html">AI Workbench</a>.</li>
+  <li><a href="https://www.cloudera.com/about/news-and-blogs/press-releases/2026-02-09-cloudera-unveils-next-phase-of-ai-inferencing-and-unified-data-access-capabilities.html"><strong>Press Release</strong></a>: Learn more about Cloudera AI Inference on-premises (GA).</li>
+</ul>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/index.html">DOCS</a> for Cloudera AI.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><summary type="html"><![CDATA[We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.]]></summary></entry><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
 
 <p>Powered by <strong>NVIDIA NIM</strong>, the Cloudera AI Inference service provides the control and performance that enterprises need to accelerate innovation without compromising data security.</p>
 
@@ -496,136 +588,4 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/product/topics/ml-product-overview.html">DOCS</a> for Cloudera Ai.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera and AI,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="agent" /><category term="ai studio" /><category term="cml" /><category term="amp" /><category term="ai workbench" /><summary type="html"><![CDATA[Happy New Year!!! It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space. Now, what kind of human would I be if i wasnt using AI to talk about AI? First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI. Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Kubernetes Operator 1.4</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Kubernetes Operator 1.4" /><published>2025-07-24T00:00:00-04:00</published><updated>2025-07-24T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streams%20Messaging%20Kubernetes%20Operator%201.4</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/"><![CDATA[<p>The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful new capabilities.</p>
-
-<h1 id="release-highlights">Release Highlights</h1>
-
-<h2 id="introducing-cloudera-surveyor-your-new-go-to-for-seamless-kafka-management-on-kubernetes">Introducing Cloudera Surveyor: Your New Go-To for Seamless Kafka Management on Kubernetes</h2>
-<p>Cloudera Surveyor is a brand-new, intuitive graphical interface built to streamline the monitoring and management of your Apache Kafka clusters running on Kubernetes. As a core component delivered with Cloudera Streams Messaging - Kubernetes Operator 1.4, Surveyor empowers you with:</p>
-
-<ul>
-  <li>Effortless Management: Move beyond the command line with a modern, easy-to-use UI for all your Kafka operations.</li>
-  <li>Multi-Cluster Visibility: Manage and monitor multiple Kafka clusters from a single, centralized console.</li>
-  <li>Actionable Insights: Get real-time health and performance metrics that help you quickly identify and resolve issues.</li>
-  <li>Enhanced Security: Benefit from built-in TLS, robust LDAP authentication, and enforcement of Kafka ACLs.</li>
-  <li>Enterprise Scalability: Designed to handle large-scale deployments, Surveyor scales to manage hundreds of Kafka clusters, brokers, and topics.</li>
-  <li>Broad Kafka Compatibility: Manage diverse Kafka deployments consistently across on-premises, cloud, or Kubernetes environments.</li>
-</ul>
-
-<h2 id="cloudera-streams-messaging---kubernetes-operator-14-the-foundation-for-your-kubernetes-native-kafka">Cloudera Streams Messaging - Kubernetes Operator 1.4: The Foundation for Your Kubernetes-Native Kafka</h2>
-<p>Cloudera Streams Messaging - Kubernetes Operator 1.4 provides the robust and reliable foundation necessary for deploying and managing Kafka clusters, including the new Cloudera Surveyor. This update brings continued stability and improvements to your containerized Kafka deployments, ensuring a seamless experience for upgrades and operations within your Kubernetes environments.</p>
-
-<h2 id="unified-data-in-motion-portfolio-beyond-kafka">Unified Data In Motion Portfolio: Beyond Kafka</h2>
-<p>This launch further strengthens Cloudera’s comprehensive Data In Motion portfolio. While Cloudera Streams Messaging - Kubernetes Operator and Cloudera Surveyor significantly enhance your Kafka experience, our solutions span the entire real-time data lifecycle. Our portfolio also includes powerful offerings for data ingestion and transformation with Apache NiFi, and advanced stream processing and analytics with Apache Flink, providing a complete ecosystem for your event-driven architectures.</p>
-
-<h2 id="who-benefits-from-cloudera-surveyor-and-when">Who Benefits from Cloudera Surveyor and When?</h2>
-<p>Cloudera Surveyor is designed to bring clarity, control, and efficiency to anyone managing Apache Kafka on Kubernetes, whether you’re an administrator, a DevOps engineer, or a developer.</p>
-
-<h3 id="for-kafka-administrators--sres-site-reliability-engineers">For Kafka Administrators &amp; SREs (Site Reliability Engineers):</h3>
-<ul>
-  <li>Daily Operations &amp; Health Monitoring: Easily oversee the health of all your Kafka clusters, brokers, and topics from a single dashboard. Quickly spot anomalies, monitor resource utilization, and ensure the continuous availability of your streaming infrastructure.</li>
-  <li>Proactive Troubleshooting: When issues arise, drill down into performance metrics, consumer group lag, and topic details with an intuitive UI. Identify bottlenecks, misconfigurations, or problematic consumers faster, significantly reducing mean time to resolution (MTTR).</li>
-  <li>Scaling &amp; Capacity Planning: Gain insights into topic growth, partition distribution, and broker load to inform your scaling decisions and optimize resource allocation across your Kubernetes environment.</li>
-</ul>
-
-<h3 id="for-devops--platform-engineers">For DevOps &amp; Platform Engineers:</h3>
-<ul>
-  <li>Streamlined Deployments &amp; Upgrades: While Cloudera Streams Messaging - Kubernetes Operator handles the heavy lifting, Surveyor provides immediate visual confirmation of your deployed Kafka clusters, enabling quick validation post-deployment or upgrade.</li>
-  <li>Consistent Multi-Cluster Management: For organizations running numerous Kafka clusters (e.g., for different departments, environments, or applications), Surveyor offers a centralized management plane, drastically simplifying oversight and ensuring consistent configurations and security policies.</li>
-</ul>
-
-<h3 id="for-developers-working-with-kafka">For Developers working with Kafka:</h3>
-<ul>
-  <li>Understanding Topic &amp; Consumer Behavior: Quickly inspect topics, view message counts, and monitor consumer group progress. This is invaluable for debugging applications, verifying data flow, and understanding how new features or changes impact the Kafka ecosystem during development and testing phases.</li>
-  <li>Security &amp; Access Management: Easily review and manage Kafka ACLs directly through the UI, ensuring that applications and users have appropriate access to topics and consumer groups, without resorting to complex command-line operations.</li>
-</ul>
-
-<h2 id="resources">Resources</h2>
-<p>Ready to explore Cloudera Streams Messaging - Kubernetes Operator 1.4 and Cloudera Surveyor? Find out more here:</p>
-
-<p>New - <a href="https://docs.cloudera.com/csm-operator/1.4/surveyor-overview/topics/csm-op-surveyor-overview.html">Cloudera Surveyor Documentation</a></p>
-
-<p>New - <a href="https://docs.cloudera.com/csm-operator/1.4/release-notes/topics/csm-op-rn.html#concept_ksn_nwn_cbc">Cloudera Streams Messaging - Kubernetes Operator 1.4 Release Notes</a></p>
-
-<p><a href="https://www.cloudera.com/products/stream-processing.html">Cloudera Streaming Product Page</a></p>
-
-<p><a href="https://www.cloudera.com/events/webinars/accelerate-streaming-pipeline-deployments-with-new-kubernetes-operators.html">Accelerate Streaming Pipeline Deployments with New Kubernetes Operators</a> (webinar recording)</p>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.4/index.html">DOCS</a> for the CSM Operator.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[The Data In Motion team is thrilled to announce the release of Cloudera Streams Messaging - Kubernetes Operator 1.4 and the exciting new Cloudera Surveyor! This release marks a significant step forward in simplifying and enhancing your Apache Kafka management experience on Kubernetes, focusing on intuitive user experience and powerful new capabilities.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics - Kubernetes Operator 1.3</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics - Kubernetes Operator 1.3" /><published>2025-07-22T00:00:00-04:00</published><updated>2025-07-22T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Analytics%20-%20Kubernetes%20Operator%201.3</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.</p>
-
-<p>This release includes rebases to Apache Flink 1.20 and Apache Flink Kubernetes Operator 1.11.0. Other changes and updates are focused on enhancing security, usability, and making the product more robust.</p>
-
-<h3 id="release-highlights">Release Highlights</h3>
-
-<ul>
-  <li>
-    <p><strong>Rebase to Flink 1.20</strong>
-  For more information, see the <a href="https://flink.apache.org/news/2024/07/22/flink-1.20-release.html">Flink 1.20 Release Notes</a> and the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Flink 1.20 Documentation</a>.</p>
-  </li>
-  <li>
-    <p><strong>Rebase to Flink Kubernetes Operator 1.11.0</strong>
-  For more information, see the <a href="https://github.com/apache/flink-kubernetes-operator/releases/tag/v1.11.0">Flink Kubernetes Operator 1.11.0 Release Notes</a> and the <a href="https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-release-1.11/">Flink Kubernetes Operator 1.11.0 Documentation</a>.</p>
-  </li>
-  <li>
-    <p><strong>Flink OpenTelemetry Metrics Reporter (Technical Preview)</strong>
-  The OpenTelemetry metrics reporter is now included, in Tech Preview, in the operator image. It makes it easier and more efficient to aggregate job metrics to a central service like Prometheus or any OpenTelemetry-compatible service, and aggregate metrics using open standards. To learn more about using the OpenTelemetry reporter with Flink, see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/deployment/metric_reporters/opentelemetry/">Monitoring Flink with OpenTelemetry</a>.</p>
-  </li>
-  <li>
-    <p><strong>Flink image with Hadoop, Hive, Iceberg, and Kudu connectors</strong>
-  Cloudera now offers alternative images for Cloudera Streaming Analytics - Kubernetes Operator that include popular connectors and their dependencies. This makes it easier to launch jobs right after installation and saves time because there’s no need to create custom images. For more information, refer to the Operator’s <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/concepts/csa-k8s-operator-images.html">Documentation</a>.</p>
-  </li>
-  <li>
-    <p><strong>Basic authentication for Flink UI and rest API</strong>
-  The Operator now includes the Flink Basic Authentication Handler, enabling users to secure their deployments without the need for external or third-party JARs.</p>
-  </li>
-</ul>
-
-<p>Please see the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/release-notes/csa-k8s-operator-rn.html">Release Notes</a> for the complete list of fixes and improvements.</p>
-
-<h3 id="getting-the-new-release">Getting the New Release</h3>
-
-<ul>
-  <li>To upgrade to Cloudera Streaming Analytics - Kubernetes Operator 1.3, check out the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/installation/csa-k8s-operator-upgrade.html">Upgrade Guide</a>.</li>
-  <li>If you are installing this operator for the first time, consult the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/installation/csa-k8s-operator-install.html">Installation Guide</a>.</li>
-</ul>
-
-<h3 id="use-cases">Use Cases</h3>
-
-<ul>
-  <li><strong>Event-Driven Applications:</strong> Stateful applications that ingest events from one or more event streams and react to incoming events by triggering computations, state updates, or external actions. Apache Flink excels in handling the concept of time and state for these applications, and can scale to manage very large data volumes (up to several terabytes). It has a rich set of APIs, ranging from low-level controls to high-level functionality, like Flink SQL, enabling developers to choose the most suitable options for the implementation of advanced business logic. One of Apache Flink’s most popular features for event-driven applications is its support for savepoints. A savepoint is a consistent state image that can be used as a starting point for compatible applications. With a savepoint, an application can be updated or adapt its scale, or multiple versions of an application can be started for A/B testing.
-  <strong>Examples:</strong>
-    <ul>
-      <li>Fraud detection</li>
-      <li>Anomaly detection</li>
-      <li>Rule-based alerting</li>
-      <li>Business process monitoring</li>
-      <li>Web application (social network)</li>
-    </ul>
-  </li>
-  <li><strong>Data Analytics Applications:</strong> With a sophisticated stream processing engine, analytics can be performed in real time. Streaming queries or applications ingest real-time event streams and continuously produce and update results as events are consumed. The results are written to an external database or maintained as internal state. A dashboard application can read the latest results from the external database or directly query the internal state of the application. Apache Flink supports streaming as well as batch analytical applications.
-  <strong>Examples:</strong>
-    <ul>
-      <li>Quality monitoring of telco networks</li>
-      <li>Analysis of product updates and experiment evaluation in mobile applications</li>
-      <li>Ad-hoc analysis of live data in consumer technology</li>
-      <li>Large-scale graph analysis</li>
-    </ul>
-  </li>
-  <li><strong>Data Pipeline Applications:</strong> Streaming data pipelines serve a similar purpose as Extract-Transform-Load (ETL) jobs. They transform and enrich data and can move it from one storage system to another. However, they operate in a continuous streaming mode instead of being periodically triggered. Hence, they can read records from sources that continuously produce data and move it with low latency to their destination.
-  <strong>Examples:</strong>
-    <ul>
-      <li>Real-time search index building in e-commerce</li>
-      <li>Continuous ETL in e-commerce</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="resources">Resources</h3>
-
-<ul>
-  <li><a href="https://www.cloudera.com/products/streaming-analytics.html">New - Cloudera Streaming Analytics Community Page</a></li>
-  <li><a href="https://www.cloudera.com/products/streaming-analytics/kubernetes-operator.html">New - Cloudera Streaming Analytics - Kubernetes Operator Product Page</a></li>
-  <li><a href="https://blog.cloudera.com/cloudera-streaming-analytics-kubernetes-operator-1-3-release/">New - Cloudera Streaming Analytics - Kubernetes Operator 1.3 Blog Post</a> (to share)</li>
-  <li><a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/index.html">Updated - Cloudera Streaming Analytics - Kubernetes Operator Documentation</a></li>
-  <li><a href="https://www.cloudera.com/webinars/streaming-analytics-overview.html">Cloudera Streaming Analytics Overview (webinar recording)</a></li>
-</ul>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><category term="kubernetes" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.]]></summary></entry></feed>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera and AI,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="agent" /><category term="ai studio" /><category term="cml" /><category term="amp" /><category term="ai workbench" /><summary type="html"><![CDATA[Happy New Year!!! It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space. Now, what kind of human would I be if i wasnt using AI to talk about AI? First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI. Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.]]></summary></entry></feed>
