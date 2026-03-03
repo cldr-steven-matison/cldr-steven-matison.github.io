@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-02T09:02:07-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-03T10:32:01-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Data Flow 3.0 for Cloudera on Cloud</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" rel="alternate" type="text/html" title="Cloudera Data Flow 3.0 for Cloudera on Cloud" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0%20For%20Cloudera%20On%20Cloud</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of <strong>Cloudera Data Flow 3.0 for Cloudera on cloud</strong>.</p>
+
+<p>This landmark release represents the most significant architectural shift in the history of Cloudera Data Flow. Importantly, we’ve moved beyond a single-flow deployment model to now support <strong>multi-flow deployments</strong>, offering unprecedented control over cloud resource consumption and infrastructure costs. It also introduces enhancements to the developer experience with data provenance tools, and ensures compliance with the latest security and platform standards through new Kubernetes and NiFi version support.</p>
+
+<hr />
+
+<h3 id="release-highlights">Release Highlights</h3>
+
+<ul>
+  <li><strong>Multi-Flow Deployments:</strong> Users can now add and manage multiple flows within a single NiFi deployment. This allows for better optimization of workload resources and cloud infrastructure costs. The 1:1 flow-to-deployment model is still possible for use cases that need resource isolation.</li>
+  <li><strong>Data Provenance in Flow Designer:</strong> A new Provenance Events feature within Flow Designer allows users to search, audit, and inspect FlowFiles as they move through a running test session, providing a historical record of data transitions for easier debugging and observability. Records can be replayed after debugging to ensure healthy data reaches its final destination.</li>
+  <li><strong>Project-Level Governance and Enforcement:</strong> Admins can now enforce resource association with projects at the environment level, providing strict control over access to flow drafts, test sessions and deployments. This is paired with new project-level usage tracking in the Cloudera consumption reporting.</li>
+  <li><strong>NiFi End-of-Support Protections:</strong> To ensure environment stability, the upgrade process now includes automated NiFi end-of-support policy enforcement. It will proactively check for NiFi runtime compatibility and block upgrades if unsupported versions are detected, preventing potential service disruptions. Options for upgrading NiFi runtime include:
+    <ul>
+      <li>The upgrade process can automatically upgrade your NiFi runtime version to a supported one. (<a href="https://docs.cloudera.com/dataflow/cloud/service-upgrade/topics/cdf-upgrade-environment.html">doc</a>)</li>
+      <li>Per-deployment upgrades of NiFi runtime can be done via the “Change NiFi Version” action. (<a href="https://docs.cloudera.com/dataflow/cloud/managing-deployments/topics/cdf-changing-nifi-runtime-version.html">doc</a>)</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="flow-designer-enhancements">Flow Designer Enhancements</h4>
+<ul>
+  <li>Scalability improvements to Flow Designer reduce infrastructure CPU utilization while building in the canvas.</li>
+  <li>Test Session states are now similar to those of deployments (active, suspended, terminated). This improves flexibility in managing test sessions and provides better control over cloud resource costs, without state loss.</li>
+</ul>
+
+<h4 id="readyflow-updates">ReadyFlow Updates</h4>
+<p>The <strong>RAG Query Pinecone</strong> and <strong>Airtable-to-Cloud-Storage</strong> ReadyFlows have been refined with improved configuration parameters. To maintain a streamlined gallery, several deprecated or low-usage flows have been removed:</p>
+<ul>
+  <li>ADLS to Chroma DB</li>
+  <li>S3 to Chroma DB</li>
+  <li>S3 to S3 Avro with S3 Notifications</li>
+  <li>Slack to Chroma DB</li>
+</ul>
+
+<h4 id="platform-upgrades">Platform Upgrades</h4>
+<p>Added support for <strong>Kubernetes 1.33</strong> and <strong>NiFi 1.28.1 / 2.6.0</strong>.</p>
+
+<hr />
+
+<h3 id="upgrading-to-the-new-release">Upgrading to the New Release</h3>
+<p>Customers can perform an in-place upgrade from supported Cloudera Data Flow versions to 3.0. Before initiating the upgrade, please ensure that you have reviewed the <a href="https://docs.cloudera.com/dataflow/cloud/support-matrix/topics/cdf-eol-policy.html">NiFi EoS requirements</a> and <a href="https://docs.cloudera.com/dataflow/cloud/service-upgrade/topics/cdf-upgrade-prerequisites.html">upgrade prerequisites</a>. Alternatively, disabling and re-enabling an existing Data Flow environment will result in the re-enabled environment running the latest version.</p>
+
+<hr />
+
+<h3 id="links">Links</h3>
+<ul>
+  <li><a href="https://docs.cloudera.com/dataflow/cloud/release-notes/topics/cdf-whats-new.html"><strong>Release Notes</strong></a></li>
+  <li><a href="https://docs.cloudera.com/dataflow/cloud/index.html"><strong>Documentation</strong></a></li>
+</ul>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera DataFlow 3.0 please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="dataflow" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.]]></summary></entry><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
 
 <p>This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model endpoints.</p>
 
@@ -261,7 +312,45 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.6/index.html">DOCS</a> for the CSM Operator.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streams Messaging Operator please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6]]></summary></entry><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streams Messaging Operator please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6]]></summary></entry><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
+
+<p>Powered by <strong>NVIDIA NIM</strong>, the Cloudera AI Inference service provides the control and performance that enterprises need to accelerate innovation without compromising data security.</p>
+
+<hr />
+
+<h2 id="empowering-true-private-ai">Empowering True Private AI</h2>
+<p>Cloudera AI Inference for on-premises is engineered for organizations that demand absolute control over their intellectual property and data sovereignty.</p>
+
+<ul>
+  <li><strong>Complete Data Privacy:</strong> Ensure that sensitive data, prompts, and model responses never leave your secure corporate network, meeting strict regulatory requirements.</li>
+  <li><strong>Air-Gapped Readiness:</strong> Full support for highly secure, air-gapped environments, providing the tools and documentation necessary to import and manage models without external connectivity.</li>
+  <li><strong>Storage Flexibility:</strong> Full support to any S3-compatible object storage.</li>
+</ul>
+
+<hr />
+
+<h2 id="predictable-tco-for-production-ai">Predictable TCO for Production AI</h2>
+<p>As enterprises move from experimentation to steady-state production, the on-premises service offers a significantly lower total cost of ownership (TCO) compared to token-based cloud APIs*.</p>
+
+<p>The AI Inference on-premises service lowers long-term TCO by providing ownership of GPU infrastructure, which pays off fast when inference happens 24/7.</p>
+
+<h2 id="feature-highlights-for-production-grade-ai">Feature Highlights for Production-Grade AI</h2>
+<ul>
+  <li><strong>Optimized Performance:</strong> Prebuilt and optimized engines, including <strong>TensorRT-LLM</strong> and <strong>vLLM</strong>, ensure low-latency, high-throughput inferencing.</li>
+  <li><strong>Seamless Integration:</strong> Integrate with existing MLOps workflows and CI/CD pipelines using OpenAI-compatible APIs for large language models (LLMs) and Open Inference Protocol APIs for traditional models.</li>
+  <li><strong>Comprehensive Monitoring:</strong> Track performance metrics such as latency, throughput, and resource utilization in real-time to ensure operational continuity.</li>
+</ul>
+
+<hr />
+
+<h2 id="get-started-today">Get Started Today</h2>
+<p>The Cloudera AI Inference service enables enterprises to achieve high-performance, private AI with a significantly lower TCO than cloud-based APIs. By keeping workloads on-premises, customers ensure absolute data sovereignty and predictable costs for production-scale GenAI.</p>
+
+<p>To get started, visit the <strong>Model Hub</strong> to select from a catalog of optimized models ready for deployment within your secure environment.</p>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/1.5.5/index.html">DOCS</a> for Cloudera AI.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI Inference please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="inference" /><category term="onpremise" /><summary type="html"><![CDATA[We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.]]></summary></entry><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
 
 <p>This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model endpoints.</p>
 
@@ -307,45 +396,7 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/index.html">DOCS</a> for Cloudera AI.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><summary type="html"><![CDATA[We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.]]></summary></entry><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
-
-<p>Powered by <strong>NVIDIA NIM</strong>, the Cloudera AI Inference service provides the control and performance that enterprises need to accelerate innovation without compromising data security.</p>
-
-<hr />
-
-<h2 id="empowering-true-private-ai">Empowering True Private AI</h2>
-<p>Cloudera AI Inference for on-premises is engineered for organizations that demand absolute control over their intellectual property and data sovereignty.</p>
-
-<ul>
-  <li><strong>Complete Data Privacy:</strong> Ensure that sensitive data, prompts, and model responses never leave your secure corporate network, meeting strict regulatory requirements.</li>
-  <li><strong>Air-Gapped Readiness:</strong> Full support for highly secure, air-gapped environments, providing the tools and documentation necessary to import and manage models without external connectivity.</li>
-  <li><strong>Storage Flexibility:</strong> Full support to any S3-compatible object storage.</li>
-</ul>
-
-<hr />
-
-<h2 id="predictable-tco-for-production-ai">Predictable TCO for Production AI</h2>
-<p>As enterprises move from experimentation to steady-state production, the on-premises service offers a significantly lower total cost of ownership (TCO) compared to token-based cloud APIs*.</p>
-
-<p>The AI Inference on-premises service lowers long-term TCO by providing ownership of GPU infrastructure, which pays off fast when inference happens 24/7.</p>
-
-<h2 id="feature-highlights-for-production-grade-ai">Feature Highlights for Production-Grade AI</h2>
-<ul>
-  <li><strong>Optimized Performance:</strong> Prebuilt and optimized engines, including <strong>TensorRT-LLM</strong> and <strong>vLLM</strong>, ensure low-latency, high-throughput inferencing.</li>
-  <li><strong>Seamless Integration:</strong> Integrate with existing MLOps workflows and CI/CD pipelines using OpenAI-compatible APIs for large language models (LLMs) and Open Inference Protocol APIs for traditional models.</li>
-  <li><strong>Comprehensive Monitoring:</strong> Track performance metrics such as latency, throughput, and resource utilization in real-time to ensure operational continuity.</li>
-</ul>
-
-<hr />
-
-<h2 id="get-started-today">Get Started Today</h2>
-<p>The Cloudera AI Inference service enables enterprises to achieve high-performance, private AI with a significantly lower TCO than cloud-based APIs. By keeping workloads on-premises, customers ensure absolute data sovereignty and predictable costs for production-scale GenAI.</p>
-
-<p>To get started, visit the <strong>Model Hub</strong> to select from a catalog of optimized models ready for deployment within your secure environment.</p>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/1.5.5/index.html">DOCS</a> for Cloudera AI.</p>
-
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI Inference please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="inference" /><category term="onpremise" /><summary type="html"><![CDATA[We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.]]></summary></entry><entry><title type="html">Introducing Cloudera Data Lineage</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/" rel="alternate" type="text/html" title="Introducing Cloudera Data Lineage" /><published>2026-02-03T00:00:00-05:00</published><updated>2026-02-03T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/"><![CDATA[<p>In a significant move to conquer “metadata chaos,” <strong>Cloudera</strong> officially acquired <strong>Octopai</strong> in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><summary type="html"><![CDATA[We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.]]></summary></entry><entry><title type="html">Introducing Cloudera Data Lineage</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/" rel="alternate" type="text/html" title="Introducing Cloudera Data Lineage" /><published>2026-02-03T00:00:00-05:00</published><updated>2026-02-03T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/"><![CDATA[<p>In a significant move to conquer “metadata chaos,” <strong>Cloudera</strong> officially acquired <strong>Octopai</strong> in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.</p>
 
 <hr />
 
@@ -516,76 +567,4 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/octopai/latest/index.html">DOCS</a> for Cloudera Data Lineage.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="octopai" /><category term="data" /><category term="lineage" /><summary type="html"><![CDATA[Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more!]]></summary></entry><entry><title type="html">Get Up To Speed With Cloudera AI 2026</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI/" rel="alternate" type="text/html" title="Get Up To Speed With Cloudera AI 2026" /><published>2026-01-09T00:00:00-05:00</published><updated>2026-01-09T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-AI</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI/"><![CDATA[<p>Happy New Year!!!   It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space.   Now, what kind of human would I be if i wasnt using AI to talk about AI?   First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI.  Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.</p>
-
-<p><b>0 to 100 mph Lets go!!</b></p>
-
-<p>My prompt:</p>
-
-<p><b><i>
-  Write a short summary of how cloudera went from machine learning to ai in the last 3 to 5 years
-</i></b></p>
-
-<p>Gemini Reply, with human edits:</p>
-
-<h1 id="clouderas-evolution-from-big-data-to-enterprise-ai-20212026">Cloudera’s Evolution: From Big Data to Enterprise AI (2021–2026)</h1>
-
-<p>In the last 3 to 5 years, Cloudera has undergone a major strategic transformation, shifting from a focus on <strong>Big Data and Machine Learning (ML)</strong> to becoming a comprehensive <strong>Enterprise AI platform</strong>.</p>
-
-<p>This transition was driven by the market’s move from predictive models to <strong>Generative AI (GenAI)</strong> and the need for businesses to run AI on their own data without compromising security.</p>
-
-<hr />
-
-<h3 id="the-strategic-pivot-20212023">The Strategic Pivot (2021–2023)</h3>
-<p>Cloudera began moving away from its legacy as a Hadoop-based “Big Data” company toward the <strong>Cloudera Data Platform (CDP)</strong>, a hybrid data cloud. During this phase:</p>
-<ul>
-  <li><strong>From ML to AI:</strong> The company rebranded “Cloudera Machine Learning” to <strong>Cloudera AI</strong>. This signaled a shift toward embedding intelligence into business processes rather than just building isolated models.</li>
-  <li><strong>The Data Lakehouse:</strong> They popularized the “Open Data Lakehouse” (built on <strong>Apache Iceberg</strong>), which provided the structured, governed foundation necessary for large-scale AI.</li>
-</ul>
-
-<h3 id="the-generative-ai--agentic-era-20242025">The Generative AI &amp; Agentic Era (2024–2025)</h3>
-<p>With the explosion of GenAI, Cloudera shifted its product roadmap to support Large Language Models (LLMs) and autonomous agents.</p>
-<ul>
-  <li><strong>Strategic Acquisitions:</strong>
-    <ul>
-      <li><strong>Verta (May 2024):</strong> Acquired for its AI operational platform to strengthen model management and “ModelOps.”</li>
-      <li><strong>Octopai (Nov 2024):</strong> Added automated data lineage to ensure AI models use trustworthy, traceable data.</li>
-      <li><strong>Taikun (Aug 2025):</strong> Integrated Kubernetes management to allow AI workloads to run seamlessly across any cloud or on-prem environment.</li>
-    </ul>
-  </li>
-  <li><strong>AI-Specific Tools:</strong> They launched <strong>Cloudera AI Studios</strong> and <strong>AMPs</strong> (Accelerators for Machine Learning Projects), providing templates for RAG (Retrieval-Augmented Generation) and AI agents.</li>
-</ul>
-
-<h2 id="resources">Resources</h2>
-
-<p>As promised, please find the following resources and references that I have collected to help you get up to speed with Cloudera and AI.</p>
-
-<p><a href="https://www.cloudera.com/products/machine-learning/ai-studios/product-tour.html">Agent Studio Product Tour</a></p>
-
-<p><a href="https://app.getreprise.com/launch/W6G3ON6/">Agent Studio</a></p>
-
-<p><a href="https://app.getreprise.com/launch/9yKdqN6/">Hybrid Product Tour - Evolve25</a></p>
-
-<p><a href="https://www.cloudera.com/products/machine-learning.html">Cloudera AI</a></p>
-
-<p><a href="https://www.cloudera.com/why-cloudera/enterprise-ai.html">Enterprise AI</a></p>
-
-<p><a href="https://www.cloudera.com/products/machine-learning/ai-workbench.html">Cloudera AI Workbench</a></p>
-
-<p><a href="https://www.cloudera.com/products/machine-learning/ai-studios.html">Cloudera AI Studios</a></p>
-
-<p><a href="https://www.cloudera.com/campaign/the-future-of-enterprise-ai-agents.html?internal_keyplay=AI&amp;internal_campaign=Thought-Leadership-Reports---AlwaysOn-FY26-Q1-GLOBAL-CT-Report-The-Future-of-Enterprise-AI-Agents&amp;cid=701Ui00000SH4IQIA1&amp;internal_link=p11">The Future of AI Agents</a></p>
-
-<p><a href="https://www.cloudera.com/campaign/the-evolution-of-ai-the-state-of-enterprise-ai-and-data-architecture.html?internal_keyplay=AI&amp;internal_campaign=Thought-Leadership-Reports---AlwaysOn-FY26-GLOBAL-CT-Report-State-of-Enterprise-AI-Survey&amp;cid=701Ui00000cKCojIAG&amp;internal_link=p11">The State of Enterprise AI and Data Architecture</a></p>
-
-<p><a href="https://www.cloudera.com/content/dam/www/marketing/resources/ebooks/unleashing-the-power-of-generative-ai-in-your-business.pdf.landing.html">Unleashing the Power of Generative AI in Your Business</a></p>
-
-<p><a href="https://www.cloudera.com/blog/business/context-is-the-hard-part-practical-lessons-in-building-agentic-ai-system.html">Context Is the Hard Part: Practical Lessons in Building Agentic AI Systems</a></p>
-
-<p><a href="https://www.cloudera.com/blog/business/deliver-repeatable-measurable-and-enterprise-ready-ai-for-life-sciences.html">Deliver Repeatable, Measurable, and Enterprise-Ready AI for Life Sciences</a></p>
-
-<p><a href="https://www.cloudera.com/blog/business/2026-predictions-the-architecture-governance-and-ai-trends-every-enterprise-must-prepare-for.html">2026 Predictions: The Architecture, Governance, and AI Trends Every Enterprise Must Prepare For</a></p>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/product/topics/ml-product-overview.html">DOCS</a> for Cloudera Ai.</p>
-
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera and AI,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="agent" /><category term="ai studio" /><category term="cml" /><category term="amp" /><category term="ai workbench" /><summary type="html"><![CDATA[Happy New Year!!! It’s been quite some time since I had a moment to blog, and I figured the start of the new year was a good time to post about how much Cloudera has been doing in the AI space. Now, what kind of human would I be if i wasnt using AI to talk about AI? First, let’s ask my second favorite AI, Gemini to summarize Cloudera from Machine Learning to AI. Then lastly, I will provide you with a collection of materials so you can study up on Cloudera and AI for 2026.]]></summary></entry></feed>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="octopai" /><category term="data" /><category term="lineage" /><summary type="html"><![CDATA[Cloudera Connectivity, Spark, Kafka, NiFi, Databricks, AI, and more!]]></summary></entry></feed>

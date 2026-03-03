@@ -292,4 +292,10 @@ var store = [{
         "tags": ["cloudera","ai"],
         "url": "/blog/Cloudera-AI-January-Release/",
         "teaser": "/assets/images/cloudera_ai_inference.png"
+      },{
+        "title": "Cloudera Data Flow 3.0 for Cloudera on Cloud",
+        "excerpt":"The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud. This landmark release represents the most significant architectural shift in the history of Cloudera Data Flow. Importantly, we’ve moved beyond a single-flow deployment model to now support multi-flow deployments, offering...","categories": ["blog"],
+        "tags": ["cloudera","nifi","dataflow"],
+        "url": "/blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/",
+        "teaser": "/assets/images/clouderadataflow.png"
       }]

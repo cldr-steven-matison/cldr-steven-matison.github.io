@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Cloudera Data Flow 2.10 for Cloudera on Cloud - Cloudera Solutions Engineer</title>
-<meta name="description" content="The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.">
+<!-- begin _includes/seo.html --><title>Cloudera Data Flow 3.0 for Cloudera on Cloud - Cloudera Solutions Engineer</title>
+<meta name="description" content="The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Cloudera Data Flow 2.10 for Cloudera on Cloud">
-<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-DataFlow-2.10/">
+<meta property="og:title" content="Cloudera Data Flow 3.0 for Cloudera on Cloud">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/">
 
 
-  <meta property="og:description" content="The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.">
-
-
-
-  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/nifi-logo.png">
+  <meta property="og:description" content="The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.">
 
 
 
-
-
-  <meta property="article:published_time" content="2025-04-30T00:00:00-04:00">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/clouderadataflow.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2026-03-02T00:00:00-05:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Cloudera-DataFlow-2.10/">
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/">
 
 
 
@@ -268,16 +268,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Cloudera Data Flow 2.10 for Cloudera on Cloud">
-    <meta itemprop="description" content="The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.">
-    <meta itemprop="datePublished" content="2025-04-30T00:00:00-04:00">
+    <meta itemprop="headline" content="Cloudera Data Flow 3.0 for Cloudera on Cloud">
+    <meta itemprop="description" content="The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.">
+    <meta itemprop="datePublished" content="2026-03-02T00:00:00-05:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-DataFlow-2.10/" class="u-url" itemprop="url">Cloudera Data Flow 2.10 for Cloudera on Cloud
+            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" class="u-url" itemprop="url">Cloudera Data Flow 3.0 for Cloudera on Cloud
 </a>
           </h1>
           
@@ -306,36 +306,58 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.</p>
+        <p>The Data In Motion Team is pleased to announce the release of <strong>Cloudera Data Flow 3.0 for Cloudera on cloud</strong>.</p>
 
-<p>This release introduces NiFi 2 as generally available in Data Flow. Along with seamless NiFi 2 migrations, this  positions Data Flow as the ideal platform to migrate, build, and deploy NiFi 2 flows with minimal operational effort. In addition, it includes features that improve developer productivity, operational costs and security.</p>
+<p>This landmark release represents the most significant architectural shift in the history of Cloudera Data Flow. Importantly, we’ve moved beyond a single-flow deployment model to now support <strong>multi-flow deployments</strong>, offering unprecedented control over cloud resource consumption and infrastructure costs. It also introduces enhancements to the developer experience with data provenance tools, and ensures compliance with the latest security and platform standards through new Kubernetes and NiFi version support.</p>
 
-<h2 id="release-highlights">Release Highlights</h2>
+<hr />
+
+<h3 id="release-highlights">Release Highlights</h3>
+
 <ul>
-  <li>Build and deploy on NiFi 2: Users can now develop flows in the Flow Designer as NiFi 2.3 flows by default. NiFi 2.3 will also be available as the NiFi 2 runtime for Flow Deployments. This marks the general availability of NiFi 2 in Data Flow.</li>
-  <li>Time and cost savings on NiFi 2 migrations: Self-service migration is powered by Data Flow Catalog and Flow Designer. Users can organize NiFi 1 flows in Catalog, start migrations with one click, and make any required changes in Flow Designer. A comprehensive visual migration report clearly highlights items that require manual updates, while enabling users to effectively keep track of their progress.</li>
-  <li>Improved developer productivity: Users can accelerate deployment processes by importing and referencing Shared Parameter Groups during deployment. This streamlined workflow significantly reduces development and deployment complexity and accelerates time to value for users by eliminating manual copy&amp;paste of parameter values.</li>
-  <li>Improved cost efficiency: Users can now specify tailored storage capacity, IOPS, and throughput sizes  for their NiFi repositories, making smaller deployments more cost-efficient.</li>
-  <li>Strengthened security: Collections enhance security by enabling precise role based access control for cataloged flows. Users can organize cataloged flows into Collections and tightly manage user access to each Collection.</li>
-  <li>Secured inbound connections: Users can specify trusted IP addresses for flows with inbound connections, which will limit traffic to only the specified IP addresses.</li>
-  <li>Better notifications: Users can now stay better informed with enhanced, customizable notifications:
+  <li><strong>Multi-Flow Deployments:</strong> Users can now add and manage multiple flows within a single NiFi deployment. This allows for better optimization of workload resources and cloud infrastructure costs. The 1:1 flow-to-deployment model is still possible for use cases that need resource isolation.</li>
+  <li><strong>Data Provenance in Flow Designer:</strong> A new Provenance Events feature within Flow Designer allows users to search, audit, and inspect FlowFiles as they move through a running test session, providing a historical record of data transitions for easier debugging and observability. Records can be replayed after debugging to ensure healthy data reaches its final destination.</li>
+  <li><strong>Project-Level Governance and Enforcement:</strong> Admins can now enforce resource association with projects at the environment level, providing strict control over access to flow drafts, test sessions and deployments. This is paired with new project-level usage tracking in the Cloudera consumption reporting.</li>
+  <li><strong>NiFi End-of-Support Protections:</strong> To ensure environment stability, the upgrade process now includes automated NiFi end-of-support policy enforcement. It will proactively check for NiFi runtime compatibility and block upgrades if unsupported versions are detected, preventing potential service disruptions. Options for upgrading NiFi runtime include:
     <ul>
-      <li>Subscribe to deployment-specific alerts and customize notifications by event severity.</li>
-      <li>Set up KPI-level subscriptions and notifications, including a URL that directs you to the affected NiFi component on the NiFi Canvas.</li>
-      <li>Create distribution lists to ensure team-wide notification delivery.</li>
-      <li>Integrate notifications directly with Slack (Technical Preview).</li>
+      <li>The upgrade process can automatically upgrade your NiFi runtime version to a supported one. (<a href="https://docs.cloudera.com/dataflow/cloud/service-upgrade/topics/cdf-upgrade-environment.html">doc</a>)</li>
+      <li>Per-deployment upgrades of NiFi runtime can be done via the “Change NiFi Version” action. (<a href="https://docs.cloudera.com/dataflow/cloud/managing-deployments/topics/cdf-changing-nifi-runtime-version.html">doc</a>)</li>
     </ul>
   </li>
-  <li>Platform upgrades: Added support for Kubernetes 1.31 and NiFi 1.28.</li>
 </ul>
 
-<h2 id="upgrading-to-the-new-release">Upgrading to the New Release</h2>
-<p>Customers can perform an in-place upgrade from supported Cloudera Data Flow  versions to 2.10. Alternatively, disabling and re-enabling an existing Data Flow environment will result in the re-enabled environment running the latest version.</p>
+<h4 id="flow-designer-enhancements">Flow Designer Enhancements</h4>
+<ul>
+  <li>Scalability improvements to Flow Designer reduce infrastructure CPU utilization while building in the canvas.</li>
+  <li>Test Session states are now similar to those of deployments (active, suspended, terminated). This improves flexibility in managing test sessions and provides better control over cloud resource costs, without state loss.</li>
+</ul>
 
-<h2 id="links">Links</h2>
-<p><a href="https://docs.cloudera.com/dataflow/cloud/release-notes/topics/cdf-whats-new.html">Release notes</a></p>
+<h4 id="readyflow-updates">ReadyFlow Updates</h4>
+<p>The <strong>RAG Query Pinecone</strong> and <strong>Airtable-to-Cloud-Storage</strong> ReadyFlows have been refined with improved configuration parameters. To maintain a streamlined gallery, several deprecated or low-usage flows have been removed:</p>
+<ul>
+  <li>ADLS to Chroma DB</li>
+  <li>S3 to Chroma DB</li>
+  <li>S3 to S3 Avro with S3 Notifications</li>
+  <li>Slack to Chroma DB</li>
+</ul>
 
-<p><a href="https://docs.cloudera.com/dataflow/cloud/index.html">Documentation</a></p>
+<h4 id="platform-upgrades">Platform Upgrades</h4>
+<p>Added support for <strong>Kubernetes 1.33</strong> and <strong>NiFi 1.28.1 / 2.6.0</strong>.</p>
+
+<hr />
+
+<h3 id="upgrading-to-the-new-release">Upgrading to the New Release</h3>
+<p>Customers can perform an in-place upgrade from supported Cloudera Data Flow versions to 3.0. Before initiating the upgrade, please ensure that you have reviewed the <a href="https://docs.cloudera.com/dataflow/cloud/support-matrix/topics/cdf-eol-policy.html">NiFi EoS requirements</a> and <a href="https://docs.cloudera.com/dataflow/cloud/service-upgrade/topics/cdf-upgrade-prerequisites.html">upgrade prerequisites</a>. Alternatively, disabling and re-enabling an existing Data Flow environment will result in the re-enabled environment running the latest version.</p>
+
+<hr />
+
+<h3 id="links">Links</h3>
+<ul>
+  <li><a href="https://docs.cloudera.com/dataflow/cloud/release-notes/topics/cdf-whats-new.html"><strong>Release Notes</strong></a></li>
+  <li><a href="https://docs.cloudera.com/dataflow/cloud/index.html"><strong>Documentation</strong></a></li>
+</ul>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera DataFlow 3.0 please reach out to schedule a discussion.</p>
 
         
       </section>
@@ -352,7 +374,9 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/Cloudera Data Flow" class="page__taxonomy-item p-category" rel="tag">Cloudera Data Flow</a><span class="sep">, </span>
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/dataflow" class="page__taxonomy-item p-category" rel="tag">dataflow</a><span class="sep">, </span>
     
       <a href="/tags/nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
     
@@ -379,7 +403,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-04-30T00:00:00-04:00">April 30, 2025</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-02T00:00:00-05:00">March 2, 2026</time></p>
 
       </footer>
 
@@ -388,23 +412,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Cloudera+Data+Flow+2.10+for+Cloudera+on+Cloud%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-DataFlow-2.10%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Data+Flow+3.0+for+Cloudera+on+Cloud%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Flow-Management-3.0-For-Cloudera-On-Cloud%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-DataFlow-2.10%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Flow-Management-3.0-For-Cloudera-On-Cloud%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-DataFlow-2.10%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Flow-Management-3.0-For-Cloudera-On-Cloud%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/blog/CSA-1.15-Release/" class="pagination--pager" title="Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1
+      <a href="/blog/Cloudera-AI-January-Release/" class="pagination--pager" title="Cloudera AI January Release
 ">Previous</a>
     
     
-      <a href="/blog/Cloudera-Flow-Management-Kubernetes-Operator-2.10/" class="pagination--pager" title="Cloudera Flow Management - Kubernetes Operator 2.10
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -418,50 +441,6 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/clouderadataflow.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" rel="permalink">Cloudera Data Flow 3.0 for Cloudera on Cloud
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.
-</p>
-  </article>
-</div>
-
         
           
 
@@ -589,6 +568,50 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csm-op-deployment-architecture.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/" rel="permalink">Cloudera Streams Messaging - Kubernetes Operator 1.6
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6
 </p>
   </article>
 </div>
