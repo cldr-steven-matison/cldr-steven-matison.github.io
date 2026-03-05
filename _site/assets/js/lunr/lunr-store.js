@@ -298,4 +298,10 @@ var store = [{
         "tags": ["cloudera","nifi","dataflow"],
         "url": "/blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/",
         "teaser": "/assets/images/clouderadataflow.png"
+      },{
+        "title": "Cloudera Streaming Analytics Operator for Kubernetes 1.5",
+        "excerpt":"Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security. Release...","categories": ["blog"],
+        "tags": ["Cloudera Streaming Analytics","flink","cloudera","kubernetes"],
+        "url": "/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/",
+        "teaser": "/assets/images/csa-architecture.png"
       }]
