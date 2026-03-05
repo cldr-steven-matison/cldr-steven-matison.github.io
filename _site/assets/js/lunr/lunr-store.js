@@ -299,6 +299,12 @@ var store = [{
         "url": "/blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/",
         "teaser": "/assets/images/clouderadataflow.png"
       },{
+        "title": "Cloudera Flow Management Operator for Kubernetes 3.0",
+        "excerpt":"The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productivity and usability features. Release Highlights Easier Onboarding with Programmatic User Management via New Customer Resource Definition (CRD) This new CRD eliminates manual user setup by bringing...","categories": ["blog"],
+        "tags": ["cloudera","nifi","kubernetes"],
+        "url": "/blog/Cloudera-Flow-Management-Kubernetes-Operator-3.0/",
+        "teaser": "/assets/images/kubernetes-logo.png"
+      },{
         "title": "Cloudera Streaming Analytics Operator for Kubernetes 1.5",
         "excerpt":"Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security. Release...","categories": ["blog"],
         "tags": ["Cloudera Streaming Analytics","flink","cloudera","kubernetes"],

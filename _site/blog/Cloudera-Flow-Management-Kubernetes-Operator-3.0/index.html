@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Release of Cloudera Kubernetes Operators - Cloudera Solutions Engineer</title>
-<meta name="description" content="I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.">
+<!-- begin _includes/seo.html --><title>Cloudera Flow Management Operator for Kubernetes 3.0 - Cloudera Solutions Engineer</title>
+<meta name="description" content="The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productivity and usability features.">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,11 +22,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Release of Cloudera Kubernetes Operators">
-<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Kubernetes-Operator/">
+<meta property="og:title" content="Cloudera Flow Management Operator for Kubernetes 3.0">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-3.0/">
 
 
-  <meta property="og:description" content="I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.">
+  <meta property="og:description" content="The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productivity and usability features.">
 
 
 
@@ -36,7 +36,7 @@
 
 
 
-  <meta property="article:published_time" content="2024-07-18T00:00:00-04:00">
+  <meta property="article:published_time" content="2026-03-03T00:00:00-05:00">
 
 
 
@@ -47,7 +47,7 @@
   
 
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Kubernetes-Operator/">
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-3.0/">
 
 
 
@@ -268,16 +268,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Release of Cloudera Kubernetes Operators">
-    <meta itemprop="description" content="I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.">
-    <meta itemprop="datePublished" content="2024-07-18T00:00:00-04:00">
+    <meta itemprop="headline" content="Cloudera Flow Management Operator for Kubernetes 3.0">
+    <meta itemprop="description" content="The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productivity and usability features.">
+    <meta itemprop="datePublished" content="2026-03-03T00:00:00-05:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io//blog/Kubernetes-Operator/" class="u-url" itemprop="url">Release of Cloudera Kubernetes Operators
+            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-3.0/" class="u-url" itemprop="url">Cloudera Flow Management Operator for Kubernetes 3.0
 </a>
           </h1>
           
@@ -306,39 +306,32 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.</p>
+        <p>The Data In Motion Team is pleased to announce the release of <strong>Cloudera Flow Management Operator for Kubernetes version 3.0</strong>. This release introduces productivity and usability features.</p>
 
-<h1 id="cloudera-kubernetes-operators">Cloudera Kubernetes Operators</h1>
+<hr />
 
-<h2 id="cfm---cloudera-flow-management-operator">CFM - Cloudera Flow Management Operator</h2>
-<p>Cloudera Flow Management (CFM) Operator allows you to deploy and manage NiFi clusters and NiFi Registry instances on Kubernetes. CFM Operator simplifies data collection, transformation, and delivery across your enterprise. Leveraging containerized infrastructure, the operator streamlines the orchestration of complex data flows.</p>
+<h3 id="release-highlights">Release Highlights</h3>
+
+<h4 id="easier-onboarding-with-programmatic-user-management-via-new-customer-resource-definition-crd">Easier Onboarding with Programmatic User Management via New Customer Resource Definition (CRD)</h4>
+<p>This new CRD eliminates manual user setup by bringing NiFi identity management directly into a Kubernetes environment. Admins can now define user identities and associated access policies alongside cluster configuration in the yaml config file, enabling rapid, automated onboarding. By treating users as code, we reduce administrative overhead and ensure consistent security across all environments.</p>
+
+<h4 id="absolute-stability-with-enhanced-leader-election-guardrails-for-cluster-scaling">Absolute Stability with Enhanced Leader Election Guardrails for Cluster Scaling</h4>
+<p>A new “safety-first” scaling mechanism guarantees NiFi flow integrity by preventing accidental configuration erasure during cluster expansion. This prevents new nodes from inadvertently declaring themselves leaders with empty flows and overwriting production environments, ensuring absolute stability for GitOps-managed clusters.</p>
+
+<hr />
+
+<h3 id="upgrading-to-the-new-release">Upgrading to the New Release</h3>
+<p>Reference the latest operator version in the Helm Install command. More details can be found in the <a href="https://docs-archive.cloudera.com/cfm-operator/3.0/installation/topics/cfm-op-install-cfm-op.html">installation instructions</a>.</p>
+
+<hr />
+
+<h3 id="links">Links</h3>
 <ul>
-  <li><a href="https://nifi.apache.org/">Apache NiFi</a></li>
+  <li><a href="https://docs-archive.cloudera.com/cfm-operator/3.0/release-notes/topics/cfm-op-whats-new.html">Release notes</a></li>
+  <li><a href="https://docs-archive.cloudera.com/cfm-operator/3.0/index.html">Documentation</a></li>
 </ul>
 
-<h2 id="csm---cloudera-streams-messaging-operator">CSM - Cloudera Streams Messaging Operator</h2>
-<p>CSM (Cloudera Streams Messaging) Operator allows you to deploy and manage Streams Messaging components as container applications on Kubernetes. CSM Operator simplifies the process of creating, managing, and troubleshooting Kafka deployments in a Kubernetes environment. CSM Operator includes several services and components such as Strimzi, Kafka, Cruise Control, and others.</p>
-<ul>
-  <li><a href="https://kafka.apache.org/">Apache Kafka</a></li>
-</ul>
-
-<h2 id="csa---cloudera-streams-analytics-operator">CSA - Cloudera Streams Analytics Operator</h2>
-<p>Cloudera Streaming Analytics (CSA) Operator allows you to deploy and manage the Streaming Analytics components of Cloudera Data Platform (CDP), Flink and SQL Stream Builder (SSB), as container applications on Kubernetes. CSA Operator is based on the Apache Flink Kubernetes Operator (Flink Operator), and offers the same set of features as the Flink Operator supports. By extending the Kubernetes API, the Flink Operator acts as a control plane to manage the deployment lifecycle of Flink applications using the operator pattern.</p>
-<ul>
-  <li><a href="https://flink.apache.org/">Apache Flink</a></li>
-</ul>
-
-<p>Check out this <a href="https://community.cloudera.com/t5/Community-Articles/Cloudera-Flow-Management-Operator-A-technical-deep-dive/ta-p/390473">Deep Technical Dive with Pierre Villard</a></p>
-
-<p>Find more about Cloudera DataFlow starting right <a href="https://www.cloudera.com/products/dataflow.html">here</a>.</p>
-
-<p>You can learn more about Cloudera Stream Processing right <a href="https://www.cloudera.com/products/stream-processing.html">here</a>.</p>
-
-<p>As always, check out the docs for each operator:</p>
-
-<p><a href="https://docs.cloudera.com/cfm-operator/2.8.0/index.html">CFM</a>
-<a href="https://docs.cloudera.com/csm-operator/1.0/index.html">CSM</a>
-<a href="https://docs.cloudera.com/csa-operator/1.0/index.html">CSA</a></p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about  Cloudera Flow Management Operator for Kubernetes 3.0 please reach out to schedule a discussion.</p>
 
         
       </section>
@@ -355,15 +348,11 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/cfm" class="page__taxonomy-item p-category" rel="tag">cfm</a><span class="sep">, </span>
-    
-      <a href="/tags/csa" class="page__taxonomy-item p-category" rel="tag">csa</a><span class="sep">, </span>
-    
-      <a href="/tags/csm" class="page__taxonomy-item p-category" rel="tag">csm</a><span class="sep">, </span>
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
     
       <a href="/tags/kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
     
-      <a href="/tags/operator" class="page__taxonomy-item p-category" rel="tag">operator</a>
+      <a href="/tags/nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
     
     </span>
   </p>
@@ -388,7 +377,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2024-07-18T00:00:00-04:00">July 18, 2024</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-03T00:00:00-05:00">March 3, 2026</time></p>
 
       </footer>
 
@@ -397,22 +386,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Release+of+Cloudera+Kubernetes+Operators%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FKubernetes-Operator%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Flow+Management+Operator+for+Kubernetes+3.0%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Flow-Management-Kubernetes-Operator-3.0%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FKubernetes-Operator%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Flow-Management-Kubernetes-Operator-3.0%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FKubernetes-Operator%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Flow-Management-Kubernetes-Operator-3.0%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/blog/CEM-2.1.2-Release/" class="pagination--pager" title="Release of CEM 2.1.2
+      <a href="/blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" class="pagination--pager" title="Cloudera Data Flow 3.0 for Cloudera on Cloud
 ">Previous</a>
     
     
-      <a href="/blog/Install-CFM-Operator/" class="pagination--pager" title="Installing Cloudera CFM Kubernetes Operator
+      <a href="/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" class="pagination--pager" title="Cloudera Streaming Analytics Operator for Kubernetes 1.5
 ">Next</a>
     
   </nav>
@@ -467,49 +456,6 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our ...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/kubernetes-logo.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Cloudera-Flow-Management-Kubernetes-Operator-3.0/" rel="permalink">Cloudera Flow Management Operator for Kubernetes 3.0
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productiv...</p>
   </article>
 </div>
 
@@ -597,6 +543,50 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/surveyor.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Surveyor/" rel="permalink">Cloudera Streams Messaging - Surveyor
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Introducing Cloudera Streams Messaging Surveyor
+</p>
   </article>
 </div>
 

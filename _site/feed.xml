@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-05T07:32:32-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streaming Analytics Operator for Kubernetes 1.5</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics Operator for Kubernetes 1.5" /><published>2026-03-04T00:00:00-05:00</published><updated>2026-03-04T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Analytics%20-%20Kubernetes%20Operator%201.5</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of the <strong>Cloudera Streaming Analytics Operator for Kubernetes 1.5</strong>. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-05T07:57:02-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streaming Analytics Operator for Kubernetes 1.5</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics Operator for Kubernetes 1.5" /><published>2026-03-04T00:00:00-05:00</published><updated>2026-03-04T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Analytics%20-%20Kubernetes%20Operator%201.5</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of the <strong>Cloudera Streaming Analytics Operator for Kubernetes 1.5</strong>. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.</p>
 
 <hr />
 
@@ -34,53 +34,32 @@
   <li><a href="https://www.cloudera.com/products/stream-processing.html">Cloudera Streaming Product Page</a></li>
 </ul>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streaming Analytics Operator for Kubernetes 1.5 please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><category term="kubernetes" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.]]></summary></entry><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
-
-<p>This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model endpoints.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streaming Analytics Operator for Kubernetes 1.5 please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="Cloudera Streaming Analytics" /><category term="flink" /><category term="cloudera" /><category term="kubernetes" /><summary type="html"><![CDATA[Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.]]></summary></entry><entry><title type="html">Cloudera Flow Management Operator for Kubernetes 3.0</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-3.0/" rel="alternate" type="text/html" title="Cloudera Flow Management Operator for Kubernetes 3.0" /><published>2026-03-03T00:00:00-05:00</published><updated>2026-03-03T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Flow%20Management%20Kubernetes%20Operator%203.0</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-Kubernetes-Operator-3.0/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of <strong>Cloudera Flow Management Operator for Kubernetes version 3.0</strong>. This release introduces productivity and usability features.</p>
 
 <hr />
 
-<h2 id="key-features">Key Features</h2>
+<h3 id="release-highlights">Release Highlights</h3>
 
-<h3 id="1-robust-ai-inference-and-serving">1. Robust AI Inference and Serving</h3>
-<ul>
-  <li><strong>Production-Grade App Serving (Tech Preview):</strong> Host applications and agents directly within the Inference service. Apps now scale dynamically with model endpoints for a unified AI architecture.</li>
-  <li><strong>Extended Model Support:</strong> Direct deployment for <strong>XGBoost, PyTorch, and TensorFlow</strong> models straight from the Cloudera AI Registry.</li>
-  <li><strong>Advanced vLLM Task Specification:</strong> Manually specify model tasks (e.g., <code class="language-plaintext highlighter-rouge">EMBED</code>, <code class="language-plaintext highlighter-rouge">RANK</code>, or <code class="language-plaintext highlighter-rouge">CLASSIFICATION</code>) via the API during deployment to unlock broader vLLM architecture support.</li>
-  <li><strong>Guaranteed Compute (AWS):</strong> Support for <strong>AWS On-Demand Capacity Reservations</strong> and capacity blocks ensures compute availability for critical workloads.</li>
-</ul>
+<h4 id="easier-onboarding-with-programmatic-user-management-via-new-customer-resource-definition-crd">Easier Onboarding with Programmatic User Management via New Customer Resource Definition (CRD)</h4>
+<p>This new CRD eliminates manual user setup by bringing NiFi identity management directly into a Kubernetes environment. Admins can now define user identities and associated access policies alongside cluster configuration in the yaml config file, enabling rapid, automated onboarding. By treating users as code, we reduce administrative overhead and ensure consistent security across all environments.</p>
 
-<h3 id="2-accelerated-ai-workbench-performance">2. Accelerated AI Workbench Performance</h3>
-<ul>
-  <li><strong>Enhanced UI:</strong> Faster page load times due to memory and query optimizations across projects and jobs.</li>
-  <li><strong>Auto-Rollback Upgrades:</strong> Safer, “one-click” side-by-side upgrades for the workbench with built-in automatic rollback support in case of failure.</li>
-</ul>
-
-<h3 id="3-enhanced-ai-registry-and-catalog">3. Enhanced AI Registry and Catalog</h3>
-<ul>
-  <li><strong>Deep Lineage Tracking:</strong> The Registry now displays structured metadata (provider, model ID, checksum) for all models imported from <strong>Hugging Face</strong> and <strong>NVIDIA NGC</strong>.</li>
-</ul>
+<h4 id="absolute-stability-with-enhanced-leader-election-guardrails-for-cluster-scaling">Absolute Stability with Enhanced Leader Election Guardrails for Cluster Scaling</h4>
+<p>A new “safety-first” scaling mechanism guarantees NiFi flow integrity by preventing accidental configuration erasure during cluster expansion. This prevents new nodes from inadvertently declaring themselves leaders with empty flows and overwriting production environments, ensuring absolute stability for GitOps-managed clusters.</p>
 
 <hr />
 
-<h2 id="platform-updates">Platform Updates</h2>
-<ul>
-  <li><strong>Unified Administration:</strong> Consistent admin experience across the Workbench, Registry, and Inference services.</li>
-  <li><strong>Latest Kubernetes Support:</strong> Official support added for <strong>Amazon EKS 1.33</strong> and <strong>Azure AKS 1.33</strong>.</li>
-</ul>
+<h3 id="upgrading-to-the-new-release">Upgrading to the New Release</h3>
+<p>Reference the latest operator version in the Helm Install command. More details can be found in the <a href="https://docs-archive.cloudera.com/cfm-operator/3.0/installation/topics/cfm-op-install-cfm-op.html">installation instructions</a>.</p>
 
 <hr />
 
-<h2 id="public-links">Public Links</h2>
+<h3 id="links">Links</h3>
 <ul>
-  <li><a href="https://docs.cloudera.com/machine-learning/cloud/release-notes/topics/ml-whats-new.html#ml_workspace_resource_tags"><strong>Release Notes</strong></a>: Review the complete list of changes.</li>
-  <li><a href="https://www.cloudera.com/products/machine-learning.html"><strong>Cloudera AI Portfolio</strong></a>: Deep dive into the Cloudera <a href="https://www.cloudera.com/products/machine-learning/ai-inference-service.html">AI Inference Service</a> and <a href="https://www.cloudera.com/products/machine-learning/ai-workbench.html">AI Workbench</a>.</li>
-  <li><a href="https://www.cloudera.com/about/news-and-blogs/press-releases/2026-02-09-cloudera-unveils-next-phase-of-ai-inferencing-and-unified-data-access-capabilities.html"><strong>Press Release</strong></a>: Learn more about Cloudera AI Inference on-premises (GA).</li>
+  <li><a href="https://docs-archive.cloudera.com/cfm-operator/3.0/release-notes/topics/cfm-op-whats-new.html">Release notes</a></li>
+  <li><a href="https://docs-archive.cloudera.com/cfm-operator/3.0/index.html">Documentation</a></li>
 </ul>
 
-<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/index.html">DOCS</a> for Cloudera AI.</p>
-
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><summary type="html"><![CDATA[We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.]]></summary></entry><entry><title type="html">Cloudera Data Flow 3.0 for Cloudera on Cloud</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" rel="alternate" type="text/html" title="Cloudera Data Flow 3.0 for Cloudera on Cloud" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0%20For%20Cloudera%20On%20Cloud</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of <strong>Cloudera Data Flow 3.0 for Cloudera on cloud</strong>.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about  Cloudera Flow Management Operator for Kubernetes 3.0 please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="kubernetes" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productivity and usability features.]]></summary></entry><entry><title type="html">Cloudera Data Flow 3.0 for Cloudera on Cloud</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" rel="alternate" type="text/html" title="Cloudera Data Flow 3.0 for Cloudera on Cloud" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0%20For%20Cloudera%20On%20Cloud</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of <strong>Cloudera Data Flow 3.0 for Cloudera on cloud</strong>.</p>
 
 <p>This landmark release represents the most significant architectural shift in the history of Cloudera Data Flow. Importantly, we’ve moved beyond a single-flow deployment model to now support <strong>multi-flow deployments</strong>, offering unprecedented control over cloud resource consumption and infrastructure costs. It also introduces enhancements to the developer experience with data provenance tools, and ensures compliance with the latest security and platform standards through new Kubernetes and NiFi version support.</p>
 
@@ -131,7 +110,53 @@
   <li><a href="https://docs.cloudera.com/dataflow/cloud/index.html"><strong>Documentation</strong></a></li>
 </ul>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera DataFlow 3.0 please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="dataflow" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Surveyor</title><link href="https://cldr-steven-matison.github.io//blog/Surveyor/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Surveyor" /><published>2026-02-24T00:00:00-05:00</published><updated>2026-02-24T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Surveyor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Surveyor/"><![CDATA[<h1 id="introducing-cloudera-streams-messaging-surveyor">Introducing Cloudera Streams Messaging Surveyor</h1>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera DataFlow 3.0 please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="dataflow" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.]]></summary></entry><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
+
+<p>This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model endpoints.</p>
+
+<hr />
+
+<h2 id="key-features">Key Features</h2>
+
+<h3 id="1-robust-ai-inference-and-serving">1. Robust AI Inference and Serving</h3>
+<ul>
+  <li><strong>Production-Grade App Serving (Tech Preview):</strong> Host applications and agents directly within the Inference service. Apps now scale dynamically with model endpoints for a unified AI architecture.</li>
+  <li><strong>Extended Model Support:</strong> Direct deployment for <strong>XGBoost, PyTorch, and TensorFlow</strong> models straight from the Cloudera AI Registry.</li>
+  <li><strong>Advanced vLLM Task Specification:</strong> Manually specify model tasks (e.g., <code class="language-plaintext highlighter-rouge">EMBED</code>, <code class="language-plaintext highlighter-rouge">RANK</code>, or <code class="language-plaintext highlighter-rouge">CLASSIFICATION</code>) via the API during deployment to unlock broader vLLM architecture support.</li>
+  <li><strong>Guaranteed Compute (AWS):</strong> Support for <strong>AWS On-Demand Capacity Reservations</strong> and capacity blocks ensures compute availability for critical workloads.</li>
+</ul>
+
+<h3 id="2-accelerated-ai-workbench-performance">2. Accelerated AI Workbench Performance</h3>
+<ul>
+  <li><strong>Enhanced UI:</strong> Faster page load times due to memory and query optimizations across projects and jobs.</li>
+  <li><strong>Auto-Rollback Upgrades:</strong> Safer, “one-click” side-by-side upgrades for the workbench with built-in automatic rollback support in case of failure.</li>
+</ul>
+
+<h3 id="3-enhanced-ai-registry-and-catalog">3. Enhanced AI Registry and Catalog</h3>
+<ul>
+  <li><strong>Deep Lineage Tracking:</strong> The Registry now displays structured metadata (provider, model ID, checksum) for all models imported from <strong>Hugging Face</strong> and <strong>NVIDIA NGC</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="platform-updates">Platform Updates</h2>
+<ul>
+  <li><strong>Unified Administration:</strong> Consistent admin experience across the Workbench, Registry, and Inference services.</li>
+  <li><strong>Latest Kubernetes Support:</strong> Official support added for <strong>Amazon EKS 1.33</strong> and <strong>Azure AKS 1.33</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="public-links">Public Links</h2>
+<ul>
+  <li><a href="https://docs.cloudera.com/machine-learning/cloud/release-notes/topics/ml-whats-new.html#ml_workspace_resource_tags"><strong>Release Notes</strong></a>: Review the complete list of changes.</li>
+  <li><a href="https://www.cloudera.com/products/machine-learning.html"><strong>Cloudera AI Portfolio</strong></a>: Deep dive into the Cloudera <a href="https://www.cloudera.com/products/machine-learning/ai-inference-service.html">AI Inference Service</a> and <a href="https://www.cloudera.com/products/machine-learning/ai-workbench.html">AI Workbench</a>.</li>
+  <li><a href="https://www.cloudera.com/about/news-and-blogs/press-releases/2026-02-09-cloudera-unveils-next-phase-of-ai-inferencing-and-unified-data-access-capabilities.html"><strong>Press Release</strong></a>: Learn more about Cloudera AI Inference on-premises (GA).</li>
+</ul>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/index.html">DOCS</a> for Cloudera AI.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><summary type="html"><![CDATA[We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Surveyor</title><link href="https://cldr-steven-matison.github.io//blog/Surveyor/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Surveyor" /><published>2026-02-24T00:00:00-05:00</published><updated>2026-02-24T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Surveyor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Surveyor/"><![CDATA[<h1 id="introducing-cloudera-streams-messaging-surveyor">Introducing Cloudera Streams Messaging Surveyor</h1>
 
 <p>Recently released <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/">CSM 1.6</a> brings Surveyor, Iceberg Connector, and Schema Registry.  In my previous blog post <a href="https://cldr-steven-matison.github.io/blog/Schema-Registry/">Schema Registry</a>, I expose the steps to get to the UI.  Now let’s do the same with Surveyor.</p>
 
@@ -462,75 +487,4 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/octopai/latest/index.html">DOCS</a> for Cloudera Data Lineage.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="octopai" /><category term="data" /><category term="lineage" /><summary type="html"><![CDATA[In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.]]></summary></entry><entry><title type="html">Trino SQL Engine in Cloudera Data Warehouse for On-Premises</title><link href="https://cldr-steven-matison.github.io//blog/Trino-for-Cloudera-Data-Warehouse/" rel="alternate" type="text/html" title="Trino SQL Engine in Cloudera Data Warehouse for On-Premises" /><published>2026-01-30T00:00:00-05:00</published><updated>2026-01-30T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Trino%20for%20Cloudera%20Data%20Warehouse</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Trino-for-Cloudera-Data-Warehouse/"><![CDATA[<h2 id="trino-sql-engine-in-cloudera-data-warehouse-cdw-now-general-availability-ga-for-on-premises">Trino SQL Engine in Cloudera Data Warehouse (CDW) Now General Availability (GA) for On-Premises</h2>
-
-<p>We’re excited to announce the general availability of the <strong>Trino SQL Engine in Cloudera Data Warehouse</strong> for On-Premises environments (Data Services 1.5.5 SP2).</p>
-
-<p>This release brings a fully managed, containerized Trino experience to your data estate. It delivers a high-performance, distributed SQL query engine wrapped in an enterprise-grade <strong>Virtual Warehouse</strong>, eliminating the complexity of manual configuration while offering auto-scaling, auto-suspend, and seamless Cloudera integration.</p>
-
-<hr />
-
-<h2 id="key-benefits">Key Benefits</h2>
-<ul>
-  <li><strong>Seamless Data Federation:</strong> Connect to 30+ data sources to analyze data where it lives without complex ETL.</li>
-  <li><strong>Elastic Scalability &amp; Cost Control:</strong> Automatically scale workers based on load and utilize auto-suspend to eliminate idle compute costs.</li>
-  <li><strong>Unified Security:</strong> Full integration with <strong>Apache Ranger</strong> ensures rigorous data protection policies.</li>
-  <li><strong>Simplified Operations:</strong> New UI for connector management and built-in diagnostic tools.</li>
-</ul>
-
-<hr />
-
-<h2 id="feature-highlights">Feature Highlights</h2>
-
-<h3 id="1-universal-connectivity--storage">1. Universal Connectivity &amp; Storage</h3>
-<ul>
-  <li><strong>Certified Enterprise Connectors:</strong> Fully supported for Oracle, Snowflake, AWS Redshift, PostgreSQL, MySQL, Hive (HMS), Iceberg, and MariaDB.</li>
-  <li><strong>Expansive Ecosystem:</strong> Support for Kafka, MongoDB, Delta Lake, Google BigQuery, Druid, and MS SQL Server.</li>
-  <li><strong>Teradata Connector:</strong> Now available in <strong>Tech Preview</strong>.</li>
-  <li><strong>Connector Management UI:</strong> User-friendly interface to create, configure, and test connectors before deployment.</li>
-  <li><strong>Hybrid Storage:</strong> Full read/write to <strong>Ozone (OFS protocol)</strong> with local SSD caching for maximum performance.</li>
-</ul>
-
-<h3 id="2-automated-lifecycle-management">2. Automated Lifecycle Management</h3>
-<ul>
-  <li><strong>Virtual Warehouses:</strong> Easily manage the lifecycle of Trino coordinators and workers.</li>
-  <li><strong>Intelligent Auto-Scaling:</strong> Custom scaling parameters (min/max workers) to handle peak loads.</li>
-  <li><strong>Graceful Shutdown:</strong> Auto-suspend for “T-shirt sizes” (XS to L) ensures resources are released without interrupting queries.</li>
-  <li><strong>Disaster Recovery:</strong> Full Backup and Restore support for virtual warehouses and connectors.</li>
-</ul>
-
-<h3 id="3-enterprise-security--governance">3. Enterprise Security &amp; Governance</h3>
-<ul>
-  <li><strong>Fine-Grained Access:</strong> Ranger integration for authorization, dynamic column masking, and row filtering.</li>
-  <li><strong>Secure Connectivity:</strong> Support for LDAP authentication and a dedicated <strong>Secrets Management</strong> system for external credentials.</li>
-</ul>
-
-<h3 id="4-empowering-all-users">4. Empowering All Users</h3>
-<ul>
-  <li><strong>Talk-to-Your-Data:</strong> AI SQL Assistance allows users to generate optimized Trino SQL from natural language.</li>
-  <li><strong>Analyst Ready:</strong> Full Trino syntax support and autocomplete within the <strong>Hue SQL Editor</strong>.</li>
-  <li><strong>Developer Friendly:</strong> Includes CDW CLI and a built-in Coordinator Web UI for deep-dive monitoring.</li>
-  <li><strong>Visual Insights:</strong> Native integration with <strong>Cloudera Data Visualization</strong>.</li>
-</ul>
-
-<hr />
-
-<h2 id="primary-use-cases">Primary Use Cases</h2>
-<ul>
-  <li><strong>Federated Data Access:</strong> Connect to external sources like Snowflake and Postgres with <strong>zero-copy data</strong>.</li>
-  <li><strong>Interactive Reporting:</strong> Use distributed SQL and SSD caching to power low-latency dashboards.</li>
-  <li><strong>Cost-Efficient Ad Hoc Analytics:</strong> Spin up “right-sized” warehouses that automatically shut down after analysis is complete.</li>
-</ul>
-
-<hr />
-
-<h2 id="links">Links</h2>
-<ul>
-  <li><a href="https://docs.cloudera.com/data-warehouse/1.5.5/release-notes/topics/dw-private-cloud-whats-new-155-sp2.html">Release Notes</a></li>
-  <li><a href="https://docs.cloudera.com/data-warehouse/1.5.5/release-notes/topics/dw-private-cloud-whats-new-155-sp2.html#dw-private-cloud-whats-new-155-sp2__Trino_155_sp2">What’sNew</a></li>
-  <li><a href="https://docs.cloudera.com/data-warehouse/1.5.5/administration/topics/dw-trino-connectors.html">Trino Documentation</a></li>
-</ul>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/data-warehouse/1.5.5/index.html">DOCS</a> for Cloudera Data Warehouse.</p>
-
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="trino" /><summary type="html"><![CDATA[Trino SQL Engine in Cloudera Data Warehouse (CDW) Now General Availability (GA) for On-Premises]]></summary></entry></feed>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="octopai" /><category term="data" /><category term="lineage" /><summary type="html"><![CDATA[In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.]]></summary></entry></feed>
