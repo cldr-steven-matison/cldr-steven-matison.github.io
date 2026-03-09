@@ -25,12 +25,12 @@ A new "safety-first" scaling mechanism guarantees NiFi flow integrity by prevent
 ---
 
 ### Upgrading to the New Release
-Reference the latest operator version in the Helm Install command. More details can be found in the [installation instructions](https://docs-archive.cloudera.com/cfm-operator/3.0/installation/topics/cfm-op-install-cfm-op.html).
+Reference the latest operator version in the Helm Install command. More details can be found in the [installation instructions](https://docs.cloudera.com/cfm-operator/3.0.0/installation/topics/cfm-op-install-cfm-op.html).
 
 ---
 
 ### Links
-* [Release notes](https://docs-archive.cloudera.com/cfm-operator/3.0/release-notes/topics/cfm-op-whats-new.html)
-* [Documentation](https://docs-archive.cloudera.com/cfm-operator/3.0/index.html)
+* [Release notes](https://docs.cloudera.com/cfm-operator/3.0.0/release-notes/topics/cfm-op-whats-new.html)
+* [Documentation](https://docs.cloudera.com/cfm-operator/3.0.0/index.html
 
 If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about  {{ page.title }} please reach out to schedule a discussion.

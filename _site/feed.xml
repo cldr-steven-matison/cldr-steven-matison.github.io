@@ -1,4 +1,378 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-05T07:57:02-05:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streaming Analytics Operator for Kubernetes 1.5</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics Operator for Kubernetes 1.5" /><published>2026-03-04T00:00:00-05:00</published><updated>2026-03-04T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Analytics%20-%20Kubernetes%20Operator%201.5</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of the <strong>Cloudera Streaming Analytics Operator for Kubernetes 1.5</strong>. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-09T16:10:45-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streaming Operators</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/" rel="alternate" type="text/html" title="Cloudera Streaming Operators" /><published>2026-03-09T00:00:00-04:00</published><updated>2026-03-09T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Operators</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/"><![CDATA[<p>Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of <strong>Cloudera Streaming Operators</strong> (CFM, CSA, CSM) on a local Minikube cluster.</p>
+
+<p>We are utilizing the <strong>Evaluation</strong> examples for these services. This is a critical step for any engineer; mastering the foundational “batteries-included” configurations is essential before moving into complex, high-availability production architectures.</p>
+
+<p>🚀 <strong>Let’s get started!</strong></p>
+
+<hr />
+
+<h3 id="-my-macbook-setup">💻 My Macbook Setup</h3>
+<p>First, we need the “Swiss Army Knife” of macOS: <strong>Homebrew</strong>. We will use it to install our core CLI tools, container runtimes, and local Kubernetes environment.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Homebrew (if not already installed)</span>
+/bin/bash <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="si">)</span><span class="s2">"</span>
+
+<span class="c"># Install Core Tools</span>
+brew <span class="nb">install </span>git docker python minikube kubernetes-cli k9s helm
+
+<span class="c"># Start Docker Desktop (or Colima)</span>
+open /Applications/Docker.app
+
+<span class="c"># Spin up Minikube with enough resources for the full stack</span>
+minikube start <span class="nt">--cpus</span> 4 <span class="nt">--memory</span> 12288
+</code></pre></div></div>
+
+<p class="notice--warning">:trophy: <strong>Pro Tip!</strong> Makes sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.</p>
+
+<hr />
+
+<h3 id="-some-helm-and-kubectl-setup">📦 Some Helm and Kubectl Setup</h3>
+<p>We need the Operators installed first to manage our custom resources. We’ll pull these from the Cloudera Helm Registry.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Create the namespace</span>
+kubectl create namespace cld-streaming
+
+<span class="c"># 2. Add Cloudera License Credentials</span>
+kubectl create secret docker-registry cloudera-creds <span class="se">\</span>
+  <span class="nt">--docker-server</span><span class="o">=</span>container.repository.cloudera.com <span class="se">\</span>
+  <span class="nt">--docker-username</span><span class="o">=</span>&lt;CLOUDERA_LICENSE_USER&gt; <span class="se">\</span>
+  <span class="nt">--docker-password</span><span class="o">=</span>&lt;CLOUDERA_LICENSE_PASSWORD&gt; <span class="se">\</span>
+  <span class="nt">-n</span> cld-streaming
+
+helm registry login container.repository.cloudera.com
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="-install-cloudera-streams-messaging-operatorcsm-16">🎡 Install Cloudera Streams Messaging Operator(CSM 1.6)</h3>
+<p>Next, we stand up our messaging backbone. The CSM 1.6 operator makes it incredibly simple to deploy a Kafka cluster for local development.  First lets install the Strimzi Kafka Operator:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Cloudera Kafka Strimzi Operator</span>
+helm <span class="nb">install </span>strimzi-cluster-operator 
+<span class="nt">--namespace</span> cld-streaming 
+<span class="nt">--version</span> 1.6.0-b99
+<span class="nt">--set</span> <span class="s1">'image.imagePullSecrets[0].name=cloudera-creds'</span> 
+<span class="nt">--set-file</span> clouderaLicense.fileContent<span class="o">=</span>./license.txt 
+<span class="nt">--set</span> <span class="nv">watchAnyNamespace</span><span class="o">=</span><span class="nb">true 
+</span>oci://container.repository.cloudera.com/cloudera-helm/csm-operator/strimzi-kafka-operator 
+</code></pre></div></div>
+
+<p>Create the kafka-eval.yaml as follows:</p>
+
+<p><strong>kafka-eval.yaml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">kafka.strimzi.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Kafka</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">my-cluster</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+    <span class="na">strimzi.io/node-pools</span><span class="pi">:</span> <span class="s">enabled</span>
+    <span class="na">strimzi.io/kraft</span><span class="pi">:</span> <span class="s">enabled</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">kafka</span><span class="pi">:</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s">4.1.1.1.6</span>
+    <span class="na">listeners</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">plain</span>
+        <span class="na">port</span><span class="pi">:</span> <span class="m">9092</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">internal</span>
+        <span class="na">tls</span><span class="pi">:</span> <span class="kc">false</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">tls</span>
+        <span class="na">port</span><span class="pi">:</span> <span class="m">9093</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">internal</span>
+        <span class="na">tls</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">offsets.topic.replication.factor</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">transaction.state.log.replication.factor</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">transaction.state.log.min.isr</span><span class="pi">:</span> <span class="m">2</span>
+      <span class="na">default.replication.factor</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">min.insync.replicas</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="na">entityOperator</span><span class="pi">:</span>
+    <span class="na">topicOperator</span><span class="pi">:</span> <span class="pi">{}</span>
+    <span class="na">userOperator</span><span class="pi">:</span> <span class="pi">{}</span>
+</code></pre></div></div>
+
+<p>Create the kafka-nodepool.yaml as follows:</p>
+
+<p><strong>kafka-nodepool.yaml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">kafka.strimzi.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">KafkaNodePool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">combined</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">strimzi.io/cluster</span><span class="pi">:</span> <span class="s">my-cluster</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">controller</span>
+    <span class="pi">-</span> <span class="s">broker</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">jbod</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="m">0</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">persistent-claim</span>
+        <span class="na">size</span><span class="pi">:</span> <span class="s">10Gi</span>
+        <span class="na">kraftMetadata</span><span class="pi">:</span> <span class="s">shared</span>
+        <span class="na">deleteClaim</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">kafka.strimzi.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">KafkaNodePool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">broker-only</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">strimzi.io/cluster</span><span class="pi">:</span> <span class="s">my-cluster</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">broker</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">jbod</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="m">0</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">persistent-claim</span>
+        <span class="na">size</span><span class="pi">:</span> <span class="s">10Gi</span>
+        <span class="na">kraftMetadata</span><span class="pi">:</span> <span class="s">shared</span>
+        <span class="na">deleteClaim</span><span class="pi">:</span> <span class="kc">false</span>
+</code></pre></div></div>
+
+<p>Execute the following <code class="language-plaintext highlighter-rouge">kubectl apply</code> command to create the kafka cluster:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">--filename</span> kafka-eval.yaml,kafka-nodepool.yaml <span class="nt">--namespace</span> cld-streaming
+</code></pre></div></div>
+
+<p>Notice the response:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kafka.kafka.strimzi.io/my-cluster created
+kafkanodepool.kafka.strimzi.io/combined created
+kafkanodepool.kafka.strimzi.io/broker-only created
+</span></code></pre></div></div>
+<hr />
+
+<h3 id="-deploy-schema-registry-csm-16">📑 Deploy Schema Registry (CSM 1.6)</h3>
+<p>To manage our data serialization and ensure compatibility across the stack, we deploy the <strong>Cloudera Schema Registry</strong>. This allows to define schema for data that NiFI, Kafka, Flink and SSB can easily decipher.</p>
+
+<p>Create the sr-values.yaml file as follows:</p>
+
+<p><strong>sr-values.yaml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tls</span><span class="pi">:</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">authentication</span><span class="pi">:</span>
+  <span class="na">oauth</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">authorization</span><span class="pi">:</span>
+  <span class="na">simple</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">database</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">in-memory</span>
+<span class="na">service</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">NodePort</span>
+</code></pre></div></div>
+
+<p>Execute the following helm command to install Schema Registry:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Schema Registry from the Cloudera OCI Registry</span>
+helm <span class="nb">install </span>schema-registry 
+<span class="nt">--namespace</span> cld-streaming 
+<span class="nt">--version</span> 1.6.0-b99 
+<span class="nt">--values</span> sr-values.yaml 
+<span class="nt">--set</span> <span class="s2">"image.imagePullSecrets[0].name=cloudera-creds"</span> 
+oci://container.repository.cloudera.com/cloudera-helm/csm-operator/schema-registry 
+</code></pre></div></div>
+
+<p>Notice the following output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Pulled: container.repository.cloudera.com/cloudera-helm/csm-operator/schema-registry:1.6.0-b99
+Digest: sha256:6e7d57bf42ddefc3f216b977d91fd606caf78a456c6aa2989002ad4387fb5a6d
+NAME: schema-registry
+LAST DEPLOYED: Mon Mar  9 13:15:09 2026
+NAMESPACE: cld-streaming
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+NOTES:
+Thank you for installing schema-registry.
+
+Your release is named schema-registry.
+
+WARNING: You configured Schema Registry to use an in-memory database. This setup is only suitable for testing and evaluation. Cloudera does not recommend this configuration for production use. All schemas will be lost when Pods restart.
+</span></code></pre></div></div>
+
+<h3 id="️-deploy-kafka-surveyor-csm-16">🕵️ Deploy Kafka Surveyor (CSM 1.6)</h3>
+<p>A new standout in the CSM Operator 1.6 is <strong>Kafka Surveyor</strong>. This provides advanced observability into your Kafka environment. It is a game-changer for monitoring broker health and topic metrics in a Kubernetes-native way.</p>
+
+<p>Before we can create a surveyor yaml we need to find our kafka boostrapServers:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get kafka my-cluster <span class="nt">-n</span> cld-streaming <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.status.listeners[?(@.name=="plain")].bootstrapServers}'</span>
+</code></pre></div></div>
+
+<p>Grab the following from the output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">my-cluster-kafka-bootstrap.cld-streaming.svc:9092 
+</span></code></pre></div></div>
+
+<p>and use it to create the surveyor-eval.yaml as follows:</p>
+
+<p><strong>kafka-surveyor.yaml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">clusterConfigs</span><span class="pi">:</span>
+  <span class="na">clusters</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">clusterName</span><span class="pi">:</span> <span class="s">my-cluster</span>
+      <span class="na">tags</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">csm1.6</span>
+      <span class="na">bootstrapServers</span><span class="pi">:</span> <span class="s">my-cluster-kafka-bootstrap.cld-streaming.svc:9092</span> 
+      <span class="na">adminOperationTimeout</span><span class="pi">:</span> <span class="s">PT1M</span>
+      <span class="na">authorization</span><span class="pi">:</span>
+        <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+      <span class="na">commonClientConfig</span><span class="pi">:</span>
+        <span class="na">security.protocol</span><span class="pi">:</span> <span class="s">PLAINTEXT</span>
+<span class="na">surveyorConfig</span><span class="pi">:</span>
+  <span class="na">surveyor</span><span class="pi">:</span>
+    <span class="na">authentication</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">tlsConfigs</span><span class="pi">:</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+
+</code></pre></div></div>
+
+<p>Execute the following helm command to install Cloudera Surveyor:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install </span>cloudera-surveyor <span class="se">\\</span>
+  <span class="nt">--namespace</span> cld-streaming <span class="se">\\</span>
+  <span class="nt">--version</span> 1.6.0-b99 <span class="se">\\</span>
+  <span class="nt">--values</span> kafka-surveyor.yaml <span class="se">\\</span>
+  <span class="nt">--set</span> image.imagePullSecrets<span class="o">=</span>cloudera-creds <span class="se">\\</span>
+  <span class="nt">--set-file</span> clouderaLicense.fileContent<span class="o">=</span>./license.txt
+</code></pre></div></div>
+
+<p>Notice the following output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Pulled: container.repository.cloudera.com/cloudera-helm/csm-operator/surveyor:1.6.0-b99
+Digest: sha256:7e12c2b2ab8aca0351296f5c986d64d55a92b66e7ac6b599ccbd5b3fa9c13167
+NAME: cloudera-surveyor
+LAST DEPLOYED: Mon Mar  9 13:18:14 2026
+NAMESPACE: cld-streaming
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+NOTES:
+Thank you for installing surveyor.
+
+Your release is named cloudera-surveyor.
+</span></code></pre></div></div>
+<hr />
+
+<h3 id="-deploy-sql-stream-builder-csa-15">⚡ Deploy SQL Stream Builder (CSA 1.5)</h3>
+
+<p>First lets install the Cloudera Streaming Analytics Operator</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml
+kubectl <span class="nb">wait</span> <span class="nt">-n</span> cert-manager <span class="nt">--for</span><span class="o">=</span><span class="nv">condition</span><span class="o">=</span>Available deployment <span class="nt">--all</span>
+
+helm <span class="nb">install </span>csa-operator <span class="nt">--namespace</span> cld-streaming <span class="se">\\</span>
+    <span class="nt">--set</span> <span class="s1">'flink-kubernetes-operator.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\\</span>
+    <span class="nt">--set</span> <span class="s1">'ssb.sse.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\\</span>
+    <span class="nt">--set</span> <span class="s1">'ssb.sqlRunner.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\\</span>
+    <span class="nt">--set-file</span> flink-kubernetes-operator.clouderaLicense.fileContent<span class="o">=</span>./license.txt <span class="se">\\</span>
+</code></pre></div></div>
+
+<p>Notice the following output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Pulled: container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator:1.5.0-b275
+Digest: sha256:2ee057584ec167a9d70cabbe9a4f0aa8cd93ddf74e73da3c2617a829a87e593c
+NAME: csa-operator
+LAST DEPLOYED: Mon Mar  9 14:43:32 2026
+NAMESPACE: cld-streaming
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+</span></code></pre></div></div>
+
+<hr />
+
+<h3 id="-deploy-nifi-cfm-30">🌊 Deploy NiFi (CFM 3.0)</h3>
+<p>We’ll start with a NiFi cluster using the standard evaluation spec. This gives us a fully functional NiFi instance without the overhead of complex external persistence.</p>
+
+<p>Create the nifi-eval.yaml as follows:</p>
+
+<p><strong>nifi-eval.yaml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">cfm.cloudera.com/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">NifiCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nifi-eval</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">nodes</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">imagePullSecrets</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">cloudera-creds</span>
+  <span class="na">externalConfiguration</span><span class="pi">:</span>
+    <span class="na">nodeProperties</span><span class="pi">:</span>
+      <span class="na">nifi.web.http.host</span><span class="pi">:</span> <span class="s">0.0.0.0</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> nifi-eval.yaml <span class="nt">-n</span> cld-streaming
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="️-final-verification">🕵️ Final Verification</h3>
+<p>The best way to see the fruits of your labor is via <code class="language-plaintext highlighter-rouge">k9s</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check the deployment progress</span>
+k9s
+</code></pre></div></div>
+
+<p><img src="/assets/images/k9s-full-stack.png" alt="k9s Full Setup Placeholder" />
+<em>Behold: The full Cloudera Streaming stack running harmoniously in your local cluster.</em></p>
+
+<p>You can also expose all the services with minikube like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service list <span class="nt">-n</span> cld-streaming
+┌───────────────┬────────────────────────────────┬──────────────────┬─────┐
+│   NAMESPACE   │              NAME              │   TARGET PORT    │ URL │
+├───────────────┼────────────────────────────────┼──────────────────┼─────┤
+│ cld-streaming │ cloudera-surveyor-service      │ http/8080        │     │
+│ cld-streaming │ flink-operator-webhook-service │ No node port     │     │
+│ cld-streaming │ my-cluster-kafka-bootstrap     │ No node port     │     │
+│ cld-streaming │ my-cluster-kafka-brokers       │ No node port     │     │
+│ cld-streaming │ schema-registry-service        │ application/9090 │     │
+│ cld-streaming │ ssb-mve                        │ No node port     │     │
+│ cld-streaming │ ssb-postgresql                 │ No node port     │     │
+│ cld-streaming │ ssb-sse                        │ No node port     │     │
+└───────────────┴────────────────────────────────┴──────────────────┴─────┘
+</code></pre></div></div>
+
+<p class="notice--success">:trophy: <strong>Pro Tip!</strong> Once your pods are running, use <code class="language-plaintext highlighter-rouge">minikbue service</code> to expose the UI endpoints.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check our the service UIs:</span>
+minikube service cloudera-surveyor-service <span class="nt">--namespace</span> cld-streaming
+minikube service schema-registry-service <span class="nt">--namespace</span> cld-streaming
+minikube service ssb-sse <span class="nt">--namespace</span> cld-streaming
+</code></pre></div></div>
+
+<p>This setup is your “sandbox” for building end-to-end streaming architectures.</p>
+
+<p><img src="/assets/images/csm-schemaregistry.png" alt="CSM Schema Registry" /></p>
+
+<p><img src="/assets/images/csm-surveyor.png" alt="CSM Surveyor" /></p>
+
+<p><img src="/assets/images/csa-ssb.png" alt="CSA Sql Stream Builder SSB" /></p>
+
+<hr />
+
+<h3 id="-resources">📚 Resources</h3>
+<ul>
+  <li><a href="http://docs.cloudera.com/cfm-operator/3.0.0/index.html">Cloudera Flow Management (CFM) 3.0 Docs</a></li>
+  <li><a href="https://docs.cloudera.com/csa-operator/1.5/index.html">Cloudera Streaming Analytics (CSA) 1.5 Docs</a></li>
+  <li><a href="https://docs.cloudera.com/csm-operator/1.6/index.html">Cloudera Streams Messaging (CSM) 1.6 Docs</a></li>
+</ul>
+
+<hr />
+
+<h3 id="macbook-setup-with-cloudera-streaming-operators-deep-dive">Macbook Setup with Cloudera Streaming Operators Deep Dive</h3>
+
+<p>I hope you enjoyed this foundational guide to getting your local environment ready with the Cloudera Streaming stack. By starting with these evaluation examples, you’ve established the baseline knowledge required to navigate the latest CSA 1.5, CSM 1.6, and CFM 3.0 Cloudera Operators.</p>
+
+<p>If you have any questions about Cloudera Streaming Operators or the integration between these components, please reach out!</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="operator" /><category term="nifi" /><category term="kafka" /><category term="flink" /><summary type="html"><![CDATA[Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.]]></summary></entry><entry><title type="html">Cloudera Streaming Analytics Operator for Kubernetes 1.5</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" rel="alternate" type="text/html" title="Cloudera Streaming Analytics Operator for Kubernetes 1.5" /><published>2026-03-04T00:00:00-05:00</published><updated>2026-03-04T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Analytics%20-%20Kubernetes%20Operator%201.5</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/"><![CDATA[<p>Cloudera’s Data In Motion Team is pleased to announce the release of the <strong>Cloudera Streaming Analytics Operator for Kubernetes 1.5</strong>. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.</p>
 
 <hr />
 
@@ -49,17 +423,63 @@
 <hr />
 
 <h3 id="upgrading-to-the-new-release">Upgrading to the New Release</h3>
-<p>Reference the latest operator version in the Helm Install command. More details can be found in the <a href="https://docs-archive.cloudera.com/cfm-operator/3.0/installation/topics/cfm-op-install-cfm-op.html">installation instructions</a>.</p>
+<p>Reference the latest operator version in the Helm Install command. More details can be found in the <a href="https://docs.cloudera.com/cfm-operator/3.0.0/installation/topics/cfm-op-install-cfm-op.html">installation instructions</a>.</p>
 
 <hr />
 
 <h3 id="links">Links</h3>
 <ul>
-  <li><a href="https://docs-archive.cloudera.com/cfm-operator/3.0/release-notes/topics/cfm-op-whats-new.html">Release notes</a></li>
-  <li><a href="https://docs-archive.cloudera.com/cfm-operator/3.0/index.html">Documentation</a></li>
+  <li><a href="https://docs.cloudera.com/cfm-operator/3.0.0/release-notes/topics/cfm-op-whats-new.html">Release notes</a></li>
+  <li>[Documentation](https://docs.cloudera.com/cfm-operator/3.0.0/index.html</li>
 </ul>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about  Cloudera Flow Management Operator for Kubernetes 3.0 please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="kubernetes" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productivity and usability features.]]></summary></entry><entry><title type="html">Cloudera Data Flow 3.0 for Cloudera on Cloud</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" rel="alternate" type="text/html" title="Cloudera Data Flow 3.0 for Cloudera on Cloud" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0%20For%20Cloudera%20On%20Cloud</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of <strong>Cloudera Data Flow 3.0 for Cloudera on cloud</strong>.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about  Cloudera Flow Management Operator for Kubernetes 3.0 please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="kubernetes" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productivity and usability features.]]></summary></entry><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
+
+<p>This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model endpoints.</p>
+
+<hr />
+
+<h2 id="key-features">Key Features</h2>
+
+<h3 id="1-robust-ai-inference-and-serving">1. Robust AI Inference and Serving</h3>
+<ul>
+  <li><strong>Production-Grade App Serving (Tech Preview):</strong> Host applications and agents directly within the Inference service. Apps now scale dynamically with model endpoints for a unified AI architecture.</li>
+  <li><strong>Extended Model Support:</strong> Direct deployment for <strong>XGBoost, PyTorch, and TensorFlow</strong> models straight from the Cloudera AI Registry.</li>
+  <li><strong>Advanced vLLM Task Specification:</strong> Manually specify model tasks (e.g., <code class="language-plaintext highlighter-rouge">EMBED</code>, <code class="language-plaintext highlighter-rouge">RANK</code>, or <code class="language-plaintext highlighter-rouge">CLASSIFICATION</code>) via the API during deployment to unlock broader vLLM architecture support.</li>
+  <li><strong>Guaranteed Compute (AWS):</strong> Support for <strong>AWS On-Demand Capacity Reservations</strong> and capacity blocks ensures compute availability for critical workloads.</li>
+</ul>
+
+<h3 id="2-accelerated-ai-workbench-performance">2. Accelerated AI Workbench Performance</h3>
+<ul>
+  <li><strong>Enhanced UI:</strong> Faster page load times due to memory and query optimizations across projects and jobs.</li>
+  <li><strong>Auto-Rollback Upgrades:</strong> Safer, “one-click” side-by-side upgrades for the workbench with built-in automatic rollback support in case of failure.</li>
+</ul>
+
+<h3 id="3-enhanced-ai-registry-and-catalog">3. Enhanced AI Registry and Catalog</h3>
+<ul>
+  <li><strong>Deep Lineage Tracking:</strong> The Registry now displays structured metadata (provider, model ID, checksum) for all models imported from <strong>Hugging Face</strong> and <strong>NVIDIA NGC</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="platform-updates">Platform Updates</h2>
+<ul>
+  <li><strong>Unified Administration:</strong> Consistent admin experience across the Workbench, Registry, and Inference services.</li>
+  <li><strong>Latest Kubernetes Support:</strong> Official support added for <strong>Amazon EKS 1.33</strong> and <strong>Azure AKS 1.33</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="public-links">Public Links</h2>
+<ul>
+  <li><a href="https://docs.cloudera.com/machine-learning/cloud/release-notes/topics/ml-whats-new.html#ml_workspace_resource_tags"><strong>Release Notes</strong></a>: Review the complete list of changes.</li>
+  <li><a href="https://www.cloudera.com/products/machine-learning.html"><strong>Cloudera AI Portfolio</strong></a>: Deep dive into the Cloudera <a href="https://www.cloudera.com/products/machine-learning/ai-inference-service.html">AI Inference Service</a> and <a href="https://www.cloudera.com/products/machine-learning/ai-workbench.html">AI Workbench</a>.</li>
+  <li><a href="https://www.cloudera.com/about/news-and-blogs/press-releases/2026-02-09-cloudera-unveils-next-phase-of-ai-inferencing-and-unified-data-access-capabilities.html"><strong>Press Release</strong></a>: Learn more about Cloudera AI Inference on-premises (GA).</li>
+</ul>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/index.html">DOCS</a> for Cloudera AI.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><summary type="html"><![CDATA[We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.]]></summary></entry><entry><title type="html">Cloudera Data Flow 3.0 for Cloudera on Cloud</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" rel="alternate" type="text/html" title="Cloudera Data Flow 3.0 for Cloudera on Cloud" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0%20For%20Cloudera%20On%20Cloud</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/"><![CDATA[<p>The Data In Motion Team is pleased to announce the release of <strong>Cloudera Data Flow 3.0 for Cloudera on cloud</strong>.</p>
 
 <p>This landmark release represents the most significant architectural shift in the history of Cloudera Data Flow. Importantly, we’ve moved beyond a single-flow deployment model to now support <strong>multi-flow deployments</strong>, offering unprecedented control over cloud resource consumption and infrastructure costs. It also introduces enhancements to the developer experience with data provenance tools, and ensures compliance with the latest security and platform standards through new Kubernetes and NiFi version support.</p>
 
@@ -110,53 +530,7 @@
   <li><a href="https://docs.cloudera.com/dataflow/cloud/index.html"><strong>Documentation</strong></a></li>
 </ul>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera DataFlow 3.0 please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="dataflow" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.]]></summary></entry><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-03-02T00:00:00-05:00</published><updated>2026-03-02T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
-
-<p>This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model endpoints.</p>
-
-<hr />
-
-<h2 id="key-features">Key Features</h2>
-
-<h3 id="1-robust-ai-inference-and-serving">1. Robust AI Inference and Serving</h3>
-<ul>
-  <li><strong>Production-Grade App Serving (Tech Preview):</strong> Host applications and agents directly within the Inference service. Apps now scale dynamically with model endpoints for a unified AI architecture.</li>
-  <li><strong>Extended Model Support:</strong> Direct deployment for <strong>XGBoost, PyTorch, and TensorFlow</strong> models straight from the Cloudera AI Registry.</li>
-  <li><strong>Advanced vLLM Task Specification:</strong> Manually specify model tasks (e.g., <code class="language-plaintext highlighter-rouge">EMBED</code>, <code class="language-plaintext highlighter-rouge">RANK</code>, or <code class="language-plaintext highlighter-rouge">CLASSIFICATION</code>) via the API during deployment to unlock broader vLLM architecture support.</li>
-  <li><strong>Guaranteed Compute (AWS):</strong> Support for <strong>AWS On-Demand Capacity Reservations</strong> and capacity blocks ensures compute availability for critical workloads.</li>
-</ul>
-
-<h3 id="2-accelerated-ai-workbench-performance">2. Accelerated AI Workbench Performance</h3>
-<ul>
-  <li><strong>Enhanced UI:</strong> Faster page load times due to memory and query optimizations across projects and jobs.</li>
-  <li><strong>Auto-Rollback Upgrades:</strong> Safer, “one-click” side-by-side upgrades for the workbench with built-in automatic rollback support in case of failure.</li>
-</ul>
-
-<h3 id="3-enhanced-ai-registry-and-catalog">3. Enhanced AI Registry and Catalog</h3>
-<ul>
-  <li><strong>Deep Lineage Tracking:</strong> The Registry now displays structured metadata (provider, model ID, checksum) for all models imported from <strong>Hugging Face</strong> and <strong>NVIDIA NGC</strong>.</li>
-</ul>
-
-<hr />
-
-<h2 id="platform-updates">Platform Updates</h2>
-<ul>
-  <li><strong>Unified Administration:</strong> Consistent admin experience across the Workbench, Registry, and Inference services.</li>
-  <li><strong>Latest Kubernetes Support:</strong> Official support added for <strong>Amazon EKS 1.33</strong> and <strong>Azure AKS 1.33</strong>.</li>
-</ul>
-
-<hr />
-
-<h2 id="public-links">Public Links</h2>
-<ul>
-  <li><a href="https://docs.cloudera.com/machine-learning/cloud/release-notes/topics/ml-whats-new.html#ml_workspace_resource_tags"><strong>Release Notes</strong></a>: Review the complete list of changes.</li>
-  <li><a href="https://www.cloudera.com/products/machine-learning.html"><strong>Cloudera AI Portfolio</strong></a>: Deep dive into the Cloudera <a href="https://www.cloudera.com/products/machine-learning/ai-inference-service.html">AI Inference Service</a> and <a href="https://www.cloudera.com/products/machine-learning/ai-workbench.html">AI Workbench</a>.</li>
-  <li><a href="https://www.cloudera.com/about/news-and-blogs/press-releases/2026-02-09-cloudera-unveils-next-phase-of-ai-inferencing-and-unified-data-access-capabilities.html"><strong>Press Release</strong></a>: Learn more about Cloudera AI Inference on-premises (GA).</li>
-</ul>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/index.html">DOCS</a> for Cloudera AI.</p>
-
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><summary type="html"><![CDATA[We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Surveyor</title><link href="https://cldr-steven-matison.github.io//blog/Surveyor/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Surveyor" /><published>2026-02-24T00:00:00-05:00</published><updated>2026-02-24T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Surveyor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Surveyor/"><![CDATA[<h1 id="introducing-cloudera-streams-messaging-surveyor">Introducing Cloudera Streams Messaging Surveyor</h1>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera DataFlow 3.0 please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="nifi" /><category term="dataflow" /><summary type="html"><![CDATA[The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.]]></summary></entry><entry><title type="html">Cloudera Streams Messaging - Surveyor</title><link href="https://cldr-steven-matison.github.io//blog/Surveyor/" rel="alternate" type="text/html" title="Cloudera Streams Messaging - Surveyor" /><published>2026-02-24T00:00:00-05:00</published><updated>2026-02-24T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Surveyor</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Surveyor/"><![CDATA[<h1 id="introducing-cloudera-streams-messaging-surveyor">Introducing Cloudera Streams Messaging Surveyor</h1>
 
 <p>Recently released <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/">CSM 1.6</a> brings Surveyor, Iceberg Connector, and Schema Registry.  In my previous blog post <a href="https://cldr-steven-matison.github.io/blog/Schema-Registry/">Schema Registry</a>, I expose the steps to get to the UI.  Now let’s do the same with Surveyor.</p>
 
@@ -373,45 +747,7 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/csm-operator/1.6/index.html">DOCS</a> for the CSM Operator.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streams Messaging Operator please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6]]></summary></entry><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
-
-<p>Powered by <strong>NVIDIA NIM</strong>, the Cloudera AI Inference service provides the control and performance that enterprises need to accelerate innovation without compromising data security.</p>
-
-<hr />
-
-<h2 id="empowering-true-private-ai">Empowering True Private AI</h2>
-<p>Cloudera AI Inference for on-premises is engineered for organizations that demand absolute control over their intellectual property and data sovereignty.</p>
-
-<ul>
-  <li><strong>Complete Data Privacy:</strong> Ensure that sensitive data, prompts, and model responses never leave your secure corporate network, meeting strict regulatory requirements.</li>
-  <li><strong>Air-Gapped Readiness:</strong> Full support for highly secure, air-gapped environments, providing the tools and documentation necessary to import and manage models without external connectivity.</li>
-  <li><strong>Storage Flexibility:</strong> Full support to any S3-compatible object storage.</li>
-</ul>
-
-<hr />
-
-<h2 id="predictable-tco-for-production-ai">Predictable TCO for Production AI</h2>
-<p>As enterprises move from experimentation to steady-state production, the on-premises service offers a significantly lower total cost of ownership (TCO) compared to token-based cloud APIs*.</p>
-
-<p>The AI Inference on-premises service lowers long-term TCO by providing ownership of GPU infrastructure, which pays off fast when inference happens 24/7.</p>
-
-<h2 id="feature-highlights-for-production-grade-ai">Feature Highlights for Production-Grade AI</h2>
-<ul>
-  <li><strong>Optimized Performance:</strong> Prebuilt and optimized engines, including <strong>TensorRT-LLM</strong> and <strong>vLLM</strong>, ensure low-latency, high-throughput inferencing.</li>
-  <li><strong>Seamless Integration:</strong> Integrate with existing MLOps workflows and CI/CD pipelines using OpenAI-compatible APIs for large language models (LLMs) and Open Inference Protocol APIs for traditional models.</li>
-  <li><strong>Comprehensive Monitoring:</strong> Track performance metrics such as latency, throughput, and resource utilization in real-time to ensure operational continuity.</li>
-</ul>
-
-<hr />
-
-<h2 id="get-started-today">Get Started Today</h2>
-<p>The Cloudera AI Inference service enables enterprises to achieve high-performance, private AI with a significantly lower TCO than cloud-based APIs. By keeping workloads on-premises, customers ensure absolute data sovereignty and predictable costs for production-scale GenAI.</p>
-
-<p>To get started, visit the <strong>Model Hub</strong> to select from a catalog of optimized models ready for deployment within your secure environment.</p>
-
-<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/1.5.5/index.html">DOCS</a> for Cloudera AI.</p>
-
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI Inference please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="inference" /><category term="onpremise" /><summary type="html"><![CDATA[We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.]]></summary></entry><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streams Messaging Operator please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="csm" /><category term="kafka" /><category term="kubernetes" /><category term="cloudera" /><summary type="html"><![CDATA[Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6]]></summary></entry><entry><title type="html">Cloudera AI January Release</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" rel="alternate" type="text/html" title="Cloudera AI January Release" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20January%20Release</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/"><![CDATA[<p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
 
 <p>This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model endpoints.</p>
 
@@ -457,34 +793,42 @@
 
 <p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/index.html">DOCS</a> for Cloudera AI.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><summary type="html"><![CDATA[We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.]]></summary></entry><entry><title type="html">Introducing Cloudera Data Lineage</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/" rel="alternate" type="text/html" title="Introducing Cloudera Data Lineage" /><published>2026-02-03T00:00:00-05:00</published><updated>2026-02-03T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/"><![CDATA[<p>In a significant move to conquer “metadata chaos,” <strong>Cloudera</strong> officially acquired <strong>Octopai</strong> in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><summary type="html"><![CDATA[We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.]]></summary></entry><entry><title type="html">Cloudera AI Inference Service GA Onpremise</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/" rel="alternate" type="text/html" title="Cloudera AI Inference Service GA Onpremise" /><published>2026-02-05T00:00:00-05:00</published><updated>2026-02-05T00:00:00-05:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20AI%20Inference</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-AI-Inference/"><![CDATA[<p>We’re excited to announce the <strong>general availability (GA)</strong> of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.</p>
+
+<p>Powered by <strong>NVIDIA NIM</strong>, the Cloudera AI Inference service provides the control and performance that enterprises need to accelerate innovation without compromising data security.</p>
 
 <hr />
 
-<h2 id="a-brief-history-from-hadoop-to-hybrid-ai">A Brief History: From Hadoop to Hybrid AI</h2>
+<h2 id="empowering-true-private-ai">Empowering True Private AI</h2>
+<p>Cloudera AI Inference for on-premises is engineered for organizations that demand absolute control over their intellectual property and data sovereignty.</p>
 
-<p>Cloudera’s journey began in 2008 as a visionary in the Apache Hadoop ecosystem, eventually merging with its primary rival, Hortonworks, in 2019. Since then, the company has pivoted aggressively toward the <strong>Cloudera Data Platform (CDP)</strong>, a hybrid solution that manages data across on-premises and multi-cloud environments.</p>
-
-<p>Octopai, founded in 2016, carved out a niche as the gold standard for automated data discovery and lineage. By the time of the merger, Octopai was already famous for its ability to map complex data environments in seconds—something that traditionally took manual weeks or months. By bringing Octopai into the fold, Cloudera has essentially added the “GPS” to its massive data warehouse and lakehouse offerings, allowing users to see exactly where their data comes from and where it is going.</p>
+<ul>
+  <li><strong>Complete Data Privacy:</strong> Ensure that sensitive data, prompts, and model responses never leave your secure corporate network, meeting strict regulatory requirements.</li>
+  <li><strong>Air-Gapped Readiness:</strong> Full support for highly secure, air-gapped environments, providing the tools and documentation necessary to import and manage models without external connectivity.</li>
+  <li><strong>Storage Flexibility:</strong> Full support to any S3-compatible object storage.</li>
+</ul>
 
 <hr />
 
-<h2 id="cloudera-data-lineage-powering-the-era-of-convergence">Cloudera Data Lineage: Powering the “Era of Convergence”</h2>
+<h2 id="predictable-tco-for-production-ai">Predictable TCO for Production AI</h2>
+<p>As enterprises move from experimentation to steady-state production, the on-premises service offers a significantly lower total cost of ownership (TCO) compared to token-based cloud APIs*.</p>
 
-<p>Now fully integrated as <strong>Cloudera Data Lineage</strong>, the platform has received a massive overhaul to support the modern data estate. Cloudera has introduced over <strong>60 native connectors</strong> designed to bridge the gap between traditional big data systems and real-time streaming architectures.</p>
+<p>The AI Inference on-premises service lowers long-term TCO by providing ownership of GPU infrastructure, which pays off fast when inference happens 24/7.</p>
 
-<h3 id="deep-integration-with-nifi-and-kafka">Deep Integration with NiFi and Kafka</h3>
-<p>A standout update is the deep integration with <strong>Apache NiFi (Cloudera DataFlow)</strong> and <strong>Apache Kafka</strong>. The new NiFi connectors allow for <strong>“cross-system lineage,”</strong> meaning as data is ingested from the edge and transformed through various processors, the lineage is captured automatically. This prevents the “black box” effect often seen in data-in-motion.</p>
+<h2 id="feature-highlights-for-production-grade-ai">Feature Highlights for Production-Grade AI</h2>
+<ul>
+  <li><strong>Optimized Performance:</strong> Prebuilt and optimized engines, including <strong>TensorRT-LLM</strong> and <strong>vLLM</strong>, ensure low-latency, high-throughput inferencing.</li>
+  <li><strong>Seamless Integration:</strong> Integrate with existing MLOps workflows and CI/CD pipelines using OpenAI-compatible APIs for large language models (LLMs) and Open Inference Protocol APIs for traditional models.</li>
+  <li><strong>Comprehensive Monitoring:</strong> Track performance metrics such as latency, throughput, and resource utilization in real-time to ensure operational continuity.</li>
+</ul>
 
-<p>Similarly, the <strong>Kafka connectors</strong> enable organizations to track ephemeral streaming data, ensuring that real-time insights are just as governed and auditable as static data in HDFS or S3.</p>
+<hr />
 
-<h3 id="ai-driven-governance">AI-Driven Governance</h3>
-<p>Beyond just connectivity, Cloudera has added the <strong>Octomize AI agent</strong>, which uses generative AI to help data teams optimize SQL queries and automatically document data flows. These features transform Cloudera Data Lineage from a simple map into an active intelligence layer, essential for meeting the strict requirements of GDPR, HIPAA, and the governance needs of enterprise-scale AI.</p>
+<h2 id="get-started-today">Get Started Today</h2>
+<p>The Cloudera AI Inference service enables enterprises to achieve high-performance, private AI with a significantly lower TCO than cloud-based APIs. By keeping workloads on-premises, customers ensure absolute data sovereignty and predictable costs for production-scale GenAI.</p>
 
-<blockquote>
-  <p><strong>Key Takeaway:</strong> The fusion of Octopai’s metadata discovery engine with Cloudera’s big data backbone provides Cloudera Data Lineage; a unified view of data health, from the first spark of ingestion to the final AI model.</p>
-</blockquote>
+<p>To get started, visit the <strong>Model Hub</strong> to select from a catalog of optimized models ready for deployment within your secure environment.</p>
 
-<p>As always, check out the entire <a href="https://docs.cloudera.com/octopai/latest/index.html">DOCS</a> for Cloudera Data Lineage.</p>
+<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/1.5.5/index.html">DOCS</a> for Cloudera AI.</p>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage,  please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="octopai" /><category term="data" /><category term="lineage" /><summary type="html"><![CDATA[In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.]]></summary></entry></feed>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI Inference please reach out to schedule a discussion.</p>]]></content><author><name>Steven Matison</name></author><category term="blog" /><category term="cloudera" /><category term="ai" /><category term="inference" /><category term="onpremise" /><summary type="html"><![CDATA[We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.]]></summary></entry></feed>

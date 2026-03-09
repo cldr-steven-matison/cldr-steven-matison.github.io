@@ -310,4 +310,10 @@ var store = [{
         "tags": ["Cloudera Streaming Analytics","flink","cloudera","kubernetes"],
         "url": "/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/",
         "teaser": "/assets/images/csa-architecture.png"
+      },{
+        "title": "Cloudera Streaming Operators",
+        "excerpt":"Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster. We are utilizing the Evaluation examples for these...","categories": ["blog"],
+        "tags": ["cloudera","operator","nifi","kafka","flink"],
+        "url": "/blog/Cloudera-Streaming-Operators/",
+        "teaser": "/assets/images/surveyor.png"
       }]

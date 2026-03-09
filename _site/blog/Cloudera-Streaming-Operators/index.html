@@ -1,0 +1,1013 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Cloudera Streaming Operators - Cloudera Solutions Engineer</title>
+<meta name="description" content="Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Cloudera Streaming Operators">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/">
+
+
+  <meta property="og:description" content="Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/surveyor.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-09T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io//"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <a class="site-title" href="/">
+          Cloudera Solutions Engineer
+          
+        </a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&amp;pageNum=1">Community</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io//">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io//" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Hello, My name is Steven Matison and I am a Senior Solutions Engineer at Cloudera, Inc.  Check out my journey with Cloudera Data Platform (CDP).</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Cloudera Streaming Operators">
+    <meta itemprop="description" content="Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.">
+    <meta itemprop="datePublished" content="2026-03-09T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/" class="u-url" itemprop="url">Cloudera Streaming Operators
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of <strong>Cloudera Streaming Operators</strong> (CFM, CSA, CSM) on a local Minikube cluster.</p>
+
+<p>We are utilizing the <strong>Evaluation</strong> examples for these services. This is a critical step for any engineer; mastering the foundational “batteries-included” configurations is essential before moving into complex, high-availability production architectures.</p>
+
+<p>🚀 <strong>Let’s get started!</strong></p>
+
+<hr>
+
+<h3 id="-my-macbook-setup">💻 My Macbook Setup</h3>
+<p>First, we need the “Swiss Army Knife” of macOS: <strong>Homebrew</strong>. We will use it to install our core CLI tools, container runtimes, and local Kubernetes environment.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Homebrew (if not already installed)</span>
+/bin/bash <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="si">)</span><span class="s2">"</span>
+
+<span class="c"># Install Core Tools</span>
+brew <span class="nb">install </span>git docker python minikube kubernetes-cli k9s helm
+
+<span class="c"># Start Docker Desktop (or Colima)</span>
+open /Applications/Docker.app
+
+<span class="c"># Spin up Minikube with enough resources for the full stack</span>
+minikube start <span class="nt">--cpus</span> 4 <span class="nt">--memory</span> 12288
+</code></pre></div></div>
+
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Makes sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.</p>
+
+<hr>
+
+<h3 id="-some-helm-and-kubectl-setup">📦 Some Helm and Kubectl Setup</h3>
+<p>We need the Operators installed first to manage our custom resources. We’ll pull these from the Cloudera Helm Registry.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Create the namespace</span>
+kubectl create namespace cld-streaming
+
+<span class="c"># 2. Add Cloudera License Credentials</span>
+kubectl create secret docker-registry cloudera-creds <span class="se">\</span>
+  <span class="nt">--docker-server</span><span class="o">=</span>container.repository.cloudera.com <span class="se">\</span>
+  <span class="nt">--docker-username</span><span class="o">=</span>&lt;CLOUDERA_LICENSE_USER&gt; <span class="se">\</span>
+  <span class="nt">--docker-password</span><span class="o">=</span>&lt;CLOUDERA_LICENSE_PASSWORD&gt; <span class="se">\</span>
+  <span class="nt">-n</span> cld-streaming
+
+helm registry login container.repository.cloudera.com
+</code></pre></div></div>
+
+<hr>
+
+<h3 id="-install-cloudera-streams-messaging-operatorcsm-16">🎡 Install Cloudera Streams Messaging Operator(CSM 1.6)</h3>
+<p>Next, we stand up our messaging backbone. The CSM 1.6 operator makes it incredibly simple to deploy a Kafka cluster for local development.  First lets install the Strimzi Kafka Operator:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Cloudera Kafka Strimzi Operator</span>
+helm <span class="nb">install </span>strimzi-cluster-operator 
+<span class="nt">--namespace</span> cld-streaming 
+<span class="nt">--version</span> 1.6.0-b99
+<span class="nt">--set</span> <span class="s1">'image.imagePullSecrets[0].name=cloudera-creds'</span> 
+<span class="nt">--set-file</span> clouderaLicense.fileContent<span class="o">=</span>./license.txt 
+<span class="nt">--set</span> <span class="nv">watchAnyNamespace</span><span class="o">=</span><span class="nb">true 
+</span>oci://container.repository.cloudera.com/cloudera-helm/csm-operator/strimzi-kafka-operator 
+</code></pre></div></div>
+
+<p>Create the kafka-eval.yaml as follows:</p>
+
+<p><strong>kafka-eval.yaml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">kafka.strimzi.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Kafka</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">my-cluster</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+    <span class="na">strimzi.io/node-pools</span><span class="pi">:</span> <span class="s">enabled</span>
+    <span class="na">strimzi.io/kraft</span><span class="pi">:</span> <span class="s">enabled</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">kafka</span><span class="pi">:</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s">4.1.1.1.6</span>
+    <span class="na">listeners</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">plain</span>
+        <span class="na">port</span><span class="pi">:</span> <span class="m">9092</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">internal</span>
+        <span class="na">tls</span><span class="pi">:</span> <span class="kc">false</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">tls</span>
+        <span class="na">port</span><span class="pi">:</span> <span class="m">9093</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">internal</span>
+        <span class="na">tls</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">offsets.topic.replication.factor</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">transaction.state.log.replication.factor</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">transaction.state.log.min.isr</span><span class="pi">:</span> <span class="m">2</span>
+      <span class="na">default.replication.factor</span><span class="pi">:</span> <span class="m">3</span>
+      <span class="na">min.insync.replicas</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="na">entityOperator</span><span class="pi">:</span>
+    <span class="na">topicOperator</span><span class="pi">:</span> <span class="pi">{}</span>
+    <span class="na">userOperator</span><span class="pi">:</span> <span class="pi">{}</span>
+</code></pre></div></div>
+
+<p>Create the kafka-nodepool.yaml as follows:</p>
+
+<p><strong>kafka-nodepool.yaml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">kafka.strimzi.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">KafkaNodePool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">combined</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">strimzi.io/cluster</span><span class="pi">:</span> <span class="s">my-cluster</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">controller</span>
+    <span class="pi">-</span> <span class="s">broker</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">jbod</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="m">0</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">persistent-claim</span>
+        <span class="na">size</span><span class="pi">:</span> <span class="s">10Gi</span>
+        <span class="na">kraftMetadata</span><span class="pi">:</span> <span class="s">shared</span>
+        <span class="na">deleteClaim</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">kafka.strimzi.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">KafkaNodePool</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">broker-only</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">strimzi.io/cluster</span><span class="pi">:</span> <span class="s">my-cluster</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">broker</span>
+  <span class="na">storage</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">jbod</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="m">0</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">persistent-claim</span>
+        <span class="na">size</span><span class="pi">:</span> <span class="s">10Gi</span>
+        <span class="na">kraftMetadata</span><span class="pi">:</span> <span class="s">shared</span>
+        <span class="na">deleteClaim</span><span class="pi">:</span> <span class="kc">false</span>
+</code></pre></div></div>
+
+<p>Execute the following <code class="language-plaintext highlighter-rouge">kubectl apply</code> command to create the kafka cluster:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">--filename</span> kafka-eval.yaml,kafka-nodepool.yaml <span class="nt">--namespace</span> cld-streaming
+</code></pre></div></div>
+
+<p>Notice the response:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kafka.kafka.strimzi.io/my-cluster created
+kafkanodepool.kafka.strimzi.io/combined created
+kafkanodepool.kafka.strimzi.io/broker-only created
+</span></code></pre></div></div>
+<hr>
+
+<h3 id="-deploy-schema-registry-csm-16">📑 Deploy Schema Registry (CSM 1.6)</h3>
+<p>To manage our data serialization and ensure compatibility across the stack, we deploy the <strong>Cloudera Schema Registry</strong>. This allows to define schema for data that NiFI, Kafka, Flink and SSB can easily decipher.</p>
+
+<p>Create the sr-values.yaml file as follows:</p>
+
+<p><strong>sr-values.yaml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tls</span><span class="pi">:</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">authentication</span><span class="pi">:</span>
+  <span class="na">oauth</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">authorization</span><span class="pi">:</span>
+  <span class="na">simple</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">database</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">in-memory</span>
+<span class="na">service</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">NodePort</span>
+</code></pre></div></div>
+
+<p>Execute the following helm command to install Schema Registry:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Schema Registry from the Cloudera OCI Registry</span>
+helm <span class="nb">install </span>schema-registry 
+<span class="nt">--namespace</span> cld-streaming 
+<span class="nt">--version</span> 1.6.0-b99 
+<span class="nt">--values</span> sr-values.yaml 
+<span class="nt">--set</span> <span class="s2">"image.imagePullSecrets[0].name=cloudera-creds"</span> 
+oci://container.repository.cloudera.com/cloudera-helm/csm-operator/schema-registry 
+</code></pre></div></div>
+
+<p>Notice the following output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Pulled: container.repository.cloudera.com/cloudera-helm/csm-operator/schema-registry:1.6.0-b99
+Digest: sha256:6e7d57bf42ddefc3f216b977d91fd606caf78a456c6aa2989002ad4387fb5a6d
+NAME: schema-registry
+LAST DEPLOYED: Mon Mar  9 13:15:09 2026
+NAMESPACE: cld-streaming
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+NOTES:
+Thank you for installing schema-registry.
+
+Your release is named schema-registry.
+
+WARNING: You configured Schema Registry to use an in-memory database. This setup is only suitable for testing and evaluation. Cloudera does not recommend this configuration for production use. All schemas will be lost when Pods restart.
+</span></code></pre></div></div>
+
+<h3 id="️-deploy-kafka-surveyor-csm-16">🕵️ Deploy Kafka Surveyor (CSM 1.6)</h3>
+<p>A new standout in the CSM Operator 1.6 is <strong>Kafka Surveyor</strong>. This provides advanced observability into your Kafka environment. It is a game-changer for monitoring broker health and topic metrics in a Kubernetes-native way.</p>
+
+<p>Before we can create a surveyor yaml we need to find our kafka boostrapServers:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get kafka my-cluster <span class="nt">-n</span> cld-streaming <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.status.listeners[?(@.name=="plain")].bootstrapServers}'</span>
+</code></pre></div></div>
+
+<p>Grab the following from the output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">my-cluster-kafka-bootstrap.cld-streaming.svc:9092 
+</span></code></pre></div></div>
+
+<p>and use it to create the surveyor-eval.yaml as follows:</p>
+
+<p><strong>kafka-surveyor.yaml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">clusterConfigs</span><span class="pi">:</span>
+  <span class="na">clusters</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">clusterName</span><span class="pi">:</span> <span class="s">my-cluster</span>
+      <span class="na">tags</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">csm1.6</span>
+      <span class="na">bootstrapServers</span><span class="pi">:</span> <span class="s">my-cluster-kafka-bootstrap.cld-streaming.svc:9092</span> 
+      <span class="na">adminOperationTimeout</span><span class="pi">:</span> <span class="s">PT1M</span>
+      <span class="na">authorization</span><span class="pi">:</span>
+        <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+      <span class="na">commonClientConfig</span><span class="pi">:</span>
+        <span class="na">security.protocol</span><span class="pi">:</span> <span class="s">PLAINTEXT</span>
+<span class="na">surveyorConfig</span><span class="pi">:</span>
+  <span class="na">surveyor</span><span class="pi">:</span>
+    <span class="na">authentication</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">tlsConfigs</span><span class="pi">:</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+
+</code></pre></div></div>
+
+<p>Execute the following helm command to install Cloudera Surveyor:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install </span>cloudera-surveyor <span class="se">\\</span>
+  <span class="nt">--namespace</span> cld-streaming <span class="se">\\</span>
+  <span class="nt">--version</span> 1.6.0-b99 <span class="se">\\</span>
+  <span class="nt">--values</span> kafka-surveyor.yaml <span class="se">\\</span>
+  <span class="nt">--set</span> image.imagePullSecrets<span class="o">=</span>cloudera-creds <span class="se">\\</span>
+  <span class="nt">--set-file</span> clouderaLicense.fileContent<span class="o">=</span>./license.txt
+</code></pre></div></div>
+
+<p>Notice the following output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Pulled: container.repository.cloudera.com/cloudera-helm/csm-operator/surveyor:1.6.0-b99
+Digest: sha256:7e12c2b2ab8aca0351296f5c986d64d55a92b66e7ac6b599ccbd5b3fa9c13167
+NAME: cloudera-surveyor
+LAST DEPLOYED: Mon Mar  9 13:18:14 2026
+NAMESPACE: cld-streaming
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+NOTES:
+Thank you for installing surveyor.
+
+Your release is named cloudera-surveyor.
+</span></code></pre></div></div>
+<hr>
+
+<h3 id="-deploy-sql-stream-builder-csa-15">⚡ Deploy SQL Stream Builder (CSA 1.5)</h3>
+
+<p>First lets install the Cloudera Streaming Analytics Operator</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml
+kubectl <span class="nb">wait</span> <span class="nt">-n</span> cert-manager <span class="nt">--for</span><span class="o">=</span><span class="nv">condition</span><span class="o">=</span>Available deployment <span class="nt">--all</span>
+
+helm <span class="nb">install </span>csa-operator <span class="nt">--namespace</span> cld-streaming <span class="se">\\</span>
+    <span class="nt">--set</span> <span class="s1">'flink-kubernetes-operator.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\\</span>
+    <span class="nt">--set</span> <span class="s1">'ssb.sse.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\\</span>
+    <span class="nt">--set</span> <span class="s1">'ssb.sqlRunner.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\\</span>
+    <span class="nt">--set-file</span> flink-kubernetes-operator.clouderaLicense.fileContent<span class="o">=</span>./license.txt <span class="se">\\</span>
+</code></pre></div></div>
+
+<p>Notice the following output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Pulled: container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator:1.5.0-b275
+Digest: sha256:2ee057584ec167a9d70cabbe9a4f0aa8cd93ddf74e73da3c2617a829a87e593c
+NAME: csa-operator
+LAST DEPLOYED: Mon Mar  9 14:43:32 2026
+NAMESPACE: cld-streaming
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+</span></code></pre></div></div>
+
+<hr>
+
+<h3 id="-deploy-nifi-cfm-30">🌊 Deploy NiFi (CFM 3.0)</h3>
+<p>We’ll start with a NiFi cluster using the standard evaluation spec. This gives us a fully functional NiFi instance without the overhead of complex external persistence.</p>
+
+<p>Create the nifi-eval.yaml as follows:</p>
+
+<p><strong>nifi-eval.yaml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">cfm.cloudera.com/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">NifiCluster</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nifi-eval</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">nodes</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">imagePullSecrets</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">cloudera-creds</span>
+  <span class="na">externalConfiguration</span><span class="pi">:</span>
+    <span class="na">nodeProperties</span><span class="pi">:</span>
+      <span class="na">nifi.web.http.host</span><span class="pi">:</span> <span class="s">0.0.0.0</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> nifi-eval.yaml <span class="nt">-n</span> cld-streaming
+</code></pre></div></div>
+
+<hr>
+
+<h3 id="️-final-verification">🕵️ Final Verification</h3>
+<p>The best way to see the fruits of your labor is via <code class="language-plaintext highlighter-rouge">k9s</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check the deployment progress</span>
+k9s
+</code></pre></div></div>
+
+<p><img src="/assets/images/k9s-full-stack.png" alt="k9s Full Setup Placeholder">
+<em>Behold: The full Cloudera Streaming stack running harmoniously in your local cluster.</em></p>
+
+<p>You can also expose all the services with minikube like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service list <span class="nt">-n</span> cld-streaming
+┌───────────────┬────────────────────────────────┬──────────────────┬─────┐
+│   NAMESPACE   │              NAME              │   TARGET PORT    │ URL │
+├───────────────┼────────────────────────────────┼──────────────────┼─────┤
+│ cld-streaming │ cloudera-surveyor-service      │ http/8080        │     │
+│ cld-streaming │ flink-operator-webhook-service │ No node port     │     │
+│ cld-streaming │ my-cluster-kafka-bootstrap     │ No node port     │     │
+│ cld-streaming │ my-cluster-kafka-brokers       │ No node port     │     │
+│ cld-streaming │ schema-registry-service        │ application/9090 │     │
+│ cld-streaming │ ssb-mve                        │ No node port     │     │
+│ cld-streaming │ ssb-postgresql                 │ No node port     │     │
+│ cld-streaming │ ssb-sse                        │ No node port     │     │
+└───────────────┴────────────────────────────────┴──────────────────┴─────┘
+</code></pre></div></div>
+
+<p class="notice--success"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Once your pods are running, use <code class="language-plaintext highlighter-rouge">minikbue service</code> to expose the UI endpoints.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check our the service UIs:</span>
+minikube service cloudera-surveyor-service <span class="nt">--namespace</span> cld-streaming
+minikube service schema-registry-service <span class="nt">--namespace</span> cld-streaming
+minikube service ssb-sse <span class="nt">--namespace</span> cld-streaming
+</code></pre></div></div>
+
+<p>This setup is your “sandbox” for building end-to-end streaming architectures.</p>
+
+<p><img src="/assets/images/csm-schemaregistry.png" alt="CSM Schema Registry"></p>
+
+<p><img src="/assets/images/csm-surveyor.png" alt="CSM Surveyor"></p>
+
+<p><img src="/assets/images/csa-ssb.png" alt="CSA Sql Stream Builder SSB"></p>
+
+<hr>
+
+<h3 id="-resources">📚 Resources</h3>
+<ul>
+  <li><a href="http://docs.cloudera.com/cfm-operator/3.0.0/index.html">Cloudera Flow Management (CFM) 3.0 Docs</a></li>
+  <li><a href="https://docs.cloudera.com/csa-operator/1.5/index.html">Cloudera Streaming Analytics (CSA) 1.5 Docs</a></li>
+  <li><a href="https://docs.cloudera.com/csm-operator/1.6/index.html">Cloudera Streams Messaging (CSM) 1.6 Docs</a></li>
+</ul>
+
+<hr>
+
+<h3 id="macbook-setup-with-cloudera-streaming-operators-deep-dive">Macbook Setup with Cloudera Streaming Operators Deep Dive</h3>
+
+<p>I hope you enjoyed this foundational guide to getting your local environment ready with the Cloudera Streaming stack. By starting with these evaluation examples, you’ve established the baseline knowledge required to navigate the latest CSA 1.5, CSM 1.6, and CFM 3.0 Cloudera Operators.</p>
+
+<p>If you have any questions about Cloudera Streaming Operators or the integration between these components, please reach out!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/flink" class="page__taxonomy-item p-category" rel="tag">flink</a><span class="sep">, </span>
+    
+      <a href="/tags/kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
+    
+      <a href="/tags/nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/operator" class="page__taxonomy-item p-category" rel="tag">operator</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-09T00:00:00-04:00">March 9, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streaming+Operators%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Streaming-Operators%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Streaming-Operators%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Streaming-Operators%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" class="pagination--pager" title="Cloudera Streaming Analytics Operator for Kubernetes 1.5
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csa-architecture.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" rel="permalink">Cloudera Streaming Analytics Operator for Kubernetes 1.5
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/kubernetes-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Flow-Management-Kubernetes-Operator-3.0/" rel="permalink">Cloudera Flow Management Operator for Kubernetes 3.0
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productiv...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/clouderadataflow.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" rel="permalink">Cloudera Data Flow 3.0 for Cloudera on Cloud
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/cloudera_ai_inference.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-AI-January-Release/" rel="permalink">Cloudera AI January Release
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
