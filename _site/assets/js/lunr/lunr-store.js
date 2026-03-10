@@ -287,12 +287,6 @@ var store = [{
         "url": "/blog/Surveyor/",
         "teaser": "/assets/images/surveyor.png"
       },{
-        "title": "Cloudera AI January Release",
-        "excerpt":"We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving. This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model...","categories": ["blog"],
-        "tags": ["cloudera","ai"],
-        "url": "/blog/Cloudera-AI-January-Release/",
-        "teaser": "/assets/images/cloudera_ai_inference.png"
-      },{
         "title": "Cloudera Data Flow 3.0 for Cloudera on Cloud",
         "excerpt":"The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud. This landmark release represents the most significant architectural shift in the history of Cloudera Data Flow. Importantly, we’ve moved beyond a single-flow deployment model to now support multi-flow deployments, offering...","categories": ["blog"],
         "tags": ["cloudera","nifi","dataflow"],
