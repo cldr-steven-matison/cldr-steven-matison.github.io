@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Cloudera Streaming Operators - Cloudera Solutions Engineer</title>
-<meta name="description" content="Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.">
+<meta name="description" content="Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.">
 
 
   <meta name="author" content="Steven Matison">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/">
 
 
-  <meta property="og:description" content="Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.">
+  <meta property="og:description" content="Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.">
 
 
 
@@ -272,7 +272,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Cloudera Streaming Operators">
-    <meta itemprop="description" content="Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.">
+    <meta itemprop="description" content="Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.">
     <meta itemprop="datePublished" content="2026-03-09T00:00:00-04:00">
     
 
@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          6 minute read
+          7 minute read
         
       </span>
     
@@ -309,16 +309,16 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of <strong>Cloudera Streaming Operators</strong> (CFM, CSA, CSM) on a local Minikube cluster.</p>
+        <p>Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of <strong>Cloudera Streaming Operators</strong> (CFM, CSA, CSM) on a local Minikube cluster.</p>
 
-<p>We are utilizing the <strong>Evaluation</strong> examples for these services. This is a critical step for any engineer; mastering the foundational “batteries-included” configurations is essential before moving into complex, high-availability production architectures.</p>
+<p>Please note that we are utilizing the <strong>Evaluation</strong> examples for these services. This is a critical step for any engineer; mastering the foundational configurations is essential before moving into complex, secured, and high-availability production architectures.</p>
 
 <p>🚀 <strong>Let’s get started!</strong></p>
 
 <hr>
 
 <h3 id="-my-macbook-setup">💻 My Macbook Setup</h3>
-<p>First, we need the “Swiss Army Knife” of macOS: <strong>Homebrew</strong>. We will use it to install our core CLI tools, container runtimes, and local Kubernetes environment.</p>
+<p>First, we need the “Swiss Army Knife” of macOS: <strong>homebrew</strong>. We will use it to install our core CLI tools, container runtimes, and local Kubernetes environment.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Homebrew (if not already installed)</span>
 /bin/bash <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="si">)</span><span class="s2">"</span>
@@ -338,7 +338,7 @@ minikube start <span class="nt">--cpus</span> 4 <span class="nt">--memory</span>
 <hr>
 
 <h3 id="-some-helm-and-kubectl-setup">📦 Some Helm and Kubectl Setup</h3>
-<p>We need the Operators installed first to manage our custom resources. We’ll pull these from the Cloudera Helm Registry.</p>
+<p>Let’s get started with <code class="language-plaintext highlighter-rouge">kubectl</code> by creating a namespace and a docker secret we will use with each operator.  We’ll loging now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during install.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Create the namespace</span>
 kubectl create namespace cld-streaming
@@ -350,22 +350,19 @@ kubectl create secret docker-registry cloudera-creds <span class="se">\</span>
   <span class="nt">--docker-password</span><span class="o">=</span>&lt;CLOUDERA_LICENSE_PASSWORD&gt; <span class="se">\</span>
   <span class="nt">-n</span> cld-streaming
 
-helm registry login container.repository.cloudera.com
+
+helm repo add jetstack https://charts.jetstack.io
+helm <span class="nb">install </span>cert-manager jetstack/cert-manager <span class="nt">--version</span> v1.16.3 <span class="nt">--namespace</span> cert-manager <span class="nt">--create-namespace</span> <span class="nt">--set</span> <span class="nv">installCRDs</span><span class="o">=</span><span class="nb">true
+</span>helm registry login container.repository.cloudera.com
 </code></pre></div></div>
 
 <hr>
 
 <h3 id="-install-cloudera-streams-messaging-operatorcsm-16">🎡 Install Cloudera Streams Messaging Operator(CSM 1.6)</h3>
-<p>Next, we stand up our messaging backbone. The CSM 1.6 operator makes it incredibly simple to deploy a Kafka cluster for local development.  First lets install the Strimzi Kafka Operator:</p>
+<p>Next, we will stand up our messaging backbone: Kafka. The CSM 1.6 operator makes it incredibly simple to deploy a Kafka cluster for local development.  First let’s install the Strimzi Kafka Operator from Cloudera:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Cloudera Kafka Strimzi Operator</span>
-helm <span class="nb">install </span>strimzi-cluster-operator 
-<span class="nt">--namespace</span> cld-streaming 
-<span class="nt">--version</span> 1.6.0-b99
-<span class="nt">--set</span> <span class="s1">'image.imagePullSecrets[0].name=cloudera-creds'</span> 
-<span class="nt">--set-file</span> clouderaLicense.fileContent<span class="o">=</span>./license.txt 
-<span class="nt">--set</span> <span class="nv">watchAnyNamespace</span><span class="o">=</span><span class="nb">true 
-</span>oci://container.repository.cloudera.com/cloudera-helm/csm-operator/strimzi-kafka-operator 
+helm <span class="nb">install </span>strimzi-cluster-operator <span class="nt">--namespace</span> cld-streaming <span class="nt">--set</span> <span class="s1">'image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="nt">--set-file</span> clouderaLicense.fileContent<span class="o">=</span>./license.txt <span class="nt">--set</span> <span class="nv">watchAnyNamespace</span><span class="o">=</span><span class="nb">true </span>oci://container.repository.cloudera.com/cloudera-helm/csm-operator/strimzi-kafka-operator <span class="nt">--version</span> 1.6.0-b99
 </code></pre></div></div>
 
 <p>Create the kafka-eval.yaml as follows:</p>
@@ -480,11 +477,11 @@ kafkanodepool.kafka.strimzi.io/broker-only created
 <p>Execute the following helm command to install Schema Registry:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Schema Registry from the Cloudera OCI Registry</span>
-helm <span class="nb">install </span>schema-registry 
-<span class="nt">--namespace</span> cld-streaming 
-<span class="nt">--version</span> 1.6.0-b99 
-<span class="nt">--values</span> sr-values.yaml 
-<span class="nt">--set</span> <span class="s2">"image.imagePullSecrets[0].name=cloudera-creds"</span> 
+helm <span class="nb">install </span>schema-registry <span class="se">\</span>
+<span class="nt">--namespace</span> cld-streaming <span class="se">\</span>
+<span class="nt">--version</span> 1.6.0-b99 <span class="se">\</span>
+<span class="nt">--values</span> sr-values.yaml <span class="se">\</span>
+<span class="nt">--set</span> <span class="s2">"image.imagePullSecrets[0].name=cloudera-creds"</span> <span class="se">\</span>
 oci://container.repository.cloudera.com/cloudera-helm/csm-operator/schema-registry 
 </code></pre></div></div>
 
@@ -545,11 +542,11 @@ WARNING: You configured Schema Registry to use an in-memory database. This setup
 
 <p>Execute the following helm command to install Cloudera Surveyor:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install </span>cloudera-surveyor <span class="se">\\</span>
-  <span class="nt">--namespace</span> cld-streaming <span class="se">\\</span>
-  <span class="nt">--version</span> 1.6.0-b99 <span class="se">\\</span>
-  <span class="nt">--values</span> kafka-surveyor.yaml <span class="se">\\</span>
-  <span class="nt">--set</span> image.imagePullSecrets<span class="o">=</span>cloudera-creds <span class="se">\\</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install </span>cloudera-surveyor <span class="se">\</span>
+  <span class="nt">--namespace</span> cld-streaming <span class="se">\</span>
+  <span class="nt">--version</span> 1.6.0-b99 <span class="se">\</span>
+  <span class="nt">--values</span> kafka-surveyor.yaml <span class="se">\</span>
+  <span class="nt">--set</span> image.imagePullSecrets<span class="o">=</span>cloudera-creds <span class="se">\</span>
   <span class="nt">--set-file</span> clouderaLicense.fileContent<span class="o">=</span>./license.txt
 </code></pre></div></div>
 
@@ -578,11 +575,14 @@ Your release is named cloudera-surveyor.
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml
 kubectl <span class="nb">wait</span> <span class="nt">-n</span> cert-manager <span class="nt">--for</span><span class="o">=</span><span class="nv">condition</span><span class="o">=</span>Available deployment <span class="nt">--all</span>
 
-helm <span class="nb">install </span>csa-operator <span class="nt">--namespace</span> cld-streaming <span class="se">\\</span>
-    <span class="nt">--set</span> <span class="s1">'flink-kubernetes-operator.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\\</span>
-    <span class="nt">--set</span> <span class="s1">'ssb.sse.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\\</span>
-    <span class="nt">--set</span> <span class="s1">'ssb.sqlRunner.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\\</span>
-    <span class="nt">--set-file</span> flink-kubernetes-operator.clouderaLicense.fileContent<span class="o">=</span>./license.txt <span class="se">\\</span>
+helm <span class="nb">install </span>csa-operator <span class="nt">--namespace</span> cld-streaming <span class="se">\</span>
+    <span class="nt">--version</span> 1.5.0-b275 <span class="se">\</span>
+    <span class="nt">--set</span> <span class="s1">'flink-kubernetes-operator.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+    <span class="nt">--set</span> <span class="s1">'ssb.sse.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+    <span class="nt">--set</span> <span class="s1">'ssb.sqlRunner.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+    <span class="nt">--set</span> <span class="s1">'ssb.mve.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+    <span class="nt">--set-file</span> flink-kubernetes-operator.clouderaLicense.fileContent<span class="o">=</span>./license.txt <span class="se">\</span>
+    oci://container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator 
 </code></pre></div></div>
 
 <p>Notice the following output:</p>
@@ -603,21 +603,69 @@ TEST SUITE: None
 <h3 id="-deploy-nifi-cfm-30">🌊 Deploy NiFi (CFM 3.0)</h3>
 <p>We’ll start with a NiFi cluster using the standard evaluation spec. This gives us a fully functional NiFi instance without the overhead of complex external persistence.</p>
 
+<p>First lets install the CFM 3.0 Nifi Operator:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install </span>cfm-operator oci://container.repository.cloudera.com/cloudera-helm/cfm-operator/cfm-operator <span class="se">\</span>
+  <span class="nt">--namespace</span> cld-streaming <span class="se">\</span>
+  <span class="nt">--version</span> 3.0.0-b126 <span class="se">\</span>
+  <span class="nt">--set</span> <span class="nv">installCRDs</span><span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+  <span class="nt">--set</span> image.repository<span class="o">=</span>container.repository.cloudera.com/cloudera/cfm-operator <span class="se">\</span>
+  <span class="nt">--set</span> image.tag<span class="o">=</span>3.0.0-b126 <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s2">"image.imagePullSecrets[0].name=cloudera-creds"</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s2">"imagePullSecrets={cloudera-creds}"</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s2">"authProxy.image.repository=container.repository.cloudera.com/cloudera_thirdparty/hardened/kube-rbac-proxy"</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s2">"authProxy.image.tag=0.19.0-r3-202503182126"</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="nv">licenseSecret</span><span class="o">=</span>cfm-operator-license <span class="se">\</span>
+  <span class="nt">--set-file</span> clouderaLicense.fileContent<span class="o">=</span>./license.txt
+
+</code></pre></div></div>
+
 <p>Create the nifi-eval.yaml as follows:</p>
 
 <p><strong>nifi-eval.yaml</strong></p>
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">cfm.cloudera.com/v1alpha1</span>
-<span class="na">kind</span><span class="pi">:</span> <span class="s">NifiCluster</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Nifi</span>
 <span class="na">metadata</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">nifi-eval</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">mynifi</span>
   <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">nodes</span><span class="pi">:</span> <span class="m">1</span>
-  <span class="na">imagePullSecrets</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">cloudera-creds</span>
-  <span class="na">externalConfiguration</span><span class="pi">:</span>
-    <span class="na">nodeProperties</span><span class="pi">:</span>
-      <span class="na">nifi.web.http.host</span><span class="pi">:</span> <span class="s">0.0.0.0</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">nifiVersion</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1.28.1"</span>
+  <span class="na">image</span><span class="pi">:</span>
+    <span class="na">repository</span><span class="pi">:</span> <span class="s">container.repository.cloudera.com/cloudera/cfm-nifi-k8s</span>
+    <span class="na">tag</span><span class="pi">:</span> <span class="s">3.0.0-b126-nifi_1.28.1.2.3.17.0-9</span>
+    <span class="na">pullSecret</span><span class="pi">:</span> <span class="s">cloudera-creds</span>
+  <span class="na">tiniImage</span><span class="pi">:</span>
+    <span class="na">repository</span><span class="pi">:</span> <span class="s">container.repository.cloudera.com/cloudera/cfm-tini</span>
+    <span class="na">tag</span><span class="pi">:</span> <span class="s">3.0.0-b126</span>
+    <span class="na">pullSecret</span><span class="pi">:</span> <span class="s">cloudera-creds</span>
+  <span class="na">hostName</span><span class="pi">:</span> <span class="s">mynifi.localhost</span>
+  <span class="na">uiConnection</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">Ingress</span>
+  <span class="na">configOverride</span><span class="pi">:</span>
+    <span class="na">nifiProperties</span><span class="pi">:</span>
+      <span class="na">upsert</span><span class="pi">:</span>
+        <span class="na">nifi.cluster.leader.election.implementation</span><span class="pi">:</span> <span class="s2">"</span><span class="s">KubernetesLeaderElectionManager"</span>
+    <span class="na">authorizers</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">&lt;authorizers&gt;</span>
+        <span class="s">&lt;authorizer&gt;</span>
+          <span class="s">&lt;identifier&gt;single-user-authorizer&lt;/identifier&gt;</span>
+          <span class="s">&lt;class&gt;org.apache.nifi.authorization.single.user.SingleUserAuthorizer&lt;/class&gt;</span>
+        <span class="s">&lt;/authorizer&gt;</span>
+      <span class="s">&lt;/authorizers&gt;</span>
+    <span class="na">loginIdentityProviders</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">&lt;loginIdentityProviders&gt;</span>
+        <span class="s">&lt;provider&gt;</span>
+          <span class="s">&lt;identifier&gt;single-user-provider&lt;/identifier&gt;</span>
+          <span class="s">&lt;class&gt;org.apache.nifi.authentication.single.user.SingleUserLoginIdentityProvider&lt;/class&gt;</span>
+          <span class="s">&lt;property name="Username"&gt;admin&lt;/property&gt;</span>
+          <span class="s">&lt;property name="Password"&gt;$2b$10$GRa8g9Z5rBENXPFNHFBosev9XmY6CSk0SdcBi5sQMRX92KD73asGG&lt;/property&gt;</span>
+        <span class="s">&lt;/provider&gt;</span>
+      <span class="s">&lt;/loginIdentityProviders&gt;</span>
+  <span class="na">stateManagement</span><span class="pi">:</span>
+    <span class="na">clusterProvider</span><span class="pi">:</span>
+      <span class="na">id</span><span class="pi">:</span> <span class="s">kubernetes-provider</span>
+      <span class="na">class</span><span class="pi">:</span> <span class="s">org.apache.nifi.kubernetes.state.provider.KubernetesConfigMapStateProvider</span>
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> nifi-eval.yaml <span class="nt">-n</span> cld-streaming
@@ -632,35 +680,42 @@ TEST SUITE: None
 k9s
 </code></pre></div></div>
 
+<p class="notice--warning"><img class="emoji" title=":watch:" alt=":watch:" src="https://github.githubassets.com/images/icons/emoji/unicode/231a.png" height="20" width="20"> <strong>Be Patient!</strong> It will take quite a bit of time for the entire stack to be online and running.</p>
+
 <p><img src="/assets/images/k9s-full-stack.png" alt="k9s Full Setup Placeholder">
-<em>Behold: The full Cloudera Streaming stack running harmoniously in your local cluster.</em></p>
+<em>Behold: The full Cloudera Streaming stack running harmoniously in your local minikube cluster.</em></p>
 
 <p>You can also expose all the services with minikube like this:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service list <span class="nt">-n</span> cld-streaming
-┌───────────────┬────────────────────────────────┬──────────────────┬─────┐
-│   NAMESPACE   │              NAME              │   TARGET PORT    │ URL │
-├───────────────┼────────────────────────────────┼──────────────────┼─────┤
-│ cld-streaming │ cloudera-surveyor-service      │ http/8080        │     │
-│ cld-streaming │ flink-operator-webhook-service │ No node port     │     │
-│ cld-streaming │ my-cluster-kafka-bootstrap     │ No node port     │     │
-│ cld-streaming │ my-cluster-kafka-brokers       │ No node port     │     │
-│ cld-streaming │ schema-registry-service        │ application/9090 │     │
-│ cld-streaming │ ssb-mve                        │ No node port     │     │
-│ cld-streaming │ ssb-postgresql                 │ No node port     │     │
-│ cld-streaming │ ssb-sse                        │ No node port     │     │
-└───────────────┴────────────────────────────────┴──────────────────┴─────┘
+┌───────────────┬─────────────────────────────────────────────────┬──────────────────┬─────┐
+│   NAMESPACE   │                      NAME                       │   TARGET PORT    │ URL │
+├───────────────┼─────────────────────────────────────────────────┼──────────────────┼─────┤
+│ cld-streaming │ cfm-operator-controller-manager-metrics-service │ No node port     │     │
+│ cld-streaming │ cfm-operator-webhook-service                    │ No node port     │     │
+│ cld-streaming │ cloudera-surveyor-service                       │ http/8080        │     │
+│ cld-streaming │ flink-operator-webhook-service                  │ No node port     │     │
+│ cld-streaming │ my-cluster-kafka-bootstrap                      │ No node port     │     │
+│ cld-streaming │ my-cluster-kafka-brokers                        │ No node port     │     │
+│ cld-streaming │ mynifi                                          │ No node port     │     │
+│ cld-streaming │ mynifi-web                                      │ No node port     │     │
+│ cld-streaming │ schema-registry-service                         │ application/9090 │     │
+│ cld-streaming │ ssb-mve                                         │ No node port     │     │
+│ cld-streaming │ ssb-postgresql                                  │ No node port     │     │
+│ cld-streaming │ ssb-sse                                         │ No node port     │     │
+└───────────────┴─────────────────────────────────────────────────┴──────────────────┴─────┘
 </code></pre></div></div>
 
-<p class="notice--success"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Once your pods are running, use <code class="language-plaintext highlighter-rouge">minikbue service</code> to expose the UI endpoints.</p>
+<p class="notice--success"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Once your pods are running, use <code class="language-plaintext highlighter-rouge">minikube service</code> to expose the UI endpoints.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check our the service UIs:</span>
 minikube service cloudera-surveyor-service <span class="nt">--namespace</span> cld-streaming
 minikube service schema-registry-service <span class="nt">--namespace</span> cld-streaming
 minikube service ssb-sse <span class="nt">--namespace</span> cld-streaming
+minikube service mynifi <span class="nt">--namespace</span> cld-streaming
 </code></pre></div></div>
 
-<p>This setup is your “sandbox” for building end-to-end streaming architectures.</p>
+<p>This setup is your “sandbox” for building end-to-end streaming architectures with the Cloudera Stgreaming Operators.</p>
 
 <p><img src="/assets/images/csm-schemaregistry.png" alt="CSM Schema Registry"></p>
 
@@ -668,13 +723,15 @@ minikube service ssb-sse <span class="nt">--namespace</span> cld-streaming
 
 <p><img src="/assets/images/csa-ssb.png" alt="CSA Sql Stream Builder SSB"></p>
 
+<p><img src="/assets/images/cfm-nifi.png" alt="CFM NiFi"></p>
+
 <hr>
 
 <h3 id="-resources">📚 Resources</h3>
 <ul>
-  <li><a href="http://docs.cloudera.com/cfm-operator/3.0.0/index.html">Cloudera Flow Management (CFM) 3.0 Docs</a></li>
-  <li><a href="https://docs.cloudera.com/csa-operator/1.5/index.html">Cloudera Streaming Analytics (CSA) 1.5 Docs</a></li>
   <li><a href="https://docs.cloudera.com/csm-operator/1.6/index.html">Cloudera Streams Messaging (CSM) 1.6 Docs</a></li>
+  <li><a href="https://docs.cloudera.com/csa-operator/1.5/index.html">Cloudera Streaming Analytics (CSA) 1.5 Docs</a></li>
+  <li><a href="http://docs.cloudera.com/cfm-operator/3.0.0/index.html">Cloudera Flow Management (CFM) 3.0 Docs</a></li>
 </ul>
 
 <hr>

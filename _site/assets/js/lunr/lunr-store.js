@@ -312,7 +312,7 @@ var store = [{
         "teaser": "/assets/images/csa-architecture.png"
       },{
         "title": "Cloudera Streaming Operators",
-        "excerpt":"Setting up a new Macbook for Data Engineering doesn’t have to be a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster. We are utilizing the Evaluation examples for these...","categories": ["blog"],
+        "excerpt":"Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster. Please note that we are utilizing the Evaluation examples for...","categories": ["blog"],
         "tags": ["cloudera","operator","nifi","kafka","flink"],
         "url": "/blog/Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/surveyor.png"
