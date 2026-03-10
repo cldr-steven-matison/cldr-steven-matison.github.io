@@ -44,7 +44,7 @@ minikube start --cpus 4 --memory 12288
 ---
 
 ### 📦 Some Helm and Kubectl Setup
-Let's get started with `kubectl` by creating a namespace and a docker secret we will use with each operator.  We'll logging now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during install.
+Let's get started with `kubectl` by creating a namespace and a docker secret we will use with each operator.  We will login now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during installs later.
 
 ```bash
 # 1. Create the namespace
