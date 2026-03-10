@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-10T12:12:33-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streaming Operators</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/" rel="alternate" type="text/html" title="Cloudera Streaming Operators" /><published>2026-03-09T00:00:00-04:00</published><updated>2026-03-09T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Operators</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/"><![CDATA[<p>Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of <strong>Cloudera Streaming Operators</strong> (CFM, CSA, CSM) on a local Minikube cluster.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-10T15:12:48-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streaming Operators</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/" rel="alternate" type="text/html" title="Cloudera Streaming Operators" /><published>2026-03-09T00:00:00-04:00</published><updated>2026-03-09T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Operators</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/"><![CDATA[<p>Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of <strong>Cloudera Streaming Operators</strong> (CFM, CSA, CSM) on a local Minikube cluster.</p>
 
 <p>Please note that we are utilizing the <strong>Evaluation</strong> examples for these services. This is a critical step for any engineer; mastering the foundational configurations is essential before moving into complex, secured, and high-availability production architectures.</p>
 
@@ -22,12 +22,12 @@ open /Applications/Docker.app
 minikube start <span class="nt">--cpus</span> 4 <span class="nt">--memory</span> 12288
 </code></pre></div></div>
 
-<p class="notice--warning">:trophy: <strong>Pro Tip!</strong> Makes sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.</p>
+<p class="notice--warning">:trophy: <strong>Pro Tip!</strong> Make sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.</p>
 
 <hr />
 
 <h3 id="-some-helm-and-kubectl-setup">📦 Some Helm and Kubectl Setup</h3>
-<p>Let’s get started with <code class="language-plaintext highlighter-rouge">kubectl</code> by creating a namespace and a docker secret we will use with each operator.  We’ll loging now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during install.</p>
+<p>Let’s get started with <code class="language-plaintext highlighter-rouge">kubectl</code> by creating a namespace and a docker secret we will use with each operator.  We’ll logging now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during install.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Create the namespace</span>
 kubectl create namespace cld-streaming
@@ -196,7 +196,7 @@ WARNING: You configured Schema Registry to use an in-memory database. This setup
 <h3 id="️-deploy-kafka-surveyor-csm-16">🕵️ Deploy Kafka Surveyor (CSM 1.6)</h3>
 <p>A new standout in the CSM Operator 1.6 is <strong>Kafka Surveyor</strong>. This provides advanced observability into your Kafka environment. It is a game-changer for monitoring broker health and topic metrics in a Kubernetes-native way.</p>
 
-<p>Before we can create a surveyor yaml we need to find our kafka boostrapServers:</p>
+<p>Before we can create a surveyor yaml we need to find our kafka bootstrapServers:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get kafka my-cluster <span class="nt">-n</span> cld-streaming <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.status.listeners[?(@.name=="plain")].bootstrapServers}'</span>
 </code></pre></div></div>
@@ -363,6 +363,7 @@ TEST SUITE: None
 <hr />
 
 <h3 id="️-final-verification">🕵️ Final Verification</h3>
+
 <p>The best way to see the fruits of your labor is via <code class="language-plaintext highlighter-rouge">k9s</code>.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check the deployment progress</span>
@@ -397,14 +398,14 @@ k9s
 
 <p class="notice--success">:trophy: <strong>Pro Tip!</strong> Once your pods are running, use <code class="language-plaintext highlighter-rouge">minikube service</code> to expose the UI endpoints.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check our the service UIs:</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check out the service UIs:</span>
 minikube service cloudera-surveyor-service <span class="nt">--namespace</span> cld-streaming
 minikube service schema-registry-service <span class="nt">--namespace</span> cld-streaming
 minikube service ssb-sse <span class="nt">--namespace</span> cld-streaming
 minikube service mynifi <span class="nt">--namespace</span> cld-streaming
 </code></pre></div></div>
 
-<p>This setup is your “sandbox” for building end-to-end streaming architectures with the Cloudera Stgreaming Operators.</p>
+<p>This setup is your “sandbox” for building end-to-end streaming architectures with the Cloudera Streaming Operators.</p>
 
 <p><img src="/assets/images/csm-schemaregistry.png" alt="CSM Schema Registry" /></p>
 

@@ -333,12 +333,12 @@ open /Applications/Docker.app
 minikube start <span class="nt">--cpus</span> 4 <span class="nt">--memory</span> 12288
 </code></pre></div></div>
 
-<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Makes sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.</p>
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Make sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.</p>
 
 <hr>
 
 <h3 id="-some-helm-and-kubectl-setup">📦 Some Helm and Kubectl Setup</h3>
-<p>Let’s get started with <code class="language-plaintext highlighter-rouge">kubectl</code> by creating a namespace and a docker secret we will use with each operator.  We’ll loging now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during install.</p>
+<p>Let’s get started with <code class="language-plaintext highlighter-rouge">kubectl</code> by creating a namespace and a docker secret we will use with each operator.  We’ll logging now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during install.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Create the namespace</span>
 kubectl create namespace cld-streaming
@@ -507,7 +507,7 @@ WARNING: You configured Schema Registry to use an in-memory database. This setup
 <h3 id="️-deploy-kafka-surveyor-csm-16">🕵️ Deploy Kafka Surveyor (CSM 1.6)</h3>
 <p>A new standout in the CSM Operator 1.6 is <strong>Kafka Surveyor</strong>. This provides advanced observability into your Kafka environment. It is a game-changer for monitoring broker health and topic metrics in a Kubernetes-native way.</p>
 
-<p>Before we can create a surveyor yaml we need to find our kafka boostrapServers:</p>
+<p>Before we can create a surveyor yaml we need to find our kafka bootstrapServers:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get kafka my-cluster <span class="nt">-n</span> cld-streaming <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.status.listeners[?(@.name=="plain")].bootstrapServers}'</span>
 </code></pre></div></div>
@@ -674,6 +674,7 @@ TEST SUITE: None
 <hr>
 
 <h3 id="️-final-verification">🕵️ Final Verification</h3>
+
 <p>The best way to see the fruits of your labor is via <code class="language-plaintext highlighter-rouge">k9s</code>.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check the deployment progress</span>
@@ -708,14 +709,14 @@ k9s
 
 <p class="notice--success"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Once your pods are running, use <code class="language-plaintext highlighter-rouge">minikube service</code> to expose the UI endpoints.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check our the service UIs:</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check out the service UIs:</span>
 minikube service cloudera-surveyor-service <span class="nt">--namespace</span> cld-streaming
 minikube service schema-registry-service <span class="nt">--namespace</span> cld-streaming
 minikube service ssb-sse <span class="nt">--namespace</span> cld-streaming
 minikube service mynifi <span class="nt">--namespace</span> cld-streaming
 </code></pre></div></div>
 
-<p>This setup is your “sandbox” for building end-to-end streaming architectures with the Cloudera Stgreaming Operators.</p>
+<p>This setup is your “sandbox” for building end-to-end streaming architectures with the Cloudera Streaming Operators.</p>
 
 <p><img src="/assets/images/csm-schemaregistry.png" alt="CSM Schema Registry"></p>
 

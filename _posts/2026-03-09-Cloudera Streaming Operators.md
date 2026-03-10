@@ -38,13 +38,13 @@ open /Applications/Docker.app
 minikube start --cpus 4 --memory 12288
 ```
 
-:trophy: **Pro Tip!** Makes sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.
+:trophy: **Pro Tip!** Make sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.
 {: .notice--warning}
 
 ---
 
 ### 📦 Some Helm and Kubectl Setup
-Let's get started with `kubectl` by creating a namespace and a docker secret we will use with each operator.  We'll loging now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during install.
+Let's get started with `kubectl` by creating a namespace and a docker secret we will use with each operator.  We'll logging now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during install.
 
 ```bash
 # 1. Create the namespace
@@ -224,7 +224,7 @@ WARNING: You configured Schema Registry to use an in-memory database. This setup
 ### 🕵️ Deploy Kafka Surveyor (CSM 1.6)
 A new standout in the CSM Operator 1.6 is **Kafka Surveyor**. This provides advanced observability into your Kafka environment. It is a game-changer for monitoring broker health and topic metrics in a Kubernetes-native way.
 
-Before we can create a surveyor yaml we need to find our kafka boostrapServers:
+Before we can create a surveyor yaml we need to find our kafka bootstrapServers:
 
 ```bash
 kubectl get kafka my-cluster -n cld-streaming -o jsonpath='{.status.listeners[?(@.name=="plain")].bootstrapServers}'
@@ -402,6 +402,7 @@ kubectl apply -f nifi-eval.yaml -n cld-streaming
 ---
 
 ### 🕵️ Final Verification
+
 The best way to see the fruits of your labor is via `k9s`. 
 
 ```bash
@@ -444,14 +445,14 @@ minikube service list -n cld-streaming
 
 
 ```bash
-# Check our the service UIs:
+# Check out the service UIs:
 minikube service cloudera-surveyor-service --namespace cld-streaming
 minikube service schema-registry-service --namespace cld-streaming
 minikube service ssb-sse --namespace cld-streaming
 minikube service mynifi --namespace cld-streaming
 ```
 
-This setup is your "sandbox" for building end-to-end streaming architectures with the Cloudera Stgreaming Operators.
+This setup is your "sandbox" for building end-to-end streaming architectures with the Cloudera Streaming Operators.
 
 ![CSM Schema Registry](/assets/images/csm-schemaregistry.png)
 
