@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-10T15:28:59-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streaming Operators</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/" rel="alternate" type="text/html" title="Cloudera Streaming Operators" /><published>2026-03-09T00:00:00-04:00</published><updated>2026-03-09T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Operators</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/"><![CDATA[<p>Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of <strong>Cloudera Streaming Operators</strong> (CFM, CSA, CSM) on a local Minikube cluster.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://cldr-steven-matison.github.io//" rel="alternate" type="text/html" /><updated>2026-03-11T09:44:10-04:00</updated><id>https://cldr-steven-matison.github.io//feed.xml</id><title type="html">Cloudera Solutions Engineer</title><subtitle>Solutions Engineer @Cloudera</subtitle><author><name>Steven Matison</name></author><entry><title type="html">Cloudera Streaming Operators</title><link href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/" rel="alternate" type="text/html" title="Cloudera Streaming Operators" /><published>2026-03-09T00:00:00-04:00</published><updated>2026-03-09T00:00:00-04:00</updated><id>https://cldr-steven-matison.github.io//blog/Cloudera%20Streaming%20Operators</id><content type="html" xml:base="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/"><![CDATA[<p>Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of <strong>Cloudera Streaming Operators</strong> (CFM, CSA, CSM) on a local Minikube cluster.</p>
 
 <p>Please note that we are utilizing the <strong>Evaluation</strong> examples for these services. This is a critical step for any engineer; mastering the foundational configurations is essential before moving into complex, secured, and high-availability production architectures.</p>
 
@@ -45,6 +45,7 @@ helm <span class="nb">install </span>cert-manager jetstack/cert-manager <span cl
 </span>helm registry login container.repository.cloudera.com
 </code></pre></div></div>
 
+<p class="notice--warning">:trophy: <strong>Pro Tip!</strong> If you are working with helm over time across different clusters, remember you may need to relogin again.</p>
 <hr />
 
 <h3 id="-install-cloudera-streams-messaging-operatorcsm-16">🎡 Install Cloudera Streams Messaging Operator(CSM 1.6)</h3>
@@ -259,7 +260,7 @@ Your release is named cloudera-surveyor.
 
 <h3 id="-deploy-sql-stream-builder-csa-15">⚡ Deploy SQL Stream Builder (CSA 1.5)</h3>
 
-<p>First lets install the Cloudera Streaming Analytics Operator</p>
+<p>To get started with SQL Stream Builder first we need to install the Cloudera Streaming Analytics Operator:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml
 kubectl <span class="nb">wait</span> <span class="nt">-n</span> cert-manager <span class="nt">--for</span><span class="o">=</span><span class="nv">condition</span><span class="o">=</span>Available deployment <span class="nt">--all</span>
@@ -290,9 +291,9 @@ TEST SUITE: None
 <hr />
 
 <h3 id="-deploy-nifi-cfm-30">🌊 Deploy NiFi (CFM 3.0)</h3>
-<p>We’ll start with a NiFi cluster using the standard evaluation spec. This gives us a fully functional NiFi instance without the overhead of complex external persistence.</p>
+<p>Next we will deploy NiFi using the standard evaluation spec. This gives us a fully functional NiFi instance without the overhead of complex external persistence.</p>
 
-<p>First lets install the CFM 3.0 Nifi Operator:</p>
+<p>First install the CFM 3.0 Nifi Operator:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install </span>cfm-operator oci://container.repository.cloudera.com/cloudera-helm/cfm-operator/cfm-operator <span class="se">\</span>
   <span class="nt">--namespace</span> cld-streaming <span class="se">\</span>
@@ -356,6 +357,8 @@ TEST SUITE: None
       <span class="na">id</span><span class="pi">:</span> <span class="s">kubernetes-provider</span>
       <span class="na">class</span><span class="pi">:</span> <span class="s">org.apache.nifi.kubernetes.state.provider.KubernetesConfigMapStateProvider</span>
 </code></pre></div></div>
+
+<p>Execute the following kubectl apply command to create the nifi cluster:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> nifi-eval.yaml <span class="nt">-n</span> cld-streaming
 </code></pre></div></div>
