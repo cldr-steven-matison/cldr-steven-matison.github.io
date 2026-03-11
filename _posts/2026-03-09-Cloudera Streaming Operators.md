@@ -63,6 +63,8 @@ helm install cert-manager jetstack/cert-manager --version v1.16.3 --namespace ce
 helm registry login container.repository.cloudera.com
 ```
 
+:trophy: **Pro Tip!** If you are working with helm over time across different clusters, remember you may need to relogin again.
+{: .notice--warning}
 ---
 
 
@@ -292,7 +294,7 @@ Your release is named cloudera-surveyor.
 
 ### ⚡ Deploy SQL Stream Builder (CSA 1.5)
 
-First lets install the Cloudera Streaming Analytics Operator
+To get started with SQL Stream Builder first we need to install the Cloudera Streaming Analytics Operator:
 
 ```bash
 kubectl create -f https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml
@@ -326,9 +328,9 @@ TEST SUITE: None
 
 
 ### 🌊 Deploy NiFi (CFM 3.0)
-We'll start with a NiFi cluster using the standard evaluation spec. This gives us a fully functional NiFi instance without the overhead of complex external persistence.
+Next we will deploy NiFi using the standard evaluation spec. This gives us a fully functional NiFi instance without the overhead of complex external persistence.
 
-First lets install the CFM 3.0 Nifi Operator:
+First install the CFM 3.0 Nifi Operator:
 
 ```bash
 helm install cfm-operator oci://container.repository.cloudera.com/cloudera-helm/cfm-operator/cfm-operator \
@@ -394,6 +396,8 @@ spec:
       id: kubernetes-provider
       class: org.apache.nifi.kubernetes.state.provider.KubernetesConfigMapStateProvider
 ```
+
+Execute the following kubectl apply command to create the nifi cluster:
 
 ```bash
 kubectl apply -f nifi-eval.yaml -n cld-streaming
