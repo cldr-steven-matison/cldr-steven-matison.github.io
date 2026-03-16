@@ -310,4 +310,10 @@ var store = [{
         "tags": ["cloudera","operator","nifi","kafka","flink"],
         "url": "/blog/Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/surveyor.png"
+      },{
+        "title": "NiFi Kafka and Flink on Kubernetes",
+        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. Last week I published how I installed all of the Cloudera Streaming Operators on my MacBook. This post got quite a bit of attention and I had a few friends...","categories": ["blog"],
+        "tags": ["cloudera","kubernetes","nifi","kafka","flink"],
+        "url": "/blog/NiFi-Kafka-Flink-on-Kubernetes/",
+        "teaser": "/assets/images/k9s-full-stack.png"
       }]

@@ -1,0 +1,852 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>NiFi Kafka and Flink on Kubernetes - Cloudera Solutions Engineer</title>
+<meta name="description" content=":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="NiFi Kafka and Flink on Kubernetes">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/NiFi-Kafka-Flink-on-Kubernetes/">
+
+
+  <meta property="og:description" content=":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/k9s-full-stack.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-16T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/NiFi-Kafka-Flink-on-Kubernetes/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io//"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <a class="site-title" href="/">
+          Cloudera Solutions Engineer
+          
+        </a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&amp;pageNum=1">Community</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io//">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io//" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Hello, My name is Steven Matison and I am a Senior Solutions Engineer at Cloudera, Inc.  Check out my journey with Cloudera Data Platform (CDP).</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="NiFi Kafka and Flink on Kubernetes">
+    <meta itemprop="description" content=":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed.">
+    <meta itemprop="datePublished" content="2026-03-16T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io//blog/NiFi-Kafka-Flink-on-Kubernetes/" class="u-url" itemprop="url">NiFi Kafka and Flink on Kubernetes
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
+
+<p>Last week I published how I installed all of the <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!</p>
+
+<p>In this blog I am going to go into the next phases of working with Cloudera Streaming Operators.
+Since I am so familar with the <a href="https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB">Fraud Demo</a> I am going to use NIFI to build a simple flow to create some transactions in topic <code class="language-plaintext highlighter-rouge">txn1</code>, confirm the Kafka topic has data, then access SQL Stream Builder to execute a <code class="language-plaintext highlighter-rouge">select * from txn1</code> query. With these simple bits, the end to end test of NiFi, Kafka, and Flink on kubernetes should be completed.</p>
+
+<p>🚀 <strong>Let’s get started!</strong></p>
+
+<hr>
+
+<h3 id="building-a-simple-flow-with-nifi">Building a Simple Flow with NiFI</h3>
+
+<p>Today I am working with NiFi 2.0 deployed on CFM 2.11 by the following yaml</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">cfm.cloudera.com/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Nifi</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">mynifi</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cfm-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">nifiVersion</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4.0"</span>
+  <span class="na">image</span><span class="pi">:</span>
+    <span class="na">repository</span><span class="pi">:</span> <span class="s">container.repository.cloudera.com/cloudera/cfm-nifi-k8s</span>
+    <span class="na">tag</span><span class="pi">:</span> <span class="s">2.11.0-b57-nifi_2.4.0.4.3.3.0-40</span>
+    <span class="na">pullSecret</span><span class="pi">:</span> <span class="s">cloudera-creds</span>
+  <span class="na">tiniImage</span><span class="pi">:</span>
+    <span class="na">repository</span><span class="pi">:</span> <span class="s">container.repository.cloudera.com/cloudera/cfm-tini</span>
+    <span class="na">tag</span><span class="pi">:</span> <span class="s">2.11.0-b57</span>
+    <span class="na">pullSecret</span><span class="pi">:</span> <span class="s">cloudera-creds</span>
+  <span class="na">hostName</span><span class="pi">:</span> <span class="s">mynifi.localhost</span>
+  <span class="na">uiConnection</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">Ingress</span>
+  <span class="na">configOverride</span><span class="pi">:</span>
+    <span class="c1"># Based on the error, we pass properties as a block or use the 2.11 'upsert' pattern</span>
+    <span class="na">nifiProperties</span><span class="pi">:</span>
+      <span class="na">upsert</span><span class="pi">:</span>
+        <span class="na">nifi.cluster.leader.election.implementation</span><span class="pi">:</span> <span class="s2">"</span><span class="s">KubernetesLeaderElectionManager"</span>
+    <span class="na">authorizers</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">&lt;authorizers&gt;</span>
+        <span class="s">&lt;authorizer&gt;</span>
+          <span class="s">&lt;identifier&gt;single-user-authorizer&lt;/identifier&gt;</span>
+          <span class="s">&lt;class&gt;org.apache.nifi.authorization.single.user.SingleUserAuthorizer&lt;/class&gt;</span>
+        <span class="s">&lt;/authorizer&gt;</span>
+      <span class="s">&lt;/authorizers&gt;</span>
+    <span class="na">loginIdentityProviders</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">&lt;loginIdentityProviders&gt;</span>
+        <span class="s">&lt;provider&gt;</span>
+          <span class="s">&lt;identifier&gt;single-user-provider&lt;/identifier&gt;</span>
+          <span class="s">&lt;class&gt;org.apache.nifi.authentication.single.user.SingleUserLoginIdentityProvider&lt;/class&gt;</span>
+          <span class="s">&lt;property name="Username"&gt;admin&lt;/property&gt;</span>
+          <span class="s">&lt;property name="Password"&gt;$2b$10$GRa8g9Z5rBENXPFNHFBosev9XmY6CSk0SdcBi5sQMRX92KD73asGG&lt;/property&gt;</span>
+        <span class="s">&lt;/provider&gt;</span>
+      <span class="s">&lt;/loginIdentityProviders&gt;</span>
+  <span class="na">stateManagement</span><span class="pi">:</span>
+    <span class="na">clusterProvider</span><span class="pi">:</span>
+      <span class="na">id</span><span class="pi">:</span> <span class="s">kubernetes-provider</span>
+      <span class="na">class</span><span class="pi">:</span> <span class="s">org.apache.nifi.kubernetes.state.provider.KubernetesConfigMapStateProvider</span>
+</code></pre></div></div>
+
+<p>To acccess the NiFi UI execute the <code class="language-plaintext highlighter-rouge">minikube service</code> command as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service mynifi-web <span class="nt">--namespace</span> cfm-streaming
+</code></pre></div></div>
+
+<p class="notice--warning"><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Pro Tip!</strong> Your first visit, you may need to append /nifi into your browser url.</p>
+
+<p>Next, drag out a GenerateFlowFile and PublishKafka_2_6 processor.  Connect them as follows:</p>
+
+<p><img src="/assets/images/2026-03-16-flow.png" alt="NiFi Flow"></p>
+
+<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> I always route the success and failure separately so that I can debug.  Later you I will use auto-termination, re-route failure back to PublishKafka, or setup retry once I confirm the processor configuration is operating as expected.</p>
+
+<p>Insert this transaction json into GenerateFlowfile Custom Text:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="s2">"bc1a1d00-2134-11f1-93ac-06d0b7278335"</span><span class="p">,</span><span class="nl">"amount"</span><span class="p">:</span><span class="mi">1493</span><span class="p">,</span><span class="nl">"lon"</span><span class="p">:</span><span class="mf">4.8320114</span><span class="p">,</span><span class="nl">"account_id"</span><span class="p">:</span><span class="s2">"486"</span><span class="p">,</span><span class="nl">"lat"</span><span class="p">:</span><span class="mf">45.7578137</span><span class="p">,</span><span class="nl">"ts"</span><span class="p">:</span><span class="s2">"2026-03-16 12:36:20"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/assets/images/2026-03-16-flow-generateFlowFile.png" alt="NiFi Flow GenerateFlowFile"></p>
+
+<p>Next, in PublishKafka_2_6 set the Kafka Brokers and Topic Name as follows:</p>
+
+<p><img src="/assets/images/2026-03-16-flow-publishKafka.png" alt="NiFi Flow PublishKafka_2_6"></p>
+
+<p>Remember we got our bootstrap servers in the previous blog: <code class="language-plaintext highlighter-rouge">my-cluster-kafka-bootstrap.cld-streaming.svc:9092</code> like this:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl get kafka my-cluster -n cld-streaming -o jsonpath='{.status.listeners[?(@.name=="plain")].bootstrapServers}'
+
+my-cluster-kafka-bootstrap.cld-streaming.svc:9092
+</span></code></pre></div></div>
+
+<p class="notice--info"><img class="emoji" title=":mag:" alt=":mag:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f50d.png" height="20" width="20"> <strong>Look!</strong> Take a deeper look into Kafka Brokers and bootStrapserver and notice the shape of the bootstrapServers:<code class="language-plaintext highlighter-rouge">[clusterName]-bootstrap.[namespace].svc:9092</code></p>
+
+<p>Start your nifi flow and confirm PublishKafka_2_6 Success.  You can now exit Nifi and close out the <code class="language-plaintext highlighter-rouge">minikube service</code> command.  You have now successfully deployed a simple nifi flow on kubernetes pushing transaction data to kafka topic txn1.</p>
+
+<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> You can find the flow definition file of the flow <code class="language-plaintext highlighter-rouge">TXN1.json</code> over in my <a href="https://github.com/cldr-steven-matison/NiFi-Templates">GitHub NiFi Templates</a>.</p>
+
+<h3 id="confirm-kafka-topic-on-kubernetes">Confirm Kafka Topic on Kubernetes</h3>
+
+<p>Now that we are sending data to our Kafka Topic <code class="language-plaintext highlighter-rouge">txn1</code> we need to confirm that data is there. You can execute the following command to review the topic:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+  /opt/kafka/bin/kafka-console-consumer.sh \
+  --bootstrap-server localhost:9092 \
+  --topic txn1 \
+  --from-beginning \
+  --max-messages 10
+</span></code></pre></div></div>
+
+<p>Terminal output should be 10 copies of the transaction above.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"transaction_id":"bc1a1d00-2134-11f1-93ac-06d0b7278335","amount":1493,"lon":4.8320114,"account_id":"486","lat":45.7578137,"ts":"2026-03-16 12:36:20"}
+Processed a total of 10 messages
+</span></code></pre></div></div>
+
+<p>If you just want to see if the topic exists and has offsets you can run:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+  /opt/kafka/bin/kafka-topics.sh \
+  --bootstrap-server localhost:9092 \
+  --describe \
+  --topic txn1
+</span></code></pre></div></div>
+
+<p>Notice the following output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Topic: txn1 TopicId: ySDTMGkCTAK-EAG6DasAUg PartitionCount: 1 ReplicationFactor: 3  Configs: min.insync.replicas=2
+  Topic: txn1 Partition: 0  Leader: 4 Replicas: 4,5,0 Isr: 0,5,4  Elr:  LastKnownElr: 
+</span></code></pre></div></div>
+
+<p>Excellent, so now we have deployed a nifi flow publishing transaction json to kafka topic txn1 and we have confirmed data exists in kafka.  Now let’s move on to Sql Stream Builder.</p>
+
+<h3 id="using-sql-stream-builder-on-kubernetes">Using Sql Stream Builder on Kubernetes</h3>
+
+<p>To login to SSB we will use the super secure user <code class="language-plaintext highlighter-rouge">admin</code> with the password <code class="language-plaintext highlighter-rouge">admin</code>.  Once  you get logged in you should have a look around.  Check out the entire left menu.  Open the explorer and open all entities.  Notice the different entities each have different right navigations.  As you start to use SSB you will need to be familiar with all of these.</p>
+
+<p>We are all SSB Pro’s now, so i am going to jump right into what we need to setup to accomplish the task.</p>
+
+<p>First, lets create our Kafka Data Sources.  Open Data Sources, in right menu for Kafka click + New Kafka Data Source.  Fill the form out as follows:</p>
+
+<p><img src="/assets/images/2026-03-16-ssb-kafka-1.png" alt="SSB New Kafka Data Source"></p>
+
+<p class="notice--warning"><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Pro Tip!</strong> Notice you need to Validate before Create.</p>
+
+<p>You should now see your cluster listed in Data Sources &gt; Kafka:</p>
+
+<p><img src="/assets/images/2026-03-16-ssb-kafka-2.png" alt="SSB New Kafka Data Source"></p>
+
+<p>Now we can create our Virtual Table on top of our existing Kafka Topic <code class="language-plaintext highlighter-rouge">txn1</code>.  In Virtual Tables right menu click + New Kafka Table. Fill the form out as follows:</p>
+
+<p><img src="/assets/images/2026-03-16-ssb-kafka-3.png" alt="SSB New Kafka Data Source"></p>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>WARNING!</strong> You must switch over to Event Time tab before you push Create.</p>
+
+<p>Set the Event Time Column to <code class="language-plaintext highlighter-rouge">event_time</code> as follows then Create:</p>
+
+<p><img src="/assets/images/2026-03-16-ssb-kafka-4.png" alt="SSB New Kafka Data Source"></p>
+
+<p>Notice the <code class="language-plaintext highlighter-rouge">event_time</code> column has been added to the schema:</p>
+
+<p><img src="/assets/images/2026-03-16-ssb-kafka-5.png" alt="SSB New Kafka Data Source"></p>
+
+<p>You have reached the end of this current session.   At this point I am expecting to test the <code class="language-plaintext highlighter-rouge">select * from txn1</code>
+ which I can execute without error and the job is running, but I am unable to see results.  The real work behind the scene begins.    I know I still need to add the Schema Registry Catalog.  I also needed to learn how to get into some of the logs to begin to see what was going on.  Those commands will be shared in the final section below.</p>
+
+<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
+
+<h3 id="-terminal-commands-for-this-session">💻 Terminal Commands for this Session</h3>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">minikube start --memory 16384 --cpus 6
+minikube service mynifi-web --namespace cfm-streaming
+
+kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+  /opt/kafka/bin/kafka-console-consumer.sh \
+  --bootstrap-server localhost:9092 \
+  --topic txn1 \
+  --from-beginning \
+  --max-messages 10
+
+kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+  /opt/kafka/bin/kafka-topics.sh \
+  --bootstrap-server localhost:9092 \
+  --describe \
+  --topic txn1
+
+minikube service ssb-sse --namespace cld-streaming
+
+
+</span><span class="gp">#</span><span class="w"> </span>commands <span class="k">while </span>working with CSA
+<span class="go">kubectl logs ssb-session-admin-6ccdc69dc6-h28qk -n cld-streaming
+kubectl logs ssb-sse-5d4474c569-n4qdd -n cld-streaming
+kubectl get flinkdeployments -n cld-streaming
+kubectl logs ssb-sse-5d4474c569-n4qdd -n cld-streaming | grep -i "kafka"
+kubectl logs -l app=flink -c ssb-session-admin-taskmanager-1-3 -n cld-streaming -f | grep "txn_test_out"
+kubectl get pods -n cld-streaming | grep -E "taskmanager|jobmanager"
+kubectl logs ssb-session-admin-taskmanager-1-3 -n cld-streaming -c flink-main-container -f | grep "txn_test_out"
+kubectl get svc -n cld-streaming | grep ssb
+kubectl port-forward svc/ssb-session-admin-rest -n cld-streaming 8081:8081
+
+</span></code></pre></div></div>
+
+<h3 id="-resources">📚 Resources</h3>
+<ul>
+  <li><a href="https://docs.cloudera.com/csm-operator/1.6/index.html">Cloudera Streams Messaging (CSM) 1.6 Docs</a></li>
+  <li><a href="https://docs.cloudera.com/csa-operator/1.5/index.html">Cloudera Streaming Analytics (CSA) 1.5 Docs</a></li>
+  <li><a href="http://docs.cloudera.com/cfm-operator/3.0.0/index.html">Cloudera Flow Management (CFM) 3.0 Docs</a></li>
+</ul>
+
+<hr>
+
+<h3 id="nifi-kafka-and-flink-on-kubernetes">NiFi Kafka and Flink on Kubernetes</h3>
+
+<p>If you have any questions about the integration between these components or you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about NiFi Kafka and Flink on Kubernetes,  please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/flink" class="page__taxonomy-item p-category" rel="tag">flink</a><span class="sep">, </span>
+    
+      <a href="/tags/kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
+    
+      <a href="/tags/kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      <a href="/tags/nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-16T00:00:00-04:00">March 16, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=NiFi+Kafka+and+Flink+on+Kubernetes%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-Kafka-Flink-on-Kubernetes%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-Kafka-Flink-on-Kubernetes%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-Kafka-Flink-on-Kubernetes%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Cloudera-Streaming-Operators/" class="pagination--pager" title="Cloudera Streaming Operators
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/surveyor.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Streaming-Operators/" rel="permalink">Cloudera Streaming Operators
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera St...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csa-architecture.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" rel="permalink">Cloudera Streaming Analytics Operator for Kubernetes 1.5
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/kubernetes-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Flow-Management-Kubernetes-Operator-3.0/" rel="permalink">Cloudera Flow Management Operator for Kubernetes 3.0
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productiv...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/clouderadataflow.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" rel="permalink">Cloudera Data Flow 3.0 for Cloudera on Cloud
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

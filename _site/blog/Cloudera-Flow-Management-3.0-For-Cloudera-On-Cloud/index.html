@@ -120,11 +120,14 @@
           Cloudera Solutions Engineer
           
         </a>
-        <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="https://community.cloudera.com/?type=everything&pageNum=1">Community</a>
-            </li><li class="masthead__menu-item">
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&amp;pageNum=1">Community</a>
+            </li>
+<li class="masthead__menu-item">
               <a href="/about/">About</a>
-            </li></ul>
+            </li>
+</ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
@@ -310,15 +313,19 @@
 
 <p>This landmark release represents the most significant architectural shift in the history of Cloudera Data Flow. Importantly, we’ve moved beyond a single-flow deployment model to now support <strong>multi-flow deployments</strong>, offering unprecedented control over cloud resource consumption and infrastructure costs. It also introduces enhancements to the developer experience with data provenance tools, and ensures compliance with the latest security and platform standards through new Kubernetes and NiFi version support.</p>
 
-<hr />
+<hr>
 
 <h3 id="release-highlights">Release Highlights</h3>
 
 <ul>
-  <li><strong>Multi-Flow Deployments:</strong> Users can now add and manage multiple flows within a single NiFi deployment. This allows for better optimization of workload resources and cloud infrastructure costs. The 1:1 flow-to-deployment model is still possible for use cases that need resource isolation.</li>
-  <li><strong>Data Provenance in Flow Designer:</strong> A new Provenance Events feature within Flow Designer allows users to search, audit, and inspect FlowFiles as they move through a running test session, providing a historical record of data transitions for easier debugging and observability. Records can be replayed after debugging to ensure healthy data reaches its final destination.</li>
-  <li><strong>Project-Level Governance and Enforcement:</strong> Admins can now enforce resource association with projects at the environment level, providing strict control over access to flow drafts, test sessions and deployments. This is paired with new project-level usage tracking in the Cloudera consumption reporting.</li>
-  <li><strong>NiFi End-of-Support Protections:</strong> To ensure environment stability, the upgrade process now includes automated NiFi end-of-support policy enforcement. It will proactively check for NiFi runtime compatibility and block upgrades if unsupported versions are detected, preventing potential service disruptions. Options for upgrading NiFi runtime include:
+  <li>
+<strong>Multi-Flow Deployments:</strong> Users can now add and manage multiple flows within a single NiFi deployment. This allows for better optimization of workload resources and cloud infrastructure costs. The 1:1 flow-to-deployment model is still possible for use cases that need resource isolation.</li>
+  <li>
+<strong>Data Provenance in Flow Designer:</strong> A new Provenance Events feature within Flow Designer allows users to search, audit, and inspect FlowFiles as they move through a running test session, providing a historical record of data transitions for easier debugging and observability. Records can be replayed after debugging to ensure healthy data reaches its final destination.</li>
+  <li>
+<strong>Project-Level Governance and Enforcement:</strong> Admins can now enforce resource association with projects at the environment level, providing strict control over access to flow drafts, test sessions and deployments. This is paired with new project-level usage tracking in the Cloudera consumption reporting.</li>
+  <li>
+<strong>NiFi End-of-Support Protections:</strong> To ensure environment stability, the upgrade process now includes automated NiFi end-of-support policy enforcement. It will proactively check for NiFi runtime compatibility and block upgrades if unsupported versions are detected, preventing potential service disruptions. Options for upgrading NiFi runtime include:
     <ul>
       <li>The upgrade process can automatically upgrade your NiFi runtime version to a supported one. (<a href="https://docs.cloudera.com/dataflow/cloud/service-upgrade/topics/cdf-upgrade-environment.html">doc</a>)</li>
       <li>Per-deployment upgrades of NiFi runtime can be done via the “Change NiFi Version” action. (<a href="https://docs.cloudera.com/dataflow/cloud/managing-deployments/topics/cdf-changing-nifi-runtime-version.html">doc</a>)</li>
@@ -344,12 +351,12 @@
 <h4 id="platform-upgrades">Platform Upgrades</h4>
 <p>Added support for <strong>Kubernetes 1.33</strong> and <strong>NiFi 1.28.1 / 2.6.0</strong>.</p>
 
-<hr />
+<hr>
 
 <h3 id="upgrading-to-the-new-release">Upgrading to the New Release</h3>
 <p>Customers can perform an in-place upgrade from supported Cloudera Data Flow versions to 3.0. Before initiating the upgrade, please ensure that you have reviewed the <a href="https://docs.cloudera.com/dataflow/cloud/support-matrix/topics/cdf-eol-policy.html">NiFi EoS requirements</a> and <a href="https://docs.cloudera.com/dataflow/cloud/service-upgrade/topics/cdf-upgrade-prerequisites.html">upgrade prerequisites</a>. Alternatively, disabling and re-enabling an existing Data Flow environment will result in the re-enabled environment running the latest version.</p>
 
-<hr />
+<hr>
 
 <h3 id="links">Links</h3>
 <ul>
@@ -416,7 +423,7 @@
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Flow-Management-3.0-For-Cloudera-On-Cloud%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Flow-Management-3.0-For-Cloudera-On-Cloud%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Flow-Management-3.0-For-Cloudera-On-Cloud%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -442,6 +449,50 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/k9s-full-stack.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/NiFi-Kafka-Flink-on-Kubernetes/" rel="permalink">NiFi Kafka and Flink on Kubernetes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -572,50 +623,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/surveyor.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Surveyor/" rel="permalink">Cloudera Streams Messaging - Surveyor
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Introducing Cloudera Streams Messaging Surveyor
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -663,7 +670,7 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 <script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
       </footer>
     </div>

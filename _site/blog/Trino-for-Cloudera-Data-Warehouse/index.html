@@ -120,11 +120,14 @@
           Cloudera Solutions Engineer
           
         </a>
-        <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="https://community.cloudera.com/?type=everything&pageNum=1">Community</a>
-            </li><li class="masthead__menu-item">
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&amp;pageNum=1">Community</a>
+            </li>
+<li class="masthead__menu-item">
               <a href="/about/">About</a>
-            </li></ul>
+            </li>
+</ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">Toggle menu</span>
@@ -312,61 +315,83 @@
 
 <p>This release brings a fully managed, containerized Trino experience to your data estate. It delivers a high-performance, distributed SQL query engine wrapped in an enterprise-grade <strong>Virtual Warehouse</strong>, eliminating the complexity of manual configuration while offering auto-scaling, auto-suspend, and seamless Cloudera integration.</p>
 
-<hr />
+<hr>
 
 <h2 id="key-benefits">Key Benefits</h2>
 <ul>
-  <li><strong>Seamless Data Federation:</strong> Connect to 30+ data sources to analyze data where it lives without complex ETL.</li>
-  <li><strong>Elastic Scalability &amp; Cost Control:</strong> Automatically scale workers based on load and utilize auto-suspend to eliminate idle compute costs.</li>
-  <li><strong>Unified Security:</strong> Full integration with <strong>Apache Ranger</strong> ensures rigorous data protection policies.</li>
-  <li><strong>Simplified Operations:</strong> New UI for connector management and built-in diagnostic tools.</li>
+  <li>
+<strong>Seamless Data Federation:</strong> Connect to 30+ data sources to analyze data where it lives without complex ETL.</li>
+  <li>
+<strong>Elastic Scalability &amp; Cost Control:</strong> Automatically scale workers based on load and utilize auto-suspend to eliminate idle compute costs.</li>
+  <li>
+<strong>Unified Security:</strong> Full integration with <strong>Apache Ranger</strong> ensures rigorous data protection policies.</li>
+  <li>
+<strong>Simplified Operations:</strong> New UI for connector management and built-in diagnostic tools.</li>
 </ul>
 
-<hr />
+<hr>
 
 <h2 id="feature-highlights">Feature Highlights</h2>
 
 <h3 id="1-universal-connectivity--storage">1. Universal Connectivity &amp; Storage</h3>
 <ul>
-  <li><strong>Certified Enterprise Connectors:</strong> Fully supported for Oracle, Snowflake, AWS Redshift, PostgreSQL, MySQL, Hive (HMS), Iceberg, and MariaDB.</li>
-  <li><strong>Expansive Ecosystem:</strong> Support for Kafka, MongoDB, Delta Lake, Google BigQuery, Druid, and MS SQL Server.</li>
-  <li><strong>Teradata Connector:</strong> Now available in <strong>Tech Preview</strong>.</li>
-  <li><strong>Connector Management UI:</strong> User-friendly interface to create, configure, and test connectors before deployment.</li>
-  <li><strong>Hybrid Storage:</strong> Full read/write to <strong>Ozone (OFS protocol)</strong> with local SSD caching for maximum performance.</li>
+  <li>
+<strong>Certified Enterprise Connectors:</strong> Fully supported for Oracle, Snowflake, AWS Redshift, PostgreSQL, MySQL, Hive (HMS), Iceberg, and MariaDB.</li>
+  <li>
+<strong>Expansive Ecosystem:</strong> Support for Kafka, MongoDB, Delta Lake, Google BigQuery, Druid, and MS SQL Server.</li>
+  <li>
+<strong>Teradata Connector:</strong> Now available in <strong>Tech Preview</strong>.</li>
+  <li>
+<strong>Connector Management UI:</strong> User-friendly interface to create, configure, and test connectors before deployment.</li>
+  <li>
+<strong>Hybrid Storage:</strong> Full read/write to <strong>Ozone (OFS protocol)</strong> with local SSD caching for maximum performance.</li>
 </ul>
 
 <h3 id="2-automated-lifecycle-management">2. Automated Lifecycle Management</h3>
 <ul>
-  <li><strong>Virtual Warehouses:</strong> Easily manage the lifecycle of Trino coordinators and workers.</li>
-  <li><strong>Intelligent Auto-Scaling:</strong> Custom scaling parameters (min/max workers) to handle peak loads.</li>
-  <li><strong>Graceful Shutdown:</strong> Auto-suspend for “T-shirt sizes” (XS to L) ensures resources are released without interrupting queries.</li>
-  <li><strong>Disaster Recovery:</strong> Full Backup and Restore support for virtual warehouses and connectors.</li>
+  <li>
+<strong>Virtual Warehouses:</strong> Easily manage the lifecycle of Trino coordinators and workers.</li>
+  <li>
+<strong>Intelligent Auto-Scaling:</strong> Custom scaling parameters (min/max workers) to handle peak loads.</li>
+  <li>
+<strong>Graceful Shutdown:</strong> Auto-suspend for “T-shirt sizes” (XS to L) ensures resources are released without interrupting queries.</li>
+  <li>
+<strong>Disaster Recovery:</strong> Full Backup and Restore support for virtual warehouses and connectors.</li>
 </ul>
 
 <h3 id="3-enterprise-security--governance">3. Enterprise Security &amp; Governance</h3>
 <ul>
-  <li><strong>Fine-Grained Access:</strong> Ranger integration for authorization, dynamic column masking, and row filtering.</li>
-  <li><strong>Secure Connectivity:</strong> Support for LDAP authentication and a dedicated <strong>Secrets Management</strong> system for external credentials.</li>
+  <li>
+<strong>Fine-Grained Access:</strong> Ranger integration for authorization, dynamic column masking, and row filtering.</li>
+  <li>
+<strong>Secure Connectivity:</strong> Support for LDAP authentication and a dedicated <strong>Secrets Management</strong> system for external credentials.</li>
 </ul>
 
 <h3 id="4-empowering-all-users">4. Empowering All Users</h3>
 <ul>
-  <li><strong>Talk-to-Your-Data:</strong> AI SQL Assistance allows users to generate optimized Trino SQL from natural language.</li>
-  <li><strong>Analyst Ready:</strong> Full Trino syntax support and autocomplete within the <strong>Hue SQL Editor</strong>.</li>
-  <li><strong>Developer Friendly:</strong> Includes CDW CLI and a built-in Coordinator Web UI for deep-dive monitoring.</li>
-  <li><strong>Visual Insights:</strong> Native integration with <strong>Cloudera Data Visualization</strong>.</li>
+  <li>
+<strong>Talk-to-Your-Data:</strong> AI SQL Assistance allows users to generate optimized Trino SQL from natural language.</li>
+  <li>
+<strong>Analyst Ready:</strong> Full Trino syntax support and autocomplete within the <strong>Hue SQL Editor</strong>.</li>
+  <li>
+<strong>Developer Friendly:</strong> Includes CDW CLI and a built-in Coordinator Web UI for deep-dive monitoring.</li>
+  <li>
+<strong>Visual Insights:</strong> Native integration with <strong>Cloudera Data Visualization</strong>.</li>
 </ul>
 
-<hr />
+<hr>
 
 <h2 id="primary-use-cases">Primary Use Cases</h2>
 <ul>
-  <li><strong>Federated Data Access:</strong> Connect to external sources like Snowflake and Postgres with <strong>zero-copy data</strong>.</li>
-  <li><strong>Interactive Reporting:</strong> Use distributed SQL and SSD caching to power low-latency dashboards.</li>
-  <li><strong>Cost-Efficient Ad Hoc Analytics:</strong> Spin up “right-sized” warehouses that automatically shut down after analysis is complete.</li>
+  <li>
+<strong>Federated Data Access:</strong> Connect to external sources like Snowflake and Postgres with <strong>zero-copy data</strong>.</li>
+  <li>
+<strong>Interactive Reporting:</strong> Use distributed SQL and SSD caching to power low-latency dashboards.</li>
+  <li>
+<strong>Cost-Efficient Ad Hoc Analytics:</strong> Spin up “right-sized” warehouses that automatically shut down after analysis is complete.</li>
 </ul>
 
-<hr />
+<hr>
 
 <h2 id="links">Links</h2>
 <ul>
@@ -434,7 +459,7 @@
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FTrino-for-Cloudera-Data-Warehouse%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FTrino-for-Cloudera-Data-Warehouse%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FTrino-for-Cloudera-Data-Warehouse%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -460,6 +485,50 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/k9s-full-stack.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/NiFi-Kafka-Flink-on-Kubernetes/" rel="permalink">NiFi Kafka and Flink on Kubernetes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -590,50 +659,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/clouderadataflow.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/" rel="permalink">Cloudera Data Flow 3.0 for Cloudera on Cloud
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -681,7 +706,7 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 <script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
       </footer>
     </div>

@@ -6,6 +6,18 @@
     <atom:link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>NiFi Kafka and Flink on Kubernetes</title>
+        <link>https://cldr-steven-matison.github.io//blog/NiFi-Kafka-Flink-on-Kubernetes/</link>
+        <pubDate>Mon, 16 Mar 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io//assets/images/k9s-full-stack.png</image>
+          <media:content url="https://cldr-steven-matison.github.io//assets/images/k9s-full-stack.png" medium="image" />
+        
+        <description>:warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed.
+</description>
+      </item>
+    
+      <item>
         <title>Cloudera Streaming Operators</title>
         <link>https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/</link>
         <pubDate>Mon, 09 Mar 2026 00:00:00 -0400</pubDate>
@@ -110,18 +122,6 @@
           <media:content url="https://cldr-steven-matison.github.io//assets/images/cloudera_ai_inference.png" medium="image" />
         
         <description>We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers.
-</description>
-      </item>
-    
-      <item>
-        <title>Introducing Cloudera Data Lineage</title>
-        <link>https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage/</link>
-        <pubDate>Tue, 03 Feb 2026 00:00:00 -0500</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io//assets/images/cloudera_data_lineage.png</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/cloudera_data_lineage.png" medium="image" />
-        
-        <description>In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader.
 </description>
       </item>
     
