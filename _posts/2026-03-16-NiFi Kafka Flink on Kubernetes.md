@@ -18,7 +18,7 @@ tags:
 Last week I published how I installed all of the [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/) on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!
 
 In this blog I am going to go into the next phases of working with Cloudera Streaming Operators.
-Since I am so familar with the [Fraud Demo](https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB) I am going to use NIFI to build a simple flow to create some transactions in topic `txn1`, confirm the Kafka topic has data, then access SQL Stream Builder to execute a `select * from txn1` query. With these simple bits, the end to end test of NiFi, Kafka, and Flink on kubernetes should be completed.
+Since I am so familar with the [Fraud Demo](https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB) I am going to use NiFi to build a simple flow to create some transactions in topic `txn1`, confirm the Kafka topic has data, then access SQL Stream Builder to execute a `select * from txn1` query. With these simple bits, the end to end test of NiFi, Kafka, and Flink on kubernetes should be completed.
 
 🚀 **Let's get started!**
 
@@ -88,7 +88,7 @@ Next, drag out a GenerateFlowFile and PublishKafka_2_6 processor.  Connect them 
 
 ![NiFi Flow](/assets/images/2026-03-16-flow.png)
 
-:trophy: **Pro Tip!** I always route the success and failure separately so that I can debug.  Later you I will use auto-termination, re-route failure back to PublishKafka, or setup retry once I confirm the processor configuration is operating as expected.
+:trophy: **Pro Tip!** I always route the success and failure separately so that I can debug.  Later I will use auto-termination, re-route failure back to PublishKafka, or setup retry once I confirm the processor configuration is operating as expected.
 {: .notice--primary}
 
 
@@ -117,13 +117,13 @@ my-cluster-kafka-bootstrap.cld-streaming.svc:9092
 :mag: **Look!** Take a deeper look into Kafka Brokers and bootStrapserver and notice the shape of the bootstrapServers:`[clusterName]-bootstrap.[namespace].svc:9092`
 {: .notice--info}
 
-Start your nifi flow and confirm PublishKafka_2_6 Success.  You can now exit Nifi and close out the `minikube service` command.  You have now successfully deployed a simple nifi flow on kubernetes pushing transaction data to kafka topic txn1.
+Start your NiFi flow and confirm PublishKafka_2_6 is sending flowfiles to success.  You can now exit Nifi and close out the `minikube service` command.  You have just successfully deployed a simple NiFi flow on kubernetes pushing transaction data to Kafka topic txn1 also on kubernetes.
 
 
 :trophy: **Pro Tip!** You can find the flow definition file of the flow `TXN1.json` over in my [GitHub NiFi Templates](https://github.com/cldr-steven-matison/NiFi-Templates).
 {: .notice--primary}
 
-
+---
 
 ### Confirm Kafka Topic on Kubernetes
 
@@ -162,17 +162,19 @@ Topic: txn1 TopicId: ySDTMGkCTAK-EAG6DasAUg PartitionCount: 1 ReplicationFactor:
   Topic: txn1 Partition: 0  Leader: 4 Replicas: 4,5,0 Isr: 0,5,4  Elr:  LastKnownElr: 
 ```
 
-Excellent, so now we have deployed a nifi flow publishing transaction json to kafka topic txn1 and we have confirmed data exists in kafka.  Now let's move on to Sql Stream Builder.
+Excellent, so now we have deployed a NiFi flow publishing transaction json to Kafka topic txn1 and we have confirmed data exists in Kafka.  Now let's move on to Sql Stream Builder.
+
+---
 
 ### Using Sql Stream Builder on Kubernetes
 
-To login to SSB we will use the super secure user `admin` with the password `admin`.  Once  you get logged in you should have a look around.  Check out the entire left menu.  Open the explorer and open all entities.  Notice the different entities each have different right navigations.  As you start to use SSB you will need to be familiar with all of these.
+To login to SSB we will use the user `admin` with the password `admin`.  Once you get logged in click into the `ssb_default` project and then you should have a look around.  Check out the entire left menu.  Open the Explorer and open all entities.  Notice the different entities each have a different right navigation.  As you start to use SSB you will need to be familiar with all of these.
 
 
-We are all SSB Pro's now, so i am going to jump right into what we need to setup to accomplish the task.
+By now we are all SQL Stream Builder pros, so I am just going to jump right into what needs to be setup to accomplish the task of `select * from txn1`.
 
 
-First, lets create our Kafka Data Sources.  Open Data Sources, in right menu for Kafka click + New Kafka Data Source.  Fill the form out as follows:
+First, let's create our Kafka Data Source.  Open Data Sources, in right menu for Kafka click + New Kafka Data Source.  Fill the form out as follows:
 
 ![SSB New Kafka Data Source](/assets/images/2026-03-16-ssb-kafka-1.png)
 
@@ -192,13 +194,11 @@ Now we can create our Virtual Table on top of our existing Kafka Topic `txn1`.  
 
 Set the Event Time Column to `event_time` as follows then Create:
 
-
 ![SSB New Kafka Data Source](/assets/images/2026-03-16-ssb-kafka-4.png)
 
 Notice the `event_time` column has been added to the schema:
 
 ![SSB New Kafka Data Source](/assets/images/2026-03-16-ssb-kafka-5.png)
-
 
 You have reached the end of this current session.   At this point I am expecting to test the `select * from txn1`
  which I can execute without error and the job is running, but I am unable to see results.  The real work behind the scene begins.    I know I still need to add the Schema Registry Catalog.  I also needed to learn how to get into some of the logs to begin to see what was going on.  Those commands will be shared in the final section below.
@@ -207,6 +207,7 @@ You have reached the end of this current session.   At this point I am expecting
 :warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
 {: .notice--danger}
 
+---
 
 ### 💻 Terminal Commands for this Session
 
@@ -215,6 +216,7 @@ You have reached the end of this current session.   At this point I am expecting
 minikube start --memory 16384 --cpus 6
 minikube service mynifi-web --namespace cfm-streaming
 
+# commands while working with CSM
 kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-console-consumer.sh \
   --bootstrap-server localhost:9092 \
@@ -226,6 +228,12 @@ kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:9092 \
   --describe \
+  --topic txn1
+
+kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+  /opt/kafka/bin/kafka-topics.sh \
+  --bootstrap-server localhost:9092 \
+  --delete \
   --topic txn1
 
 minikube service ssb-sse --namespace cld-streaming
