@@ -473,6 +473,7 @@ This setup is your "sandbox" for building end-to-end streaming architectures wit
 * [Cloudera Streaming Analytics (CSA) 1.5 Docs](https://docs.cloudera.com/csa-operator/1.5/index.html)
 * [Cloudera Flow Management (CFM) 3.0 Docs](http://docs.cloudera.com/cfm-operator/3.0.0/index.html)
 * [ClouderaStreamingOperators](https://github.com/cldr-steven-matison/ClouderaStreamingOperators)
+
 ---
 
 ### Macbook Setup with Cloudera Streaming Operators Deep Dive
