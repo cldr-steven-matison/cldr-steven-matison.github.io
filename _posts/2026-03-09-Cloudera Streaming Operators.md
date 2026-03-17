@@ -35,7 +35,7 @@ brew install git docker python minikube kubernetes-cli k9s helm
 open /Applications/Docker.app
 
 # Spin up Minikube with enough resources for the full stack
-minikube start --cpus 4 --memory 12288
+minikube start --cpus 6 --memory 16384
 ```
 
 :trophy: **Pro Tip!** Make sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.
@@ -453,7 +453,7 @@ minikube service list -n cld-streaming
 minikube service cloudera-surveyor-service --namespace cld-streaming
 minikube service schema-registry-service --namespace cld-streaming
 minikube service ssb-sse --namespace cld-streaming
-minikube service mynifi --namespace cld-streaming
+minikube service mynifi-web --namespace cld-streaming
 ```
 
 This setup is your "sandbox" for building end-to-end streaming architectures with the Cloudera Streaming Operators.
@@ -472,7 +472,7 @@ This setup is your "sandbox" for building end-to-end streaming architectures wit
 * [Cloudera Streams Messaging (CSM) 1.6 Docs](https://docs.cloudera.com/csm-operator/1.6/index.html)
 * [Cloudera Streaming Analytics (CSA) 1.5 Docs](https://docs.cloudera.com/csa-operator/1.5/index.html)
 * [Cloudera Flow Management (CFM) 3.0 Docs](http://docs.cloudera.com/cfm-operator/3.0.0/index.html)
-
+* [ClouderaStreamingOperators](https://github.com/cldr-steven-matison/ClouderaStreamingOperators)
 ---
 
 ### Macbook Setup with Cloudera Streaming Operators Deep Dive

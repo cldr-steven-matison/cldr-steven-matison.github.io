@@ -170,6 +170,7 @@ Excellent, so now we have deployed a NiFi flow publishing transaction json to Ka
 
 To login to SSB we will use the user `admin` with the password `admin`.  Once you get logged in click into the `ssb_default` project and then you should have a look around.  Check out the entire left menu.  Open the Explorer and open all entities.  Notice the different entities each have a different right navigation.  As you start to use SSB you will need to be familiar with all of these.
 
+![SQL Stream Builder](/assets/images/2026-03-16-ssb.png)
 
 By now we are all SQL Stream Builder pros, so I am just going to jump right into what needs to be setup to accomplish the task of `select * from txn1`.
 
@@ -215,8 +216,9 @@ You have reached the end of this current session.   At this point I am expecting
 ```terminal
 minikube start --memory 16384 --cpus 6
 minikube service mynifi-web --namespace cfm-streaming
+minikube service ssb-sse --namespace cld-streaming
 
-# commands while working with CSM
+# Consume Kafka Topic 
 kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-console-consumer.sh \
   --bootstrap-server localhost:9092 \
@@ -224,22 +226,21 @@ kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
   --from-beginning \
   --max-messages 10
 
+#Describe Kafka Topic
 kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:9092 \
   --describe \
   --topic txn1
 
+# Delete Kafka Topic
 kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:9092 \
   --delete \
   --topic txn1
 
-minikube service ssb-sse --namespace cld-streaming
-
-
-# commands while working with CSA
+# Debug CSA
 kubectl logs ssb-session-admin-6ccdc69dc6-h28qk -n cld-streaming
 kubectl logs ssb-sse-5d4474c569-n4qdd -n cld-streaming
 kubectl get flinkdeployments -n cld-streaming
@@ -257,7 +258,7 @@ kubectl port-forward svc/ssb-session-admin-rest -n cld-streaming 8081:8081
 * [Cloudera Streams Messaging (CSM) 1.6 Docs](https://docs.cloudera.com/csm-operator/1.6/index.html)
 * [Cloudera Streaming Analytics (CSA) 1.5 Docs](https://docs.cloudera.com/csa-operator/1.5/index.html)
 * [Cloudera Flow Management (CFM) 3.0 Docs](http://docs.cloudera.com/cfm-operator/3.0.0/index.html)
-
+* [Using Cloudera SQL Stream Builder](https://docs.cloudera.com/csa/1.16.1/how-to-ssb/topics/csa-ssb-running-simple-job.html)
 ---
 
 ### {{ page.title }}

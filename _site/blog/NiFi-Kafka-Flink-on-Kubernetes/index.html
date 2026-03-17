@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          5 minute read
+          6 minute read
         
       </span>
     
@@ -450,6 +450,8 @@ Processed a total of 10 messages
 
 <p>To login to SSB we will use the user <code class="language-plaintext highlighter-rouge">admin</code> with the password <code class="language-plaintext highlighter-rouge">admin</code>.  Once you get logged in click into the <code class="language-plaintext highlighter-rouge">ssb_default</code> project and then you should have a look around.  Check out the entire left menu.  Open the Explorer and open all entities.  Notice the different entities each have a different right navigation.  As you start to use SSB you will need to be familiar with all of these.</p>
 
+<p><img src="/assets/images/2026-03-16-ssb.png" alt="SQL Stream Builder"></p>
+
 <p>By now we are all SQL Stream Builder pros, so I am just going to jump right into what needs to be setup to accomplish the task of <code class="language-plaintext highlighter-rouge">select * from txn1</code>.</p>
 
 <p>First, let’s create our Kafka Data Source.  Open Data Sources, in right menu for Kafka click + New Kafka Data Source.  Fill the form out as follows:</p>
@@ -487,8 +489,9 @@ Processed a total of 10 messages
 
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">minikube start --memory 16384 --cpus 6
 minikube service mynifi-web --namespace cfm-streaming
+minikube service ssb-sse --namespace cld-streaming
 
-</span><span class="gp">#</span><span class="w"> </span>commands <span class="k">while </span>working with CSM
+</span><span class="gp">#</span><span class="w"> </span>Consume Kafka Topic 
 <span class="go">kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-console-consumer.sh \
   --bootstrap-server localhost:9092 \
@@ -496,22 +499,21 @@ minikube service mynifi-web --namespace cfm-streaming
   --from-beginning \
   --max-messages 10
 
-kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+</span><span class="gp">#</span>Describe Kafka Topic
+<span class="go">kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:9092 \
   --describe \
   --topic txn1
 
-kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+</span><span class="gp">#</span><span class="w"> </span>Delete Kafka Topic
+<span class="go">kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:9092 \
   --delete \
   --topic txn1
 
-minikube service ssb-sse --namespace cld-streaming
-
-
-</span><span class="gp">#</span><span class="w"> </span>commands <span class="k">while </span>working with CSA
+</span><span class="gp">#</span><span class="w"> </span>Debug CSA
 <span class="go">kubectl logs ssb-session-admin-6ccdc69dc6-h28qk -n cld-streaming
 kubectl logs ssb-sse-5d4474c569-n4qdd -n cld-streaming
 kubectl get flinkdeployments -n cld-streaming
@@ -529,9 +531,10 @@ kubectl port-forward svc/ssb-session-admin-rest -n cld-streaming 8081:8081
   <li><a href="https://docs.cloudera.com/csm-operator/1.6/index.html">Cloudera Streams Messaging (CSM) 1.6 Docs</a></li>
   <li><a href="https://docs.cloudera.com/csa-operator/1.5/index.html">Cloudera Streaming Analytics (CSA) 1.5 Docs</a></li>
   <li><a href="http://docs.cloudera.com/cfm-operator/3.0.0/index.html">Cloudera Flow Management (CFM) 3.0 Docs</a></li>
+  <li>
+    <h2 id="using-cloudera-sql-stream-builder"><a href="https://docs.cloudera.com/csa/1.16.1/how-to-ssb/topics/csa-ssb-running-simple-job.html">Using Cloudera SQL Stream Builder</a></h2>
+  </li>
 </ul>
-
-<hr>
 
 <h3 id="nifi-kafka-and-flink-on-kubernetes">NiFi Kafka and Flink on Kubernetes</h3>
 
