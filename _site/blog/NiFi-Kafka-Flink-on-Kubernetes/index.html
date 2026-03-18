@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>NiFi Kafka and Flink on Kubernetes - Cloudera Solutions Engineer</title>
-<meta name="description" content=":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed.">
+<meta name="description" content="Last week I published how I installed all of the Cloudera Streaming Operators on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!">
 
 
   <meta name="author" content="Steven Matison">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="https://cldr-steven-matison.github.io//blog/NiFi-Kafka-Flink-on-Kubernetes/">
 
 
-  <meta property="og:description" content=":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed.">
+  <meta property="og:description" content="Last week I published how I installed all of the Cloudera Streaming Operators on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!">
 
 
 
@@ -272,7 +272,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="NiFi Kafka and Flink on Kubernetes">
-    <meta itemprop="description" content=":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed.">
+    <meta itemprop="description" content="Last week I published how I installed all of the Cloudera Streaming Operators on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!">
     <meta itemprop="datePublished" content="2026-03-16T00:00:00-04:00">
     
 
@@ -309,9 +309,7 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
-
-<p>Last week I published how I installed all of the <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!</p>
+        <p>Last week I published how I installed all of the <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!</p>
 
 <p>In this blog I am going to go into the next phases of working with Cloudera Streaming Operators.
 Since I am so familar with the <a href="https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB">Fraud Demo</a> I am going to use NiFi to build a simple flow to create some transactions in topic <code class="language-plaintext highlighter-rouge">txn1</code>, confirm the Kafka topic has data, then access SQL Stream Builder to execute a <code class="language-plaintext highlighter-rouge">select * from txn1</code> query. With these simple bits, the end to end test of NiFi, Kafka, and Flink on kubernetes should be completed.</p>
@@ -478,12 +476,32 @@ Processed a total of 10 messages
 
 <p><img src="/assets/images/2026-03-16-ssb-kafka-5.png" alt="SSB New Kafka Data Source"></p>
 
-<p>You have reached the end of this current session.   At this point I am expecting to test the <code class="language-plaintext highlighter-rouge">select * from txn1</code>
- which I can execute without error and the job is running, but I am unable to see results.  The real work behind the scene begins.    I know I still need to add the Schema Registry Catalog.  I also needed to learn how to get into some of the logs to begin to see what was going on.  Those commands will be shared in the final section below.</p>
+<p>Now we should be able to create our first job and execute <code class="language-plaintext highlighter-rouge">select * from txn1</code>:</p>
 
-<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
+<p><img src="/assets/images/2026-03-16-ssb-select.png" alt="SQL Stream Builder"></p>
+
+<p class="notice--primary"><img class="emoji" title=":watch:" alt=":watch:" src="https://github.githubassets.com/images/icons/emoji/unicode/231a.png" height="20" width="20"> <strong>Be Patient!</strong> It could take a few moments before results display.</p>
 
 <hr>
+
+<h3 id="-summary-the-power-of-streaming-on-kubernetes">🏁 Summary: The Power of Streaming on Kubernetes</h3>
+
+<p>By successfully executing that <code class="language-plaintext highlighter-rouge">SELECT * FROM TXN1</code> query, you’ve just validated a complete, modern data pipeline running entirely within a Kubernetes ecosystem. This milestone proves several critical architectural points:</p>
+
+<ul>
+  <li>
+<strong>Seamless Interoperability:</strong> We’ve shown that <strong>NiFi</strong> (CFM) can reliably produce data, <strong>Kafka</strong> (CSM) can persist it, and <strong>Flink/SSB</strong> (CSA) can consume it—all while communicating over the internal K8s service mesh using standard DNS-based bootstrap servers.</li>
+  <li>
+<strong>Cloud-Native Agility:</strong> Deploying these complex stateful services via <strong>Operators</strong> allows you to manage lifecycle and configuration through simple YAML manifests, making “Streaming-as-a-Service” a reality on your local machine or in the cloud.</li>
+  <li>
+<strong>Low-Barrier SQL Analytics:</strong> With <strong>SQL Stream Builder</strong>, we’ve moved beyond writing complex Java/Scala Flink code. You can now define data sources, map schemas, and perform real-time transformations using standard SQL, significantly shortening the development cycle.</li>
+</ul>
+
+<p>With this foundation solid, you are no longer just “testing” a setup; you have a functional sandbox to build sophisticated, production-ready streaming applications—like fraud detection, real-time ETL, or IoT monitoring—all powered by the scalability of Kubernetes.</p>
+
+<hr>
+
+<p><strong>Would you like me to help you draft the next section on setting up Flink Windowing functions or perhaps a more complex SQL join between two Kafka topics?</strong></p>
 
 <h3 id="-terminal-commands-for-this-session">💻 Terminal Commands for this Session</h3>
 

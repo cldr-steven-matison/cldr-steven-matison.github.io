@@ -13,7 +13,7 @@
           <image>https://cldr-steven-matison.github.io//assets/images/k9s-full-stack.png</image>
           <media:content url="https://cldr-steven-matison.github.io//assets/images/k9s-full-stack.png" medium="image" />
         
-        <description>:warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed.
+        <description>Last week I published how I installed all of the Cloudera Streaming Operators on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!
 </description>
       </item>
     

@@ -12,9 +12,6 @@ tags:
   - flink
 ---
 
-:warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
-{: .notice--danger}
-
 Last week I published how I installed all of the [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/) on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!
 
 In this blog I am going to go into the next phases of working with Cloudera Streaming Operators.
@@ -201,14 +198,29 @@ Notice the `event_time` column has been added to the schema:
 
 ![SSB New Kafka Data Source](/assets/images/2026-03-16-ssb-kafka-5.png)
 
-You have reached the end of this current session.   At this point I am expecting to test the `select * from txn1`
- which I can execute without error and the job is running, but I am unable to see results.  The real work behind the scene begins.    I know I still need to add the Schema Registry Catalog.  I also needed to learn how to get into some of the logs to begin to see what was going on.  Those commands will be shared in the final section below.
+Now we should be able to create our first job and execute `select * from txn1`:
+
+![SQL Stream Builder](/assets/images/2026-03-16-ssb-select.png)
 
 
-:warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
-{: .notice--danger}
+:watch: **Be Patient!** It could take a few moments before results display.
+{: .notice--primary}
 
 ---
+
+### 🏁 Summary: The Power of Streaming on Kubernetes
+
+By successfully executing that `SELECT * FROM TXN1` query, you’ve just validated a complete, modern data pipeline running entirely within a Kubernetes ecosystem. This milestone proves several critical architectural points:
+
+* **Seamless Interoperability:** We’ve shown that **NiFi** (CFM) can reliably produce data, **Kafka** (CSM) can persist it, and **Flink/SSB** (CSA) can consume it—all while communicating over the internal K8s service mesh using standard DNS-based bootstrap servers.
+* **Cloud-Native Agility:** Deploying these complex stateful services via **Operators** allows you to manage lifecycle and configuration through simple YAML manifests, making "Streaming-as-a-Service" a reality on your local machine or in the cloud.
+* **Low-Barrier SQL Analytics:** With **SQL Stream Builder**, we’ve moved beyond writing complex Java/Scala Flink code. You can now define data sources, map schemas, and perform real-time transformations using standard SQL, significantly shortening the development cycle.
+
+With this foundation solid, you are no longer just "testing" a setup; you have a functional sandbox to build sophisticated, production-ready streaming applications—like fraud detection, real-time ETL, or IoT monitoring—all powered by the scalability of Kubernetes.
+
+---
+
+**Would you like me to help you draft the next section on setting up Flink Windowing functions or perhaps a more complex SQL join between two Kafka topics?**
 
 ### 💻 Terminal Commands for this Session
 
