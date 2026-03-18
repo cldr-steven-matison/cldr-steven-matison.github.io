@@ -46,7 +46,6 @@ spec:
   uiConnection:
     type: Ingress
   configOverride:
-    # Based on the error, we pass properties as a block or use the 2.11 'upsert' pattern
     nifiProperties:
       upsert:
         nifi.cluster.leader.election.implementation: "KubernetesLeaderElectionManager"
