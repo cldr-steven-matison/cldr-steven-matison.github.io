@@ -394,8 +394,6 @@ Since I am so familar with the <a href="https://github.com/cldr-steven-matison/F
 <p>Remember we got our bootstrap servers in the previous blog: <code class="language-plaintext highlighter-rouge">my-cluster-kafka-bootstrap.cld-streaming.svc:9092</code> like this:</p>
 
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl get kafka my-cluster -n cld-streaming -o jsonpath='{.status.listeners[?(@.name=="plain")].bootstrapServers}'
-
-my-cluster-kafka-bootstrap.cld-streaming.svc:9092
 </span></code></pre></div></div>
 
 <p class="notice--info"><img class="emoji" title=":mag:" alt=":mag:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f50d.png" height="20" width="20"> <strong>Look!</strong> Take a deeper look into Kafka Brokers and bootStrapserver and notice the shape of the bootstrapServers:<code class="language-plaintext highlighter-rouge">[clusterName]-bootstrap.[namespace].svc:9092</code></p>
@@ -485,7 +483,7 @@ Processed a total of 10 messages
 
 <h3 id="-summary-the-power-of-streaming-on-kubernetes">🏁 Summary: The Power of Streaming on Kubernetes</h3>
 
-<p>By successfully executing that <code class="language-plaintext highlighter-rouge">SELECT * FROM TXN1</code> query, you’ve just validated a complete, modern data pipeline running entirely within a Kubernetes ecosystem. This milestone proves several critical architectural points:</p>
+<p>By successfully executing that <code class="language-plaintext highlighter-rouge">select * from txn1</code> query, you’ve just validated a complete, modern data pipeline running entirely within a Kubernetes ecosystem. This milestone proves several critical architectural points:</p>
 
 <ul>
   <li>

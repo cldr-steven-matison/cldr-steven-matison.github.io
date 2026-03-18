@@ -106,8 +106,6 @@ Remember we got our bootstrap servers in the previous blog: `my-cluster-kafka-bo
 
 ```terminal
 kubectl get kafka my-cluster -n cld-streaming -o jsonpath='{.status.listeners[?(@.name=="plain")].bootstrapServers}'
-
-my-cluster-kafka-bootstrap.cld-streaming.svc:9092
 ```
 
 :mag: **Look!** Take a deeper look into Kafka Brokers and bootStrapserver and notice the shape of the bootstrapServers:`[clusterName]-bootstrap.[namespace].svc:9092`
@@ -209,7 +207,7 @@ Now we should be able to create our first job and execute `select * from txn1`:
 
 ### 🏁 Summary: The Power of Streaming on Kubernetes
 
-By successfully executing that `SELECT * FROM TXN1` query, you’ve just validated a complete, modern data pipeline running entirely within a Kubernetes ecosystem. This milestone proves several critical architectural points:
+By successfully executing that `select * from txn1` query, you’ve just validated a complete, modern data pipeline running entirely within a Kubernetes ecosystem. This milestone proves several critical architectural points:
 
 * **Seamless Interoperability:** We’ve shown that **NiFi** (CFM) can reliably produce data, **Kafka** (CSM) can persist it, and **Flink/SSB** (CSA) can consume it—all while communicating over the internal K8s service mesh using standard DNS-based bootstrap servers.
 * **Cloud-Native Agility:** Deploying these complex stateful services via **Operators** allows you to manage lifecycle and configuration through simple YAML manifests, making "Streaming-as-a-Service" a reality on your local machine or in the cloud.
