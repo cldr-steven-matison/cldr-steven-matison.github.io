@@ -1,7 +1,7 @@
 ---
 title:  "NiFi Kafka and Flink on Kubernetes"
 header:
-  teaser: "/assets/images/k9s-full-stack.png"
+  teaser: "/assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg"
 categories: 
   - blog
 tags:
@@ -16,6 +16,8 @@ Last week I published how I installed all of the [Cloudera Streaming Operators](
 
 In this blog I am going to go into the next phases of working with Cloudera Streaming Operators.
 Since I am so familar with the [Fraud Demo](https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB) I am going to use NiFi to build a simple flow to create some transactions in topic `txn1`, confirm the Kafka topic has data, then access SQL Stream Builder to execute a `select * from txn1` query. With these simple bits, the end to end test of NiFi, Kafka, and Flink on kubernetes should be completed.
+
+![NiFi Kafka and Flink On Kubernetes](/assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg)
 
 🚀 **Let's get started!**
 
