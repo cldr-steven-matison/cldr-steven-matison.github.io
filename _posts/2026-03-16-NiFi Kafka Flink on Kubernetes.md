@@ -220,8 +220,6 @@ With this foundation solid, you are no longer just "testing" a setup; you have a
 
 ---
 
-**Would you like me to help you draft the next section on setting up Flink Windowing functions or perhaps a more complex SQL join between two Kafka topics?**
-
 ### 💻 Terminal Commands for this Session
 
 
