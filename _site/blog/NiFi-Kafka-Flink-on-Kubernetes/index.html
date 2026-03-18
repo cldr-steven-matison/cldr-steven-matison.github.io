@@ -413,7 +413,7 @@ my-cluster-kafka-bootstrap.cld-streaming.svc:9092
 
 <p>Now that we are sending data to our Kafka Topic <code class="language-plaintext highlighter-rouge">txn1</code> we need to confirm that data is there. You can execute the following command to review the topic:</p>
 
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl exec -it my-cluster-combined-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-console-consumer.sh \
   --bootstrap-server localhost:9092 \
   --topic txn1 \
@@ -429,7 +429,7 @@ Processed a total of 10 messages
 
 <p>If you just want to see if the topic exists and has offsets you can run:</p>
 
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl exec -it my-cluster-combined-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:9092 \
   --describe \

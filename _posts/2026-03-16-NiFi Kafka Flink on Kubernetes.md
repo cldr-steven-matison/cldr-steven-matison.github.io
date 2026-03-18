@@ -130,7 +130,7 @@ Start your NiFi flow and confirm PublishKafka_2_6 is sending flowfiles to succes
 Now that we are sending data to our Kafka Topic `txn1` we need to confirm that data is there. You can execute the following command to review the topic:
 
 ```terminal
-kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+kubectl exec -it my-cluster-combined-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-console-consumer.sh \
   --bootstrap-server localhost:9092 \
   --topic txn1 \
@@ -148,7 +148,7 @@ Processed a total of 10 messages
 If you just want to see if the topic exists and has offsets you can run:
 
 ```terminal
-kubectl exec -it my-cluster-broker-only-0 -n cld-streaming -- \
+kubectl exec -it my-cluster-combined-0 -n cld-streaming -- \
   /opt/kafka/bin/kafka-topics.sh \
   --bootstrap-server localhost:9092 \
   --describe \

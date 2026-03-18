@@ -265,7 +265,7 @@ tlsConfigs:
 Execute the following helm command to install Cloudera Surveyor:
 
 ```bash
-helm install cloudera-surveyor \
+helm install cloudera-surveyor oci://container.repository.cloudera.com/cloudera-helm/csm-operator/surveyor \
   --namespace cld-streaming \
   --version 1.6.0-b99 \
   --values kafka-surveyor.yaml \
@@ -327,25 +327,24 @@ TEST SUITE: None
 ---
 
 
-### 🌊 Deploy NiFi (CFM 3.0)
+### 🌊 Deploy NiFi (CFM 2.11)
 Next we will deploy NiFi using the standard evaluation spec. This gives us a fully functional NiFi instance without the overhead of complex external persistence.
 
-First install the CFM 3.0 Nifi Operator:
+First install the CFM 2.11 Nifi Operator:
 
 ```bash
 helm install cfm-operator oci://container.repository.cloudera.com/cloudera-helm/cfm-operator/cfm-operator \
-  --namespace cld-streaming \
-  --version 3.0.0-b126 \
+  --namespace cfm-streaming \
+  --version 2.11.0-b57 \
   --set installCRDs=true \
   --set image.repository=container.repository.cloudera.com/cloudera/cfm-operator \
-  --set image.tag=3.0.0-b126 \
+  --set image.tag=2.11.0-b57 \
   --set "image.imagePullSecrets[0].name=cloudera-creds" \
   --set "imagePullSecrets={cloudera-creds}" \
   --set "authProxy.image.repository=container.repository.cloudera.com/cloudera_thirdparty/hardened/kube-rbac-proxy" \
   --set "authProxy.image.tag=0.19.0-r3-202503182126" \
   --set licenseSecret=cfm-operator-license \
   --set-file clouderaLicense.fileContent=./license.txt
-
 ```
 
 Create the nifi-eval.yaml as follows:
@@ -356,22 +355,23 @@ apiVersion: cfm.cloudera.com/v1alpha1
 kind: Nifi
 metadata:
   name: mynifi
-  namespace: cld-streaming
+  namespace: cfm-streaming
 spec:
   replicas: 1
-  nifiVersion: "1.28.1"
+  nifiVersion: "2.4.0"
   image:
     repository: container.repository.cloudera.com/cloudera/cfm-nifi-k8s
-    tag: 3.0.0-b126-nifi_1.28.1.2.3.17.0-9
+    tag: 2.11.0-b57-nifi_2.4.0.4.3.3.0-40
     pullSecret: cloudera-creds
   tiniImage:
     repository: container.repository.cloudera.com/cloudera/cfm-tini
-    tag: 3.0.0-b126
+    tag: 2.11.0-b57
     pullSecret: cloudera-creds
   hostName: mynifi.localhost
   uiConnection:
     type: Ingress
   configOverride:
+    # Based on the error, we pass properties as a block or use the 2.11 'upsert' pattern
     nifiProperties:
       upsert:
         nifi.cluster.leader.election.implementation: "KubernetesLeaderElectionManager"
