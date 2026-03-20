@@ -4,16 +4,14 @@ title: Categories
 permalink: /categories/
 ---
 
-<div class="category-list">
+<div class="feature__wrapper">
   {% assign categories = site.categories | sort %}
   {% for category in categories %}
-    <a href="#{{ category[0] | slugify }}" class="category-link" style="margin-right: 15px; font-weight: bold;">
-      {{ category[0] | upcase }} ({{ category[1].size }})
+    <a href="#{{ category[0] | slugify }}" class="btn btn--primary" style="margin-bottom: 5px;">
+      {{ category[0] }} <span class="badge">{{ category[1].size }}</span>
     </a>
   {% endfor %}
 </div>
-
-<hr>
 
 {% for category in categories %}
   <section id="{{ category[0] | slugify }}">
