@@ -15,10 +15,10 @@ Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? 
 The flow JSON I used is here:  
 **[NiFiBenchMarkTest.json](https://raw.githubusercontent.com/cldr-steven-matison/NiFi-Templates)**
 
-I ran everything on a Windows-hosted **Minikube** cluster (6 CPUs, 16 GB RAM) using a default Cloudera Flow Management (CFM) evaluation deployment. The results were excellent: I hit 100% CPU usage while keeping NiFi rock-solid stable.
+I ran everything on a Windows-hosted **Minikube** cluster (6 CPUs, 16 GB RAM) using a default Cloudera Flow Management (CFM) evaluation deployment. The results were excellent: I hit 99% CPU usage while keeping NiFi rock-solid stable.
 
-All of this setup is fully documented in my repo:  
-[ClouderaStreamingOperators](https://github.com/cldr-steven-matison/ClouderaStreamingOperators) and in my blog [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/).
+All of this setup is fully documented in my blog [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/) and in my repo:  
+[ClouderaStreamingOperators](https://github.com/cldr-steven-matison/ClouderaStreamingOperators).
 
 ## 1. Setting Up the NiFi Flow (Default Settings Only)
 
@@ -63,6 +63,9 @@ This gives NiFi far more total threads to work with across the entire cluster.
 These changes prevent early back-pressure and let the system queue massive amounts of data before throttling.
 
 Apply the changes, restart the affected processors, and watch the magic happen.
+
+:trophy: **Pro Tip!** You can also set the Run Duration of a processor while tuning.  In the test above I set my DuplicateFlowfile to 25 ms.  Definitely consider how long you want each process thread to run.
+{: .notice--warning}
 
 ## Results Summary
 
