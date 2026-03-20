@@ -3,7 +3,7 @@ title:  "Cloudera Streams Messaging Operator 1.1"
 header:
   teaser: "/assets/images/Cloudera Streams Messaging Operator.png"
 categories: 
-  - blog
+  - release
 tags:
   - csm
   - cloudera

@@ -3,7 +3,7 @@ title:  "Cloudera Data Flow 3.0 for Cloudera on Cloud"
 header:
   teaser: "/assets/images/clouderadataflow.png"
 categories: 
-  - blog
+  - release
 tags:
   - cloudera
   - nifi

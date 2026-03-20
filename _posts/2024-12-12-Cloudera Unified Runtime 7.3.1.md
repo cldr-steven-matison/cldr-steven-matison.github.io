@@ -3,7 +3,7 @@ title:  "Introducing Cloudera’s Unified Runtime with 7.3.1"
 header:
   teaser: "/assets/images/Cloudera-Data-Platform.png"
 categories: 
-  - blog
+  - release
 tags:
   - cloudera
   - cdp

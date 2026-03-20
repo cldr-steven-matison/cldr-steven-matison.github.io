@@ -3,7 +3,7 @@ title:  "Cloudera Data Services On Premises 1.5.5 General Availability"
 header:
   teaser: "/assets/images/Cloudera-Data-Platform.png"
 categories: 
-  - blog
+  - release
 tags:
   - cloudera
 ---

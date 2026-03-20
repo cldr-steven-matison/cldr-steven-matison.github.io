@@ -3,7 +3,7 @@ title:  "Cloudera Streaming Analytics Operator for Kubernetes 1.5"
 header:
   teaser: "/assets/images/csa-architecture.png"
 categories: 
-  - blog
+  - release
 tags:
   - Cloudera Streaming Analytics
   - flink

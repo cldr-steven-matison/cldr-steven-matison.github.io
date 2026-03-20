@@ -3,7 +3,7 @@ title:  "Cloudera Streams Messaging - Kubernetes Operator 1.4"
 header:
   teaser: "/assets/images/csm-op-deployment-architecture.jpg"
 categories: 
-  - blog
+  - release
 tags:
   - csm
   - kafka

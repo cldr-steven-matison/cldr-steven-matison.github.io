@@ -3,7 +3,7 @@ title:  "Cloudera Flow Management 4.0.0 Technical Preview for Cloudera 7.3.1"
 header:
   teaser: "/assets/images/nifi-logo.png"
 categories: 
-  - blog
+  - release
 tags:
   - cloudera
   - nifi

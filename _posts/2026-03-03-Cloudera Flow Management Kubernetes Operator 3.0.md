@@ -3,7 +3,7 @@ title:  "Cloudera Flow Management Operator for Kubernetes 3.0"
 header:
   teaser: "/assets/images/kubernetes-logo.png"
 categories: 
-  - blog
+  - release
 tags:
   - cloudera
   - nifi

@@ -3,7 +3,7 @@ title:  "Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400"
 header:
   teaser: "/assets/images/nifi-logo.png"
 categories: 
-  - blog
+  - release
 tags:
   - cloudera
   - nifi

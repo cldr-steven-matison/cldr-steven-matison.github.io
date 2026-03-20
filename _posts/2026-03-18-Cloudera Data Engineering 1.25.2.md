@@ -3,7 +3,7 @@ title:  "Cloudera Data Engineering 1.25.2"
 header:
   teaser: "/assets/images/2026-03-18-CDE-1.25.2.png"
 categories: 
-  - blog
+  - release
 tags:
   - cloudera
   - kubernetes

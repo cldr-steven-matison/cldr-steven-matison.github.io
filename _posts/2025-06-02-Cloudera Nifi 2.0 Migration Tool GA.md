@@ -3,7 +3,7 @@ title:  "Cloudera Flow Management Migration Tool 3.0.0 for NiFi 1 to NiFi 2 migr
 header:
   teaser: "/assets/images/nifi-logo.png"
 categories: 
-  - blog
+  - release
 tags:
   - nifi
   - cloudera

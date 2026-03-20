@@ -3,7 +3,7 @@ title:  "Cloudera Flow Management - Kubernetes Operator 2.10"
 header:
   teaser: "/assets/images/kubernetes-logo.png"
 categories: 
-  - blog
+  - release
 tags:
   - cloudera
   - nifi

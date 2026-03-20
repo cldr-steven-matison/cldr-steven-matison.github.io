@@ -3,7 +3,7 @@ title:  "Cloudera Migration Assistant 3.5.0"
 header:
   teaser: "/assets/images/Cloudera-Data-Platform.png"
 categories: 
-  - blog
+  - release
 tags:
   - cloudera
   - spark

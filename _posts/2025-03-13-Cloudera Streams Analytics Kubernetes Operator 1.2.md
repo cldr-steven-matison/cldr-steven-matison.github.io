@@ -3,7 +3,7 @@ title:  "Cloudera Streaming Analytics - Kubernetes Operator 1.2"
 header:
   teaser: "/assets/images/csa-architecture.png"
 categories: 
-  - blog
+  - release
 tags:
   - csa
   - cloudera
