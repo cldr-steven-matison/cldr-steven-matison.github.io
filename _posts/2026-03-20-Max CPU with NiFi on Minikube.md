@@ -69,7 +69,7 @@ Apply the changes, restart the affected processors, and watch the magic happen.
 :trophy: **Pro Tip!** You can also set the Run Duration of a processor while tuning.  In the test above I set my DuplicateFlowfile to 25 ms.  Definitely consider how long you want each process thread to run.
 {: .notice--warning}
 
-## Results Summary
+## Results 
 
 With the tuned settings applied, the cluster performed beautifully:
 - CPU hit **99%** sustained load
@@ -101,7 +101,13 @@ Here are the screenshots I captured on my phone during the test runs.
 ![Tuning NiFi Flow](/assets/images/2026-03-20-screenshot-4.jpg)
 
 
+___
 
+## Summary
+
+This experiment confirms that even a minimal, default deployment of Apache NiFi on a local Kubernetes environment like Minikube is an absolute powerhouse—provided you know which dials to turn. By simply adjusting the concurrent tasks, expanding the timer-driven thread pool, and giving your queues enough room to breathe, you can transform a modest 6-core setup into a high-performance data processing lab.
+
+The most impressive takeaway wasn't just hitting 99% CPU utilization; it was that NiFi remained completely stable and the UI stayed responsive throughout the entire stress test. Whether you are running on a massive production cluster or a local laptop, the same principles apply: Test, Tune, and don't be afraid to listen for the :cyclone:!
 
 Happy tuning — go push your NiFi clusters to the limit! 🚀 
 
@@ -111,6 +117,6 @@ Happy tuning — go push your NiFi clusters to the limit! 🚀
 
 ---
 
-### {{ page.title }}
+## {{ page.title }}
 
 If you have any questions about the integration between these components or you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about {{ page.title }},  please reach out to schedule a discussion.
