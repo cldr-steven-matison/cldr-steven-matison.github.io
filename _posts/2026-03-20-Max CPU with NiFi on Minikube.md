@@ -106,8 +106,6 @@ Here are the screenshots I captured on my phone during the test runs.
 Happy tuning — go push your NiFi clusters to the limit! 🚀 
 
 ### 📚 Resources
-* [Cloudera Streams Messaging (CSM) 1.6 Docs](https://docs.cloudera.com/csm-operator/1.6/index.html)
-* [Cloudera Streaming Analytics (CSA) 1.5 Docs](https://docs.cloudera.com/csa-operator/1.5/index.html)
 * [Cloudera Flow Management (CFM) 3.0 Docs](http://docs.cloudera.com/cfm-operator/3.0.0/index.html)
 * [ClouderaStreamingOperators](https://github.com/cldr-steven-matison/ClouderaStreamingOperators)
 
