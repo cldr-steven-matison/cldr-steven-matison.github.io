@@ -20,7 +20,7 @@ I ran everything on a Windows-hosted **Minikube** cluster (6 CPUs, 16 GB RAM) us
 All of this setup is fully documented in my blog [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/) and in my repo:  
 [ClouderaStreamingOperators](https://github.com/cldr-steven-matison/ClouderaStreamingOperators).
 
-## Setting Up the NiFi Flow (Default Settings Only)
+## Setting Up the NiFi Flow
 
 Once you have the NiFi UI open:
 
@@ -37,7 +37,7 @@ Once you have the NiFi UI open:
 
 You’ll immediately see data flowing. The flow generates synthetic records, duplicates them aggressively, and compresses them — exactly the kind of workload that hammers both CPU and memory.
 
-## Tuning for Maximum Load (After the Flow Is Running)
+## Tuning for Maximum Load
 
 Once you confirm the flow is stable with defaults, it’s time to open the throttle.
 
@@ -55,7 +55,9 @@ This lets 16 parallel threads chew through the heavy compression work.
 This gives NiFi far more total threads to work with across the entire cluster.
 
 ### Crank Up Queue Sizes
-- Click each connection arrow (especially between GenerateFlowFile → DuplicateFlowFile and DuplicateFlowFile → CompressContent)
+- Click each connection arrow 
+  - GenerateFlowFile → DuplicateFlowFile
+  - DuplicateFlowFile → CompressContent
 - Edit the connection properties
 - Set **Back Pressure Data Size Threshold** to **`500 GB`** (or as high as your volume allows)
 - Optionally bump the object count threshold to 500,000+ as well

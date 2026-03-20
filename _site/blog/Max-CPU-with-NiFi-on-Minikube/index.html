@@ -319,7 +319,7 @@
 <p>All of this setup is fully documented in my blog <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> and in my repo:<br>
 <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">ClouderaStreamingOperators</a>.</p>
 
-<h2 id="setting-up-the-nifi-flow-default-settings-only">Setting Up the NiFi Flow (Default Settings Only)</h2>
+<h2 id="setting-up-the-nifi-flow">Setting Up the NiFi Flow</h2>
 
 <p>Once you have the NiFi UI open:</p>
 
@@ -341,7 +341,7 @@
 
 <p>You’ll immediately see data flowing. The flow generates synthetic records, duplicates them aggressively, and compresses them — exactly the kind of workload that hammers both CPU and memory.</p>
 
-<h2 id="tuning-for-maximum-load-after-the-flow-is-running">Tuning for Maximum Load (After the Flow Is Running)</h2>
+<h2 id="tuning-for-maximum-load">Tuning for Maximum Load</h2>
 
 <p>Once you confirm the flow is stable with defaults, it’s time to open the throttle.</p>
 
@@ -366,7 +366,12 @@
 
 <h3 id="crank-up-queue-sizes">Crank Up Queue Sizes</h3>
 <ul>
-  <li>Click each connection arrow (especially between GenerateFlowFile → DuplicateFlowFile and DuplicateFlowFile → CompressContent)</li>
+  <li>Click each connection arrow
+    <ul>
+      <li>GenerateFlowFile → DuplicateFlowFile</li>
+      <li>DuplicateFlowFile → CompressContent</li>
+    </ul>
+  </li>
   <li>Edit the connection properties</li>
   <li>Set <strong>Back Pressure Data Size Threshold</strong> to <strong><code class="language-plaintext highlighter-rouge">500 GB</code></strong> (or as high as your volume allows)</li>
   <li>Optionally bump the object count threshold to 500,000+ as well</li>
