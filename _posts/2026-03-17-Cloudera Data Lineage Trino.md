@@ -1,7 +1,7 @@
 ---
 title:  "Cloudera Data Lineage for Trino"
 header:
-  teaser: "/assets/images/2026-03-18-CDE-1.25.2.png"
+  teaser: "/assets/images/2026-03-17-CDL-trino.png"
 categories: 
   - blog
 tags:
