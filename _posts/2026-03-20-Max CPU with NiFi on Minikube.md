@@ -13,7 +13,7 @@ tags:
 Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:.  **Or Did I?**
 
 The flow JSON I used is here:  
-**[NiFiBenchMarkTest.json](https://raw.githubusercontent.com/cldr-steven-matison/NiFi-Templates)**
+**[NiFiBenchMarkTest.json](https://github.com/cldr-steven-matison/NiFi-Templates)**
 
 I ran everything on a Windows-hosted **Minikube** cluster (6 CPUs, 16 GB RAM) using a default Cloudera Flow Management (CFM) evaluation deployment. The results were excellent: I hit 99% CPU usage while keeping NiFi rock-solid stable.
 
