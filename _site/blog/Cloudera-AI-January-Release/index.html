@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Cloudera Data Engineering 1.25.2 - Cloudera Solutions Engineer</title>
-<meta name="description" content="We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads.">
+<!-- begin _includes/seo.html --><title>Cloudera AI January Release - Cloudera Solutions Engineer</title>
+<meta name="description" content="We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,21 +22,21 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Cloudera Data Engineering 1.25.2">
+<meta property="og:title" content="Cloudera AI January Release">
 <meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/">
 
 
-  <meta property="og:description" content="We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads.">
+  <meta property="og:description" content="We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.">
 
 
 
-  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/2026-03-18-CDE-1.25.2.png">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/cloudera_ai_inference.png">
 
 
 
 
 
-  <meta property="article:published_time" content="2026-03-18T00:00:00-04:00">
+  <meta property="article:published_time" content="2026-02-05T00:00:00-05:00">
 
 
 
@@ -268,16 +268,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Cloudera Data Engineering 1.25.2">
-    <meta itemprop="description" content="We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads.">
-    <meta itemprop="datePublished" content="2026-03-18T00:00:00-04:00">
+    <meta itemprop="headline" content="Cloudera AI January Release">
+    <meta itemprop="description" content="We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving.">
+    <meta itemprop="datePublished" content="2026-02-05T00:00:00-05:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" class="u-url" itemprop="url">Cloudera Data Engineering 1.25.2
+            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-AI-January-Release/" class="u-url" itemprop="url">Cloudera AI January Release
 </a>
           </h1>
           
@@ -294,7 +294,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          2 minute read
+          1 minute read
         
       </span>
     
@@ -306,50 +306,53 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>We are excited to announce the latest release of <strong>Cloudera Data Engineering (CDE) on Cloud</strong>. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads.</p>
+        <p>We’re excited to announce the latest release of <strong>Cloudera AI</strong>. This update introduces <strong>Production-Grade App Serving (Technical Preview)</strong>, elevating the Cloudera AI Inference service beyond simple model serving.</p>
+
+<p>This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model endpoints.</p>
 
 <hr />
 
-<h3 id="key-features">Key Features</h3>
+<h2 id="key-features">Key Features</h2>
 
+<h3 id="1-robust-ai-inference-and-serving">1. Robust AI Inference and Serving</h3>
 <ul>
-  <li><strong>Virtual Cluster Suspend and Resume [Generally Available]:</strong> This feature allows users to temporarily suspend individual CDE Virtual Clusters during idle periods, providing granular cost control over infrastructure deployment.</li>
-  <li><strong>Job-level Spot Instance Override [Technical Preview]:</strong> Gain flexibility by specifying Spot override at the job level. This allows practitioners to match hardware precisely to the computational needs of specific Spark workloads.</li>
-  <li><strong>Graviton-based Database Instances by Default:</strong> To improve price-performance, AWS deployments now utilize Graviton-based database instances as the default for service metadata.</li>
-  <li><strong>Python Environment Support for External IDE [Technical Preview]:</strong> Enhances the developer experience by allowing practitioners to leverage CDE-managed Python environments directly within their favorite local IDEs.</li>
-  <li><strong>Azure Workload Identity Migration:</strong> CDE has transitioned from Azure Pod Identity to Azure Workload Identity, aligning with the latest security best practices for identity management on Kubernetes.</li>
-  <li><strong>Atlas Lineage for Spark Iceberg Tables:</strong> Strengthen data governance with automated lineage tracking for Spark operations on Apache Iceberg tables, integrated directly with Cloudera Atlas.</li>
-  <li><strong>Expanded Scaling Range:</strong> CDE now supports scaling up to 250 nodes per virtual cluster, enabling larger scale data processing.</li>
-  <li><strong>Kubernetes Version Upgraded to 1.33</strong></li>
+  <li><strong>Production-Grade App Serving (Tech Preview):</strong> Host applications and agents directly within the Inference service. Apps now scale dynamically with model endpoints for a unified AI architecture.</li>
+  <li><strong>Extended Model Support:</strong> Direct deployment for <strong>XGBoost, PyTorch, and TensorFlow</strong> models straight from the Cloudera AI Registry.</li>
+  <li><strong>Advanced vLLM Task Specification:</strong> Manually specify model tasks (e.g., <code class="language-plaintext highlighter-rouge">EMBED</code>, <code class="language-plaintext highlighter-rouge">RANK</code>, or <code class="language-plaintext highlighter-rouge">CLASSIFICATION</code>) via the API during deployment to unlock broader vLLM architecture support.</li>
+  <li><strong>Guaranteed Compute (AWS):</strong> Support for <strong>AWS On-Demand Capacity Reservations</strong> and capacity blocks ensures compute availability for critical workloads.</li>
+</ul>
+
+<h3 id="2-accelerated-ai-workbench-performance">2. Accelerated AI Workbench Performance</h3>
+<ul>
+  <li><strong>Enhanced UI:</strong> Faster page load times due to memory and query optimizations across projects and jobs.</li>
+  <li><strong>Auto-Rollback Upgrades:</strong> Safer, “one-click” side-by-side upgrades for the workbench with built-in automatic rollback support in case of failure.</li>
+</ul>
+
+<h3 id="3-enhanced-ai-registry-and-catalog">3. Enhanced AI Registry and Catalog</h3>
+<ul>
+  <li><strong>Deep Lineage Tracking:</strong> The Registry now displays structured metadata (provider, model ID, checksum) for all models imported from <strong>Hugging Face</strong> and <strong>NVIDIA NGC</strong>.</li>
 </ul>
 
 <hr />
 
-<h3 id="use-cases">Use Cases</h3>
-
-<h4 id="enhanced-cost-management">Enhanced Cost Management</h4>
-<p>With the GA of <strong>Virtual Cluster Suspend and Resume</strong>, teams can pause individual virtual clusters when not in use. Combined with the new <strong>Job-level Spot Instance Type Overrides (AWS only)</strong>, customers can more granularly tradeoff SLA needs with reduced cost within the same Virtual Cluster instead of having different Virtual Clusters (which can also be costly). Also by switching to <strong>Graviton based RDS on AWS</strong>, customers will see a further reduction in TCO.</p>
-
-<h4 id="advanced-enterprise-security-and-governance">Advanced Enterprise Security and Governance</h4>
-<p>The switch to <strong>Workload Identity on Azure</strong> provides a more secure and scalable way to manage service permissions. Additionally, the integration of <strong>Atlas Lineage for Iceberg</strong> ensures that data practitioners and compliance officers can trace data movement across the Lakehouse with full transparency.</p>
-
-<h4 id="accelerated-developer-productivity">Accelerated Developer Productivity</h4>
-<p>By supporting <strong>Python Environments for External IDEs</strong>, CDE removes the friction between local development and cloud execution. Data engineers can now develop and test complex pipelines locally with the exact environment specifications used in production.</p>
+<h2 id="platform-updates">Platform Updates</h2>
+<ul>
+  <li><strong>Unified Administration:</strong> Consistent admin experience across the Workbench, Registry, and Inference services.</li>
+  <li><strong>Latest Kubernetes Support:</strong> Official support added for <strong>Amazon EKS 1.33</strong> and <strong>Azure AKS 1.33</strong>.</li>
+</ul>
 
 <hr />
 
-<h3 id="links-for-customers">Links for Customers</h3>
+<h2 id="public-links">Public Links</h2>
 <ul>
-  <li><a href="https://docs.cloudera.com/data-engineering/cloud/release-notes/topics/cde-whats-new.html">Product Release Notes</a></li>
-  <li><a href="https://docs.cloudera.com/data-engineering/cloud/release-notes/topics/cde-dl-compatibility.html">Compatibility and Runtime Components</a></li>
-  <li><a href="https://www.cloudera.com/products/data-engineering.html">[New] Product Website</a></li>
-  <li><a href="https://www.cloudera.com/products/data-engineering/cdp-tour-data-engineering.html">[New] Reprise Demo</a></li>
-  <li><a href="https://www.cloudera.com/products/cloudera-public-cloud-trial.html">[New] Free 5-day trial for Cloudera Data Engineering on cloud</a></li>
-  <li><a href="https://www.youtube.com/watch?v=d7X5UY8o56k">Demo of External IDE Connectivity and CI/CD pipeline</a></li>
-  <li><a href="https://www.cloudera.com/content/dam/www/marketing/resources/datasheets/cde-data-sheet.pdf.landing.html">Datasheet</a></li>
+  <li><a href="https://docs.cloudera.com/machine-learning/cloud/release-notes/topics/ml-whats-new.html#ml_workspace_resource_tags"><strong>Release Notes</strong></a>: Review the complete list of changes.</li>
+  <li><a href="https://www.cloudera.com/products/machine-learning.html"><strong>Cloudera AI Portfolio</strong></a>: Deep dive into the Cloudera <a href="https://www.cloudera.com/products/machine-learning/ai-inference-service.html">AI Inference Service</a> and <a href="https://www.cloudera.com/products/machine-learning/ai-workbench.html">AI Workbench</a>.</li>
+  <li><a href="https://www.cloudera.com/about/news-and-blogs/press-releases/2026-02-09-cloudera-unveils-next-phase-of-ai-inferencing-and-unified-data-access-capabilities.html"><strong>Press Release</strong></a>: Learn more about Cloudera AI Inference on-premises (GA).</li>
 </ul>
 
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Engineering 1.25.2 please reach out to schedule a discussion.</p>
+<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/index.html">DOCS</a> for Cloudera AI.</p>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI please reach out to schedule a discussion.</p>
 
 
         
@@ -367,11 +370,9 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/cde" class="page__taxonomy-item p-category" rel="tag">cde</a><span class="sep">, </span>
+      <a href="/tags/ai" class="page__taxonomy-item p-category" rel="tag">ai</a><span class="sep">, </span>
     
-      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
-    
-      <a href="/tags/kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a>
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a>
     
     </span>
   </p>
@@ -396,7 +397,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-18T00:00:00-04:00">March 18, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-02-05T00:00:00-05:00">February 5, 2026</time></p>
 
       </footer>
 
@@ -405,7 +406,7 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Cloudera+Data+Engineering+1.25.2%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-AI-January-Release%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+AI+January+Release%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-AI-January-Release%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-AI-January-Release%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -416,11 +417,11 @@
       
   <nav class="pagination">
     
-      <a href="/blog/NiFi-Kafka-Flink-on-Kubernetes/" class="pagination--pager" title="NiFi Kafka and Flink on Kubernetes
+      <a href="/blog/Cloudera-AI-Inference/" class="pagination--pager" title="Cloudera AI Inference Service GA Onpremise
 ">Previous</a>
     
     
-      <a href="/blog/Max-CPU-with-NiFi-on-Minikube/" class="pagination--pager" title="Test &amp; Tune for Max CPU with NiFi on Minikube
+      <a href="/blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/" class="pagination--pager" title="Cloudera Streams Messaging - Kubernetes Operator 1.6
 ">Next</a>
     
   </nav>
@@ -475,6 +476,49 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of mem...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-18-CDE-1.25.2.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Data-Engineering-1.25.2/" rel="permalink">Cloudera Data Engineering 1.25.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security...</p>
   </article>
 </div>
 
@@ -561,49 +605,6 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera St...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/csa-architecture.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" rel="permalink">Cloudera Streaming Analytics Operator for Kubernetes 1.5
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our ...</p>
   </article>
 </div>
 

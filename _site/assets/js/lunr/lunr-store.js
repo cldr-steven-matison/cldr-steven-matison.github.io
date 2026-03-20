@@ -320,7 +320,7 @@ var store = [{
         "title": "Cloudera Data Engineering 1.25.2",
         "excerpt":"We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads. Key Features Virtual Cluster Suspend and Resume [Generally...","categories": ["blog"],
         "tags": ["cloudera","kubernetes","cde"],
-        "url": "/blog/Cloudera-AI-January-Release/",
+        "url": "/blog/Cloudera-Data-Engineering-1.25.2/",
         "teaser": "/assets/images/2026-03-18-CDE-1.25.2.png"
       },{
         "title": "Test & Tune for Max CPU with NiFi on Minikube",

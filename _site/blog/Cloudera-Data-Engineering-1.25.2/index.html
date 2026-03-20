@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>NiFi 2.0 is Getting Hot - Cloudera Solutions Engineer</title>
-<meta name="description" content="NiFi 2.0 is getting closer and closer to a reality as we approach the end of 2023.   Version 2.0.0-M1 was released November 25, 2023 and is the first milestone version of Apache NiFi 2.0.0. This version includes over 900 issues resolved, with new features, numerous improvements, and bug fixes.">
+<!-- begin _includes/seo.html --><title>Cloudera Data Engineering 1.25.2 - Cloudera Solutions Engineer</title>
+<meta name="description" content="We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads.">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="NiFi 2.0 is Getting Hot">
-<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/NiFi-2.0/">
+<meta property="og:title" content="Cloudera Data Engineering 1.25.2">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Engineering-1.25.2/">
 
 
-  <meta property="og:description" content="NiFi 2.0 is getting closer and closer to a reality as we approach the end of 2023.   Version 2.0.0-M1 was released November 25, 2023 and is the first milestone version of Apache NiFi 2.0.0. This version includes over 900 issues resolved, with new features, numerous improvements, and bug fixes.">
-
-
-
-  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/nifi-logo.png">
+  <meta property="og:description" content="We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads.">
 
 
 
-
-
-  <meta property="article:published_time" content="2023-11-25T00:00:00-05:00">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/2026-03-18-CDE-1.25.2.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2026-03-18T00:00:00-04:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/NiFi-2.0/">
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Engineering-1.25.2/">
 
 
 
@@ -268,16 +268,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="NiFi 2.0 is Getting Hot">
-    <meta itemprop="description" content="NiFi 2.0 is getting closer and closer to a reality as we approach the end of 2023.   Version 2.0.0-M1 was released November 25, 2023 and is the first milestone version of Apache NiFi 2.0.0. This version includes over 900 issues resolved, with new features, numerous improvements, and bug fixes.">
-    <meta itemprop="datePublished" content="2023-11-25T00:00:00-05:00">
+    <meta itemprop="headline" content="Cloudera Data Engineering 1.25.2">
+    <meta itemprop="description" content="We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads.">
+    <meta itemprop="datePublished" content="2026-03-18T00:00:00-04:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io//blog/NiFi-2.0/" class="u-url" itemprop="url">NiFi 2.0 is Getting Hot
+            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Engineering-1.25.2/" class="u-url" itemprop="url">Cloudera Data Engineering 1.25.2
 </a>
           </h1>
           
@@ -294,7 +294,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          less than 1 minute read
+          2 minute read
         
       </span>
     
@@ -306,26 +306,51 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>NiFi 2.0 is getting closer and closer to a reality as we approach the end of 2023.   Version 2.0.0-M1 was released November 25, 2023 and is the first milestone version of Apache NiFi 2.0.0. This version includes over 900 issues resolved, with new features, numerous improvements, and bug fixes.</p>
+        <p>We are excited to announce the latest release of <strong>Cloudera Data Engineering (CDE) on Cloud</strong>. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads.</p>
 
-<p>Features I am hearing the most about already in the community are:</p>
+<hr />
 
-<ol>
-  <li>Initial version of native Python API for Processors</li>
-  <li>Stateless Execution mode for Process Groups</li>
-  <li>Kubernetes-based Leader Election and State Management extensions</li>
-  <li>Python-based Processors for interacting with ChatGPT and Vector Databases</li>
-</ol>
+<h3 id="key-features">Key Features</h3>
 
-<p>To prepare for NiFi Adoption be sure to give a read of Pierre Villard’s blog <a href="https://medium.com/cloudera-inc/getting-ready-for-apache-nifi-2-0-5a5e6a67f450">Getting Ready for NiFi 2.0</a>.</p>
+<ul>
+  <li><strong>Virtual Cluster Suspend and Resume [Generally Available]:</strong> This feature allows users to temporarily suspend individual CDE Virtual Clusters during idle periods, providing granular cost control over infrastructure deployment.</li>
+  <li><strong>Job-level Spot Instance Override [Technical Preview]:</strong> Gain flexibility by specifying Spot override at the job level. This allows practitioners to match hardware precisely to the computational needs of specific Spark workloads.</li>
+  <li><strong>Graviton-based Database Instances by Default:</strong> To improve price-performance, AWS deployments now utilize Graviton-based database instances as the default for service metadata.</li>
+  <li><strong>Python Environment Support for External IDE [Technical Preview]:</strong> Enhances the developer experience by allowing practitioners to leverage CDE-managed Python environments directly within their favorite local IDEs.</li>
+  <li><strong>Azure Workload Identity Migration:</strong> CDE has transitioned from Azure Pod Identity to Azure Workload Identity, aligning with the latest security best practices for identity management on Kubernetes.</li>
+  <li><strong>Atlas Lineage for Spark Iceberg Tables:</strong> Strengthen data governance with automated lineage tracking for Spark operations on Apache Iceberg tables, integrated directly with Cloudera Atlas.</li>
+  <li><strong>Expanded Scaling Range:</strong> CDE now supports scaling up to 250 nodes per virtual cluster, enabling larger scale data processing.</li>
+  <li><strong>Kubernetes Version Upgraded to 1.33</strong></li>
+</ul>
 
-<p>Please refer to the <a href="https://cwiki.apache.org/confluence/display/NIFI/Deprecated+Components+and+Features">Deprecated Components and Features</a> documentation for items removed in this version.</p>
+<hr />
 
-<p><a href="https://cwiki.apache.org/confluence/display/NIFI/Migrating+Deprecated+Components+and+Features+for+2.0.0">Migrating Deprecated Components and Features</a> for 2.0.0 includes current progress on the steps necesary for migrating certain components and features.</p>
+<h3 id="use-cases">Use Cases</h3>
 
-<p><a href="https://cwiki.apache.org/confluence/display/NIFI/Release+Notes#ReleaseNotes-Version2.0.0-M1">Release Notes</a></p>
+<h4 id="enhanced-cost-management">Enhanced Cost Management</h4>
+<p>With the GA of <strong>Virtual Cluster Suspend and Resume</strong>, teams can pause individual virtual clusters when not in use. Combined with the new <strong>Job-level Spot Instance Type Overrides (AWS only)</strong>, customers can more granularly tradeoff SLA needs with reduced cost within the same Virtual Cluster instead of having different Virtual Clusters (which can also be costly). Also by switching to <strong>Graviton based RDS on AWS</strong>, customers will see a further reduction in TCO.</p>
 
-<p><a href="https://cwiki.apache.org/confluence/display/NIFI/Migration+Guidance">Migration Guidance</a></p>
+<h4 id="advanced-enterprise-security-and-governance">Advanced Enterprise Security and Governance</h4>
+<p>The switch to <strong>Workload Identity on Azure</strong> provides a more secure and scalable way to manage service permissions. Additionally, the integration of <strong>Atlas Lineage for Iceberg</strong> ensures that data practitioners and compliance officers can trace data movement across the Lakehouse with full transparency.</p>
+
+<h4 id="accelerated-developer-productivity">Accelerated Developer Productivity</h4>
+<p>By supporting <strong>Python Environments for External IDEs</strong>, CDE removes the friction between local development and cloud execution. Data engineers can now develop and test complex pipelines locally with the exact environment specifications used in production.</p>
+
+<hr />
+
+<h3 id="links-for-customers">Links for Customers</h3>
+<ul>
+  <li><a href="https://docs.cloudera.com/data-engineering/cloud/release-notes/topics/cde-whats-new.html">Product Release Notes</a></li>
+  <li><a href="https://docs.cloudera.com/data-engineering/cloud/release-notes/topics/cde-dl-compatibility.html">Compatibility and Runtime Components</a></li>
+  <li><a href="https://www.cloudera.com/products/data-engineering.html">[New] Product Website</a></li>
+  <li><a href="https://www.cloudera.com/products/data-engineering/cdp-tour-data-engineering.html">[New] Reprise Demo</a></li>
+  <li><a href="https://www.cloudera.com/products/cloudera-public-cloud-trial.html">[New] Free 5-day trial for Cloudera Data Engineering on cloud</a></li>
+  <li><a href="https://www.youtube.com/watch?v=d7X5UY8o56k">Demo of External IDE Connectivity and CI/CD pipeline</a></li>
+  <li><a href="https://www.cloudera.com/content/dam/www/marketing/resources/datasheets/cde-data-sheet.pdf.landing.html">Datasheet</a></li>
+</ul>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Engineering 1.25.2 please reach out to schedule a discussion.</p>
+
 
         
       </section>
@@ -342,7 +367,11 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
+      <a href="/tags/cde" class="page__taxonomy-item p-category" rel="tag">cde</a><span class="sep">, </span>
+    
+      <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a>
     
     </span>
   </p>
@@ -367,7 +396,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-11-25T00:00:00-05:00">November 25, 2023</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-18T00:00:00-04:00">March 18, 2026</time></p>
 
       </footer>
 
@@ -376,22 +405,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=NiFi+2.0+is+Getting+Hot%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-2.0%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Data+Engineering+1.25.2%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Data-Engineering-1.25.2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-2.0%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Data-Engineering-1.25.2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FNiFi-2.0%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Data-Engineering-1.25.2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/blog/SSB-CDP-PC-PVC-Compatibility/" class="pagination--pager" title="Cloudera SQL Stream Builder Compatibility between CDP Public Cloud and CDP Private Cloud.
+      <a href="/blog/NiFi-Kafka-Flink-on-Kubernetes/" class="pagination--pager" title="NiFi Kafka and Flink on Kubernetes
 ">Previous</a>
     
     
-      <a href="/blog/SSB-Dead-Letter-Queue/" class="pagination--pager" title="Cloudera SQL Stream Builder Introducing DLQ
+      <a href="/blog/Max-CPU-with-NiFi-on-Minikube/" class="pagination--pager" title="Test &amp; Tune for Max CPU with NiFi on Minikube
 ">Next</a>
     
   </nav>
@@ -446,49 +475,6 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of mem...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/2026-03-18-CDE-1.25.2.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Cloudera-Data-Engineering-1.25.2/" rel="permalink">Cloudera Data Engineering 1.25.2
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security...</p>
   </article>
 </div>
 
@@ -575,6 +561,49 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera St...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/csa-architecture.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" rel="permalink">Cloudera Streaming Analytics Operator for Kubernetes 1.5
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our ...</p>
   </article>
 </div>
 
