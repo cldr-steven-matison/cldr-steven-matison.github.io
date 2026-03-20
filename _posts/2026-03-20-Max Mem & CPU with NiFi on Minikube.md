@@ -1,5 +1,5 @@
 ---
-title:  "Test & Tune for Max Mem & CPU with NiFi on Minikube"
+title:  "Test & Tune for Max CPU with NiFi on Minikube"
 header:
   teaser: "/assets/images/2026-03-20-MaxMem&CPU-Nifi-minikube.png"
 categories: 
@@ -10,7 +10,7 @@ tags:
   - nifi
 ---
 
-Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it.  Or Did I?
+Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:.  **Or Did I?**
 
 The flow JSON I used is here:  
 **[NiFiBenchMarkTest.json](https://raw.githubusercontent.com/cldr-steven-matison/NiFi-Templates)**
@@ -20,7 +20,7 @@ I ran everything on a Windows-hosted **Minikube** cluster (6 CPUs, 16 GB RAM) us
 All of this setup is fully documented in my blog [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/) and in my repo:  
 [ClouderaStreamingOperators](https://github.com/cldr-steven-matison/ClouderaStreamingOperators).
 
-## 1. Setting Up the NiFi Flow (Default Settings Only)
+## Setting Up the NiFi Flow (Default Settings Only)
 
 Once you have the NiFi UI open:
 
@@ -37,24 +37,24 @@ Once you have the NiFi UI open:
 
 You’ll immediately see data flowing. The flow generates synthetic records, duplicates them aggressively, and compresses them — exactly the kind of workload that hammers both CPU and memory.
 
-## 2. Tuning for Maximum Load (After the Flow Is Running)
+## Tuning for Maximum Load (After the Flow Is Running)
 
 Once you confirm the flow is stable with defaults, it’s time to open the throttle.
 
-### A. Set Concurrency on CompressContent
+### Set Concurrency on CompressContent
 - Right-click the **CompressContent** processor → **Configure**
 - Go to the **Scheduling** tab
 - Change **Concurrent Tasks** from the default (usually 1) to **`16`**
 
 This lets 16 parallel threads chew through the heavy compression work.
 
-### B. Increase the Active Thread Pool
+### Increase the Active Thread Pool
 - Open your NiFi controller settings 
 - Raise the **Maximum Timer Driven Thread Pool Size** to **`32`** (roughly 4× my CPU cores for aggressive tuning)
 
 This gives NiFi far more total threads to work with across the entire cluster.
 
-### C. Crank Up Queue Sizes
+### Crank Up Queue Sizes
 - Click each connection arrow (especially between GenerateFlowFile → DuplicateFlowFile and DuplicateFlowFile → CompressContent)
 - Edit the connection properties
 - Set **Back Pressure Data Size Threshold** to **`500 GB`** (or as high as your volume allows)
