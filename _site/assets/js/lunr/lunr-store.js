@@ -326,6 +326,6 @@ var store = [{
         "title": "Test & Tune for Max CPU with NiFi on Minikube",
         "excerpt":"Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:. Or Did I? The flow JSON I used is here: NiFiBenchMarkTest.json I ran everything on...","categories": ["blog"],
         "tags": ["cloudera","kubernetes","nifi"],
-        "url": "/blog/Max-Mem-&-CPU-with-NiFi-on-Minikube/",
+        "url": "/blog/Max-CPU-with-NiFi-on-Minikube/",
         "teaser": "/assets/images/2026-03-20-MaxMem&CPU-Nifi-minikube.png"
       }]
