@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Cloudera Streaming Analytics Operator for Kubernetes 1.5 - Cloudera Solutions Engineer</title>
-<meta name="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.">
+<!-- begin _includes/seo.html --><title>Cloudera Data Lineage for Trino - Cloudera Solutions Engineer</title>
+<meta name="description" content=":shield: Native Governance and Data Lineage for the Unified Data Fabric">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Cloudera Streaming Analytics Operator for Kubernetes 1.5">
-<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/">
+<meta property="og:title" content="Cloudera Data Lineage for Trino">
+<meta property="og:url" content="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage-Trino/">
 
 
-  <meta property="og:description" content="Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.">
-
-
-
-  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/csa-architecture.png">
+  <meta property="og:description" content=":shield: Native Governance and Data Lineage for the Unified Data Fabric">
 
 
 
-
-
-  <meta property="article:published_time" content="2026-03-04T00:00:00-05:00">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io//assets/images/2026-03-18-CDE-1.25.2.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2026-03-17T00:00:00-04:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/">
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage-Trino/">
 
 
 
@@ -271,16 +271,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Cloudera Streaming Analytics Operator for Kubernetes 1.5">
-    <meta itemprop="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.">
-    <meta itemprop="datePublished" content="2026-03-04T00:00:00-05:00">
+    <meta itemprop="headline" content="Cloudera Data Lineage for Trino">
+    <meta itemprop="description" content=":shield: Native Governance and Data Lineage for the Unified Data Fabric">
+    <meta itemprop="datePublished" content="2026-03-17T00:00:00-04:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/" class="u-url" itemprop="url">Cloudera Streaming Analytics Operator for Kubernetes 1.5
+            <a href="https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage-Trino/" class="u-url" itemprop="url">Cloudera Data Lineage for Trino
 </a>
           </h1>
           
@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          1 minute read
+          3 minute read
         
       </span>
     
@@ -309,45 +309,44 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Cloudera’s Data In Motion Team is pleased to announce the release of the <strong>Cloudera Streaming Analytics Operator for Kubernetes 1.5</strong>. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.</p>
+        <h2 id="shield-native-governance-and-data-lineage-for-the-unified-data-fabric">
+<img class="emoji" title=":shield:" alt=":shield:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6e1.png" height="20" width="20"> Native Governance and Data Lineage for the Unified Data Fabric</h2>
 
-<hr>
+<p>The Cloudera Data Lineage team is happy to announce that Cloudera Data Lineage now supports Trino federated query engine for big data. This integration allows Trino users to access data wherever it lives without sacrificing governance, trust, or visibility.</p>
 
-<h3 id="release-highlights">Release Highlights</h3>
+<p>As modern enterprises navigate increasingly complex, hybrid, and multi-cloud environments, data often becomes fragmented across various systems and silos. Combining the federated query engine of Trino with the automated lineage of Cloudera Data Lineage provides organizations with unprecedented insight and visibility.</p>
 
-<h4 id="materialized-view-engine-on-kubernetes">Materialized View Engine on Kubernetes</h4>
-<p>Cloudera SQL Stream Builder now supports the <strong>Materialized View engine</strong> within Kubernetes deployments. This allows users to create and maintain mutating snapshots of queried data, which can be seamlessly accessed via REST APIs, bridging the gap between real-time streams and request-response applications.</p>
+<p>Here are the primary benefits and use cases that the integration of Cloudera Data Lineage with Trino provides:</p>
 
-<h4 id="asynchronous-flink-job-handling">Asynchronous Flink Job Handling</h4>
-<p>To improve the user experience, SQL Stream Builder now handles Flink jobs asynchronously. This architectural change significantly enhances the responsiveness of the Streaming SQL Console and ensures more stable job status transitions during deployments and state changes.</p>
+<p><strong>Interoperability and Federated Access:</strong> Cloudera Data Lineage’s newly released Trino integration enables customers to federate queries and securely access data from both Cloudera and non-Cloudera engines. This capability allows organizations to query data in place, dramatically improving interoperability within extended data environments.</p>
 
-<h4 id="rebase-to-flink-operator-113">Rebase to Flink Operator 1.13</h4>
-<p>The embedded Apache Flink Kubernetes Operator has been rebased to version 1.13. Alongside Apache Flink 1.20, this update brings the latest upstream stability improvements, bug fixes, and performance optimizations to your production environment.</p>
+<p><strong>Comprehensive Visibility Across the Data Estate:</strong> While Trino seamlessly connects disparate and decentralized data sources, Cloudera Data Lineage ensures that this federated querying doesn’t result in a “black box.” The integration provides comprehensive cross system visibility across the entire data estate, mapping out end-to-end data lineage and extracting deep metadata insights across all connected systems.</p>
 
-<h4 id="modernized-infrastructure--compatibility">Modernized Infrastructure &amp; Compatibility</h4>
+<p><strong>End-to-End Impact and Root Cause Analysis:</strong> Querying data across complex, hybrid environments naturally complicates troubleshooting and change management. While other federated query providers (like Starburst) restrict your visibility to just the first level of lineage on immediate systems, Cloudera Data Lineage delivers complete, multi-layered traceability. Data teams can perform instant impact analysis by investigating upstream all the way to the original source systems, and tracing downstream to see the exact impact on the BI reports and AI models supported by Trino. This turns a potentially blind, complex debugging process into a fast, automated, and fully transparent workflow.</p>
+
+<p class="notice--primary"><img class="emoji" title=":traffic_light:" alt=":traffic_light:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6a5.png" height="20" width="20"> <strong>Example:</strong> If a data engineer needs to drop or rename a column in an on-prem Oracle database, they can instantly trace the lineage to see that this specific column feeds a Trino query powering a critical executive Power BI dashboard. They can proactively update the downstream queries before making the change, entirely preventing dashboard failures and data downtime.</p>
+
+<p><strong>Discovery &amp; Business Glossary:</strong> By linking the technical metadata from all federated sources to standardized business terms, the integration bridges the gap between IT and business teams. Users can instantly find the data they need and fully understand its business context before running a Trino query, ensuring everyone speaks the same language and operates from a single source of truth.</p>
+
+<p class="notice--primary"><img class="emoji" title=":traffic_light:" alt=":traffic_light:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6a5.png" height="20" width="20"> <strong>Example:</strong> A business analyst wanting to report on “Customer Lifetime Value” no longer has to guess which of the dozens of cryptic, federated tables (e.g., cust_ltv_v2 vs c_val_final) to query. They simply search the Cloudera Data Lineage business glossary for the approved term and are immediately directed to the exact, certified technical tables they should query via Trino.</p>
+
+<p><strong>A Trusted Foundation for AI Adoption:</strong> For AI and advanced analytics initiatives to succeed, organizations must fundamentally trust the data feeding their models. Trino delivers the expansive data access required for AI, and Cloudera Data Lineage provides the crucial transparency and audit trails needed to verify data origins and transformations. This ensures that AI models are built on reliable, governed data.</p>
+
+<p class="notice--primary"><img class="emoji" title=":traffic_light:" alt=":traffic_light:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6a5.png" height="20" width="20"> <strong>Example:</strong> When deploying a new AI or machine learning model for fraud detection, compliance officers can use the lineage graph to audit the exact Trino data pipelines feeding the model. They can definitively prove to internal risk boards and external regulators that the model relies exclusively on governed, bias-checked source data—accelerating the safe launch of the AI initiative.</p>
+
+<p>The integration of Cloudera Data Lineage for Trino creates a robust, open data fabric that accelerates time-to-insight and safely powers modern AI and analytics.</p>
+
+<p>To read the technical documentation <a href="https://docs.cloudera.com/octopai/latest/howto/topics/oct-trino.html">Cloudera Data Lineage Trino</a> and to learn more about features and current capabilities, please visit the new <a href="https://docs.cloudera.com/octopai/latest/index.html">Cloudera Data Lineage Docs</a>, which includes technical product deep-dives and configuration guides.</p>
+
+<p>A huge thank you to the Engineering teams for their hard work in bringing these enhancements to production!</p>
+
+<h2 id="-resources">📚 Resources</h2>
 <ul>
-  <li>
-<strong>PostgreSQL 18.1:</strong> The default database deployed with SQL Stream Builder has been updated to version 18.1 for improved data management.</li>
-  <li>
-<strong>Java Runtime Updates:</strong> Docker images now utilize an OpenJDK 17 build that supports older cipher suites, ensuring broader compatibility with legacy security configurations while maintaining a modern runtime.</li>
+  <li><a href="https://docs.cloudera.com/octopai/latest/howto/topics/oct-trino.html">Cloudera Data Lineage Trino</a></li>
+  <li><a href="https://docs.cloudera.com/octopai/latest/index.html">Cloudera Data Lineage Docs</a></li>
 </ul>
 
-<hr>
-
-<h3 id="getting-the-new-release">Getting the New Release</h3>
-<p>To learn more about the Cloudera Streaming Analytics Operator for Kubernetes and its typical deployment architecture, see the <a href="https://docs.cloudera.com/csa-operator/1.5/overview/topics/csa-op-deployment-architecture.html">Overview</a> guide. If you are installing this operator for the first time, consult the <a href="https://docs.cloudera.com/csa-operator/1.5/installation/topics/csa-op-installation-overview.html">Installation</a> instructions.</p>
-
-<hr>
-
-<h3 id="resources">Resources</h3>
-<p>Ready to explore Cloudera Streaming Analytics Operator for Kubernetes 1.5? Find out more here:</p>
-<ul>
-  <li><a href="https://docs.cloudera.com/csa-operator/1.5/release-notes/topics/csa-op-whats-new.html">What’s New - Cloudera Streaming Analytics Operator for Kubernetes 1.5 Release Notes</a></li>
-  <li><a href="https://flink.apache.org/2025/09/29/apache-flink-kubernetes-operator-1.13.0-release-announcement/">Flink Operator 1.13 Upstream Documentation</a></li>
-  <li><a href="https://www.cloudera.com/products/stream-processing.html">Cloudera Streaming Product Page</a></li>
-</ul>
-
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Streaming Analytics Operator for Kubernetes 1.5 please reach out to schedule a discussion.</p>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Lineage for Trino please reach out to schedule a discussion.</p>
 
         
       </section>
@@ -366,11 +365,9 @@
     
       <a href="/tags/cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
     
-      <a href="/tags/Cloudera%20Streaming%20Analytics" class="page__taxonomy-item p-category" rel="tag">Cloudera Streaming Analytics</a><span class="sep">, </span>
+      <a href="/tags/octopai" class="page__taxonomy-item p-category" rel="tag">octopai</a><span class="sep">, </span>
     
-      <a href="/tags/flink" class="page__taxonomy-item p-category" rel="tag">flink</a><span class="sep">, </span>
-    
-      <a href="/tags/kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a>
+      <a href="/tags/trino" class="page__taxonomy-item p-category" rel="tag">trino</a>
     
     </span>
   </p>
@@ -395,7 +392,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-04T00:00:00-05:00">March 4, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-17T00:00:00-04:00">March 17, 2026</time></p>
 
       </footer>
 
@@ -404,22 +401,22 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streaming+Analytics+Operator+for+Kubernetes+1.5%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Streaming-Analytics-Kubernetes-Operator-1.5%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Data+Lineage+for+Trino%20https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Data-Lineage-Trino%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Streaming-Analytics-Kubernetes-Operator-1.5%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Data-Lineage-Trino%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Streaming-Analytics-Kubernetes-Operator-1.5%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2F%2Fblog%2FCloudera-Data-Lineage-Trino%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/blog/Cloudera-Flow-Management-Kubernetes-Operator-3.0/" class="pagination--pager" title="Cloudera Flow Management Operator for Kubernetes 3.0
+      <a href="/blog/NiFi-Kafka-Flink-on-Kubernetes/" class="pagination--pager" title="NiFi Kafka and Flink on Kubernetes
 ">Previous</a>
     
     
-      <a href="/blog/Cloudera-Streaming-Operators/" class="pagination--pager" title="Cloudera Streaming Operators
+      <a href="/blog/Cloudera-Data-Engineering-1.25.2/" class="pagination--pager" title="Cloudera Data Engineering 1.25.2
 ">Next</a>
     
   </nav>
@@ -529,50 +526,6 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/2026-03-18-CDE-1.25.2.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Cloudera-Data-Lineage-Trino/" rel="permalink">Cloudera Data Lineage for Trino
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          3 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description"><img class="emoji" title=":shield:" alt=":shield:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6e1.png" height="20" width="20"> Native Governance and Data Lineage for the Unified Data Fabric
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
         <img src="/assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg" alt="">
       </div>
     
@@ -604,6 +557,49 @@
 
 
     <p class="archive__item-excerpt" itemprop="description">Last week I published how I installed all of the Cloudera Streaming Operators on my MacBook. This post got quite a bit of attention and I had a few friends a...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/surveyor.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Streaming-Operators/" rel="permalink">Cloudera Streaming Operators
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera St...</p>
   </article>
 </div>
 

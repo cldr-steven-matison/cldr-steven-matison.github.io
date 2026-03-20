@@ -30,6 +30,18 @@
       </item>
     
       <item>
+        <title>Cloudera Data Lineage for Trino</title>
+        <link>https://cldr-steven-matison.github.io//blog/Cloudera-Data-Lineage-Trino/</link>
+        <pubDate>Tue, 17 Mar 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io//assets/images/2026-03-18-CDE-1.25.2.png</image>
+          <media:content url="https://cldr-steven-matison.github.io//assets/images/2026-03-18-CDE-1.25.2.png" medium="image" />
+        
+        <description>:shield: Native Governance and Data Lineage for the Unified Data Fabric
+</description>
+      </item>
+    
+      <item>
         <title>NiFi Kafka and Flink on Kubernetes</title>
         <link>https://cldr-steven-matison.github.io//blog/NiFi-Kafka-Flink-on-Kubernetes/</link>
         <pubDate>Mon, 16 Mar 2026 00:00:00 -0400</pubDate>
@@ -110,18 +122,6 @@
           <media:content url="https://cldr-steven-matison.github.io//assets/images/schemaregistry.png" medium="image" />
         
         <description>How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6
-</description>
-      </item>
-    
-      <item>
-        <title>Cloudera Streams Messaging - Kubernetes Operator 1.6</title>
-        <link>https://cldr-steven-matison.github.io//blog/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/</link>
-        <pubDate>Fri, 20 Feb 2026 00:00:00 -0500</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io//assets/images/csm-op-deployment-architecture.jpg</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/csm-op-deployment-architecture.jpg" medium="image" />
-        
-        <description>Announcing Cloudera Streams Messaging - Operator for Kubernetes v1.6
 </description>
       </item>
     

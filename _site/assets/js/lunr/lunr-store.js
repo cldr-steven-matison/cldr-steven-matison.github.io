@@ -317,6 +317,12 @@ var store = [{
         "url": "/blog/NiFi-Kafka-Flink-on-Kubernetes/",
         "teaser": "/assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg"
       },{
+        "title": "Cloudera Data Lineage for Trino",
+        "excerpt":":shield: Native Governance and Data Lineage for the Unified Data Fabric The Cloudera Data Lineage team is happy to announce that Cloudera Data Lineage now supports Trino federated query engine for big data. This integration allows Trino users to access data wherever it lives without sacrificing governance, trust, or visibility....","categories": ["blog"],
+        "tags": ["cloudera","trino","octopai"],
+        "url": "/blog/Cloudera-Data-Lineage-Trino/",
+        "teaser": "/assets/images/2026-03-18-CDE-1.25.2.png"
+      },{
         "title": "Cloudera Data Engineering 1.25.2",
         "excerpt":"We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads. Key Features Virtual Cluster Suspend and Resume [Generally...","categories": ["blog"],
         "tags": ["cloudera","kubernetes","cde"],
