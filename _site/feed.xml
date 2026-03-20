@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Cloudera Solutions Engineer</title>
-    <link>https://cldr-steven-matison.github.io//</link>
-    <atom:link href="https://cldr-steven-matison.github.io//feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://cldr-steven-matison.github.io/</link>
+    <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>Test &amp; Tune for Max CPU with NiFi on Minikube</title>
-        <link>https://cldr-steven-matison.github.io//blog/Max-CPU-with-NiFi-on-Minikube/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Max-CPU-with-NiFi-on-Minikube/</link>
         <pubDate>Fri, 20 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io//assets/images/2026-03-20-MaxMem&CPU-Nifi-minikube.png</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/2026-03-20-MaxMem&CPU-Nifi-minikube.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-20-MaxMem&CPU-Nifi-minikube.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-20-MaxMem&CPU-Nifi-minikube.png" medium="image" />
         
         <description>Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:.  Or Did I?
 </description>
@@ -19,11 +19,11 @@
     
       <item>
         <title>Cloudera Data Engineering 1.25.2</title>
-        <link>https://cldr-steven-matison.github.io//release/Cloudera-Data-Engineering-1.25.2/</link>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Data-Engineering-1.25.2/</link>
         <pubDate>Wed, 18 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io//assets/images/2026-03-18-CDE-1.25.2.png</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/2026-03-18-CDE-1.25.2.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-18-CDE-1.25.2.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-18-CDE-1.25.2.png" medium="image" />
         
         <description>We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads.
 </description>
@@ -31,11 +31,11 @@
     
       <item>
         <title>Cloudera Data Lineage for Trino</title>
-        <link>https://cldr-steven-matison.github.io//release/Cloudera-Data-Lineage-Trino/</link>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Data-Lineage-Trino/</link>
         <pubDate>Tue, 17 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io//assets/images/2026-03-17-CDL-trino.png</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/2026-03-17-CDL-trino.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-17-CDL-trino.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-17-CDL-trino.png" medium="image" />
         
         <description>:shield: Native Governance and Data Lineage for the Unified Data Fabric
 </description>
@@ -43,11 +43,11 @@
     
       <item>
         <title>NiFi Kafka and Flink on Kubernetes</title>
-        <link>https://cldr-steven-matison.github.io//blog/NiFi-Kafka-Flink-on-Kubernetes/</link>
+        <link>https://cldr-steven-matison.github.io/blog/NiFi-Kafka-Flink-on-Kubernetes/</link>
         <pubDate>Mon, 16 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io//assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg" medium="image" />
         
         <description>Last week I published how I installed all of the Cloudera Streaming Operators on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!
 </description>
@@ -55,11 +55,11 @@
     
       <item>
         <title>Cloudera Streaming Operators</title>
-        <link>https://cldr-steven-matison.github.io//blog/Cloudera-Streaming-Operators/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/</link>
         <pubDate>Mon, 09 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io//assets/images/surveyor.png</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/surveyor.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/surveyor.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/surveyor.png" medium="image" />
         
         <description>Setting up a new Macbook for Data Engineering is quite a chore. In this guide, we will go from a fresh macOS install to running the full suite of Cloudera Streaming Operators (CFM, CSA, CSM) on a local Minikube cluster.
 </description>
@@ -67,11 +67,11 @@
     
       <item>
         <title>Cloudera Streaming Analytics Operator for Kubernetes 1.5</title>
-        <link>https://cldr-steven-matison.github.io//release/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/</link>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.5/</link>
         <pubDate>Wed, 04 Mar 2026 00:00:00 -0500</pubDate>
         
-          <image>https://cldr-steven-matison.github.io//assets/images/csa-architecture.png</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/csa-architecture.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/csa-architecture.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/csa-architecture.png" medium="image" />
         
         <description>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.
 </description>
@@ -79,11 +79,11 @@
     
       <item>
         <title>Cloudera Flow Management Operator for Kubernetes 3.0</title>
-        <link>https://cldr-steven-matison.github.io//release/Cloudera-Flow-Management-Kubernetes-Operator-3.0/</link>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-Kubernetes-Operator-3.0/</link>
         <pubDate>Tue, 03 Mar 2026 00:00:00 -0500</pubDate>
         
-          <image>https://cldr-steven-matison.github.io//assets/images/kubernetes-logo.png</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/kubernetes-logo.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/kubernetes-logo.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/kubernetes-logo.png" medium="image" />
         
         <description>The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productivity and usability features.
 </description>
@@ -91,11 +91,11 @@
     
       <item>
         <title>Cloudera Data Flow 3.0 for Cloudera on Cloud</title>
-        <link>https://cldr-steven-matison.github.io//release/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/</link>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-3.0-For-Cloudera-On-Cloud/</link>
         <pubDate>Mon, 02 Mar 2026 00:00:00 -0500</pubDate>
         
-          <image>https://cldr-steven-matison.github.io//assets/images/clouderadataflow.png</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/clouderadataflow.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/clouderadataflow.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/clouderadataflow.png" medium="image" />
         
         <description>The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.0 for Cloudera on cloud.
 </description>
@@ -103,11 +103,11 @@
     
       <item>
         <title>Cloudera Streams Messaging - Surveyor</title>
-        <link>https://cldr-steven-matison.github.io//blog/Surveyor/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Surveyor/</link>
         <pubDate>Tue, 24 Feb 2026 00:00:00 -0500</pubDate>
         
-          <image>https://cldr-steven-matison.github.io//assets/images/surveyor.png</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/surveyor.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/surveyor.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/surveyor.png" medium="image" />
         
         <description>Introducing Cloudera Streams Messaging Surveyor
 </description>
@@ -115,11 +115,11 @@
     
       <item>
         <title>Cloudera Streams Messaging - Schema Registry</title>
-        <link>https://cldr-steven-matison.github.io//blog/Schema-Registry/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Schema-Registry/</link>
         <pubDate>Mon, 23 Feb 2026 00:00:00 -0500</pubDate>
         
-          <image>https://cldr-steven-matison.github.io//assets/images/schemaregistry.png</image>
-          <media:content url="https://cldr-steven-matison.github.io//assets/images/schemaregistry.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/schemaregistry.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/schemaregistry.png" medium="image" />
         
         <description>How to get to Schema Registry UI with Cloudera Streams Messaging Operator 1.6
 </description>
