@@ -3,7 +3,7 @@ title:  "Cloudera AI January Release"
 header:
   teaser: "/assets/images/cloudera_ai_inference.png"
 categories: 
-  - blog
+  - release
 tags:
   - cloudera
   - ai

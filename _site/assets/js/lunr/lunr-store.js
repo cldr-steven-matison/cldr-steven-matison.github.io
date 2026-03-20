@@ -264,9 +264,9 @@ var store = [{
         "teaser": "/assets/images/cloudera_ai_inference.png"
       },{
         "title": "Cloudera AI January Release",
-        "excerpt":"We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving. This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model...","categories": ["blog"],
+        "excerpt":"We’re excited to announce the latest release of Cloudera AI. This update introduces Production-Grade App Serving (Technical Preview), elevating the Cloudera AI Inference service beyond simple model serving. This new capability provides a unified environment where your custom applications and agents can live, run, and scale directly alongside your model...","categories": ["release"],
         "tags": ["cloudera","ai"],
-        "url": "/blog/Cloudera-AI-January-Release/",
+        "url": "/release/Cloudera-AI-January-Release/",
         "teaser": "/assets/images/cloudera_ai_inference.png"
       },{
         "title": "Cloudera Streams Messaging - Kubernetes Operator 1.6",
