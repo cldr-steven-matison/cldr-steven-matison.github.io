@@ -319,7 +319,7 @@ spec:
 
 <hr>
 
-<h2 id="-step-1-deploy-vllm-inference-server">📦 Step 1: Deploy vLLM Inference Server</h2>
+<h2 id="-step-1-deploy-vllm-qwen-inference-server">📦 Step 1: Deploy vLLM Qwen Inference Server</h2>
 
 <p>We use the Qwen model now but you could use Lllama here too.</p>
 
@@ -342,6 +342,12 @@ spec:
       <span class="na">containers</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">vllm-server</span>
         <span class="na">image</span><span class="pi">:</span> <span class="s">vllm/vllm-openai:latest</span>
+        <span class="na">env</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">HF_TOKEN</span>
+          <span class="na">valueFrom</span><span class="pi">:</span>
+            <span class="na">secretKeyRef</span><span class="pi">:</span>
+              <span class="na">name</span><span class="pi">:</span> <span class="s">hf-token</span>
+              <span class="na">key</span><span class="pi">:</span> <span class="s">HF_TOKEN</span>
         <span class="na">resources</span><span class="pi">:</span>
           <span class="na">limits</span><span class="pi">:</span>
             <span class="na">nvidia.com/gpu</span><span class="pi">:</span> <span class="m">1</span>
@@ -352,12 +358,10 @@ spec:
         <span class="pi">-</span> <span class="s2">"</span><span class="s">--load-format"</span>
         <span class="pi">-</span> <span class="s2">"</span><span class="s">bitsandbytes"</span>
         <span class="pi">-</span> <span class="s2">"</span><span class="s">--gpu-memory-utilization"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">0.80"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">0.80"</span>             <span class="c1"># Fits comfortably in 6.92 GiB</span>
         <span class="pi">-</span> <span class="s2">"</span><span class="s">--max-model-len"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">2048"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">2048"</span>             <span class="c1"># 2k is a solid sweet spot for 3B models</span>
         <span class="pi">-</span> <span class="s2">"</span><span class="s">--enforce-eager"</span>
-        <span class="na">ports</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8000</span>
         <span class="na">volumeMounts</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shm</span>
           <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/dev/shm</span>
@@ -371,6 +375,7 @@ spec:
 <span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">vllm-service</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">app</span><span class="pi">:</span> <span class="s">vllm-server</span>

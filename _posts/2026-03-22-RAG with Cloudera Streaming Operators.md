@@ -63,7 +63,7 @@ kubectl logs gpu-test -f
 
 ---
 
-## 📦 Step 1: Deploy vLLM Inference Server
+## 📦 Step 1: Deploy vLLM Qwen Inference Server
 
 We use the Qwen model now but you could use Lllama here too.
 
@@ -87,6 +87,12 @@ spec:
       containers:
       - name: vllm-server
         image: vllm/vllm-openai:latest
+        env:
+        - name: HF_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: hf-token
+              key: HF_TOKEN
         resources:
           limits:
             nvidia.com/gpu: 1
@@ -97,12 +103,10 @@ spec:
         - "--load-format"
         - "bitsandbytes"
         - "--gpu-memory-utilization"
-        - "0.80"
+        - "0.80"             # Fits comfortably in 6.92 GiB
         - "--max-model-len"
-        - "2048"
+        - "2048"             # 2k is a solid sweet spot for 3B models
         - "--enforce-eager"
-        ports:
-        - containerPort: 8000
         volumeMounts:
         - name: shm
           mountPath: /dev/shm
@@ -116,6 +120,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: vllm-service
+  namespace: default
 spec:
   selector:
     app: vllm-server

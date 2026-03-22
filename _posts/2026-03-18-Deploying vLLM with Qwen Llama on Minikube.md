@@ -106,7 +106,7 @@ Without waiting for approval, **Qwen 2.5-3B-Instruct** is a world-class, free, n
 
 {: .notice--info}
 **ProTip:** You still need your `hf-token` but you wont have to wait for approval.
-
+s
 **Create `vllm-qwen.yaml`:**
 
 ```yaml
