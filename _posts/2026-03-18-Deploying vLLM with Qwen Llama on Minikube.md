@@ -30,7 +30,7 @@ We have two great options to get you started:
 Llama 3.2-3B is incredibly smart for its size, but it is a "gated" model.
 
 {: .notice--warning}
-:key: **Requirement:** This requires Hugging Face (HF) access to download. You must have an HF account and an API token. You'll need to create a Kubernetes secret named `hf-token` containing your token before deploying this.
+:key: **Requirement:** This requires Hugging Face (HF) access to download. You must have an HF account and an API token. You'll need to create a Kubernetes secret named `hf-token` containing your token before deploying this.  Last but not least you need to complete user input form for access.
 
 **Create `vllm-llama.yaml`:**
 
@@ -102,10 +102,10 @@ spec:
 ---
 
 ### Option B: Qwen 2.5 (The "Easy" Path)
-If you want to skip the authentication headache, **Qwen 2.5-3B-Instruct** is a world-class, free, non-gated model that performs exceptionally well. It is roughly comparable to Llama 3.2 in quality but loads without any token.
+Without waiting for approval, **Qwen 2.5-3B-Instruct** is a world-class, free, non-gated model that performs exceptionally well. It is roughly comparable to Llama 3.2 in quality but loads without any token.
 
 {: .notice--info}
-**ProTip:** Use Qwen for general-purpose tasks where you need high performance without managing gated model permissions.
+**ProTip:** You still need your `hf-token` but you wont have to wait for approval.
 
 **Create `vllm-qwen.yaml`:**
 
@@ -127,9 +127,15 @@ spec:
       containers:
       - name: vllm-server
         image: vllm/vllm-openai:latest
+        env:
+        - name: HF_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: hf-token
+              key: HF_TOKEN
         resources:
           limits:
-            [nvidia.com/gpu](https://nvidia.com/gpu): 1
+            nvidia.com/gpu: 1
         args:
         - "Qwen/Qwen2.5-3B-Instruct"
         - "--quantization"
@@ -137,9 +143,9 @@ spec:
         - "--load-format"
         - "bitsandbytes"
         - "--gpu-memory-utilization"
-        - "0.80"
+        - "0.80"             # Fits comfortably in 6.92 GiB
         - "--max-model-len"
-        - "2048"
+        - "2048"             # 2k is a solid sweet spot for 3B models
         - "--enforce-eager"
         volumeMounts:
         - name: shm
@@ -154,6 +160,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: vllm-service
+  namespace: default
 spec:
   selector:
     app: vllm-server

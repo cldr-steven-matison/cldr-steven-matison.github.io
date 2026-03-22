@@ -283,7 +283,7 @@
 <h3 id="option-a-llama-32-the-heavy-hitter">Option A: Llama 3.2 (The Heavy Hitter)</h3>
 <p>Llama 3.2-3B is incredibly smart for its size, but it is a “gated” model.</p>
 
-<p class="notice--warning"><img class="emoji" title=":key:" alt=":key:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f511.png" height="20" width="20"> <strong>Requirement:</strong> This requires Hugging Face (HF) access to download. You must have an HF account and an API token. You’ll need to create a Kubernetes secret named <code class="language-plaintext highlighter-rouge">hf-token</code> containing your token before deploying this.</p>
+<p class="notice--warning"><img class="emoji" title=":key:" alt=":key:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f511.png" height="20" width="20"> <strong>Requirement:</strong> This requires Hugging Face (HF) access to download. You must have an HF account and an API token. You’ll need to create a Kubernetes secret named <code class="language-plaintext highlighter-rouge">hf-token</code> containing your token before deploying this.  Last but not least you need to complete user input form for access.</p>
 
 <p><strong>Create <code class="language-plaintext highlighter-rouge">vllm-llama.yaml</code>:</strong></p>
 
@@ -354,9 +354,9 @@
 <hr>
 
 <h3 id="option-b-qwen-25-the-easy-path">Option B: Qwen 2.5 (The “Easy” Path)</h3>
-<p>If you want to skip the authentication headache, <strong>Qwen 2.5-3B-Instruct</strong> is a world-class, free, non-gated model that performs exceptionally well. It is roughly comparable to Llama 3.2 in quality but loads without any token.</p>
+<p>Without waiting for approval, <strong>Qwen 2.5-3B-Instruct</strong> is a world-class, free, non-gated model that performs exceptionally well. It is roughly comparable to Llama 3.2 in quality but loads without any token.</p>
 
-<p class="notice--info"><strong>ProTip:</strong> Use Qwen for general-purpose tasks where you need high performance without managing gated model permissions.</p>
+<p class="notice--info"><strong>ProTip:</strong> You still need your <code class="language-plaintext highlighter-rouge">hf-token</code> but you wont have to wait for approval.</p>
 
 <p><strong>Create <code class="language-plaintext highlighter-rouge">vllm-qwen.yaml</code>:</strong></p>
 
@@ -377,9 +377,15 @@
       <span class="na">containers</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">vllm-server</span>
         <span class="na">image</span><span class="pi">:</span> <span class="s">vllm/vllm-openai:latest</span>
+        <span class="na">env</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">HF_TOKEN</span>
+          <span class="na">valueFrom</span><span class="pi">:</span>
+            <span class="na">secretKeyRef</span><span class="pi">:</span>
+              <span class="na">name</span><span class="pi">:</span> <span class="s">hf-token</span>
+              <span class="na">key</span><span class="pi">:</span> <span class="s">HF_TOKEN</span>
         <span class="na">resources</span><span class="pi">:</span>
           <span class="na">limits</span><span class="pi">:</span>
-            <span class="pi">[</span><span class="nv">nvidia.com/gpu</span><span class="pi">]</span><span class="na">(https://nvidia.com/gpu)</span><span class="pi">:</span> <span class="m">1</span>
+            <span class="na">nvidia.com/gpu</span><span class="pi">:</span> <span class="m">1</span>
         <span class="na">args</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="s2">"</span><span class="s">Qwen/Qwen2.5-3B-Instruct"</span>
         <span class="pi">-</span> <span class="s2">"</span><span class="s">--quantization"</span>
@@ -387,9 +393,9 @@
         <span class="pi">-</span> <span class="s2">"</span><span class="s">--load-format"</span>
         <span class="pi">-</span> <span class="s2">"</span><span class="s">bitsandbytes"</span>
         <span class="pi">-</span> <span class="s2">"</span><span class="s">--gpu-memory-utilization"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">0.80"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">0.80"</span>             <span class="c1"># Fits comfortably in 6.92 GiB</span>
         <span class="pi">-</span> <span class="s2">"</span><span class="s">--max-model-len"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">2048"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">2048"</span>             <span class="c1"># 2k is a solid sweet spot for 3B models</span>
         <span class="pi">-</span> <span class="s2">"</span><span class="s">--enforce-eager"</span>
         <span class="na">volumeMounts</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shm</span>
@@ -404,6 +410,7 @@
 <span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">vllm-service</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">app</span><span class="pi">:</span> <span class="s">vllm-server</span>
