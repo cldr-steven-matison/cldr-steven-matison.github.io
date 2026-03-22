@@ -318,7 +318,7 @@ var store = [{
         "teaser": "/assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg"
       },{
         "title": "Cloudera Data Lineage for Trino",
-        "excerpt":":shield: Native Governance and Data Lineage for the Unified Data Fabric The Cloudera Data Lineage team is happy to announce that Cloudera Data Lineage now supports Trino federated query engine for big data. This integration allows Trino users to access data wherever it lives without sacrificing governance, trust, or visibility....","categories": ["release"],
+        "excerpt":"Native Governance and Data Lineage for the Unified Data Fabric The Cloudera Data Lineage team is happy to announce that Cloudera Data Lineage now supports Trino federated query engine for big data. This integration allows Trino users to access data wherever it lives without sacrificing governance, trust, or visibility. As...","categories": ["release"],
         "tags": ["cloudera","trino","octopai"],
         "url": "/release/Cloudera-Data-Lineage-Trino/",
         "teaser": "/assets/images/2026-03-17-CDL-trino.png"
@@ -333,5 +333,5 @@ var store = [{
         "excerpt":"Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:. Or Did I? The flow JSON I used is here: NiFiBenchMarkTest.json I ran everything on...","categories": ["blog"],
         "tags": ["cloudera","kubernetes","nifi"],
         "url": "/blog/Max-CPU-with-NiFi-on-Minikube/",
-        "teaser": "/assets/images/2026-03-20-MaxsCPU-Nifi-minikube.png"
+        "teaser": "/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png"
       }]

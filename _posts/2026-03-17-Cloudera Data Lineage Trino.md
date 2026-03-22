@@ -10,7 +10,7 @@ tags:
   - octopai
 ---
 
-## :shield: Native Governance and Data Lineage for the Unified Data Fabric
+## Native Governance and Data Lineage for the Unified Data Fabric
 
 The Cloudera Data Lineage team is happy to announce that Cloudera Data Lineage now supports Trino federated query engine for big data. This integration allows Trino users to access data wherever it lives without sacrificing governance, trust, or visibility.
 

@@ -1,7 +1,7 @@
 ---
 title:  "Tune for Max CPU with NiFi on Minikube"
 header:
-  teaser: "/assets/images/2026-03-20-MaxsCPU-Nifi-minikube.png"
+  teaser: "/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png"
 categories: 
   - blog
 tags:
