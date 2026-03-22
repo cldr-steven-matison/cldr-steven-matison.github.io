@@ -1,5 +1,5 @@
 ---
-title:  "Test & Tune for Max CPU with NiFi on Minikube"
+title:  "Tune for Max CPU with NiFi on Minikube"
 header:
   teaser: "/assets/images/2026-03-20-MaxMem&CPU-Nifi-minikube.png"
 categories: 
