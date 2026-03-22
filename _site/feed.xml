@@ -6,7 +6,7 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
-        <title>Test &amp; Tune for Max CPU with NiFi on Minikube</title>
+        <title>Tune for Max CPU with NiFi on Minikube</title>
         <link>https://cldr-steven-matison.github.io/blog/Max-CPU-with-NiFi-on-Minikube/</link>
         <pubDate>Fri, 20 Mar 2026 00:00:00 -0400</pubDate>
         
