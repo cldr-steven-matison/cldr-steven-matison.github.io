@@ -323,15 +323,33 @@ var store = [{
         "url": "/release/Cloudera-Data-Lineage-Trino/",
         "teaser": "/assets/images/2026-03-17-CDL-trino.png"
       },{
+        "title": "GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube",
+        "excerpt":"If you’ve ever tried to get a GPU working inside a local Kubernetes cluster on Windows, you know the “Driver Dance” is real. 💃 But with WSL2, Docker Desktop, and a GEEKOM G1 (RTX 4060), we can finally bridge the gap between local development and production-grade AI inference. This post...","categories": ["blog"],
+        "tags": ["minikube","kubernetes","nvidia","ai"],
+        "url": "/blog/GPU-Setup-Minikube/",
+        "teaser": "/assets/images/2026-03-17-minikube-gpu-setup.png"
+      },{
         "title": "Cloudera Data Engineering 1.25.2",
         "excerpt":"We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security posture for Microsoft Azure users, and expanded scalability to meet the needs of the most demanding data engineering workloads. Key Features Virtual Cluster Suspend and Resume [Generally...","categories": ["release"],
         "tags": ["cloudera","kubernetes","cde"],
         "url": "/release/Cloudera-Data-Engineering-1.25.2/",
         "teaser": "/assets/images/2026-03-18-CDE-1.25.2.png"
       },{
+        "title": "Deploying vLLM with Qwen Llama on Minikube",
+        "excerpt":"In my previous post GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube, we successfully exposed the GPU to our Minikube pods. Congrats, we survived the hardest part of the WSL2/Docker Desktop stack! 🛠️ Now that your RTX 4060 (8 GB VRAM) is visible, and your NiFi + Kafka + Flink stack...","categories": ["blog"],
+        "tags": ["cloudera","minikube","kubernetes","vllm","ai"],
+        "url": "/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/",
+        "teaser": "/assets/images/2026-03-18-minikube-vllm-qwen-lama.png"
+      },{
         "title": "Tune for Max CPU with NiFi on Minikube",
         "excerpt":"Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:. Or Did I? The flow JSON I used is here: NiFiBenchMarkTest.json I ran everything on...","categories": ["blog"],
         "tags": ["cloudera","kubernetes","nifi"],
         "url": "/blog/Max-CPU-with-NiFi-on-Minikube/",
         "teaser": "/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png"
+      },{
+        "title": "RAG with Cloudera Streaming Operators",
+        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. Let’s build: StreamToVLLM — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just...","categories": ["blog"],
+        "tags": ["cloudera","operator","nifi","vllm","ai"],
+        "url": "/blog/RAG-with-Cloudera-Streaming-Operators/",
+        "teaser": "/assets/images/StreamToVLLM.png"
       }]

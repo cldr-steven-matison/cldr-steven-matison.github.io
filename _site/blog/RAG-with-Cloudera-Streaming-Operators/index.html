@@ -1,0 +1,923 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>RAG with Cloudera Streaming Operators - Cloudera Solutions Engineer</title>
+<meta name="description" content="Privacy-first, fully local semantic search &amp; question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and your RTX 4060 GPU.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="RAG with Cloudera Streaming Operators">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/RAG-with-Cloudera-Streaming-Operators/">
+
+
+  <meta property="og:description" content="Privacy-first, fully local semantic search &amp; question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and your RTX 4060 GPU.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/StreamToVLLM.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-22T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/RAG-with-Cloudera-Streaming-Operators/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <a class="site-title" href="/">
+          Cloudera Solutions Engineer
+          
+        </a>
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="https://community.cloudera.com/?type=everything&amp;pageNum=1">Community</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+</ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url"></a>
+    </h3>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="RAG with Cloudera Streaming Operators">
+    <meta itemprop="description" content="Privacy-first, fully local semantic search &amp; question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and your RTX 4060 GPU.">
+    <meta itemprop="datePublished" content="2026-03-22T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/RAG-with-Cloudera-Streaming-Operators/" class="u-url" itemprop="url">RAG with Cloudera Streaming Operators
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
+
+<p>Let’s build: <strong>StreamToVLLM</strong> — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi + Flink) + vLLM inference + Qdrant vector search.</p>
+
+<p>Perfect for this GPU() RTX 4060 8 GB VRAM) setup — it comfortably runs Qwen2.5-3B-Instruct at speed while NiFi ingests documents in real time via Kafka.</p>
+
+<p>We already have the <a href="/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> stack, <a href="/blog/GPU-Setup-Minikube/">GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube</a>, and some example <a href="/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/">Deploying vLLM with Qwen Llama on Minikube</a> working from previous sessions — now let’s wire it all together into a complete, production-grade local RAG pipeline.</p>
+
+<hr>
+
+<h2 id="-prerequisites">💻 Prerequisites</h2>
+
+<p>You should have:</p>
+<ul>
+  <li>Minikube running with <strong>GPU passthrough</strong> (RTX 4060 confirmed)</li>
+  <li>Cloudera Streaming Operators (CSM + CSA + CFM) installed in namespaces <code class="language-plaintext highlighter-rouge">cld-streaming</code> and <code class="language-plaintext highlighter-rouge">cfm-streaming</code>
+</li>
+  <li>NiFi UI accessible at <code class="language-plaintext highlighter-rouge">https://mynifi-web.mynifi.cfm-streaming.svc.cluster.local/nifi/</code>
+</li>
+</ul>
+
+<p><strong>Quick GPU double-check</strong> (do this first!):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get nodes <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[*].status.allocatable.nvidia\.com/gpu}'</span>
+<span class="c"># Should return: 1</span>
+
+<span class="c"># Run the official NVIDIA test pod</span>
+<span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh"> | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gpu-test
+spec:
+  restartPolicy: Never
+  containers:
+  - name: cuda-test
+    image: nvcr.io/nvidia/k8s/cuda-sample:vectoradd-cuda12.5.0
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+</span><span class="no">EOF
+
+</span>kubectl logs gpu-test <span class="nt">-f</span>
+</code></pre></div></div>
+
+<p><strong>Expected output:</strong> <code class="language-plaintext highlighter-rouge">Test PASSED</code> ✅</p>
+
+<p><strong>Pro Tip!</strong> Keep <code class="language-plaintext highlighter-rouge">watch nvidia-smi</code> running in another terminal — you’ll see your 4060 light up during inference.</p>
+
+<hr>
+
+<h2 id="-step-1-deploy-vllm-inference-server">📦 Step 1: Deploy vLLM Inference Server</h2>
+
+<p>We use the Qwen model now but you could use Lllama here too.</p>
+
+<p>Save as <code class="language-plaintext highlighter-rouge">vllm-qwen.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vllm-server</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">vllm-server</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">vllm-server</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">vllm-server</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">vllm/vllm-openai:latest</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">limits</span><span class="pi">:</span>
+            <span class="na">nvidia.com/gpu</span><span class="pi">:</span> <span class="m">1</span>
+        <span class="na">args</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">Qwen/Qwen2.5-3B-Instruct"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">--quantization"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">bitsandbytes"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">--load-format"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">bitsandbytes"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">--gpu-memory-utilization"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">0.80"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">--max-model-len"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">2048"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">--enforce-eager"</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8000</span>
+        <span class="na">volumeMounts</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shm</span>
+          <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/dev/shm</span>
+      <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shm</span>
+        <span class="na">emptyDir</span><span class="pi">:</span>
+          <span class="na">medium</span><span class="pi">:</span> <span class="s">Memory</span>
+          <span class="na">sizeLimit</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2Gi"</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vllm-service</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">vllm-server</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">8000</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">8000</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
+</code></pre></div></div>
+
+<p>Apply it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> vllm-qwen.yaml
+kubectl get pods <span class="nt">-w</span>
+kubectl port-forward svc/vllm-service 8000:8000
+</code></pre></div></div>
+
+<p><strong>Test it</strong> (OpenAI-compatible endpoint):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:8000/v1/chat/completions <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "model": "Qwen/Qwen2.5-3B-Instruct",
+    "messages": [{"role": "user", "content": "Hello! Tell me a short joke."}],
+    "temperature": 0.7
+  }'</span>
+</code></pre></div></div>
+
+<p><strong>⚡ Ready for RAG!</strong> Your GPU pod is now the brain of the system.</p>
+
+<hr>
+
+<h2 id="️-step-2-deploy-qdrant-vector-db">🗄️ Step 2: Deploy Qdrant Vector DB</h2>
+
+<p>Save as <code class="language-plaintext highlighter-rouge">qdrant-deployment.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">qdrant</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">qdrant</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">qdrant</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">qdrant</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">qdrant/qdrant:latest</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">6333</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">6334</span>
+        <span class="na">volumeMounts</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">qdrant-data</span>
+          <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/qdrant/storage</span>
+      <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">qdrant-data</span>
+        <span class="na">emptyDir</span><span class="pi">:</span> <span class="pi">{}</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">qdrant</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">qdrant</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">http</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">6333</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">6333</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">grpc</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">6334</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">6334</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> qdrant-deployment.yaml
+kubectl port-forward svc/qdrant 6333:6333
+curl http://localhost:6333/
+</code></pre></div></div>
+
+<hr>
+
+<h2 id="-step-3-lightweight-embedding-server">🔢 Step 3: Lightweight Embedding Server</h2>
+
+<p>Save as <code class="language-plaintext highlighter-rouge">embedding-server.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">embedding-server</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">embedding</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">embedding</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">embedder</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">ghcr.io/huggingface/text-embeddings-inference:1.5</span>
+        <span class="na">args</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">--model-id"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">nomic-ai/nomic-embed-text-v1"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">--pooling"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">cls"</span><span class="pi">]</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8080</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">limits</span><span class="pi">:</span>
+            <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+            <span class="na">memory</span><span class="pi">:</span> <span class="s">4Gi</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">embedding-service</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">embedding</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">8080</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> embedding-server.yaml
+kubectl port-forward svc/embedding-service 8080:8080
+</code></pre></div></div>
+
+<p>Test: <code class="language-plaintext highlighter-rouge">curl -X POST http://localhost:8080/embed -d '{"inputs":"Hello world"}'</code></p>
+
+<hr>
+
+<h2 id="-step-4-real-time-ingestion-with-nifi">🌊 Step 4: Real-Time Ingestion with NiFi</h2>
+
+<ol>
+  <li>Open NiFi UI → Create process group <strong>StreamToVLLM-Ingestion</strong>
+</li>
+  <li>
+    <p>Build this flow (drag &amp; drop):</p>
+
+    <p><strong>ConsumeKafka</strong> (topic: <code class="language-plaintext highlighter-rouge">new-documents</code>)<br>
+↓<br>
+<strong>ExtractText</strong> / <strong>ConvertRecord</strong> (PDF, JSON, GitHub webhooks)<br>
+↓<br>
+<strong>SplitText</strong> (512-token chunks)<br>
+↓<br>
+<strong>InvokeHTTP</strong> → <code class="language-plaintext highlighter-rouge">http://embedding-service:8080/embed</code> (get vector)<br>
+↓<br>
+<strong>InvokeHTTP</strong> → <code class="language-plaintext highlighter-rouge">http://qdrant:6333/collections/my-rag-collection/points</code> (POST vector + payload)</p>
+  </li>
+</ol>
+
+<p><strong>Pro Tip!</strong> For GitHub repos add <strong>GetHTTP</strong> + <strong>JoltTransformJSON</strong>. For URLs use <strong>GetHTTP</strong>.</p>
+
+<p>Start the flow — documents now stream in real time and land in Qdrant!</p>
+
+<hr>
+
+<h2 id="-step-5-query-time--ask-questions">🔍 Step 5: Query Time — Ask Questions!</h2>
+
+<p>Simple Python script (or curl) — save as <code class="language-plaintext highlighter-rouge">query-rag.py</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">requests</span><span class="p">,</span> <span class="n">json</span>
+
+<span class="k">def</span> <span class="nf">ask</span><span class="p">(</span><span class="n">question</span><span class="p">):</span>
+    <span class="c1"># Embed question
+</span>    <span class="n">emb</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:8080/embed"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s">"inputs"</span><span class="p">:</span> <span class="n">question</span><span class="p">}).</span><span class="nf">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Search Qdrant
+</span>    <span class="n">search</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:6333/collections/my-rag-collection/points/search"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">"vector"</span><span class="p">:</span> <span class="n">emb</span><span class="p">,</span>
+        <span class="s">"limit"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s">"with_payload"</span><span class="p">:</span> <span class="bp">True</span>
+    <span class="p">}).</span><span class="nf">json</span><span class="p">()</span>
+    
+    <span class="n">context</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n\n</span><span class="s">"</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="n">hit</span><span class="p">[</span><span class="s">"payload"</span><span class="p">][</span><span class="s">"text"</span><span class="p">]</span> <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">search</span><span class="p">[</span><span class="s">"result"</span><span class="p">]])</span>
+    
+    <span class="c1"># Call vLLM
+</span>    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:8000/v1/chat/completions"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">"model"</span><span class="p">:</span> <span class="s">"Qwen/Qwen2.5-3B-Instruct"</span><span class="p">,</span>
+        <span class="s">"messages"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"system"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="s">"Answer using only this context."</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"user"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="sa">f</span><span class="s">"Context:</span><span class="se">\n</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="se">\n\n</span><span class="s">Question: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s">"</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">})</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="nf">json</span><span class="p">()[</span><span class="s">"choices"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"message"</span><span class="p">][</span><span class="s">"content"</span><span class="p">])</span>
+
+<span class="nf">ask</span><span class="p">(</span><span class="s">"What is StreamToVLLM?"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Boom</strong> — instant, context-aware answers from your live streaming documents.</p>
+
+<hr>
+
+<h2 id="-cleanup">🧹 Cleanup</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete <span class="nt">-f</span> vllm-qwen.yaml
+kubectl delete <span class="nt">-f</span> qdrant-deployment.yaml
+kubectl delete <span class="nt">-f</span> embedding-server.yaml
+</code></pre></div></div>
+
+<hr>
+
+<h2 id="-resources--further-reading">📚 Resources &amp; Further Reading</h2>
+
+<ul>
+  <li><a href="/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a></li>
+  <li><a href="/blog/GPU-Setup-Minikube/">GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube</a></li>
+  <li><a href="/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/">Deploying vLLM with Qwen Llama on Minikube</a></li>
+</ul>
+
+<hr>
+
+<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
+
+<h3 id="rag-with-cloudera-streaming-operators">RAG with Cloudera Streaming Operators</h3>
+
+<p>If you have any questions about the integration between these components or you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about RAG with Cloudera Streaming Operators,  please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ai" class="page__taxonomy-item p-category" rel="tag">ai</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a><span class="sep">, </span>
+    
+      <a href="/tags/#vllm" class="page__taxonomy-item p-category" rel="tag">vllm</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-22T00:00:00-04:00">March 22, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=RAG+with+Cloudera+Streaming+Operators%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Max-CPU-with-NiFi-on-Minikube/" class="pagination--pager" title="Tune for Max CPU with NiFi on Minikube
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Max-CPU-with-NiFi-on-Minikube/" rel="permalink">Tune for Max CPU with NiFi on Minikube
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of mem...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-18-minikube-vllm-qwen-lama.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/" rel="permalink">Deploying vLLM with Qwen Llama on Minikube
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Unleash your local GPU! Learn how to deploy vLLM on Minikube to power real-time NiFi data pipelines using Llama 3.2 and Qwen 2.5.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-18-CDE-1.25.2.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Data-Engineering-1.25.2/" rel="permalink">Cloudera Data Engineering 1.25.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">We are excited to announce the latest release of Cloudera Data Engineering (CDE) on Cloud. This update introduces enhanced cost management controls, security...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-17-minikube-gpu-setup.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/GPU-Setup-Minikube/" rel="permalink">GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Stop fighting the drivers and start shipping AI. A step-by-step guide to exposing your RTX 40-series GPU to Minikube using WSL2 and Docker.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
