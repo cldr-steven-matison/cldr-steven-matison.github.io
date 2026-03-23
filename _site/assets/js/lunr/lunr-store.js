@@ -336,13 +336,13 @@ var store = [{
         "teaser": "/assets/images/2026-03-18-CDE-1.25.2.png"
       },{
         "title": "Deploying vLLM with Qwen Llama on Minikube",
-        "excerpt":"In my previous post GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube, we successfully exposed the GPU to our Minikube pods. Congrats, we survived the hardest part of the WSL2/Docker Desktop stack! 🛠️ Now that your RTX 4060 (8 GB VRAM) is visible, and your NiFi + Kafka + Flink stack...","categories": ["blog"],
+        "excerpt":"In my previous post GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube, we successfully exposed the GPU to our Minikube pods which so far has been the hardest part of the WSL2/Docker Desktop stack! 🛠️ Now that the RTX 4060 (8 GB VRAM) is visible, and NiFi + Kafka + Flink...","categories": ["blog"],
         "tags": ["cloudera","minikube","kubernetes","vllm","ai"],
         "url": "/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/",
         "teaser": "/assets/images/2026-03-18-minikube-vllm-qwen-lama.png"
       },{
         "title": "Tune for Max CPU with NiFi on Minikube",
-        "excerpt":"Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:. Or Did I? The flow JSON I used is here: NiFiBenchMarkTest.json I ran everything on...","categories": ["blog"],
+        "excerpt":"Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it. Or Did I? :bomb: The flow JSON I used is here: NiFiBenchMarkTest.json I ran everything on...","categories": ["blog"],
         "tags": ["cloudera","kubernetes","nifi"],
         "url": "/blog/Max-CPU-with-NiFi-on-Minikube/",
         "teaser": "/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png"

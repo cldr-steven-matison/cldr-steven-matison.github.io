@@ -268,9 +268,9 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>In my previous post <a href="/blog/GPU-Setup-Minikube/">GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube</a>, we successfully exposed the GPU to our Minikube pods.  Congrats, we survived the hardest part of the WSL2/Docker Desktop stack! 🛠️</p>
+        <p>In my previous post <a href="/blog/GPU-Setup-Minikube/">GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube</a>, we successfully exposed the GPU to our Minikube pods which so far has been the hardest part of the WSL2/Docker Desktop stack! 🛠️</p>
 
-<p>Now that your <strong>RTX 4060</strong> (8 GB VRAM) is visible, and your <strong>NiFi + Kafka + Flink</strong> stack is humming, let’s jump into the fun part: <strong>Real-time Streaming AI Inference.</strong> The 4060 is a sweet spot for local development; it can comfortably run 3B to 7B models with lightning-fast speeds, or even 13B models with some clever quantization. Our goal is to turn Minikube into a private AI endpoint that <strong>NiFi</strong> can call via the <code class="language-plaintext highlighter-rouge">InvokeHTTP</code> processor to summarize streams, classify events, or extract entities in real-time. 🚀</p>
+<p>Now that the <strong>RTX 4060</strong> (8 GB VRAM) is visible, and <strong>NiFi + Kafka + Flink</strong> stack is humming, we can jump into the fun part: <strong>Real-time Streaming AI Inference.</strong> The 4060 is a sweet spot for local development; it can comfortably run 3B to 7B models with lightning-fast speeds, or even 13B models with some clever quantization. Our goal is to turn Minikube into a private AI endpoint that <strong>NiFi</strong> can call via the <code class="language-plaintext highlighter-rouge">InvokeHTTP</code> processor to summarize streams, classify events, or extract entities in real-time. 🚀</p>
 
 <hr>
 
@@ -354,7 +354,7 @@
 <hr>
 
 <h3 id="option-b-qwen-25-the-easy-path">Option B: Qwen 2.5 (The “Easy” Path)</h3>
-<p>Without waiting for approval, <strong>Qwen 2.5-3B-Instruct</strong> is a world-class, free, non-gated model that performs exceptionally well. It is roughly comparable to Llama 3.2 in quality but loads without any token.</p>
+<p>Without waiting for approval, <strong>Qwen 2.5-3B-Instruct</strong> is a world-class, free, non-gated model that performs exceptionally well. It is roughly comparable to Llama 3.2 in quality but loads without any approvals.</p>
 
 <p class="notice--info"><strong>ProTip:</strong> You still need your <code class="language-plaintext highlighter-rouge">hf-token</code> but you wont have to wait for approval.
 s

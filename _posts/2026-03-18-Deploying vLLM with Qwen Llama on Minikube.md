@@ -14,9 +14,9 @@ tags:
 author: "Steven Matison"
 ---
 
-In my previous post [GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube](/blog/GPU-Setup-Minikube/), we successfully exposed the GPU to our Minikube pods.  Congrats, we survived the hardest part of the WSL2/Docker Desktop stack! 🛠️
+In my previous post [GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube](/blog/GPU-Setup-Minikube/), we successfully exposed the GPU to our Minikube pods which so far has been the hardest part of the WSL2/Docker Desktop stack! 🛠️
 
-Now that your **RTX 4060** (8 GB VRAM) is visible, and your **NiFi + Kafka + Flink** stack is humming, let’s jump into the fun part: **Real-time Streaming AI Inference.** The 4060 is a sweet spot for local development; it can comfortably run 3B to 7B models with lightning-fast speeds, or even 13B models with some clever quantization. Our goal is to turn Minikube into a private AI endpoint that **NiFi** can call via the `InvokeHTTP` processor to summarize streams, classify events, or extract entities in real-time. 🚀
+Now that the **RTX 4060** (8 GB VRAM) is visible, and **NiFi + Kafka + Flink** stack is humming, we can jump into the fun part: **Real-time Streaming AI Inference.** The 4060 is a sweet spot for local development; it can comfortably run 3B to 7B models with lightning-fast speeds, or even 13B models with some clever quantization. Our goal is to turn Minikube into a private AI endpoint that **NiFi** can call via the `InvokeHTTP` processor to summarize streams, classify events, or extract entities in real-time. 🚀
 
 ---
 
@@ -102,7 +102,7 @@ spec:
 ---
 
 ### Option B: Qwen 2.5 (The "Easy" Path)
-Without waiting for approval, **Qwen 2.5-3B-Instruct** is a world-class, free, non-gated model that performs exceptionally well. It is roughly comparable to Llama 3.2 in quality but loads without any token.
+Without waiting for approval, **Qwen 2.5-3B-Instruct** is a world-class, free, non-gated model that performs exceptionally well. It is roughly comparable to Llama 3.2 in quality but loads without any approvals.
 
 {: .notice--info}
 **ProTip:** You still need your `hf-token` but you wont have to wait for approval.

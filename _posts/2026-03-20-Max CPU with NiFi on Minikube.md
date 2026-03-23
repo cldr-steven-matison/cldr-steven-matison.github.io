@@ -12,7 +12,7 @@ tags:
 author: "Steven Matison"
 ---
 
-Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:.  **Or Did I?**
+Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it.  **Or Did I?** :bomb:
 
 The flow JSON I used is here:  
 **[NiFiBenchMarkTest.json](https://github.com/cldr-steven-matison/NiFi-Templates)**
@@ -66,8 +66,8 @@ This gives NiFi far more total threads to work with across the entire cluster.
   - GenerateFlowFile → DuplicateFlowFile
   - DuplicateFlowFile → CompressContent
 - Edit the connection properties
-- Set **Back Pressure Data Size Threshold** to **`500 GB`** (or as high as your volume allows)
-- Optionally bump the object count threshold to 500,000+ as well
+- Set **Back Pressure Object Threshold** to **`500 GB`** (or as high as your volume allows)
+- Optionally bump the object **Size Threshold** to **`500,000`**+** as well
 
 ![Back Pressure](/assets/images/2026-03-20-back-pressure.png)
 
@@ -131,7 +131,7 @@ Happy tuning — go push your NiFi clusters to the limit! 🚀
 
 ## 📚 Resources
 * [Cloudera Flow Management (CFM) 3.0 Docs](http://docs.cloudera.com/cfm-operator/3.0.0/index.html)
-* B[Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/)
+* [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/)
 * [ClouderaStreamingOperators](https://github.com/cldr-steven-matison/ClouderaStreamingOperators)
 
 ---
