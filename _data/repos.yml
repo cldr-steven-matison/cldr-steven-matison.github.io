@@ -1,120 +1,80 @@
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  stars: 1
+  size: 79095
+  lang: "HTML"
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  stars: 0
-- name: "DeepFindr"
-  description: "A local, privacy-first AI knowledge base. Index documents, websites, and GitHub repos — then ask questions and get accurate, sourced answers powered by    local LLMs. Desktop app (Electron) + RAG backend (FastAPI/Qdrant) + MCP server for Cursor & Claude Desktop. Everything runs on your machine."
-  url: "https://github.com/cldr-steven-matison/DeepFindr"
-  stars: 0
+  size: 42
+  lang: "Misc"
 - name: "ClouderaStreamingOperators"
   description: "Repo for yaml used in installing Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  stars: 1
+  size: 27
+  lang: "Misc"
 - name: "NiFi-Templates"
   description: "No description"
   url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  stars: 2
+  size: 465
+  lang: "Misc"
 - name: "CSA-Operator-Demo"
   description: "Sample SSB Project for CSA Operator"
   url: "https://github.com/cldr-steven-matison/CSA-Operator-Demo"
-  stars: 0
-- name: "toolkits"
-  description: "Cloudera-labs toolkits for edu students"
-  url: "https://github.com/cldr-steven-matison/toolkits"
-  stars: 0
-- name: "ADMIN-238_Admin_K8s"
-  description: "Exercises for the ADMIN-238 Administrating Kubernetes course"
-  url: "https://github.com/cldr-steven-matison/ADMIN-238_Admin_K8s"
-  stars: 0
-- name: "CHAMP-138-K8s"
-  description: "This is the exercise repo for CHAMP-138 Just Enough Kubernetes"
-  url: "https://github.com/cldr-steven-matison/CHAMP-138-K8s"
-  stars: 0
+  size: 5
+  lang: "Misc"
 - name: "hol-013-flink-project"
   description: "No description"
   url: "https://github.com/cldr-steven-matison/hol-013-flink-project"
-  stars: 0
-- name: "edge2ai-workshop"
-  description: "No description"
-  url: "https://github.com/cldr-steven-matison/edge2ai-workshop"
-  stars: 0
-- name: "kafka-python"
-  description: "Python client for Apache Kafka"
-  url: "https://github.com/cldr-steven-matison/kafka-python"
-  stars: 0
-- name: "iceberg-mcp-server"
-  description: "No description"
-  url: "https://github.com/cldr-steven-matison/iceberg-mcp-server"
-  stars: 0
-- name: "twitter-mcp"
-  description: "A Model Context Protocol server allows to interact with Twitter, enabling posting tweets and searching Twitter."
-  url: "https://github.com/cldr-steven-matison/twitter-mcp"
-  stars: 0
-- name: "mkdocs-material"
-  description: "Documentation that simply works"
-  url: "https://github.com/cldr-steven-matison/mkdocs-material"
-  stars: 0
+  size: 7
+  lang: "Misc"
 - name: "ClouderaOperatorYAML"
   description: "No description"
   url: "https://github.com/cldr-steven-matison/ClouderaOperatorYAML"
-  stars: 0
+  size: 12
+  lang: "Misc"
 - name: "Streams-Processing-Hands-on-Lab"
   description: "Github repo for CSP Hands On Lab"
   url: "https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab"
-  stars: 0
+  size: 4453
+  lang: "Misc"
 - name: "ClouderaHandsOnLabDFX"
   description: "CloudearHandsOnLabDFX"
   url: "https://github.com/cldr-steven-matison/ClouderaHandsOnLabDFX"
-  stars: 0
+  size: 20974
+  lang: "Misc"
 - name: "Fraud-Prevention-TM"
   description: "No description"
   url: "https://github.com/cldr-steven-matison/Fraud-Prevention-TM"
-  stars: 0
-- name: "Fraud-Prevention-With-Cloudera-SSB"
-  description: "No description"
-  url: "https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB"
-  stars: 3
+  size: 2736
+  lang: "Python"
 - name: "SSB-CDC-Demo"
   description: "SQLServer CDC Demo"
   url: "https://github.com/cldr-steven-matison/SSB-CDC-Demo"
-  stars: 0
+  size: 2120
+  lang: "Misc"
 - name: "IPDRStreaming"
   description: "SQL Stream Builder (SSB) jobs to analyze IPDR data stream"
   url: "https://github.com/cldr-steven-matison/IPDRStreaming"
-  stars: 0
+  size: 38
+  lang: "Misc"
 - name: "SSB-Iceberg-Demo"
   description: "No description"
   url: "https://github.com/cldr-steven-matison/SSB-Iceberg-Demo"
-  stars: 0
+  size: 73
+  lang: "Misc"
 - name: "SSBDemo"
   description: "No description"
   url: "https://github.com/cldr-steven-matison/SSBDemo"
-  stars: 0
-- name: "CallCMLModel"
-  description: "An example on calling models deployed in CML"
-  url: "https://github.com/cldr-steven-matison/CallCMLModel"
-  stars: 0
+  size: 43
+  lang: "Misc"
 - name: "fraud-workshop"
   description: "No description"
   url: "https://github.com/cldr-steven-matison/fraud-workshop"
-  stars: 0
-- name: "ozone"
-  description: "Scalable, redundant, and distributed object store for Apache Hadoop"
-  url: "https://github.com/cldr-steven-matison/ozone"
-  stars: 0
+  size: 0
+  lang: "Misc"
 - name: "se-ent-east-hackathon"
   description: "For the SE ENT East Team's Hackathon"
   url: "https://github.com/cldr-steven-matison/se-ent-east-hackathon"
-  stars: 0
-- name: "meme-gen"
-  description: "No description"
-  url: "https://github.com/cldr-steven-matison/meme-gen"
-  stars: 0
-- name: "APIbasedClusterMonitoring"
-  description: "No description"
-  url: "https://github.com/cldr-steven-matison/APIbasedClusterMonitoring"
-  stars: 0
+  size: 22842
+  lang: "Misc"
