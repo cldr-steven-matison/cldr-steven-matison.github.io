@@ -15,19 +15,17 @@ Automated showcase of my GitHub repositories, synchronized daily via GitHub Acti
           <a href="{{ repo.url }}" rel="permalink">{{ repo.name }}</a>
         </h2>
         
-        {% if repo.description %}
-          <p class="archive__item-excerpt" itemprop="description">
+        <p class="archive__item-excerpt" itemprop="description">
+          {% if repo.description and repo.description != "" %}
             {{ repo.description | truncate: 120 }}
-          </p>
-        {% else %}
-          <p class="archive__item-excerpt" itemprop="description">
-            <em>No description provided.</em>
-          </p>
-        {% endif %}
+          {% else %}
+            <span style="color: #999; font-style: italic;">Explore this project on GitHub to see the latest documentation and source code.</span>
+          {% endif %}
+        </p>
 
         <div class="page__meta" style="margin-top: 10px;">
           
-          {% if repo.lang %}
+          {% if repo.lang and repo.lang != "" %}
           <span class="btn btn--info" style="padding: 0.2em 0.6em; font-size: 0.7em; cursor: default; pointer-events: none; margin-bottom: 5px;">
             <i class="fas fa-code" aria-hidden="true"></i> {{ repo.lang }}
           </span>
