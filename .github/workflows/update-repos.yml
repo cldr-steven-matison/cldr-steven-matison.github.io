@@ -16,8 +16,7 @@ jobs:
       - name: Fetch Repositories
         run: |
           curl -s "https://api.github.com/users/cldr-steven-matison/repos?sort=updated" | \
-          jq -r '.[] | select(.fork == false) | "- name: \"\(.name)\"\n  description: \"\(.description // "")\"\n  url: \"\(.html_url)\"\n  size: \(.size)\n  lang: \"\(.language // "")\"\n  updated: \"\(.updated_at | split(\"T\")[0])\""' > _data/repos.yml
-
+          jq -r '.[] | select(.fork == false) | "- name: \"\(.name)\"\n  description: \"\(.description // "")\"\n  url: \"\(.html_url)\"\n  size: \(.size)\n  lang: \"\(.language // "")\"\n  updated: \"\(.updated_at | split("T")[0])\""' > _data/repos.yml
       - name: Commit and Push
         run: |
           git config user.name "github-actions[bot]"
