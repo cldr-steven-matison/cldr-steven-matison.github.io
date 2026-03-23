@@ -1,0 +1,27 @@
+name: Update Repo List
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every night at midnight
+  workflow_dispatch:      # Allows you to run it manually to test
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch Repositories
+        run: |
+          # Fetches your public repos and formats them into YAML
+          curl -s "https://api.github.com/users/cldr-steven-matison/repos?sort=updated" | \
+          jq -r '.[] | "- name: \"\(.name)\"\n  description: \"\(.description // "No description")\"\n  url: \"\(.html_url)\"\n  stars: \(.stargazers_count)"' > _data/repos.yml
+
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _data/repos.yml
+          git commit -m "Automated repo list update" || exit 0
+          git push
