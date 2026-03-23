@@ -24,8 +24,7 @@
           <image>https://cldr-steven-matison.github.io/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png</image>
           <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png" medium="image" />
         
-        <description>Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:.  Or Did I?
-</description>
+        <description>How I stress-tested a default Cloudera Flow Management NiFi deployment on Minikube — hitting 99% CPU with synthetic data, aggressive duplication, and heavy compression — while keeping the cluster completely stable.</description>
       </item>
     
       <item>

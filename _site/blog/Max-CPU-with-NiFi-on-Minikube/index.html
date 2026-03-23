@@ -10,13 +10,8 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- begin _includes/seo.html --><title>Tune for Max CPU with NiFi on Minikube - Cloudera Solutions Engineer</title>
-<meta name="description" content="Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:.  Or Did I?">
+<meta name="description" content="How I stress-tested a default Cloudera Flow Management NiFi deployment on Minikube — hitting 99% CPU with synthetic data, aggressive duplication, and heavy compression — while keeping the cluster completely stable.">
 
-
-  <meta name="author" content="Steven Matison">
-  
-  <meta property="article:author" content="Steven Matison">
-  
 
 
 <meta property="og:type" content="article">
@@ -26,7 +21,7 @@
 <meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Max-CPU-with-NiFi-on-Minikube/">
 
 
-  <meta property="og:description" content="Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:.  Or Did I?">
+  <meta property="og:description" content="How I stress-tested a default Cloudera Flow Management NiFi deployment on Minikube — hitting 99% CPU with synthetic data, aggressive duplication, and heavy compression — while keeping the cluster completely stable.">
 
 
 
@@ -155,22 +150,11 @@
 <div itemscope itemtype="https://schema.org/Person" class="h-card">
 
   
-    <div class="author__avatar">
-      <a href="https://cldr-steven-matison.github.io/">
-        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
-      </a>
-    </div>
-  
 
   <div class="author__content">
     <h3 class="author__name p-name" itemprop="name">
-      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url"></a>
     </h3>
-    
-      <div class="author__bio p-note" itemprop="description">
-        <p>Helping enterprises master real-time data orchestration and Cloudera Data Platform (CDP) through scalable, production-grade solutions.</p>
-
-      </div>
     
   </div>
 
@@ -178,31 +162,7 @@
     <button class="btn btn--inverse">Follow</button>
     <ul class="author__urls social-icons">
       
-        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
-        </li>
-      
 
-      
-        
-          
-        
-          
-            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
-          
-        
-          
-            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
-          
-        
-          
-        
-          
-            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
-          
-        
-          
-        
       
 
       
@@ -271,7 +231,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Tune for Max CPU with NiFi on Minikube">
-    <meta itemprop="description" content="Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it :bomb:.  Or Did I?">
+    <meta itemprop="description" content="How I stress-tested a default Cloudera Flow Management NiFi deployment on Minikube — hitting 99% CPU with synthetic data, aggressive duplication, and heavy compression — while keeping the cluster completely stable.">
     <meta itemprop="datePublished" content="2026-03-20T00:00:00-04:00">
     
 
@@ -296,7 +256,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          3 minute read
+          4 minute read
         
       </span>
     
@@ -318,20 +278,17 @@
 <p>All of this setup is fully documented in my blog <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> and in my repo:<br>
 <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">ClouderaStreamingOperators</a>.</p>
 
-<h2 id="setting-up-the-nifi-flow">Setting Up the NiFi Flow</h2>
+<h2 id="package-setting-up-the-nifi-flow">
+<img class="emoji" title=":package:" alt=":package:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4e6.png" height="20" width="20"> Setting Up the NiFi Flow</h2>
 
-<p>Once you have the NiFi UI open:</p>
+<p>Getting this NiFi Flow going is pretty easy, use the Flow Definition File I provided and follow along in the NiFi UI.</p>
 
 <ol>
   <li>Download the benchmark flow JSON linked above.</li>
-  <li>In the NiFi UI, go to the canvas → <strong>Import</strong> → upload the JSON file.</li>
-  <li>The imported flow contains exactly these processors in sequence:
-    <ul>
-      <li><strong>GenerateFlowFile</strong></li>
-      <li><strong>DuplicateFlowFile</strong></li>
-      <li><strong>CompressContent</strong></li>
-    </ul>
-  </li>
+  <li>In the NiFi UI, go to the canvas, drag out a new process group and click the button outlined in red to upload: <img src="/assets/images/2026-03-20-process-group-upload.png" alt="Upload">
+</li>
+  <li>The imported flow should look as follows: <img src="/assets/images/2026-03-20-sample-flow.png" alt="NiFi Benchmark Test">
+</li>
   <li>
     <p><strong>Do not change anything</strong> — leave all concurrency settings, thread pools, and queue back-pressure at their factory defaults.</p>
   </li>
@@ -340,7 +297,10 @@
 
 <p>You’ll immediately see data flowing. The flow generates synthetic records, duplicates them aggressively, and compresses them — exactly the kind of workload that hammers both CPU and memory.</p>
 
-<h2 id="tuning-for-maximum-load">Tuning for Maximum Load</h2>
+<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This next section are settings from my final iteration.  Depending on your enviornment you need to scale your settings from default to higher number as I describe here.  For example I started with 10gb, 10,000, and 2 concurrency and slowly incremement over iterations.</p>
+
+<h2 id="chart_with_upwards_trend-tuning-for-maximum-load">
+<img class="emoji" title=":chart_with_upwards_trend:" alt=":chart_with_upwards_trend:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4c8.png" height="20" width="20"> Tuning for Maximum Load</h2>
 
 <p>Once you confirm the flow is stable with defaults, it’s time to open the throttle.</p>
 
@@ -353,6 +313,8 @@
 </li>
 </ul>
 
+<p><img src="/assets/images/2026-03-20-concurrency.png" alt="Concurrency"></p>
+
 <p>This lets 16 parallel threads chew through the heavy compression work.</p>
 
 <h3 id="increase-the-active-thread-pool">Increase the Active Thread Pool</h3>
@@ -360,6 +322,8 @@
   <li>Open your NiFi controller settings</li>
   <li>Raise the <strong>Maximum Timer Driven Thread Pool Size</strong> to <strong><code class="language-plaintext highlighter-rouge">32</code></strong> (roughly 4× my CPU cores for aggressive tuning)</li>
 </ul>
+
+<p><img src="/assets/images/2026-03-20-screenshot-6.png" alt="Adjusting Maximum Timer Driver Thread Count"></p>
 
 <p>This gives NiFi far more total threads to work with across the entire cluster.</p>
 
@@ -376,47 +340,62 @@
   <li>Optionally bump the object count threshold to 500,000+ as well</li>
 </ul>
 
+<p><img src="/assets/images/2026-03-20-back-pressure.png" alt="Back Pressure"></p>
+
 <p>These changes prevent early back-pressure and let the system queue massive amounts of data before throttling.</p>
 
 <p>Apply the changes, restart the affected processors, and watch the magic happen.</p>
 
 <p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> You can also set the Run Duration of a processor while tuning.  In the test above I set my DuplicateFlowfile to 25 ms.  Definitely consider how long you want each process thread to run.</p>
 
-<h2 id="results">Results</h2>
+<h2 id="stopwatch-results">
+<img class="emoji" title=":stopwatch:" alt=":stopwatch:" src="https://github.githubassets.com/images/icons/emoji/unicode/23f1.png" height="20" width="20"> Results</h2>
 
 <p>With the tuned settings applied, the cluster performed beautifully:</p>
 <ul>
   <li>CPU hit <strong>99%</strong> sustained load</li>
   <li>Memory stayed comfortable at <strong>~40–41%</strong>
 </li>
-  <li>Queues ballooned to over <strong>500 GB</strong> and -100,000+ flowfiles</li>
+  <li>Queues ballooned to over <strong>500 GB</strong> and <strong>500,000+ flowfiles</strong>
+</li>
   <li>The desktop PC fan started spinning slowly… then went to <strong>full blast</strong> — the best analog indicator that real work is happening!</li>
   <li>NiFi never crashed, even when the monitoring tool screamed “Critical CPU level!”</li>
-  <li>I did press stop at this point, no sense in <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" height="20" width="20"> for a fun test</li>
+  <li>I did press stop at this point, no sense in <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" height="20" width="20"> for a fun test!</li>
 </ul>
 
 <p>A default minimal evaluation NiFi cluster on Minikube is surprisingly capable once you give it the right concurrency, thread pool, and queue headroom.</p>
 
-<p>Here are the screenshots I captured on my phone during the test runs.</p>
+<p>Here are the shots I captured during the test runs.</p>
 
-<p><em>Minikube + k9s View of the cluster building load.</em>
-<img src="/assets/images/2026-03-20-screenshot-5.jpg" width="200"></p>
+<p><em>Minikube + k9s View of the cluster building load on CPU.</em></p>
 
-<p><em>Minikube + k9s view showing 99% CPU utilization.</em>
-<img src="/assets/images/2026-03-20-screenshot-1.jpg" width="200"></p>
+<p><img src="/assets/images/2026-03-20-screenshot-5.png" width="200"></p>
 
-<p><em>Monitoring tool firing a red “Critical CPU level!” warning.</em>
-<img src="/assets/images/2026-03-20-screenshot-2.jpg" width="200"></p>
+<p><em>Minikube + k9s view showing 99% CPU utilization.</em></p>
 
-<p><em>Pink “Warning CPU level!” alert during sustained load.</em>
-<img src="/assets/images/2026-03-20-screenshot-3.jpg" width="200"></p>
+<p><img src="/assets/images/2026-03-20-screenshot-1.png" width="200"></p>
 
-<p><em>NiFi flow statistics — 102 GB queued after DuplicateFlowFile and heavy compression (tuning in progress)</em>
-<img src="/assets/images/2026-03-20-screenshot-4.jpg" alt="Tuning NiFi Flow"></p>
+<p><em>K9s firing a red “Critical CPU level!” warning.</em></p>
+
+<p><img src="/assets/images/2026-03-20-screenshot-2.png" width="200"></p>
+
+<p><em>Pink “Warning CPU level!” alert during sustained load.</em></p>
+
+<p><img src="/assets/images/2026-03-20-screenshot-3.png" width="200"></p>
+
+<p><em>NiFi flow statistics — over 500 GB queued after DuplicateFlowFile and heavy compression</em></p>
+
+<p><img src="/assets/images/2026-03-20-screenshot-4.png" alt="Tuning NiFi Flow"></p>
+
+<p>If your k9s is not showing MEM and CPU metrics execute the following command and give a few moments for the metrics to start updating.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">minikube addons enable metrics-server
+</span></code></pre></div></div>
 
 <hr>
 
-<h2 id="summary">Summary</h2>
+<h2 id="checkered_flag-summary">
+<img class="emoji" title=":checkered_flag:" alt=":checkered_flag:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c1.png" height="20" width="20"> Summary</h2>
 
 <p>This experiment confirms that even a minimal, default deployment of Apache NiFi on a local Kubernetes environment like Minikube is an absolute powerhouse—provided you know which dials to turn. By simply adjusting the concurrent tasks, expanding the timer-driven thread pool, and giving your queues enough room to breathe, you can transform a modest 6-core setup into a high-performance data processing lab.</p>
 
@@ -424,9 +403,11 @@
 
 <p>Happy tuning — go push your NiFi clusters to the limit! 🚀</p>
 
-<h3 id="-resources">📚 Resources</h3>
+<h2 id="-resources">📚 Resources</h2>
 <ul>
   <li><a href="http://docs.cloudera.com/cfm-operator/3.0.0/index.html">Cloudera Flow Management (CFM) 3.0 Docs</a></li>
+  <li>B<a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a>
+</li>
   <li><a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">ClouderaStreamingOperators</a></li>
 </ul>
 
