@@ -1,7 +1,43 @@
+- name: "SSBDemo"
+  description: "SSB Demo examples to show project differences between on-prem and cloud."
+  url: "https://github.com/cldr-steven-matison/SSBDemo"
+  size: 43
+  lang: ""
+  updated: "2026-03-23"
+- name: "SSB-Iceberg-Demo"
+  description: "Sql Stream Builder project with samples and examples of using Icberg with SSB."
+  url: "https://github.com/cldr-steven-matison/SSB-Iceberg-Demo"
+  size: 73
+  lang: ""
+  updated: "2026-03-23"
+- name: "hol-013-flink-project"
+  description: "Cloudera HOL Flink Sql Stream Builder Project Repository."
+  url: "https://github.com/cldr-steven-matison/hol-013-flink-project"
+  size: 7
+  lang: ""
+  updated: "2026-03-23"
+- name: "ClouderaOperatorYAML"
+  description: "Terminal commands and YAML to install Cloudera Streaming Operators."
+  url: "https://github.com/cldr-steven-matison/ClouderaOperatorYAML"
+  size: 12
+  lang: ""
+  updated: "2026-03-23"
+- name: "Fraud-Prevention-TM"
+  description: "Fraud Demo repo for a customer facing internal hands on lab."
+  url: "https://github.com/cldr-steven-matison/Fraud-Prevention-TM"
+  size: 2736
+  lang: "Python"
+  updated: "2026-03-23"
+- name: "NiFi-Templates"
+  description: "NiFI Templates of example flows I share with the community."
+  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
+  size: 465
+  lang: ""
+  updated: "2026-03-23"
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 79095
+  size: 79231
   lang: "HTML"
   updated: "2026-03-23"
 - name: "cldr-steven-matison"
@@ -16,30 +52,12 @@
   size: 27
   lang: ""
   updated: "2026-03-22"
-- name: "NiFi-Templates"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 465
-  lang: ""
-  updated: "2026-03-20"
 - name: "CSA-Operator-Demo"
   description: "Sample SSB Project for CSA Operator"
   url: "https://github.com/cldr-steven-matison/CSA-Operator-Demo"
   size: 5
   lang: ""
   updated: "2026-03-18"
-- name: "hol-013-flink-project"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/hol-013-flink-project"
-  size: 7
-  lang: ""
-  updated: "2026-01-19"
-- name: "ClouderaOperatorYAML"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/ClouderaOperatorYAML"
-  size: 12
-  lang: ""
-  updated: "2025-02-27"
 - name: "Streams-Processing-Hands-on-Lab"
   description: "Github repo for CSP Hands On Lab"
   url: "https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab"
@@ -52,12 +70,6 @@
   size: 20974
   lang: ""
   updated: "2024-07-24"
-- name: "Fraud-Prevention-TM"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/Fraud-Prevention-TM"
-  size: 2736
-  lang: "Python"
-  updated: "2024-06-05"
 - name: "SSB-CDC-Demo"
   description: "SQLServer CDC Demo"
   url: "https://github.com/cldr-steven-matison/SSB-CDC-Demo"
@@ -70,18 +82,6 @@
   size: 38
   lang: ""
   updated: "2023-10-25"
-- name: "SSB-Iceberg-Demo"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/SSB-Iceberg-Demo"
-  size: 73
-  lang: ""
-  updated: "2023-09-15"
-- name: "SSBDemo"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/SSBDemo"
-  size: 43
-  lang: ""
-  updated: "2023-09-07"
 - name: "se-ent-east-hackathon"
   description: "For the SE ENT East Team's Hackathon"
   url: "https://github.com/cldr-steven-matison/se-ent-east-hackathon"
