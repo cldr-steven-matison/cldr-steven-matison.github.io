@@ -15,7 +15,6 @@ jobs:
       - name: Fetch Repositories
         run: |
           # Fetches your public repos and formats them into YAML
-          # Replace the curl/jq line in your workflow with this:
           curl -s "https://api.github.com/users/cldr-steven-matison/repos?sort=updated" | \
           jq -r '.[] | select(.fork == false) | "- name: \"\(.name)\"\n  description: \"\(.description // "No description")\"\n  url: \"\(.html_url)\"\n  size: \(.size)\n  lang: \"\(.language // "Misc")\""' > _data/repos.yml
       - name: Commit and Push
