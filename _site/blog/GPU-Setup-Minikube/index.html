@@ -253,7 +253,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          2 minute read
+          4 minute read
         
       </span>
     
@@ -353,7 +353,106 @@ minikube addons <span class="nb">enable </span>nvidia-device-plugin
 
 <hr />
 
-<h3 id="questions">Questions?</h3>
+<h2 id="-terminal-commands-for-this-session">💻 Terminal Commands for this Session</h2>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>Initial Setup
+<span class="go">curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey   | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+</span><span class="gp">curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list   | sed 's#</span>deb https://#deb <span class="o">[</span>signed-by<span class="o">=</span>/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g<span class="s1">'   | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+</span><span class="go">sudo apt-get update
+sudo apt-get install -y nvidia-container-toolkit
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo apt install unzip
+wget https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_amd64.deb
+sudo apt install ./k9s_Linux_amd64.deb
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+</span><span class="gp">#</span>some docker stuff
+<span class="gp">sudo usermod -aG docker $</span>USER
+<span class="go">newgrp docker
+docker run --rm hello-world
+docker run --rm --gpus all nvidia/cuda:12.4.0-base-ubuntu22.04 nvidia-smi
+</span><span class="gp">docker rm -f $</span><span class="o">(</span>docker ps <span class="nt">-aq</span><span class="o">)</span> 2&gt;/dev/null
+<span class="go">
+</span><span class="gp">#</span>minikube commands
+<span class="go">minikube start --driver=docker --container-runtime=docker --gpus=all --mount --mount-string="/usr/lib/wsl:/usr/lib/wsl" --force-systemd=true --extra-config=kubelet.cgroup-driver=systemd --cpus=6 --memory=16384
+
+minikube addons enable metrics-server
+minikube addons enable nvidia-device-plugin
+minikube ip
+minikube tunnel
+minikube delete
+
+</span><span class="gp">#</span><span class="w"> </span>Iterations Testing to Operational GPU
+<span class="go">
+minikube start   --driver=docker   --container-runtime=docker   --gpus=all   --force-systemd=true   --feature-gates=DevicePlugins=true   --extra-config=kubelet.feature-gates=DevicePlugins=true   --cpus=6   --memory=16384
+
+kubectl describe node | grep -i nvidia
+
+minikube stop
+minikube delete --all --purge
+sudo rm -rf ~/.minikube
+sudo rm -rf /var/lib/minikube
+</span><span class="gp">docker rm -f $</span><span class="o">(</span>docker ps <span class="nt">-aq</span><span class="o">)</span> 2&gt;/dev/null
+<span class="gp">docker rmi -f $</span><span class="o">(</span>docker images <span class="nt">-q</span><span class="o">)</span> 2&gt;/dev/null
+<span class="go">
+minikube start   --driver=docker   --container-runtime=docker   --gpus=all   --force-systemd=true   --extra-config=kubelet.cgroup-driver=systemd   --feature-gates=DevicePlugins=true   --extra-config=kubelet.feature-gates=DevicePlugins=true   --cpus=6   --memory=16384
+
+minikube stop
+minikube delete --all --purge
+sudo rm -rf ~/.minikube
+sudo rm -rf /var/lib/minikube
+</span><span class="gp">docker rm -f $</span><span class="o">(</span>docker ps <span class="nt">-aq</span><span class="o">)</span> 2&gt;/dev/null
+<span class="gp">docker rmi -f $</span><span class="o">(</span>docker images <span class="nt">-q</span><span class="o">)</span> 2&gt;/dev/null
+<span class="go">
+minikube start   --driver=docker   --container-runtime=docker   --gpus=all   --force-systemd=true   --extra-config=kubelet.cgroup-driver=systemd   --cpus=6   --memory=16384
+
+kubectl describe node | grep -i nvidia
+docker inspect minikube | grep -i runtime
+</span><span class="gp">docker rm -f $</span><span class="o">(</span>docker ps <span class="nt">-aq</span><span class="o">)</span> 2&gt;/dev/null
+<span class="go">docker run --rm --gpus all nvidia/cuda:12.4.0-base-ubuntu22.04 nvidia-smi
+docker exec -it minikube nvidia-smi
+
+sudo apt install jq
+kubectl get node minikube -o jsonpath='{.status.capacity}' | jq '."nvidia.com/gpu"'
+kubectl describe node minikube | grep -A 10 -E 'Capacity:|Allocatable:|nvidia.com/gpu'
+
+</span><span class="gp">#</span><span class="w"> </span>this was obviously needed
+<span class="go">minikube addons enable nvidia-device-plugin
+
+kubectl get node minikube -o jsonpath='{.status.capacity}' | jq '."nvidia.com/gpu"'
+kubectl describe node minikube | grep -A 5 nvidia.com/gpu
+kubectl run gpu-test --rm -it --restart=Never   --image=nvidia/cuda:12.4.0-base-ubuntu22.04   --limits=nvidia.com/gpu=1   -- nvidia-smi
+kubectl run gpu-test --rm -it --restart=Never   --image=nvidia/cuda:12.4.0-base-ubuntu22.04   --overrides='{"apiVersion":"v1","spec":{"containers":[{"name":"gpu-test","image":"nvidia/cuda:12.4.0-base-ubuntu22.04","resources":{"limits":{"nvidia.com/gpu":1}},"command":["nvidia-smi"]}]}}'
+kubectl run gpu-visual --rm -it --restart=Never   --image=ghcr.io/rapidsai/gpu-ascii-mandelbrot:cuda12.2   --overrides='{"apiVersion":"v1","spec":{"containers":[{"name":"gpu-visual","image":"ghcr.io/rapidsai/gpu-ascii-mandelbrot:cuda12.2","resources":{"limits":{"nvidia.com/gpu":1}}}]}}'
+kubectl run gpu-visual --rm -it --restart=Never   --image=ghcr.io/rapidsai/gpu-ascii-mandelbrot:cuda12.2   --overrides='{
+      "apiVersion":"v1",
+      "spec":{
+        "containers":[{
+          "name":"gpu-visual",
+          "image":"ghcr.io/rapidsai/gpu-ascii-mandelbrot:cuda12.2",
+          "resources":{"limits":{"nvidia.com/gpu":1}},
+          "command":["bash","-c","/app/mandelbrot &amp;&amp; sleep 5"]
+        }]
+      }
+    }'
+kubectl run gpu-top --restart=Never -it   --image=nvidia/cuda:12.4.0-base-ubuntu22.04   --overrides='{"apiVersion":"v1","spec":{"containers":[{"name":"gpu-top","image":"nvidia/cuda:12.4.0-base-ubuntu22.04","resources":{"limits":{"nvidia.com/gpu":1}},"command":["bash","-c","watch -n 1 nvidia-smi"]}]}}'
+ 
+kubectl run gpu-test --rm -it --image=nvcr.io/nvidia/cuda:12.6.0-base-ubuntu22.04 --limits=nvidia.com/gpu=1 -- nvidia-smi
+kubectl run gpu-test --rm -it --image=nvcr.io/nvidia/cuda:12.6.0-base-ubuntu22.04 --overrides='{"spec": {"containers": [{"name": "gpu-test", "resources": {"limits": {"nvidia.com/gpu": "1"}}}]}' -- nvidia-smi
+docker run --rm --gpus all nvcr.io/nvidia/cuda:12.0.0-base-ubuntu22.04 nvidia-smi
+kubectl run gpu-smi --rm -it --image=nvcr.io/nvidia/cuda:12.0.0-base-ubuntu22.04 --overrides='{"spec":{"containers":[{"name":"gpu-smi","resources":{"limits":{"nvidia.com/gpu":1}}}]}' -- nvidia-smi
+
+docker run --rm --gpus all nvidia/cuda:12.4.0-base-ubuntu22.04 nvidia-smi
+docker exec -it minikube nvidia-smi
+ 
+kubectl get node minikube -o jsonpath='{.status.capacity}' | jq '."nvidia.com/gpu"'
+kubectl describe node minikube | grep -A 5 nvidia.com/gpu
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="questions">Questions?</h2>
 <p>Getting GPU passthrough to work is the “final boss” of local Kubernetes setup. If you’re stuck or want to see how we use this for real-time NiFi AI pipelines, please reach out to schedule a discussion!</p>
 
         
@@ -602,7 +701,7 @@ minikube addons <span class="nb">enable </span>nvidia-device-plugin
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          3 minute read
+          4 minute read
         
       </span>
     

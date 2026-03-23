@@ -232,5 +232,59 @@ Postman works perfectly since vLLM mimics the OpenAI API. Use it to test your pr
 
 ---
 
-### Questions?
+## 💻 Terminal Commands for this Session
+
+
+```terminal
+# working with vLLM
+kubectl apply -f vllm-llama.yaml
+kubectl delete -f vllm-llama.yaml  
+kubectl logs deployment/vllm-server --previous
+kubectl describe pod -l app=vllm-server
+minikube service vllm-service --url
+kubectl exec -it mynifi-0 -n cfm-streaming -- curl -v http://vllm-service.default.svc.cluster.local:8000/v1/models
+
+# debug vLLM
+kubectl get pods
+kubectl logs vllm-server-8548fd9959-rzbdl --previous
+kubectl logs -f deployment/vllm-server -c vllm --tail=300
+
+# test vLLM
+minikube service vllm-service --url
+kubectl port-forward svc/vllm-service 8000:8000
+
+    curl http://localhost:8000/v1/chat/completions   -H "Content-Type: application/json"   -d '{
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "messages": [{"role": "user", "content": "Yo, you finally woke up! Tell me something mind-blowing about space in under 100 words."}],
+      "temperature": 0.8,
+      "max_tokens": 120
+    }'
+
+    curl http://localhost:8000/v1/chat/completions   -H "Content-Type: application/json"   -d '{
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "messages": [{"role": "user", "content": "Yo, you finally woke up! Tell me something mind-blowing about space in under 100 words."}],
+      "temperature": 0.8,
+      "max_tokens": 120
+    }'
+
+    curl http://localhost:8000/v1/chat/completions   -H "Content-Type: application/json"   -d '{
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "messages": [{"role": "user", "content": "Yo, you finally woke up! Tell me something mind-blowing about space in under 100 words."}],
+      "temperature": 0.8,
+      "max_tokens": 120
+    }'
+
+    curl http://localhost:8000/v1/chat/completions   -H "Content-Type: application/json"   -d '{
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "messages": [{"role": "user", "content": "Yo, you finally woke up! Tell me something mind-blowing about space in under 100 words."}],
+      "temperature": 0.8,
+      "max_tokens": 120,
+      "stream": true
+    }'
+
+```
+
+---
+
+## Questions?
 If you have any questions about the integration between these components or you would like a deeper dive, hands-on experience, or demos, please reach out to schedule a discussion. 🤝
