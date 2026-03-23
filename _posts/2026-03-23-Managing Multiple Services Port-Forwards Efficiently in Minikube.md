@@ -1,5 +1,5 @@
 ---
-title: "Managing Multiple Services & Port-Forwards Efficiently in Minikube"
+title: "Managing Multiple Services and Port-Forwards Efficiently in Minikube"
 excerpt: "Stop drowning in open terminal tabs just to access your UIs. This guide shows you how to streamline your Cloudera Streaming Operators workflow by managing multiple Minikube services and port-forwards simultaneously using background execution and automation scripts."
 header:
   teaser: "/assets/images/2026-03-23-minikube-services.png"
@@ -71,7 +71,7 @@ minikube service schema-registry-service -n cld-streaming --url & minikube servi
    - Kill: `pkill -f "port-forward.*qdrant"` (or by PID)
 
 
-## **Use a simple bash script**  
+## **Use Bash Scripts**  
 
   Create a file like `minikube-services.sh`:
 

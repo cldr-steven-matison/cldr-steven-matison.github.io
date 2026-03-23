@@ -353,9 +353,9 @@ var store = [{
         "url": "/blog/RAG-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/StreamToVLLM.png"
       },{
-        "title": "Managing Multiple Services & Port-Forwards Efficiently in Minikube",
+        "title": "Managing Multiple Services and Port-Forwards Efficiently in Minikube",
         "excerpt":"Running tons of kubectl port-forward or minikube service commands manually gets painful fast (one terminal per forward, easy to lose, conflicts, etc.). Here are practical ways to handle many at once without going insane. Use Minikube Service List Before you start working with services, it is helpful to see the...","categories": ["blog"],
         "tags": ["cloudera","minikube","kubernetes"],
-        "url": "/blog/Managing-Multiple-Services-&-Port-Forwards-Efficiently-in-Minikube/",
+        "url": "/blog/Managing-Multiple-Services-Port-Forwards-Efficiently-in-Minikube/",
         "teaser": "/assets/images/2026-03-23-minikube-services.png"
       }]
