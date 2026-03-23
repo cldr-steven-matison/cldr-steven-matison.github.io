@@ -6,6 +6,17 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Managing Multiple Services &amp; Port-Forwards Efficiently in Minikube</title>
+        <link>https://cldr-steven-matison.github.io/blog/Managing-Multiple-Services-&-Port-Forwards-Efficiently-in-Minikube/</link>
+        <pubDate>Mon, 23 Mar 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-23-minikube-services.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-23-minikube-services.png" medium="image" />
+        
+        <description>Stop drowning in open terminal tabs just to access your UIs. This guide shows you how to streamline your Cloudera Streaming Operators workflow by managing multiple Minikube services and port-forwards simultaneously using background execution and automation scripts.</description>
+      </item>
+    
+      <item>
         <title>RAG with Cloudera Streaming Operators</title>
         <link>https://cldr-steven-matison.github.io/blog/RAG-with-Cloudera-Streaming-Operators/</link>
         <pubDate>Sun, 22 Mar 2026 00:00:00 -0400</pubDate>
@@ -106,18 +117,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/csa-architecture.png" medium="image" />
         
         <description>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics Operator for Kubernetes 1.5. This release advances our cloud-native streaming capabilities by introducing the Materialized View engine to Kubernetes, optimizing job handling responsiveness, and updating core infrastructure components for better performance and security.
-</description>
-      </item>
-    
-      <item>
-        <title>Cloudera Flow Management Operator for Kubernetes 3.0</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-Kubernetes-Operator-3.0/</link>
-        <pubDate>Tue, 03 Mar 2026 00:00:00 -0500</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/kubernetes-logo.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/kubernetes-logo.png" medium="image" />
-        
-        <description>The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.0. This release introduces productivity and usability features.
 </description>
       </item>
     
