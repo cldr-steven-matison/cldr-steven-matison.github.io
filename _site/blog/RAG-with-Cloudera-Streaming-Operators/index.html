@@ -617,21 +617,14 @@ kubectl port-forward svc/embedding-server-service 8080:80
   <li>
 <strong>EvaluateJsonPath</strong>: Extracts the resulting vector from the JSON response into a FlowFile attribute named <code class="language-plaintext highlighter-rouge">vector_data</code>.</li>
   <li>
-<strong>InvokeHTTP (Qdrant Search)</strong>: Before storing the new data, NiFi uses that vector to query Qdrant for existing related context.</li>
+<strong>ReplaceText (Format for Qdrant)</strong>: format the body required for Qdrant Upsert.</li>
   <li>
-<strong>ReplaceText (vLLM Prompt)</strong>: This step staples the retrieved context and your original message (<code class="language-plaintext highlighter-rouge">$1</code>) together into a single text prompt.
-    <ul>
-      <li>
-<em>Note: We use the vector to find the text; we do not put the raw vector numbers into the LLM prompt!</em>.</li>
-    </ul>
-  </li>
+<strong>InvokeHTTP (Qdrant Upsert)</strong>: The flow upserts the original chunk and its embedding into Qdrant so the system “learns” the document for future queries.</li>
   <li>
-<strong>InvokeHTTP (vLLM Inference)</strong>: Sends the assembled prompt to the <code class="language-plaintext highlighter-rouge">vllm-service</code> at <code class="language-plaintext highlighter-rouge">:8000</code> for GPU-accelerated generation.</li>
-  <li>
-<strong>InvokeHTTP (Qdrant Upsert)</strong>: Simultaneously, the flow upserts the original chunk and its embedding into Qdrant so the system “learns” the document for future queries.</li>
-  <li>
-<strong>PublishKafkaRecord</strong>: The final AI-generated response is published to the <code class="language-plaintext highlighter-rouge">streamtovll_results</code> topic for downstream consumption.</li>
+<strong>PublishKafkaRecord</strong>: The final response is published to the <code class="language-plaintext highlighter-rouge">streamtovll_results</code> for evaluation.</li>
 </ol>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> First version operation flow is here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">StreamToVLLM.json</a>.  I had to create the collection first.  Need to update markdown to include how to open qdrant ui, etc.</p>
 
 <p>Start the flow — documents now stream in real time and land in Qdrant and kafka topic streamtovllm_results!</p>
 

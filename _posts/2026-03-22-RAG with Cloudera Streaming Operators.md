@@ -326,12 +326,14 @@ The flow processes each document through a "Retrieve-then-Generate" loop:
 3.  **ReplaceText (Format for Embedding)**: Wraps the text chunk into the JSON format required by the embedding server: `{"inputs": "$1"}`.
 4.  **InvokeHTTP (Embed)**: Calls the `embedding-service` at `:8080` to generate a 768-dimension vector.
 5.  **EvaluateJsonPath**: Extracts the resulting vector from the JSON response into a FlowFile attribute named `vector_data`.
-6.  **InvokeHTTP (Qdrant Search)**: Before storing the new data, NiFi uses that vector to query Qdrant for existing related context.
-7.  **ReplaceText (vLLM Prompt)**: This step staples the retrieved context and your original message (`$1`) together into a single text prompt.
-    * *Note: We use the vector to find the text; we do not put the raw vector numbers into the LLM prompt!*.
-8.  **InvokeHTTP (vLLM Inference)**: Sends the assembled prompt to the `vllm-service` at `:8000` for GPU-accelerated generation.
-9.  **InvokeHTTP (Qdrant Upsert)**: Simultaneously, the flow upserts the original chunk and its embedding into Qdrant so the system "learns" the document for future queries.
-10. **PublishKafkaRecord**: The final AI-generated response is published to the `streamtovll_results` topic for downstream consumption.
+6.  **ReplaceText (Format for Qdrant)**: format the body required for Qdrant Upsert.
+7.  **InvokeHTTP (Qdrant Upsert)**: The flow upserts the original chunk and its embedding into Qdrant so the system "learns" the document for future queries.
+8. **PublishKafkaRecord**: The final response is published to the `streamtovll_results` for evaluation.
+
+
+:warning: **Danger!** First version operation flow is here: [StreamToVLLM.json](https://github.com/cldr-steven-matison/NiFi-Templates).  I had to create the collection first.  Need to update markdown to include how to open qdrant ui, etc. 
+{: .notice--warning}
+
 
 Start the flow — documents now stream in real time and land in Qdrant and kafka topic streamtovllm_results!
 
