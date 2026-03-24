@@ -262,7 +262,39 @@ Test: `curl -X POST http://localhost:8080/embed -d '{"inputs":"Hello world"}'`
 
 ---
 
-## 🌊 Step 4: Query Time — Ask Questions!
+## 🌊 Step 4: Real-Time Ingestion with NiFi
+
+:warning: **Danger!** Flow developement in progress. 
+{: .notice--warning}
+
+
+If vLLM is the brain, Apache NiFi is the nervous system. We need to move data from Kafka, chunk it, turn it into vectors, and store it in Qdrant—all in real-time. 
+
+To make this easy, I've exported the complete NiFi flow as a JSON file: `StreanTovLLM.json`. You can download it and import it directly into your NiFi UI by dragging the "Process Group" icon onto the canvas and uploading the flow definition file.
+
+### 🛠️ Setting Up the Flow
+
+
+The flow processes each document through a "Retrieve-then-Generate" loop:
+
+1.  **ConsumeKafka_2_6**: Ingests raw text from the `new_documents` topic using the `#{Kafka Broker Endpoint}` parameter.
+2.  **SplitText**: Chunks the incoming data into **20-line segments** to ensure the context remains efficient for the 3B model.
+3.  **ReplaceText (Format for Embedding)**: Wraps the text chunk into the JSON format required by the embedding server: `{"inputs": "$1"}`.
+4.  **InvokeHTTP (Embed)**: Calls the `embedding-service` at `:8080` to generate a 768-dimension vector.
+5.  **EvaluateJsonPath**: Extracts the resulting vector from the JSON response into a FlowFile attribute named `vector_data`.
+6.  **InvokeHTTP (Qdrant Search)**: Before storing the new data, NiFi uses that vector to query Qdrant for existing related context.
+7.  **ReplaceText (vLLM Prompt)**: This step staples the retrieved context and your original message (`$1`) together into a single text prompt.
+    * *Note: We use the vector to find the text; we do not put the raw vector numbers into the LLM prompt!*.
+8.  **InvokeHTTP (vLLM Inference)**: Sends the assembled prompt to the `vllm-service` at `:8000` for GPU-accelerated generation.
+9.  **InvokeHTTP (Qdrant Upsert)**: Simultaneously, the flow upserts the original chunk and its embedding into Qdrant so the system "learns" the document for future queries.
+10. **PublishKafkaRecord**: The final AI-generated response is published to the `streamtovll_results` topic for downstream consumption.
+
+Start the flow — documents now stream in real time and land in Qdrant and kafka topic streamtovllm_results!
+
+
+---
+
+## 🌊 Step 5: Query Time — Ask Questions!
 
 Simple Python script (or curl) — save as `query-rag.py`:
 
@@ -296,16 +328,6 @@ ask("What is StreamToVLLM?")
 ```
 
 **Boom** — instant, context-aware answers from your live streaming documents.
-
----
-
-
-## 🔍 Step 5: Real-Time Ingestion with NiFi
-
-:warning: **Danger!** Flow developement in progress. 
-{: .notice--warning}
-
-Start the flow — documents now stream in real time and land in Qdrant!
 
 ---
 
