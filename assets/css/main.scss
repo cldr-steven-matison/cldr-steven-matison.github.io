@@ -7,3 +7,10 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+.cloudera-icon-small {
+  width: 15px !important; /* Forces the size */
+  height: 15px !important;
+  display: inline-block;
+  margin-right: 5px;
+}

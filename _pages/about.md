@@ -44,7 +44,7 @@ I am an active contributor to the **Cloudera Community**, where I share technica
 ### Let’s Connect
 * **LinkedIn:** [steven-matison](https://www.linkedin.com/in/steven-matison/)
 * **GitHub:** [cldr-steven-matison](https://github.com/cldr-steven-matison)
-* **Cloudera Community:** [steven-matison](https://community.cloudera.com/t5/user/viewprofilepage/user-id/24011)
+* **Cloudera Community:** [steven-matison](https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503)
 
 
 ## Technologies & Key Terms:

@@ -6,9 +6,3 @@ main:
     url: /about/
   - title: "Repos"
     url: /repos/
-  - title: "Community"
-    url: https://community.cloudera.com/?type=everything&pageNum=1
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
