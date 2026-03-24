@@ -553,33 +553,7 @@ kubectl port-forward svc/embedding-service 8080:8080
 
 <hr>
 
-<h2 id="-step-4-real-time-ingestion-with-nifi">🌊 Step 4: Real-Time Ingestion with NiFi</h2>
-
-<ol>
-  <li>Open NiFi UI → Create process group <strong>StreamToVLLM-Ingestion</strong>
-</li>
-  <li>
-    <p>Build this flow (drag &amp; drop):</p>
-
-    <p><strong>ConsumeKafka</strong> (topic: <code class="language-plaintext highlighter-rouge">new-documents</code>)<br>
-↓<br>
-<strong>ExtractText</strong> / <strong>ConvertRecord</strong> (PDF, JSON, GitHub webhooks)<br>
-↓<br>
-<strong>SplitText</strong> (512-token chunks)<br>
-↓<br>
-<strong>InvokeHTTP</strong> → <code class="language-plaintext highlighter-rouge">http://embedding-service:8080/embed</code> (get vector)<br>
-↓<br>
-<strong>InvokeHTTP</strong> → <code class="language-plaintext highlighter-rouge">http://qdrant:6333/collections/my-rag-collection/points</code> (POST vector + payload)</p>
-  </li>
-</ol>
-
-<p><strong>Pro Tip!</strong> For GitHub repos add <strong>GetHTTP</strong> + <strong>JoltTransformJSON</strong>. For URLs use <strong>GetHTTP</strong>.</p>
-
-<p>Start the flow — documents now stream in real time and land in Qdrant!</p>
-
-<hr>
-
-<h2 id="-step-5-query-time--ask-questions">🔍 Step 5: Query Time — Ask Questions!</h2>
+<h2 id="-step-4-query-time--ask-questions">🌊 Step 4: Query Time — Ask Questions!</h2>
 
 <p>Simple Python script (or curl) — save as <code class="language-plaintext highlighter-rouge">query-rag.py</code>:</p>
 
@@ -612,6 +586,14 @@ kubectl port-forward svc/embedding-service 8080:8080
 </code></pre></div></div>
 
 <p><strong>Boom</strong> — instant, context-aware answers from your live streaming documents.</p>
+
+<hr>
+
+<h2 id="-step-5-real-time-ingestion-with-nifi">🔍 Step 5: Real-Time Ingestion with NiFi</h2>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> Flow developement in progress.</p>
+
+<p>Start the flow — documents now stream in real time and land in Qdrant!</p>
 
 <hr>
 

@@ -262,28 +262,7 @@ Test: `curl -X POST http://localhost:8080/embed -d '{"inputs":"Hello world"}'`
 
 ---
 
-## 🌊 Step 4: Real-Time Ingestion with NiFi
-
-1. Open NiFi UI → Create process group **StreamToVLLM-Ingestion**
-2. Build this flow (drag & drop):
-
-   **ConsumeKafka** (topic: `new-documents`)  
-   ↓  
-   **ExtractText** / **ConvertRecord** (PDF, JSON, GitHub webhooks)  
-   ↓  
-   **SplitText** (512-token chunks)  
-   ↓  
-   **InvokeHTTP** → `http://embedding-service:8080/embed` (get vector)  
-   ↓  
-   **InvokeHTTP** → `http://qdrant:6333/collections/my-rag-collection/points` (POST vector + payload)
-
-**Pro Tip!** For GitHub repos add **GetHTTP** + **JoltTransformJSON**. For URLs use **GetHTTP**.
-
-Start the flow — documents now stream in real time and land in Qdrant!
-
----
-
-## 🔍 Step 5: Query Time — Ask Questions!
+## 🌊 Step 4: Query Time — Ask Questions!
 
 Simple Python script (or curl) — save as `query-rag.py`:
 
@@ -317,6 +296,16 @@ ask("What is StreamToVLLM?")
 ```
 
 **Boom** — instant, context-aware answers from your live streaming documents.
+
+---
+
+
+## 🔍 Step 5: Real-Time Ingestion with NiFi
+
+:warning: **Danger!** Flow developement in progress. 
+{: .notice--warning}
+
+Start the flow — documents now stream in real time and land in Qdrant!
 
 ---
 
