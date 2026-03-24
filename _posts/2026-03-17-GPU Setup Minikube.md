@@ -10,7 +10,6 @@ tags:
   - kubernetes
   - nvidia
   - ai
-author: "Steven Matison"
 ---
 
 If you’ve ever tried to get a GPU working inside a local Kubernetes cluster on Windows, you know the "Driver Dance" is real. 💃 But with **WSL2**, **Docker Desktop**, and a **GEEKOM G1 (RTX 4060)**, we can finally bridge the gap between local development and production-grade AI inference.

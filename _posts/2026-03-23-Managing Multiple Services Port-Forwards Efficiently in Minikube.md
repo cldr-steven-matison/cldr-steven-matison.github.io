@@ -9,7 +9,6 @@ tags:
   - cloudera
   - minikube
   - kubernetes
-author: "Steven Matison"
 ---
 
 

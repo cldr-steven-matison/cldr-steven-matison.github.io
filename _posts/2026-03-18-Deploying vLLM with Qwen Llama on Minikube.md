@@ -11,7 +11,6 @@ tags:
   - kubernetes
   - vllm
   - ai
-author: "Steven Matison"
 ---
 
 In my previous post [GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube](/blog/GPU-Setup-Minikube/), we successfully exposed the GPU to our Minikube pods which so far has been the hardest part of the WSL2/Docker Desktop stack! 🛠️

@@ -9,7 +9,6 @@ tags:
   - cloudera
   - kubernetes
   - nifi
-author: "Steven Matison"
 ---
 
 Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it.  **Or Did I?** :bomb:
@@ -55,19 +54,19 @@ This lets 16 parallel threads chew through the heavy compression work.
 
 ### Increase the Active Thread Pool
 - Open your NiFi controller settings 
-- Raise the **Maximum Timer Driven Thread Pool Size** to **`32`** (roughly 4× my CPU cores for aggressive tuning)
+- Raise the **Maximum Timer Driven Thread Count** to **`32`** (roughly 4× my CPU cores for aggressive tuning)
 
 ![Adjusting Maximum Timer Driver Thread Count](/assets/images/2026-03-20-screenshot-6.png)
 
 This gives NiFi far more total threads to work with across the entire cluster.
 
 ### Crank Up Queue Sizes
-- Click each connection arrow 
+- Click each Success Connection
   - GenerateFlowFile → DuplicateFlowFile
   - DuplicateFlowFile → CompressContent
-- Edit the connection properties
-- Set **Back Pressure Object Threshold** to **`500 GB`** (or as high as your volume allows)
-- Optionally bump the object **Size Threshold** to **`500,000`**+** as well
+- Edit the connection properties as follows
+  - Set **Back Pressure Object Threshold** to **`500000`**
+  - Set the object **Size Threshold** to **`500GB`**
 
 ![Back Pressure](/assets/images/2026-03-20-back-pressure.png)
 

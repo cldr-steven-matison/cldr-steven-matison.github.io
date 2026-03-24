@@ -11,7 +11,6 @@ tags:
   - nifi
   - vllm
   - ai
-author: "Steven Matison"
 ---
 
 :warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
