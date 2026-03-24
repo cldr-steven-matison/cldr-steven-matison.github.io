@@ -202,6 +202,9 @@ curl http://localhost:8000/v1/chat/completions \
   }'
 ```
 
+:warning: **Danger!** If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see `Application startup complete`. 
+{: .notice--warning}
+
 ---
 
 ## 📮 Setting up Postman

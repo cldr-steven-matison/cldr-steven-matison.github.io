@@ -150,6 +150,9 @@ curl http://localhost:8000/v1/chat/completions \
   }'
 ```
 
+:warning: **Danger!** If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see `Application startup complete`. 
+{: .notice--warning}
+
 **⚡ Ready for RAG!** Your GPU pod is now the brain of the system.
 
 ---
@@ -203,10 +206,17 @@ spec:
   type: ClusterIP
 ```
 
+Apply it:
+
 ```bash
 kubectl apply -f qdrant-deployment.yaml
 kubectl port-forward svc/qdrant 6333:6333
-curl http://localhost:6333/
+```
+
+**Test it** (OpenAI-compatible endpoint):
+
+```bash
+curl http://localhost:6333
 ```
 
 ---
@@ -224,41 +234,75 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: embedding
+      app: embedding-server
   template:
     metadata:
       labels:
-        app: embedding
+        app: embedding-server
     spec:
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
-      - name: embedder
-        image: ghcr.io/huggingface/text-embeddings-inference:1.5
-        args: ["--model-id", "nomic-ai/nomic-embed-text-v1", "--pooling", "cls"]
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            cpu: "2"
-            memory: 4Gi
+        - name: tei-container
+          image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.5
+          # This is the magic part: it forces the token into the binary's face
+          command: ["/bin/sh", "-c"]
+          args: 
+            - |
+              text-embeddings-router \
+              --model-id nomic-ai/nomic-embed-text-v1 \
+              --port 80 \
+              --hf-api-token "[hf-token]"
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "2"
+          volumeMounts:
+            - name: model-cache
+              mountPath: /data
+      volumes:
+        - name: model-cache
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: embedding-service
+  name: embedding-server-service
 spec:
   selector:
-    app: embedding
+    app: embedding-server
   ports:
-  - port: 8080
-    targetPort: 8080
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
 ```
+
+I had some difficulties in getting the hf model and token secret into the mix during pod creation.  The working setup I ended up with was to download the model locally, mount that during pod creation, and explictly use the hf-token string.   
+
+Supporting Commands:
+
+```terminal
+mkdir -p /mnt/c/hf-models/nomic-embed
+cd /mnt/c/hf-models/nomic-embed
+sudo apt install python3-pip
+python3 -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='nomic-ai/nomic-embed-text-v1', local_dir='/mnt/c/hf-models/nomic-embed', token='[hf-token]]')"
+minikube mount /mnt/c/hf-models/nomic-embed:/mnt/c/hf-models/nomic-embed
+```
+
+Apply it:
 
 ```bash
 kubectl apply -f embedding-server.yaml
-kubectl port-forward svc/embedding-service 8080:8080
+kubectl port-forward svc/embedding-server-service 8080:80
 ```
 
-Test: `curl -X POST http://localhost:8080/embed -d '{"inputs":"Hello world"}'`
+**Test it** (OpenAI-compatible endpoint):
+
+```bash
+curl -X POST http://localhost:8080/embed -d '{"inputs":"The streaming pipeline is finally complete."}'   -H 'Content-Type: application/json'
+```
 
 ---
 

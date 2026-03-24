@@ -23,14 +23,14 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
 <meta property="og:title" content="RAG with Cloudera Streaming Operators">
-<meta property="og:url" content="http://localhost:4000/blog/RAG-with-Cloudera-Streaming-Operators/">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/RAG-with-Cloudera-Streaming-Operators/">
 
 
   <meta property="og:description" content="Privacy-first, fully local semantic search &amp; question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and your RTX 4060 GPU.">
 
 
 
-  <meta property="og:image" content="http://localhost:4000/assets/images/StreamToVLLM.png">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/StreamToVLLM.png">
 
 
 
@@ -47,7 +47,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/blog/RAG-with-Cloudera-Streaming-Operators/">
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/RAG-with-Cloudera-Streaming-Operators/">
 
 
 
@@ -58,7 +58,7 @@
     
       "@type": "Person",
       "name": "Steven Matison",
-      "url": "http://localhost:4000/"
+      "url": "https://cldr-steven-matison.github.io/"
     
   }
 </script>
@@ -160,7 +160,7 @@
 
   
     <div class="author__avatar">
-      <a href="http://localhost:4000/">
+      <a href="https://cldr-steven-matison.github.io/">
         <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
       </a>
     </div>
@@ -168,7 +168,7 @@
 
   <div class="author__content">
     <h3 class="author__name p-name" itemprop="name">
-      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Steven Matison</a>
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
     </h3>
     
       <div class="author__bio p-note" itemprop="description">
@@ -280,7 +280,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/blog/RAG-with-Cloudera-Streaming-Operators/" class="u-url" itemprop="url">RAG with Cloudera Streaming Operators
+            <a href="https://cldr-steven-matison.github.io/blog/RAG-with-Cloudera-Streaming-Operators/" class="u-url" itemprop="url">RAG with Cloudera Streaming Operators
 </a>
           </h1>
           
@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          5 minute read
+          6 minute read
         
       </span>
     
@@ -445,6 +445,8 @@ kubectl port-forward svc/vllm-service 8000:8000
   }'</span>
 </code></pre></div></div>
 
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see <code class="language-plaintext highlighter-rouge">Application startup complete</code>.</p>
+
 <p><strong>⚡ Ready for RAG!</strong> Your GPU pod is now the brain of the system.</p>
 
 <hr>
@@ -497,9 +499,15 @@ kubectl port-forward svc/vllm-service 8000:8000
   <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
 </code></pre></div></div>
 
+<p>Apply it:</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> qdrant-deployment.yaml
 kubectl port-forward svc/qdrant 6333:6333
-curl http://localhost:6333/
+</code></pre></div></div>
+
+<p><strong>Test it</strong> (OpenAI-compatible endpoint):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:6333
 </code></pre></div></div>
 
 <hr>
@@ -516,40 +524,72 @@ curl http://localhost:6333/
   <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">matchLabels</span><span class="pi">:</span>
-      <span class="na">app</span><span class="pi">:</span> <span class="s">embedding</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">embedding-server</span>
   <span class="na">template</span><span class="pi">:</span>
     <span class="na">metadata</span><span class="pi">:</span>
       <span class="na">labels</span><span class="pi">:</span>
-        <span class="na">app</span><span class="pi">:</span> <span class="s">embedding</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">embedding-server</span>
     <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">dnsPolicy</span><span class="pi">:</span> <span class="s">ClusterFirstWithHostNet</span>
       <span class="na">containers</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">embedder</span>
-        <span class="na">image</span><span class="pi">:</span> <span class="s">ghcr.io/huggingface/text-embeddings-inference:1.5</span>
-        <span class="na">args</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">--model-id"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">nomic-ai/nomic-embed-text-v1"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">--pooling"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">cls"</span><span class="pi">]</span>
-        <span class="na">ports</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8080</span>
-        <span class="na">resources</span><span class="pi">:</span>
-          <span class="na">limits</span><span class="pi">:</span>
-            <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
-            <span class="na">memory</span><span class="pi">:</span> <span class="s">4Gi</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">tei-container</span>
+          <span class="na">image</span><span class="pi">:</span> <span class="s">ghcr.io/huggingface/text-embeddings-inference:cpu-1.5</span>
+          <span class="c1"># This is the magic part: it forces the token into the binary's face</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">/bin/sh"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-c"</span><span class="pi">]</span>
+          <span class="na">args</span><span class="pi">:</span> 
+            <span class="pi">-</span> <span class="pi">|</span>
+              <span class="s">text-embeddings-router \</span>
+              <span class="s">--model-id nomic-ai/nomic-embed-text-v1 \</span>
+              <span class="s">--port 80 \</span>
+              <span class="s">--hf-api-token "[hf-token]"</span>
+          <span class="na">ports</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">limits</span><span class="pi">:</span>
+              <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2Gi"</span>
+              <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+          <span class="na">volumeMounts</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">model-cache</span>
+              <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/data</span>
+      <span class="na">volumes</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">model-cache</span>
+          <span class="na">emptyDir</span><span class="pi">:</span> <span class="pi">{}</span>
 <span class="nn">---</span>
 <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
 <span class="na">metadata</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">embedding-service</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">embedding-server-service</span>
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">selector</span><span class="pi">:</span>
-    <span class="na">app</span><span class="pi">:</span> <span class="s">embedding</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">embedding-server</span>
   <span class="na">ports</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
-    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">8080</span>
+    <span class="pi">-</span> <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+      <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
 </code></pre></div></div>
+
+<p>I had some difficulties in getting the hf model and token secret into the mix during pod creation.  The working setup I ended up with was to download the model locally, mount that during pod creation, and explictly use the hf-token string.</p>
+
+<p>Supporting Commands:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">mkdir -p /mnt/c/hf-models/nomic-embed
+cd /mnt/c/hf-models/nomic-embed
+sudo apt install python3-pip
+</span><span class="gp">python3 -c "from huggingface_hub import snapshot_download;</span><span class="w"> </span>snapshot_download<span class="o">(</span><span class="nv">repo_id</span><span class="o">=</span><span class="s1">'nomic-ai/nomic-embed-text-v1'</span>, <span class="nv">local_dir</span><span class="o">=</span><span class="s1">'/mnt/c/hf-models/nomic-embed'</span>, <span class="nv">token</span><span class="o">=</span><span class="s1">'[hf-token]]'</span><span class="o">)</span><span class="s2">"
+</span><span class="go">minikube mount /mnt/c/hf-models/nomic-embed:/mnt/c/hf-models/nomic-embed
+</span></code></pre></div></div>
+
+<p>Apply it:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> embedding-server.yaml
-kubectl port-forward svc/embedding-service 8080:8080
+kubectl port-forward svc/embedding-server-service 8080:80
 </code></pre></div></div>
 
-<p>Test: <code class="language-plaintext highlighter-rouge">curl -X POST http://localhost:8080/embed -d '{"inputs":"Hello world"}'</code></p>
+<p><strong>Test it</strong> (OpenAI-compatible endpoint):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST http://localhost:8080/embed <span class="nt">-d</span> <span class="s1">'{"inputs":"The streaming pipeline is finally complete."}'</span>   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+</code></pre></div></div>
 
 <hr>
 
@@ -715,11 +755,11 @@ kubectl delete <span class="nt">-f</span> embedding-server.yaml
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=RAG+with+Cloudera+Streaming+Operators%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=RAG+with+Cloudera+Streaming+Operators%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
