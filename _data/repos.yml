@@ -1,90 +1,196 @@
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 79538
+  lang: "HTML"
+  updated: "2026-03-24"
+  fork: false
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 42
+  lang: ""
+  updated: "2026-03-24"
+  fork: false
+- name: "ClouderaHandsOnLabDFX"
+  description: "2 Hours to Data Innovation hands on lab."
+  url: "https://github.com/cldr-steven-matison/ClouderaHandsOnLabDFX"
+  size: 20974
+  lang: ""
+  updated: "2026-03-23"
+  fork: false
+- name: "SSB-CDC-Demo"
+  description: "Sql Stgream Builder CDC Demo Project."
+  url: "https://github.com/cldr-steven-matison/SSB-CDC-Demo"
+  size: 2120
+  lang: ""
+  updated: "2026-03-23"
+  fork: false
 - name: "SSBDemo"
   description: "SSB Demo examples to show project differences between on-prem and cloud."
   url: "https://github.com/cldr-steven-matison/SSBDemo"
   size: 43
   lang: ""
   updated: "2026-03-23"
+  fork: false
 - name: "SSB-Iceberg-Demo"
   description: "Sql Stream Builder project with samples and examples of using Icberg with SSB."
   url: "https://github.com/cldr-steven-matison/SSB-Iceberg-Demo"
   size: 73
   lang: ""
   updated: "2026-03-23"
+  fork: false
 - name: "hol-013-flink-project"
   description: "Cloudera HOL Flink Sql Stream Builder Project Repository."
   url: "https://github.com/cldr-steven-matison/hol-013-flink-project"
   size: 7
   lang: ""
   updated: "2026-03-23"
+  fork: false
 - name: "ClouderaOperatorYAML"
   description: "Terminal commands and YAML to install Cloudera Streaming Operators."
   url: "https://github.com/cldr-steven-matison/ClouderaOperatorYAML"
   size: 12
   lang: ""
   updated: "2026-03-23"
+  fork: false
 - name: "Fraud-Prevention-TM"
   description: "Fraud Demo repo for a customer facing internal hands on lab."
   url: "https://github.com/cldr-steven-matison/Fraud-Prevention-TM"
   size: 2736
   lang: "Python"
   updated: "2026-03-23"
+  fork: false
 - name: "NiFi-Templates"
   description: "NiFI Templates of example flows I share with the community."
   url: "https://github.com/cldr-steven-matison/NiFi-Templates"
   size: 465
   lang: ""
   updated: "2026-03-23"
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 79231
-  lang: "HTML"
-  updated: "2026-03-23"
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 42
+  fork: false
+- name: "DeepFindr"
+  description: "A local, privacy-first AI knowledge base. Index documents, websites, and GitHub repos — then ask questions and get accurate, sourced answers powered by    local LLMs. Desktop app (Electron) + RAG backend (FastAPI/Qdrant) + MCP server for Cursor & Claude Desktop. Everything runs on your machine."
+  url: "https://github.com/cldr-steven-matison/DeepFindr"
+  size: 4115
   lang: ""
-  updated: "2026-03-23"
+  updated: "2026-03-22"
+  fork: true
 - name: "ClouderaStreamingOperators"
   description: "Repo for yaml used in installing Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
   size: 27
   lang: ""
   updated: "2026-03-22"
+  fork: false
 - name: "CSA-Operator-Demo"
   description: "Sample SSB Project for CSA Operator"
   url: "https://github.com/cldr-steven-matison/CSA-Operator-Demo"
   size: 5
   lang: ""
   updated: "2026-03-18"
+  fork: false
+- name: "ADMIN-238_Admin_K8s"
+  description: "Exercises for the ADMIN-238 Administrating Kubernetes course"
+  url: "https://github.com/cldr-steven-matison/ADMIN-238_Admin_K8s"
+  size: 341
+  lang: ""
+  updated: "2026-03-11"
+  fork: true
+- name: "CHAMP-138-K8s"
+  description: "This is the exercise repo for CHAMP-138 Just Enough Kubernetes"
+  url: "https://github.com/cldr-steven-matison/CHAMP-138-K8s"
+  size: 23
+  lang: ""
+  updated: "2026-03-11"
+  fork: true
+- name: "edge2ai-workshop"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/edge2ai-workshop"
+  size: 98008
+  lang: "Python"
+  updated: "2025-08-21"
+  fork: true
+- name: "kafka-python"
+  description: "Python client for Apache Kafka"
+  url: "https://github.com/cldr-steven-matison/kafka-python"
+  size: 5928
+  lang: ""
+  updated: "2025-08-21"
+  fork: true
+- name: "iceberg-mcp-server"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/iceberg-mcp-server"
+  size: 57
+  lang: ""
+  updated: "2025-07-24"
+  fork: true
+- name: "twitter-mcp"
+  description: "A Model Context Protocol server allows to interact with Twitter, enabling posting tweets and searching Twitter."
+  url: "https://github.com/cldr-steven-matison/twitter-mcp"
+  size: 58
+  lang: ""
+  updated: "2025-07-24"
+  fork: true
+- name: "mkdocs-material"
+  description: "Documentation that simply works"
+  url: "https://github.com/cldr-steven-matison/mkdocs-material"
+  size: 138059
+  lang: ""
+  updated: "2025-07-21"
+  fork: true
 - name: "Streams-Processing-Hands-on-Lab"
   description: "Github repo for CSP Hands On Lab"
   url: "https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab"
   size: 4453
   lang: ""
   updated: "2025-01-15"
-- name: "ClouderaHandsOnLabDFX"
-  description: "CloudearHandsOnLabDFX"
-  url: "https://github.com/cldr-steven-matison/ClouderaHandsOnLabDFX"
-  size: 20974
-  lang: ""
-  updated: "2024-07-24"
-- name: "SSB-CDC-Demo"
-  description: "SQLServer CDC Demo"
-  url: "https://github.com/cldr-steven-matison/SSB-CDC-Demo"
-  size: 2120
-  lang: ""
-  updated: "2023-12-06"
+  fork: false
+- name: "Fraud-Prevention-With-Cloudera-SSB"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB"
+  size: 4845
+  lang: "Python"
+  updated: "2024-04-26"
+  fork: true
 - name: "IPDRStreaming"
   description: "SQL Stream Builder (SSB) jobs to analyze IPDR data stream"
   url: "https://github.com/cldr-steven-matison/IPDRStreaming"
   size: 38
   lang: ""
   updated: "2023-10-25"
+  fork: false
+- name: "CallCMLModel"
+  description: "An example on calling models deployed in CML"
+  url: "https://github.com/cldr-steven-matison/CallCMLModel"
+  size: 13
+  lang: ""
+  updated: "2023-08-07"
+  fork: true
+- name: "ozone"
+  description: "Scalable, redundant, and distributed object store for Apache Hadoop"
+  url: "https://github.com/cldr-steven-matison/ozone"
+  size: 64943
+  lang: ""
+  updated: "2023-05-16"
+  fork: true
 - name: "se-ent-east-hackathon"
   description: "For the SE ENT East Team's Hackathon"
   url: "https://github.com/cldr-steven-matison/se-ent-east-hackathon"
   size: 22842
   lang: ""
   updated: "2023-01-17"
+  fork: false
+- name: "meme-gen"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/meme-gen"
+  size: 4024
+  lang: "JavaScript"
+  updated: "2022-06-15"
+  fork: true
+- name: "APIbasedClusterMonitoring"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/APIbasedClusterMonitoring"
+  size: 37
+  lang: ""
+  updated: "2022-02-16"
+  fork: true
