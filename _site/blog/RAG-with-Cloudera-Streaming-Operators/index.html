@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          6 minute read
+          7 minute read
         
       </span>
     
@@ -311,11 +311,13 @@
         
         <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
 
-<p>Let’s build: <strong>StreamToVLLM</strong> — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi + Flink) + vLLM inference + Qdrant vector search.</p>
+<p>Let’s build: <strong>StreamToVLLM</strong> — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search.</p>
 
-<p>Perfect for this GPU() RTX 4060 8 GB VRAM) setup — it comfortably runs Qwen2.5-3B-Instruct at speed while NiFi ingests documents in real time via Kafka.</p>
+<p><img src="/assets/images/2026-03-22-architecture.png" alt="RAG with Cloudera Streaming Operators"></p>
 
-<p>We already have the <a href="/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> stack, <a href="/blog/GPU-Setup-Minikube/">GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube</a>, and some example <a href="/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/">Deploying vLLM with Qwen Llama on Minikube</a> working from previous sessions — now let’s wire it all together into a complete, production-grade local RAG pipeline.</p>
+<p>Perfect for this GPU() RTX 4060 8 GB VRAM) setup — it comfortably runs Qwen2.5-3B-Instruct while NiFi ingests documents in real time via Kafka.</p>
+
+<p>We already have the <a href="/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> stack, <a href="/blog/GPU-Setup-Minikube/">GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube</a>, and some example <a href="/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/">Deploying vLLM with Qwen Llama on Minikube</a> working from previous sessions — now let’s wire it all together into a complete local RAG pipeline.</p>
 
 <hr>
 
@@ -356,7 +358,12 @@ spec:
 
 <p><strong>Expected output:</strong> <code class="language-plaintext highlighter-rouge">Test PASSED</code> ✅</p>
 
-<p><strong>Pro Tip!</strong> Keep <code class="language-plaintext highlighter-rouge">watch nvidia-smi</code> running in another terminal — you’ll see your 4060 light up during inference.</p>
+<p>Notice the response:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+</span></code></pre></div></div>
+
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Keep <code class="language-plaintext highlighter-rouge">watch nvidia-smi</code> running in another terminal — you’ll see your 4060 light up during inference.</p>
 
 <hr>
 
@@ -427,14 +434,14 @@ spec:
   <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
 </code></pre></div></div>
 
-<p>Apply it:</p>
+<p>Apply the Qwen YAML:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> vllm-qwen.yaml
 kubectl get pods <span class="nt">-w</span>
 kubectl port-forward svc/vllm-service 8000:8000
 </code></pre></div></div>
 
-<p><strong>Test it</strong> (OpenAI-compatible endpoint):</p>
+<p><strong>Test</strong></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:8000/v1/chat/completions <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -444,6 +451,11 @@ kubectl port-forward svc/vllm-service 8000:8000
     "temperature": 0.7
   }'</span>
 </code></pre></div></div>
+
+<p>Notice the response:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+</span></code></pre></div></div>
 
 <p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see <code class="language-plaintext highlighter-rouge">Application startup complete</code>.</p>
 
@@ -499,16 +511,21 @@ kubectl port-forward svc/vllm-service 8000:8000
   <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
 </code></pre></div></div>
 
-<p>Apply it:</p>
+<p>Apply the Qdrant YAML:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> qdrant-deployment.yaml
 kubectl port-forward svc/qdrant 6333:6333
 </code></pre></div></div>
 
-<p><strong>Test it</strong> (OpenAI-compatible endpoint):</p>
+<p><strong>Test</strong></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:6333
 </code></pre></div></div>
+
+<p>Notice the response:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+</span></code></pre></div></div>
 
 <hr>
 
@@ -580,26 +597,31 @@ sudo apt install python3-pip
 </span><span class="go">minikube mount /mnt/c/hf-models/nomic-embed:/mnt/c/hf-models/nomic-embed
 </span></code></pre></div></div>
 
-<p>Apply it:</p>
+<p>Apply the Emedding Server YAML:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> embedding-server.yaml
 kubectl port-forward svc/embedding-server-service 8080:80
 </code></pre></div></div>
 
-<p><strong>Test it</strong> (OpenAI-compatible endpoint):</p>
+<p>**Test</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST http://localhost:8080/embed <span class="nt">-d</span> <span class="s1">'{"inputs":"The streaming pipeline is finally complete."}'</span>   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
 </code></pre></div></div>
 
+<p>Notice the response:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+</span></code></pre></div></div>
+
 <hr>
 
-<h2 id="-step-4-real-time-ingestion-with-nifi">🌊 Step 4: Real-Time Ingestion with NiFi</h2>
+<h2 id="-step-4-document-ingestion-with-nifi">🌊 Step 4: Document Ingestion with NiFi</h2>
 
 <p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> Flow developement in progress.</p>
 
-<p>If vLLM is the brain, Apache NiFi is the nervous system. We need to move data from Kafka, chunk it, turn it into vectors, and store it in Qdrant—all in real-time.</p>
+<p>If vLLM is the brain, Apache NiFi is the nervous system. We need to move data from Kafka, chunk it, turn it into vectors, and store it in Qdrant—all in with NiFi.</p>
 
-<p>To make this easy, I’ve exported the complete NiFi flow as a JSON file: <code class="language-plaintext highlighter-rouge">StreanTovLLM.json</code>. You can download it and import it directly into your NiFi UI by dragging the “Process Group” icon onto the canvas and uploading the flow definition file.</p>
+<p>To make this easy, I’ve exported the complete NiFi flow as a JSON file: <code class="language-plaintext highlighter-rouge">StreanTovLLM.json</code>. You can download it and import it directly into your NiFi UI by dragging a new <code class="language-plaintext highlighter-rouge">Process Group</code> onto the canvas and uploading the flow definition file.</p>
 
 <h3 id="️-setting-up-the-flow">🛠️ Setting Up the Flow</h3>
 
@@ -626,7 +648,7 @@ kubectl port-forward svc/embedding-server-service 8080:80
 
 <p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> First version operation flow is here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">StreamToVLLM.json</a>.  I had to create the collection first.  Need to update markdown to include how to open qdrant ui, etc.</p>
 
-<p>Start the flow — documents now stream in real time and land in Qdrant and kafka topic streamtovllm_results!</p>
+<p>Start the flow — documents arrving into our topic now stream though NiFi and land in Qdrant and able to be used at context in calls to our vllm service!</p>
 
 <hr>
 
@@ -662,6 +684,11 @@ kubectl port-forward svc/embedding-server-service 8080:80
 <span class="nf">ask</span><span class="p">(</span><span class="s">"What is StreamToVLLM?"</span><span class="p">)</span>
 </code></pre></div></div>
 
+<p>Notice the response:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+</span></code></pre></div></div>
+
 <p><strong>Boom</strong> — instant, context-aware answers from your live streaming documents.</p>
 
 <hr>
@@ -672,6 +699,24 @@ kubectl port-forward svc/embedding-server-service 8080:80
 kubectl delete <span class="nt">-f</span> qdrant-deployment.yaml
 kubectl delete <span class="nt">-f</span> embedding-server.yaml
 </code></pre></div></div>
+
+<hr>
+
+<h2 id="checkered_flag-the-streamtovllm-takeaway">
+<img class="emoji" title=":checkered_flag:" alt=":checkered_flag:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c1.png" height="20" width="20"> The “StreamToVLLM” Takeaway</h2>
+
+<p>This project isn’t about building a final product; it’s about establishing a foundational dev pipeline that actually works on local hardware. By wiring these components together on an <strong>RTX 4060</strong>, we’ve brought a local GPU for functional development.</p>
+
+<ul>
+  <li>
+<strong>Foundational RAG Plumbing</strong>: We’ve built the “boring” but essential infrastructure—moving data from a stream, through a vectorizer, and into a searchable brain—all within a single Minikube cluster.</li>
+  <li>
+<strong>The Power of Context</strong>: By chunking and embedding our own data, we’ve moved the LLM from “guessing” to “referencing.” We aren’t just asking Qwen to be smart; we’re giving it an open-book exam using the specific context we’ve provided.</li>
+  <li>
+<strong>Unlocking the Sandbox</strong>: The real win here isn’t the chatbot—it’s the capability. Now that the pipeline exists, you can swap models, change embedding strategies, or pipe in entirely different data sources (Git, Jira, Slack) to see how they interact with local inference.</li>
+  <li>
+<strong>Zero-Cost Iteration</strong>: Because this is 100% local, we can break things, re-index the collection, and run 1,000 test queries in iterations.</li>
+</ul>
 
 <hr>
 
