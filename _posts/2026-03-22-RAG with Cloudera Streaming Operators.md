@@ -167,7 +167,7 @@ Notice the response:
 
 ```
 
-:warning: **Danger!** If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see `Application startup complete`. 
+:warning: **Warning!** If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see `Application startup complete`. 
 {: .notice--warning}
 
 **⚡ Ready for RAG!** Your GPU pod is now the brain of the system.
@@ -230,10 +230,9 @@ kubectl apply -f qdrant-deployment.yaml
 kubectl port-forward svc/qdrant 6333:6333
 ```
 
-**Test**
-
+Let's use curl to test and to create our first sample collection to use later:
 ```bash
-curl http://localhost:6333
+create collection curl
 ```
 
 Notice the response:
@@ -241,6 +240,9 @@ Notice the response:
 ```terminal
 
 ```
+
+:trophy: **Pro Tip!** With `port-forward` on visit http://localhost:6333/dashboard and have a look at Qdrant 
+{: .notice--primary}
 
 ---
 
@@ -337,7 +339,7 @@ Notice the response:
 
 ## 🌊 Step 4: Document Ingestion with NiFi
 
-:warning: **Danger!** First version operation flow is here: [StreamToVLLM.json](https://github.com/cldr-steven-matison/NiFi-Templates).  I had to create the collection first.  Need to update markdown to include how to open qdrant ui, etc. 
+:warning: **Warning!** First version operation flow is here: [StreamToVLLM.json](https://github.com/cldr-steven-matison/NiFi-Templates).  
 {: .notice--warning}
 
 

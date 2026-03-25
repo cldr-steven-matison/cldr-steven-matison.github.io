@@ -457,7 +457,7 @@ kubectl port-forward svc/vllm-service 8000:8000
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
 </span></code></pre></div></div>
 
-<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see <code class="language-plaintext highlighter-rouge">Application startup complete</code>.</p>
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Warning!</strong> If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see <code class="language-plaintext highlighter-rouge">Application startup complete</code>.</p>
 
 <p><strong>⚡ Ready for RAG!</strong> Your GPU pod is now the brain of the system.</p>
 
@@ -517,15 +517,16 @@ kubectl port-forward svc/vllm-service 8000:8000
 kubectl port-forward svc/qdrant 6333:6333
 </code></pre></div></div>
 
-<p><strong>Test</strong></p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:6333
+<p>Let’s use curl to test and to create our first sample collection to use later:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create collection curl
 </code></pre></div></div>
 
 <p>Notice the response:</p>
 
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
 </span></code></pre></div></div>
+
+<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> With <code class="language-plaintext highlighter-rouge">port-forward</code> on visit http://localhost:6333/dashboard and have a look at Qdrant</p>
 
 <hr>
 
@@ -617,7 +618,7 @@ kubectl port-forward svc/embedding-server-service 8080:80
 
 <h2 id="-step-4-document-ingestion-with-nifi">🌊 Step 4: Document Ingestion with NiFi</h2>
 
-<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> First version operation flow is here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">StreamToVLLM.json</a>.  I had to create the collection first.  Need to update markdown to include how to open qdrant ui, etc.</p>
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Warning!</strong> First version operation flow is here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">StreamToVLLM.json</a>.</p>
 
 <p>If vLLM is the brain, Apache NiFi is the nervous system. We need to move data from Kafka, chunk it, turn it into vectors, and store it in Qdrant — all in NiFi.</p>
 
