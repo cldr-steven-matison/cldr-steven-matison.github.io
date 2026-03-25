@@ -603,7 +603,7 @@ sudo apt install python3-pip
 kubectl port-forward svc/embedding-server-service 8080:80
 </code></pre></div></div>
 
-<p>**Test</p>
+<p><strong>Test</strong></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST http://localhost:8080/embed <span class="nt">-d</span> <span class="s1">'{"inputs":"The streaming pipeline is finally complete."}'</span>   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
 </code></pre></div></div>

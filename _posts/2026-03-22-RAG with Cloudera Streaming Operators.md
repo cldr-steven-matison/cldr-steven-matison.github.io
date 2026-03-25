@@ -320,7 +320,7 @@ kubectl apply -f embedding-server.yaml
 kubectl port-forward svc/embedding-server-service 8080:80
 ```
 
-**Test
+**Test**
 
 ```bash
 curl -X POST http://localhost:8080/embed -d '{"inputs":"The streaming pipeline is finally complete."}'   -H 'Content-Type: application/json'
