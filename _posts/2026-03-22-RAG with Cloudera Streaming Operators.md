@@ -437,9 +437,14 @@ This project isn't about building a final product; it’s about establishing a f
 
 ## 📚 Resources & Further Reading
 
-- [Cloudera Streaming Operators](/blog/Cloudera-Streaming-Operators/)
-- [GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube](/blog/GPU-Setup-Minikube/)
-- [Deploying vLLM with Qwen Llama on Minikube](/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/)
+* [Qwen2.5-3B-Instruct (Hugging Face)](https://huggingface.co/Qwen/Qwen2.5-3B-Instruct)
+* [nomic-embed-text-v1 (Hugging Face)](https://huggingface.co/nomic-ai/nomic-embed-text-v1)
+* [Text Embeddings Inference (TEI)](https://github.com/huggingface/text-embeddings-inference)
+* [Qdrant Vector Database](https://qdrant.tech/)
+* [Qdrant GitHub Repository](https://github.com/qdrant/qdrant)
+* [Cloudera Streaming Operators](/blog/Cloudera-Streaming-Operators/)
+* [GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube](/blog/GPU-Setup-Minikube/)
+* [Deploying vLLM with Qwen Llama on Minikube](/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/)
 
 ---
 
