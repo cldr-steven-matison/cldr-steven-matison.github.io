@@ -16,21 +16,6 @@ tags:
 :warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
 {: .notice--danger}
 
-{: .notice--danger}
-**Danger Error:** This is Danger
-
-{: .notice--warning}
-**Warning Error:** This is a Warning
-
-{: .notice--primary}
-**Primary Error:** This is Primary
-
-{: .notice--success}
-**Success Error:** This is a Success
-
-{: .notice--info}
-**Info Error:** This is a Info
-
 
 Let's build: **StreamToVLLM** — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search.  
 

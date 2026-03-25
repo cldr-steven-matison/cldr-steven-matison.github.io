@@ -348,7 +348,7 @@ var store = [{
         "teaser": "/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png"
       },{
         "title": "RAG with Cloudera Streaming Operators",
-        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. Danger Error: This is Danger Warning Error: This is a Warning Primary Error: This is Primary Success Error: This is a Success Info Error: This is a Info Let’s build:...","categories": ["blog"],
+        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. Let’s build: StreamToVLLM — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just...","categories": ["blog"],
         "tags": ["cloudera","operator","nifi","vllm","ai"],
         "url": "/blog/RAG-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/StreamToVLLM.png"
