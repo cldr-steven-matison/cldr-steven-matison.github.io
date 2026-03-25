@@ -64,7 +64,12 @@ kubectl logs gpu-test -f
 Notice the response:
 
 ```terminal
-
+[Vector addition of 50000 elements]
+Copy input data from the host memory to the CUDA device
+CUDA kernel launch with 196 blocks of 256 threads
+Copy output data from the CUDA device to the host memory
+Test PASSED
+Done
 ```
 
 :trophy: **Pro Tip!** Keep `watch nvidia-smi` running in another terminal — you’ll see your 4060 light up during inference.
@@ -232,13 +237,15 @@ kubectl port-forward svc/qdrant 6333:6333
 
 Let's use curl to test and to create our first sample collection to use later:
 ```bash
-create collection curl
+curl -X PUT "http://localhost:6333/collections/my-rag-collection" \
+-H "Content-Type: application/json" \
+-d '{"vectors": {"size": 768, "distance": "Cosine"}}'
 ```
 
 Notice the response:
 
 ```terminal
-
+{"result":true,"status":"ok","time":0.098496962}
 ```
 
 :trophy: **Pro Tip!** With `port-forward` on visit http://localhost:6333/dashboard and have a look at Qdrant 
@@ -332,7 +339,7 @@ curl -X POST http://localhost:8080/embed -d '{"inputs":"The streaming pipeline i
 Notice the response:
 
 ```terminal
-
+[[0.04619594,-0.0090487795, ..]]
 ```
 
 ---
@@ -354,15 +361,16 @@ The flow processes each document through a "Retrieve-then-Generate" loop:
 
 1.  **ConsumeKafka_2_6**: Ingests raw text from the `new_documents` topic using the `#{Kafka Broker Endpoint}` parameter.
 2.  **SplitText**: Chunks the incoming data into **20-line segments** to ensure the context remains efficient for the 3B model.
-3.  **ReplaceText (Format for Embedding)**: Wraps the text chunk into the JSON format required by the embedding server: `{"inputs": "$1"}`.
-4.  **InvokeHTTP (Embed)**: Calls the `embedding-service` to generate a 768-dimension vector.
-5.  **EvaluateJsonPath**: Extracts the resulting vector from the JSON response into a FlowFile attribute named `vector_data`.
-6.  **ReplaceText (Format for Qdrant)**: format the body required for Qdrant Upsert.
-7.  **InvokeHTTP (Qdrant Upsert)**: The flow upserts the original chunk and its embedding into Qdrant so the system "learns" the document for future queries.
-8. **PublishKafkaRecord**: The final response is published to the `streamtovll_results` for evaluation.
+3.  **ExtractText**: Place original content into `${content}` attribute for replaceText (Qdrant)
+4.  **ReplaceText (Format for Embedding)**: Wraps the text chunk into the JSON format required by the embedding server: `{"inputs": "$1"}`.
+5.  **InvokeHTTP (Embed)**: Calls the `embedding-service` to generate a 768-dimension vector.
+6.  **EvaluateJsonPath**: Extracts the resulting vector from the JSON response into a FlowFile attribute named `vector_data`.
+7.  **ReplaceText (Qdrant)**: format the body required for Qdrant Upsert.
+8.  **InvokeHTTP (Qdrant Upsert)**: The flow upserts the original chunk and its embedding into Qdrant so the system "learns" the document or future queries.
+9. **PublishKafkaRecord**: The final response is published to the `streamtovll_results` for evaluation.
 
 
-:warning: **Danger!** First version operation flow is here: [StreamToVLLM.json](https://github.com/cldr-steven-matison/NiFi-Templates).  I had to create the collection first.  Need to update markdown to include how to open qdrant ui, etc. 
+:warning: **Danger!** First version operation flow is here: [StreamToVLLM.json](https://github.com/cldr-steven-matison/NiFi-Templates).  
 {: .notice--warning}
 
 
@@ -373,41 +381,73 @@ Start the flow — documents arrving into our topic now stream though NiFi and l
 
 ## 🌊 Step 5: Query Time — Ask Questions!
 
-Simple Python script (or curl) — save as `query-rag.py`:
+First test with curl:
 
-```python
-import requests, json
-
-def ask(question):
-    # Embed question
-    emb = requests.post("http://localhost:8080/embed", json={"inputs": question}).json()[0]
-    
-    # Search Qdrant
-    search = requests.post("http://localhost:6333/collections/my-rag-collection/points/search", json={
-        "vector": emb,
-        "limit": 5,
-        "with_payload": True
-    }).json()
-    
-    context = "\n\n".join([hit["payload"]["text"] for hit in search["result"]])
-    
-    # Call vLLM
-    resp = requests.post("http://localhost:8000/v1/chat/completions", json={
-        "model": "Qwen/Qwen2.5-3B-Instruct",
-        "messages": [
-            {"role": "system", "content": "Answer using only this context."},
-            {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {question}"}
-        ]
-    })
-    print(resp.json()["choices"][0]["message"]["content"])
-
-ask("What is StreamToVLLM?")
+```bash
+curl -X POST "http://localhost:6333/collections/my-rag-collection/points/scroll" -H "Content-Type: application/json" -d '{"limit": 1, "with_payload": true}'
 ```
 
 Notice the response:
 
 ```terminal
+{"result":{"points":[{"id":"ee6a5070-0add-4e43-b218-9d64eeab3053","payload":{"text":"StreamToVLLM is a specialized data engineering framework. nIt connects Apache NiFi to vLLM inference servers. nThe system uses Qdrant as a vector database to store technical blog content. nThis allows for local RAG (Retrieval-Augmented Generation) on Windows WSL2 machines. nThe main goal of the project is to demonstrate high-performance streaming AI nusing Cloudera Streaming Operators and dedicated GPU hardware.","source":"kafka-stream","timestamp":"Wed Mar 25 15:24:32 GMT 2026"}}],"next_page_offset":null},"status":"ok","time":0.000567914}
+```
 
+
+Simple Python script (or curl) — save as `query-rag.py`:
+
+```python
+import requests
+
+def ask(question):
+    # 1. Embed
+    emb = requests.post("http://localhost:8080/embed", json={"inputs": question}).json()[0]
+
+    # 2. Search Qdrant
+    search = requests.post("http://localhost:6333/collections/my-rag-collection/points/search", 
+                           json={"vector": emb, "limit": 1, "with_payload": True}).json()
+    
+    results = search.get("result", [])
+    raw_text = results[0]["payload"].get("text", "") if results else "No context."
+
+    # --- THE ESCAPE HATCH ---
+    # If the text starts with '[', it's a vector. We don't want it.
+    if str(raw_text).startswith("["):
+        print("[!] Warning: Found vector trash in text field. Ignoring it.")
+        context = "Reference data is currently being re-indexed."
+    else:
+        # Force the context to be tiny (500 chars) to guarantee we stay under 4096 tokens
+        context = str(raw_text)[:500] 
+
+    # 3. vLLM Call
+    payload = {
+        "model": "Qwen/Qwen2.5-3B-Instruct",
+        "messages": [
+            {"role": "system", "content": "Briefly answer using this context."},
+            {"role": "user", "content": f"Context: {context}\n\nQuestion: {question}"}
+        ],
+        "max_tokens": 100
+    }
+
+    resp = requests.post("http://localhost:8000/v1/chat/completions", json=payload)
+    
+    if resp.status_code == 200:
+        print("\n=== ANSWER ===")
+        print(resp.json()["choices"][0]["message"]["content"])
+    else:
+        print(f"Error: {resp.text}")
+
+ask("What is StreamToVLLM?")
+
+```
+
+Notice the response:
+
+```terminal
+python3 query-rag.py
+
+=== ANSWER ===
+StreamToVLLM is a specialized data engineering framework that connects Apache NiFi with vLLM inference servers, enabling local retrieval and augmentation generation on Windows WSL2 machines using Qdrant for storing technical blog content. Its primary goal is to showcase high-performance streaming AI using Cloudera Streaming Operators and dedicated GPU hardware.
 ```
 
 **Boom** — instant, context-aware answers from your live streaming documents.

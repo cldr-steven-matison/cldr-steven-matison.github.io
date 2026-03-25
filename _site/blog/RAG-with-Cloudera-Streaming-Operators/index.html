@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          7 minute read
+          8 minute read
         
       </span>
     
@@ -360,7 +360,12 @@ spec:
 
 <p>Notice the response:</p>
 
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[Vector addition of 50000 elements]
+Copy input data from the host memory to the CUDA device
+CUDA kernel launch with 196 blocks of 256 threads
+Copy output data from the CUDA device to the host memory
+Test PASSED
+Done
 </span></code></pre></div></div>
 
 <p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Keep <code class="language-plaintext highlighter-rouge">watch nvidia-smi</code> running in another terminal — you’ll see your 4060 light up during inference.</p>
@@ -518,12 +523,14 @@ kubectl port-forward svc/qdrant 6333:6333
 </code></pre></div></div>
 
 <p>Let’s use curl to test and to create our first sample collection to use later:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create collection curl
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> PUT <span class="s2">"http://localhost:6333/collections/my-rag-collection"</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{"vectors": {"size": 768, "distance": "Cosine"}}'</span>
 </code></pre></div></div>
 
 <p>Notice the response:</p>
 
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"result":true,"status":"ok","time":0.098496962}
 </span></code></pre></div></div>
 
 <p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> With <code class="language-plaintext highlighter-rouge">port-forward</code> on visit http://localhost:6333/dashboard and have a look at Qdrant</p>
@@ -611,7 +618,7 @@ kubectl port-forward svc/embedding-server-service 8080:80
 
 <p>Notice the response:</p>
 
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[[0.04619594,-0.0090487795, ..]]
 </span></code></pre></div></div>
 
 <hr>
@@ -634,20 +641,22 @@ kubectl port-forward svc/embedding-server-service 8080:80
   <li>
 <strong>SplitText</strong>: Chunks the incoming data into <strong>20-line segments</strong> to ensure the context remains efficient for the 3B model.</li>
   <li>
+<strong>ExtractText</strong>: Place original content into <code class="language-plaintext highlighter-rouge">${content}</code> attribute for replaceText (Qdrant)</li>
+  <li>
 <strong>ReplaceText (Format for Embedding)</strong>: Wraps the text chunk into the JSON format required by the embedding server: <code class="language-plaintext highlighter-rouge">{"inputs": "$1"}</code>.</li>
   <li>
 <strong>InvokeHTTP (Embed)</strong>: Calls the <code class="language-plaintext highlighter-rouge">embedding-service</code> to generate a 768-dimension vector.</li>
   <li>
 <strong>EvaluateJsonPath</strong>: Extracts the resulting vector from the JSON response into a FlowFile attribute named <code class="language-plaintext highlighter-rouge">vector_data</code>.</li>
   <li>
-<strong>ReplaceText (Format for Qdrant)</strong>: format the body required for Qdrant Upsert.</li>
+<strong>ReplaceText (Qdrant)</strong>: format the body required for Qdrant Upsert.</li>
   <li>
-<strong>InvokeHTTP (Qdrant Upsert)</strong>: The flow upserts the original chunk and its embedding into Qdrant so the system “learns” the document for future queries.</li>
+<strong>InvokeHTTP (Qdrant Upsert)</strong>: The flow upserts the original chunk and its embedding into Qdrant so the system “learns” the document or future queries.</li>
   <li>
 <strong>PublishKafkaRecord</strong>: The final response is published to the <code class="language-plaintext highlighter-rouge">streamtovll_results</code> for evaluation.</li>
 </ol>
 
-<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> First version operation flow is here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">StreamToVLLM.json</a>.  I had to create the collection first.  Need to update markdown to include how to open qdrant ui, etc.</p>
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> First version operation flow is here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">StreamToVLLM.json</a>.</p>
 
 <p>Start the flow — documents arrving into our topic now stream though NiFi and land in Qdrant and able to be used at context in calls to our vllm service!</p>
 
@@ -655,39 +664,68 @@ kubectl port-forward svc/embedding-server-service 8080:80
 
 <h2 id="-step-5-query-time--ask-questions">🌊 Step 5: Query Time — Ask Questions!</h2>
 
-<p>Simple Python script (or curl) — save as <code class="language-plaintext highlighter-rouge">query-rag.py</code>:</p>
+<p>First test with curl:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">requests</span><span class="p">,</span> <span class="n">json</span>
-
-<span class="k">def</span> <span class="nf">ask</span><span class="p">(</span><span class="n">question</span><span class="p">):</span>
-    <span class="c1"># Embed question
-</span>    <span class="n">emb</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:8080/embed"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s">"inputs"</span><span class="p">:</span> <span class="n">question</span><span class="p">}).</span><span class="nf">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-    
-    <span class="c1"># Search Qdrant
-</span>    <span class="n">search</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:6333/collections/my-rag-collection/points/search"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
-        <span class="s">"vector"</span><span class="p">:</span> <span class="n">emb</span><span class="p">,</span>
-        <span class="s">"limit"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="s">"with_payload"</span><span class="p">:</span> <span class="bp">True</span>
-    <span class="p">}).</span><span class="nf">json</span><span class="p">()</span>
-    
-    <span class="n">context</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n\n</span><span class="s">"</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="n">hit</span><span class="p">[</span><span class="s">"payload"</span><span class="p">][</span><span class="s">"text"</span><span class="p">]</span> <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">search</span><span class="p">[</span><span class="s">"result"</span><span class="p">]])</span>
-    
-    <span class="c1"># Call vLLM
-</span>    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:8000/v1/chat/completions"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
-        <span class="s">"model"</span><span class="p">:</span> <span class="s">"Qwen/Qwen2.5-3B-Instruct"</span><span class="p">,</span>
-        <span class="s">"messages"</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"system"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="s">"Answer using only this context."</span><span class="p">},</span>
-            <span class="p">{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"user"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="sa">f</span><span class="s">"Context:</span><span class="se">\n</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="se">\n\n</span><span class="s">Question: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s">"</span><span class="p">}</span>
-        <span class="p">]</span>
-    <span class="p">})</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="nf">json</span><span class="p">()[</span><span class="s">"choices"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"message"</span><span class="p">][</span><span class="s">"content"</span><span class="p">])</span>
-
-<span class="nf">ask</span><span class="p">(</span><span class="s">"What is StreamToVLLM?"</span><span class="p">)</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="s2">"http://localhost:6333/collections/my-rag-collection/points/scroll"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-d</span> <span class="s1">'{"limit": 1, "with_payload": true}'</span>
 </code></pre></div></div>
 
 <p>Notice the response:</p>
 
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"result":{"points":[{"id":"ee6a5070-0add-4e43-b218-9d64eeab3053","payload":{"text":"StreamToVLLM is a specialized data engineering framework. nIt connects Apache NiFi to vLLM inference servers. nThe system uses Qdrant as a vector database to store technical blog content. nThis allows for local RAG (Retrieval-Augmented Generation) on Windows WSL2 machines. nThe main goal of the project is to demonstrate high-performance streaming AI nusing Cloudera Streaming Operators and dedicated GPU hardware.","source":"kafka-stream","timestamp":"Wed Mar 25 15:24:32 GMT 2026"}}],"next_page_offset":null},"status":"ok","time":0.000567914}
+</span></code></pre></div></div>
+
+<p>Simple Python script (or curl) — save as <code class="language-plaintext highlighter-rouge">query-rag.py</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">requests</span>
+
+<span class="k">def</span> <span class="nf">ask</span><span class="p">(</span><span class="n">question</span><span class="p">):</span>
+    <span class="c1"># 1. Embed
+</span>    <span class="n">emb</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:8080/embed"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s">"inputs"</span><span class="p">:</span> <span class="n">question</span><span class="p">}).</span><span class="nf">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># 2. Search Qdrant
+</span>    <span class="n">search</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:6333/collections/my-rag-collection/points/search"</span><span class="p">,</span> 
+                           <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s">"vector"</span><span class="p">:</span> <span class="n">emb</span><span class="p">,</span> <span class="s">"limit"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"with_payload"</span><span class="p">:</span> <span class="bp">True</span><span class="p">}).</span><span class="nf">json</span><span class="p">()</span>
+    
+    <span class="n">results</span> <span class="o">=</span> <span class="n">search</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"result"</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">raw_text</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">"payload"</span><span class="p">].</span><span class="nf">get</span><span class="p">(</span><span class="s">"text"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span> <span class="k">if</span> <span class="n">results</span> <span class="k">else</span> <span class="s">"No context."</span>
+
+    <span class="c1"># --- THE ESCAPE HATCH ---
+</span>    <span class="c1"># If the text starts with '[', it's a vector. We don't want it.
+</span>    <span class="k">if</span> <span class="nf">str</span><span class="p">(</span><span class="n">raw_text</span><span class="p">).</span><span class="nf">startswith</span><span class="p">(</span><span class="s">"["</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"[!] Warning: Found vector trash in text field. Ignoring it."</span><span class="p">)</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="s">"Reference data is currently being re-indexed."</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Force the context to be tiny (500 chars) to guarantee we stay under 4096 tokens
+</span>        <span class="n">context</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">raw_text</span><span class="p">)[:</span><span class="mi">500</span><span class="p">]</span> 
+
+    <span class="c1"># 3. vLLM Call
+</span>    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">"model"</span><span class="p">:</span> <span class="s">"Qwen/Qwen2.5-3B-Instruct"</span><span class="p">,</span>
+        <span class="s">"messages"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"system"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="s">"Briefly answer using this context."</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"user"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="sa">f</span><span class="s">"Context: </span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="se">\n\n</span><span class="s">Question: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s">"</span><span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s">"max_tokens"</span><span class="p">:</span> <span class="mi">100</span>
+    <span class="p">}</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:8000/v1/chat/completions"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">resp</span><span class="p">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">=== ANSWER ==="</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="nf">json</span><span class="p">()[</span><span class="s">"choices"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"message"</span><span class="p">][</span><span class="s">"content"</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Error: </span><span class="si">{</span><span class="n">resp</span><span class="p">.</span><span class="n">text</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+<span class="nf">ask</span><span class="p">(</span><span class="s">"What is StreamToVLLM?"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>Notice the response:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">python3 query-rag.py
+
+=== ANSWER ===
+StreamToVLLM is a specialized data engineering framework that connects Apache NiFi with vLLM inference servers, enabling local retrieval and augmentation generation on Windows WSL2 machines using Qdrant for storing technical blog content. Its primary goal is to showcase high-performance streaming AI using Cloudera Streaming Operators and dedicated GPU hardware.
 </span></code></pre></div></div>
 
 <p><strong>Boom</strong> — instant, context-aware answers from your live streaming documents.</p>
