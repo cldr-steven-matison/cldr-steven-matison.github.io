@@ -15,3 +15,44 @@ search: false
   margin-right: 5px;
 }
 
+/* --- Global Notice Overrides (No Sidebars) --- */
+
+/* DANGER - Standard Red */
+.notice--danger {
+  background-color: #fff5f5 !important; 
+  border: 1px solid #feb2b2 !important;
+  color: #c53030 !important;
+}
+.notice--danger h4, .notice--danger strong, .notice--danger i, .notice--danger .fas {
+  color: #9b2c2c !important;
+}
+
+/* WARNING - Standard Gold/Yellow */
+.notice--warning {
+  background-color: #fffaf0 !important;
+  border: 1px solid #fbd38d !important;
+  color: #975a16 !important;
+}
+.notice--warning h4, .notice--warning strong, .notice--warning i, .notice--warning .fas {
+  color: #744210 !important;
+}
+
+/* SUCCESS - Standard Green */
+.notice--success {
+  background-color: #f0fff4 !important;
+  border: 1px solid #9ae6b4 !important;
+  color: #276749 !important;
+}
+.notice--success h4, .notice--success strong, .notice--success i, .notice--success .fas {
+  color: #22543d !important;
+}
+
+/* INFO - Standard Blue */
+.notice--info {
+  background-color: #ebf8ff !important;
+  border: 1px solid #90cdf4 !important;
+  color: #2c5282 !important;
+}
+.notice--info h4, .notice--info strong, .notice--info i, .notice--info .fas {
+  color: #2a4365 !important;
+}

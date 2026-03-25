@@ -16,6 +16,22 @@ tags:
 :warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
 {: .notice--danger}
 
+{: .notice--danger}
+**Danger Error:** This is Danger
+
+{: .notice--warning}
+**Warning Error:** This is a Warning
+
+{: .notice--primary}
+**Primary Error:** This is Primary
+
+{: .notice--success}
+**Success Error:** This is a Success
+
+{: .notice--info}
+**Info Error:** This is a Info
+
+
 Let's build: **StreamToVLLM** — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search.  
 
 ![RAG with Cloudera Streaming Operators](/assets/images/2026-03-22-architecture.png)
@@ -336,15 +352,15 @@ Notice the response:
 
 ## 🌊 Step 4: Document Ingestion with NiFi
 
-:warning: **Danger!** Flow developement in progress. 
+:warning: **Danger!** First version operation flow is here: [StreamToVLLM.json](https://github.com/cldr-steven-matison/NiFi-Templates).  I had to create the collection first.  Need to update markdown to include how to open qdrant ui, etc. 
 {: .notice--warning}
 
 
-If vLLM is the brain, Apache NiFi is the nervous system. We need to move data from Kafka, chunk it, turn it into vectors, and store it in Qdrant—all in with NiFi. 
+If vLLM is the brain, Apache NiFi is the nervous system. We need to move data from Kafka, chunk it, turn it into vectors, and store it in Qdrant — all in NiFi. 
 
 To make this easy, I've exported the complete NiFi flow as a JSON file: `StreanTovLLM.json`. You can download it and import it directly into your NiFi UI by dragging a new `Process Group` onto the canvas and uploading the flow definition file.
 
-### 🛠️ Setting Up the Flow
+### 🛠️ StreamTovLLM NiFi Flow
 
 
 The flow processes each document through a "Retrieve-then-Generate" loop:
@@ -352,7 +368,7 @@ The flow processes each document through a "Retrieve-then-Generate" loop:
 1.  **ConsumeKafka_2_6**: Ingests raw text from the `new_documents` topic using the `#{Kafka Broker Endpoint}` parameter.
 2.  **SplitText**: Chunks the incoming data into **20-line segments** to ensure the context remains efficient for the 3B model.
 3.  **ReplaceText (Format for Embedding)**: Wraps the text chunk into the JSON format required by the embedding server: `{"inputs": "$1"}`.
-4.  **InvokeHTTP (Embed)**: Calls the `embedding-service` at `:8080` to generate a 768-dimension vector.
+4.  **InvokeHTTP (Embed)**: Calls the `embedding-service` to generate a 768-dimension vector.
 5.  **EvaluateJsonPath**: Extracts the resulting vector from the JSON response into a FlowFile attribute named `vector_data`.
 6.  **ReplaceText (Format for Qdrant)**: format the body required for Qdrant Upsert.
 7.  **InvokeHTTP (Qdrant Upsert)**: The flow upserts the original chunk and its embedding into Qdrant so the system "learns" the document for future queries.
