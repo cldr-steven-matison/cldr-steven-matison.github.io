@@ -154,7 +154,7 @@ kubectl get pods -w
 kubectl port-forward svc/vllm-service 8000:8000
 ```
 
-**Test** 
+Test With Curl:
 
 ```bash
 curl http://localhost:8000/v1/chat/completions \
@@ -330,7 +330,7 @@ kubectl apply -f embedding-server.yaml
 kubectl port-forward svc/embedding-server-service 8080:80
 ```
 
-**Test**
+Test With Curl:
 
 ```bash
 curl -X POST http://localhost:8080/embed -d '{"inputs":"The streaming pipeline is finally complete."}'   -H 'Content-Type: application/json'
@@ -356,7 +356,6 @@ To make this easy, I've exported the complete NiFi flow as a JSON file: `StreanT
 
 ### 🛠️ StreamTovLLM NiFi Flow
 
-
 The flow processes each document through a "Retrieve-then-Generate" loop:
 
 1.  **ConsumeKafka_2_6**: Ingests raw text from the `new_documents` topic using the `#{Kafka Broker Endpoint}` parameter.
@@ -367,15 +366,11 @@ The flow processes each document through a "Retrieve-then-Generate" loop:
 6.  **EvaluateJsonPath**: Extracts the resulting vector from the JSON response into a FlowFile attribute named `vector_data`.
 7.  **ReplaceText (Qdrant)**: format the body required for Qdrant Upsert.
 8.  **InvokeHTTP (Qdrant Upsert)**: The flow upserts the original chunk and its embedding into Qdrant so the system "learns" the document or future queries.
-9. **PublishKafkaRecord**: The final response is published to the `streamtovll_results` for evaluation.
-
 
 :warning: **Danger!** First version operation flow is here: [StreamToVLLM.json](https://github.com/cldr-steven-matison/NiFi-Templates).  
 {: .notice--warning}
 
-
 Start the flow — documents arrving into our topic now stream though NiFi and land in Qdrant and able to be used at context in calls to our vllm service!
-
 
 ---
 

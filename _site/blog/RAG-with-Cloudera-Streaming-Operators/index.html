@@ -446,7 +446,7 @@ kubectl get pods <span class="nt">-w</span>
 kubectl port-forward svc/vllm-service 8000:8000
 </code></pre></div></div>
 
-<p><strong>Test</strong></p>
+<p>Test With Curl:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:8000/v1/chat/completions <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -611,7 +611,7 @@ sudo apt install python3-pip
 kubectl port-forward svc/embedding-server-service 8080:80
 </code></pre></div></div>
 
-<p><strong>Test</strong></p>
+<p>Test With Curl:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST http://localhost:8080/embed <span class="nt">-d</span> <span class="s1">'{"inputs":"The streaming pipeline is finally complete."}'</span>   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
 </code></pre></div></div>
@@ -652,8 +652,6 @@ kubectl port-forward svc/embedding-server-service 8080:80
 <strong>ReplaceText (Qdrant)</strong>: format the body required for Qdrant Upsert.</li>
   <li>
 <strong>InvokeHTTP (Qdrant Upsert)</strong>: The flow upserts the original chunk and its embedding into Qdrant so the system “learns” the document or future queries.</li>
-  <li>
-<strong>PublishKafkaRecord</strong>: The final response is published to the <code class="language-plaintext highlighter-rouge">streamtovll_results</code> for evaluation.</li>
 </ol>
 
 <p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> First version operation flow is here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">StreamToVLLM.json</a>.</p>
