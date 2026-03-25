@@ -15,6 +15,28 @@ search: false
   margin-right: 5px;
 }
 
+/* --- Small & Light Read More Pill --- */
+.read-more-pill {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 2px 10px !important;      /* Tight padding like your Repo labels */
+  font-size: 0.75em !important;      /* Small text size */
+  font-weight: 600;
+  color: #555 !important;            /* Subtle dark gray text */
+  background-color: #f1f3f5 !important; /* Very light gray background */
+  border: 1px solid #e9ecef !important; /* Subtle border */
+  border-radius: 12px !important;    /* Full pill shape */
+  text-decoration: none !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.read-more-pill:hover {
+  background-color: #e2e6ea !important; /* Slightly darker on hover */
+  color: #00629B !important;            /* Cloudera Blue text on hover */
+  border-color: #ced4da !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
 /* --- Global Notice Overrides (No Sidebars) --- */
 
 /* DANGER - Standard Red */
