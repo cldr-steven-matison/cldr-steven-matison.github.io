@@ -1,10 +1,31 @@
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 79538
+  size: 80144
   lang: "HTML"
   updated: "2026-03-24"
   fork: false
+- name: "NiFi-Templates"
+  description: "NiFI Templates of example flows I share with the community."
+  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
+  size: 754
+  lang: ""
+  updated: "2026-03-24"
+  fork: false
+- name: "ClouderaStreamingOperators"
+  description: "Repo for yaml used in installing Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
+  size: 28
+  lang: ""
+  updated: "2026-03-24"
+  fork: false
+- name: "kftray"
+  description: "kubectl port-forward manager and reverse tunnel (ngrok-like) for exposing local  services publicly, with TLS termination, HTTP traffic inspection, UDP forwarding,  multi-hop proxy routing through k8s clusters, stateful config via filesystem or  git - GUI and TUI available"
+  url: "https://github.com/cldr-steven-matison/kftray"
+  size: 20485
+  lang: ""
+  updated: "2026-03-24"
+  fork: true
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
@@ -61,13 +82,6 @@
   lang: "Python"
   updated: "2026-03-23"
   fork: false
-- name: "NiFi-Templates"
-  description: "NiFI Templates of example flows I share with the community."
-  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 465
-  lang: ""
-  updated: "2026-03-23"
-  fork: false
 - name: "DeepFindr"
   description: "A local, privacy-first AI knowledge base. Index documents, websites, and GitHub repos — then ask questions and get accurate, sourced answers powered by    local LLMs. Desktop app (Electron) + RAG backend (FastAPI/Qdrant) + MCP server for Cursor & Claude Desktop. Everything runs on your machine."
   url: "https://github.com/cldr-steven-matison/DeepFindr"
@@ -75,13 +89,6 @@
   lang: ""
   updated: "2026-03-22"
   fork: true
-- name: "ClouderaStreamingOperators"
-  description: "Repo for yaml used in installing Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 27
-  lang: ""
-  updated: "2026-03-22"
-  fork: false
 - name: "CSA-Operator-Demo"
   description: "Sample SSB Project for CSA Operator"
   url: "https://github.com/cldr-steven-matison/CSA-Operator-Demo"
