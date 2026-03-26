@@ -307,7 +307,7 @@ spec:
   type: ClusterIP
 ```
 
-I had some difficulties in getting the hf model and token secret into the mix during pod creation.  The working setup I ended up with was to download the model locally, mount that during pod creation, and explictly use the hf-token string.   
+I had some difficulties in getting the hf model and token secret into the mix during pod creation.  The working setup I ended up with was to download the model locally, mount that during pod creation, and explicitly use the hf-token string.   
 
 Supporting Commands:
 
@@ -318,7 +318,7 @@ python3 -c "from huggingface_hub import snapshot_download; snapshot_download(rep
 minikube mount /mnt/c/hf-models/nomic-embed:/mnt/c/hf-models/nomic-embed
 ```
 
-Apply the Emedding Server YAML:
+Apply the Embedding Server YAML:
 
 ```bash
 kubectl apply -f embedding-server.yaml
@@ -345,7 +345,7 @@ If vLLM is the brain, Apache NiFi is the nervous system. We need to get data fro
 
 ![NiFi Flows for StreamTovLLM](/assets/images/2026-03-22-nifi-flows.png)
 
-To make this easy, I've exported the complete NiFi flow as a JSON file: `StreanTovLLM.json`. You can download it and import it directly into your NiFi UI by dragging a new `Process Group` onto the canvas and uploading the flow definition file.
+To make this easy, I've exported the complete NiFi flow as a JSON file: `StreamToVLLM.json`. You can download it and import it directly into your NiFi UI by dragging a new `Process Group` onto the canvas and uploading the flow definition file.
 
 :trophy: **NiFi Flow Definition File** The fully operational flows are here: [NiFi Templates](https://github.com/cldr-steven-matison/NiFi-Templates).  
 {: .notice--primary}
@@ -378,7 +378,7 @@ This flow is used to route incoming data sources to our `StreamTovLLM` kafka top
 :radioactive: **Careful!** The scheduling for both top processors is 1 day. Do not keep the ingest running.  You only need to ingest one example or the other.   If you do ingest too much, delete the collection, and remake it to start over.
 {: .notice--danger}
 
-:arrow_forward: Start the `StreamTovLLM` Flow.  Next, send 1 flowfile (Run Once) to PublishKafka in `IngestToStream` — the document will now stream though NiFi and land in Qdrant and able to be used as context in calls to our vllm service!
+:arrow_forward: Start the `StreamTovLLM` Flow.  Next, send 1 flowfile (Run Once) to PublishKafka in `IngestToStream` — the document will now stream through NiFi and land in Qdrant and able to be used as context in calls to our vllm service!
 
 ---
 
