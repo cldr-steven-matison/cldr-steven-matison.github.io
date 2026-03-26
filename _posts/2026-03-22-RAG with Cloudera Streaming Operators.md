@@ -13,11 +13,11 @@ tags:
   - ai
 ---
 
-Let's build: **StreamToVLLM** — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search.  
+Let's build: **StreamToVLLM** — a local RAG setup that turns your Cloudera Operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search.  
 
 ![RAG with Cloudera Streaming Operators](/assets/images/2026-03-22-architecture.png)
 
-Perfect for this GPU(RTX 4060 8 GB VRAM) setup — it comfortably runs Qwen2.5-3B-Instruct while NiFi ingests documents in real time via Kafka.  
+Perfect for this GPU (RTX 4060 8 GB VRAM) setup — it comfortably runs Qwen2.5-3B-Instruct while NiFi ingests documents in real time via Kafka.  
 
 We already have the [Cloudera Streaming Operators](/blog/Cloudera-Streaming-Operators/) stack, [GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube](/blog/GPU-Setup-Minikube/), and some example [Deploying vLLM with Qwen Llama on Minikube](/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/) working from previous sessions — now let’s wire it all together into a complete local RAG pipeline.  
 
@@ -75,7 +75,7 @@ Done
 
 ## 📦 Step 1: Deploy vLLM Qwen Inference Server
 
-We use the Qwen model now but you could use Lllama here too.
+We use the Qwen model now but you could use Llama here too.
 
 Save as `vllm-qwen.yaml`:
 
@@ -314,7 +314,7 @@ Supporting Commands:
 ```terminal
 mkdir -p /mnt/c/hf-models/nomic-embed
 cd /mnt/c/hf-models/nomic-embed
-python3 -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='nomic-ai/nomic-embed-text-v1', local_dir='/mnt/c/hf-models/nomic-embed', token='[hf-token]]')"
+python3 -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='nomic-ai/nomic-embed-text-v1', local_dir='/mnt/c/hf-models/nomic-embed', token='[hf-token]')"
 minikube mount /mnt/c/hf-models/nomic-embed:/mnt/c/hf-models/nomic-embed
 ```
 
@@ -361,7 +361,7 @@ The flow processes each document through a "Retrieve-then-Generate" loop:
 5.  **InvokeHTTP (Embed)**: Calls the `embedding-service` to generate a 768-dimension vector.
 6.  **EvaluateJsonPath**: Extracts the resulting vector from the JSON response into a FlowFile attribute named `vector_data`.
 7.  **ReplaceText (Qdrant)**: format the body required for Qdrant Upsert.
-8.  **InvokeHTTP (Qdrant Upsert)**: The flow upserts the original chunk and its embedding into Qdrant so the system "learns" the document or future queries.
+8.  **InvokeHTTP (Qdrant Upsert)**: The flow upserts the original chunk and its embedding into Qdrant so the system "learns" the document for future queries.
 
 ![NiFi Flow for StreamTovLLM](/assets/images/2026-03-22-nifi-flow-StreamTovLLM.png)
 
