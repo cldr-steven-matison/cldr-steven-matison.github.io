@@ -1,5 +1,7 @@
 ---
 title:  "RAG with Cloudera Streaming Operators"
+date: 2026-03-22
+last_modified_at: 2026-03-26
 excerpt: "Privacy-first, fully local semantic search & question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and your RTX 4060 GPU."
 header:
   teaser: "/assets/images/StreamToVLLM.png"
@@ -11,6 +13,7 @@ tags:
   - nifi
   - vllm
   - ai
+
 ---
 
 Let's build: **StreamToVLLM** — a local RAG setup that turns your Cloudera Operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search.  
