@@ -348,7 +348,7 @@ var store = [{
         "teaser": "/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png"
       },{
         "title": "RAG with Cloudera Streaming Operators",
-        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. Let’s build: StreamToVLLM — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just...","categories": ["blog"],
+        "excerpt":"Let’s build: StreamToVLLM — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search. Perfect for this GPU(RTX 4060 8...","categories": ["blog"],
         "tags": ["cloudera","operator","nifi","vllm","ai"],
         "url": "/blog/RAG-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/StreamToVLLM.png"

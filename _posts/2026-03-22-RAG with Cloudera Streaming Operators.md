@@ -13,15 +13,11 @@ tags:
   - ai
 ---
 
-:warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
-{: .notice--danger}
-
-
 Let's build: **StreamToVLLM** — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search.  
 
 ![RAG with Cloudera Streaming Operators](/assets/images/2026-03-22-architecture.png)
 
-Perfect for this GPU() RTX 4060 8 GB VRAM) setup — it comfortably runs Qwen2.5-3B-Instruct while NiFi ingests documents in real time via Kafka.  
+Perfect for this GPU(RTX 4060 8 GB VRAM) setup — it comfortably runs Qwen2.5-3B-Instruct while NiFi ingests documents in real time via Kafka.  
 
 We already have the [Cloudera Streaming Operators](/blog/Cloudera-Streaming-Operators/) stack, [GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube](/blog/GPU-Setup-Minikube/), and some example [Deploying vLLM with Qwen Llama on Minikube](/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/) working from previous sessions — now let’s wire it all together into a complete local RAG pipeline.  
 
@@ -74,7 +70,6 @@ Done
 
 :trophy: **Pro Tip!** Keep `watch nvidia-smi` running in another terminal — you’ll see your 4060 light up during inference.
 {: .notice--warning}
-
 
 ---
 
@@ -154,7 +149,7 @@ kubectl get pods -w
 kubectl port-forward svc/vllm-service 8000:8000
 ```
 
-Test With Curl:
+Test with curl:
 
 ```bash
 curl http://localhost:8000/v1/chat/completions \
@@ -236,6 +231,7 @@ kubectl port-forward svc/qdrant 6333:6333
 ```
 
 Let's use curl to test and to create our first sample collection to use later:
+
 ```bash
 curl -X PUT "http://localhost:6333/collections/my-rag-collection" \
 -H "Content-Type: application/json" \
@@ -248,7 +244,7 @@ Notice the response:
 {"result":true,"status":"ok","time":0.098496962}
 ```
 
-:trophy: **Pro Tip!** With `port-forward` on visit http://localhost:6333/dashboard and have a look at Qdrant 
+:trophy: **Pro Tip!** With `port-forward` on visit [http://localhost:6333/dashboard](http://localhost:6333/dashboard) and have a look at Qdrant.
 {: .notice--primary}
 
 ---
@@ -318,7 +314,6 @@ Supporting Commands:
 ```terminal
 mkdir -p /mnt/c/hf-models/nomic-embed
 cd /mnt/c/hf-models/nomic-embed
-sudo apt install python3-pip
 python3 -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='nomic-ai/nomic-embed-text-v1', local_dir='/mnt/c/hf-models/nomic-embed', token='[hf-token]]')"
 minikube mount /mnt/c/hf-models/nomic-embed:/mnt/c/hf-models/nomic-embed
 ```
@@ -330,7 +325,7 @@ kubectl apply -f embedding-server.yaml
 kubectl port-forward svc/embedding-server-service 8080:80
 ```
 
-Test With Curl:
+Test with curl:
 
 ```bash
 curl -X POST http://localhost:8080/embed -d '{"inputs":"The streaming pipeline is finally complete."}'   -H 'Content-Type: application/json'
@@ -346,13 +341,14 @@ Notice the response:
 
 ## 🌊 Step 4: Document Ingestion with NiFi
 
-:warning: **Warning!** First version operation flow is here: [StreamToVLLM.json](https://github.com/cldr-steven-matison/NiFi-Templates).  
-{: .notice--warning}
+If vLLM is the brain, Apache NiFi is the nervous system. We need to get data from our sources, publish that data to Kafka, then Consume it, chunk it, turn it into vectors, and store it in Qdrant — all within NiFi on kubernetes. 
 
-
-If vLLM is the brain, Apache NiFi is the nervous system. We need to move data from Kafka, chunk it, turn it into vectors, and store it in Qdrant — all in NiFi. 
+![NiFi Flows for StreamTovLLM](/assets/images/2026-03-22-nifi-flows.png)
 
 To make this easy, I've exported the complete NiFi flow as a JSON file: `StreanTovLLM.json`. You can download it and import it directly into your NiFi UI by dragging a new `Process Group` onto the canvas and uploading the flow definition file.
+
+:trophy: **NiFi Flow Definition File** The fully operational flows are here: [NiFi Templates](https://github.com/cldr-steven-matison/NiFi-Templates).  
+{: .notice--primary}
 
 ### 🛠️ StreamTovLLM NiFi Flow
 
@@ -367,16 +363,38 @@ The flow processes each document through a "Retrieve-then-Generate" loop:
 7.  **ReplaceText (Qdrant)**: format the body required for Qdrant Upsert.
 8.  **InvokeHTTP (Qdrant Upsert)**: The flow upserts the original chunk and its embedding into Qdrant so the system "learns" the document or future queries.
 
-:warning: **Danger!** First version operation flow is here: [StreamToVLLM.json](https://github.com/cldr-steven-matison/NiFi-Templates).  
-{: .notice--warning}
+![NiFi Flow for StreamTovLLM](/assets/images/2026-03-22-nifi-flow-StreamTovLLM.png)
 
-Start the flow — documents arrving into our topic now stream though NiFi and land in Qdrant and able to be used at context in calls to our vllm service!
+### 🛠️ IngestToStream NiFi Flow
+
+This flow is used to route incoming data sources to our `StreamTovLLM` kafka topic `new_documents`.
+
+1. **GenerateFlowFile**:  Sends a simple description of StreamToVLLM to Kafka.
+2. **InvokeHttp**: Sends the entire markdown file for `RAG with Cloudera Streaming Operators`  (this) blog post.
+3. **PublishKafka_2_6**:  Publishes our raw content to the `new_documents` topic.
+
+![NiFi Flow for IngestToStream](/assets/images/2026-03-22-nifi-flow-IngestToStream.png)
+
+:radioactive: **Careful!** The scheduling for both top processors is 1 day. Do not keep the ingest running.  You only need to ingest one example or the other.   If you do ingest too much, delete the collection, and remake it to start over.
+{: .notice--danger}
+
+:arrow_forward: Start the `StreamTovLLM` Flow.  Next, send 1 flowfile (Run Once) to PublishKafka in `IngestToStream` — the document will now stream though NiFi and land in Qdrant and able to be used as context in calls to our vllm service!
 
 ---
 
 ## 🌊 Step 5: Query Time — Ask Questions!
 
-First test with curl:
+What better way to test, than to ask our model **What is StreamTovLLM?**
+
+Remember the first inquiry to the model is that it does not know anything about StreamTovLLM as expected:
+
+```terminal
+=== ANSWER ===
+I apologize, but there seems to be an error in the term you've provided ("streamtovllm"). It appears to be a misspelling or incorrect combination of words. The correct term might be Streamlit (a popular open-source platform for building user interfaces for machine learning applications) or llama (which could refer to Llama.cpp, a C++ library for machine learning). Could you please clarify or provide more context about what "streamtovllm" is supposed to be?
+
+```
+
+Now after we have executed our NiFi Flow when we test with curl:
 
 ```bash
 curl -X POST "http://localhost:6333/collections/my-rag-collection/points/scroll" -H "Content-Type: application/json" -d '{"limit": 1, "with_payload": true}'
@@ -388,8 +406,7 @@ Notice the response:
 {"result":{"points":[{"id":"ee6a5070-0add-4e43-b218-9d64eeab3053","payload":{"text":"StreamToVLLM is a specialized data engineering framework. nIt connects Apache NiFi to vLLM inference servers. nThe system uses Qdrant as a vector database to store technical blog content. nThis allows for local RAG (Retrieval-Augmented Generation) on Windows WSL2 machines. nThe main goal of the project is to demonstrate high-performance streaming AI nusing Cloudera Streaming Operators and dedicated GPU hardware.","source":"kafka-stream","timestamp":"Wed Mar 25 15:24:32 GMT 2026"}}],"next_page_offset":null},"status":"ok","time":0.000567914}
 ```
 
-
-Simple Python script (or curl) — save as `query-rag.py`:
+Now, lets go a bit further and build a simple python script to ask the same question.  Save as `query-rag.py`:
 
 ```python
 import requests
@@ -436,7 +453,7 @@ ask("What is StreamToVLLM?")
 
 ```
 
-Notice the response:
+Notice the well informed response:
 
 ```terminal
 python3 query-rag.py
@@ -445,23 +462,43 @@ python3 query-rag.py
 StreamToVLLM is a specialized data engineering framework that connects Apache NiFi with vLLM inference servers, enabling local retrieval and augmentation generation on Windows WSL2 machines using Qdrant for storing technical blog content. Its primary goal is to showcase high-performance streaming AI using Cloudera Streaming Operators and dedicated GPU hardware.
 ```
 
-**Boom** — instant, context-aware answers from your live streaming documents.
+**Boom** — :boom: instant, context-aware answers from your live streaming documents.
 
 ---
 
-## 🧹 Cleanup
+## 💻 Terminal Commands For This Session
 
 ```bash
+# Look at logs
+kubectl logs gpu-test -f
+kubectl logs -l app=vllm-server --tail 300
+
+# Chained port forward
+kubectl port-forward svc/qdrant 6333:6333 &
+kubectl port-forward svc/vllm-service 8000:8000 &
+kubectl port-forward svc/embedding-server-service 8080:80 &
+
+# Delete the collection
+curl -X DELETE "http://localhost:6333/collections/my-rag-collection"
+# Recreate it fresh
+curl -X PUT "http://localhost:6333/collections/my-rag-collection" \
+-H "Content-Type: application/json" \
+-d '{"vectors": {"size": 768, "distance": "Cosine"}}'
+
+# Delete YAMLS
 kubectl delete -f vllm-qwen.yaml
 kubectl delete -f qdrant-deployment.yaml
 kubectl delete -f embedding-server.yaml
 ```
 
+:gift: **YAMLS!** You can find all the `yaml` for working with Cloudera Streaming Operators in my [GitHup Repo](https://github.com/cldr-steven-matison/ClouderaStreamingOperators).
+{: .notice--primary}
+
 ---
 
 ## :checkered_flag: The "StreamToVLLM" Takeaway
 
-This project isn't about building a final product; it’s about establishing a foundational dev pipeline that actually works on local hardware. By wiring these components together on an **RTX 4060**, we’ve brought a local GPU for functional development.
+This project isn't about building a final product; it’s about establishing a foundational dev pipeline that actually works on local hardware. By wiring these components together on kubernetes, we’ve brought a local GPU for functional development with Cloudera Streaming Operators.
 
 * **Foundational RAG Plumbing**: We’ve built the "boring" but essential infrastructure—moving data from a stream, through a vectorizer, and into a searchable brain—all within a single Minikube cluster.
 * **The Power of Context**: By chunking and embedding our own data, we’ve moved the LLM from "guessing" to "referencing." We aren't just asking Qwen to be smart; we’re giving it an open-book exam using the specific context we’ve provided.
@@ -482,10 +519,6 @@ This project isn't about building a final product; it’s about establishing a f
 * [Deploying vLLM with Qwen Llama on Minikube](/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/)
 
 ---
-
-:warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
-{: .notice--danger}
-
 
 ### {{ page.title }}
 

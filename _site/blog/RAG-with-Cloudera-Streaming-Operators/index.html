@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          8 minute read
+          10 minute read
         
       </span>
     
@@ -309,13 +309,11 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
-
-<p>Let’s build: <strong>StreamToVLLM</strong> — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search.</p>
+        <p>Let’s build: <strong>StreamToVLLM</strong> — a local RAG setup that turns your cloudera operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search.</p>
 
 <p><img src="/assets/images/2026-03-22-architecture.png" alt="RAG with Cloudera Streaming Operators"></p>
 
-<p>Perfect for this GPU() RTX 4060 8 GB VRAM) setup — it comfortably runs Qwen2.5-3B-Instruct while NiFi ingests documents in real time via Kafka.</p>
+<p>Perfect for this GPU(RTX 4060 8 GB VRAM) setup — it comfortably runs Qwen2.5-3B-Instruct while NiFi ingests documents in real time via Kafka.</p>
 
 <p>We already have the <a href="/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> stack, <a href="/blog/GPU-Setup-Minikube/">GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube</a>, and some example <a href="/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/">Deploying vLLM with Qwen Llama on Minikube</a> working from previous sessions — now let’s wire it all together into a complete local RAG pipeline.</p>
 
@@ -446,7 +444,7 @@ kubectl get pods <span class="nt">-w</span>
 kubectl port-forward svc/vllm-service 8000:8000
 </code></pre></div></div>
 
-<p>Test With Curl:</p>
+<p>Test with curl:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:8000/v1/chat/completions <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -523,6 +521,7 @@ kubectl port-forward svc/qdrant 6333:6333
 </code></pre></div></div>
 
 <p>Let’s use curl to test and to create our first sample collection to use later:</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> PUT <span class="s2">"http://localhost:6333/collections/my-rag-collection"</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 <span class="nt">-d</span> <span class="s1">'{"vectors": {"size": 768, "distance": "Cosine"}}'</span>
@@ -533,7 +532,7 @@ kubectl port-forward svc/qdrant 6333:6333
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"result":true,"status":"ok","time":0.098496962}
 </span></code></pre></div></div>
 
-<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> With <code class="language-plaintext highlighter-rouge">port-forward</code> on visit http://localhost:6333/dashboard and have a look at Qdrant</p>
+<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> With <code class="language-plaintext highlighter-rouge">port-forward</code> on visit <a href="http://localhost:6333/dashboard">http://localhost:6333/dashboard</a> and have a look at Qdrant.</p>
 
 <hr>
 
@@ -600,7 +599,6 @@ kubectl port-forward svc/qdrant 6333:6333
 
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">mkdir -p /mnt/c/hf-models/nomic-embed
 cd /mnt/c/hf-models/nomic-embed
-sudo apt install python3-pip
 </span><span class="gp">python3 -c "from huggingface_hub import snapshot_download;</span><span class="w"> </span>snapshot_download<span class="o">(</span><span class="nv">repo_id</span><span class="o">=</span><span class="s1">'nomic-ai/nomic-embed-text-v1'</span>, <span class="nv">local_dir</span><span class="o">=</span><span class="s1">'/mnt/c/hf-models/nomic-embed'</span>, <span class="nv">token</span><span class="o">=</span><span class="s1">'[hf-token]]'</span><span class="o">)</span><span class="s2">"
 </span><span class="go">minikube mount /mnt/c/hf-models/nomic-embed:/mnt/c/hf-models/nomic-embed
 </span></code></pre></div></div>
@@ -611,7 +609,7 @@ sudo apt install python3-pip
 kubectl port-forward svc/embedding-server-service 8080:80
 </code></pre></div></div>
 
-<p>Test With Curl:</p>
+<p>Test with curl:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST http://localhost:8080/embed <span class="nt">-d</span> <span class="s1">'{"inputs":"The streaming pipeline is finally complete."}'</span>   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
 </code></pre></div></div>
@@ -625,11 +623,13 @@ kubectl port-forward svc/embedding-server-service 8080:80
 
 <h2 id="-step-4-document-ingestion-with-nifi">🌊 Step 4: Document Ingestion with NiFi</h2>
 
-<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Warning!</strong> First version operation flow is here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">StreamToVLLM.json</a>.</p>
+<p>If vLLM is the brain, Apache NiFi is the nervous system. We need to get data from our sources, publish that data to Kafka, then Consume it, chunk it, turn it into vectors, and store it in Qdrant — all within NiFi on kubernetes.</p>
 
-<p>If vLLM is the brain, Apache NiFi is the nervous system. We need to move data from Kafka, chunk it, turn it into vectors, and store it in Qdrant — all in NiFi.</p>
+<p><img src="/assets/images/2026-03-22-nifi-flows.png" alt="NiFi Flows for StreamTovLLM"></p>
 
 <p>To make this easy, I’ve exported the complete NiFi flow as a JSON file: <code class="language-plaintext highlighter-rouge">StreanTovLLM.json</code>. You can download it and import it directly into your NiFi UI by dragging a new <code class="language-plaintext highlighter-rouge">Process Group</code> onto the canvas and uploading the flow definition file.</p>
+
+<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>NiFi Flow Definition File</strong> The fully operational flows are here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">NiFi Templates</a>.</p>
 
 <h3 id="️-streamtovllm-nifi-flow">🛠️ StreamTovLLM NiFi Flow</h3>
 
@@ -654,15 +654,41 @@ kubectl port-forward svc/embedding-server-service 8080:80
 <strong>InvokeHTTP (Qdrant Upsert)</strong>: The flow upserts the original chunk and its embedding into Qdrant so the system “learns” the document or future queries.</li>
 </ol>
 
-<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> First version operation flow is here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">StreamToVLLM.json</a>.</p>
+<p><img src="/assets/images/2026-03-22-nifi-flow-StreamTovLLM.png" alt="NiFi Flow for StreamTovLLM"></p>
 
-<p>Start the flow — documents arrving into our topic now stream though NiFi and land in Qdrant and able to be used at context in calls to our vllm service!</p>
+<h3 id="️-ingesttostream-nifi-flow">🛠️ IngestToStream NiFi Flow</h3>
+
+<p>This flow is used to route incoming data sources to our <code class="language-plaintext highlighter-rouge">StreamTovLLM</code> kafka topic <code class="language-plaintext highlighter-rouge">new_documents</code>.</p>
+
+<ol>
+  <li>
+<strong>GenerateFlowFile</strong>:  Sends a simple description of StreamToVLLM to Kafka.</li>
+  <li>
+<strong>InvokeHttp</strong>: Sends the entire markdown file for <code class="language-plaintext highlighter-rouge">RAG with Cloudera Streaming Operators</code>  (this) blog post.</li>
+  <li>
+<strong>PublishKafka_2_6</strong>:  Publishes our raw content to the <code class="language-plaintext highlighter-rouge">new_documents</code> topic.</li>
+</ol>
+
+<p><img src="/assets/images/2026-03-22-nifi-flow-IngestToStream.png" alt="NiFi Flow for IngestToStream"></p>
+
+<p class="notice--danger"><img class="emoji" title=":radioactive:" alt=":radioactive:" src="https://github.githubassets.com/images/icons/emoji/unicode/2622.png" height="20" width="20"> <strong>Careful!</strong> The scheduling for both top processors is 1 day. Do not keep the ingest running.  You only need to ingest one example or the other.   If you do ingest too much, delete the collection, and remake it to start over.</p>
+
+<p><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://github.githubassets.com/images/icons/emoji/unicode/25b6.png" height="20" width="20"> Start the <code class="language-plaintext highlighter-rouge">StreamTovLLM</code> Flow.  Next, send 1 flowfile (Run Once) to PublishKafka in <code class="language-plaintext highlighter-rouge">IngestToStream</code> — the document will now stream though NiFi and land in Qdrant and able to be used as context in calls to our vllm service!</p>
 
 <hr>
 
 <h2 id="-step-5-query-time--ask-questions">🌊 Step 5: Query Time — Ask Questions!</h2>
 
-<p>First test with curl:</p>
+<p>What better way to test, than to ask our model <strong>What is StreamTovLLM?</strong></p>
+
+<p>Remember the first inquiry to the model is that it does not know anything about StreamTovLLM as expected:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">=== ANSWER ===
+I apologize, but there seems to be an error in the term you've provided ("streamtovllm"). It appears to be a misspelling or incorrect combination of words. The correct term might be Streamlit (a popular open-source platform for building user interfaces for machine learning applications) or llama (which could refer to Llama.cpp, a C++ library for machine learning). Could you please clarify or provide more context about what "streamtovllm" is supposed to be?
+
+</span></code></pre></div></div>
+
+<p>Now after we have executed our NiFi Flow when we test with curl:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="s2">"http://localhost:6333/collections/my-rag-collection/points/scroll"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-d</span> <span class="s1">'{"limit": 1, "with_payload": true}'</span>
 </code></pre></div></div>
@@ -672,7 +698,7 @@ kubectl port-forward svc/embedding-server-service 8080:80
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"result":{"points":[{"id":"ee6a5070-0add-4e43-b218-9d64eeab3053","payload":{"text":"StreamToVLLM is a specialized data engineering framework. nIt connects Apache NiFi to vLLM inference servers. nThe system uses Qdrant as a vector database to store technical blog content. nThis allows for local RAG (Retrieval-Augmented Generation) on Windows WSL2 machines. nThe main goal of the project is to demonstrate high-performance streaming AI nusing Cloudera Streaming Operators and dedicated GPU hardware.","source":"kafka-stream","timestamp":"Wed Mar 25 15:24:32 GMT 2026"}}],"next_page_offset":null},"status":"ok","time":0.000567914}
 </span></code></pre></div></div>
 
-<p>Simple Python script (or curl) — save as <code class="language-plaintext highlighter-rouge">query-rag.py</code>:</p>
+<p>Now, lets go a bit further and build a simple python script to ask the same question.  Save as <code class="language-plaintext highlighter-rouge">query-rag.py</code>:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">requests</span>
 
@@ -718,7 +744,7 @@ kubectl port-forward svc/embedding-server-service 8080:80
 
 </code></pre></div></div>
 
-<p>Notice the response:</p>
+<p>Notice the well informed response:</p>
 
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">python3 query-rag.py
 
@@ -726,23 +752,42 @@ kubectl port-forward svc/embedding-server-service 8080:80
 StreamToVLLM is a specialized data engineering framework that connects Apache NiFi with vLLM inference servers, enabling local retrieval and augmentation generation on Windows WSL2 machines using Qdrant for storing technical blog content. Its primary goal is to showcase high-performance streaming AI using Cloudera Streaming Operators and dedicated GPU hardware.
 </span></code></pre></div></div>
 
-<p><strong>Boom</strong> — instant, context-aware answers from your live streaming documents.</p>
+<p><strong>Boom</strong> — <img class="emoji" title=":boom:" alt=":boom:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a5.png" height="20" width="20"> instant, context-aware answers from your live streaming documents.</p>
 
 <hr>
 
-<h2 id="-cleanup">🧹 Cleanup</h2>
+<h2 id="-terminal-commands-for-this-session">💻 Terminal Commands For This Session</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete <span class="nt">-f</span> vllm-qwen.yaml
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Look at logs</span>
+kubectl logs gpu-test <span class="nt">-f</span>
+kubectl logs <span class="nt">-l</span> <span class="nv">app</span><span class="o">=</span>vllm-server <span class="nt">--tail</span> 300
+
+<span class="c"># Chained port forward</span>
+kubectl port-forward svc/qdrant 6333:6333 &amp;
+kubectl port-forward svc/vllm-service 8000:8000 &amp;
+kubectl port-forward svc/embedding-server-service 8080:80 &amp;
+
+<span class="c"># Delete the collection</span>
+curl <span class="nt">-X</span> DELETE <span class="s2">"http://localhost:6333/collections/my-rag-collection"</span>
+<span class="c"># Recreate it fresh</span>
+curl <span class="nt">-X</span> PUT <span class="s2">"http://localhost:6333/collections/my-rag-collection"</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{"vectors": {"size": 768, "distance": "Cosine"}}'</span>
+
+<span class="c"># Delete YAMLS</span>
+kubectl delete <span class="nt">-f</span> vllm-qwen.yaml
 kubectl delete <span class="nt">-f</span> qdrant-deployment.yaml
 kubectl delete <span class="nt">-f</span> embedding-server.yaml
 </code></pre></div></div>
+
+<p class="notice--primary"><img class="emoji" title=":gift:" alt=":gift:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f381.png" height="20" width="20"> <strong>YAMLS!</strong> You can find all the <code class="language-plaintext highlighter-rouge">yaml</code> for working with Cloudera Streaming Operators in my <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">GitHup Repo</a>.</p>
 
 <hr>
 
 <h2 id="checkered_flag-the-streamtovllm-takeaway">
 <img class="emoji" title=":checkered_flag:" alt=":checkered_flag:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c1.png" height="20" width="20"> The “StreamToVLLM” Takeaway</h2>
 
-<p>This project isn’t about building a final product; it’s about establishing a foundational dev pipeline that actually works on local hardware. By wiring these components together on an <strong>RTX 4060</strong>, we’ve brought a local GPU for functional development.</p>
+<p>This project isn’t about building a final product; it’s about establishing a foundational dev pipeline that actually works on local hardware. By wiring these components together on kubernetes, we’ve brought a local GPU for functional development with Cloudera Streaming Operators.</p>
 
 <ul>
   <li>
@@ -771,8 +816,6 @@ kubectl delete <span class="nt">-f</span> embedding-server.yaml
 </ul>
 
 <hr>
-
-<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
 
 <h3 id="rag-with-cloudera-streaming-operators">RAG with Cloudera Streaming Operators</h3>
 
