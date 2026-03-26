@@ -79,3 +79,21 @@ search: false
   color: #2a4365 !important;
 }
 
+
+/* Force code blocks to wrap text instead of scrolling */
+pre, 
+code, 
+.highlight pre, 
+.highlight code {
+  white-space: pre-wrap !important;       /* CSS3 standard for wrapping */
+  white-space: -moz-pre-wrap !important;  /* Firefox */
+  white-space: -pre-wrap !important;       /* Opera */
+  white-space: -o-pre-wrap !important;     /* Older Opera */
+  word-wrap: break-word !important;        /* IE/Edge */
+  word-break: break-all !important;        /* Break long strings (like URLs) */
+}
+
+/* Remove the horizontal scrollbar since we are wrapping now */
+.highlight {
+  overflow-x: hidden !important;
+}
