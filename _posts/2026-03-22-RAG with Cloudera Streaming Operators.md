@@ -491,7 +491,7 @@ kubectl delete -f qdrant-deployment.yaml
 kubectl delete -f embedding-server.yaml
 ```
 
-:gift: **YAMLS!** You can find all the `yaml` for working with Cloudera Streaming Operators in my [GitHup Repo](https://github.com/cldr-steven-matison/ClouderaStreamingOperators).
+:gift: **YAMLS!** You can find all the `yaml` for working with Cloudera Streaming Operators in my [GitHub Repo](https://github.com/cldr-steven-matison/ClouderaStreamingOperators).
 {: .notice--primary}
 
 ---
