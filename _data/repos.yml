@@ -1,16 +1,30 @@
-- name: "NiFi-Templates"
-  description: "NiFI Templates of example flows I share with the community."
-  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 771
+- name: "insanely-fast-whisper"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/insanely-fast-whisper"
+  size: 10259
   lang: ""
-  updated: "2026-03-25"
-  fork: false
+  updated: "2026-03-26"
+  fork: true
+- name: "carbonyl"
+  description: "Chromium running inside your terminal"
+  url: "https://github.com/cldr-steven-matison/carbonyl"
+  size: 283
+  lang: ""
+  updated: "2026-03-26"
+  fork: true
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 80523
+  size: 81744
   lang: "HTML"
-  updated: "2026-03-25"
+  updated: "2026-03-26"
+  fork: false
+- name: "NiFi-Templates"
+  description: "NiFI Templates of example flows I share with the community."
+  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
+  size: 780
+  lang: ""
+  updated: "2026-03-26"
   fork: false
 - name: "ClouderaStreamingOperators"
   description: "Repo for yaml used in installing Cloudera Streaming Operators"
