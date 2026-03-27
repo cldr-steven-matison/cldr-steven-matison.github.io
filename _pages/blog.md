@@ -1,17 +1,10 @@
 ---
-layout: single
-author_profile: true
-permalink: /blog/
+layout: posts
 title: "Blog"
-excerpt: "My Blog"
+permalink: /blog/
+author_profile: true
+entries_layout: grid
+classes: wide
 ---
 
-
-## My Posts
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-    </li>
-  {% endfor %}
-</ul>
+Select a post below to read more about my latest technical guides and architecture deep-dives.
