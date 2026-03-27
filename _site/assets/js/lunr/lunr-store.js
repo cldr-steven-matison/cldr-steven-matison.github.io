@@ -255,7 +255,7 @@ var store = [{
         "excerpt":"In a significant move to conquer “metadata chaos,” Cloudera officially acquired Octopai in late 2024. This acquisition marks a pivotal moment in Cloudera’s evolution from a big data pioneer to a comprehensive Hybrid Data and AI leader. A Brief History: From Hadoop to Hybrid AI Cloudera’s journey began in 2008...","categories": ["blog"],
         "tags": ["cloudera","octopai","data","lineage"],
         "url": "/blog/Cloudera-Data-Lineage/",
-        "teaser": "/assets/images/cloudera_data_lineage.png"
+        "teaser": "/assets/images/2026-02-03-cloudera_data_lineage.png"
       },{
         "title": "Cloudera AI Inference Service GA Onpremise",
         "excerpt":"We’re excited to announce the general availability (GA) of the Cloudera AI Inference service for on-premises deployments. This milestone marks a significant expansion of our private AI vision, allowing enterprises to deploy, scale, and govern the latest generative AI (GenAI) models directly within their own data centers. Powered by NVIDIA...","categories": ["blog"],

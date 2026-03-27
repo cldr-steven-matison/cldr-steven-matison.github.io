@@ -1,7 +1,7 @@
 ---
 title:  "Introducing Cloudera Data Lineage"
 header:
-  teaser: "/assets/images/cloudera_data_lineage.png"
+  teaser: "/assets/images/2026-02-03-cloudera_data_lineage.png"
 categories: 
   - blog
 tags:
