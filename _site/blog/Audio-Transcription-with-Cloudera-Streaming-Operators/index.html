@@ -346,15 +346,13 @@
   <li>The full <strong>StreamToVLLM</strong> RAG stack (vLLM Qwen, Qdrant <code class="language-plaintext highlighter-rouge">my-rag-collection</code>, embedding server) already deployed</li>
   <li>NiFi UI at <code class="language-plaintext highlighter-rouge">https://mynifi-web.mynifi.cfm-streaming.svc.cluster.local/nifi/</code>
 </li>
-  <li>Git cloned: <code class="language-plaintext highlighter-rouge">git clone https://github.com/cldr-steven-matison/insanely-fast-whisper.git</code>
-</li>
 </ul>
 
 <hr>
 
 <h2 id="-step-1-containerize--deploy-insanely-fast-whisper-inference-server">📦 Step 1: Containerize &amp; Deploy Insanely Fast Whisper Inference Server</h2>
 
-<p>The original repo is a fast CLI/pipeline. We wrap it in a lightweight FastAPI service so NiFi can call it over HTTP.</p>
+<p>The original repo is a fast CLI/pipeline built on openai whisper large-v3. Here we will wrap large-v3 in a lightweight FastAPI service so NiFi can call it over HTTP.</p>
 
 <h3 id="11-create-the-dockerfile-save-as-dockerfilewhisper">1.1 Create the Dockerfile (save as <code class="language-plaintext highlighter-rouge">Dockerfile.whisper</code>)</h3>
 
@@ -650,13 +648,13 @@ kubectl delete <span class="nt">-f</span> whisper-server.yaml
   <li>
 <strong>Full streaming audio pipeline</strong> now lives inside your Cloudera Operators cluster.</li>
   <li>
-<strong>RTX 4060</strong> handles large-v3 Whisper at insane speeds.</li>
+<strong>RTX 4060</strong> handles large-v3 Whisper.</li>
   <li>
-<strong>Zero extra infrastructure</strong> — NiFi + Kafka do all the heavy lifting.</li>
+<strong>Local infrastructure</strong> — NiFi + Kafka on my local minikube cluster.</li>
   <li>
 <strong>Seamless RAG integration</strong> — spoken content is now searchable and queryable exactly like your documents.</li>
   <li>
-<strong>Future-proof</strong> — swap Whisper models, add diarization, or pipe live microphone streams via NiFi processors.</li>
+<strong>Future-Proof</strong> — swap Whisper models, add diarization, or pipe live microphone streams via NiFi processors.</li>
 </ul>
 
 <p>You now have a complete local AI data engineering sandbox: documents → RAG, audio → transcripts → RAG using NiFi, and Kafka deployed with Cloudera Streaming Operators.</p>
@@ -695,6 +693,8 @@ kubectl delete <span class="nt">-f</span> whisper-server.yaml
       <a href="/tags/#kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
     
       <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#openai" class="page__taxonomy-item p-category" rel="tag">openai</a><span class="sep">, </span>
     
       <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a><span class="sep">, </span>
     

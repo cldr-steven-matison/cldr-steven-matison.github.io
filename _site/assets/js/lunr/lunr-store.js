@@ -361,7 +361,7 @@ var store = [{
       },{
         "title": "Insanely Fast Audio Transcription with Cloudera Streaming Operators",
         "excerpt":"I saw Insanely Fast Whisper posted on X the other day and thought it was really cool. I bookmarked and later forked the GitHub Repo. It turns out this is a perfect integration with my RAG demo RAG with Cloudera Streaming Operators. So follow along as I build StreamToWhisper —...","categories": ["blog"],
-        "tags": ["cloudera","operator","nifi","kafka","vllm","rag","gpu"],
+        "tags": ["cloudera","operator","nifi","kafka","vllm","rag","gpu","openai"],
         "url": "/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/2026-03-30-StreamToWhisper.png"
       },{
