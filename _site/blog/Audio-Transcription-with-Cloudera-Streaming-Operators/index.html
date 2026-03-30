@@ -1,0 +1,1092 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Insanely Fast Audio Transcription with Cloudera Streaming Operators - Cloudera Solutions Engineer</title>
+<meta name="description" content="Real-time, GPU-accelerated speech-to-text over streaming audio sources — powered by insanely-fast-whisper, Cloudera Streaming Operators (Kafka + NiFi), and my RTX 4060. Transcripts flow straight into my existing RAG pipeline for instant Q&amp;A on spoken content.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Insanely Fast Audio Transcription with Cloudera Streaming Operators">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/">
+
+
+  <meta property="og:description" content="Real-time, GPU-accelerated speech-to-text over streaming audio sources — powered by insanely-fast-whisper, Cloudera Streaming Operators (Kafka + NiFi), and my RTX 4060. Transcripts flow straight into my existing RAG pipeline for instant Q&amp;A on spoken content.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-30T00:00:00-04:00">
+
+
+
+  <meta property="article:modified_time" content="2026-03-30T00:00:00-04:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration and Cloudera Data Platform (CDP) through scalable, production-grade solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Insanely Fast Audio Transcription with Cloudera Streaming Operators">
+    <meta itemprop="description" content="Real-time, GPU-accelerated speech-to-text over streaming audio sources — powered by insanely-fast-whisper, Cloudera Streaming Operators (Kafka + NiFi), and my RTX 4060. Transcripts flow straight into my existing RAG pipeline for instant Q&amp;A on spoken content.">
+    <meta itemprop="datePublished" content="2026-03-30T00:00:00-04:00">
+    <meta itemprop="dateModified" content="2026-03-30T00:00:00-04:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/" class="u-url" itemprop="url">Insanely Fast Audio Transcription with Cloudera Streaming Operators
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-03-30">
+            March 30, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>I saw <a href="https://github.com/Vaibhavs10/insanely-fast-whisper">Insanely Fast Whisper</a> posted on X the other day and thought it was really cool. I bookmarked and later forked the GitHub Repo.  It turns out this is a perfect integration with my RAG demo <a href="/blog/RAG-with-Cloudera-Streaming-Operators/">RAG with Cloudera Streaming Operators</a>.</p>
+
+<p>So follow along as I build <strong>StreamToWhisper</strong> — an audio ingestion layer deployed in your local Cloudera Streaming Operators stack. Audio files or live streams hit NiFi → Kafka → insanely-fast-whisper inference on the RTX 4060 → clean transcripts land in Kafka and are processed straight into your Qdrant RAG collection.</p>
+
+<p>The result? You can now ask your vLLM model questions about <em>spoken</em> content with perfect context.</p>
+
+<p><img src="/assets/images/2026-03-30-StreamToWhisper.png" alt="StreamToWhisper Architecture"></p>
+
+<p>You already have the full <a href="/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> stack + the <a href="/blog/RAG-with-Cloudera-Streaming-Operators/">StreamToVLLM</a> RAG pipeline from the previous session. We’re just adding the audio transcription ability to the brain.</p>
+
+<p>🚀 <strong>Let’s get started!</strong></p>
+
+<hr>
+
+<h2 id="-prerequisites">💻 Prerequisites</h2>
+
+<p>You should have:</p>
+<ul>
+  <li>Minikube running with <strong>GPU passthrough</strong> (RTX 4060 confirmed)</li>
+  <li>Cloudera Streaming Operators (CSM + CSA + CFM) installed in <code class="language-plaintext highlighter-rouge">cld-streaming</code> and <code class="language-plaintext highlighter-rouge">cfm-streaming</code>
+</li>
+  <li>The full <strong>StreamToVLLM</strong> RAG stack (vLLM Qwen, Qdrant <code class="language-plaintext highlighter-rouge">my-rag-collection</code>, embedding server) already deployed</li>
+  <li>NiFi UI at <code class="language-plaintext highlighter-rouge">https://mynifi-web.mynifi.cfm-streaming.svc.cluster.local/nifi/</code>
+</li>
+  <li>Git cloned: <code class="language-plaintext highlighter-rouge">git clone https://github.com/cldr-steven-matison/insanely-fast-whisper.git</code>
+</li>
+</ul>
+
+<hr>
+
+<h2 id="-step-1-containerize--deploy-insanely-fast-whisper-inference-server">📦 Step 1: Containerize &amp; Deploy Insanely Fast Whisper Inference Server</h2>
+
+<p>The original repo is a fast CLI/pipeline. We wrap it in a lightweight FastAPI service so NiFi can call it over HTTP.</p>
+
+<h3 id="11-create-the-dockerfile-save-as-dockerfilewhisper">1.1 Create the Dockerfile (save as <code class="language-plaintext highlighter-rouge">Dockerfile.whisper</code>)</h3>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Dockerfile.whisper.12 - Final Stable "G1" Build</span>
+<span class="c"># Targets: CUDA 12.4, Flash Attention 2, Whisper-Large-v3</span>
+<span class="c"># Author: Steven Matison (Solutions Engineer, Cloudera)</span>
+
+<span class="c"># STAGE 1: The Heavy Lifting (Builder)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+
+<span class="k">ARG</span><span class="s"> HF_TOKEN</span>
+<span class="k">ENV</span><span class="s"> HF_TOKEN=${HF_TOKEN}</span>
+<span class="k">ENV</span><span class="s"> DEBIAN_FRONTEND=noninteractive</span>
+
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> <span class="se">\
+</span>    python3.11 python3.11-venv python3-pip git ffmpeg ninja-build <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>
+
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">RUN </span>python3.11 <span class="nt">-m</span> venv /opt/venv
+<span class="k">ENV</span><span class="s"> PATH="/opt/venv/bin:$PATH"</span>
+
+<span class="c"># 1. Essential Build Tools for C++ Compilation</span>
+<span class="k">RUN </span>pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span> <span class="nt">--upgrade</span> pip setuptools wheel packaging
+
+<span class="c"># 2. Hard-pin Torch to CUDA 12.4 (RTX 4060 Optimization)</span>
+<span class="k">RUN </span>pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span> <span class="se">\
+</span>    <span class="nv">torch</span><span class="o">==</span>2.4.1+cu124 <span class="nv">torchvision</span><span class="o">==</span>0.19.1+cu124 <span class="nv">torchaudio</span><span class="o">==</span>2.4.1+cu124 <span class="se">\
+</span>    <span class="nt">--extra-index-url</span> https://download.pytorch.org/whl/cu124
+
+<span class="c"># 3. Web Stack (Allowing Transitive Dependencies for Starlette/Pydantic)</span>
+<span class="k">RUN </span>pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span> <span class="se">\
+</span>    fastapi uvicorn starlette pydantic pydantic-core <span class="se">\
+</span>    anyio idna sniffio typing-extensions click h11 python-multipart
+
+<span class="c"># 4. AI Stack (Guarded with --no-deps to prevent Torch overwrites)</span>
+<span class="k">RUN </span>pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span> <span class="nt">--no-deps</span> <span class="se">\
+</span>    transformers insanely-fast-whisper<span class="o">==</span>0.0.15 huggingface_hub
+
+<span class="c"># 5. Manual AI Dependency Tree</span>
+<span class="k">RUN </span>pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span> <span class="se">\
+</span>    pyyaml requests tqdm numpy regex sentencepiece <span class="se">\
+</span>    httpx filelock fsspec safetensors accelerate <span class="se">\
+</span>    soundfile librosa scipy tokenizers
+
+<span class="c"># 6. Compile Flash Attention 2 (Hardware-Specific Build)</span>
+<span class="k">RUN </span>pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span> flash-attn <span class="nt">--no-build-isolation</span>
+
+<span class="c"># 7. Pre-Bake Whisper-Large-v3 (Authenticated Download)</span>
+<span class="k">RUN </span>python3 <span class="nt">-c</span> <span class="s2">"from transformers import pipeline; pipeline('automatic-speech-recognition', model='openai/whisper-large-v3')"</span>
+
+<span class="c"># ==========================================</span>
+<span class="c"># STAGE 2: The Lean Runtime</span>
+<span class="c"># ==========================================</span>
+<span class="k">FROM</span><span class="s"> nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04</span>
+
+<span class="k">ENV</span><span class="s"> DEBIAN_FRONTEND=noninteractive</span>
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> <span class="se">\
+</span>    python3.11 ffmpeg <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>
+
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">COPY</span><span class="s"> --from=builder /opt/venv /opt/venv</span>
+<span class="k">COPY</span><span class="s"> --from=builder /root/.cache/huggingface /root/.cache/huggingface</span>
+<span class="k">ENV</span><span class="s"> PATH="/opt/venv/bin:$PATH"</span>
+
+<span class="c"># FastAPI Inference Logic</span>
+<span class="k">COPY</span><span class="s"> &lt;&lt;EOF /app/main.py</span>
+<span class="k">from</span><span class="s"> fastapi import FastAPI, File, UploadFile</span>
+<span class="k">from</span><span class="s"> fastapi.responses import JSONResponse</span>
+import torch
+<span class="k">from</span><span class="s"> transformers import pipeline</span>
+import tempfile
+import os
+
+app = FastAPI(title="StreamToWhisper")
+
+pipe = pipeline(
+    "automatic-speech-recognition",
+    model="openai/whisper-large-v3",
+    torch_dtype=torch.float16,
+    device="cuda:0",
+    model_kwargs={"attn_implementation": "flash_attention_2"}
+)
+
+@app.post("/transcribe")
+async def transcribe(file: UploadFile = File(...)):
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
+        tmp.write(await file.read())
+        tmp_path = tmp.name
+    try:
+        result = pipe(tmp_path, chunk_length_s=30, batch_size=24, return_timestamps=True)
+        os.unlink(tmp_path)
+        return {"text": result["text"]}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8001)
+EOF
+
+<span class="k">EXPOSE</span><span class="s"> 8001</span>
+<span class="k">ENTRYPOINT</span><span class="s"> ["/opt/venv/bin/python3", "main.py"]</span>
+</code></pre></div></div>
+
+<h3 id="12-build--load-into-minikube">1.2 Build &amp; load into Minikube</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">eval</span> <span class="si">$(</span>minikube docker-env<span class="si">)</span>
+docker build <span class="nt">-t</span> streamwhisper:latest <span class="nt">--build-arg</span> <span class="nv">HF_TOKEN</span><span class="o">=</span><span class="nv">$MY_TOKEN</span> <span class="nt">-f</span> Dockerfile.whisper <span class="nb">.</span>
+</code></pre></div></div>
+
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> To speed up build times, use your <code class="language-plaintext highlighter-rouge">hf-token</code>.</p>
+
+<p>The final build output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">docker build -t streamwhisper:latest --build-arg HF_TOKEN=$</span>MY_TOKEN <span class="nt">-f</span> Dockerfile.whisper <span class="nb">.</span>
+<span class="go">[+] Building 373.0s (21/21) FINISHED                                                docker:default
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile.whisper.12                               0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 3.29kB                                                        0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04         0.3s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore                                                             0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 2B                                                               0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>internal] preparing inline document                                               0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>builder  1/11] FROM docker.io/nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04@sha256:622e78a  0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>builder  2/11] RUN apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span>     python3.11 python3.1  0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>builder  3/11] WORKDIR /app                                                       0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>builder  4/11] RUN python3.11 <span class="nt">-m</span> venv /opt/venv                                   0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span>CACHED <span class="o">[</span>builder  5/11] RUN pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span> <span class="nt">--upgrade</span> pip setuptools wheel pac  0.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>builder  6/11] RUN pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span>     <span class="nv">torch</span><span class="o">==</span>2.4.1+cu124 <span class="nv">torchvision</span><span class="o">==</span>0.1  170.4s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>builder  7/11] RUN pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span>     fastapi uvicorn starlette pydantic py  3.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>builder  8/11] RUN pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span> <span class="nt">--no-deps</span>     transformers insanely-fast-  5.3s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>builder  9/11] RUN pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span>     pyyaml requests tqdm numpy regex sen  16.9s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>builder 10/11] RUN pip <span class="nb">install</span> <span class="nt">--no-cache-dir</span> flash-attn <span class="nt">--no-build-isolation</span>           22.9s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>builder 11/11] RUN python3 <span class="nt">-c</span> <span class="s2">"from transformers import pipeline; pipeline('automatic-  74.1s
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="s2">CACHED [stage-1 2/6] RUN apt-get update &amp;&amp; apt-get install -y     python3.11 ffmpeg       0.0s
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="s2">CACHED [stage-1 3/6] WORKDIR /app                                                         0.0s
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="s2">[stage-1 4/6] COPY --from=builder /opt/venv /opt/venv                                    27.1s
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="s2">[stage-1 5/6] COPY --from=builder /root/.cache/huggingface /root/.cache/huggingface       8.4s
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="s2">[stage-1 6/6] COPY &lt;&lt;EOF /app/main.py                                                     0.1s
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="s2">exporting to image                                                                       25.3s
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="s2">=&gt; exporting layers                                                                      25.3s
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="s2">=&gt; writing image sha256:5196a989b7101dad6a12e8a2dd01bab45fea29dccda69ded5f639c92717f2dc4  0.0s
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="s2">=&gt; naming to docker.io/library/streamwhisper:latest                                       0.0s
+</span></code></pre></div></div>
+
+<h3 id="13-deploy-yaml-save-as-whisper-serveryaml">1.3 Deploy YAML (save as <code class="language-plaintext highlighter-rouge">whisper-server.yaml</code>)</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">whisper-server</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">whisper-server</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">whisper-server</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">whisper-server</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">streamwhisper:latest</span>
+        <span class="na">imagePullPolicy</span><span class="pi">:</span> <span class="s">Never</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">limits</span><span class="pi">:</span>
+            <span class="na">nvidia.com/gpu</span><span class="pi">:</span> <span class="m">1</span>
+            <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">8Gi"</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8001</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">whisper-service</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">whisper-server</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">8001</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">8001</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
+</code></pre></div></div>
+
+<p>Apply it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> whisper-server.yaml
+kubectl get pods <span class="nt">-w</span> <span class="nt">-l</span> <span class="nv">app</span><span class="o">=</span>whisper-server
+kubectl port-forward svc/whisper-service 8001:8001
+</code></pre></div></div>
+
+<p><strong>Test the API</strong> (use any .wav or .mp3 file):</p>
+
+<p>For my test I found the following URL to use:  <strong>https://www.voiptroubleshooter.com/open_speech/american/OSR_us_000_0010_8k.wav</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST http://localhost:8001/transcribe <span class="se">\</span>
+  <span class="nt">-F</span> <span class="s2">"file=@/path/to/your/OSR_us_000_0010_8k.wav"</span> <span class="se">\</span>
+  | jq
+</code></pre></div></div>
+
+<p>Notice the following output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"text":" The birch canoe slid on the smooth planks. Glue the sheet to the dark blue background. It is easy to tell the depth of a well. These days a chicken leg is a rare dish. Rice is often served in round bowls. The juice of lemons makes fine punch. The box was thrown beside the parked truck. The hogs were fed chopped corn and garbage four hours of steady work faced us a large size in stockings is hard to sell"}
+</span></code></pre></div></div>
+
+<hr>
+
+<h2 id="-step-2-nifi-flows-for-streamtowhisper">🌊 Step 2: NiFi Flows for StreamToWhisper</h2>
+
+<p><strong>Download the full flows here:</strong> <a href="https://github.com/cldr-steven-matison/NiFi-Templates">NiFi Templates</a> (new <code class="language-plaintext highlighter-rouge">StreamToWhisper</code> and <code class="language-plaintext highlighter-rouge">IngestDataToSTream</code> flows added today).</p>
+
+<p><img src="/assets/images/2026-03-30-StreamToWhisper-nifi-flow.png" alt="StreamToWhisper NiFi Flow"></p>
+
+<h3 id="️-ingestaudiotostream-flow">🛠️ IngestAudioToStream Flow</h3>
+<ul>
+  <li>GenerateFlowFile / InvokeHTTP → pulls audio from our sample URL above</li>
+  <li>PublishKafka_2_6 → sends raw audio bytes to the Kafka topic <code class="language-plaintext highlighter-rouge">new_audio</code> for consumption</li>
+</ul>
+
+<p><img src="/assets/images/2026-03-30-StreamToWhisper-nifi-flow-1.png" alt="StreamToWhisper IngestAudioToStream NiFi Flow"></p>
+
+<h3 id="️-streamtowhisper-flow">🛠️ StreamToWhisper Flow</h3>
+<ol>
+  <li>
+<strong>ConsumeKafka_2_6</strong> – Consumes new <code class="language-plaintext highlighter-rouge">new_audio</code> topic for incoming files</li>
+  <li>
+<strong>InvokeHTTP</strong> – POST to <code class="language-plaintext highlighter-rouge">http://whisper-service:8001/transcribe</code> (binary file upload)</li>
+  <li>
+<strong>EvaluateJsonPath</strong> – extract <code class="language-plaintext highlighter-rouge">$.text</code> into attribute <code class="language-plaintext highlighter-rouge">transcript</code> to use further</li>
+  <li>
+<strong>ReplaceText</strong> - format flowfile with our transcript text</li>
+  <li>
+<strong>PublishKafka_2_6</strong> – publish to <code class="language-plaintext highlighter-rouge">new_documents</code> to process as any other document in <code class="language-plaintext highlighter-rouge">StreamToVLLM</code>
+</li>
+</ol>
+
+<p><img src="/assets/images/2026-03-30-StreamToWhisper-nifi-flow-2.png" alt="StreamToWhisper StreamToWhisper NiFi Flow"></p>
+
+<hr>
+
+<h2 id="-step-3-integration-with-existing-rag-streamtovllm">🌊 Step 3: Integration with Existing RAG (StreamToVLLM)</h2>
+
+<p>Transcripts are automatically ingested into Qdrant by the existing <code class="language-plaintext highlighter-rouge">StreamToVLLM</code> flow.</p>
+
+<p>Now ask your vLLM model about spoken content:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 query-rag-whisper.py
+</code></pre></div></div>
+
+<p><strong>Example question:</strong> “How is rice prepared?”</p>
+
+<p>You’ll get a perfect context-aware answer pulled from the transcribed audio.</p>
+
+<p>Notice the following output:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">python3 query-rag-whisper.py
+
+=== ANSWER ===
+Rice is often served in round bowls. It can be prepared in various ways, such as plain, with sides like peanut sauce, or in different flavored broths. It's a staple food that is consumed by billions worldwide and has numerous cultural and culinary associations.
+
+</span></code></pre></div></div>
+
+<hr>
+
+<h2 id="-terminal-commands-for-this-session">💻 Terminal Commands For This Session</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build &amp; deploy</span>
+<span class="nb">eval</span> <span class="si">$(</span>minikube docker-env<span class="si">)</span>
+docker build <span class="nt">-t</span> streamwhisper:latest <span class="nt">-f</span> Dockerfile.whisper <span class="nb">.</span>
+kubectl apply <span class="nt">-f</span> whisper-server.yaml
+
+<span class="c"># Port forwards (add to your existing chain)</span>
+kubectl port-forward svc/whisper-service 8001:8001 &amp;
+
+<span class="c"># Check GPU usage</span>
+watch nvidia-smi
+
+<span class="c"># Delete / restart</span>
+kubectl delete <span class="nt">-f</span> whisper-server.yaml
+</code></pre></div></div>
+
+<p class="notice--primary"><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Lessons Learned</strong> I summarized lessons learned, terminal commands, and terminal output <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/">here</a>.</p>
+
+<hr>
+
+<h2 id="checkered_flag-the-streamtowhisper-takeaway">
+<img class="emoji" title=":checkered_flag:" alt=":checkered_flag:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c1.png" height="20" width="20"> The “StreamToWhisper” Takeaway</h2>
+
+<ul>
+  <li>
+<strong>Full streaming audio pipeline</strong> now lives inside your Cloudera Operators cluster.</li>
+  <li>
+<strong>RTX 4060</strong> handles large-v3 Whisper at insane speeds.</li>
+  <li>
+<strong>Zero extra infrastructure</strong> — NiFi + Kafka do all the heavy lifting.</li>
+  <li>
+<strong>Seamless RAG integration</strong> — spoken content is now searchable and queryable exactly like your documents.</li>
+  <li>
+<strong>Future-proof</strong> — swap Whisper models, add diarization, or pipe live microphone streams via NiFi processors.</li>
+</ul>
+
+<p>You now have a complete local AI data engineering sandbox: documents → RAG, audio → transcripts → RAG using NiFi, and Kafka deployed with Cloudera Streaming Operators.</p>
+
+<hr>
+
+<h2 id="-resources--further-reading">📚 Resources &amp; Further Reading</h2>
+
+<ul>
+  <li><a href="https://github.com/cldr-steven-matison/insanely-fast-whisper">Insanely-fast-whisper GitHub</a></li>
+  <li><a href="https://huggingface.co/openai/whisper-large-v3">OpenAI Whisper large-v3</a></li>
+  <li><a href="/blog/2026-03-22-RAG-with-Cloudera-Streaming-Operators/">RAG with Cloudera Streaming Operators</a></li>
+  <li><a href="/blog/2026-03-09-Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a></li>
+  <li><a href="https://github.com/cldr-steven-matison/NiFi-Templates">NiFi Templates Repo</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#gpu" class="page__taxonomy-item p-category" rel="tag">gpu</a><span class="sep">, </span>
+    
+      <a href="/tags/#kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a><span class="sep">, </span>
+    
+      <a href="/tags/#rag" class="page__taxonomy-item p-category" rel="tag">rag</a><span class="sep">, </span>
+    
+      <a href="/tags/#vllm" class="page__taxonomy-item p-category" rel="tag">vllm</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-30">March 30, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Insanely+Fast+Audio+Transcription+with+Cloudera+Streaming+Operators%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FAudio-Transcription-with-Cloudera-Streaming-Operators%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FAudio-Transcription-with-Cloudera-Streaming-Operators%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FAudio-Transcription-with-Cloudera-Streaming-Operators%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Managing-Multiple-Services-Port-Forwards-Efficiently-in-Minikube/" class="pagination--pager" title="Managing Multiple Services and Port-Forwards Efficiently in Minikube
+">Previous</a>
+    
+    
+      <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/" class="pagination--pager" title="Lessons Learned Audio Transcription RAG
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-30-StreamToWhisper-lessons.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/" rel="permalink">Lessons Learned Audio Transcription RAG
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          78 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Infrastructure tuning is the ‘final boss’ of local AI. Skip the ‘Driver Dance’ and move past the tutorials with these hard-won lessons on CUDA pinning, depen...
+    <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-23-minikube-services.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Managing-Multiple-Services-Port-Forwards-Efficiently-in-Minikube/" rel="permalink">Managing Multiple Services and Port-Forwards Efficiently in Minikube
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Stop drowning in open terminal tabs just to access your UIs. This guide shows you how to streamline your Cloudera Streaming Operators workflow by managing mu...
+    <a href="/blog/Managing-Multiple-Services-Port-Forwards-Efficiently-in-Minikube/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/StreamToVLLM.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/RAG-with-Cloudera-Streaming-Operators/" rel="permalink">RAG with Cloudera Streaming Operators
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Privacy-first, fully local semantic search &amp; question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and ...
+    <a href="/blog/RAG-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Max-CPU-with-NiFi-on-Minikube/" rel="permalink">Tune for Max CPU with NiFi on Minikube
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How I stress-tested a default Cloudera Flow Management NiFi deployment on Minikube — hitting 99% CPU with synthetic data, aggressive duplication, and heavy c...
+    <a href="/blog/Max-CPU-with-NiFi-on-Minikube/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<style>
+  .code-header {
+    position: relative;
+    background: #252a31; /* Matches dark syntax themes */
+    padding: 5px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .copy-code-button {
+    background: #3d4551;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .copy-code-button:hover { background: #505a69; }
+</style>
+
+<script>
+  document.querySelectorAll('div.highlighter-rouge, figure.highlight').forEach((container) => {
+    // Create header and button
+    const header = document.createElement('div');
+    header.className = 'code-header';
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+
+    button.addEventListener('click', () => {
+      const code = container.querySelector('code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => { button.innerText = 'Copy'; }, 2000);
+      });
+    });
+
+    header.appendChild(button);
+    container.prepend(header);
+  });
+</script>
+
+  </body>
+</html>
