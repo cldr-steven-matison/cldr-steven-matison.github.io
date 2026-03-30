@@ -24,7 +24,7 @@ This post is comprised of the backing lessons from [Insanely Fast Audio Transcri
 
 ## Lessons from the Edge: Operationalizing Whisper on Local K8s
 
-Building a production-grade inference container for the RTX 4060 required moving past "standard" tutorials and into deep infrastructure tuning. Here are the hard-won lessons from the **StreamToWhisper** build.
+Building a local inference container for the RTX 4060 required moving past "standard" tutorials and into deep infrastructure tuning. Here are the hard-won lessons from the **StreamToWhisper** build.
 
 ### 1. The CUDA Version Pinning Trap
 Standard `pip install torch` often pulls a version bundled with an older CUDA toolkit (e.g., 12.1). For modern hardware like the **G1 (RTX 4060)**, we had to explicitly target the `+cu124` index. Failure to do this results in a "Runtime Device Mismatch" where the GPU is visible but unusable.
@@ -2489,81 +2489,7 @@ Loading safetensors checkpoint shards: 100% Completed | 2/2 [00:10<00:00,  5.29s
 (APIServer pid=1) INFO:     Started server process [1]
 (APIServer pid=1) INFO:     Waiting for application startup.
 (APIServer pid=1) INFO:     Application startup complete.
-tunas@MINI-Gaming-G1:~$ python3 query-rag-whisper.py
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 791, in urlopen
-    response = self._make_request(
-               ^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 537, in _make_request
-    response = conn.getresponse()
-               ^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 461, in getresponse
-    httplib_response = super().getresponse()
-                       ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/http/client.py", line 1448, in getresponse
-    response.begin()
-  File "/usr/lib/python3.12/http/client.py", line 336, in begin
-    version, status, reason = self._read_status()
-                              ^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/http/client.py", line 305, in _read_status
-    raise RemoteDisconnected("Remote end closed connection without"
-http.client.RemoteDisconnected: Remote end closed connection without response
 
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 486, in send
-    resp = conn.urlopen(
-           ^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 845, in urlopen
-    retries = retries.increment(
-              ^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 472, in increment
-    raise reraise(type(error), error, _stacktrace)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/urllib3/util/util.py", line 38, in reraise
-    raise value.with_traceback(tb)
-  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 791, in urlopen
-    response = self._make_request(
-               ^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 537, in _make_request
-    response = conn.getresponse()
-               ^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 461, in getresponse
-    httplib_response = super().getresponse()
-                       ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/http/client.py", line 1448, in getresponse
-    response.begin()
-  File "/usr/lib/python3.12/http/client.py", line 336, in begin
-    version, status, reason = self._read_status()
-                              ^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/http/client.py", line 305, in _read_status
-    raise RemoteDisconnected("Remote end closed connection without"
-urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/tunas/query-rag-whisper.py", line 41, in <module>
-    ask("What do you know about rice?")
-  File "/home/tunas/query-rag-whisper.py", line 33, in ask
-    resp = requests.post("http://localhost:8000/v1/chat/completions", json=payload)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/requests/api.py", line 115, in post
-    return request("post", url, data=data, json=json, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/requests/api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 589, in request
-    resp = self.send(prep, **send_kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 703, in send
-    r = adapter.send(request, **kwargs)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 501, in send
-    raise ConnectionError(err, request=request)
-requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
 tunas@MINI-Gaming-G1:~$ python3 query-rag-whisper.py
 
 === ANSWER ===

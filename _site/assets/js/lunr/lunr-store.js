@@ -366,7 +366,7 @@ var store = [{
         "teaser": "/assets/images/2026-03-30-StreamToWhisper.png"
       },{
         "title": "Lessons Learned Audio Transcription RAG",
-        "excerpt":"This post is comprised of the backing lessons from Insanely Fast Audio Transcription with Cloudera Streaming Operators with a summary of the hurdles, a log of the terminal commands, and terminal output. Lessons from the Edge: Operationalizing Whisper on Local K8s Building a production-grade inference container for the RTX 4060...","categories": ["blog"],
+        "excerpt":"This post is comprised of the backing lessons from Insanely Fast Audio Transcription with Cloudera Streaming Operators with a summary of the hurdles, a log of the terminal commands, and terminal output. Lessons from the Edge: Operationalizing Whisper on Local K8s Building a local inference container for the RTX 4060...","categories": ["blog"],
         "tags": ["cloudera","operator","nifi","kafka","whisper","vllm","rag","gpu"],
         "url": "/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/2026-03-30-StreamToWhisper-lessons.png"
