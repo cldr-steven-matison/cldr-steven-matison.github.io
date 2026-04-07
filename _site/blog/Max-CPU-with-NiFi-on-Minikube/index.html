@@ -320,7 +320,7 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it.  <strong>Or Did I?</strong> <img class="emoji" title=":bomb:" alt=":bomb:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f4a3.png" height="20" width="20"></p>
+        <p>Yesterday I built a simple but brutal benchmark flow for Apache NiFi. The goal? Push a default minimal NiFi cluster on Minikube to the absolute limits of memory and CPU — without crashing it.  <strong>Or Did I?</strong> <img class="emoji" title=":bomb:" alt=":bomb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a3.png" height="20" width="20"></p>
 
 <p>The flow JSON I used is here:<br>
 <strong><a href="https://github.com/cldr-steven-matison/NiFi-Templates">NiFiBenchMarkTest.json</a></strong></p>
@@ -331,7 +331,7 @@
 <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">ClouderaStreamingOperators</a>.</p>
 
 <h2 id="package-setting-up-the-nifi-flow">
-<img class="emoji" title=":package:" alt=":package:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f4e6.png" height="20" width="20"> Setting Up the NiFi Flow</h2>
+<img class="emoji" title=":package:" alt=":package:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4e6.png" height="20" width="20"> Setting Up the NiFi Flow</h2>
 
 <p>Getting this NiFi Flow going is pretty easy, use the Flow Definition File I provided and follow along in the NiFi UI.</p>
 
@@ -349,10 +349,10 @@
 
 <p>You’ll immediately see data flowing. The flow generates synthetic records, duplicates them aggressively, and compresses them — exactly the kind of workload that hammers both CPU and memory.</p>
 
-<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This next section are settings from my final iteration.  Depending on your enviornment you need to scale your settings from default to higher number as I describe here.  For example I started with 10gb, 10,000, and 2 concurrency and slowly incremement over iterations.</p>
+<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This next section are settings from my final iteration.  Depending on your enviornment you need to scale your settings from default to higher number as I describe here.  For example I started with 10gb, 10,000, and 2 concurrency and slowly incremement over iterations.</p>
 
 <h2 id="chart_with_upwards_trend-tuning-for-maximum-load">
-<img class="emoji" title=":chart_with_upwards_trend:" alt=":chart_with_upwards_trend:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f4c8.png" height="20" width="20"> Tuning for Maximum Load</h2>
+<img class="emoji" title=":chart_with_upwards_trend:" alt=":chart_with_upwards_trend:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4c8.png" height="20" width="20"> Tuning for Maximum Load</h2>
 
 <p>Once you confirm the flow is stable with defaults, it’s time to open the throttle.</p>
 
@@ -403,10 +403,10 @@
 
 <p>Apply the changes, restart the affected processors, and watch the magic happen.</p>
 
-<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> You can also set the Run Duration of a processor while tuning.  In the test above I set my DuplicateFlowfile to 25 ms.  Definitely consider how long you want each process thread to run.</p>
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> You can also set the Run Duration of a processor while tuning.  In the test above I set my DuplicateFlowfile to 25 ms.  Definitely consider how long you want each process thread to run.</p>
 
 <h2 id="stopwatch-results">
-<img class="emoji" title=":stopwatch:" alt=":stopwatch:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/23f1.png" height="20" width="20"> Results</h2>
+<img class="emoji" title=":stopwatch:" alt=":stopwatch:" src="https://github.githubassets.com/images/icons/emoji/unicode/23f1.png" height="20" width="20"> Results</h2>
 
 <p>With the tuned settings applied, the cluster performed beautifully:</p>
 <ul>
@@ -417,7 +417,7 @@
 </li>
   <li>The desktop PC fan started spinning slowly… then went to <strong>full blast</strong> — the best analog indicator that real work is happening!</li>
   <li>NiFi never crashed, even when the monitoring tool screamed “Critical CPU level!”</li>
-  <li>I did press stop at this point, no sense in <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f525.png" height="20" width="20"> for a fun test!</li>
+  <li>I did press stop at this point, no sense in <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" height="20" width="20"> for a fun test!</li>
 </ul>
 
 <p>A default minimal evaluation NiFi cluster on Minikube is surprisingly capable once you give it the right concurrency, thread pool, and queue headroom.</p>
@@ -452,11 +452,11 @@
 <hr>
 
 <h2 id="checkered_flag-summary">
-<img class="emoji" title=":checkered_flag:" alt=":checkered_flag:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c1.png" height="20" width="20"> Summary</h2>
+<img class="emoji" title=":checkered_flag:" alt=":checkered_flag:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c1.png" height="20" width="20"> Summary</h2>
 
 <p>This experiment confirms that even a minimal, default deployment of Apache NiFi on a local Kubernetes environment like Minikube is an absolute powerhouse—provided you know which dials to turn. By simply adjusting the concurrent tasks, expanding the timer-driven thread pool, and giving your queues enough room to breathe, you can transform a modest 6-core setup into a high-performance data processing lab.</p>
 
-<p>The most impressive takeaway wasn’t just hitting 99% CPU utilization; it was that NiFi remained completely stable and the UI stayed responsive throughout the entire stress test. Whether you are running on a massive production cluster or a local laptop, the same principles apply: Test, Tune, and don’t be afraid to listen for the <img class="emoji" title=":cyclone:" alt=":cyclone:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f300.png" height="20" width="20">!</p>
+<p>The most impressive takeaway wasn’t just hitting 99% CPU utilization; it was that NiFi remained completely stable and the UI stayed responsive throughout the entire stress test. Whether you are running on a massive production cluster or a local laptop, the same principles apply: Test, Tune, and don’t be afraid to listen for the <img class="emoji" title=":cyclone:" alt=":cyclone:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f300.png" height="20" width="20">!</p>
 
 <p>Happy tuning — go push your NiFi clusters to the limit! 🚀</p>
 

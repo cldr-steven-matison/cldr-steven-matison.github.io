@@ -385,13 +385,13 @@ Since I am so familar with the <a href="https://github.com/cldr-steven-matison/F
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service mynifi-web <span class="nt">--namespace</span> cfm-streaming
 </code></pre></div></div>
 
-<p class="notice--warning"><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Pro Tip!</strong> Your first visit, you may need to append /nifi into your browser url.</p>
+<p class="notice--warning"><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Pro Tip!</strong> Your first visit, you may need to append /nifi into your browser url.</p>
 
 <p>Next, drag out a GenerateFlowFile and PublishKafka_2_6 processor.  Connect them as follows:</p>
 
 <p><img src="/assets/images/2026-03-16-flow.png" alt="NiFi Flow"></p>
 
-<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> I always route the success and failure separately so that I can debug.  Later I will use auto-termination, re-route failure back to PublishKafka, or setup retry once I confirm the processor configuration is operating as expected.</p>
+<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> I always route the success and failure separately so that I can debug.  Later I will use auto-termination, re-route failure back to PublishKafka, or setup retry once I confirm the processor configuration is operating as expected.</p>
 
 <p>Insert this transaction json into GenerateFlowfile Custom Text:</p>
 
@@ -409,11 +409,11 @@ Since I am so familar with the <a href="https://github.com/cldr-steven-matison/F
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">kubectl get kafka my-cluster -n cld-streaming -o jsonpath='{.status.listeners[?(@.name=="plain")].bootstrapServers}'
 </span></code></pre></div></div>
 
-<p class="notice--info"><img class="emoji" title=":mag:" alt=":mag:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f50d.png" height="20" width="20"> <strong>Look!</strong> Take a deeper look into Kafka Brokers and bootStrapserver and notice the shape of the bootstrapServers:<code class="language-plaintext highlighter-rouge">[clusterName]-bootstrap.[namespace].svc:9092</code></p>
+<p class="notice--info"><img class="emoji" title=":mag:" alt=":mag:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f50d.png" height="20" width="20"> <strong>Look!</strong> Take a deeper look into Kafka Brokers and bootStrapserver and notice the shape of the bootstrapServers:<code class="language-plaintext highlighter-rouge">[clusterName]-bootstrap.[namespace].svc:9092</code></p>
 
 <p>Start your NiFi flow and confirm PublishKafka_2_6 is sending flowfiles to success.  You can now exit Nifi and close out the <code class="language-plaintext highlighter-rouge">minikube service</code> command.  You have just successfully deployed a simple NiFi flow on kubernetes pushing transaction data to Kafka topic txn1 also on kubernetes.</p>
 
-<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> You can find the flow definition file of the flow <code class="language-plaintext highlighter-rouge">TXN1.json</code> over in my <a href="https://github.com/cldr-steven-matison/NiFi-Templates">GitHub NiFi Templates</a>.</p>
+<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> You can find the flow definition file of the flow <code class="language-plaintext highlighter-rouge">TXN1.json</code> over in my <a href="https://github.com/cldr-steven-matison/NiFi-Templates">GitHub NiFi Templates</a>.</p>
 
 <hr>
 
@@ -466,7 +466,7 @@ Processed a total of 10 messages
 
 <p><img src="/assets/images/2026-03-16-ssb-kafka-1.png" alt="SSB New Kafka Data Source"></p>
 
-<p class="notice--warning"><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Pro Tip!</strong> Notice you need to Validate before Create.</p>
+<p class="notice--warning"><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Pro Tip!</strong> Notice you need to Validate before Create.</p>
 
 <p>You should now see your cluster listed in Data Sources &gt; Kafka:</p>
 
@@ -476,7 +476,7 @@ Processed a total of 10 messages
 
 <p><img src="/assets/images/2026-03-16-ssb-kafka-3.png" alt="SSB New Kafka Data Source"></p>
 
-<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/26a0.png" height="20" width="20"> <strong>WARNING!</strong> You must switch over to Event Time tab before you push Create.</p>
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>WARNING!</strong> You must switch over to Event Time tab before you push Create.</p>
 
 <p>Set the Event Time Column to <code class="language-plaintext highlighter-rouge">event_time</code> as follows then Create:</p>
 
@@ -490,7 +490,7 @@ Processed a total of 10 messages
 
 <p><img src="/assets/images/2026-03-16-ssb-select.png" alt="SQL Stream Builder"></p>
 
-<p class="notice--primary"><img class="emoji" title=":watch:" alt=":watch:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/231a.png" height="20" width="20"> <strong>Be Patient!</strong> It could take a few moments before results display.</p>
+<p class="notice--primary"><img class="emoji" title=":watch:" alt=":watch:" src="https://github.githubassets.com/images/icons/emoji/unicode/231a.png" height="20" width="20"> <strong>Be Patient!</strong> It could take a few moments before results display.</p>
 
 <hr>
 

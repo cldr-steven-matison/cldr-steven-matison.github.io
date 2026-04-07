@@ -335,7 +335,7 @@
 <h3 id="option-a-llama-32-the-heavy-hitter">Option A: Llama 3.2 (The Heavy Hitter)</h3>
 <p>Llama 3.2-3B is incredibly smart for its size, but it is a “gated” model.</p>
 
-<p class="notice--warning"><img class="emoji" title=":key:" alt=":key:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f511.png" height="20" width="20"> <strong>Requirement:</strong> This requires Hugging Face (HF) access to download. You must have an HF account and an API token. You’ll need to create a Kubernetes secret named <code class="language-plaintext highlighter-rouge">hf-token</code> containing your token before deploying this.  Last but not least you need to complete user input form for access.</p>
+<p class="notice--warning"><img class="emoji" title=":key:" alt=":key:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f511.png" height="20" width="20"> <strong>Requirement:</strong> This requires Hugging Face (HF) access to download. You must have an HF account and an API token. You’ll need to create a Kubernetes secret named <code class="language-plaintext highlighter-rouge">hf-token</code> containing your token before deploying this.  Last but not least you need to complete user input form for access.</p>
 
 <p><strong>Create <code class="language-plaintext highlighter-rouge">vllm-llama.yaml</code>:</strong></p>
 
@@ -503,7 +503,7 @@ kubectl logs <span class="nt">-f</span> deployment/vllm-server <span class="nt">
   }'</span>
 </code></pre></div></div>
 
-<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see <code class="language-plaintext highlighter-rouge">Application startup complete</code>.</p>
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see <code class="language-plaintext highlighter-rouge">Application startup complete</code>.</p>
 
 <hr>
 

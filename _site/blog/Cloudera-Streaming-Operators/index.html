@@ -344,7 +344,7 @@ open /Applications/Docker.app
 minikube start <span class="nt">--cpus</span> 6 <span class="nt">--memory</span> 16384
 </code></pre></div></div>
 
-<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Make sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.</p>
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Make sure you have enough resources in docker, then use minikube start to allocate cpu and memory as shown above.</p>
 
 <hr>
 
@@ -367,7 +367,7 @@ helm <span class="nb">install </span>cert-manager jetstack/cert-manager <span cl
 </span>helm registry login container.repository.cloudera.com
 </code></pre></div></div>
 
-<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> If you are working with helm over time across different clusters, remember you may need to relogin again.</p>
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> If you are working with helm over time across different clusters, remember you may need to relogin again.</p>
 <hr>
 
 <h3 id="-install-cloudera-streams-messaging-operatorcsm-16">🎡 Install Cloudera Streams Messaging Operator(CSM 1.6)</h3>
@@ -695,7 +695,7 @@ TEST SUITE: None
 k9s
 </code></pre></div></div>
 
-<p class="notice--warning"><img class="emoji" title=":watch:" alt=":watch:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/231a.png" height="20" width="20"> <strong>Be Patient!</strong> It will take quite a bit of time for the entire stack to be online and running.</p>
+<p class="notice--warning"><img class="emoji" title=":watch:" alt=":watch:" src="https://github.githubassets.com/images/icons/emoji/unicode/231a.png" height="20" width="20"> <strong>Be Patient!</strong> It will take quite a bit of time for the entire stack to be online and running.</p>
 
 <p><img src="/assets/images/k9s-full-stack.png" alt="k9s Full Setup Placeholder">
 <em>Behold: The full Cloudera Streaming stack running harmoniously in your local minikube cluster.</em></p>
@@ -721,7 +721,7 @@ k9s
 └───────────────┴─────────────────────────────────────────────────┴──────────────────┴─────┘
 </code></pre></div></div>
 
-<p class="notice--success"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Once your pods are running, use <code class="language-plaintext highlighter-rouge">minikube service</code> to expose the UI endpoints.</p>
+<p class="notice--success"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Once your pods are running, use <code class="language-plaintext highlighter-rouge">minikube service</code> to expose the UI endpoints.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check out the service UIs:</span>
 minikube service cloudera-surveyor-service <span class="nt">--namespace</span> cld-streaming

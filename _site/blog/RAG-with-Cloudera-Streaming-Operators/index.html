@@ -379,7 +379,7 @@ Test PASSED
 Done
 </span></code></pre></div></div>
 
-<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Keep <code class="language-plaintext highlighter-rouge">watch nvidia-smi</code> running in another terminal — you’ll see your 4060 light up during inference.</p>
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Keep <code class="language-plaintext highlighter-rouge">watch nvidia-smi</code> running in another terminal — you’ll see your 4060 light up during inference.</p>
 
 <hr>
 
@@ -473,7 +473,7 @@ kubectl port-forward svc/vllm-service 8000:8000
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"id":"chatcmpl-bf9eab9a4c952c2d","object":"chat.completion","created":1774452848,"model":"Qwen/Qwen2.5-3B-Instruct","choices":[{"index":0,"message":{"role":"assistant","content":"Of course! Here's a quick one for you:\n\nWhy don't scientists trust atoms?\n\nBecause they make up everything!","refusal":null,"annotations":null,"audio":null,"function_call":null,"tool_calls":[],"reasoning":null},"logprobs":null,"finish_reason":"stop","stop_reason":null,"token_ids":null}],"service_tier":null,"system_fingerprint":null,"usage":{"prompt_tokens":37,"total_tokens":62,"completion_tokens":25,"prompt_tokens_details":null},"prompt_logprobs":null,"prompt_token_ids":null,"kv_transfer_params":null}
 </span></code></pre></div></div>
 
-<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/26a0.png" height="20" width="20"> <strong>Warning!</strong> If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see <code class="language-plaintext highlighter-rouge">Application startup complete</code>.</p>
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Warning!</strong> If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see <code class="language-plaintext highlighter-rouge">Application startup complete</code>.</p>
 
 <p><strong>⚡ Ready for RAG!</strong> Your GPU pod is now the brain of the system.</p>
 
@@ -545,7 +545,7 @@ kubectl port-forward svc/qdrant 6333:6333
 <div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"result":true,"status":"ok","time":0.098496962}
 </span></code></pre></div></div>
 
-<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> With <code class="language-plaintext highlighter-rouge">port-forward</code> on visit <a href="http://localhost:6333/dashboard">http://localhost:6333/dashboard</a> and have a look at Qdrant.</p>
+<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> With <code class="language-plaintext highlighter-rouge">port-forward</code> on visit <a href="http://localhost:6333/dashboard">http://localhost:6333/dashboard</a> and have a look at Qdrant.</p>
 
 <hr>
 
@@ -642,7 +642,7 @@ kubectl port-forward svc/embedding-server-service 8080:80
 
 <p>To make this easy, I’ve exported the complete NiFi flow as a JSON file: <code class="language-plaintext highlighter-rouge">StreamToVLLM.json</code>. You can download it and import it directly into your NiFi UI by dragging a new <code class="language-plaintext highlighter-rouge">Process Group</code> onto the canvas and uploading the flow definition file.</p>
 
-<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>NiFi Flow Definition File</strong> The fully operational flows are here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">NiFi Templates</a>.</p>
+<p class="notice--primary"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>NiFi Flow Definition File</strong> The fully operational flows are here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">NiFi Templates</a>.</p>
 
 <h3 id="️-streamtovllm-nifi-flow">🛠️ StreamTovLLM NiFi Flow</h3>
 
@@ -684,9 +684,9 @@ kubectl port-forward svc/embedding-server-service 8080:80
 
 <p><img src="/assets/images/2026-03-22-nifi-flow-IngestToStream.png" alt="NiFi Flow for IngestToStream"></p>
 
-<p class="notice--danger"><img class="emoji" title=":radioactive:" alt=":radioactive:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/2622.png" height="20" width="20"> <strong>Careful!</strong> The scheduling for both top processors is 1 day. Do not keep the ingest running.  You only need to ingest one example or the other.   If you do ingest too much, delete the collection, and remake it to start over.</p>
+<p class="notice--danger"><img class="emoji" title=":radioactive:" alt=":radioactive:" src="https://github.githubassets.com/images/icons/emoji/unicode/2622.png" height="20" width="20"> <strong>Careful!</strong> The scheduling for both top processors is 1 day. Do not keep the ingest running.  You only need to ingest one example or the other.   If you do ingest too much, delete the collection, and remake it to start over.</p>
 
-<p><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/25b6.png" height="20" width="20"> Start the <code class="language-plaintext highlighter-rouge">StreamTovLLM</code> Flow.  Next, send 1 flowfile (Run Once) to PublishKafka in <code class="language-plaintext highlighter-rouge">IngestToStream</code> — the document will now stream through NiFi and land in Qdrant and able to be used as context in calls to our vllm service!</p>
+<p><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://github.githubassets.com/images/icons/emoji/unicode/25b6.png" height="20" width="20"> Start the <code class="language-plaintext highlighter-rouge">StreamTovLLM</code> Flow.  Next, send 1 flowfile (Run Once) to PublishKafka in <code class="language-plaintext highlighter-rouge">IngestToStream</code> — the document will now stream through NiFi and land in Qdrant and able to be used as context in calls to our vllm service!</p>
 
 <hr>
 
@@ -765,7 +765,7 @@ I apologize, but there seems to be an error in the term you've provided ("stream
 StreamToVLLM is a specialized data engineering framework that connects Apache NiFi with vLLM inference servers, enabling local retrieval and augmentation generation on Windows WSL2 machines using Qdrant for storing technical blog content. Its primary goal is to showcase high-performance streaming AI using Cloudera Streaming Operators and dedicated GPU hardware.
 </span></code></pre></div></div>
 
-<p><strong>Boom</strong> — <img class="emoji" title=":boom:" alt=":boom:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f4a5.png" height="20" width="20"> instant, context-aware answers from your live streaming documents.</p>
+<p><strong>Boom</strong> — <img class="emoji" title=":boom:" alt=":boom:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a5.png" height="20" width="20"> instant, context-aware answers from your live streaming documents.</p>
 
 <hr>
 
@@ -793,12 +793,12 @@ kubectl delete <span class="nt">-f</span> qdrant-deployment.yaml
 kubectl delete <span class="nt">-f</span> embedding-server.yaml
 </code></pre></div></div>
 
-<p class="notice--primary"><img class="emoji" title=":gift:" alt=":gift:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f381.png" height="20" width="20"> <strong>YAMLS!</strong> You can find all the <code class="language-plaintext highlighter-rouge">yaml</code> for working with Cloudera Streaming Operators in my <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">GitHub Repo</a>.</p>
+<p class="notice--primary"><img class="emoji" title=":gift:" alt=":gift:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f381.png" height="20" width="20"> <strong>YAMLS!</strong> You can find all the <code class="language-plaintext highlighter-rouge">yaml</code> for working with Cloudera Streaming Operators in my <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">GitHub Repo</a>.</p>
 
 <hr>
 
 <h2 id="checkered_flag-the-streamtovllm-takeaway">
-<img class="emoji" title=":checkered_flag:" alt=":checkered_flag:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c1.png" height="20" width="20"> The “StreamToVLLM” Takeaway</h2>
+<img class="emoji" title=":checkered_flag:" alt=":checkered_flag:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c1.png" height="20" width="20"> The “StreamToVLLM” Takeaway</h2>
 
 <p>This project isn’t about building a final product; it’s about establishing a foundational dev pipeline that actually works on local hardware. By wiring these components together on kubernetes, we’ve brought a local GPU for functional development with Cloudera Streaming Operators.</p>
 

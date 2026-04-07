@@ -326,7 +326,7 @@
 
 <p>First, skip the “hard install” <a href="https://docs.cloudera.com/csm-operator/1.6/installation/topics/csm-op-install-surveyor-overview.html#concept_k1j_x1w_vfc">docs</a>, and work with the basic evaluation <a href="https://docs.cloudera.com/csm-operator/1.6/installation/topics/csm-op-install-surveyor-overview.html#task_gfn_mmj_wfc">docs</a>.  We just want to evaluate that the operator works and that we can get to and see the Surveyor UI.</p>
 
-<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> It is important to have a basic working install confidence.  Without you will quickly be blocked.  With confidence you can solve the difficulties you will encounter while installing these services in existing or alternative kubernetes platforms.</p>
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> It is important to have a basic working install confidence.  Without you will quickly be blocked.  With confidence you can solve the difficulties you will encounter while installing these services in existing or alternative kubernetes platforms.</p>
 
 <p>We will need the following contents for values.yaml:</p>
 
@@ -351,7 +351,7 @@
 
 </code></pre></div></div>
 
-<p><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/1f4a1.png" height="20" width="20"> Check out these two methods for getting your bootstrap servers:</p>
+<p><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> Check out these two methods for getting your bootstrap servers:</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span> <span class="n">get</span> <span class="n">kafka</span> <span class="n">my</span><span class="o">-</span><span class="n">cluster</span> <span class="o">-</span><span class="n">n</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span> <span class="o">-</span><span class="n">o</span> <span class="n">jsonpath</span><span class="o">=</span><span class="s1">'{.status.listeners[?(@.name=="plain")].bootstrapServers}'</span>
 </code></pre></div></div>
@@ -376,7 +376,7 @@
   <p><strong>Note:</strong> Check out my full command stream for the session above:</p>
 </blockquote>
 
-<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/emoji/unicode/26a0.png" height="20" width="20"> <strong>Watch out!</strong> Be careful with upstream documentation copy paste code boxes with \\ and return lines they will often times mess you up.</p>
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Watch out!</strong> Be careful with upstream documentation copy paste code boxes with \\ and return lines they will often times mess you up.</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">minikube</span> <span class="n">service</span> <span class="n">my</span><span class="o">-</span><span class="n">cluster</span><span class="o">-</span><span class="n">kafka</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">bootstrap</span> <span class="o">--</span><span class="n">url</span> <span class="o">-</span><span class="n">n</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span>
 <span class="n">kubectl</span> <span class="n">get</span> <span class="n">kafka</span> <span class="n">my</span><span class="o">-</span><span class="n">cluster</span> <span class="o">-</span><span class="n">n</span> <span class="n">csm</span><span class="o">-</span><span class="n">operator</span> <span class="o">-</span><span class="n">o</span> <span class="n">jsonpath</span><span class="o">=</span><span class="s1">'{.status.listeners[?(@.name=="plain")].bootstrapServers}'</span>
