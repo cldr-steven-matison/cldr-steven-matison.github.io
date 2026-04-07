@@ -133,6 +133,10 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
+  jekyll-feed
+  jekyll-gist
+  jekyll-paginate
+  jekyll-sitemap
   jemoji
   minimal-mistakes-jekyll!
   rake (>= 12.3.3)

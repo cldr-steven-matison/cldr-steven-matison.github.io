@@ -233,6 +233,10 @@ plugins:
   - jekyll-include-cache
   - jemoji
 
+# 2. Add this block to force absolute image URLs
+emoji:
+  src: "https://github.githubassets.com/images/icons/emoji/unicode/"
+    
 # mimic GitHub Pages with --safe
 whitelist:
   - jekyll-paginate
