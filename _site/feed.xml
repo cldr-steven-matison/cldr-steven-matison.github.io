@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Cloudera Solutions Engineer</title>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://cldr-steven-matison.github.io/</link>
+    <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2</title>
-        <link>http://localhost:4000/release/Cloudera-Flow-Management-4.12.0/</link>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-4.12.0/</link>
         <pubDate>Thu, 02 Apr 2026 00:00:00 -0400</pubDate>
         
-          <image>http://localhost:4000/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png</image>
-          <media:content url="http://localhost:4000/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png" medium="image" />
         
         <description>The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Cloudera Manager on Cloudera on premises and Cloudera on cloud (Data Hub) 7.3.2. This release offers a number of new features and improvements as well as upgraded dependencies.
 </description>
@@ -19,11 +19,11 @@
     
       <item>
         <title>Introducing Cloudera Runtime 7.3.2</title>
-        <link>http://localhost:4000/release/Introducing-Cloudera-Runtime-7.3.2/</link>
+        <link>https://cldr-steven-matison.github.io/release/Introducing-Cloudera-Runtime-7.3.2/</link>
         <pubDate>Wed, 01 Apr 2026 00:00:00 -0400</pubDate>
         
-          <image>http://localhost:4000/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png</image>
-          <media:content url="http://localhost:4000/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png" medium="image" />
         
         <description>We are excited to announce the delivery of Cloudera runtime 7.3.2! This represents our most enduring Long-Term Support (LTS) release to date, with support extending through 2032. This release builds upon the unified code base for both Cloudera on premises and Cloudera on cloud that was established in the previous release in support of the hybrid cloud strategy.
 </description>
@@ -31,88 +31,88 @@
     
       <item>
         <title>Lessons Learned Audio Transcription RAG</title>
-        <link>http://localhost:4000/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/</link>
         <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>http://localhost:4000/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
-          <media:content url="http://localhost:4000/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
         
         <description>Infrastructure tuning is the &apos;final boss&apos; of local AI. Skip the &apos;Driver Dance&apos; and move past the tutorials with these hard-won lessons on CUDA pinning, dependency traps, and Flash Attention 2 hacks for Whisper on local Kubernetes.</description>
       </item>
     
       <item>
         <title>Lessons Learned Audio Transcription Terminal Output 3</title>
-        <link>http://localhost:4000/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/</link>
         <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>http://localhost:4000/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
-          <media:content url="http://localhost:4000/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
         
         <description>Terminal 3 Output to go along with Audio Transcription RAG post.</description>
       </item>
     
       <item>
         <title>Lessons Learned Audio Transcription Terminal Output 2</title>
-        <link>http://localhost:4000/blog/Lessons-From-Audio-Transcription-Terminal-Output-2/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-Output-2/</link>
         <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>http://localhost:4000/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
-          <media:content url="http://localhost:4000/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
         
         <description>Terminal 2 Output to go along with Audio Transcription RAG post.</description>
       </item>
     
       <item>
         <title>Lessons Learned Audio Transcription Terminal Output 1</title>
-        <link>http://localhost:4000/blog/Lessons-From-Audio-Transcription-Terminal-Output-1/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-Output-1/</link>
         <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>http://localhost:4000/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
-          <media:content url="http://localhost:4000/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
         
         <description>Terminal 1 Output to go along with Audio Transcription RAG post.</description>
       </item>
     
       <item>
         <title>Lessons Learned Audio Transcription Terminal History</title>
-        <link>http://localhost:4000/blog/Lessons-From-Audio-Transcription-Terminal-History/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-History/</link>
         <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>http://localhost:4000/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
-          <media:content url="http://localhost:4000/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
         
         <description>Terminal History to go along with Audio Transcription RAG post.</description>
       </item>
     
       <item>
         <title>Insanely Fast Audio Transcription with Cloudera Streaming Operators</title>
-        <link>http://localhost:4000/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/</link>
         <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>http://localhost:4000/assets/images/2026-03-30-StreamToWhisper.png</image>
-          <media:content url="http://localhost:4000/assets/images/2026-03-30-StreamToWhisper.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper.png" medium="image" />
         
         <description>Real-time, GPU-accelerated speech-to-text over streaming audio sources — powered by insanely-fast-whisper, Cloudera Streaming Operators (Kafka + NiFi), and my RTX 4060. Transcripts flow straight into my existing RAG pipeline for instant Q&amp;A on spoken content.</description>
       </item>
     
       <item>
         <title>Managing Multiple Services and Port-Forwards Efficiently in Minikube</title>
-        <link>http://localhost:4000/blog/Managing-Multiple-Services-Port-Forwards-Efficiently-in-Minikube/</link>
+        <link>https://cldr-steven-matison.github.io/blog/Managing-Multiple-Services-Port-Forwards-Efficiently-in-Minikube/</link>
         <pubDate>Mon, 23 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>http://localhost:4000/assets/images/2026-03-23-minikube-services.png</image>
-          <media:content url="http://localhost:4000/assets/images/2026-03-23-minikube-services.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-23-minikube-services.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-23-minikube-services.png" medium="image" />
         
         <description>Stop drowning in open terminal tabs just to access your UIs. This guide shows you how to streamline your Cloudera Streaming Operators workflow by managing multiple Minikube services and port-forwards simultaneously using background execution and automation scripts.</description>
       </item>
     
       <item>
         <title>RAG with Cloudera Streaming Operators</title>
-        <link>http://localhost:4000/blog/RAG-with-Cloudera-Streaming-Operators/</link>
+        <link>https://cldr-steven-matison.github.io/blog/RAG-with-Cloudera-Streaming-Operators/</link>
         <pubDate>Sun, 22 Mar 2026 00:00:00 -0400</pubDate>
         
-          <image>http://localhost:4000/assets/images/StreamToVLLM.png</image>
-          <media:content url="http://localhost:4000/assets/images/StreamToVLLM.png" medium="image" />
+          <image>https://cldr-steven-matison.github.io/assets/images/StreamToVLLM.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/StreamToVLLM.png" medium="image" />
         
         <description>Privacy-first, fully local semantic search &amp; question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and your RTX 4060 GPU.</description>
       </item>
