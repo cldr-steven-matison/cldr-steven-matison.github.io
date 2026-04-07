@@ -1,0 +1,817 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Lessons Learned Audio Transcription Terminal History - Cloudera Solutions Engineer</title>
+<meta name="description" content="Terminal History to go along with Audio Transcription RAG post.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Lessons Learned Audio Transcription Terminal History">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-History/">
+
+
+  <meta property="og:description" content="Terminal History to go along with Audio Transcription RAG post.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-30T00:00:00-04:00">
+
+
+
+  <meta property="article:modified_time" content="2026-03-30T00:00:00-04:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-History/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration and Cloudera Data Platform (CDP) through scalable, production-grade solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Lessons Learned Audio Transcription Terminal History">
+    <meta itemprop="description" content="Terminal History to go along with Audio Transcription RAG post.">
+    <meta itemprop="datePublished" content="2026-03-30T00:00:00-04:00">
+    <meta itemprop="dateModified" content="2026-03-30T00:00:00-04:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-History/" class="u-url" itemprop="url">Lessons Learned Audio Transcription Terminal History
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-03-30">
+            March 30, 2026
+          </time>
+        </p>
+      
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>This post is comprised of the backing lessons from <a href="/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/">Insanely Fast Audio Transcription with Cloudera Streaming Operators</a> with a <a href="">summary of the hurdles</a>, a [log of the terminal commands], <a href="">terminal output 1</a> <a href="">terminal output 2</a>, and <a href="">terminal output 3</a>.</p>
+
+<h2 id="terminal-history">Terminal History</h2>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">mkdir whisper
+cd whisper
+nano Dockerfile.whisper
+docker build -t streamwhisper:latest -f Dockerfile.whisper .
+nano Dockerfile.whisper.2
+docker build -t streamwhisper:latest -f Dockerfile.whisper.2 .
+nano Dockerfile.whisper.3
+docker build -t streamwhisper:latest -f Dockerfile.whisper.3 .
+nano Dockerfile.whisper.4
+docker build -t streamwhisper:latest -f Dockerfile.whisper.4 .
+nano Dockerfile.whisper.5
+docker build -t streamwhisper:latest -f Dockerfile.whisper.5 .
+nano Dockerfile.whisper.6
+docker build -t streamwhisper:latest -f Dockerfile.whisper.6 .
+nano Dockerfile.whisper.7
+docker build -t streamwhisper:latest -f Dockerfile.whisper.7 .
+nano Dockerfile.whisper.8
+docker build -t streamwhisper:latest -f Dockerfile.whisper.8 .
+nano Dockerfile.whisper.9
+docker build -t streamwhisper:latest -f Dockerfile.whisper.9 .
+nano Dockerfile.whisper.10
+docker build -t streamwhisper:latest -f Dockerfile.whisper.10 .
+nano Dockerfile.whisper.11
+docker build -t streamwhisper:latest -f Dockerfile.whisper.11 .
+nano Dockerfile.whisper.12
+docker build -t streamwhisper:latest -f Dockerfile.whisper.12 .
+</span><span class="gp">export MY_TOKEN=$</span><span class="o">(</span>kubectl get secret hf-token <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.token}'</span> | <span class="nb">base64</span> <span class="nt">--decode</span><span class="o">)</span>
+<span class="gp">docker build -t streamwhisper:latest --build-arg HF_TOKEN=$</span>MY_TOKEN <span class="nt">-f</span> Dockerfile.whisper.12 <span class="nb">.</span>
+<span class="go">minikube service whisper-server-service --url
+curl -X POST http://whisper-server-service:8001/transcribe   -H "Content-Type: multipart/form-data"   -F "file=@test-speech.wav"
+curl -X POST http://127.0.0.1:8001/transcribe   -H "Content-Type: multipart/form-data"   -F "file=@test-speech.wav"
+wget -O test-speech.wav https://github.com/Azure-Samples/cognitive-services-speech-sdk/raw/master/samples/cpp/windows/console/samples/whatstheweatherlike.wav
+curl -X POST http://127.0.0.1:8001/transcribe   -H "Content-Type: multipart/form-data"   -F "file=@test-speech.wav"
+nano whisper-server.yaml
+kubectl apply -f whisper-server.yaml
+kubectl describe pod whisper-server-779f955f5c-j2vr7
+kubectl delete -f whisper-server.yaml
+kubectl apply -f whisper-server.yaml
+kubectl delete -f vllm-qwen.yaml
+kubectl delete -f whisper-server.yaml
+kubectl apply -f whisper-server.yaml
+kubectl describe pod whisper-server-6486568f56-xrcg2
+kubectl rollout restart deployment whisper-server
+kubectl describe pod whisper-server-6486568f56-xrcg2
+kubectl logs whisper-server-6486568f56-xrcg2
+kubectl delete -f whisper-server.yaml
+kubectl apply -f whisper-server.yaml
+kubectl logs whisper-server-6486568f56-gzvqs
+kubectl delete -f whisper-server.yaml
+kubectl apply -f whisper-server.yaml
+kubectl delete -f whisper-server.yaml
+kubectl apply -f whisper-server.yaml
+kubectl delete -f whisper-server.yaml
+kubectl apply -f whisper-server.yaml
+kubectl logs whisper-server-6486568f56-bbz6z
+kubectl delete -f whisper-server.yaml
+</span><span class="gp">export MY_TOKEN=$</span><span class="o">(</span>kubectl get secret hf-token <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.token}'</span> | <span class="nb">base64</span> <span class="nt">--decode</span><span class="o">)</span>
+<span class="go">kubectl rollout restart deployment whisper-server
+kubectl apply -f whisper-server.yaml
+kubectl port-forward deployment/whisper-server 8001:8001
+kubectl delete -f whisper-server.yaml
+kubectl port-forward deployment/whisper-server 8001:8001
+kubectl port-forward deployment/whisper-server 8001:8001 -n cfm-streaming
+kubectl apply -f whisper-server.yaml
+kubectl delete -f whisper-server.yaml
+kubectl apply -f whisper-server.yaml
+kubectl port-forward deployment/whisper-server 8001:8001 -n cfm-streaming
+kubectl port-forward deployment/whisper-server 8001:8001
+kubectl delete -f whisper-server.yaml
+kubectl apply -f whisper-server.yaml
+kubectl delete -f whisper-server.yaml
+kubectl exec -it mynifi-0 -n cfm-streaming -- curl -s -o /dev/null -w "%{http_code}" http://whisper-server-service.default.svc.cluster.local:8001/transcribe
+kubectl apply -f vllm-qwen.yaml
+
+</span></code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#gpu" class="page__taxonomy-item p-category" rel="tag">gpu</a><span class="sep">, </span>
+    
+      <a href="/tags/#kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a><span class="sep">, </span>
+    
+      <a href="/tags/#rag" class="page__taxonomy-item p-category" rel="tag">rag</a><span class="sep">, </span>
+    
+      <a href="/tags/#vllm" class="page__taxonomy-item p-category" rel="tag">vllm</a><span class="sep">, </span>
+    
+      <a href="/tags/#whisper" class="page__taxonomy-item p-category" rel="tag">whisper</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-30">March 30, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Lessons+Learned+Audio+Transcription+Terminal+History%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FLessons-From-Audio-Transcription-Terminal-History%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FLessons-From-Audio-Transcription-Terminal-History%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FLessons-From-Audio-Transcription-Terminal-History%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/" class="pagination--pager" title="Insanely Fast Audio Transcription with Cloudera Streaming Operators
+">Previous</a>
+    
+    
+      <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-1/" class="pagination--pager" title="Lessons Learned Audio Transcription Terminal Output 1
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Flow-Management-4.12.0/" rel="permalink">Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Clou...
+    <a href="/release/Cloudera-Flow-Management-4.12.0/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Introducing-Cloudera-Runtime-7.3.2/" rel="permalink">Introducing Cloudera Runtime 7.3.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    We are excited to announce the delivery of Cloudera runtime 7.3.2! This represents our most enduring Long-Term Support (LTS) release to date, with support ex...
+    <a href="/release/Introducing-Cloudera-Runtime-7.3.2/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-30-StreamToWhisper-lessons.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/" rel="permalink">Lessons Learned Audio Transcription RAG
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Infrastructure tuning is the ‘final boss’ of local AI. Skip the ‘Driver Dance’ and move past the tutorials with these hard-won lessons on CUDA pinning, depen...
+    <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-30-StreamToWhisper-lessons.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/" rel="permalink">Lessons Learned Audio Transcription Terminal Output 3
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Terminal 3 Output to go along with Audio Transcription RAG post.
+
+    <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<style>
+  .code-header {
+    position: relative;
+    background: #252a31; /* Matches dark syntax themes */
+    padding: 5px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .copy-code-button {
+    background: #3d4551;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .copy-code-button:hover { background: #505a69; }
+</style>
+
+<script>
+  document.querySelectorAll('div.highlighter-rouge, figure.highlight').forEach((container) => {
+    // Create header and button
+    const header = document.createElement('div');
+    header.className = 'code-header';
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+
+    button.addEventListener('click', () => {
+      const code = container.querySelector('code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => { button.innerText = 'Copy'; }, 2000);
+      });
+    });
+
+    header.appendChild(button);
+    container.prepend(header);
+  });
+</script>
+
+  </body>
+</html>

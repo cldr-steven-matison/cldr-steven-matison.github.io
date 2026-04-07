@@ -1,0 +1,1390 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Lessons Learned Audio Transcription Terminal Output 2 - Cloudera Solutions Engineer</title>
+<meta name="description" content="Terminal 2 Output to go along with Audio Transcription RAG post.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Lessons Learned Audio Transcription Terminal Output 2">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-Output-2/">
+
+
+  <meta property="og:description" content="Terminal 2 Output to go along with Audio Transcription RAG post.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-30T00:00:00-04:00">
+
+
+
+  <meta property="article:modified_time" content="2026-03-30T00:00:00-04:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-Output-2/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration and Cloudera Data Platform (CDP) through scalable, production-grade solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Lessons Learned Audio Transcription Terminal Output 2">
+    <meta itemprop="description" content="Terminal 2 Output to go along with Audio Transcription RAG post.">
+    <meta itemprop="datePublished" content="2026-03-30T00:00:00-04:00">
+    <meta itemprop="dateModified" content="2026-03-30T00:00:00-04:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-Output-2/" class="u-url" itemprop="url">Lessons Learned Audio Transcription Terminal Output 2
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          13 minute read
+        
+      </span>
+    
+    
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-03-30">
+            March 30, 2026
+          </time>
+        </p>
+      
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>This post is comprised of the backing lessons from <a href="/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/">Insanely Fast Audio Transcription with Cloudera Streaming Operators</a> with a <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/">summary of the hurdles</a>, a <a href="/blog/Lessons-From-Audio-Transcription-Terminal-History/">log of the terminal history</a>, <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-1/">terminal output 1</a> <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-2/">terminal output 2</a>, and <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/">terminal output 3</a>.</p>
+
+<h2 id="terminal-2-output">Terminal 2 Output</h2>
+
+<p>Testing Insanely Fast Whisper</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">steven@CSO:~$</span><span class="w"> </span>nano whisper-server.yaml
+<span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl apply <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps/whisper-server created
+service/whisper-service created
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl describe pod whisper-server-779f955f5c-j2vr7
+<span class="go">Name:             whisper-server-779f955f5c-j2vr7
+Namespace:        default
+Priority:         0
+Service Account:  default
+</span><span class="gp">Node:             &lt;none&gt;</span><span class="w">
+</span><span class="go">Labels:           app=whisper-server
+                  pod-template-hash=779f955f5c
+</span><span class="gp">Annotations:      &lt;none&gt;</span><span class="w">
+</span><span class="go">Status:           Pending
+IP:
+</span><span class="gp">IPs:              &lt;none&gt;</span><span class="w">
+</span><span class="go">Controlled By:    ReplicaSet/whisper-server-779f955f5c
+Containers:
+  whisper-server:
+    Image:      streamwhisper:latest
+    Port:       8001/TCP
+    Host Port:  0/TCP
+    Limits:
+      memory:          20Gi
+      nvidia.com/gpu:  1
+    Requests:
+      memory:          20Gi
+      nvidia.com/gpu:  1
+</span><span class="gp">    Environment:       &lt;none&gt;</span><span class="w">
+</span><span class="go">    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-w5447 (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False
+Volumes:
+  kube-api-access-w5447:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+</span><span class="gp">Node-Selectors:              &lt;none&gt;</span><span class="w">
+</span><span class="go">Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age                 From               Message
+  ----     ------            ----                ----               -------
+  Warning  FailedScheduling  102s (x3 over 12m)  default-scheduler  0/1 nodes are available: 1 Insufficient nvidia.com/gpu. no new claims to deallocate, preemption: 0/1 nodes are available: 1 No preemption victims found for incoming pod.
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>nano whisper-server.yaml
+<span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl delete <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps "whisper-server" deleted from default namespace
+service "whisper-service" deleted from default namespace
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl apply <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps/whisper-server created
+service/whisper-service created
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl describe pod whisper-server-6486568f56-rsv4v
+<span class="go">Name:             whisper-server-6486568f56-rsv4v
+Namespace:        default
+Priority:         0
+Service Account:  default
+</span><span class="gp">Node:             &lt;none&gt;</span><span class="w">
+</span><span class="go">Labels:           app=whisper-server
+                  pod-template-hash=6486568f56
+</span><span class="gp">Annotations:      &lt;none&gt;</span><span class="w">
+</span><span class="go">Status:           Pending
+IP:
+</span><span class="gp">IPs:              &lt;none&gt;</span><span class="w">
+</span><span class="go">Controlled By:    ReplicaSet/whisper-server-6486568f56
+Containers:
+  whisper-server:
+    Image:      streamwhisper:latest
+    Port:       8001/TCP
+    Host Port:  0/TCP
+    Limits:
+      memory:          8Gi
+      nvidia.com/gpu:  1
+    Requests:
+      memory:          8Gi
+      nvidia.com/gpu:  1
+</span><span class="gp">    Environment:       &lt;none&gt;</span><span class="w">
+</span><span class="go">    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8l2r4 (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False
+Volumes:
+  kube-api-access-8l2r4:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+</span><span class="gp">Node-Selectors:              &lt;none&gt;</span><span class="w">
+</span><span class="go">Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  18s   default-scheduler  0/1 nodes are available: 1 Insufficient nvidia.com/gpu. no new claims to deallocate, preemption: 0/1 nodes are available: 1 No preemption victims found for incoming pod.
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl get nodes <span class="nt">-o</span> custom-columns<span class="o">=</span>NAME:.metadata.name,GPU:.status.allocatable.<span class="s2">"nvidia</span><span class="se">\.</span><span class="s2">com</span><span class="se">\/</span><span class="s2">gpu"</span>
+<span class="go">NAME       GPU
+minikube   1
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl delete <span class="nt">-f</span> vllm-qwen.yaml
+<span class="go">deployment.apps "vllm-server" deleted from default namespace
+service "vllm-service" deleted from default namespace
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl delete <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps "whisper-server" deleted from default namespace
+service "whisper-service" deleted from default namespace
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl apply <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps/whisper-server created
+service/whisper-service created
+
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl describe pod whisper-server-6486568f56-xrcg2
+<span class="go">Name:             whisper-server-6486568f56-xrcg2
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 27 Mar 2026 17:39:19 -0400
+Labels:           app=whisper-server
+                  pod-template-hash=6486568f56
+</span><span class="gp">Annotations:      &lt;none&gt;</span><span class="w">
+</span><span class="go">Status:           Running
+IP:               10.244.0.58
+IPs:
+  IP:           10.244.0.58
+Controlled By:  ReplicaSet/whisper-server-6486568f56
+Containers:
+  whisper-server:
+    Container ID:   docker://4a27011f083c1c206893cea30dacb826cc92fab426e949b30ff9d626c9316a7d
+    Image:          streamwhisper:latest
+    Image ID:       docker://sha256:0aef498fd237777f54b6bf049c9250ceadcf682889e6041c75f3261f877e935f
+    Port:           8001/TCP
+    Host Port:      0/TCP
+    State:          Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Fri, 27 Mar 2026 17:39:42 -0400
+      Finished:     Fri, 27 Mar 2026 17:39:45 -0400
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Fri, 27 Mar 2026 17:39:25 -0400
+      Finished:     Fri, 27 Mar 2026 17:39:28 -0400
+    Ready:          False
+    Restart Count:  2
+    Limits:
+      memory:          8Gi
+      nvidia.com/gpu:  1
+    Requests:
+      memory:          8Gi
+      nvidia.com/gpu:  1
+</span><span class="gp">    Environment:       &lt;none&gt;</span><span class="w">
+</span><span class="go">    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-gddtm (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       False
+  ContainersReady             False
+  PodScheduled                True
+Volumes:
+  kube-api-access-gddtm:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+</span><span class="gp">Node-Selectors:              &lt;none&gt;</span><span class="w">
+</span><span class="go">Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age                From               Message
+  ----     ------            ----               ----               -------
+  Warning  FailedScheduling  40s                default-scheduler  0/1 nodes are available: 1 Insufficient nvidia.com/gpu. no new claims to deallocate, preemption: 0/1 nodes are available: 1 No preemption victims found for incoming pod.
+  Normal   Scheduled         39s                default-scheduler  Successfully assigned default/whisper-server-6486568f56-xrcg2 to minikube
+  Normal   Pulled            16s (x3 over 39s)  kubelet            Container image "streamwhisper:latest" already present on machine and can be accessed by the pod
+  Normal   Created           16s (x3 over 39s)  kubelet            Container created
+  Normal   Started           16s (x3 over 38s)  kubelet            Container started
+  Warning  BackOff           13s (x2 over 30s)  kubelet            Back-off restarting failed container whisper-server in pod whisper-server-6486568f56-xrcg2_default(02ecffea-ebca-4f84-a8f2-8145b2a3921a)
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span><span class="c"># Force a restart of the pod to ensure a clean slate on the GPU</span>
+<span class="go">kubectl rollout restart deployment whisper-server
+deployment.apps/whisper-server restarted
+
+
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>steven@CSO:~<span class="nv">$ </span>kubectl describe pod whisper-server-6486568f56-xrcg2
+<span class="go">Name:             whisper-server-6486568f56-xrcg2
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 27 Mar 2026 17:39:19 -0400
+Labels:           app=whisper-server
+                  pod-template-hash=6486568f56
+</span><span class="gp">Annotations:      &lt;none&gt;</span><span class="w">
+</span><span class="go">Status:           Running
+IP:               10.244.0.58
+IPs:
+  IP:           10.244.0.58
+Controlled By:  ReplicaSet/whisper-server-6486568f56
+Containers:
+  whisper-server:
+    Container ID:   docker://b6f5a7dc6abf916f503c68b3f8bfe72c4a0d5aa1921c5e86e1bc1296732280a4
+    Image:          streamwhisper:latest
+    Image ID:       docker://sha256:0aef498fd237777f54b6bf049c9250ceadcf682889e6041c75f3261f877e935f
+    Port:           8001/TCP
+    Host Port:      0/TCP
+    State:          Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Fri, 27 Mar 2026 17:42:25 -0400
+      Finished:     Fri, 27 Mar 2026 17:42:28 -0400
+921a)^Chisper-server in pod whisper-server-6486568f56-xrcg2_default(02ecffea-ebca-4f84-a8f2-8145b2a3
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl logs whisper-server-6486568f56-xrcg2
+<span class="go">
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.4.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2169, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2403, in _get_module
+    raise e
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2401, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1206, in _gcd_import
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 1178, <span class="k">in </span>_find_and_load
+<span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1149, in _find_and_load_unlocked
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 690, <span class="k">in </span>_load_unlocked
+<span class="gp">  File "&lt;frozen importlib._bootstrap_external&gt;</span><span class="s2">", line 940, in exec_module
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 241, <span class="k">in </span>_call_with_frames_removed
+<span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 27, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from ..image_processing_utils import BaseImageProcessor
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_utils.py", line 24, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_processing_base import BatchFeature, ImageProcessingMixin
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_base.py", line 25, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_utils import is_valid_image, load_image
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_utils.py", line 53, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from torchvision.transforms import InterpolationMode
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/__init__.py", line 10, in &lt;module&gt;</span><span class="w">
+</span><span class="gp">    from torchvision import _meta_registrations, datasets, io, models, ops, transforms, utils  #</span><span class="w"> </span>usort:skip
+<span class="go">    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/_meta_registrations.py", line 163, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    @torch.library.register_fake("torchvision::nms")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 1087, in register
+    use_lib._register_fake(
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 204, in _register_fake
+    handle = entry.fake_impl.register(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/_library/fake_impl.py", line 50, in register
+    if torch._C._dispatch_has_kernel_for_dispatch_key(self.qualname, "Meta"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: operator torchvision::nms does not exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+</span><span class="gp">  File "/app/main.py", line 4, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from transformers import pipeline
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2257, in __getattr__
+    raise ModuleNotFoundError(
+ModuleNotFoundError: Could not import module 'pipeline'. Are this object's requirements defined correctly?
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl delete <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps "whisper-server" deleted from default namespace
+service "whisper-service" deleted from default namespace
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl apply <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps/whisper-server created
+service/whisper-service created
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl logs whisper-server-6486568f56-gzvqs
+<span class="go">
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.4.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2169, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2403, in _get_module
+    raise e
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2401, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1206, in _gcd_import
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 1178, <span class="k">in </span>_find_and_load
+<span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1149, in _find_and_load_unlocked
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 690, <span class="k">in </span>_load_unlocked
+<span class="gp">  File "&lt;frozen importlib._bootstrap_external&gt;</span><span class="s2">", line 940, in exec_module
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 241, <span class="k">in </span>_call_with_frames_removed
+<span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 27, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from ..image_processing_utils import BaseImageProcessor
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_utils.py", line 24, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_processing_base import BatchFeature, ImageProcessingMixin
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_base.py", line 25, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_utils import is_valid_image, load_image
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_utils.py", line 53, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from torchvision.transforms import InterpolationMode
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/__init__.py", line 10, in &lt;module&gt;</span><span class="w">
+</span><span class="gp">    from torchvision import _meta_registrations, datasets, io, models, ops, transforms, utils  #</span><span class="w"> </span>usort:skip
+<span class="go">    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/_meta_registrations.py", line 163, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    @torch.library.register_fake("torchvision::nms")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 1087, in register
+    use_lib._register_fake(
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 204, in _register_fake
+    handle = entry.fake_impl.register(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/_library/fake_impl.py", line 50, in register
+    if torch._C._dispatch_has_kernel_for_dispatch_key(self.qualname, "Meta"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: operator torchvision::nms does not exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+</span><span class="gp">  File "/app/main.py", line 4, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from transformers import pipeline
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2257, in __getattr__
+    raise ModuleNotFoundError(
+ModuleNotFoundError: Could not import module 'pipeline'. Are this object's requirements defined correctly?
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl logs whisper-server-6486568f56-gzvqs
+<span class="go">
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.4.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2169, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2403, in _get_module
+    raise e
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2401, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1206, in _gcd_import
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 1178, <span class="k">in </span>_find_and_load
+<span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1149, in _find_and_load_unlocked
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 690, <span class="k">in </span>_load_unlocked
+<span class="gp">  File "&lt;frozen importlib._bootstrap_external&gt;</span><span class="s2">", line 940, in exec_module
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 241, <span class="k">in </span>_call_with_frames_removed
+<span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 27, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from ..image_processing_utils import BaseImageProcessor
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_utils.py", line 24, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_processing_base import BatchFeature, ImageProcessingMixin
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_base.py", line 25, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_utils import is_valid_image, load_image
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_utils.py", line 53, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from torchvision.transforms import InterpolationMode
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/__init__.py", line 10, in &lt;module&gt;</span><span class="w">
+</span><span class="gp">    from torchvision import _meta_registrations, datasets, io, models, ops, transforms, utils  #</span><span class="w"> </span>usort:skip
+<span class="go">    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/_meta_registrations.py", line 163, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    @torch.library.register_fake("torchvision::nms")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 1087, in register
+    use_lib._register_fake(
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 204, in _register_fake
+    handle = entry.fake_impl.register(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/_library/fake_impl.py", line 50, in register
+    if torch._C._dispatch_has_kernel_for_dispatch_key(self.qualname, "Meta"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: operator torchvision::nms does not exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+</span><span class="gp">  File "/app/main.py", line 4, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from transformers import pipeline
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2257, in __getattr__
+    raise ModuleNotFoundError(
+ModuleNotFoundError: Could not import module 'pipeline'. Are this object's requirements defined correctly?
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl logs whisper-server-6486568f56-gzvqs
+<span class="go">
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.4.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2169, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2403, in _get_module
+    raise e
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2401, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1206, in _gcd_import
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 1178, <span class="k">in </span>_find_and_load
+<span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1149, in _find_and_load_unlocked
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 690, <span class="k">in </span>_load_unlocked
+<span class="gp">  File "&lt;frozen importlib._bootstrap_external&gt;</span><span class="s2">", line 940, in exec_module
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 241, <span class="k">in </span>_call_with_frames_removed
+<span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 27, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from ..image_processing_utils import BaseImageProcessor
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_utils.py", line 24, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_processing_base import BatchFeature, ImageProcessingMixin
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_base.py", line 25, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_utils import is_valid_image, load_image
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_utils.py", line 53, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from torchvision.transforms import InterpolationMode
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/__init__.py", line 10, in &lt;module&gt;</span><span class="w">
+</span><span class="gp">    from torchvision import _meta_registrations, datasets, io, models, ops, transforms, utils  #</span><span class="w"> </span>usort:skip
+<span class="go">    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/_meta_registrations.py", line 163, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    @torch.library.register_fake("torchvision::nms")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 1087, in register
+    use_lib._register_fake(
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 204, in _register_fake
+    handle = entry.fake_impl.register(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/_library/fake_impl.py", line 50, in register
+    if torch._C._dispatch_has_kernel_for_dispatch_key(self.qualname, "Meta"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: operator torchvision::nms does not exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+</span><span class="gp">  File "/app/main.py", line 4, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from transformers import pipeline
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2257, in __getattr__
+    raise ModuleNotFoundError(
+ModuleNotFoundError: Could not import module 'pipeline'. Are this object's requirements defined correctly?
+
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl logs whisper-server-6486568f56-gzvqs
+<span class="go">
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.4.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2169, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2403, in _get_module
+    raise e
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2401, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1206, in _gcd_import
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 1178, <span class="k">in </span>_find_and_load
+<span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1149, in _find_and_load_unlocked
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 690, <span class="k">in </span>_load_unlocked
+<span class="gp">  File "&lt;frozen importlib._bootstrap_external&gt;</span><span class="s2">", line 940, in exec_module
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 241, <span class="k">in </span>_call_with_frames_removed
+<span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 27, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from ..image_processing_utils import BaseImageProcessor
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_utils.py", line 24, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_processing_base import BatchFeature, ImageProcessingMixin
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_base.py", line 25, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_utils import is_valid_image, load_image
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_utils.py", line 53, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from torchvision.transforms import InterpolationMode
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/__init__.py", line 10, in &lt;module&gt;</span><span class="w">
+</span><span class="gp">    from torchvision import _meta_registrations, datasets, io, models, ops, transforms, utils  #</span><span class="w"> </span>usort:skip
+<span class="go">    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/_meta_registrations.py", line 163, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    @torch.library.register_fake("torchvision::nms")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 1087, in register
+    use_lib._register_fake(
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 204, in _register_fake
+    handle = entry.fake_impl.register(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/_library/fake_impl.py", line 50, in register
+    if torch._C._dispatch_has_kernel_for_dispatch_key(self.qualname, "Meta"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: operator torchvision::nms does not exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+</span><span class="gp">  File "/app/main.py", line 4, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from transformers import pipeline
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2257, in __getattr__
+    raise ModuleNotFoundError(
+ModuleNotFoundError: Could not import module 'pipeline'. Are this object's requirements defined correctly?
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl logs whisper-server-6486568f56-gzvqs
+<span class="go">
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.4.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2169, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2403, in _get_module
+    raise e
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2401, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1206, in _gcd_import
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 1178, <span class="k">in </span>_find_and_load
+<span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">", line 1149, in _find_and_load_unlocked
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 690, <span class="k">in </span>_load_unlocked
+<span class="gp">  File "&lt;frozen importlib._bootstrap_external&gt;</span><span class="s2">", line 940, in exec_module
+</span><span class="gp">  File "&lt;frozen importlib._bootstrap&gt;</span><span class="s2">"</span>, line 241, <span class="k">in </span>_call_with_frames_removed
+<span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 27, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from ..image_processing_utils import BaseImageProcessor
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_utils.py", line 24, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_processing_base import BatchFeature, ImageProcessingMixin
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_processing_base.py", line 25, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from .image_utils import is_valid_image, load_image
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/transformers/image_utils.py", line 53, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from torchvision.transforms import InterpolationMode
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/__init__.py", line 10, in &lt;module&gt;</span><span class="w">
+</span><span class="gp">    from torchvision import _meta_registrations, datasets, io, models, ops, transforms, utils  #</span><span class="w"> </span>usort:skip
+<span class="go">    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/torchvision/_meta_registrations.py", line 163, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    @torch.library.register_fake("torchvision::nms")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 1087, in register
+    use_lib._register_fake(
+  File "/opt/venv/lib/python3.11/site-packages/torch/library.py", line 204, in _register_fake
+    handle = entry.fake_impl.register(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/torch/_library/fake_impl.py", line 50, in register
+    if torch._C._dispatch_has_kernel_for_dispatch_key(self.qualname, "Meta"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: operator torchvision::nms does not exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+</span><span class="gp">  File "/app/main.py", line 4, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from transformers import pipeline
+  File "/opt/venv/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 2257, in __getattr__
+    raise ModuleNotFoundError(
+ModuleNotFoundError: Could not import module 'pipeline'. Are this object's requirements defined correctly?
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl delete <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps "whisper-server" deleted from default namespace
+service "whisper-service" deleted from default namespace
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl apply <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps/whisper-server created
+service/whisper-service created
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl delete <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps "whisper-server" deleted from default namespace
+service "whisper-service" deleted from default namespace
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl apply <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps/whisper-server created
+service/whisper-service created
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl delete <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps "whisper-server" deleted from default namespace
+service "whisper-service" deleted from default namespace
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl apply <span class="nt">-f</span> whisper-server.yaml
+<span class="go">deployment.apps/whisper-server created
+service/whisper-service created
+</span><span class="gp">steven@CSO:~$</span><span class="w"> </span>kubectl logs whisper-server-6486568f56-bbz6z
+<span class="go">Traceback (most recent call last):
+</span><span class="gp">  File "/app/main.py", line 1, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from fastapi import FastAPI, File, UploadFile
+</span><span class="gp">  File "/opt/venv/lib/python3.11/site-packages/fastapi/__init__.py", line 5, in &lt;module&gt;</span><span class="w">
+</span><span class="go">    from starlette import status as status
+ModuleNotFoundError: No module named 'starlette'
+</span></code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#gpu" class="page__taxonomy-item p-category" rel="tag">gpu</a><span class="sep">, </span>
+    
+      <a href="/tags/#kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a><span class="sep">, </span>
+    
+      <a href="/tags/#rag" class="page__taxonomy-item p-category" rel="tag">rag</a><span class="sep">, </span>
+    
+      <a href="/tags/#vllm" class="page__taxonomy-item p-category" rel="tag">vllm</a><span class="sep">, </span>
+    
+      <a href="/tags/#whisper" class="page__taxonomy-item p-category" rel="tag">whisper</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-30">March 30, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Lessons+Learned+Audio+Transcription+Terminal+Output+2%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FLessons-From-Audio-Transcription-Terminal-Output-2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FLessons-From-Audio-Transcription-Terminal-Output-2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FLessons-From-Audio-Transcription-Terminal-Output-2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-1/" class="pagination--pager" title="Lessons Learned Audio Transcription Terminal Output 1
+">Previous</a>
+    
+    
+      <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/" class="pagination--pager" title="Lessons Learned Audio Transcription Terminal Output 3
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Flow-Management-4.12.0/" rel="permalink">Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Clou...
+    <a href="/release/Cloudera-Flow-Management-4.12.0/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Introducing-Cloudera-Runtime-7.3.2/" rel="permalink">Introducing Cloudera Runtime 7.3.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    We are excited to announce the delivery of Cloudera runtime 7.3.2! This represents our most enduring Long-Term Support (LTS) release to date, with support ex...
+    <a href="/release/Introducing-Cloudera-Runtime-7.3.2/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-30-StreamToWhisper-lessons.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/" rel="permalink">Lessons Learned Audio Transcription RAG
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Infrastructure tuning is the ‘final boss’ of local AI. Skip the ‘Driver Dance’ and move past the tutorials with these hard-won lessons on CUDA pinning, depen...
+    <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-30-StreamToWhisper-lessons.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/" rel="permalink">Lessons Learned Audio Transcription Terminal Output 3
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Terminal 3 Output to go along with Audio Transcription RAG post.
+
+    <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<style>
+  .code-header {
+    position: relative;
+    background: #252a31; /* Matches dark syntax themes */
+    padding: 5px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .copy-code-button {
+    background: #3d4551;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .copy-code-button:hover { background: #505a69; }
+</style>
+
+<script>
+  document.querySelectorAll('div.highlighter-rouge, figure.highlight').forEach((container) => {
+    // Create header and button
+    const header = document.createElement('div');
+    header.className = 'code-header';
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+
+    button.addEventListener('click', () => {
+      const code = container.querySelector('code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => { button.innerText = 'Copy'; }, 2000);
+      });
+    });
+
+    header.appendChild(button);
+    container.prepend(header);
+  });
+</script>
+
+  </body>
+</html>

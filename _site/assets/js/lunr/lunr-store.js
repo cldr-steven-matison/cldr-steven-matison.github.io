@@ -365,8 +365,32 @@ var store = [{
         "url": "/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/2026-03-30-StreamToWhisper.png"
       },{
+        "title": "Lessons Learned Audio Transcription Terminal History",
+        "excerpt":"This post is comprised of the backing lessons from Insanely Fast Audio Transcription with Cloudera Streaming Operators with a summary of the hurdles, a [log of the terminal commands], terminal output 1 terminal output 2, and terminal output 3. Terminal History mkdir whisper cd whisper nano Dockerfile.whisper docker build -t...","categories": ["blog"],
+        "tags": ["cloudera","operator","nifi","kafka","whisper","vllm","rag","gpu"],
+        "url": "/blog/Lessons-From-Audio-Transcription-Terminal-History/",
+        "teaser": "/assets/images/2026-03-30-StreamToWhisper-lessons.png"
+      },{
+        "title": "Lessons Learned Audio Transcription Terminal Output 1",
+        "excerpt":"This post is comprised of the backing lessons from Insanely Fast Audio Transcription with Cloudera Streaming Operators with a summary of the hurdles, a log of the terminal history, terminal output 1 terminal output 2, and terminal output 3. Terminal 1 Output This terminal is mostly me building the DockerFile....","categories": ["blog"],
+        "tags": ["cloudera","operator","nifi","kafka","whisper","vllm","rag","gpu"],
+        "url": "/blog/Lessons-From-Audio-Transcription-Terminal-Output-1/",
+        "teaser": "/assets/images/2026-03-30-StreamToWhisper-lessons.png"
+      },{
+        "title": "Lessons Learned Audio Transcription Terminal Output 2",
+        "excerpt":"This post is comprised of the backing lessons from Insanely Fast Audio Transcription with Cloudera Streaming Operators with a summary of the hurdles, a log of the terminal history, terminal output 1 terminal output 2, and terminal output 3. Terminal 2 Output Testing Insanely Fast Whisper steven@CSO:~$ nano whisper-server.yaml steven@CSO:~$...","categories": ["blog"],
+        "tags": ["cloudera","operator","nifi","kafka","whisper","vllm","rag","gpu"],
+        "url": "/blog/Lessons-From-Audio-Transcription-Terminal-Output-2/",
+        "teaser": "/assets/images/2026-03-30-StreamToWhisper-lessons.png"
+      },{
+        "title": "Lessons Learned Audio Transcription Terminal Output 3",
+        "excerpt":"This post is comprised of the backing lessons from Insanely Fast Audio Transcription with Cloudera Streaming Operators with a summary of the hurdles, a log of the terminal history, terminal output 1 terminal output 2, and terminal output 3. Terminal 3 Output With each service working, I was attempting to...","categories": ["blog"],
+        "tags": ["cloudera","operator","nifi","kafka","whisper","vllm","rag","gpu"],
+        "url": "/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/",
+        "teaser": "/assets/images/2026-03-30-StreamToWhisper-lessons.png"
+      },{
         "title": "Lessons Learned Audio Transcription RAG",
-        "excerpt":"This post is comprised of the backing lessons from Insanely Fast Audio Transcription with Cloudera Streaming Operators with a summary of the hurdles, a log of the terminal commands, and terminal output. Lessons from the Edge: Operationalizing Whisper on Local K8s Building a local inference container for the RTX 4060...","categories": ["blog"],
+        "excerpt":"This post is comprised of the backing lessons from Insanely Fast Audio Transcription with Cloudera Streaming Operators with a summary of the hurdles, a log of the terminal history, terminal output 1 terminal output 2, and terminal output 3. Lessons from the Edge: Operationalizing Whisper on Local K8s Building a...","categories": ["blog"],
         "tags": ["cloudera","operator","nifi","kafka","whisper","vllm","rag","gpu"],
         "url": "/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/2026-03-30-StreamToWhisper-lessons.png"
