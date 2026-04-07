@@ -525,4 +525,4 @@ This project isn't about building a final product; it’s about establishing a f
 
 ### {{ page.title }}
 
-If you have any questions about the integration between these components or you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about {{ page.title }},  please reach out to schedule a discussion.
+Please reach out to schedule a discussion if you would like a deeper dive, hands on experience, or demos of the integration between these components.
