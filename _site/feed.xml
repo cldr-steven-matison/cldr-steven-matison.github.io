@@ -6,32 +6,6 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
-        <title>Test</title>
-        <link>https://cldr-steven-matison.github.io/test/</link>
-        <pubDate>Tue, 07 Apr 2026 00:00:00 -0400</pubDate>
-        
-        <description>
-
-title:  “RAG with Cloudera Streaming Operators”
-date: 2026-03-22
-last_modified_at: 2026-03-26
-excerpt: “Privacy-first, fully local semantic search &amp;amp; question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and your RTX 4060 GPU.”
-header:
-  teaser: “/assets/images/StreamToVLLM.png”
-categories:
-
-  blog
-tags:
-  cloudera
-  operator
-  nifi
-  vllm
-  ai
-
-</description>
-      </item>
-    
-      <item>
         <title>Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2</title>
         <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-4.12.0/</link>
         <pubDate>Thu, 02 Apr 2026 00:00:00 -0400</pubDate>
@@ -130,6 +104,17 @@ tags:
           <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-23-minikube-services.png" medium="image" />
         
         <description>Stop drowning in open terminal tabs just to access your UIs. This guide shows you how to streamline your Cloudera Streaming Operators workflow by managing multiple Minikube services and port-forwards simultaneously using background execution and automation scripts.</description>
+      </item>
+    
+      <item>
+        <title>RAG with Cloudera Streaming Operators</title>
+        <link>https://cldr-steven-matison.github.io/blog/RAG-with-Cloudera-Streaming-Operators/</link>
+        <pubDate>Sun, 22 Mar 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/StreamToVLLM.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/StreamToVLLM.png" medium="image" />
+        
+        <description>Privacy-first, fully local semantic search &amp; question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and your RTX 4060 GPU.</description>
       </item>
     
   </channel>

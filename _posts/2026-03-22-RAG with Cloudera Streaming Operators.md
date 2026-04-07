@@ -1,4 +1,3 @@
-
 ---
 title:  "RAG with Cloudera Streaming Operators"
 date: 2026-03-22
@@ -379,7 +378,7 @@ This flow is used to route incoming data sources to our `StreamTovLLM` kafka top
 
 ![NiFi Flow for IngestToStream](/assets/images/2026-03-22-nifi-flow-IngestToStream.png)
 
-<img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2622-fe0f.png" alt="radioactive" style="height:1.2em;vertical-align:middle;"> **Careful!** The scheduling for both top processors is 1 day. Do not keep the ingest running.  You only need to ingest one example or the other.   If you do ingest too much, delete the collection, and remake it to start over.
+<img src="https://twemoji.maxcdn.com/v/14.0.2/svg/2622.svg" alt="radioactive" style="height:1.2em;vertical-align:middle;"> **Careful!** The scheduling for both top processors is 1 day. Do not keep the ingest running.  You only need to ingest one example or the other.   If you do ingest too much, delete the collection, and remake it to start over.
 {: .notice--danger}
 
 <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/27a1.png" alt="right arrow" style="height:1.2em;vertical-align:middle;"> Start the `StreamTovLLM` Flow.  Next, send 1 flowfile (Run Once) to PublishKafka in `IngestToStream` — the document will now stream through NiFi and land in Qdrant and able to be used as context in calls to our vllm service!

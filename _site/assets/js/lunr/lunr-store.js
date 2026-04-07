@@ -347,11 +347,11 @@ var store = [{
         "url": "/blog/Max-CPU-with-NiFi-on-Minikube/",
         "teaser": "/assets/images/2026-03-20-MaxCPU-Nifi-minikube.png"
       },{
-        "title": "Rag with cloudera streaming operators",
-        "excerpt":"title: “RAG with Cloudera Streaming Operators” date: 2026-03-22 last_modified_at: 2026-03-26 excerpt: “Privacy-first, fully local semantic search &amp; question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and your RTX 4060 GPU.” header: teaser: “/assets/images/StreamToVLLM.png” categories: blog tags: cloudera operator nifi vllm ai Let’s build:...","categories": [],
-        "tags": [],
-        "url": "/RAG-with-Cloudera-Streaming-Operators/",
-        "teaser": null
+        "title": "RAG with Cloudera Streaming Operators",
+        "excerpt":"Let’s build: StreamToVLLM — a local RAG setup that turns your Cloudera Operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search. Perfect for this GPU (RTX 4060...","categories": ["blog"],
+        "tags": ["cloudera","operator","nifi","vllm","ai"],
+        "url": "/blog/RAG-with-Cloudera-Streaming-Operators/",
+        "teaser": "/assets/images/StreamToVLLM.png"
       },{
         "title": "Managing Multiple Services and Port-Forwards Efficiently in Minikube",
         "excerpt":"Running tons of kubectl port-forward or minikube service commands manually gets painful fast (one terminal per forward, easy to lose, conflicts, etc.). Here are practical ways to handle many at once without going insane. Use Minikube Service List Before you start working with services, it is helpful to see the...","categories": ["blog"],
@@ -406,10 +406,4 @@ var store = [{
         "tags": ["cloudera","nifi","cfm"],
         "url": "/release/Cloudera-Flow-Management-4.12.0/",
         "teaser": "/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png"
-      },{
-        "title": "Test",
-        "excerpt":"title: “RAG with Cloudera Streaming Operators” date: 2026-03-22 last_modified_at: 2026-03-26 excerpt: “Privacy-first, fully local semantic search &amp; question-answering over your documents, Git repos, and URLs — powered by Kafka streaming, NiFi, Qdrant, and your RTX 4060 GPU.” header: teaser: “/assets/images/StreamToVLLM.png” categories: blog tags: cloudera operator nifi vllm ai Let’s build:...","categories": [],
-        "tags": [],
-        "url": "/test/",
-        "teaser": null
       }]
