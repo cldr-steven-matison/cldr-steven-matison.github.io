@@ -117,13 +117,17 @@
         
           <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
         
-        <ul class="visible-links"><li class="masthead__menu-item">
+        <ul class="visible-links">
+<li class="masthead__menu-item">
               <a href="/blog/">Blog</a>
-            </li><li class="masthead__menu-item">
+            </li>
+<li class="masthead__menu-item">
               <a href="/about/">About</a>
-            </li><li class="masthead__menu-item">
+            </li>
+<li class="masthead__menu-item">
               <a href="/repos/">Repos</a>
-            </li></ul>
+            </li>
+</ul>
         
         <button class="search__toggle" type="button">
           <span class="visually-hidden">Toggle search</span>
@@ -301,7 +305,8 @@
     
     
       
-        <p class="page__date">
+        </p>
+<p class="page__date">
           <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
           <time datetime="2026-03-26">
             March 26, 2026
@@ -309,7 +314,7 @@
         </p>
       
     
-  </p>
+  
 
 
         </header>
@@ -319,497 +324,400 @@
         
         <p>Let’s build: <strong>StreamToVLLM</strong> — a local RAG setup that turns your Cloudera Operator deployed cluster into a real-time, streaming-aware knowledge base. No cloud APIs. No data leaving your machine. Just pure Cloudera Streaming Operators (Kafka + NiFi) + vLLM inference + Qdrant vector search.</p>
 
-<p><img src="/assets/images/2026-03-22-architecture.png" alt="RAG with Cloudera Streaming Operators" /></p>
+<p><img src="/assets/images/2026-03-22-architecture.png" alt="RAG with Cloudera Streaming Operators"></p>
 
 <p>Perfect for this GPU (RTX 4060 8 GB VRAM) setup — it comfortably runs Qwen2.5-3B-Instruct while NiFi ingests documents in real time via Kafka.</p>
 
 <p>We already have the <a href="/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> stack, <a href="/blog/GPU-Setup-Minikube/">GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube</a>, and some example <a href="/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/">Deploying vLLM with Qwen Llama on Minikube</a> working from previous sessions — now let’s wire it all together into a complete local RAG pipeline.</p>
 
-<hr />
+<hr>
 
-<h2 id="-prerequisites"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f4bb.png" alt="laptop" style="height:1.2em;vertical-align:middle;" /> Prerequisites</h2>
+<h2 id="-prerequisites">💻 Prerequisites</h2>
 
 <p>You should have:</p>
 <ul>
   <li>Minikube running with <strong>GPU passthrough</strong> (RTX 4060 confirmed)</li>
-  <li>Cloudera Streaming Operators (CSM + CSA + CFM) installed in namespaces <code class="language-plaintext highlighter-rouge">cld-streaming</code> and <code class="language-plaintext highlighter-rouge">cfm-streaming</code></li>
-  <li>NiFi UI accessible at <code class="language-plaintext highlighter-rouge">https://mynifi-web.mynifi.cfm-streaming.svc.cluster.local/nifi/</code></li>
+  <li>Cloudera Streaming Operators (CSM + CSA + CFM) installed in namespaces <code class="language-plaintext highlighter-rouge">cld-streaming</code> and <code class="language-plaintext highlighter-rouge">cfm-streaming</code>
+</li>
+  <li>NiFi UI accessible at <code class="language-plaintext highlighter-rouge">https://mynifi-web.mynifi.cfm-streaming.svc.cluster.local/nifi/</code>
+</li>
 </ul>
 
 <p><strong>Quick GPU double-check</strong> (do this first!):</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get nodes <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[*].status.allocatable.nvidia\.com/gpu}'</span>
-<span class="c"># Should return: 1</span>
+<p>```bash
+kubectl get nodes -o jsonpath=’{.items[*].status.allocatable.nvidia.com/gpu}’</p>
+<h1 id="should-return-1">Should return: 1</h1>
 
-<span class="c"># Run the official NVIDIA test pod</span>
-<span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh"> | kubectl apply -f -
+<h1 id="run-the-official-nvidia-test-pod">Run the official NVIDIA test pod</h1>
+<p>cat «EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
   name: gpu-test
 spec:
   restartPolicy: Never
-  containers:
-  - name: cuda-test
-    image: nvcr.io/nvidia/k8s/cuda-sample:vectoradd-cuda12.5.0
-    resources:
-      limits:
-        nvidia.com/gpu: 1
-</span><span class="no">EOF
+  containers:</p>
+<ul>
+  <li>name: cuda-test
+image: nvcr.io/nvidia/k8s/cuda-sample:vectoradd-cuda12.5.0
+resources:
+  limits:
+    nvidia.com/gpu: 1
+EOF</li>
+</ul>
 
-</span>kubectl logs gpu-test <span class="nt">-f</span>
-</code></pre></div></div>
+<p>kubectl logs gpu-test -f</p>
 
-<p><strong>Expected output:</strong> <code class="language-plaintext highlighter-rouge">Test PASSED</code> <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2705.png" alt="check mark button" style="height:1.2em;vertical-align:middle;" /></p>
+<p>Expected output: Test PASSED   Notice the response:terminal</p>
 
-<p>Notice the response:</p>
-
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[Vector addition of 50000 elements]
+<p>[Vector addition of 50000 elements]
 Copy input data from the host memory to the CUDA device
 CUDA kernel launch with 196 blocks of 256 threads
 Copy output data from the CUDA device to the host memory
 Test PASSED
-Done
-</span></code></pre></div></div>
+Done</p>
 
-<p class="notice--warning"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3c6.png" alt="trophy" style="height:1.2em;vertical-align:middle;" /> <strong>Pro Tip!</strong> Keep <code class="language-plaintext highlighter-rouge">watch nvidia-smi</code> running in another terminal — you’ll see your 4060 light up during inference.</p>
+<p><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> Pro Tip! Keep watch nvidia-smi running in another terminal — you’ll see your 4060 light up during inference.
+{: .notice–warning} Step 1: Deploy vLLM Qwen Inference ServerWe use the Qwen model now but you could use Llama here too.Save as vllm-qwen.yaml:yaml</p>
 
-<hr />
+<p>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm-server
+  template:
+    metadata:
+      labels:
+        app: vllm-server
+    spec:
+      containers:
+      - name: vllm-server
+        image: vllm/vllm-openai:latest
+        env:
+        - name: HF_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: hf-token
+              key: HF_TOKEN
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+        args:
+        - “Qwen/Qwen2.5-3B-Instruct”
+        - “–quantization”
+        - “bitsandbytes”
+        - “–load-format”
+        - “bitsandbytes”
+        - “–gpu-memory-utilization”
+        - “0.80”             # Fits comfortably in 6.92 GiB
+        - “–max-model-len”
+        - “2048”             # 2k is a solid sweet spot for 3B models
+        - “–enforce-eager”
+        volumeMounts:
+        - name: shm
+          mountPath: /dev/shm
+      volumes:
+      - name: shm
+        emptyDir:
+          medium: Memory
+          sizeLimit: “2Gi”
+—
+apiVersion: v1
+kind: Service
+metadata:
+  name: vllm-service
+  namespace: default
+spec:
+  selector:
+    app: vllm-server
+  ports:</p>
+<ul>
+  <li>protocol: TCP
+port: 8000
+targetPort: 8000
+  type: ClusterIP</li>
+</ul>
 
-<h2 id="-step-1-deploy-vllm-qwen-inference-server"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f4e6.png" alt="package" style="height:1.2em;vertical-align:middle;" /> Step 1: Deploy vLLM Qwen Inference Server</h2>
+<p>Apply the Qwen YAML:bash</p>
 
-<p>We use the Qwen model now but you could use Llama here too.</p>
+<p>kubectl apply -f vllm-qwen.yaml
+kubectl get pods -w
+kubectl port-forward svc/vllm-service 8000:8000</p>
 
-<p>Save as <code class="language-plaintext highlighter-rouge">vllm-qwen.yaml</code>:</p>
+<p>Test with curl:bash</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
-<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
-<span class="na">metadata</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">vllm-server</span>
-<span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
-  <span class="na">selector</span><span class="pi">:</span>
-    <span class="na">matchLabels</span><span class="pi">:</span>
-      <span class="na">app</span><span class="pi">:</span> <span class="s">vllm-server</span>
-  <span class="na">template</span><span class="pi">:</span>
-    <span class="na">metadata</span><span class="pi">:</span>
-      <span class="na">labels</span><span class="pi">:</span>
-        <span class="na">app</span><span class="pi">:</span> <span class="s">vllm-server</span>
-    <span class="na">spec</span><span class="pi">:</span>
-      <span class="na">containers</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">vllm-server</span>
-        <span class="na">image</span><span class="pi">:</span> <span class="s">vllm/vllm-openai:latest</span>
-        <span class="na">env</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">HF_TOKEN</span>
-          <span class="na">valueFrom</span><span class="pi">:</span>
-            <span class="na">secretKeyRef</span><span class="pi">:</span>
-              <span class="na">name</span><span class="pi">:</span> <span class="s">hf-token</span>
-              <span class="na">key</span><span class="pi">:</span> <span class="s">HF_TOKEN</span>
-        <span class="na">resources</span><span class="pi">:</span>
-          <span class="na">limits</span><span class="pi">:</span>
-            <span class="na">nvidia.com/gpu</span><span class="pi">:</span> <span class="m">1</span>
-        <span class="na">args</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">Qwen/Qwen2.5-3B-Instruct"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">--quantization"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">bitsandbytes"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">--load-format"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">bitsandbytes"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">--gpu-memory-utilization"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">0.80"</span>             <span class="c1"># Fits comfortably in 6.92 GiB</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">--max-model-len"</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">2048"</span>             <span class="c1"># 2k is a solid sweet spot for 3B models</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">--enforce-eager"</span>
-        <span class="na">volumeMounts</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shm</span>
-          <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/dev/shm</span>
-      <span class="na">volumes</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shm</span>
-        <span class="na">emptyDir</span><span class="pi">:</span>
-          <span class="na">medium</span><span class="pi">:</span> <span class="s">Memory</span>
-          <span class="na">sizeLimit</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2Gi"</span>
-<span class="nn">---</span>
-<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
-<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
-<span class="na">metadata</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">vllm-service</span>
-  <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
-<span class="na">spec</span><span class="pi">:</span>
-  <span class="na">selector</span><span class="pi">:</span>
-    <span class="na">app</span><span class="pi">:</span> <span class="s">vllm-server</span>
-  <span class="na">ports</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
-    <span class="na">port</span><span class="pi">:</span> <span class="m">8000</span>
-    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">8000</span>
-  <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
-</code></pre></div></div>
+<p>curl http://localhost:8000/v1/chat/completions <br>
+  -H “Content-Type: application/json” <br>
+  -d ‘{
+    “model”: “Qwen/Qwen2.5-3B-Instruct”,
+    “messages”: [{“role”: “user”, “content”: “Hello! Tell me a short joke.”}],
+    “temperature”: 0.7
+  }’</p>
 
-<p>Apply the Qwen YAML:</p>
+<p>Notice the response:terminal</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> vllm-qwen.yaml
-kubectl get pods <span class="nt">-w</span>
-kubectl port-forward svc/vllm-service 8000:8000
-</code></pre></div></div>
+<p>{“id”:”chatcmpl-bf9eab9a4c952c2d”,”object”:”chat.completion”,”created”:1774452848,”model”:”Qwen/Qwen2.5-3B-Instruct”,”choices”:[{“index”:0,”message”:{“role”:”assistant”,”content”:”Of course! Here’s a quick one for you:\n\nWhy don’t scientists trust atoms?\n\nBecause they make up everything!”,”refusal”:null,”annotations”:null,”audio”:null,”function_call”:null,”tool_calls”:[],”reasoning”:null},”logprobs”:null,”finish_reason”:”stop”,”stop_reason”:null,”token_ids”:null}],”service_tier”:null,”system_fingerprint”:null,”usage”:{“prompt_tokens”:37,”total_tokens”:62,”completion_tokens”:25,”prompt_tokens_details”:null},”prompt_logprobs”:null,”prompt_token_ids”:null,”kv_transfer_params”:null}</p>
 
-<p>Test with curl:</p>
+<p><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> Warning! If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see Application startup complete. 
+{: .notice–warning} Ready for RAG! Your GPU pod is now the brain of the system. Step 2: Deploy Qdrant Vector DBSave as qdrant-deployment.yaml:yaml</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:8000/v1/chat/completions <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  <span class="nt">-d</span> <span class="s1">'{
-    "model": "Qwen/Qwen2.5-3B-Instruct",
-    "messages": [{"role": "user", "content": "Hello! Tell me a short joke."}],
-    "temperature": 0.7
-  }'</span>
-</code></pre></div></div>
+<p>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qdrant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qdrant
+  template:
+    metadata:
+      labels:
+        app: qdrant
+    spec:
+      containers:
+      - name: qdrant
+        image: qdrant/qdrant:latest
+        ports:
+        - containerPort: 6333
+        - containerPort: 6334
+        volumeMounts:
+        - name: qdrant-data
+          mountPath: /qdrant/storage
+      volumes:
+      - name: qdrant-data
+        emptyDir: {}
+—
+apiVersion: v1
+kind: Service
+metadata:
+  name: qdrant
+spec:
+  selector:
+    app: qdrant
+  ports:</p>
+<ul>
+  <li>name: http
+port: 6333
+targetPort: 6333</li>
+  <li>name: grpc
+port: 6334
+targetPort: 6334
+  type: ClusterIP</li>
+</ul>
 
-<p>Notice the response:</p>
+<p>Apply the Qdrant YAML:bash</p>
 
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"id":"chatcmpl-bf9eab9a4c952c2d","object":"chat.completion","created":1774452848,"model":"Qwen/Qwen2.5-3B-Instruct","choices":[{"index":0,"message":{"role":"assistant","content":"Of course! Here's a quick one for you:\n\nWhy don't scientists trust atoms?\n\nBecause they make up everything!","refusal":null,"annotations":null,"audio":null,"function_call":null,"tool_calls":[],"reasoning":null},"logprobs":null,"finish_reason":"stop","stop_reason":null,"token_ids":null}],"service_tier":null,"system_fingerprint":null,"usage":{"prompt_tokens":37,"total_tokens":62,"completion_tokens":25,"prompt_tokens_details":null},"prompt_logprobs":null,"prompt_token_ids":null,"kv_transfer_params":null}
-</span></code></pre></div></div>
+<p>kubectl apply -f qdrant-deployment.yaml
+kubectl port-forward svc/qdrant 6333:6333</p>
 
-<p class="notice--warning"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/26a0.png" alt="warning sign" style="height:1.2em;vertical-align:middle;" /> <strong>Warning!</strong> If your curl command crashes the port forward, your vllm-server is not ready yet.  Watch the vllm-server logs until you see <code class="language-plaintext highlighter-rouge">Application startup complete</code>.</p>
+<p>Let’s use curl to test and to create our first sample collection to use later:bash</p>
 
-<p><strong>⚡ Ready for RAG!</strong> Your GPU pod is now the brain of the system.</p>
+<p>curl -X PUT “http://localhost:6333/collections/my-rag-collection” <br>
+-H “Content-Type: application/json” <br>
+-d ‘{“vectors”: {“size”: 768, “distance”: “Cosine”}}’</p>
 
-<hr />
+<p>Notice the response:terminal</p>
 
-<h2 id="-step-2-deploy-qdrant-vector-db"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f5c4.png" alt="file cabinet" style="height:1.2em;vertical-align:middle;" /> Step 2: Deploy Qdrant Vector DB</h2>
+<p>{“result”:true,”status”:”ok”,”time”:0.098496962}</p>
 
-<p>Save as <code class="language-plaintext highlighter-rouge">qdrant-deployment.yaml</code>:</p>
+<p><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> Pro Tip! With port-forward on visit http://localhost:6333/dashboard and have a look at Qdrant.
+{: .notice–primary} Step 3: Lightweight Embedding ServerSave as embedding-server.yaml:yaml</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
-<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
-<span class="na">metadata</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">qdrant</span>
-<span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
-  <span class="na">selector</span><span class="pi">:</span>
-    <span class="na">matchLabels</span><span class="pi">:</span>
-      <span class="na">app</span><span class="pi">:</span> <span class="s">qdrant</span>
-  <span class="na">template</span><span class="pi">:</span>
-    <span class="na">metadata</span><span class="pi">:</span>
-      <span class="na">labels</span><span class="pi">:</span>
-        <span class="na">app</span><span class="pi">:</span> <span class="s">qdrant</span>
-    <span class="na">spec</span><span class="pi">:</span>
-      <span class="na">containers</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">qdrant</span>
-        <span class="na">image</span><span class="pi">:</span> <span class="s">qdrant/qdrant:latest</span>
-        <span class="na">ports</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">6333</span>
-        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">6334</span>
-        <span class="na">volumeMounts</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">qdrant-data</span>
-          <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/qdrant/storage</span>
-      <span class="na">volumes</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">qdrant-data</span>
-        <span class="na">emptyDir</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="nn">---</span>
-<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
-<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
-<span class="na">metadata</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">qdrant</span>
-<span class="na">spec</span><span class="pi">:</span>
-  <span class="na">selector</span><span class="pi">:</span>
-    <span class="na">app</span><span class="pi">:</span> <span class="s">qdrant</span>
-  <span class="na">ports</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">http</span>
-    <span class="na">port</span><span class="pi">:</span> <span class="m">6333</span>
-    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">6333</span>
-  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">grpc</span>
-    <span class="na">port</span><span class="pi">:</span> <span class="m">6334</span>
-    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">6334</span>
-  <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
-</code></pre></div></div>
+<p>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: embedding-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: embedding-server
+  template:
+    metadata:
+      labels:
+        app: embedding-server
+    spec:
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+        - name: tei-container
+          image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.5
+          # This is the magic part: it forces the token into the binary’s face
+          command: [“/bin/sh”, “-c”]
+          args: 
+            - |
+              text-embeddings-router <br>
+              –model-id nomic-ai/nomic-embed-text-v1 <br>
+              –port 80 <br>
+              –hf-api-token “[hf-token]”
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: “2Gi”
+              cpu: “2”
+          volumeMounts:
+            - name: model-cache
+              mountPath: /data
+      volumes:
+        - name: model-cache
+          emptyDir: {}
+—
+apiVersion: v1
+kind: Service
+metadata:
+  name: embedding-server-service
+spec:
+  selector:
+    app: embedding-server
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP</p>
 
-<p>Apply the Qdrant YAML:</p>
+<p>I had some difficulties in getting the hf model and token secret into the mix during pod creation.  The working setup I ended up with was to download the model locally, mount that during pod creation, and explicitly use the hf-token string.   Supporting Commands:terminal</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> qdrant-deployment.yaml
-kubectl port-forward svc/qdrant 6333:6333
-</code></pre></div></div>
-
-<p>Let’s use curl to test and to create our first sample collection to use later:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> PUT <span class="s2">"http://localhost:6333/collections/my-rag-collection"</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-<span class="nt">-d</span> <span class="s1">'{"vectors": {"size": 768, "distance": "Cosine"}}'</span>
-</code></pre></div></div>
-
-<p>Notice the response:</p>
-
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"result":true,"status":"ok","time":0.098496962}
-</span></code></pre></div></div>
-
-<p class="notice--primary"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3c6.png" alt="trophy" style="height:1.2em;vertical-align:middle;" /> <strong>Pro Tip!</strong> With <code class="language-plaintext highlighter-rouge">port-forward</code> on visit <a href="http://localhost:6333/dashboard">http://localhost:6333/dashboard</a> and have a look at Qdrant.</p>
-
-<hr />
-
-<h2 id="-step-3-lightweight-embedding-server"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f522.png" alt="input numbers" style="height:1.2em;vertical-align:middle;" /> Step 3: Lightweight Embedding Server</h2>
-
-<p>Save as <code class="language-plaintext highlighter-rouge">embedding-server.yaml</code>:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
-<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
-<span class="na">metadata</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">embedding-server</span>
-<span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
-  <span class="na">selector</span><span class="pi">:</span>
-    <span class="na">matchLabels</span><span class="pi">:</span>
-      <span class="na">app</span><span class="pi">:</span> <span class="s">embedding-server</span>
-  <span class="na">template</span><span class="pi">:</span>
-    <span class="na">metadata</span><span class="pi">:</span>
-      <span class="na">labels</span><span class="pi">:</span>
-        <span class="na">app</span><span class="pi">:</span> <span class="s">embedding-server</span>
-    <span class="na">spec</span><span class="pi">:</span>
-      <span class="na">dnsPolicy</span><span class="pi">:</span> <span class="s">ClusterFirstWithHostNet</span>
-      <span class="na">containers</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">tei-container</span>
-          <span class="na">image</span><span class="pi">:</span> <span class="s">ghcr.io/huggingface/text-embeddings-inference:cpu-1.5</span>
-          <span class="c1"># This is the magic part: it forces the token into the binary's face</span>
-          <span class="na">command</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">/bin/sh"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-c"</span><span class="pi">]</span>
-          <span class="na">args</span><span class="pi">:</span> 
-            <span class="pi">-</span> <span class="pi">|</span>
-              <span class="s">text-embeddings-router \</span>
-              <span class="s">--model-id nomic-ai/nomic-embed-text-v1 \</span>
-              <span class="s">--port 80 \</span>
-              <span class="s">--hf-api-token "[hf-token]"</span>
-          <span class="na">ports</span><span class="pi">:</span>
-            <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
-          <span class="na">resources</span><span class="pi">:</span>
-            <span class="na">limits</span><span class="pi">:</span>
-              <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2Gi"</span>
-              <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
-          <span class="na">volumeMounts</span><span class="pi">:</span>
-            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">model-cache</span>
-              <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/data</span>
-      <span class="na">volumes</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">model-cache</span>
-          <span class="na">emptyDir</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="nn">---</span>
-<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
-<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
-<span class="na">metadata</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">embedding-server-service</span>
-<span class="na">spec</span><span class="pi">:</span>
-  <span class="na">selector</span><span class="pi">:</span>
-    <span class="na">app</span><span class="pi">:</span> <span class="s">embedding-server</span>
-  <span class="na">ports</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
-      <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
-      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
-  <span class="na">type</span><span class="pi">:</span> <span class="s">ClusterIP</span>
-</code></pre></div></div>
-
-<p>I had some difficulties in getting the hf model and token secret into the mix during pod creation.  The working setup I ended up with was to download the model locally, mount that during pod creation, and explicitly use the hf-token string.</p>
-
-<p>Supporting Commands:</p>
-
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">mkdir -p /mnt/c/hf-models/nomic-embed
+<p>mkdir -p /mnt/c/hf-models/nomic-embed
 cd /mnt/c/hf-models/nomic-embed
-</span><span class="gp">python3 -c "from huggingface_hub import snapshot_download;</span><span class="w"> </span>snapshot_download<span class="o">(</span><span class="nv">repo_id</span><span class="o">=</span><span class="s1">'nomic-ai/nomic-embed-text-v1'</span>, <span class="nv">local_dir</span><span class="o">=</span><span class="s1">'/mnt/c/hf-models/nomic-embed'</span>, <span class="nv">token</span><span class="o">=</span><span class="s1">'[hf-token]'</span><span class="o">)</span><span class="s2">"
-</span><span class="go">minikube mount /mnt/c/hf-models/nomic-embed:/mnt/c/hf-models/nomic-embed
-</span></code></pre></div></div>
+python3 -c “from huggingface_hub import snapshot_download; snapshot_download(repo_id=’nomic-ai/nomic-embed-text-v1’, local_dir=’/mnt/c/hf-models/nomic-embed’, token=’[hf-token]’)”
+minikube mount /mnt/c/hf-models/nomic-embed:/mnt/c/hf-models/nomic-embed</p>
 
-<p>Apply the Embedding Server YAML:</p>
+<p>Apply the Embedding Server YAML:bash</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> embedding-server.yaml
-kubectl port-forward svc/embedding-server-service 8080:80
+<p>kubectl apply -f embedding-server.yaml
+kubectl port-forward svc/embedding-server-service 8080:80</p>
+
+<p>Test with curl:bash</p>
+
+<p>curl -X POST http://localhost:8080/embed -d ‘{“inputs”:”The streaming pipeline is finally complete.”}’   -H ‘Content-Type: application/json’</p>
+
+<p>Notice the response:terminal</p>
+
+<p>[[0.04619594,-0.0090487795, ..]]</p>
+
+<p>Step 4: Document Ingestion with NiFiIf vLLM is the brain, Apache NiFi is the nervous system. We need to get data from our sources, publish that data to Kafka, then Consume it, chunk it, turn it into vectors, and store it in Qdrant — all within NiFi on kubernetes. NiFi Flows for StreamTovLLMTo make this easy, I’ve exported the complete NiFi flow as a JSON file: StreamToVLLM.json. You can download it and import it directly into your NiFi UI by dragging a new Process Group onto the canvas and uploading the flow definition file.<img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> NiFi Flow Definition File The fully operational flows are here: NiFi Templates.
+{: .notice–primary} StreamTovLLM NiFi FlowThe flow processes each document through a “Retrieve-then-Generate” loop:ConsumeKafka_2_6: Ingests raw text from the new_documents topic using the #{Kafka Broker Endpoint} parameter.
+SplitText: Chunks the incoming data into 20-line segments to ensure the context remains efficient for the 3B model.
+ExtractText: Place original content into ${content} attribute for replaceText (Qdrant)
+ReplaceText (Format for Embedding): Wraps the text chunk into the JSON format required by the embedding server: {“inputs”: “$1”}.
+InvokeHTTP (Embed): Calls the embedding-service to generate a 768-dimension vector.
+EvaluateJsonPath: Extracts the resulting vector from the JSON response into a FlowFile attribute named vector_data.
+ReplaceText (Qdrant): format the body required for Qdrant Upsert.
+InvokeHTTP (Qdrant Upsert): The flow upserts the original chunk and its embedding into Qdrant so the system “learns” the document for future queries.</p>
+
+<p>NiFi Flow for StreamTovLLM IngestToStream NiFi FlowThis flow is used to route incoming data sources to our StreamTovLLM kafka topic new_documents.GenerateFlowFile:  Sends a simple description of StreamToVLLM to Kafka.
+InvokeHttp: Sends the entire markdown file for RAG with Cloudera Streaming Operators  (this) blog post.
+PublishKafka_2_6:  Publishes our raw content to the new_documents topic.</p>
+
+<p>NiFi Flow for IngestToStream<img class="emoji" title=":radioactive:" alt=":radioactive:" src="https://github.githubassets.com/images/icons/emoji/unicode/2622.png" height="20" width="20"> Careful! The scheduling for both top processors is 1 day. Do not keep the ingest running.  You only need to ingest one example or the other.   If you do ingest too much, delete the collection, and remake it to start over.
+{: .notice–danger}<img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://github.githubassets.com/images/icons/emoji/unicode/25b6.png" height="20" width="20"> Start the StreamTovLLM Flow.  Next, send 1 flowfile (Run Once) to PublishKafka in IngestToStream — the document will now stream through NiFi and land in Qdrant and able to be used as context in calls to our vllm service! Step 5: Query Time — Ask Questions!What better way to test, than to ask our model What is StreamTovLLM?Remember the first inquiry to the model is that it does not know anything about StreamTovLLM as expected:terminal</p>
+
+<p>=== ANSWER ===
+I apologize, but there seems to be an error in the term you’ve provided (“streamtovllm”). It appears to be a misspelling or incorrect combination of words. The correct term might be Streamlit (a popular open-source platform for building user interfaces for machine learning applications) or llama (which could refer to Llama.cpp, a C++ library for machine learning). Could you please clarify or provide more context about what “streamtovllm” is supposed to be?
+Now after we have executed our NiFi Flow when we test with curl:bash</p>
+
+<p>curl -X POST “http://localhost:6333/collections/my-rag-collection/points/scroll” -H “Content-Type: application/json” -d ‘{“limit”: 1, “with_payload”: true}’</p>
+
+<p>Notice the response:terminal</p>
+
+<p>{“result”:{“points”:[{“id”:”ee6a5070-0add-4e43-b218-9d64eeab3053”,”payload”:{“text”:”StreamToVLLM is a specialized data engineering framework. nIt connects Apache NiFi to vLLM inference servers. nThe system uses Qdrant as a vector database to store technical blog content. nThis allows for local RAG (Retrieval-Augmented Generation) on Windows WSL2 machines. nThe main goal of the project is to demonstrate high-performance streaming AI nusing Cloudera Streaming Operators and dedicated GPU hardware.”,”source”:”kafka-stream”,”timestamp”:”Wed Mar 25 15:24:32 GMT 2026”}}],”next_page_offset”:null},”status”:”ok”,”time”:0.000567914}</p>
+
+<p>Now, lets go a bit further and build a simple python script to ask the same question.  Save as query-rag.py:python</p>
+
+<p>import requests</p>
+
+<p>def ask(question):
+    # 1. Embed
+    emb = requests.post(“http://localhost:8080/embed”, json={“inputs”: question}).json()[0]</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 2. Search Qdrant
+search = requests.post("http://localhost:6333/collections/my-rag-collection/points/search", 
+                       json={"vector": emb, "limit": 1, "with_payload": True}).json()
+
+results = search.get("result", [])
+raw_text = results[0]["payload"].get("text", "") if results else "No context."
+
+# --- THE ESCAPE HATCH ---
+# If the text starts with '[', it's a vector. We don't want it.
+if str(raw_text).startswith("["):
+    print("[!] Warning: Found vector trash in text field. Ignoring it.")
+    context = "Reference data is currently being re-indexed."
+else:
+    # Force the context to be tiny (500 chars) to guarantee we stay under 4096 tokens
+    context = str(raw_text)[:500] 
+
+# 3. vLLM Call
+payload = {
+    "model": "Qwen/Qwen2.5-3B-Instruct",
+    "messages": [
+        {"role": "system", "content": "Briefly answer using this context."},
+        {"role": "user", "content": f"Context: {context}\n\nQuestion: {question}"}
+    ],
+    "max_tokens": 100
+}
+
+resp = requests.post("http://localhost:8000/v1/chat/completions", json=payload)
+
+if resp.status_code == 200:
+    print("\n=== ANSWER ===")
+    print(resp.json()["choices"][0]["message"]["content"])
+else:
+    print(f"Error: {resp.text}")
 </code></pre></div></div>
 
-<p>Test with curl:</p>
+<p>ask(“What is StreamToVLLM?”)
+Notice the well informed response:terminal</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST http://localhost:8080/embed <span class="nt">-d</span> <span class="s1">'{"inputs":"The streaming pipeline is finally complete."}'</span>   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
-</code></pre></div></div>
+<p>python3 query-rag.py</p>
 
-<p>Notice the response:</p>
+<p>=== ANSWER ===
+StreamToVLLM is a specialized data engineering framework that connects Apache NiFi with vLLM inference servers, enabling local retrieval and augmentation generation on Windows WSL2 machines using Qdrant for storing technical blog content. Its primary goal is to showcase high-performance streaming AI using Cloudera Streaming Operators and dedicated GPU hardware.</p>
 
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[[0.04619594,-0.0090487795, ..]]
-</span></code></pre></div></div>
+<p>Boom — <img class="emoji" title=":boom:" alt=":boom:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a5.png" height="20" width="20"> instant, context-aware answers from your live streaming documents. Terminal Commands For This Sessionbash</p>
 
-<hr />
+<h1 id="look-at-logs">Look at logs</h1>
+<p>kubectl logs gpu-test -f
+kubectl logs -l app=vllm-server –tail 300</p>
 
-<h2 id="-step-4-document-ingestion-with-nifi"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f30a.png" alt="water wave" style="height:1.2em;vertical-align:middle;" /> Step 4: Document Ingestion with NiFi</h2>
-
-<p>If vLLM is the brain, Apache NiFi is the nervous system. We need to get data from our sources, publish that data to Kafka, then Consume it, chunk it, turn it into vectors, and store it in Qdrant — all within NiFi on kubernetes.</p>
-
-<p><img src="/assets/images/2026-03-22-nifi-flows.png" alt="NiFi Flows for StreamTovLLM" /></p>
-
-<p>To make this easy, I’ve exported the complete NiFi flow as a JSON file: <code class="language-plaintext highlighter-rouge">StreamToVLLM.json</code>. You can download it and import it directly into your NiFi UI by dragging a new <code class="language-plaintext highlighter-rouge">Process Group</code> onto the canvas and uploading the flow definition file.</p>
-
-<p class="notice--primary"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3c6.png" alt="trophy" style="height:1.2em;vertical-align:middle;" /> <strong>NiFi Flow Definition File</strong> The fully operational flows are here: <a href="https://github.com/cldr-steven-matison/NiFi-Templates">NiFi Templates</a>.</p>
-
-<h3 id="️-streamtovllm-nifi-flow">🛠️ StreamTovLLM NiFi Flow</h3>
-
-<p>The flow processes each document through a “Retrieve-then-Generate” loop:</p>
-
-<ol>
-  <li><strong>ConsumeKafka_2_6</strong>: Ingests raw text from the <code class="language-plaintext highlighter-rouge">new_documents</code> topic using the <code class="language-plaintext highlighter-rouge">#{Kafka Broker Endpoint}</code> parameter.</li>
-  <li><strong>SplitText</strong>: Chunks the incoming data into <strong>20-line segments</strong> to ensure the context remains efficient for the 3B model.</li>
-  <li><strong>ExtractText</strong>: Place original content into <code class="language-plaintext highlighter-rouge">${content}</code> attribute for replaceText (Qdrant)</li>
-  <li><strong>ReplaceText (Format for Embedding)</strong>: Wraps the text chunk into the JSON format required by the embedding server: <code class="language-plaintext highlighter-rouge">{"inputs": "$1"}</code>.</li>
-  <li><strong>InvokeHTTP (Embed)</strong>: Calls the <code class="language-plaintext highlighter-rouge">embedding-service</code> to generate a 768-dimension vector.</li>
-  <li><strong>EvaluateJsonPath</strong>: Extracts the resulting vector from the JSON response into a FlowFile attribute named <code class="language-plaintext highlighter-rouge">vector_data</code>.</li>
-  <li><strong>ReplaceText (Qdrant)</strong>: format the body required for Qdrant Upsert.</li>
-  <li><strong>InvokeHTTP (Qdrant Upsert)</strong>: The flow upserts the original chunk and its embedding into Qdrant so the system “learns” the document for future queries.</li>
-</ol>
-
-<p><img src="/assets/images/2026-03-22-nifi-flow-StreamTovLLM.png" alt="NiFi Flow for StreamTovLLM" /></p>
-
-<h3 id="️-ingesttostream-nifi-flow">🛠️ IngestToStream NiFi Flow</h3>
-
-<p>This flow is used to route incoming data sources to our <code class="language-plaintext highlighter-rouge">StreamTovLLM</code> kafka topic <code class="language-plaintext highlighter-rouge">new_documents</code>.</p>
-
-<ol>
-  <li><strong>GenerateFlowFile</strong>:  Sends a simple description of StreamToVLLM to Kafka.</li>
-  <li><strong>InvokeHttp</strong>: Sends the entire markdown file for <code class="language-plaintext highlighter-rouge">RAG with Cloudera Streaming Operators</code>  (this) blog post.</li>
-  <li><strong>PublishKafka_2_6</strong>:  Publishes our raw content to the <code class="language-plaintext highlighter-rouge">new_documents</code> topic.</li>
-</ol>
-
-<p><img src="/assets/images/2026-03-22-nifi-flow-IngestToStream.png" alt="NiFi Flow for IngestToStream" /></p>
-
-<p class="notice--danger"><img src="https://twemoji.maxcdn.com/v/14.0.2/svg/2622.svg" alt="radioactive" style="height:1.2em;vertical-align:middle;" /> <strong>Careful!</strong> The scheduling for both top processors is 1 day. Do not keep the ingest running.  You only need to ingest one example or the other.   If you do ingest too much, delete the collection, and remake it to start over.</p>
-
-<p><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/27a1.png" alt="right arrow" style="height:1.2em;vertical-align:middle;" /> Start the <code class="language-plaintext highlighter-rouge">StreamTovLLM</code> Flow.  Next, send 1 flowfile (Run Once) to PublishKafka in <code class="language-plaintext highlighter-rouge">IngestToStream</code> — the document will now stream through NiFi and land in Qdrant and able to be used as context in calls to our vllm service!</p>
-
-<hr />
-
-<h2 id="-step-5-query-time--ask-questions"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f30a.png" alt="water wave" style="height:1.2em;vertical-align:middle;" /> Step 5: Query Time — Ask Questions!</h2>
-
-<p>What better way to test, than to ask our model <strong>What is StreamTovLLM?</strong></p>
-
-<p>Remember the first inquiry to the model is that it does not know anything about StreamTovLLM as expected:</p>
-
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">=== ANSWER ===
-I apologize, but there seems to be an error in the term you've provided ("streamtovllm"). It appears to be a misspelling or incorrect combination of words. The correct term might be Streamlit (a popular open-source platform for building user interfaces for machine learning applications) or llama (which could refer to Llama.cpp, a C++ library for machine learning). Could you please clarify or provide more context about what "streamtovllm" is supposed to be?
-
-</span></code></pre></div></div>
-
-<p>Now after we have executed our NiFi Flow when we test with curl:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="s2">"http://localhost:6333/collections/my-rag-collection/points/scroll"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-d</span> <span class="s1">'{"limit": 1, "with_payload": true}'</span>
-</code></pre></div></div>
-
-<p>Notice the response:</p>
-
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">{"result":{"points":[{"id":"ee6a5070-0add-4e43-b218-9d64eeab3053","payload":{"text":"StreamToVLLM is a specialized data engineering framework. nIt connects Apache NiFi to vLLM inference servers. nThe system uses Qdrant as a vector database to store technical blog content. nThis allows for local RAG (Retrieval-Augmented Generation) on Windows WSL2 machines. nThe main goal of the project is to demonstrate high-performance streaming AI nusing Cloudera Streaming Operators and dedicated GPU hardware.","source":"kafka-stream","timestamp":"Wed Mar 25 15:24:32 GMT 2026"}}],"next_page_offset":null},"status":"ok","time":0.000567914}
-</span></code></pre></div></div>
-
-<p>Now, lets go a bit further and build a simple python script to ask the same question.  Save as <code class="language-plaintext highlighter-rouge">query-rag.py</code>:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">requests</span>
-
-<span class="k">def</span> <span class="nf">ask</span><span class="p">(</span><span class="n">question</span><span class="p">):</span>
-    <span class="c1"># 1. Embed
-</span>    <span class="n">emb</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:8080/embed"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s">"inputs"</span><span class="p">:</span> <span class="n">question</span><span class="p">}).</span><span class="nf">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="c1"># 2. Search Qdrant
-</span>    <span class="n">search</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:6333/collections/my-rag-collection/points/search"</span><span class="p">,</span> 
-                           <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s">"vector"</span><span class="p">:</span> <span class="n">emb</span><span class="p">,</span> <span class="s">"limit"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"with_payload"</span><span class="p">:</span> <span class="bp">True</span><span class="p">}).</span><span class="nf">json</span><span class="p">()</span>
-    
-    <span class="n">results</span> <span class="o">=</span> <span class="n">search</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"result"</span><span class="p">,</span> <span class="p">[])</span>
-    <span class="n">raw_text</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">"payload"</span><span class="p">].</span><span class="nf">get</span><span class="p">(</span><span class="s">"text"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span> <span class="k">if</span> <span class="n">results</span> <span class="k">else</span> <span class="s">"No context."</span>
-
-    <span class="c1"># --- THE ESCAPE HATCH ---
-</span>    <span class="c1"># If the text starts with '[', it's a vector. We don't want it.
-</span>    <span class="k">if</span> <span class="nf">str</span><span class="p">(</span><span class="n">raw_text</span><span class="p">).</span><span class="nf">startswith</span><span class="p">(</span><span class="s">"["</span><span class="p">):</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"[!] Warning: Found vector trash in text field. Ignoring it."</span><span class="p">)</span>
-        <span class="n">context</span> <span class="o">=</span> <span class="s">"Reference data is currently being re-indexed."</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># Force the context to be tiny (500 chars) to guarantee we stay under 4096 tokens
-</span>        <span class="n">context</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">raw_text</span><span class="p">)[:</span><span class="mi">500</span><span class="p">]</span> 
-
-    <span class="c1"># 3. vLLM Call
-</span>    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">"model"</span><span class="p">:</span> <span class="s">"Qwen/Qwen2.5-3B-Instruct"</span><span class="p">,</span>
-        <span class="s">"messages"</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"system"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="s">"Briefly answer using this context."</span><span class="p">},</span>
-            <span class="p">{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"user"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="sa">f</span><span class="s">"Context: </span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="se">\n\n</span><span class="s">Question: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s">"</span><span class="p">}</span>
-        <span class="p">],</span>
-        <span class="s">"max_tokens"</span><span class="p">:</span> <span class="mi">100</span>
-    <span class="p">}</span>
-
-    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s">"http://localhost:8000/v1/chat/completions"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
-    
-    <span class="k">if</span> <span class="n">resp</span><span class="p">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">=== ANSWER ==="</span><span class="p">)</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="nf">json</span><span class="p">()[</span><span class="s">"choices"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"message"</span><span class="p">][</span><span class="s">"content"</span><span class="p">])</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Error: </span><span class="si">{</span><span class="n">resp</span><span class="p">.</span><span class="n">text</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
-
-<span class="nf">ask</span><span class="p">(</span><span class="s">"What is StreamToVLLM?"</span><span class="p">)</span>
-
-</code></pre></div></div>
-
-<p>Notice the well informed response:</p>
-
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">python3 query-rag.py
-
-=== ANSWER ===
-StreamToVLLM is a specialized data engineering framework that connects Apache NiFi with vLLM inference servers, enabling local retrieval and augmentation generation on Windows WSL2 machines using Qdrant for storing technical blog content. Its primary goal is to showcase high-performance streaming AI using Cloudera Streaming Operators and dedicated GPU hardware.
-</span></code></pre></div></div>
-
-<p><strong>Boom</strong> — <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f4a5.png" alt="collision" style="height:1.2em;vertical-align:middle;" /> instant, context-aware answers from your live streaming documents.</p>
-
-<hr />
-
-<h2 id="-terminal-commands-for-this-session"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f4bb.png" alt="laptop" style="height:1.2em;vertical-align:middle;" /> Terminal Commands For This Session</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Look at logs</span>
-kubectl logs gpu-test <span class="nt">-f</span>
-kubectl logs <span class="nt">-l</span> <span class="nv">app</span><span class="o">=</span>vllm-server <span class="nt">--tail</span> 300
-
-<span class="c"># Chained port forward</span>
-kubectl port-forward svc/qdrant 6333:6333 &amp;
+<h1 id="chained-port-forward">Chained port forward</h1>
+<p>kubectl port-forward svc/qdrant 6333:6333 &amp;
 kubectl port-forward svc/vllm-service 8000:8000 &amp;
-kubectl port-forward svc/embedding-server-service 8080:80 &amp;
+kubectl port-forward svc/embedding-server-service 8080:80 &amp;</p>
 
-<span class="c"># Delete the collection</span>
-curl <span class="nt">-X</span> DELETE <span class="s2">"http://localhost:6333/collections/my-rag-collection"</span>
-<span class="c"># Recreate it fresh</span>
-curl <span class="nt">-X</span> PUT <span class="s2">"http://localhost:6333/collections/my-rag-collection"</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-<span class="nt">-d</span> <span class="s1">'{"vectors": {"size": 768, "distance": "Cosine"}}'</span>
+<h1 id="delete-the-collection">Delete the collection</h1>
+<p>curl -X DELETE “http://localhost:6333/collections/my-rag-collection”</p>
+<h1 id="recreate-it-fresh">Recreate it fresh</h1>
+<p>curl -X PUT “http://localhost:6333/collections/my-rag-collection” <br>
+-H “Content-Type: application/json” <br>
+-d ‘{“vectors”: {“size”: 768, “distance”: “Cosine”}}’</p>
 
-<span class="c"># Delete YAMLS</span>
-kubectl delete <span class="nt">-f</span> vllm-qwen.yaml
-kubectl delete <span class="nt">-f</span> qdrant-deployment.yaml
-kubectl delete <span class="nt">-f</span> embedding-server.yaml
-</code></pre></div></div>
+<h1 id="delete-yamls">Delete YAMLS</h1>
+<p>kubectl delete -f vllm-qwen.yaml
+kubectl delete -f qdrant-deployment.yaml
+kubectl delete -f embedding-server.yaml</p>
 
-<p class="notice--primary"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f381.png" alt="gift" style="height:1.2em;vertical-align:middle;" /> <strong>YAMLS!</strong> You can find all the <code class="language-plaintext highlighter-rouge">yaml</code> for working with Cloudera Streaming Operators in my <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">GitHub Repo</a>.</p>
+<p><img class="emoji" title=":gift:" alt=":gift:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f381.png" height="20" width="20"> YAMLS! You can find all the yaml for working with Cloudera Streaming Operators in my GitHub Repo.
+{: .notice–primary}<img class="emoji" title=":checkered_flag:" alt=":checkered_flag:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c1.png" height="20" width="20"> The “StreamToVLLM” TakeawayThis project isn’t about building a final product; it’s about establishing a foundational dev pipeline that actually works on local hardware. By wiring these components together on kubernetes, we’ve brought a local GPU for functional development with Cloudera Streaming Operators.Foundational RAG Plumbing: We’ve built the “boring” but essential infrastructure—moving data from a stream, through a vectorizer, and into a searchable brain—all within a single Minikube cluster.
+The Power of Context: By chunking and embedding our own data, we’ve moved the LLM from “guessing” to “referencing.” We aren’t just asking Qwen to be smart; we’re giving it an open-book exam using the specific context we’ve provided.
+Unlocking the Sandbox: The real win here isn’t the chatbot—it’s the capability. Now that the pipeline exists, you can swap models, change embedding strategies, or pipe in entirely different data sources (Git, Jira, Slack) to see how they interact with local inference. 
+Zero-Cost Iteration: Because this is 100% local, we can break things, re-index the collection, and run 1,000 test queries in iterations.</p>
 
-<hr />
+<p>Resources &amp; Further ReadingQwen2.5-3B-Instruct (Hugging Face)
+nomic-embed-text-v1 (Hugging Face)
+Text Embeddings Inference (TEI)
+Qdrant Vector Database
+Qdrant GitHub Repository
+Cloudera Streaming Operators (/blog/Cloudera-Streaming-Operators/)
+GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube (/blog/GPU-Setup-Minikube/)
+Deploying vLLM with Qwen Llama on Minikube (/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/)</p>
 
-<h2 id="-the-streamtovllm-takeaway"><img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3c1.png" alt="chequered flag" style="height:1.2em;vertical-align:middle;" /> The “StreamToVLLM” Takeaway</h2>
-
-<p>This project isn’t about building a final product; it’s about establishing a foundational dev pipeline that actually works on local hardware. By wiring these components together on kubernetes, we’ve brought a local GPU for functional development with Cloudera Streaming Operators.</p>
-
-<ul>
-  <li><strong>Foundational RAG Plumbing</strong>: We’ve built the “boring” but essential infrastructure—moving data from a stream, through a vectorizer, and into a searchable brain—all within a single Minikube cluster.</li>
-  <li><strong>The Power of Context</strong>: By chunking and embedding our own data, we’ve moved the LLM from “guessing” to “referencing.” We aren’t just asking Qwen to be smart; we’re giving it an open-book exam using the specific context we’ve provided.</li>
-  <li><strong>Unlocking the Sandbox</strong>: The real win here isn’t the chatbot—it’s the capability. Now that the pipeline exists, you can swap models, change embedding strategies, or pipe in entirely different data sources (Git, Jira, Slack) to see how they interact with local inference.</li>
-  <li><strong>Zero-Cost Iteration</strong>: Because this is 100% local, we can break things, re-index the collection, and run 1,000 test queries in iterations.</li>
-</ul>
-
-<hr />
-
-<h2 id="-resources--further-reading">📚 Resources &amp; Further Reading</h2>
-
-<ul>
-  <li><a href="https://huggingface.co/Qwen/Qwen2.5-3B-Instruct">Qwen2.5-3B-Instruct (Hugging Face)</a></li>
-  <li><a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">nomic-embed-text-v1 (Hugging Face)</a></li>
-  <li><a href="https://github.com/huggingface/text-embeddings-inference">Text Embeddings Inference (TEI)</a></li>
-  <li><a href="https://qdrant.tech/">Qdrant Vector Database</a></li>
-  <li><a href="https://github.com/qdrant/qdrant">Qdrant GitHub Repository</a></li>
-  <li><a href="/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a></li>
-  <li><a href="/blog/GPU-Setup-Minikube/">GPU-Accelerated Kubernetes: Setting up NVIDIA on Minikube</a></li>
-  <li><a href="/blog/Deploying-vLLM-with-Qwen-Llama-on-Minikube/">Deploying vLLM with Qwen Llama on Minikube</a></li>
-</ul>
-
-<hr />
-
-<h3 id="rag-with-cloudera-streaming-operators">RAG with Cloudera Streaming Operators</h3>
-
-<p>If you have any questions about the integration between these components or you would like a deeper dive, hands on experience, demos of RAG with Cloudera Streaming Operators,  please reach out to schedule a discussion.</p>
+<p>RAG with Cloudera Streaming OperatorsIf you have any questions about the integration between these components or you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about RAG with Cloudera Streaming Operators,  please reach out to schedule a discussion.</p>
 
         
       </section>
@@ -872,7 +780,7 @@ kubectl delete <span class="nt">-f</span> embedding-server.yaml
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FRAG-with-Cloudera-Streaming-Operators%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -941,7 +849,7 @@ kubectl delete <span class="nt">-f</span> embedding-server.yaml
     
   <div class="archive__item-excerpt" itemprop="description">
     The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Clou...
-    <a href="/release/Cloudera-Flow-Management-4.12.0/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/release/Cloudera-Flow-Management-4.12.0/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -990,7 +898,7 @@ kubectl delete <span class="nt">-f</span> embedding-server.yaml
     
   <div class="archive__item-excerpt" itemprop="description">
     We are excited to announce the delivery of Cloudera runtime 7.3.2! This represents our most enduring Long-Term Support (LTS) release to date, with support ex...
-    <a href="/release/Introducing-Cloudera-Runtime-7.3.2/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/release/Introducing-Cloudera-Runtime-7.3.2/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -1039,7 +947,7 @@ kubectl delete <span class="nt">-f</span> embedding-server.yaml
     
   <div class="archive__item-excerpt" itemprop="description">
     Infrastructure tuning is the ‘final boss’ of local AI. Skip the ‘Driver Dance’ and move past the tutorials with these hard-won lessons on CUDA pinning, depen...
-    <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -1089,7 +997,7 @@ kubectl delete <span class="nt">-f</span> embedding-server.yaml
   <div class="archive__item-excerpt" itemprop="description">
     Terminal 3 Output to go along with Audio Transcription RAG post.
 
-    <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -1106,13 +1014,15 @@ kubectl delete <span class="nt">-f</span> embedding-server.yaml
 
     
       <div class="search-content">
-        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
     <label class="sr-only" for="search">
       Enter your search term...
     </label>
-    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
   </form>
-  <div id="results" class="results"></div></div>
+  <div id="results" class="results"></div>
+</div>
 
       </div>
     
@@ -1154,7 +1064,7 @@ kubectl delete <span class="nt">-f</span> embedding-server.yaml
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 <script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
       </footer>
     </div>
