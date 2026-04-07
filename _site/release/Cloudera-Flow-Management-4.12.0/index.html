@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- begin _includes/seo.html --><title>Release of Cloudera Kubernetes Operators - Cloudera Solutions Engineer</title>
-<meta name="description" content="I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.">
+<!-- begin _includes/seo.html --><title>Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2 - Cloudera Solutions Engineer</title>
+<meta name="description" content="The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Cloudera Manager on Cloudera on premises and Cloudera on cloud (Data Hub) 7.3.2. This release offers a number of new features and improvements as well as upgraded dependencies.">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Release of Cloudera Kubernetes Operators">
-<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Kubernetes-Operator/">
+<meta property="og:title" content="Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-4.12.0/">
 
 
-  <meta property="og:description" content="I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.">
-
-
-
-  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/kubernetes-logo.png">
+  <meta property="og:description" content="The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Cloudera Manager on Cloudera on premises and Cloudera on cloud (Data Hub) 7.3.2. This release offers a number of new features and improvements as well as upgraded dependencies.">
 
 
 
-
-
-  <meta property="article:published_time" content="2024-07-18T00:00:00-04:00">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2026-04-02T00:00:00-04:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Kubernetes-Operator/">
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-4.12.0/">
 
 
 
@@ -267,194 +267,19 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Release of Cloudera Kubernetes Operators">
-    <meta itemprop="description" content="I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.">
-    <meta itemprop="datePublished" content="2024-07-18T00:00:00-04:00">
+    <meta itemprop="headline" content="Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2">
+    <meta itemprop="description" content="The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Cloudera Manager on Cloudera on premises and Cloudera on cloud (Data Hub) 7.3.2. This release offers a number of new features and improvements as well as upgraded dependencies.">
+    <meta itemprop="datePublished" content="2026-04-02T00:00:00-04:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io/blog/Kubernetes-Operator/" class="u-url" itemprop="url">Release of Cloudera Kubernetes Operators
+            <a href="https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-4.12.0/" class="u-url" itemprop="url">Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2
 </a>
           </h1>
           
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          1 minute read
-        
-      </span>
-    
-    
-      
-        <p class="page__date">
-          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
-          <time datetime="2024-07-18T00:00:00-04:00">
-            July 18, 2024
-          </time>
-        </p>
-      
-    
-  </p>
-
-
-        </header>
-      
-
-      <section class="page__content e-content" itemprop="text">
-        
-        <p>I have been working on so many things related to my CDP Public Cloud and CDP Private Cloud customers that I just do not get enough time to blog.  Since my last post I am happy to report that Cloudera has finally GA’d 3 kubernetes Operators.</p>
-
-<h1 id="cloudera-kubernetes-operators">Cloudera Kubernetes Operators</h1>
-
-<h2 id="cfm---cloudera-flow-management-operator">CFM - Cloudera Flow Management Operator</h2>
-<p>Cloudera Flow Management (CFM) Operator allows you to deploy and manage NiFi clusters and NiFi Registry instances on Kubernetes. CFM Operator simplifies data collection, transformation, and delivery across your enterprise. Leveraging containerized infrastructure, the operator streamlines the orchestration of complex data flows.</p>
-<ul>
-  <li><a href="https://nifi.apache.org/">Apache NiFi</a></li>
-</ul>
-
-<h2 id="csm---cloudera-streams-messaging-operator">CSM - Cloudera Streams Messaging Operator</h2>
-<p>CSM (Cloudera Streams Messaging) Operator allows you to deploy and manage Streams Messaging components as container applications on Kubernetes. CSM Operator simplifies the process of creating, managing, and troubleshooting Kafka deployments in a Kubernetes environment. CSM Operator includes several services and components such as Strimzi, Kafka, Cruise Control, and others.</p>
-<ul>
-  <li><a href="https://kafka.apache.org/">Apache Kafka</a></li>
-</ul>
-
-<h2 id="csa---cloudera-streams-analytics-operator">CSA - Cloudera Streams Analytics Operator</h2>
-<p>Cloudera Streaming Analytics (CSA) Operator allows you to deploy and manage the Streaming Analytics components of Cloudera Data Platform (CDP), Flink and SQL Stream Builder (SSB), as container applications on Kubernetes. CSA Operator is based on the Apache Flink Kubernetes Operator (Flink Operator), and offers the same set of features as the Flink Operator supports. By extending the Kubernetes API, the Flink Operator acts as a control plane to manage the deployment lifecycle of Flink applications using the operator pattern.</p>
-<ul>
-  <li><a href="https://flink.apache.org/">Apache Flink</a></li>
-</ul>
-
-<p>Check out this <a href="https://community.cloudera.com/t5/Community-Articles/Cloudera-Flow-Management-Operator-A-technical-deep-dive/ta-p/390473">Deep Technical Dive with Pierre Villard</a></p>
-
-<p>Find more about Cloudera DataFlow starting right <a href="https://www.cloudera.com/products/dataflow.html">here</a>.</p>
-
-<p>You can learn more about Cloudera Stream Processing right <a href="https://www.cloudera.com/products/stream-processing.html">here</a>.</p>
-
-<p>As always, check out the docs for each operator:</p>
-
-<p><a href="https://docs.cloudera.com/cfm-operator/2.8.0/index.html">CFM</a>
-<a href="https://docs.cloudera.com/csm-operator/1.0/index.html">CSM</a>
-<a href="https://docs.cloudera.com/csa-operator/1.0/index.html">CSA</a></p>
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/tags/#cfm" class="page__taxonomy-item p-category" rel="tag">cfm</a><span class="sep">, </span>
-    
-      <a href="/tags/#csa" class="page__taxonomy-item p-category" rel="tag">csa</a><span class="sep">, </span>
-    
-      <a href="/tags/#csm" class="page__taxonomy-item p-category" rel="tag">csm</a><span class="sep">, </span>
-    
-      <a href="/tags/#kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
-    
-      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a>
-    
-    </span>
-  </p>
-
-
-
-
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
-    
-    </span>
-  </p>
-
-
-        
-
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2024-07-18T00:00:00-04:00">July 18, 2024</time></p>
-
-      </footer>
-
-      <section class="page__share">
-  
-    <h4 class="page__share-title">Share on</h4>
-  
-
-  <a href="https://twitter.com/intent/tweet?text=Release+of+Cloudera+Kubernetes+Operators%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FKubernetes-Operator%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
-
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FKubernetes-Operator%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
-
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FKubernetes-Operator%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
-</section>
-
-
-      
-  <nav class="pagination">
-    
-      <a href="/release/CEM-2.1.2-Release/" class="pagination--pager" title="Release of CEM 2.1.2
-">Previous</a>
-    
-    
-      <a href="/blog/Install-CFM-Operator/" class="pagination--pager" title="Installing Cloudera CFM Kubernetes Operator
-">Next</a>
-    
-  </nav>
-
-    </div>
-
-    
-  </article>
-
-  
-  
-    <div class="page__related">
-      <h2 class="page__related-title">You may also enjoy</h2>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/release/Cloudera-Flow-Management-4.12.0/" rel="permalink">Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2
-</a>
-      
-    </h2>
-    
 
   <p class="page__meta">
     
@@ -473,18 +298,169 @@
       </span>
     
     
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-04-02T00:00:00-04:00">
+            April 02, 2026
+          </time>
+        </p>
+      
+    
   </p>
 
 
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>The Data in Motion Team is pleased to announce the General Availability (GA) release of <strong>Cloudera Flow Management 4.12.0</strong>, supporting <strong>Apache NiFi 2.6</strong> with Cloudera Manager on Cloudera on premises and Cloudera on cloud (Data Hub) 7.3.2. This release offers a number of new features and improvements as well as upgraded dependencies.</p>
+
+<hr />
+
+<h3 id="key-features-for-this-release">Key features for this release</h3>
+
+<p><strong>NiFi 2.6:</strong> Cloudera Flow Management 4.12.0 is based on Apache NiFi 2.6.0 and adds several new features not available in previous versions of Apache NiFi.</p>
+
+<p><strong>New Components in Apache NiFi 2.6:</strong></p>
+<ul>
+  <li><strong>ConsumeKinesis</strong> - a new processor that enables users to receive messages from an AWS Kinesis source</li>
+  <li><strong>PutIcebergRecord</strong> - a new processor that enables users to put record-based FlowFiles into Iceberg tables</li>
+  <li><strong>AzureDevOpsFlowRegistryClient</strong> - a new flow registry client that enables users to leverage Azure DevOps as a Flow Registry</li>
+</ul>
+
+<p><strong>New and Improved Components in Cloudera Flow Management 4.12:</strong></p>
+<ul>
+  <li>Now offering <strong>ConsumeMQTTIIoT</strong> and <strong>MQTTIIoTReader</strong>, allowing flows to receive and parse Sparkplug messages, enabling Industrial Internet of Things (IIoT) and edge use cases via an industry-standard format.</li>
+  <li>Support for <strong>OAuth2 (OAUTHBEARER)</strong> authentication has been added for Kafka components. This enhancement enables secure access to Kafka brokers using an OAuth2 Token Provider controller service to obtain and manage access tokens.</li>
+</ul>
+
+<p><strong>New Flow Analysis Rule:</strong> Cloudera Flow Management 4.12.0 adds the <strong>RequireServerSSLContext</strong> Flow Analysis Rule to ensure no servers (via ListenHttp or ListenTCP) can be created without a secure communications layer.</p>
+
+<p><strong>Migration Tool version 7.0.0:</strong> Includes bug fixes and supports migrations from Cloudera Flow Management 2.1.7 Service Pack 3 to Cloudera Flow Management 4.12.</p>
+
+<p><strong>Updates and Patches:</strong> Additionally, updates and patches have been implemented for additional stability, performance and security.</p>
+
+<hr />
+
+<h3 id="support-matrix-and-upgrade-paths">Support Matrix and Upgrade Paths</h3>
+
+<p>To upgrade, users should:</p>
+<ol>
+  <li>Upgrade to <strong>Cloudera Flow Management 2.1.7 Service Pack (SP) 3</strong> first.</li>
+  <li>Then utilize the <strong>Cloudera Flow Management Migration tool version 7.0.0</strong> to convert existing Cloudera Flow Management 2.1.7 SP3 flows to run on Cloudera Flow Management 4.12.0 instances.</li>
+</ol>
+
+<p><strong>Note:</strong> Cloudera Flow Management 4.12.0 is supported on Cloudera Data Platform 7.3.2. In-place upgrades from Cloudera Flow Management 2 to Cloudera Flow Management 4 are not supported; flows must be migrated then transferred to the Cloudera Flow Management 4 instance(s).</p>
+
+<p>Upgrading from Cloudera Flow Management 4.10.0 or 4.11.0 to 4.12.0 using Cloudera Manager follows the standard upgrade procedure.</p>
+
+<hr />
+
+<h3 id="use-cases">Use Cases</h3>
+
+<p><strong>Leverage NiFi 2 capabilities with Cloudera enhancements:</strong></p>
+<ul>
+  <li>Exercise NiFi 2 capabilities in production with Cloudera’s NiFi 2 based Generally Available release.</li>
+  <li>Flow administrators can enforce best practices for flow designers to ensure robust, reliable solutions using the Flow Analysis Rules Engine and Cloudera-provided flow analysis rules.</li>
+  <li>Create RAG pipelines for GenAI, Data Engineering, and Machine Learning model scoring using new processors and integrations.</li>
+  <li>Implement IIoT solutions at the edge to ingest messages from edge devices and process them using the full power of Cloudera Flow Management.</li>
+</ul>
+
+<hr />
+
+<h3 id="links">Links</h3>
+<ul>
+  <li><a href="https://docs.cloudera.com/cfm/4.12.0/release-notes/topics/cfm-whats-new.html"><strong>Release Notes</strong></a></li>
+  <li><a href="https://docs.cloudera.com/cfm/4.12.0/release-notes/topics/cfm-download-locations.html"><strong>Download</strong></a></li>
+  <li><a href="https://docs.cloudera.com/cfm/4.12.0/index.html"><strong>Docs</strong></a></li>
+</ul>
+
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2 please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
     
-  <div class="archive__item-excerpt" itemprop="description">
-    The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Clou...
-    <a href="/release/Cloudera-Flow-Management-4.12.0/" class="read-more-pill">Read More &rarr;</a>
-  </div>
+      <a href="/tags/#cfm" class="page__taxonomy-item p-category" rel="tag">cfm</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
+    
+    </span>
+  </p>
 
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#release" class="page__taxonomy-item p-category" rel="tag">release</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-04-02T00:00:00-04:00">April 2, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Flow+Management+4.12.0+General+Availability+for+Cloudera+7.3.2%20https%3A%2F%2Fcldr-steven-matison.github.io%2Frelease%2FCloudera-Flow-Management-4.12.0%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcldr-steven-matison.github.io%2Frelease%2FCloudera-Flow-Management-4.12.0%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Frelease%2FCloudera-Flow-Management-4.12.0%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/release/Introducing-Cloudera-Runtime-7.3.2/" class="pagination--pager" title="Introducing Cloudera Runtime 7.3.2
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
   </article>
-</div>
 
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
         
           
 
@@ -566,7 +542,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          80 minute read
+          94 minute read
         
       </span>
     
@@ -615,7 +591,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          6 minute read
+          7 minute read
         
       </span>
     
@@ -627,6 +603,55 @@
   <div class="archive__item-excerpt" itemprop="description">
     Real-time, GPU-accelerated speech-to-text over streaming audio sources — powered by insanely-fast-whisper, Cloudera Streaming Operators (Kafka + NiFi), and m...
     <a href="/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-03-23-minikube-services.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Managing-Multiple-Services-Port-Forwards-Efficiently-in-Minikube/" rel="permalink">Managing Multiple Services and Port-Forwards Efficiently in Minikube
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Stop drowning in open terminal tabs just to access your UIs. This guide shows you how to streamline your Cloudera Streaming Operators workflow by managing mu...
+    <a href="/blog/Managing-Multiple-Services-Port-Forwards-Efficiently-in-Minikube/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>

@@ -6,6 +6,30 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-4.12.0/</link>
+        <pubDate>Thu, 02 Apr 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png" medium="image" />
+        
+        <description>The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Cloudera Manager on Cloudera on premises and Cloudera on cloud (Data Hub) 7.3.2. This release offers a number of new features and improvements as well as upgraded dependencies.
+</description>
+      </item>
+    
+      <item>
+        <title>Introducing Cloudera Runtime 7.3.2</title>
+        <link>https://cldr-steven-matison.github.io/release/Introducing-Cloudera-Runtime-7.3.2/</link>
+        <pubDate>Wed, 01 Apr 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png" medium="image" />
+        
+        <description>We are excited to announce the delivery of Cloudera runtime 7.3.2! This represents our most enduring Long-Term Support (LTS) release to date, with support extending through 2032. This release builds upon the unified code base for both Cloudera on premises and Cloudera on cloud that was established in the previous release in support of the hybrid cloud strategy.
+</description>
+      </item>
+    
+      <item>
         <title>Lessons Learned Audio Transcription RAG</title>
         <link>https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/</link>
         <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
@@ -92,30 +116,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-17-minikube-gpu-setup.png" medium="image" />
         
         <description>Stop fighting the drivers and start shipping AI. A step-by-step guide to exposing your RTX 40-series GPU to Minikube using WSL2 and Docker.</description>
-      </item>
-    
-      <item>
-        <title>Cloudera Data Lineage for Trino</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Data-Lineage-Trino/</link>
-        <pubDate>Tue, 17 Mar 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-17-CDL-trino.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-17-CDL-trino.png" medium="image" />
-        
-        <description>Native Governance and Data Lineage for the Unified Data Fabric
-</description>
-      </item>
-    
-      <item>
-        <title>NiFi Kafka and Flink on Kubernetes</title>
-        <link>https://cldr-steven-matison.github.io/blog/NiFi-Kafka-Flink-on-Kubernetes/</link>
-        <pubDate>Mon, 16 Mar 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-16-NififKafkaFlinkonKubernetes.jpg" medium="image" />
-        
-        <description>Last week I published how I installed all of the Cloudera Streaming Operators on my MacBook. This post got quite a bit of attention and I had a few friends ask if I was going to use this setup for more in-depth demos and how to do stuff with CFM, CSM, and CSA Operators.  Absolutely!!
-</description>
       </item>
     
   </channel>

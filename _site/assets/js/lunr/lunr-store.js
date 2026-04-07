@@ -370,4 +370,16 @@ var store = [{
         "tags": ["cloudera","operator","nifi","kafka","whisper","vllm","rag","gpu"],
         "url": "/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/2026-03-30-StreamToWhisper-lessons.png"
+      },{
+        "title": "Introducing Cloudera Runtime 7.3.2",
+        "excerpt":"We are excited to announce the delivery of Cloudera runtime 7.3.2! This represents our most enduring Long-Term Support (LTS) release to date, with support extending through 2032. This release builds upon the unified code base for both Cloudera on premises and Cloudera on cloud that was established in the previous...","categories": ["release"],
+        "tags": ["cloudera"],
+        "url": "/release/Introducing-Cloudera-Runtime-7.3.2/",
+        "teaser": "/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png"
+      },{
+        "title": "Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2",
+        "excerpt":"The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Cloudera Manager on Cloudera on premises and Cloudera on cloud (Data Hub) 7.3.2. This release offers a number of new features and improvements as well as...","categories": ["release"],
+        "tags": ["cloudera","nifi","cfm"],
+        "url": "/release/Cloudera-Flow-Management-4.12.0/",
+        "teaser": "/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png"
       }]
