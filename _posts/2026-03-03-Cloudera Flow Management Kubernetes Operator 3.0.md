@@ -31,6 +31,6 @@ Reference the latest operator version in the Helm Install command. More details 
 
 ### Links
 * [Release notes](https://docs.cloudera.com/cfm-operator/3.0.0/release-notes/topics/cfm-op-whats-new.html)
-* [Documentation](https://docs.cloudera.com/cfm-operator/3.0.0/index.html
+* [Documentation](https://docs.cloudera.com/cfm-operator/3.0.0/index.html)
 
 If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about  {{ page.title }} please reach out to schedule a discussion.
