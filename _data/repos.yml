@@ -1,17 +1,38 @@
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 89347
-  lang: "HTML"
-  updated: "2026-04-06"
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 43
+  lang: ""
+  updated: "2026-04-08"
   fork: false
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 524
+  size: 548
   lang: "Python"
-  updated: "2026-04-03"
+  updated: "2026-04-08"
   fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 91180
+  lang: "HTML"
+  updated: "2026-04-07"
+  fork: false
+- name: "NiFi-Templates"
+  description: "NiFI Templates of example flows I share with the community."
+  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
+  size: 855
+  lang: ""
+  updated: "2026-04-07"
+  fork: false
+- name: "DataDesigner"
+  description: "🎨 NeMo Data Designer: Generate high-quality synthetic data from scratch or from seed data."
+  url: "https://github.com/cldr-steven-matison/DataDesigner"
+  size: 289376
+  lang: ""
+  updated: "2026-04-07"
+  fork: true
 - name: "claw-code"
   description: "Better Harness Tools, not merely storing the archive of leaked Claude Code but also make real things done. Now rewriting in Rust."
   url: "https://github.com/cldr-steven-matison/claw-code"
@@ -25,20 +46,6 @@
   size: 43
   lang: "Dockerfile"
   updated: "2026-03-31"
-  fork: false
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 43
-  lang: ""
-  updated: "2026-03-31"
-  fork: false
-- name: "NiFi-Templates"
-  description: "NiFI Templates of example flows I share with the community."
-  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 796
-  lang: ""
-  updated: "2026-03-30"
   fork: false
 - name: "insanely-fast-whisper"
   description: ""
