@@ -223,11 +223,11 @@ Apply our python nifi yaml:
 kubectl apply -f nifi-cluster-30-nifi2x-python.yaml -n cfm-streaming
 ```
 
-Open the Nifi UI and you should notice new processor TransactionGenerator.  Notice its **Version: 0.0.6-SNAPSHOT**
+Open the Nifi UI and you should notice new processor TransactionGenerator.  Notice its **Version: 0.0.6-SNAPSHOT**.  It took me 6 iterations to get this new python to work.  The code was original an ExecuteScript processor I had started to translate to NiFi 2.0 [here](/blog/NIFI-2-Python-Processor/).
 
 ![TransactionGenerator](/assets/images/2026-04-09-TransactionGenerator.png)
 
-You can now repeat this process iterating your Version to ensure the python works as expected in NiFi. 
+You can now repeat this process iterating your Version to ensure the python works as expected in NiFi. I have already created newer copies and you can find those in my NiFi Templates. 
 
 :trophy: **Pro Tip!** Be patient after saving new changes to the filename.  Refresh NiFi UI if needed and ensure you see your newest Version.
 {: .notice--warning}

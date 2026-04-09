@@ -529,11 +529,11 @@ class TransactionGenerator<span class="o">(</span>FlowFileSource<span class="o">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> nifi-cluster-30-nifi2x-python.yaml <span class="nt">-n</span> cfm-streaming
 </code></pre></div></div>
 
-<p>Open the Nifi UI and you should notice new processor TransactionGenerator.  Notice its <strong>Version: 0.0.6-SNAPSHOT</strong></p>
+<p>Open the Nifi UI and you should notice new processor TransactionGenerator.  Notice its <strong>Version: 0.0.6-SNAPSHOT</strong>.  It took me 6 iterations to get this new python to work.  The code was original an ExecuteScript processor I had started to translate to NiFi 2.0 <a href="/blog/NIFI-2-Python-Processor/">here</a>.</p>
 
 <p><img src="/assets/images/2026-04-09-TransactionGenerator.png" alt="TransactionGenerator"></p>
 
-<p>You can now repeat this process iterating your Version to ensure the python works as expected in NiFi.</p>
+<p>You can now repeat this process iterating your Version to ensure the python works as expected in NiFi. I have already created newer copies and you can find those in my NiFi Templates.</p>
 
 <p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Be patient after saving new changes to the filename.  Refresh NiFi UI if needed and ensure you see your newest Version.</p>
 
