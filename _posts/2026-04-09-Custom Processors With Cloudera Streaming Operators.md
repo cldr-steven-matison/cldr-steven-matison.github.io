@@ -410,18 +410,26 @@ The CFM Operator will reconcile, mount the volume into all NiFi pods, and load t
 
 ### Step 6: Troubleshooting
 
-- Check NiFi pod logs for NAR loading:
-  ```bash
-  kubectl logs mynifi-0 -n cfm-streaming | grep -iE 'nar|python|TransactionGenerator'
-  ```
-- Confirm the volume is mounted and the NAR is present:
-  ```bash
-  kubectl exec -it mynifi-0 -n cfm-streaming -- ls /opt/nifi/nifi-current/extensions/custom-nars/
-  ```
+- Check NiFi app log:
+
+```bash
+kubectl logs mynifi-0 -c app-log -n cfm-streaming
+```
+
+- Confirm the volume is mounted and the files are present:
+
+```bash
+kubectl exec -n cfm-streaming mynifi-0 -- ls -la /opt/nifi/nifi-current/python/extensions
+```
+
+```bash
+kubectl exec -it mynifi-0 -n cfm-streaming -- ls /opt/nifi/nifi-current/extensions/custom-nars/
+```
+
 - If the processor does not appear:
   - Verify the NAR file is inside the PVC (`kubectl exec` into `nar-loader`).
   - Check that the PVC is Bound and the pod is Running.
-  - Make sure the NAR structure inside the file is correct (`python/processors/TransactionGenerator.py`).
+  - Make sure the NAR structure inside the file is correct
 - You can delete/recreate the `nar-loader` pod anytime if you need to add more NARs later.
 
 
