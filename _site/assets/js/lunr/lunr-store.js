@@ -406,4 +406,10 @@ var store = [{
         "tags": ["cloudera","nifi","cfm"],
         "url": "/release/Cloudera-Flow-Management-4.12.0/",
         "teaser": "/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png"
+      },{
+        "title": "Custom NiFi Processors with Cloudera Streaming Operators",
+        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. Ready to take NiFi beyond the out-of-the-box components? This guide dives into the practical steps for deploying custom extensions within Cloudera Streaming Operators. We’ll explore two distinct paths for extending...","categories": ["blog"],
+        "tags": ["cloudera","nifi","python","java","nar"],
+        "url": "/blog/Custom-Processors-With-Cloudera-Streaming-Operators/",
+        "teaser": "/assets/images/2026-04-09-Custom-NiFi-Processors.png"
       }]
