@@ -709,21 +709,28 @@ kubectl get pod nar-loader <span class="nt">-n</span> cfm-streaming
 <h3 id="step-6-troubleshooting">Step 6: Troubleshooting</h3>
 
 <ul>
-  <li>Check NiFi pod logs for NAR loading:
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>kubectl logs mynifi-0 <span class="nt">-n</span> cfm-streaming | <span class="nb">grep</span> <span class="nt">-iE</span> <span class="s1">'nar|python|TransactionGenerator'</span>
-</code></pre></div>    </div>
-  </li>
-  <li>Confirm the volume is mounted and the NAR is present:
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-it</span> mynifi-0 <span class="nt">-n</span> cfm-streaming <span class="nt">--</span> <span class="nb">ls</span> /opt/nifi/nifi-current/extensions/custom-nars/
-</code></pre></div>    </div>
-  </li>
+  <li>Check NiFi app log:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl logs mynifi-0 <span class="nt">-c</span> app-log <span class="nt">-n</span> cfm-streaming
+</code></pre></div></div>
+
+<ul>
+  <li>Confirm the volume is mounted and the files are present:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-n</span> cfm-streaming mynifi-0 <span class="nt">--</span> <span class="nb">ls</span> <span class="nt">-la</span> /opt/nifi/nifi-current/python/extensions
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-it</span> mynifi-0 <span class="nt">-n</span> cfm-streaming <span class="nt">--</span> <span class="nb">ls</span> /opt/nifi/nifi-current/extensions/custom-nars/
+</code></pre></div></div>
+
+<ul>
   <li>If the processor does not appear:
     <ul>
       <li>Verify the NAR file is inside the PVC (<code class="language-plaintext highlighter-rouge">kubectl exec</code> into <code class="language-plaintext highlighter-rouge">nar-loader</code>).</li>
       <li>Check that the PVC is Bound and the pod is Running.</li>
-      <li>Make sure the NAR structure inside the file is correct (<code class="language-plaintext highlighter-rouge">python/processors/TransactionGenerator.py</code>).</li>
+      <li>Make sure the NAR structure inside the file is correct</li>
     </ul>
   </li>
   <li>You can delete/recreate the <code class="language-plaintext highlighter-rouge">nar-loader</code> pod anytime if you need to add more NARs later.</li>
