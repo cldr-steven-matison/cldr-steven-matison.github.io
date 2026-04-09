@@ -1,30 +1,44 @@
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 43
-  lang: ""
-  updated: "2026-04-08"
-  fork: false
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 548
+  size: 501
   lang: "Python"
+  updated: "2026-04-09"
+  fork: false
+- name: "NiFi2-Processor-Playground"
+  description: "A place to play around with NiFi 2.0 Processors"
+  url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
+  size: 7
+  lang: "Python"
+  updated: "2026-04-09"
+  fork: false
+- name: "ClouderaStreamingOperators"
+  description: "Repo for yaml used in installing Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
+  size: 29
+  lang: ""
   updated: "2026-04-08"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 91180
+  size: 91186
   lang: "HTML"
-  updated: "2026-04-07"
+  updated: "2026-04-08"
   fork: false
 - name: "NiFi-Templates"
   description: "NiFI Templates of example flows I share with the community."
   url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 855
+  size: 861
+  lang: "Python"
+  updated: "2026-04-08"
+  fork: false
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 44
   lang: ""
-  updated: "2026-04-07"
+  updated: "2026-04-08"
   fork: false
 - name: "DataDesigner"
   description: "🎨 NeMo Data Designer: Generate high-quality synthetic data from scratch or from seed data."
@@ -61,13 +75,6 @@
   lang: ""
   updated: "2026-03-26"
   fork: true
-- name: "ClouderaStreamingOperators"
-  description: "Repo for yaml used in installing Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 28
-  lang: ""
-  updated: "2026-03-24"
-  fork: false
 - name: "kftray"
   description: "kubectl port-forward manager and reverse tunnel (ngrok-like) for exposing local  services publicly, with TLS termination, HTTP traffic inspection, UDP forwarding,  multi-hop proxy routing through k8s clusters, stateful config via filesystem or  git - GUI and TUI available"
   url: "https://github.com/cldr-steven-matison/kftray"
