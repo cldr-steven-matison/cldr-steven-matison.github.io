@@ -1,45 +1,59 @@
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 44
+  lang: ""
+  updated: "2026-04-10"
+  fork: false
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 501
+  size: 520
   lang: "Python"
+  updated: "2026-04-10"
+  fork: false
+- name: "NiFi-Templates"
+  description: "NiFI Templates of example flows I share with the community."
+  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
+  size: 875
+  lang: "Python"
+  updated: "2026-04-10"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 91580
+  lang: "HTML"
   updated: "2026-04-09"
   fork: false
 - name: "NiFi2-Processor-Playground"
   description: "A place to play around with NiFi 2.0 Processors"
   url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
-  size: 7
+  size: 262
   lang: "Python"
   updated: "2026-04-09"
   fork: false
 - name: "ClouderaStreamingOperators"
   description: "Repo for yaml used in installing Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 29
+  size: 31
   lang: ""
-  updated: "2026-04-08"
+  updated: "2026-04-09"
   fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 91186
-  lang: "HTML"
-  updated: "2026-04-08"
-  fork: false
-- name: "NiFi-Templates"
-  description: "NiFI Templates of example flows I share with the community."
-  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 861
-  lang: "Python"
-  updated: "2026-04-08"
-  fork: false
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 44
+- name: "nifi-python-extensions"
+  description: "Apache NiFi Python Extensions"
+  url: "https://github.com/cldr-steven-matison/nifi-python-extensions"
+  size: 41
   lang: ""
-  updated: "2026-04-08"
-  fork: false
+  updated: "2026-04-09"
+  fork: true
+- name: "FLaNK-python-processors"
+  description: "Many processors"
+  url: "https://github.com/cldr-steven-matison/FLaNK-python-processors"
+  size: 62
+  lang: ""
+  updated: "2026-04-09"
+  fork: true
 - name: "DataDesigner"
   description: "🎨 NeMo Data Designer: Generate high-quality synthetic data from scratch or from seed data."
   url: "https://github.com/cldr-steven-matison/DataDesigner"
