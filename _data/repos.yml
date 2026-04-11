@@ -1,15 +1,36 @@
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 44
-  lang: ""
-  updated: "2026-04-10"
-  fork: false
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 520
+  size: 629
   lang: "Python"
+  updated: "2026-04-11"
+  fork: false
+- name: "deer-flow"
+  description: "An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours."
+  url: "https://github.com/cldr-steven-matison/deer-flow"
+  size: 29900
+  lang: ""
+  updated: "2026-04-11"
+  fork: true
+- name: "Streams-Processing-Hands-on-Lab"
+  description: "Github repo for CSP Hands On Lab"
+  url: "https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab"
+  size: 5075
+  lang: ""
+  updated: "2026-04-10"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 91581
+  lang: "HTML"
+  updated: "2026-04-10"
+  fork: false
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 45
+  lang: ""
   updated: "2026-04-10"
   fork: false
 - name: "NiFi-Templates"
@@ -18,13 +39,6 @@
   size: 875
   lang: "Python"
   updated: "2026-04-10"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 91580
-  lang: "HTML"
-  updated: "2026-04-09"
   fork: false
 - name: "NiFi2-Processor-Playground"
   description: "A place to play around with NiFi 2.0 Processors"
@@ -208,13 +222,6 @@
   lang: ""
   updated: "2025-07-21"
   fork: true
-- name: "Streams-Processing-Hands-on-Lab"
-  description: "Github repo for CSP Hands On Lab"
-  url: "https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab"
-  size: 4453
-  lang: ""
-  updated: "2025-01-15"
-  fork: false
 - name: "Fraud-Prevention-With-Cloudera-SSB"
   description: ""
   url: "https://github.com/cldr-steven-matison/Fraud-Prevention-With-Cloudera-SSB"
