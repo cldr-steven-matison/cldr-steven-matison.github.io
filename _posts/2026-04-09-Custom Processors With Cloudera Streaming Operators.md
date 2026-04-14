@@ -13,8 +13,6 @@ tags:
   - nar
 ---
 
-:warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
-{: .notice--danger}
 
 Ready to take NiFi beyond the out-of-the-box components? This guide dives into the practical steps for deploying custom extensions within Cloudera Streaming Operators. We’ll explore two distinct paths for extending your data flows: rapid prototyping with Python processors and the Java/NAR approach using Nar Provider. Whether you’re generating synthetic fraud data or building complex custom logic, here is how to bring custom processors into your local development environment.
 

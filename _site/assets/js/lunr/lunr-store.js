@@ -408,8 +408,14 @@ var store = [{
         "teaser": "/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png"
       },{
         "title": "Custom NiFi Processors with Cloudera Streaming Operators",
-        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. Ready to take NiFi beyond the out-of-the-box components? This guide dives into the practical steps for deploying custom extensions within Cloudera Streaming Operators. We’ll explore two distinct paths for extending...","categories": ["blog"],
+        "excerpt":"Ready to take NiFi beyond the out-of-the-box components? This guide dives into the practical steps for deploying custom extensions within Cloudera Streaming Operators. We’ll explore two distinct paths for extending your data flows: rapid prototyping with Python processors and the Java/NAR approach using Nar Provider. Whether you’re generating synthetic fraud...","categories": ["blog"],
         "tags": ["cloudera","nifi","python","java","nar"],
         "url": "/blog/Custom-Processors-With-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/2026-04-09-Custom-NiFi-Processors.png"
+      },{
+        "title": "All The New In Cloudera 7.3.2",
+        "excerpt":"Cloudera Runtime 7.3.2 delivers a comprehensive set of new capabilities, modernizations, and performance improvements across the entire platform. This release modernizes the stack with JDK 17 support for multiple components (bringing better performance, security, and long-term maintainability), adds IPv6 dual-stack support in several services for enhanced network scalability and future-proofing,...","categories": ["blog"],
+        "tags": ["cloudera"],
+        "url": "/blog/All-the-New-in-7.3.2/",
+        "teaser": "/assets/images/2026-04-14-all_the_new_in_7_3_2.png"
       }]
