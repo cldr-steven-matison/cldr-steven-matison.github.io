@@ -1,17 +1,31 @@
-- name: "DesktopShare"
-  description: "Share spot for Macbook & Windows MD & Test Files"
-  url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 698
-  lang: "Python"
-  updated: "2026-04-13"
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 45
+  lang: ""
+  updated: "2026-04-15"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 91585
+  size: 97952
   lang: "HTML"
-  updated: "2026-04-13"
+  updated: "2026-04-14"
   fork: false
+- name: "DesktopShare"
+  description: "Share spot for Macbook & Windows MD & Test Files"
+  url: "https://github.com/cldr-steven-matison/DesktopShare"
+  size: 782
+  lang: "Python"
+  updated: "2026-04-14"
+  fork: false
+- name: "nifi-zerobus-bundle"
+  description: "Apache NiFi processor for Databricks Zerobus Ingest — stream data directly into Delta tables"
+  url: "https://github.com/cldr-steven-matison/nifi-zerobus-bundle"
+  size: 31
+  lang: ""
+  updated: "2026-04-14"
+  fork: true
 - name: "deer-flow"
   description: "An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours."
   url: "https://github.com/cldr-steven-matison/deer-flow"
@@ -23,13 +37,6 @@
   description: "Github repo for CSP Hands On Lab"
   url: "https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab"
   size: 5075
-  lang: ""
-  updated: "2026-04-10"
-  fork: false
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 45
   lang: ""
   updated: "2026-04-10"
   fork: false
