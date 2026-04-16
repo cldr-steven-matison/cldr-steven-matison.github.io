@@ -463,7 +463,7 @@ class TransactionGenerator<span class="o">(</span>FlowFileSource<span class="o">
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube mount ~/nifi-custom-processors:/extensions <span class="nt">--uid</span> 10001 <span class="nt">--gid</span> 10001
 </code></pre></div></div>
 
-<p>Create <code class="language-plaintext highlighter-rouge">nifi-cluster-30-nifi2x-nar.yaml</code> as follows:</p>
+<p>Create <code class="language-plaintext highlighter-rouge">nifi-cluster-30-nifi2x-python.yaml</code> as follows:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">cfm.cloudera.com/v1alpha1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">Nifi</span>
@@ -771,7 +771,7 @@ kubectl apply <span class="nt">-f</span> nifi-cluster-30-nifi2x-nar.yaml <span c
 
 <ul>
   <li><a href="https://nifi.apache.org/documentation/v2/nifi-2.0.0-M2/html/python-developer-guide.html">Apache NiFi Python Developer Guide</a></li>
-  <li><a href="/blog/2026-03-09-Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a></li>
+  <li><a href="/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a></li>
   <li><a href="https://github.com/cldr-steven-matison/NiFi2-Processor-Playground">NiFi 2.0 Processor Playground</a></li>
   <li><a href="https://github.com/cldr-steven-matison/NiFi-Templates">NiFi Templates Repo</a></li>
 </ul>

@@ -155,7 +155,7 @@ In another terminal execute this command:
 minikube mount ~/nifi-custom-processors:/extensions --uid 10001 --gid 10001
 ```
 
-Create `nifi-cluster-30-nifi2x-nar.yaml` as follows:
+Create `nifi-cluster-30-nifi2x-python.yaml` as follows:
 
 ```yaml
 apiVersion: cfm.cloudera.com/v1alpha1
@@ -468,7 +468,7 @@ kubectl apply -f nifi-cluster-30-nifi2x-nar.yaml -n cfm-streaming
 ### **Resources**
 
 * [Apache NiFi Python Developer Guide](https://nifi.apache.org/documentation/v2/nifi-2.0.0-M2/html/python-developer-guide.html)
-* [Cloudera Streaming Operators](/blog/2026-03-09-Cloudera-Streaming-Operators/)
+* [Cloudera Streaming Operators](/blog/Cloudera-Streaming-Operators/)
 * [NiFi 2.0 Processor Playground](https://github.com/cldr-steven-matison/NiFi2-Processor-Playground)
 * [NiFi Templates Repo](https://github.com/cldr-steven-matison/NiFi-Templates)
 
