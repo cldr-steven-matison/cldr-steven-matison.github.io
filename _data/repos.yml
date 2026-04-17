@@ -1,8 +1,43 @@
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 782
+  size: 736
+  lang: "Shell"
+  updated: "2026-04-17"
+  fork: false
+- name: "ClouderaStreamingOperators"
+  description: "Repo for yaml used in installing Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
+  size: 36
+  lang: ""
+  updated: "2026-04-16"
+  fork: false
+- name: "NiFi-Templates"
+  description: "NiFI Templates of example flows I share with the community."
+  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
+  size: 880
   lang: "Python"
+  updated: "2026-04-16"
+  fork: false
+- name: "ClouderaOperatorYAML"
+  description: "Terminal commands and YAML to install Cloudera Streaming Operators."
+  url: "https://github.com/cldr-steven-matison/ClouderaOperatorYAML"
+  size: 14
+  lang: ""
+  updated: "2026-04-16"
+  fork: false
+- name: "Flink-Kubernetes-Playground"
+  description: "A repository I am using to play with flink on kubernetes."
+  url: "https://github.com/cldr-steven-matison/Flink-Kubernetes-Playground"
+  size: 2
+  lang: "Dockerfile"
+  updated: "2026-04-16"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 97967
+  lang: "HTML"
   updated: "2026-04-16"
   fork: false
 - name: "llmfit"
@@ -12,13 +47,6 @@
   lang: ""
   updated: "2026-04-15"
   fork: true
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 97952
-  lang: "HTML"
-  updated: "2026-04-15"
-  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
@@ -47,25 +75,11 @@
   lang: ""
   updated: "2026-04-10"
   fork: false
-- name: "NiFi-Templates"
-  description: "NiFI Templates of example flows I share with the community."
-  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 875
-  lang: "Python"
-  updated: "2026-04-10"
-  fork: false
 - name: "NiFi2-Processor-Playground"
   description: "A place to play around with NiFi 2.0 Processors"
   url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
   size: 262
   lang: "Python"
-  updated: "2026-04-09"
-  fork: false
-- name: "ClouderaStreamingOperators"
-  description: "Repo for yaml used in installing Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 31
-  lang: ""
   updated: "2026-04-09"
   fork: false
 - name: "nifi-python-extensions"
@@ -156,13 +170,6 @@
   description: "Cloudera HOL Flink Sql Stream Builder Project Repository."
   url: "https://github.com/cldr-steven-matison/hol-013-flink-project"
   size: 7
-  lang: ""
-  updated: "2026-03-23"
-  fork: false
-- name: "ClouderaOperatorYAML"
-  description: "Terminal commands and YAML to install Cloudera Streaming Operators."
-  url: "https://github.com/cldr-steven-matison/ClouderaOperatorYAML"
-  size: 12
   lang: ""
   updated: "2026-03-23"
   fork: false
