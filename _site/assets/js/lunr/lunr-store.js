@@ -418,4 +418,10 @@ var store = [{
         "tags": ["cloudera"],
         "url": "/blog/All-the-New-in-7.3.2/",
         "teaser": "/assets/images/2026-04-14-all_the_new_in_7_3_2.png"
+      },{
+        "title": "Introducing Cloudera Data Explorer",
+        "excerpt":"** Hue is Reborn for the Modern Data Era ** If you’ve been following Cloudera’s journey as long as I have, you know that some tools just stick. They evolve, they adapt, and sometimes they get a fresh coat of paint and a new name that better reflects where the...","categories": ["blog"],
+        "tags": ["cloudera"],
+        "url": "/blog/Introducing-Cloudera-Data-Explorer/",
+        "teaser": "/assets/images/2026-04-20-Cloudera_Data_Explorer.png"
       }]
