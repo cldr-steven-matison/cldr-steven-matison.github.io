@@ -351,8 +351,9 @@ minikube start <span class="nt">--cpus</span> 6 <span class="nt">--memory</span>
 <h3 id="-some-helm-and-kubectl-setup">📦 Some Helm and Kubectl Setup</h3>
 <p>Let’s get started with <code class="language-plaintext highlighter-rouge">kubectl</code> by creating a namespace and a docker secret we will use with each operator.  We will login now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during installs later.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Create the namespace</span>
-kubectl create namespace cld-streaming
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Create the namespaces</span>
+kubectl create namespace cld-streaming <span class="c"># for kafka, flink</span>
+kubectl create namespace cfm-streaming <span class="c"># for nifi</span>
 
 <span class="c"># 2. Add Cloudera License Credentials</span>
 kubectl create secret docker-registry cloudera-creds <span class="se">\</span>
@@ -682,7 +683,7 @@ TEST SUITE: None
 
 <p>Execute the following kubectl apply command to create the nifi cluster:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> nifi-eval.yaml <span class="nt">-n</span> cld-streaming
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> nifi-eval.yaml <span class="nt">-n</span> cfm-streaming
 </code></pre></div></div>
 
 <hr>

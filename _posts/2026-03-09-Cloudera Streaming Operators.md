@@ -47,8 +47,9 @@ minikube start --cpus 6 --memory 16384
 Let's get started with `kubectl` by creating a namespace and a docker secret we will use with each operator.  We will login now and pull these Cloudera Streaming Operators from the Cloudera Helm Registry during installs later.
 
 ```bash
-# 1. Create the namespace
-kubectl create namespace cld-streaming
+# 1. Create the namespaces
+kubectl create namespace cld-streaming # for kafka, flink
+kubectl create namespace cfm-streaming # for nifi
 
 # 2. Add Cloudera License Credentials
 kubectl create secret docker-registry cloudera-creds \
@@ -400,7 +401,7 @@ spec:
 Execute the following kubectl apply command to create the nifi cluster:
 
 ```bash
-kubectl apply -f nifi-eval.yaml -n cld-streaming
+kubectl apply -f nifi-eval.yaml -n cfm-streaming
 ```
 
 ---
