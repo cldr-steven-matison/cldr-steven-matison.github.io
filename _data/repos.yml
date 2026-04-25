@@ -1,15 +1,22 @@
+- name: "Streams-Processing-Hands-on-Lab"
+  description: "Github repo for CSP Hands On Lab"
+  url: "https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab"
+  size: 5005
+  lang: "Python"
+  updated: "2026-04-24"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 99498
+  lang: "HTML"
+  updated: "2026-04-24"
+  fork: false
 - name: "NiFi-Templates"
   description: "NiFI Templates of example flows I share with the community."
   url: "https://github.com/cldr-steven-matison/NiFi-Templates"
   size: 883
   lang: "Python"
-  updated: "2026-04-23"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 99497
-  lang: "HTML"
   updated: "2026-04-23"
   fork: false
 - name: "DesktopShare"
@@ -32,13 +39,6 @@
   size: 33
   lang: ""
   updated: "2026-04-21"
-  fork: false
-- name: "Streams-Processing-Hands-on-Lab"
-  description: "Github repo for CSP Hands On Lab"
-  url: "https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab"
-  size: 4984
-  lang: ""
-  updated: "2026-04-19"
   fork: false
 - name: "ClouderaOperatorYAML"
   description: "Terminal commands and YAML to install Cloudera Streaming Operators."
