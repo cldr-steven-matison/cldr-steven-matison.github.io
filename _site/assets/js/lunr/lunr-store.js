@@ -424,4 +424,10 @@ var store = [{
         "tags": ["cloudera"],
         "url": "/blog/Introducing-Cloudera-Data-Explorer/",
         "teaser": "/assets/images/2026-04-20-Cloudera_Data_Explorer.png"
+      },{
+        "title": "Top 5 NiFi Operational Struggles",
+        "excerpt":"Over the past several years I’ve worked alongside engineering teams, architects, and executive leaders to design and operate real-time data pipelines that support everything from fraud detection and supply-chain optimization to customer 360 initiatives. Apache NiFi remains one of the most versatile tools for building data flows; its visual canvas,...","categories": ["blog"],
+        "tags": ["cloudera","dataflow","nifi"],
+        "url": "/blog/Top-5-NiFi-Operational-Struggles/",
+        "teaser": "/assets/images/2026-04-27-Cloudera_DataFlow.png"
       }]
