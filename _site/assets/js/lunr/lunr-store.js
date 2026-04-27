@@ -425,6 +425,12 @@ var store = [{
         "url": "/blog/Introducing-Cloudera-Data-Explorer/",
         "teaser": "/assets/images/2026-04-20-Cloudera_Data_Explorer.png"
       },{
+        "title": "Cloudera AI April Release",
+        "excerpt":"We are excited to announce the latest release of Cloudera AI. This update focuses on streamlining model deployment, enhancing user experience, and expanding our ecosystem integrations within the Cloudera AI Inference service. Key highlights include the introduction of long-lived API keys for persistent authentication, new model additions, and a new...","categories": ["release"],
+        "tags": ["cloudera","ai"],
+        "url": "/release/Cloudera-AI-April-Release/",
+        "teaser": "/assets/images/cloudera_ai_inference.png"
+      },{
         "title": "Top 5 NiFi Operational Struggles",
         "excerpt":"Over the past several years I’ve worked alongside engineering teams, architects, and executive leaders to design and operate real-time data pipelines that support everything from fraud detection and supply-chain optimization to customer 360 initiatives. Apache NiFi remains one of the most versatile tools for building data flows; its visual canvas,...","categories": ["blog"],
         "tags": ["cloudera","dataflow","nifi"],

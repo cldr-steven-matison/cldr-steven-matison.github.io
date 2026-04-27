@@ -17,6 +17,18 @@
       </item>
     
       <item>
+        <title>Cloudera AI April Release</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-AI-April-Release/</link>
+        <pubDate>Wed, 22 Apr 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/cloudera_ai_inference.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/cloudera_ai_inference.png" medium="image" />
+        
+        <description>We are excited to announce the latest release of Cloudera AI. This update focuses on streamlining model deployment, enhancing user experience, and expanding our ecosystem integrations within the Cloudera AI Inference service. Key highlights include the introduction of long-lived API keys for persistent authentication, new model additions, and a new public Model Hub Catalog to accelerate model discovery, alongside several key performance and stability fixes within the Cloudera AI Workbench.
+</description>
+      </item>
+    
+      <item>
         <title>Introducing Cloudera Data Explorer</title>
         <link>https://cldr-steven-matison.github.io/blog/Introducing-Cloudera-Data-Explorer/</link>
         <pubDate>Mon, 20 Apr 2026 00:00:00 -0400</pubDate>
@@ -104,17 +116,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
         
         <description>Terminal 2 Output to go along with Audio Transcription RAG post.</description>
-      </item>
-    
-      <item>
-        <title>Lessons Learned Audio Transcription Terminal Output 1</title>
-        <link>https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-Output-1/</link>
-        <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
-        
-        <description>Terminal 1 Output to go along with Audio Transcription RAG post.</description>
       </item>
     
   </channel>

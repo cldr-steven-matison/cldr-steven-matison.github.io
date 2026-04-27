@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- begin _includes/seo.html --><title>Lessons Learned Audio Transcription Terminal History - Cloudera Solutions Engineer</title>
-<meta name="description" content="Terminal History to go along with Audio Transcription RAG post.">
+<!-- begin _includes/seo.html --><title>Cloudera AI April Release - Cloudera Solutions Engineer</title>
+<meta name="description" content="We are excited to announce the latest release of Cloudera AI. This update focuses on streamlining model deployment, enhancing user experience, and expanding our ecosystem integrations within the Cloudera AI Inference service. Key highlights include the introduction of long-lived API keys for persistent authentication, new model additions, and a new public Model Hub Catalog to accelerate model discovery, alongside several key performance and stability fixes within the Cloudera AI Workbench.">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,25 +22,23 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Lessons Learned Audio Transcription Terminal History">
-<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-History/">
+<meta property="og:title" content="Cloudera AI April Release">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/release/Cloudera-AI-April-Release/">
 
 
-  <meta property="og:description" content="Terminal History to go along with Audio Transcription RAG post.">
-
-
-
-  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png">
+  <meta property="og:description" content="We are excited to announce the latest release of Cloudera AI. This update focuses on streamlining model deployment, enhancing user experience, and expanding our ecosystem integrations within the Cloudera AI Inference service. Key highlights include the introduction of long-lived API keys for persistent authentication, new model additions, and a new public Model Hub Catalog to accelerate model discovery, alongside several key performance and stability fixes within the Cloudera AI Workbench.">
 
 
 
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/cloudera_ai_inference.png">
 
 
-  <meta property="article:published_time" content="2026-03-30T00:00:00-04:00">
 
 
 
-  <meta property="article:modified_time" content="2026-03-30T00:00:00-04:00">
+  <meta property="article:published_time" content="2026-04-22T00:00:00-04:00">
+
+
 
 
 
@@ -49,7 +47,7 @@
   
 
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-History/">
+<link rel="canonical" href="https://cldr-steven-matison.github.io/release/Cloudera-AI-April-Release/">
 
 
 
@@ -269,16 +267,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Lessons Learned Audio Transcription Terminal History">
-    <meta itemprop="description" content="Terminal History to go along with Audio Transcription RAG post.">
-    <meta itemprop="datePublished" content="2026-03-30T00:00:00-04:00">
-    <meta itemprop="dateModified" content="2026-03-30T00:00:00-04:00">
+    <meta itemprop="headline" content="Cloudera AI April Release">
+    <meta itemprop="description" content="We are excited to announce the latest release of Cloudera AI. This update focuses on streamlining model deployment, enhancing user experience, and expanding our ecosystem integrations within the Cloudera AI Inference service. Key highlights include the introduction of long-lived API keys for persistent authentication, new model additions, and a new public Model Hub Catalog to accelerate model discovery, alongside several key performance and stability fixes within the Cloudera AI Workbench.">
+    <meta itemprop="datePublished" content="2026-04-22T00:00:00-04:00">
+    
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-History/" class="u-url" itemprop="url">Lessons Learned Audio Transcription Terminal History
+            <a href="https://cldr-steven-matison.github.io/release/Cloudera-AI-April-Release/" class="u-url" itemprop="url">Cloudera AI April Release
 </a>
           </h1>
           
@@ -303,8 +301,8 @@
       
         <p class="page__date">
           <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
-          <time datetime="2026-03-30">
-            March 30, 2026
+          <time datetime="2026-04-22T00:00:00-04:00">
+            April 22, 2026
           </time>
         </p>
       
@@ -317,85 +315,48 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>This post is comprised of the backing lessons from <a href="/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/">Insanely Fast Audio Transcription with Cloudera Streaming Operators</a> with a <a href="">summary of the hurdles</a>, a [log of the terminal commands], <a href="">terminal output 1</a> <a href="">terminal output 2</a>, and <a href="">terminal output 3</a>.</p>
+        <p>We are excited to announce the latest release of Cloudera AI. This update focuses on streamlining model deployment, enhancing user experience, and expanding our ecosystem integrations within the Cloudera AI Inference service. Key highlights include the introduction of long-lived API keys for persistent authentication, new model additions, and a new public Model Hub Catalog to accelerate model discovery, alongside several key performance and stability fixes within the Cloudera AI Workbench.</p>
 
-<h2 id="terminal-history">Terminal History</h2>
+<h2 id="key-features">Key Features</h2>
 
-<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">mkdir whisper
-cd whisper
-nano Dockerfile.whisper
-docker build -t streamwhisper:latest -f Dockerfile.whisper .
-nano Dockerfile.whisper.2
-docker build -t streamwhisper:latest -f Dockerfile.whisper.2 .
-nano Dockerfile.whisper.3
-docker build -t streamwhisper:latest -f Dockerfile.whisper.3 .
-nano Dockerfile.whisper.4
-docker build -t streamwhisper:latest -f Dockerfile.whisper.4 .
-nano Dockerfile.whisper.5
-docker build -t streamwhisper:latest -f Dockerfile.whisper.5 .
-nano Dockerfile.whisper.6
-docker build -t streamwhisper:latest -f Dockerfile.whisper.6 .
-nano Dockerfile.whisper.7
-docker build -t streamwhisper:latest -f Dockerfile.whisper.7 .
-nano Dockerfile.whisper.8
-docker build -t streamwhisper:latest -f Dockerfile.whisper.8 .
-nano Dockerfile.whisper.9
-docker build -t streamwhisper:latest -f Dockerfile.whisper.9 .
-nano Dockerfile.whisper.10
-docker build -t streamwhisper:latest -f Dockerfile.whisper.10 .
-nano Dockerfile.whisper.11
-docker build -t streamwhisper:latest -f Dockerfile.whisper.11 .
-nano Dockerfile.whisper.12
-docker build -t streamwhisper:latest -f Dockerfile.whisper.12 .
-</span><span class="gp">export MY_TOKEN=$</span><span class="o">(</span>kubectl get secret hf-token <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.token}'</span> | <span class="nb">base64</span> <span class="nt">--decode</span><span class="o">)</span>
-<span class="gp">docker build -t streamwhisper:latest --build-arg HF_TOKEN=$</span>MY_TOKEN <span class="nt">-f</span> Dockerfile.whisper.12 <span class="nb">.</span>
-<span class="go">minikube service whisper-server-service --url
-curl -X POST http://whisper-server-service:8001/transcribe   -H "Content-Type: multipart/form-data"   -F "file=@test-speech.wav"
-curl -X POST http://127.0.0.1:8001/transcribe   -H "Content-Type: multipart/form-data"   -F "file=@test-speech.wav"
-wget -O test-speech.wav https://github.com/Azure-Samples/cognitive-services-speech-sdk/raw/master/samples/cpp/windows/console/samples/whatstheweatherlike.wav
-curl -X POST http://127.0.0.1:8001/transcribe   -H "Content-Type: multipart/form-data"   -F "file=@test-speech.wav"
-nano whisper-server.yaml
-kubectl apply -f whisper-server.yaml
-kubectl describe pod whisper-server-779f955f5c-j2vr7
-kubectl delete -f whisper-server.yaml
-kubectl apply -f whisper-server.yaml
-kubectl delete -f vllm-qwen.yaml
-kubectl delete -f whisper-server.yaml
-kubectl apply -f whisper-server.yaml
-kubectl describe pod whisper-server-6486568f56-xrcg2
-kubectl rollout restart deployment whisper-server
-kubectl describe pod whisper-server-6486568f56-xrcg2
-kubectl logs whisper-server-6486568f56-xrcg2
-kubectl delete -f whisper-server.yaml
-kubectl apply -f whisper-server.yaml
-kubectl logs whisper-server-6486568f56-gzvqs
-kubectl delete -f whisper-server.yaml
-kubectl apply -f whisper-server.yaml
-kubectl delete -f whisper-server.yaml
-kubectl apply -f whisper-server.yaml
-kubectl delete -f whisper-server.yaml
-kubectl apply -f whisper-server.yaml
-kubectl logs whisper-server-6486568f56-bbz6z
-kubectl delete -f whisper-server.yaml
-</span><span class="gp">export MY_TOKEN=$</span><span class="o">(</span>kubectl get secret hf-token <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.token}'</span> | <span class="nb">base64</span> <span class="nt">--decode</span><span class="o">)</span>
-<span class="go">kubectl rollout restart deployment whisper-server
-kubectl apply -f whisper-server.yaml
-kubectl port-forward deployment/whisper-server 8001:8001
-kubectl delete -f whisper-server.yaml
-kubectl port-forward deployment/whisper-server 8001:8001
-kubectl port-forward deployment/whisper-server 8001:8001 -n cfm-streaming
-kubectl apply -f whisper-server.yaml
-kubectl delete -f whisper-server.yaml
-kubectl apply -f whisper-server.yaml
-kubectl port-forward deployment/whisper-server 8001:8001 -n cfm-streaming
-kubectl port-forward deployment/whisper-server 8001:8001
-kubectl delete -f whisper-server.yaml
-kubectl apply -f whisper-server.yaml
-kubectl delete -f whisper-server.yaml
-kubectl exec -it mynifi-0 -n cfm-streaming -- curl -s -o /dev/null -w "%{http_code}" http://whisper-server-service.default.svc.cluster.local:8001/transcribe
-kubectl apply -f vllm-qwen.yaml
+<h3 id="ai-inference-service">AI Inference service</h3>
 
-</span></code></pre></div></div>
+<ul>
+  <li>
+    <p><strong>Long-Lived API Key Support:</strong> Authenticate application requests and test model endpoints using newly supported long-lived API keys.To improve management of API security, you can now generate these persistent credentials directly from the Model Endpoint Details page to streamline your application integration. Note:** This feature requires Cloudera Base version 7.3.2.</p>
+  </li>
+  <li>
+    <p><strong>Wizard-Based Model Endpoint Creation:</strong> Experience a redesigned, guided flow for creating and editing model endpoints. This unifies model version selection, resource profiles, autoscaling configuration, and final review into a single, seamless user experience.</p>
+  </li>
+  <li>
+    <p><strong>Task Selection for Hugging Face Models:</strong> Specify the model task (e.g., text generation, reranking, or embedding) during deployment. Persisting this context in the payload ensures proper vLLM interface configuration, broadening support for Hugging Face models.</p>
+  </li>
+  <li>
+    <p><strong>NVIDIA Magpie TTS Multilingual NIM:</strong> Deploy high-quality text-to-speech (TTS) workloads with new support for the NVIDIA Magpie TTS NIM runtime. Using the new TEXT_TO_SPEECH task, you can seamlessly generate multilingual synthetic speech in both offline (WAV) and streaming (LPCM) formats.</p>
+  </li>
+  <li>
+    <p><strong>NVIDIA Whisper Large v3 NIM:</strong> Power high-accuracy automatic speech recognition (ASR) workloads using the newly supported NVIDIA Whisper Large v3 NIM. Deploying the latest runtime significantly improves transcription performance, while maintaining full backward compatibility to ensure earlier deployments remain uninterrupted.</p>
+  </li>
+</ul>
+
+<h3 id="ai-registry">AI Registry</h3>
+
+<ul>
+  <li><strong>Public Model Hub Catalog:</strong> Browse and evaluate recommended NVIDIA NIMs and Hugging Face models before importing them using the newly introduced <a href="https://cloudera.github.io/Model-Hub/">public catalog</a>. This curated, standalone repository accelerates model selection and simplifies collaboration by granting stakeholders outside the Cloudera environment direct visibility into supported AI assets.</li>
+</ul>
+
+<h2 id="public-links">Public Links</h2>
+
+<ul>
+  <li><strong>Release Notes:</strong> <a href="https://docs.cloudera.com/machine-learning/cloud/release-notes/topics/ml-whats-new.html#ml_workspace_resource_tags">Review the complete list of changes.</a></li>
+  <li><strong>Public Model Hub Catalog:</strong> <a href="https://cloudera.github.io/Model-Hub/">Cloudera Github</a></li>
+  <li><strong><a href="https://www.cloudera.com/products/machine-learning.html">Cloudera AI</a> Portfolio:</strong> Dive deeper into <a href="https://www.cloudera.com/products/machine-learning/ai-inference-service.html">Cloudera AI Inference</a> service and <a href="https://www.cloudera.com/products/machine-learning/ai-workbench.html">Cloudera AI Workbench.</a></li>
+</ul>
+
+<p>As always, check out the entire <a href="https://docs.cloudera.com/machine-learning/cloud/index.html">DOCS</a> for Cloudera AI.</p>
+
+<h2 id="cloudera-ai-april-release">Cloudera AI April Release</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera AI April Release please reach out to schedule a discussion.</p>
 
         
       </section>
@@ -412,21 +373,9 @@ kubectl apply -f vllm-qwen.yaml
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+      <a href="/tags/#ai" class="page__taxonomy-item p-category" rel="tag">ai</a><span class="sep">, </span>
     
-      <a href="/tags/#gpu" class="page__taxonomy-item p-category" rel="tag">gpu</a><span class="sep">, </span>
-    
-      <a href="/tags/#kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
-    
-      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
-    
-      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a><span class="sep">, </span>
-    
-      <a href="/tags/#rag" class="page__taxonomy-item p-category" rel="tag">rag</a><span class="sep">, </span>
-    
-      <a href="/tags/#vllm" class="page__taxonomy-item p-category" rel="tag">vllm</a><span class="sep">, </span>
-    
-      <a href="/tags/#whisper" class="page__taxonomy-item p-category" rel="tag">whisper</a>
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a>
     
     </span>
   </p>
@@ -443,7 +392,7 @@ kubectl apply -f vllm-qwen.yaml
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+      <a href="/categories/#release" class="page__taxonomy-item p-category" rel="tag">release</a>
     
     </span>
   </p>
@@ -451,7 +400,7 @@ kubectl apply -f vllm-qwen.yaml
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-30">March 30, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-04-22T00:00:00-04:00">April 22, 2026</time></p>
 
       </footer>
 
@@ -460,20 +409,20 @@ kubectl apply -f vllm-qwen.yaml
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Lessons+Learned+Audio+Transcription+Terminal+History%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FLessons-From-Audio-Transcription-Terminal-History%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+AI+April+Release%20https%3A%2F%2Fcldr-steven-matison.github.io%2Frelease%2FCloudera-AI-April-Release%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FLessons-From-Audio-Transcription-Terminal-History%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Frelease%2FCloudera-AI-April-Release%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/blog/Audio-Transcription-with-Cloudera-Streaming-Operators/" class="pagination--pager" title="Insanely Fast Audio Transcription with Cloudera Streaming Operators
+      <a href="/blog/Introducing-Cloudera-Data-Explorer/" class="pagination--pager" title="Introducing Cloudera Data Explorer
 ">Previous</a>
     
     
-      <a href="/blog/Lessons-From-Audio-Transcription-Terminal-Output-1/" class="pagination--pager" title="Lessons Learned Audio Transcription Terminal Output 1
+      <a href="/blog/Top-5-NiFi-Operational-Struggles/" class="pagination--pager" title="Top 5 NiFi Operational Struggles
 ">Next</a>
     
   </nav>
@@ -546,55 +495,6 @@ kubectl apply -f vllm-qwen.yaml
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/cloudera_ai_inference.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/release/Cloudera-AI-April-Release/" rel="permalink">Cloudera AI April Release
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 minute read
-        
-      </span>
-    
-    
-  </p>
-
-
-    
-  <div class="archive__item-excerpt" itemprop="description">
-    We are excited to announce the latest release of Cloudera AI. This update focuses on streamlining model deployment, enhancing user experience, and expanding ...
-    <a href="/release/Cloudera-AI-April-Release/" class="read-more-pill">Read More &rarr;</a>
-  </div>
-
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
         <img src="/assets/images/2026-04-20-Cloudera_Data_Explorer.png" alt="">
       </div>
     
@@ -618,7 +518,7 @@ kubectl apply -f vllm-qwen.yaml
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          8 minute read
+          7 minute read
         
       </span>
     
@@ -667,7 +567,7 @@ kubectl apply -f vllm-qwen.yaml
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          50 minute read
+          48 minute read
         
       </span>
     
@@ -679,6 +579,55 @@ kubectl apply -f vllm-qwen.yaml
   <div class="archive__item-excerpt" itemprop="description">
     Explore the major modernization of CDP Private Cloud Base in Cloudera Runtime 7.3.2. This comprehensive guide covers the JDK 17 transition, the new React-bas...
     <a href="/blog/All-the-New-in-7.3.2/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-04-09-Custom-NiFi-Processors.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Custom-Processors-With-Cloudera-Streaming-Operators/" rel="permalink">Custom NiFi Processors with Cloudera Streaming Operators
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Learn how to extend NiFi’s capabilities within Cloudera Streaming Operators by deploying custom Python and Java processors. This guide covers everything from...
+    <a href="/blog/Custom-Processors-With-Cloudera-Streaming-Operators/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>
