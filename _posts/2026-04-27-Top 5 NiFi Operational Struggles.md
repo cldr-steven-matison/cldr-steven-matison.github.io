@@ -1,6 +1,6 @@
 ---
 title:  "Top 5 NiFi Operational Struggles"
-excerpt: "Identify and conquer the standard performance and stability demons of Apache NiFi. In this post, I break down the Top 5 operational struggles—from JVM Out-of-Memory errors and excessive backpressure to rogue processors and flowfile fragmentation—providing expert, field-tested configuration fixes to keep your cluster rock-solid."
+excerpt: "Identify and conquer the standard performance and stability demons of Apache NiFi. In this post, I break down the Top 5 operational struggles and discuss how Cloudera DataFlow solve for each."
 header:
   teaser: "/assets/images/2026-04-27-Cloudera_DataFlow.png"
 categories: 
