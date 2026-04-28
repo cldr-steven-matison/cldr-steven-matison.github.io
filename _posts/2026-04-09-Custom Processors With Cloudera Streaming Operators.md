@@ -437,7 +437,22 @@ And there you have it—a peek under the hood of how we bridge the gap between "
 
 By mastering the art of the NiFi Custom Resource (CR) and volume orchestration, you’re no longer limited to what’s "in the box". You've now got the blueprint to inject custom synthetic data, complex business logic, or niche integrations directly into your data pipelines. Now go forth, build that custom logic, and let your Kubernetes pods do the heavy lifting!
 
-### Terminal Commands
+### **Resources**
+
+* [Apache NiFi Python Developer Guide](https://nifi.apache.org/documentation/v2/nifi-2.0.0-M2/html/python-developer-guide.html)
+* [Cloudera Streaming Operators](/blog/Cloudera-Streaming-Operators/)
+* [NiFi 2.0 Processor Playground](https://github.com/cldr-steven-matison/NiFi2-Processor-Playground)
+* [NiFi Templates Repo](https://github.com/cldr-steven-matison/NiFi-Templates)
+
+___
+
+###  **{{ page.title }}**
+
+Please reach out to schedule a discussion if you would like a deeper dive, hands on experience, or demos of the integration between these components.
+
+### Appendix
+
+## Terminal Commands
 
 ```bash
 kubectl describe pod mynifi-0 -n cfm-streaming
@@ -464,16 +479,18 @@ kubectl delete -f nifi-cluster-30-nifi2x-nar.yaml -n cfm-streaming
 kubectl apply -f nifi-cluster-30-nifi2x-nar.yaml -n cfm-streaming
 
  ```
+ 
+## Re Role NiFi with Extensions
 
-### **Resources**
+Restart the minikube mount, then delete the nifi pod.  Expect to lose your flow if not using persisted volumes.
 
-* [Apache NiFi Python Developer Guide](https://nifi.apache.org/documentation/v2/nifi-2.0.0-M2/html/python-developer-guide.html)
-* [Cloudera Streaming Operators](/blog/Cloudera-Streaming-Operators/)
-* [NiFi 2.0 Processor Playground](https://github.com/cldr-steven-matison/NiFi2-Processor-Playground)
-* [NiFi Templates Repo](https://github.com/cldr-steven-matison/NiFi-Templates)
+```terminal
+NiFi2 Processor Playground % minikube mount nifi-custom-processors:/extensions --uid 10001 --gid 10001
+kubectl delete pod mynifi-0 -n cfm-streaming
+```
 
-___
+Use this command to confirm the mount is seen by the pod:
 
-###  **{{ page.title }}**
-
-Please reach out to schedule a discussion if you would like a deeper dive, hands on experience, or demos of the integration between these components.
+```terminal
+kubectl exec -n cfm-streaming mynifi-0 -- ls -la /opt/nifi/nifi-current/python/extensions
+```
