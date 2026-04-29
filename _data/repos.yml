@@ -1,3 +1,17 @@
+- name: "DesktopShare"
+  description: "Share spot for Macbook & Windows MD & Test Files"
+  url: "https://github.com/cldr-steven-matison/DesktopShare"
+  size: 850
+  lang: "Python"
+  updated: "2026-04-28"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 100847
+  lang: "HTML"
+  updated: "2026-04-28"
+  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
@@ -19,24 +33,10 @@
   lang: ""
   updated: "2026-04-27"
   fork: false
-- name: "DesktopShare"
-  description: "Share spot for Macbook & Windows MD & Test Files"
-  url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 842
-  lang: "Python"
-  updated: "2026-04-27"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 100835
-  lang: "HTML"
-  updated: "2026-04-27"
-  fork: false
 - name: "Streams-Processing-Hands-on-Lab"
   description: "Github repo for CSP Hands On Lab"
   url: "https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab"
-  size: 5018
+  size: 5023
   lang: "Python"
   updated: "2026-04-27"
   fork: false
