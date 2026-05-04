@@ -436,4 +436,10 @@ var store = [{
         "tags": ["cloudera","dataflow","nifi"],
         "url": "/blog/Top-5-NiFi-Operational-Struggles/",
         "teaser": "/assets/images/2026-04-27-Cloudera_DataFlow.png"
+      },{
+        "title": "Persisting Schema Registry with PostgreSQL",
+        "excerpt":"If you deploy the Cloudera Schema Registry using the default Helm values, it uses an in-memory database. This means that if your pod crashes or restarts (e.g., from an Out of Memory error), all of your registered schemas instantly vanish. To make your schemas immortal, we need a persistent backend....","categories": ["blog"],
+        "tags": ["cloudera","kafka","schema registry","operator"],
+        "url": "/blog/Persiting-Schema-with-Schema-Registry/",
+        "teaser": "/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png"
       }]

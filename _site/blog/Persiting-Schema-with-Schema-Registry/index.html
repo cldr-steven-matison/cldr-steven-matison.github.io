@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- begin _includes/seo.html --><title>Cloudera Data Flow 2.10 for Cloudera on Cloud - Cloudera Solutions Engineer</title>
-<meta name="description" content="The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.">
+<!-- begin _includes/seo.html --><title>Persisting Schema Registry with PostgreSQL - Cloudera Solutions Engineer</title>
+<meta name="description" content="Learn how to use CSA Operator’s PostgreSQL pod to persist schemas in the Schema Registry.">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Cloudera Data Flow 2.10 for Cloudera on Cloud">
-<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Cloudera-DataFlow-2.10/">
+<meta property="og:title" content="Persisting Schema Registry with PostgreSQL">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Persiting-Schema-with-Schema-Registry/">
 
 
-  <meta property="og:description" content="The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.">
-
-
-
-  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/nifi-logo.png">
+  <meta property="og:description" content="Learn how to use CSA Operator’s PostgreSQL pod to persist schemas in the Schema Registry.">
 
 
 
-
-
-  <meta property="article:published_time" content="2025-04-30T00:00:00-04:00">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2026-05-04T00:00:00-04:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Cloudera-DataFlow-2.10/">
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Persiting-Schema-with-Schema-Registry/">
 
 
 
@@ -267,16 +267,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Cloudera Data Flow 2.10 for Cloudera on Cloud">
-    <meta itemprop="description" content="The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.">
-    <meta itemprop="datePublished" content="2025-04-30T00:00:00-04:00">
+    <meta itemprop="headline" content="Persisting Schema Registry with PostgreSQL">
+    <meta itemprop="description" content="Learn how to use CSA Operator’s PostgreSQL pod to persist schemas in the Schema Registry.">
+    <meta itemprop="datePublished" content="2026-05-04T00:00:00-04:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io/blog/Cloudera-DataFlow-2.10/" class="u-url" itemprop="url">Cloudera Data Flow 2.10 for Cloudera on Cloud
+            <a href="https://cldr-steven-matison.github.io/blog/Persiting-Schema-with-Schema-Registry/" class="u-url" itemprop="url">Persisting Schema Registry with PostgreSQL
 </a>
           </h1>
           
@@ -301,8 +301,8 @@
       
         <p class="page__date">
           <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
-          <time datetime="2025-04-30T00:00:00-04:00">
-            April 30, 2025
+          <time datetime="2026-05-04T00:00:00-04:00">
+            May 04, 2026
           </time>
         </p>
       
@@ -315,36 +315,89 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 2.10 for Cloudera on Cloud.</p>
+        <p>If you deploy the Cloudera Schema Registry using the default Helm values, it uses an <code class="language-plaintext highlighter-rouge">in-memory</code> database. This means that if your pod crashes or restarts (e.g., from an Out of Memory error), all of your registered schemas instantly vanish.</p>
 
-<p>This release introduces NiFi 2 as generally available in Data Flow. Along with seamless NiFi 2 migrations, this  positions Data Flow as the ideal platform to migrate, build, and deploy NiFi 2 flows with minimal operational effort. In addition, it includes features that improve developer productivity, operational costs and security.</p>
+<p>To make your schemas immortal, we need a persistent backend. While you could spin up a dedicated database, a much more efficient approach for this lab is to piggyback on the PostgreSQL instance already running for SQL Stream Builder (SSB).</p>
 
-<h2 id="release-highlights">Release Highlights</h2>
-<ul>
-  <li>Build and deploy on NiFi 2: Users can now develop flows in the Flow Designer as NiFi 2.3 flows by default. NiFi 2.3 will also be available as the NiFi 2 runtime for Flow Deployments. This marks the general availability of NiFi 2 in Data Flow.</li>
-  <li>Time and cost savings on NiFi 2 migrations: Self-service migration is powered by Data Flow Catalog and Flow Designer. Users can organize NiFi 1 flows in Catalog, start migrations with one click, and make any required changes in Flow Designer. A comprehensive visual migration report clearly highlights items that require manual updates, while enabling users to effectively keep track of their progress.</li>
-  <li>Improved developer productivity: Users can accelerate deployment processes by importing and referencing Shared Parameter Groups during deployment. This streamlined workflow significantly reduces development and deployment complexity and accelerates time to value for users by eliminating manual copy&amp;paste of parameter values.</li>
-  <li>Improved cost efficiency: Users can now specify tailored storage capacity, IOPS, and throughput sizes  for their NiFi repositories, making smaller deployments more cost-efficient.</li>
-  <li>Strengthened security: Collections enhance security by enabling precise role based access control for cataloged flows. Users can organize cataloged flows into Collections and tightly manage user access to each Collection.</li>
-  <li>Secured inbound connections: Users can specify trusted IP addresses for flows with inbound connections, which will limit traffic to only the specified IP addresses.</li>
-  <li>Better notifications: Users can now stay better informed with enhanced, customizable notifications:
-    <ul>
-      <li>Subscribe to deployment-specific alerts and customize notifications by event severity.</li>
-      <li>Set up KPI-level subscriptions and notifications, including a URL that directs you to the affected NiFi component on the NiFi Canvas.</li>
-      <li>Create distribution lists to ensure team-wide notification delivery.</li>
-      <li>Integrate notifications directly with Slack (Technical Preview).</li>
-    </ul>
-  </li>
-  <li>Platform upgrades: Added support for Kubernetes 1.31 and NiFi 1.28.</li>
-</ul>
+<p>Here is how to create a dedicated user and database for Schema Registry inside the existing SSB Postgres pod.</p>
 
-<h2 id="upgrading-to-the-new-release">Upgrading to the New Release</h2>
-<p>Customers can perform an in-place upgrade from supported Cloudera Data Flow  versions to 2.10. Alternatively, disabling and re-enabling an existing Data Flow environment will result in the re-enabled environment running the latest version.</p>
+<h2 id="setup-the-database-and-user">Setup the Database and User</h2>
 
-<h2 id="links">Links</h2>
-<p><a href="https://docs.cloudera.com/dataflow/cloud/release-notes/topics/cdf-whats-new.html">Release notes</a></p>
+<p>First, find the name of your SSB Postgres pod:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods <span class="nt">-n</span> cld-streaming | <span class="nb">grep </span>postgres
+</code></pre></div></div>
 
-<p><a href="https://docs.cloudera.com/dataflow/cloud/index.html">Documentation</a></p>
+<p>Next, execute into the pod to create the database, create a dedicated <code class="language-plaintext highlighter-rouge">registry</code> user, and grant the proper ownership. <em>(Replace <code class="language-plaintext highlighter-rouge">&lt;ssb-postgresql-pod-name&gt;</code> with your actual pod name)</em>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create the database</span>
+kubectl <span class="nb">exec</span> <span class="nt">-it</span> &lt;ssb-postgresql-pod-name&gt; <span class="nt">-n</span> cld-streaming <span class="nt">--</span> psql <span class="nt">-U</span> postgres <span class="nt">-c</span> <span class="s2">"CREATE DATABASE registry;"</span>
+
+<span class="c"># Create the dedicated user</span>
+kubectl <span class="nb">exec</span> <span class="nt">-it</span> &lt;ssb-postgresql-pod-name&gt; <span class="nt">-n</span> cld-streaming <span class="nt">--</span> psql <span class="nt">-U</span> postgres <span class="nt">-c</span> <span class="s2">"CREATE USER registry WITH PASSWORD 'cloudera';"</span>
+
+<span class="c"># Grant ownership to the new user</span>
+kubectl <span class="nb">exec</span> <span class="nt">-it</span> &lt;ssb-postgresql-pod-name&gt; <span class="nt">-n</span> cld-streaming <span class="nt">--</span> psql <span class="nt">-U</span> postgres <span class="nt">-c</span> <span class="s2">"ALTER DATABASE registry OWNER TO registry;"</span>
+</code></pre></div></div>
+
+<h2 id="create-the-kubernetes-secret">Create the Kubernetes Secret</h2>
+
+<p>The Schema Registry Helm chart strictly requires passwords to be passed via a Kubernetes Secret. Run this command to store our password:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create secret generic sr-db-pass <span class="se">\</span>
+  <span class="nt">--from-literal</span><span class="o">=</span><span class="nv">password</span><span class="o">=</span>cloudera <span class="se">\</span>
+  <span class="nt">--namespace</span> cld-streaming
+</code></pre></div></div>
+
+<h2 id="full-helm-values-configuration">Full Helm Values Configuration</h2>
+
+<p>Create a file named <code class="language-plaintext highlighter-rouge">sr-values-postgres.yaml</code> with the full configuration. This disables TLS/OAuth for the lab, sets up the PostgreSQL connection using the secret we just created, and adds resource limits to prevent OOM restarts.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tls</span><span class="pi">:</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">authentication</span><span class="pi">:</span>
+  <span class="na">oauth</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">authorization</span><span class="pi">:</span>
+  <span class="na">simple</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">database</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">postgresql</span>
+  <span class="na">jdbcUrl</span><span class="pi">:</span> <span class="s2">"</span><span class="s">jdbc:postgresql://ssb-postgresql.cld-streaming.svc:5432/registry"</span>
+  <span class="na">username</span><span class="pi">:</span> <span class="s2">"</span><span class="s">registry"</span>
+  <span class="na">password</span><span class="pi">:</span>
+    <span class="na">secretKeyRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sr-db-pass"</span>
+      <span class="na">key</span><span class="pi">:</span> <span class="s2">"</span><span class="s">password"</span>
+<span class="na">service</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">NodePort</span>
+<span class="na">resources</span><span class="pi">:</span>
+  <span class="na">requests</span><span class="pi">:</span>
+    <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">512Mi"</span>
+    <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">500m"</span>
+  <span class="na">limits</span><span class="pi">:</span>
+    <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1Gi"</span>
+    <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1000m"</span>
+</code></pre></div></div>
+
+<h2 id="install-and-verify">Install and Verify</h2>
+
+<p>Now, run the full Helm install command to deploy Schema Registry with your new configuration:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install </span>schema-registry <span class="se">\</span>
+<span class="nt">--namespace</span> cld-streaming <span class="se">\</span>
+<span class="nt">--version</span> 1.6.0-b99 <span class="se">\</span>
+<span class="nt">--values</span> sr-values-postgres.yaml <span class="se">\</span>
+<span class="nt">--set</span> <span class="s2">"image.imagePullSecrets[0].name=cloudera-creds"</span> <span class="se">\</span>
+oci://container.repository.cloudera.com/cloudera-helm/csm-operator/schema-registry 
+</code></pre></div></div>
+
+<p>Check the status of your pods to ensure they initialize successfully. The init container will authenticate as the new <code class="language-plaintext highlighter-rouge">registry</code> user and permanently persist your schemas!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods <span class="nt">-l</span> <span class="nv">app</span><span class="o">=</span>schema-registry <span class="nt">-n</span> cld-streaming <span class="nt">-w</span>
+</code></pre></div></div>
+
+<h2 id="persisting-schema-registry-with-postgresql">Persisting Schema Registry with PostgreSQL</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Persisting Schema Registry with PostgreSQL please reach out to schedule a discussion.</p>
 
         
       </section>
@@ -361,9 +414,13 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/#Cloudera Data Flow" class="page__taxonomy-item p-category" rel="tag">Cloudera Data Flow</a><span class="sep">, </span>
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
     
-      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
+      <a href="/tags/#kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
+    
+      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a><span class="sep">, </span>
+    
+      <a href="/tags/#schema registry" class="page__taxonomy-item p-category" rel="tag">schema registry</a>
     
     </span>
   </p>
@@ -388,7 +445,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-04-30T00:00:00-04:00">April 30, 2025</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-05-04T00:00:00-04:00">May 4, 2026</time></p>
 
       </footer>
 
@@ -397,21 +454,20 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Cloudera+Data+Flow+2.10+for+Cloudera+on+Cloud%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FCloudera-DataFlow-2.10%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Persisting+Schema+Registry+with+PostgreSQL%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FPersiting-Schema-with-Schema-Registry%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FCloudera-DataFlow-2.10%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FPersiting-Schema-with-Schema-Registry%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/release/CSA-1.15-Release/" class="pagination--pager" title="Cloudera Streaming Analytics 1.15 for Cloudera 7.3.1
+      <a href="/blog/Top-5-NiFi-Operational-Struggles/" class="pagination--pager" title="Top 5 NiFi Operational Struggles
 ">Previous</a>
     
     
-      <a href="/release/Cloudera-Flow-Management-Kubernetes-Operator-2.10/" class="pagination--pager" title="Cloudera Flow Management - Kubernetes Operator 2.10
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -425,56 +481,6 @@
     <div class="page__related">
       <h2 class="page__related-title">You may also enjoy</h2>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/Persiting-Schema-with-Schema-Registry/" rel="permalink">Persisting Schema Registry with PostgreSQL
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 minute read
-        
-      </span>
-    
-    
-  </p>
-
-
-    
-  <div class="archive__item-excerpt" itemprop="description">
-    Learn how to use CSA Operator’s PostgreSQL pod to persist schemas in the Schema Registry.
-
-    <a href="/blog/Persiting-Schema-with-Schema-Registry/" class="read-more-pill">Read More &rarr;</a>
-  </div>
-
-  </article>
-</div>
-
         
           
 
@@ -556,7 +562,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          2 minute read
+          1 minute read
         
       </span>
     
@@ -605,7 +611,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          8 minute read
+          7 minute read
         
       </span>
     
@@ -617,6 +623,55 @@
   <div class="archive__item-excerpt" itemprop="description">
     As of Cloudera Runtime 7.3.2, Hue is now Cloudera Data Explorer — the modern SQL editor for the lakehouse era, with a new REST API that turns natural languag...
     <a href="/blog/Introducing-Cloudera-Data-Explorer/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-04-14-all_the_new_in_7_3_2.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/All-the-New-in-7.3.2/" rel="permalink">All The New In Cloudera 7.3.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          48 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Explore the major modernization of CDP Private Cloud Base in Cloudera Runtime 7.3.2. This comprehensive guide covers the JDK 17 transition, the new React-bas...
+    <a href="/blog/All-the-New-in-7.3.2/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>

@@ -6,6 +6,17 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Persisting Schema Registry with PostgreSQL</title>
+        <link>https://cldr-steven-matison.github.io/blog/Persiting-Schema-with-Schema-Registry/</link>
+        <pubDate>Mon, 04 May 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png" medium="image" />
+        
+        <description>Learn how to use CSA Operator&apos;s PostgreSQL pod to persist schemas in the Schema Registry.</description>
+      </item>
+    
+      <item>
         <title>Top 5 NiFi Operational Struggles</title>
         <link>https://cldr-steven-matison.github.io/blog/Top-5-NiFi-Operational-Struggles/</link>
         <pubDate>Mon, 27 Apr 2026 00:00:00 -0400</pubDate>
@@ -105,17 +116,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
         
         <description>Terminal 3 Output to go along with Audio Transcription RAG post.</description>
-      </item>
-    
-      <item>
-        <title>Lessons Learned Audio Transcription Terminal Output 2</title>
-        <link>https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-Output-2/</link>
-        <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
-        
-        <description>Terminal 2 Output to go along with Audio Transcription RAG post.</description>
       </item>
     
   </channel>
