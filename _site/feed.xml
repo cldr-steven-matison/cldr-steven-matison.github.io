@@ -6,9 +6,53 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Observability with Cloudera Streaming Operators</title>
+        <link>https://cldr-steven-matison.github.io/blog/Observability-with-Cloudera-Streaming-Operators/</link>
+        <pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png" medium="image" />
+        
+        <description>The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Prometheus, and Grafana.</description>
+      </item>
+    
+      <item>
+        <title>Monitoring Cloudera Streams Messaging (CSM) with Prometheus</title>
+        <link>https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/</link>
+        <pubDate>Mon, 04 May 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSM_metrics.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSM_metrics.png" medium="image" />
+        
+        <description>Unlock deep Kafka broker metrics in Cloudera Streams Messaging (CSM) by injecting a custom JMX Prometheus Exporter and deploying a targeted PodMonitor.</description>
+      </item>
+    
+      <item>
+        <title>Monitoring Cloudera Flow Management (CFM) with Prometheus</title>
+        <link>https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/</link>
+        <pubDate>Sun, 03 May 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-05-CFM_metrics.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-CFM_metrics.png" medium="image" />
+        
+        <description>Discover how to securely expose Cloudera Flow Management (CFM) NiFi metrics to Prometheus by configuring an mTLS bypass for Single User Auth.</description>
+      </item>
+    
+      <item>
+        <title>Monitoring Cloudera Streaming Analytics (CSA) with Prometheus</title>
+        <link>https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/</link>
+        <pubDate>Sat, 02 May 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSA_metrics.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSA_metrics.png" medium="image" />
+        
+        <description>Learn how to monitor dynamic Flink and SQL Stream Builder jobs in Cloudera Streaming Analytics (CSA) by utilizing a Headless Service and ServiceMonitor for Prometheus discovery.</description>
+      </item>
+    
+      <item>
         <title>Persisting Schema Registry with PostgreSQL</title>
         <link>https://cldr-steven-matison.github.io/blog/Persiting-Schema-with-Schema-Registry/</link>
-        <pubDate>Mon, 04 May 2026 00:00:00 -0400</pubDate>
+        <pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
         
           <image>https://cldr-steven-matison.github.io/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png</image>
           <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png" medium="image" />
@@ -70,52 +114,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-04-09-Custom-NiFi-Processors.png" medium="image" />
         
         <description>Learn how to extend NiFi’s capabilities within Cloudera Streaming Operators by deploying custom Python and Java processors. This guide covers everything from rapid prototyping with local mounts to production-ready NAR deployments using the NarProvider.</description>
-      </item>
-    
-      <item>
-        <title>Cloudera Flow Management 4.12.0 General Availability for Cloudera 7.3.2</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-4.12.0/</link>
-        <pubDate>Thu, 02 Apr 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-04-01-Cloudera-Flow-Management-4.12.0.png" medium="image" />
-        
-        <description>The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 4.12.0, supporting Apache NiFi 2.6 with Cloudera Manager on Cloudera on premises and Cloudera on cloud (Data Hub) 7.3.2. This release offers a number of new features and improvements as well as upgraded dependencies.
-</description>
-      </item>
-    
-      <item>
-        <title>Introducing Cloudera Runtime 7.3.2</title>
-        <link>https://cldr-steven-matison.github.io/release/Introducing-Cloudera-Runtime-7.3.2/</link>
-        <pubDate>Wed, 01 Apr 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-04-02-Cloudera-Runtime-7.3.2.png" medium="image" />
-        
-        <description>We are excited to announce the delivery of Cloudera runtime 7.3.2! This represents our most enduring Long-Term Support (LTS) release to date, with support extending through 2032. This release builds upon the unified code base for both Cloudera on premises and Cloudera on cloud that was established in the previous release in support of the hybrid cloud strategy.
-</description>
-      </item>
-    
-      <item>
-        <title>Lessons Learned Audio Transcription RAG</title>
-        <link>https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-with-Cloudera-Streaming-Operators/</link>
-        <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
-        
-        <description>Infrastructure tuning is the &apos;final boss&apos; of local AI. Skip the &apos;Driver Dance&apos; and move past the tutorials with these hard-won lessons on CUDA pinning, dependency traps, and Flash Attention 2 hacks for Whisper on local Kubernetes.</description>
-      </item>
-    
-      <item>
-        <title>Lessons Learned Audio Transcription Terminal Output 3</title>
-        <link>https://cldr-steven-matison.github.io/blog/Lessons-From-Audio-Transcription-Terminal-Output-3/</link>
-        <pubDate>Mon, 30 Mar 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-03-30-StreamToWhisper-lessons.png" medium="image" />
-        
-        <description>Terminal 3 Output to go along with Audio Transcription RAG post.</description>
       </item>
     
   </channel>

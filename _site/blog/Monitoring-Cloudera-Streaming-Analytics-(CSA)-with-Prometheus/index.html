@@ -1,0 +1,976 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Monitoring Cloudera Streaming Analytics (CSA) with Prometheus - Cloudera Solutions Engineer</title>
+<meta name="description" content="Learn how to monitor dynamic Flink and SQL Stream Builder jobs in Cloudera Streaming Analytics (CSA) by utilizing a Headless Service and ServiceMonitor for Prometheus discovery.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Monitoring Cloudera Streaming Analytics (CSA) with Prometheus">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/">
+
+
+  <meta property="og:description" content="Learn how to monitor dynamic Flink and SQL Stream Builder jobs in Cloudera Streaming Analytics (CSA) by utilizing a Headless Service and ServiceMonitor for Prometheus discovery.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSA_metrics.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-05-02T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration and Cloudera Data Platform (CDP) through scalable, production-grade solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Monitoring Cloudera Streaming Analytics (CSA) with Prometheus">
+    <meta itemprop="description" content="Learn how to monitor dynamic Flink and SQL Stream Builder jobs in Cloudera Streaming Analytics (CSA) by utilizing a Headless Service and ServiceMonitor for Prometheus discovery.">
+    <meta itemprop="datePublished" content="2026-05-02T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/" class="u-url" itemprop="url">Monitoring Cloudera Streaming Analytics (CSA) with Prometheus
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-05-02T00:00:00-04:00">
+            May 02, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
+
+<p>If you followed our previous guides on monitoring Cloudera Streams Messaging (CSM) and Cloudera Flow Management (CFM), you now have visibility into your data ingestion (NiFi) and event streaming (Kafka). But what about monitoring the streams processing jobs (FLINK) in Cloudera Streaming Analytics (CSA)?</p>
+
+<p>When running Flink and SQL Stream Builder (SSB) via the CSA Operator, flink jobs spin up dynamically on Kubernetes. Because these dynamically generated TaskManager pods don’t explicitly declare metric ports in their Kubernetes spec, standard Prometheus PodMonitors will silently drop the targets—making metric discovery a bit of a K8s networking puzzle.</p>
+
+<p>In this third and final post of the series, we’re going to wire up our CSA Flink jobs to our existing Prometheus + Grafana stack. By utilizing a Headless Service to bypass strict pod-spec validation natively, we will finally complete plugging our CFM NiFi Operator, CSA Flink Operator, and CSM Kafka Operator into Prometheus and Grafana stack for monitoring.</p>
+
+<hr>
+
+<h3 id="1️⃣-create-the-prometheus-values-file">1️⃣ Create the Prometheus Values File</h3>
+
+<p>Create this file in the <strong>root</strong> of your repo. This forces Flink to open port 9249 for metrics scraping.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">csa-prometheus-values.yaml</code></strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># csa-prometheus-values.yaml</span>
+<span class="c1"># Enables native PrometheusReporter for ALL SQL Stream Builder (SSB) jobs</span>
+
+<span class="na">ssb</span><span class="pi">:</span>
+  <span class="na">flinkConfiguration</span><span class="pi">:</span>
+    <span class="na">flink-conf.yaml</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">metrics.reporters: prom</span>
+      <span class="s">metrics.reporter.prom.factory.class: org.apache.flink.metrics.prometheus.PrometheusReporterFactory</span>
+      <span class="s">metrics.reporter.prom.port: "9249"</span>
+      <span class="s">taskmanager.network.detailed-metrics: "true"</span>
+
+      <span class="s"># Optional: cleaner metric labels for Grafana dashboards</span>
+      <span class="s">metrics.scope.jm: "flink.jobmanager.&lt;host&gt;"</span>
+      <span class="s">metrics.scope.tm: "flink.taskmanager.&lt;host&gt;.&lt;tm_id&gt;"</span>
+      <span class="s">metrics.scope.job: "flink.job.&lt;job_id&gt;.&lt;job_name&gt;"</span>
+</code></pre></div></div>
+
+<hr>
+
+<h3 id="2️⃣-exact-helm-install-command-fresh-install">2️⃣ Exact Helm Install Command (Fresh Install)</h3>
+
+<p>Run this <strong>exact</strong> command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install </span>csa-operator <span class="se">\</span>
+  oci://[container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator]<span class="o">(</span>https://container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator<span class="o">)</span> <span class="se">\</span>
+  <span class="nt">--namespace</span> cld-streaming <span class="se">\</span>
+  <span class="nt">--create-namespace</span> <span class="se">\</span>
+  <span class="nt">--version</span> 1.5.0-b275 <span class="se">\</span>
+  <span class="nt">--values</span> ./csa-prometheus-values.yaml <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'flink-kubernetes-operator.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'ssb.sse.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'ssb.sqlRunner.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'ssb.mve.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'ssb.database.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'ssb.flink.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  <span class="nt">--set-file</span> flink-kubernetes-operator.clouderaLicense.fileContent<span class="o">=</span>./license.txt
+</code></pre></div></div>
+
+<hr>
+
+<h3 id="3️⃣-verify-the-install">3️⃣ Verify the Install</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Helm release</span>
+helm list <span class="nt">-n</span> cld-streaming
+
+<span class="c"># 2. All pods running</span>
+kubectl get pods <span class="nt">-n</span> cld-streaming
+
+<span class="c"># 3. Confirm Prometheus config was applied</span>
+helm get values csa-operator <span class="nt">-n</span> cld-streaming | <span class="nb">grep</span> <span class="nt">-A</span> 20 <span class="s2">"flink-conf.yaml"</span>
+</code></pre></div></div>
+
+<hr>
+
+<h3 id="4️⃣-discovery-with-headless-service--servicemonitor">4️⃣ Discovery with Headless Service &amp; ServiceMonitor</h3>
+
+<p>Because Flink Native Kubernetes does not explicitly declare port 9249 in its dynamic pod specs, standard <code class="language-plaintext highlighter-rouge">PodMonitors</code> will drop the targets. Instead, we bridge the gap using a <strong>Headless Service</strong> and a <strong>ServiceMonitor</strong>.</p>
+
+<p><strong>A. Create the Headless Service (<code class="language-plaintext highlighter-rouge">csa-flink-service.yaml</code>)</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">csa-flink-metrics-service</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">csa-flink-metrics</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">clusterIP</span><span class="pi">:</span> <span class="s">None</span>  <span class="c1"># Makes it a headless service</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="c1"># This automatically captures ALL Flink pods (JobManagers &amp; TaskManagers)</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">flink-native-kubernetes</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">prom-metrics</span>
+      <span class="na">port</span><span class="pi">:</span> <span class="m">9249</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">9249</span>
+</code></pre></div></div>
+
+<p><strong>B. Create the ServiceMonitor (<code class="language-plaintext highlighter-rouge">csa-flink-service-monitor.yaml</code>)</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">monitoring.coreos.com/v1</span><span class="pi">]</span><span class="s">(https://monitoring.coreos.com/v1)</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceMonitor</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">csa-flink-metrics-monitor</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">release</span><span class="pi">:</span> <span class="s">prometheus</span> <span class="c1"># Must match your Prometheus Operator release label</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">csa-flink-metrics</span>
+  <span class="na">namespaceSelector</span><span class="pi">:</span>
+    <span class="na">matchNames</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">cld-streaming</span>
+  <span class="na">endpoints</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">prom-metrics</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">15s</span>
+      <span class="na">scrapeTimeout</span><span class="pi">:</span> <span class="s">10s</span>
+      <span class="na">relabelings</span><span class="pi">:</span>
+        <span class="c1"># Extracts labels so Grafana dashboards automatically map deployments</span>
+        <span class="pi">-</span> <span class="na">sourceLabels</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">__meta_kubernetes_pod_label_app</span><span class="pi">]</span>
+          <span class="na">targetLabel</span><span class="pi">:</span> <span class="s">flink_deployment</span>
+        <span class="pi">-</span> <span class="na">sourceLabels</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">__meta_kubernetes_pod_label_component</span><span class="pi">]</span>
+          <span class="na">targetLabel</span><span class="pi">:</span> <span class="s">component</span>
+        <span class="pi">-</span> <span class="na">sourceLabels</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">__meta_kubernetes_pod_name</span><span class="pi">]</span>
+          <span class="na">targetLabel</span><span class="pi">:</span> <span class="s">pod</span>
+        <span class="pi">-</span> <span class="na">sourceLabels</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">__meta_kubernetes_namespace</span><span class="pi">]</span>
+          <span class="na">targetLabel</span><span class="pi">:</span> <span class="s">namespace</span>
+</code></pre></div></div>
+
+<p><strong>C. Apply both files:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> csa-flink-service.yaml <span class="nt">-n</span> cld-streaming
+kubectl apply <span class="nt">-f</span> csa-flink-service-monitor.yaml <span class="nt">-n</span> cld-streaming
+</code></pre></div></div>
+
+<p><em>Wait ~30 seconds, then check Prometheus UI (<code class="language-plaintext highlighter-rouge">Status -&gt; Targets</code>). You should see your JobManagers and TaskManagers listed as <code class="language-plaintext highlighter-rouge">UP</code> under <code class="language-plaintext highlighter-rouge">serviceMonitor/cld-streaming/csa-flink-metrics-monitor/0</code>.</em></p>
+
+<hr>
+
+<h3 id="5️⃣-test-prometheus-metrics-run-an-ssb-job">5️⃣ Test Prometheus Metrics (Run an SSB Job)</h3>
+
+<ol>
+  <li>Open SSB UI:
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>minikube service ssb-sse <span class="nt">--namespace</span> cld-streaming
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Run any SQL job (or the existing <code class="language-plaintext highlighter-rouge">ssb-session-admin</code> job will already have created a Flink pod).</p>
+  </li>
+  <li>Verify metrics are exposed directly from a pod:
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="c"># Replace with your actual taskmanager pod name</span>
+kubectl <span class="nb">exec</span> <span class="nt">-it</span> ssb-session-admin-taskmanager-1-3 <span class="nt">-n</span> cld-streaming <span class="nt">--</span> <span class="se">\</span>
+  curl <span class="nt">-s</span> http://localhost:9249/metrics | <span class="nb">head</span> <span class="nt">-20</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>You should see <code class="language-plaintext highlighter-rouge">flink_</code> metrics.</p>
+
+<hr>
+
+<h3 id="6️⃣-querying-ssb--flink-metrics-in-prometheus-ui">6️⃣ Querying SSB / Flink Metrics in Prometheus UI</h3>
+
+<p><strong>Sample Query 1: JVM CPU Load</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flink_taskmanager_Status_JVM_CPU_Load<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Sample Query 2: Job Uptime</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flink_jobmanager_job_uptime<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Sample Query 3: Records In/Out Per Second</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>flink_taskmanager_job_task_operator_numRecordsInPerSecond<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">})</span> by <span class="o">(</span>job_name<span class="o">)</span>
+</code></pre></div></div>
+
+<p><strong>End-to-End Pipeline (NiFi → SSB → Kafka)</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>nifi_bytes_sent<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cfm-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span> 
+or 
+<span class="nb">sum</span><span class="o">(</span>flink_taskmanager_job_task_operator_numRecordsInPerSecond<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">})</span> 
+or 
+<span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>kafka_server_brokertopicmetrics_bytesin_total<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
+</code></pre></div></div>
+
+<hr>
+
+<h3 id="7️⃣-visualizing-in-grafana">7️⃣ Visualizing in Grafana</h3>
+
+<ul>
+  <li>
+<strong>ID <code class="language-plaintext highlighter-rouge">11049</code> (Recommended First Test)</strong>
+    <ul>
+      <li>
+<strong>Name:</strong> Flink Dashboard</li>
+      <li>
+<strong>Description:</strong> The standard, most reliable community dashboard built explicitly for the Flink Prometheus Exporter. It tracks JobManagers, TaskManagers, JVM metrics, and basic job health.</li>
+    </ul>
+  </li>
+  <li>
+<strong>ID <code class="language-plaintext highlighter-rouge">14911</code></strong>
+    <ul>
+      <li>
+<strong>Name:</strong> Apache Flink Dashboard for Job / Task Manager</li>
+      <li>
+<strong>Description:</strong> A slightly more modern layout that breaks down metrics specifically between the Job Manager and Task Manager. Good for digging into CPU/Memory constraints.</li>
+    </ul>
+  </li>
+  <li>
+<strong>ID <code class="language-plaintext highlighter-rouge">14840</code></strong>
+    <ul>
+      <li>
+<strong>Name:</strong> Flink Metrics (with Kafka) on K8S</li>
+      <li>
+        <h2 id="description-since-you-are-running-csa-alongside-kafka-this-dashboard-is-actually-built-to-monitor-flink-applications-and-includes-kafka-throughput-parameters-alongside-kubernetes-memorycpu-stats">
+<strong>Description:</strong> Since you are running CSA alongside Kafka, this dashboard is actually built to monitor Flink applications <em>and</em> includes Kafka throughput parameters alongside Kubernetes memory/CPU stats.</h2>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="-summary">🏁 Summary</h3>
+
+<p>With this final piece in place, you have successfully built a complete, end-to-end observability pipeline across your entire Cloudera Streaming Operators architecture. By bridging CFM (NiFi) for ingestion, CSA (SQL Stream Builder / Flink) for real-time processing, and CSM (Kafka) for event streaming, you now have a unified view of your data’s lifecycle within a single Prometheus and Grafana stack.</p>
+
+<p>In this specific guide, we didn’t just flip a switch to turn on metrics—we architected a robust, Kubernetes-native solution. By implementing a Headless Service and a ServiceMonitor, we bypassed the strict pod-spec limitations of Flink Native Kubernetes. This ensures that every dynamically provisioned JobManager and TaskManager is automatically discovered and scraped by Prometheus, completely eliminating the silent “0 targets” discovery failures.</p>
+
+<p>Best of all, your entire monitoring configuration remains declarative and fully Git-trackable. You can now reliably execute complex PromQL queries across namespaces and correlate behavior across entirely different engines. Whether you are tracking backpressure in NiFi, measuring checkpoint durations and records-per-second in Flink, or monitoring consumer lag in Kafka, you finally have the single pane of glass required to confidently debug, tune, and scale your real-time data pipelines.</p>
+
+<hr>
+
+<h3 id="appendix">Appendix</h3>
+
+<h4 id="1-cleanup--re-install">1. Cleanup / Re-install</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm uninstall csa-operator <span class="nt">-n</span> cld-streaming
+kubectl delete servicemonitor csa-flink-metrics-monitor <span class="nt">-n</span> cld-streaming <span class="nt">--ignore-not-found</span>
+kubectl delete service csa-flink-metrics-service <span class="nt">-n</span> cld-streaming <span class="nt">--ignore-not-found</span>
+</code></pre></div></div>
+
+<h4 id="2-force-prometheus-to-re-discover">2. Force Prometheus to Re-discover</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl rollout restart deployment prometheus-kube-prometheus-operator <span class="nt">-n</span> cld-streaming
+</code></pre></div></div>
+
+<h4 id="3-quick-verification-commands">3. Quick Verification Commands</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get servicemonitor <span class="nt">-n</span> cld-streaming
+kubectl get service csa-flink-metrics-service <span class="nt">-n</span> cld-streaming
+kubectl get pods <span class="nt">-n</span> cld-streaming <span class="nt">-l</span> <span class="nb">type</span><span class="o">=</span>flink-native-kubernetes
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#csa" class="page__taxonomy-item p-category" rel="tag">csa</a><span class="sep">, </span>
+    
+      <a href="/tags/#flink" class="page__taxonomy-item p-category" rel="tag">flink</a><span class="sep">, </span>
+    
+      <a href="/tags/#grafana" class="page__taxonomy-item p-category" rel="tag">grafana</a><span class="sep">, </span>
+    
+      <a href="/tags/#prometheus" class="page__taxonomy-item p-category" rel="tag">prometheus</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-05-02T00:00:00-04:00">May 2, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Monitoring+Cloudera+Streaming+Analytics+%28CSA%29+with+Prometheus%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FMonitoring-Cloudera-Streaming-Analytics-%28CSA%29-with-Prometheus%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FMonitoring-Cloudera-Streaming-Analytics-%28CSA%29-with-Prometheus%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Persiting-Schema-with-Schema-Registry/" class="pagination--pager" title="Persisting Schema Registry with PostgreSQL
+">Previous</a>
+    
+    
+      <a href="/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/" class="pagination--pager" title="Monitoring Cloudera Flow Management (CFM) with Prometheus
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" rel="permalink">Observability with Cloudera Streaming Operators
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Promethe...
+    <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-CSM_metrics.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" rel="permalink">Monitoring Cloudera Streams Messaging (CSM) with Prometheus
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Unlock deep Kafka broker metrics in Cloudera Streams Messaging (CSM) by injecting a custom JMX Prometheus Exporter and deploying a targeted PodMonitor.
+
+    <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-CFM_metrics.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/" rel="permalink">Monitoring Cloudera Flow Management (CFM) with Prometheus
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Discover how to securely expose Cloudera Flow Management (CFM) NiFi metrics to Prometheus by configuring an mTLS bypass for Single User Auth.
+
+    <a href="/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Persiting-Schema-with-Schema-Registry/" rel="permalink">Persisting Schema Registry with PostgreSQL
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Learn how to use CSA Operator’s PostgreSQL pod to persist schemas in the Schema Registry.
+
+    <a href="/blog/Persiting-Schema-with-Schema-Registry/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<style>
+  .code-header {
+    position: relative;
+    background: #252a31; /* Matches dark syntax themes */
+    padding: 5px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .copy-code-button {
+    background: #3d4551;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .copy-code-button:hover { background: #505a69; }
+</style>
+
+<script>
+  document.querySelectorAll('div.highlighter-rouge, figure.highlight').forEach((container) => {
+    // Create header and button
+    const header = document.createElement('div');
+    header.className = 'code-header';
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+
+    button.addEventListener('click', () => {
+      const code = container.querySelector('code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => { button.innerText = 'Copy'; }, 2000);
+      });
+    });
+
+    header.appendChild(button);
+    container.prepend(header);
+  });
+</script>
+
+  </body>
+</html>

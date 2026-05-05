@@ -1,0 +1,921 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Monitoring Cloudera Flow Management (CFM) with Prometheus - Cloudera Solutions Engineer</title>
+<meta name="description" content="Discover how to securely expose Cloudera Flow Management (CFM) NiFi metrics to Prometheus by configuring an mTLS bypass for Single User Auth.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Monitoring Cloudera Flow Management (CFM) with Prometheus">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/">
+
+
+  <meta property="og:description" content="Discover how to securely expose Cloudera Flow Management (CFM) NiFi metrics to Prometheus by configuring an mTLS bypass for Single User Auth.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-05-05-CFM_metrics.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-05-03T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration and Cloudera Data Platform (CDP) through scalable, production-grade solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Monitoring Cloudera Flow Management (CFM) with Prometheus">
+    <meta itemprop="description" content="Discover how to securely expose Cloudera Flow Management (CFM) NiFi metrics to Prometheus by configuring an mTLS bypass for Single User Auth.">
+    <meta itemprop="datePublished" content="2026-05-03T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/" class="u-url" itemprop="url">Monitoring Cloudera Flow Management (CFM) with Prometheus
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-05-03T00:00:00-04:00">
+            May 03, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
+
+<p>In the previous guide on monitoring Cloudera Streams Messaging (CSM) we adeded visibility into your Kafka Brokers. Data pipelines don’t start at the broker—they often start with <strong>NiFi</strong>.</p>
+
+<p>When running NiFi via the <strong>Cloudera Flow Management (CFM) Operator</strong>, securing the cluster with Single User Auth puts the APIs into a strict lockdown. This makes scraping native metrics a bit of a kubernetes challenge.</p>
+
+<p>In this post, we’re going to wire up a secure CFM NiFi 2.x cluster to the <strong>Prometheus + Grafana</strong> stack, bypassing web authentication safely using mTLS, and ultimately bridging our cross-namespace metrics into a single pane of glass.</p>
+
+<hr>
+
+<h3 id="1️⃣-the-nifi-cluster-config-the-cr">1️⃣ The NiFi Cluster Config (The CR)</h3>
+
+<p>In NiFi 2.x, Prometheus metrics are built natively into the application; we don’t need an external JMX exporter like Kafka. However, we do need to tell the CFM Operator to disable standard authentication on the metrics endpoint.</p>
+
+<p>Update your <code class="language-plaintext highlighter-rouge">Nifi</code> Custom Resource (<code class="language-plaintext highlighter-rouge">nifi-cluster.yaml</code>) with the <code class="language-plaintext highlighter-rouge">configOverride</code> block:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">cfm.cloudera.com/v1alpha1</span><span class="pi">]</span><span class="s">(https://cfm.cloudera.com/v1alpha1)</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Nifi</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">mynifi</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cfm-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">nifiVersion</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.6.0"</span>
+  <span class="c1"># ... [image, statefulset, uiConnection, etc.] ...</span>
+  <span class="na">security</span><span class="pi">:</span>
+    <span class="na">initialAdminIdentity</span><span class="pi">:</span> <span class="s2">"</span><span class="s">admin"</span>
+    <span class="na">nodeCertGen</span><span class="pi">:</span>
+      <span class="na">issuerRef</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">cfm-operator-ca-issuer-signed</span>
+        <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterIssuer</span>
+    <span class="na">singleUserAuth</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
+      <span class="na">credentialsSecretName</span><span class="pi">:</span> <span class="s2">"</span><span class="s">nifi-admin-creds"</span>
+  <span class="na">configOverride</span><span class="pi">:</span>
+    <span class="na">nifiProperties</span><span class="pi">:</span>
+      <span class="na">upsert</span><span class="pi">:</span>
+        <span class="na">nifi.cluster.leader.election.implementation</span><span class="pi">:</span> <span class="s2">"</span><span class="s">KubernetesLeaderElectionManager"</span>
+        <span class="c1"># Disable standard auth for the prometheus endpoint</span>
+        <span class="na">nifi.web.prometheus.metrics.authenticated</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
+</code></pre></div></div>
+<p><em>Apply this configuration and allow the NiFi pods to perform a rolling restart if necessary.</em></p>
+
+<hr>
+
+<h3 id="2️⃣-the-mtls-vip-bypass-finding-the-cert">2️⃣ The mTLS VIP Bypass (Finding the Cert)</h3>
+
+<p>Because we have <code class="language-plaintext highlighter-rouge">singleUserAuth: enabled</code>, NiFi will fiercely defend its endpoints—even with the property override above—throwing <strong>401 Unauthorized</strong> errors at Prometheus. NiFi expects a login token.</p>
+
+<p>To get around the web login completely, we use <strong>Client Certificates (mTLS)</strong>. The CFM Operator automatically generates a highly privileged cert to talk to NiFi securely. We are going to borrow that cert for Prometheus.</p>
+
+<p>Run this command to find the Operator’s user certificate:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get secrets <span class="nt">-n</span> cfm-streaming | <span class="nb">grep </span>kubernetes.io/tls
+</code></pre></div></div>
+<p>Look for <strong><code class="language-plaintext highlighter-rouge">mynifi-cfm-operator-user-cert</code></strong>. This is our golden ticket.</p>
+
+<hr>
+
+<h3 id="3️⃣-discovery-with-servicemonitor">3️⃣ Discovery with ServiceMonitor</h3>
+
+<p>Now we tell Prometheus to scrape NiFi, handing it the certificate so it can breeze past the 401 Unauthorized screens. We also use a <code class="language-plaintext highlighter-rouge">relabelings</code> block to ensure the <code class="language-plaintext highlighter-rouge">Host</code> header perfectly matches what NiFi’s Jetty server expects (preventing a <strong>400 Bad Request</strong> error).</p>
+
+<p>Save this as <code class="language-plaintext highlighter-rouge">nifi-service-monitor.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">monitoring.coreos.com/v1</span><span class="pi">]</span><span class="s">(https://monitoring.coreos.com/v1)</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceMonitor</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nifi-service-monitor</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cfm-streaming</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">release</span><span class="pi">:</span> <span class="s">prometheus</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app.kubernetes.io/name</span><span class="pi">:</span> <span class="s">server</span>
+      <span class="na">app.kubernetes.io/instance</span><span class="pi">:</span> <span class="s">mynifi</span>
+  <span class="na">namespaceSelector</span><span class="pi">:</span>
+    <span class="na">matchNames</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">cfm-streaming</span>
+  <span class="na">endpoints</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">https</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">/nifi-api/flow/metrics/prometheus</span>  <span class="c1"># The native NiFi 2.x endpoint</span>
+    <span class="na">interval</span><span class="pi">:</span> <span class="s">30s</span>
+    <span class="na">scheme</span><span class="pi">:</span> <span class="s">https</span>
+    <span class="na">tlsConfig</span><span class="pi">:</span>
+      <span class="na">insecureSkipVerify</span><span class="pi">:</span> <span class="kc">true</span>
+      <span class="na">serverName</span><span class="pi">:</span> <span class="s">mynifi-web.cfm-streaming.svc.cluster.local</span>
+      <span class="c1"># The mTLS Bypass</span>
+      <span class="na">cert</span><span class="pi">:</span>
+        <span class="na">secret</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">mynifi-cfm-operator-user-cert</span>
+          <span class="na">key</span><span class="pi">:</span> <span class="s">tls.crt</span>
+      <span class="na">keySecret</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">mynifi-cfm-operator-user-cert</span>
+        <span class="na">key</span><span class="pi">:</span> <span class="s">tls.key</span>
+    <span class="na">relabelings</span><span class="pi">:</span>
+      <span class="c1"># Satisfies NiFi's strict SNI and Host header checks</span>
+      <span class="pi">-</span> <span class="na">targetLabel</span><span class="pi">:</span> <span class="s">__address__</span>
+        <span class="na">replacement</span><span class="pi">:</span> <span class="s">mynifi-web.cfm-streaming.svc.cluster.local:8443</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">kubectl apply -f nifi-service-monitor.yaml -n cfm-streaming</code></p>
+
+<p><em>(Wait about 30 seconds. In your Prometheus UI under <strong>Status -&gt; Targets</strong>, <code class="language-plaintext highlighter-rouge">nifi-service-monitor</code> should now show as <strong>1/1 UP</strong>).</em></p>
+
+<hr>
+
+<h3 id="4️⃣-querying-nifi-metrics-in-prometheus-ui">4️⃣ Querying NiFi Metrics in Prometheus UI</h3>
+
+<p>Now that Prometheus has a secure, authenticated channel to NiFi, let’s look at the data. Open the Prometheus UI Graph tab and test these queries:</p>
+
+<p><strong>Sample Query 1: Total Bytes Queued</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>nifi_amount_bytes_queued<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cfm-streaming"</span><span class="o">})</span>
+</code></pre></div></div>
+<p><em>Great for setting up alerts if a downstream system (like Kafka) goes offline and backpressure builds up.</em></p>
+
+<p><strong>Sample Query 2: Total Items Queued</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>nifi_amount_items_queued<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cfm-streaming"</span><span class="o">})</span>
+</code></pre></div></div>
+
+<p><strong>Sample Query 3: Active Threads</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>nifi_active_threads<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cfm-streaming"</span><span class="o">})</span>
+</code></pre></div></div>
+
+<hr>
+
+<h3 id="5️⃣-visualizing-cfm-nifi-with-grafana-dashboards">5️⃣ Visualizing CFM NiFi with Grafana Dashboards</h3>
+
+<p>With Prometheus pulling the data, let’s load up a beautiful community-built dashboard.</p>
+
+<p><strong>Step 1: Import the Dashboard</strong></p>
+<ol>
+  <li>Open Grafana and navigate to <strong>Dashboards</strong> -&gt; <strong>New</strong> -&gt; <strong>Import</strong>.</li>
+  <li>In the “Import via grafana.com” box, type <strong><code class="language-plaintext highlighter-rouge">15822</code></strong> (or <code class="language-plaintext highlighter-rouge">12375</code>) and click <strong>Load</strong>.</li>
+  <li>Select your Prometheus data source at the bottom and click <strong>Import</strong>.</li>
+</ol>
+
+<p><em>Boom. You now have full JVM stats, FlowFile queue tracking, and throughput metrics.</em></p>
+
+<p><strong>Step 2: The “Master Plan” Cross-Namespace Panel</strong>
+To truly see your pipeline in action, add a custom Time Series panel to your dashboard that overlays NiFi’s <em>outbound</em> data directly on top of Kafka’s <em>inbound</em> data.</p>
+
+<ul>
+  <li>
+<strong>Query A (NiFi Send Rate):</strong>
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>nifi_bytes_sent<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cfm-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+<strong>Query B (Kafka Receive Rate):</strong>
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>kafka_server_brokertopicmetrics_bytesin_total<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>If Query A and Query B are flowing together, your pipeline is healthy. If they diverge, you know instantly where the bottleneck is.</p>
+
+<hr>
+
+<h3 id="-summary">🏁 Summary</h3>
+
+<p>By leveraging the CFM Operator’s native mynifi-cfm-operator-user-cert, you have successfully engineered an mTLS bridge that bypasses NiFi’s strict Single User Auth lockdown. We didn’t just find a workaround for the “401 Unauthorized” errors; we architected a secure, automated discovery path that allows Prometheus to scrape sensitive metrics without compromising the security of your data orchestration layer.</p>
+
+<p>This configuration effectively solves the “networking puzzle” of NiFi 2.x observability. By aligning your ServiceMonitor with NiFi’s strict SNI and Host header requirements, you’ve ensured that your monitoring stack remains as resilient and production-ready as the pipelines it tracks. You now have the declarative tools to move beyond basic health checks and into deep, cross-namespace correlation.</p>
+
+<p>With this piece of the puzzle in place, you can finally realize the “Master Plan”: a single pane of glass where you can watch NiFi’s outbound data rates flow in perfect synchronization with Kafka’s inbound throughput. You no longer have to guess where a bottleneck resides; you have the real-time telemetry required to prove exactly how data is moving through your entire Cloudera Streaming architecture.</p>
+
+<p>Next Steps: Complete the trifecta by wiring up CSA (Flink) to monitor your real-time processing jobs!</p>
+
+<p><a href="/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/">Part 3: Monitoring Cloudera Streaming Analytics (CSA) with Prometheus</a></p>
+
+<hr>
+
+<h3 id="appendix">Appendix</h3>
+
+<h4 id="1-wiping-the-servicemonitor-configuration">1. Wiping the ServiceMonitor Configuration</h4>
+<p>If Prometheus gets “stuck” on an old path or configuration, the cleanest way to force an update is to delete the monitor and re-apply:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete servicemonitor nifi-service-monitor <span class="nt">-n</span> cfm-streaming
+<span class="c"># Wait 30 seconds, then re-apply</span>
+kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="nt">-n</span> cfm-streaming
+</code></pre></div></div>
+
+<h4 id="2-confirming-metric-path-locally">2. Confirming Metric Path Locally</h4>
+<p>If you want to verify what metrics the endpoint is outputting from inside the cluster using the Operator cert:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec </span>mynifi-0 <span class="nt">-n</span> cfm-streaming <span class="nt">--</span> curl <span class="nt">-k</span> <span class="nt">-v</span> <span class="nt">--cert</span> /path/to/cert https://localhost:8443/nifi-api/flow/metrics/prometheus
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cfm" class="page__taxonomy-item p-category" rel="tag">cfm</a><span class="sep">, </span>
+    
+      <a href="/tags/#grafana" class="page__taxonomy-item p-category" rel="tag">grafana</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#prometheus" class="page__taxonomy-item p-category" rel="tag">prometheus</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-05-03T00:00:00-04:00">May 3, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Monitoring+Cloudera+Flow+Management+%28CFM%29+with+Prometheus%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FMonitoring-Cloudera-Flow-Management-%28CFM%29-with-Prometheus%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FMonitoring-Cloudera-Flow-Management-%28CFM%29-with-Prometheus%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/" class="pagination--pager" title="Monitoring Cloudera Streaming Analytics (CSA) with Prometheus
+">Previous</a>
+    
+    
+      <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" class="pagination--pager" title="Monitoring Cloudera Streams Messaging (CSM) with Prometheus
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" rel="permalink">Observability with Cloudera Streaming Operators
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Promethe...
+    <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-CSM_metrics.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" rel="permalink">Monitoring Cloudera Streams Messaging (CSM) with Prometheus
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Unlock deep Kafka broker metrics in Cloudera Streams Messaging (CSM) by injecting a custom JMX Prometheus Exporter and deploying a targeted PodMonitor.
+
+    <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-CSA_metrics.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/" rel="permalink">Monitoring Cloudera Streaming Analytics (CSA) with Prometheus
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Learn how to monitor dynamic Flink and SQL Stream Builder jobs in Cloudera Streaming Analytics (CSA) by utilizing a Headless Service and ServiceMonitor for P...
+    <a href="/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Persiting-Schema-with-Schema-Registry/" rel="permalink">Persisting Schema Registry with PostgreSQL
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Learn how to use CSA Operator’s PostgreSQL pod to persist schemas in the Schema Registry.
+
+    <a href="/blog/Persiting-Schema-with-Schema-Registry/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<style>
+  .code-header {
+    position: relative;
+    background: #252a31; /* Matches dark syntax themes */
+    padding: 5px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .copy-code-button {
+    background: #3d4551;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .copy-code-button:hover { background: #505a69; }
+</style>
+
+<script>
+  document.querySelectorAll('div.highlighter-rouge, figure.highlight').forEach((container) => {
+    // Create header and button
+    const header = document.createElement('div');
+    header.className = 'code-header';
+    
+    const button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+
+    button.addEventListener('click', () => {
+      const code = container.querySelector('code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => { button.innerText = 'Copy'; }, 2000);
+      });
+    });
+
+    header.appendChild(button);
+    container.prepend(header);
+  });
+</script>
+
+  </body>
+</html>
