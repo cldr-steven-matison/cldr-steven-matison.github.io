@@ -28,8 +28,8 @@ By the end of this journey, you won't just have basic health checks; you will ha
 This lesson assumes you have already:
 
 1. Completed deployment of [Cloudera Streaming Operators](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/)
-2. Have had the entire stack running, nifi flow is running, topics `txn`,`tnx2`,`txn_fraud`, exist, Sql Stream Builder Simple_Select Job is running.
-3. Cloned the latest [Cloudera Streaming Operators GitHub](https://github.com/cldr-steven-matison/ClouderaStreamingOperators) repo in ~/
+2. Have the `minikube` branch of [Streams Processing Hands on Lab ](https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab) setup completed, nifi flow is running, topics `txn`,`tnx2`, and `txn_fraud` exist, Sql Stream Builder Jobs running with operational polling.
+3. Cloned the latest [Cloudera Streaming Operators GitHub](https://github.com/cldr-steven-matison/ClouderaStreamingOperators) repo in ~/ local path.
 
 :warning: **Warning!** Some of the excercises below include new helm install commands.  Be prepared to use your helm uninstall commands as needed.  This is good practice to reset. However if you are using AI to execute against this plan,  you can helm upgrade or apply patches to get desired outcome(s)
 {: .notice--warning}

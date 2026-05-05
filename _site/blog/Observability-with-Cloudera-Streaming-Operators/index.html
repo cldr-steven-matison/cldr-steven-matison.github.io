@@ -23,14 +23,14 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
 <meta property="og:title" content="Observability with Cloudera Streaming Operators">
-<meta property="og:url" content="http://localhost:4000/blog/Observability-with-Cloudera-Streaming-Operators/">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Observability-with-Cloudera-Streaming-Operators/">
 
 
   <meta property="og:description" content="The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Prometheus, and Grafana.">
 
 
 
-  <meta property="og:image" content="http://localhost:4000/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png">
 
 
 
@@ -47,7 +47,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/blog/Observability-with-Cloudera-Streaming-Operators/">
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Observability-with-Cloudera-Streaming-Operators/">
 
 
 
@@ -58,7 +58,7 @@
     
       "@type": "Person",
       "name": "Steven Matison",
-      "url": "http://localhost:4000/"
+      "url": "https://cldr-steven-matison.github.io/"
     
   }
 </script>
@@ -160,7 +160,7 @@
 
   
     <div class="author__avatar">
-      <a href="http://localhost:4000/">
+      <a href="https://cldr-steven-matison.github.io/">
         <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
       </a>
     </div>
@@ -168,7 +168,7 @@
 
   <div class="author__content">
     <h3 class="author__name p-name" itemprop="name">
-      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Steven Matison</a>
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
     </h3>
     
       <div class="author__bio p-note" itemprop="description">
@@ -280,7 +280,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/blog/Observability-with-Cloudera-Streaming-Operators/" class="u-url" itemprop="url">Observability with Cloudera Streaming Operators
+            <a href="https://cldr-steven-matison.github.io/blog/Observability-with-Cloudera-Streaming-Operators/" class="u-url" itemprop="url">Observability with Cloudera Streaming Operators
 </a>
           </h1>
           
@@ -337,8 +337,8 @@
 <ol>
   <li>Completed deployment of <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a>
 </li>
-  <li>Have had the entire stack running, nifi flow is running, topics <code class="language-plaintext highlighter-rouge">txn</code>,<code class="language-plaintext highlighter-rouge">tnx2</code>,<code class="language-plaintext highlighter-rouge">txn_fraud</code>, exist, Sql Stream Builder Simple_Select Job is running.</li>
-  <li>Cloned the latest <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">Cloudera Streaming Operators GitHub</a> repo in ~/</li>
+  <li>Have the <code class="language-plaintext highlighter-rouge">minikube</code> branch of <a href="https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab">Streams Processing Hands on Lab </a> setup completed, nifi flow is running, topics <code class="language-plaintext highlighter-rouge">txn</code>,<code class="language-plaintext highlighter-rouge">tnx2</code>, and <code class="language-plaintext highlighter-rouge">txn_fraud</code> exist, Sql Stream Builder Jobs running with operational polling.</li>
+  <li>Cloned the latest <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">Cloudera Streaming Operators GitHub</a> repo in ~/ local path.</li>
 </ol>
 
 <p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Warning!</strong> Some of the excercises below include new helm install commands.  Be prepared to use your helm uninstall commands as needed.  This is good practice to reset. However if you are using AI to execute against this plan,  you can helm upgrade or apply patches to get desired outcome(s)</p>
@@ -481,9 +481,9 @@ This specific configuration enables proxy access, sets up the default datasource
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Observability+with+Cloudera+Streaming+Operators%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2FObservability-with-Cloudera-Streaming-Operators%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Observability+with+Cloudera+Streaming+Operators%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FObservability-with-Cloudera-Streaming-Operators%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2FObservability-with-Cloudera-Streaming-Operators%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FObservability-with-Cloudera-Streaming-Operators%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
