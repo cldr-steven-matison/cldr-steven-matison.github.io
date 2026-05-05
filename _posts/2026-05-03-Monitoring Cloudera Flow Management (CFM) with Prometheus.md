@@ -15,7 +15,7 @@ tags:
 :warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
 {: .notice--danger}
 
-In the previous guide on monitoring Cloudera Streams Messaging (CSM) we adeded visibility into your Kafka Brokers. Data pipelines don't start at the broker—they often start with **NiFi**. 
+In the previous guide on monitoring Cloudera Streams Messaging (CSM) we added visibility into your Kafka Brokers. Data pipelines don't start at the broker—they often start with **NiFi**. 
 
 When running NiFi via the **Cloudera Flow Management (CFM) Operator**, securing the cluster with Single User Auth puts the APIs into a strict lockdown. This makes scraping native metrics a bit of a kubernetes challenge. 
 
