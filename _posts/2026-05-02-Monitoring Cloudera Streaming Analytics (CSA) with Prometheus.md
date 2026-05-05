@@ -158,7 +158,7 @@ kubectl apply -f csa-flink-service-monitor.yaml -n cld-streaming
    minikube service ssb-sse --namespace cld-streaming
    ```
 
-2. Run any SQL job (or the existing `ssb-session-admin` job will already have created a Flink pod).
+2. Run any SQL job in Sql Stream Builder.
 
 3. Verify metrics are exposed directly from a pod:
    ```bash
