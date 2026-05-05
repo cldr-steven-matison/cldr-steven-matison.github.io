@@ -34,7 +34,7 @@ This lesson assumes you have already:
 :warning: **Warning!** Some of the excercises below include new helm install commands.  Be prepared to use your helm uninstall commands as needed.  This is good practice to reset. However if you are using AI to execute against this plan,  you can helm upgrade or apply patches to get desired outcome(s)
 {: .notice--warning}
 
-### 🛠️ Prometheus Install
+### Prometheus Install
 
 Before diving into the specific operators, you need a central monitoring stack. We will be using the community Prometheus Operator. Ensure your Kubernetes environment (like Minikube) is ready, and run the following commands to install the Prometheus Operator and Grafana into the `cld-streaming` namespace.
 
@@ -63,7 +63,7 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
 
 ---
 
-### 📚 The 3-Part Integration Series
+### The 3-Part Integration Series
 
 With the foundation laid, it's time to connect the engines. Follow these guides in order to build your end-to-end observability pipeline:
 
@@ -76,11 +76,11 @@ With the foundation laid, it's time to connect the engines. Follow these guides 
 
 ---
 
-### 📊 End to End CSO Dashboard with Grafana
+### End to End CSO Dashboard with Grafana
 
 [ insert content here ]
 
-### 🏁 Summary: Observability in Kubernetes Achieved
+### Summary: Observability in Kubernetes Achieved
 
 By wiring CFM (NiFi), CSM (Kafka). CSA (Flink/SSB) metrics to Prometheus, you have successfully built the complete, end-to-end observability of the Cloudera Streaming Operators. 
 
@@ -90,7 +90,7 @@ You can now reliably execute complex PromQL queries across namespaces, correlati
 
 ---
 
-### 📚 Resources
+### Resources
 * [Cloudera Streams Messaging (CSM) 1.6 Docs](https://docs.cloudera.com/csm-operator/1.6/index.html)
 * [Cloudera Streaming Analytics (CSA) 1.5 Docs](https://docs.cloudera.com/csa-operator/1.5/index.html)
 * [Cloudera Flow Management (CFM) 3.0 Docs](http://docs.cloudera.com/cfm-operator/3.0.0/index.html)

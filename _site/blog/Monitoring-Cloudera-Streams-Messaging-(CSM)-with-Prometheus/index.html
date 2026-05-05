@@ -328,7 +328,7 @@
 
 <hr>
 
-<h3 id="1️⃣-the-metrics-configmap">1️⃣ The Metrics ConfigMap</h3>
+<h3 id="the-metrics-configmap">The Metrics ConfigMap</h3>
 <p>First, we need to define how Kafka’s JMX metrics are converted into Prometheus format. Create <code class="language-plaintext highlighter-rouge">kafka-metrics-config.yaml</code>:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kind</span><span class="pi">:</span> <span class="s">ConfigMap</span>
@@ -505,7 +505,7 @@
 
 <hr>
 
-<h3 id="2️⃣-the-kafka-cluster-config">2️⃣ The Kafka Cluster Config</h3>
+<h3 id="the-kafka-cluster-config">The Kafka Cluster Config</h3>
 
 <p>Create the <code class="language-plaintext highlighter-rouge">kafka-nodepool.yaml</code>:</p>
 
@@ -572,7 +572,7 @@
 
 <hr>
 
-<h3 id="3️⃣-discovery-with-podmonitor">3️⃣ Discovery with PodMonitor</h3>
+<h3 id="discovery-with-podmonitor">Discovery with PodMonitor</h3>
 <p>Now we tell Prometheus to go find our brokers. Save as <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor.yaml</code>:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">monitoring.coreos.com/v1</span>
@@ -616,7 +616,7 @@
 
 <hr>
 
-<h3 id="4️⃣-exposing-the-uis">4️⃣ Exposing the UIs</h3>
+<h3 id="exposing-the-uis">Exposing the UIs</h3>
 
 <p>Grab the URLs and keep the tunnels alive in separate terminals.</p>
 
@@ -637,7 +637,7 @@
 </code></pre></div></div>
 <hr>
 
-<h3 id="5️⃣-querying-kafka-metrics-in-prometheus-ui">5️⃣ Querying Kafka Metrics in Prometheus UI</h3>
+<h3 id="querying-kafka-metrics-in-prometheus-ui">Querying Kafka Metrics in Prometheus UI</h3>
 
 <p>Now that you have the Prometheus UI exposed via <code class="language-plaintext highlighter-rouge">minikube service</code> (from Section 4) and your <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor</code> shows <strong>3/3 targets UP</strong>, you can start exploring live metrics from your <strong>CSM Operator</strong> Kafka cluster in real time.</p>
 
@@ -687,7 +687,7 @@
 
 <hr>
 
-<h3 id="6️⃣-visualizing-csm-kafka-with-grafana-dashboards">6️⃣ Visualizing CSM Kafka with Grafana Dashboards</h3>
+<h3 id="visualizing-csm-kafka-with-grafana-dashboards">Visualizing CSM Kafka with Grafana Dashboards</h3>
 
 <p>With Prometheus feeding live data, Grafana turns those raw metrics into professional dashboards. However, “no data” is the most common issue at this stage — usually because Prometheus is not yet scraping the Kafka brokers or the dashboard variables don’t match your labels.</p>
 
@@ -720,7 +720,7 @@ Go to <strong>Configuration → Data Sources</strong>.</p>
   </li>
 </ol>
 
-<h3 id="-summary">🏁 Summary</h3>
+<h3 id="summary">Summary</h3>
 
 <p>With the JMX exporter successfully injected and the PodMonitor active, you have cleared the first major hurdle in building an end-to-end observability pipeline. We didn’t just flip a switch; we architected a robust, Kubernetes-native discovery mechanism that respects the Strimzi-based Operator’s strict validation rules while still providing deep, granular visibility into broker performance.</p>
 

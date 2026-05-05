@@ -23,7 +23,7 @@ In this post, we’re going to wire up a secure CFM NiFi 2.x cluster to the **Pr
 
 ---
 
-### 1️⃣ The NiFi Cluster Config (The CR)
+### The NiFi Cluster Config (The CR)
 
 In NiFi 2.x, Prometheus metrics are built natively into the application; we don't need an external JMX exporter like Kafka. However, we do need to tell the CFM Operator to disable standard authentication on the metrics endpoint. 
 
@@ -59,7 +59,7 @@ spec:
 
 ---
 
-### 2️⃣ The mTLS VIP Bypass (Finding the Cert)
+### The mTLS VIP Bypass (Finding the Cert)
 
 Because we have `singleUserAuth: enabled`, NiFi will fiercely defend its endpoints—even with the property override above—throwing **401 Unauthorized** errors at Prometheus. NiFi expects a login token.
 
@@ -73,7 +73,7 @@ Look for **`mynifi-cfm-operator-user-cert`**. This is our golden ticket.
 
 ---
 
-### 3️⃣ Discovery with ServiceMonitor
+### Discovery with ServiceMonitor
 
 Now we tell Prometheus to scrape NiFi, handing it the certificate so it can breeze past the 401 Unauthorized screens. We also use a `relabelings` block to ensure the `Host` header perfectly matches what NiFi's Jetty server expects (preventing a **400 Bad Request** error).
 
@@ -122,7 +122,7 @@ spec:
 
 ---
 
-### 4️⃣ Querying NiFi Metrics in Prometheus UI
+### Querying NiFi Metrics in Prometheus UI
 
 Now that Prometheus has a secure, authenticated channel to NiFi, let's look at the data. Open the Prometheus UI Graph tab and test these queries:
 
@@ -144,7 +144,7 @@ sum(nifi_active_threads{namespace="cfm-streaming"})
 
 ---
 
-### 5️⃣ Visualizing CFM NiFi with Grafana Dashboards
+### Visualizing CFM NiFi with Grafana Dashboards
 
 With Prometheus pulling the data, let's load up a beautiful community-built dashboard.
 
@@ -171,7 +171,7 @@ If Query A and Query B are flowing together, your pipeline is healthy. If they d
 
 ---
 
-### 🏁 Summary
+### Summary
 
 By leveraging the CFM Operator’s native mynifi-cfm-operator-user-cert, you have successfully engineered an mTLS bridge that bypasses NiFi’s strict Single User Auth lockdown. We didn’t just find a workaround for the "401 Unauthorized" errors; we architected a secure, automated discovery path that allows Prometheus to scrape sensitive metrics without compromising the security of your data orchestration layer.
 

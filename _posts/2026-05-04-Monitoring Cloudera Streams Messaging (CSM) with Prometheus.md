@@ -21,7 +21,7 @@ In Part 1 of this series, we are going to crack open that black box. We will wal
 
 ---
 
-### 1️⃣ The Metrics ConfigMap
+### The Metrics ConfigMap
 First, we need to define how Kafka's JMX metrics are converted into Prometheus format. Create `kafka-metrics-config.yaml`:
 
 ```yaml
@@ -199,7 +199,7 @@ data:
 
 ---
 
-### 2️⃣ The Kafka Cluster Config 
+### The Kafka Cluster Config 
   
 Create the `kafka-nodepool.yaml`:
 
@@ -269,7 +269,7 @@ spec:
 
 ---
 
-### 3️⃣ Discovery with PodMonitor
+### Discovery with PodMonitor
 Now we tell Prometheus to go find our brokers. Save as `strimzi-pod-monitor.yaml`:
 
 ```yaml
@@ -314,7 +314,7 @@ spec:
 
 ---
 
-### 4️⃣ Exposing the UIs
+### Exposing the UIs
 
 Grab the URLs and keep the tunnels alive in separate terminals.
 
@@ -336,7 +336,7 @@ kubectl get secret --namespace cld-streaming prometheus-grafana -o jsonpath="{.d
 ---
 
 
-### 5️⃣ Querying Kafka Metrics in Prometheus UI
+### Querying Kafka Metrics in Prometheus UI
 
 Now that you have the Prometheus UI exposed via `minikube service` (from Section 4) and your `strimzi-pod-monitor` shows **3/3 targets UP**, you can start exploring live metrics from your **CSM Operator** Kafka cluster in real time.
 
@@ -380,7 +380,7 @@ This gives you immediate visibility into both message rate and data volume — p
 
 ---
 
-### 6️⃣ Visualizing CSM Kafka with Grafana Dashboards
+### Visualizing CSM Kafka with Grafana Dashboards
 
 With Prometheus feeding live data, Grafana turns those raw metrics into professional dashboards. However, “no data” is the most common issue at this stage — usually because Prometheus is not yet scraping the Kafka brokers or the dashboard variables don’t match your labels.
 
@@ -403,7 +403,7 @@ Go to **Configuration → Data Sources**.
    - Datasource → select your Prometheus data source  
    - Click **Import**
 
-### 🏁 Summary
+### Summary
 
 With the JMX exporter successfully injected and the PodMonitor active, you have cleared the first major hurdle in building an end-to-end observability pipeline. We didn’t just flip a switch; we architected a robust, Kubernetes-native discovery mechanism that respects the Strimzi-based Operator's strict validation rules while still providing deep, granular visibility into broker performance.
 
