@@ -212,6 +212,7 @@ sum(rate(kafka_server_brokertopicmetrics_bytesin_total{namespace="cld-streaming"
 * **ID `14840`**
   * **Name:** Flink Metrics (with Kafka) on K8S
   * **Description:** Since you are running CSA alongside Kafka, this dashboard is actually built to monitor Flink applications *and* includes Kafka throughput parameters alongside Kubernetes memory/CPU stats.
+  
 ---
 
 ### 🏁 Summary
