@@ -322,7 +322,7 @@
         
         <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
 
-<p>In the previous guide on monitoring Cloudera Streams Messaging (CSM) we added visibility into your Kafka Brokers. Data pipelines don’t start at the broker—they often start with <strong>NiFi</strong>.</p>
+<p>In the previous guide on monitoring Cloudera Streams Messaging (CSM) we added visibility into your Kafka cluster. Data pipelines don’t start at the broker—they often start with <strong>NiFi</strong>.</p>
 
 <p>When running NiFi via the <strong>Cloudera Flow Management (CFM) Operator</strong>, securing the cluster with Single User Auth puts the APIs into a strict lockdown. This makes scraping native metrics a bit of a kubernetes challenge.</p>
 
@@ -344,7 +344,6 @@
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
   <span class="na">nifiVersion</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.6.0"</span>
-  <span class="c1"># ... [image, statefulset, uiConnection, etc.] ...</span>
   <span class="na">security</span><span class="pi">:</span>
     <span class="na">initialAdminIdentity</span><span class="pi">:</span> <span class="s2">"</span><span class="s">admin"</span>
     <span class="na">nodeCertGen</span><span class="pi">:</span>
@@ -374,7 +373,7 @@
 <p>Run this command to find the Operator’s user certificate:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get secrets <span class="nt">-n</span> cfm-streaming | <span class="nb">grep </span>kubernetes.io/tls
 </code></pre></div></div>
-<p>Look for <strong><code class="language-plaintext highlighter-rouge">mynifi-cfm-operator-user-cert</code></strong>. This is our golden ticket.</p>
+<p>Look for <strong><code class="language-plaintext highlighter-rouge">mynifi-cfm-operator-user-cert</code></strong>. This is our golden ticket which we will take with us below into our NiFi ServiceMonitor.</p>
 
 <hr>
 
@@ -482,9 +481,9 @@ To truly see your pipeline in action, add a custom Time Series panel to your das
 
 <h3 id="summary">Summary</h3>
 
-<p>By leveraging the CFM Operator’s native mynifi-cfm-operator-user-cert, you have successfully engineered an mTLS bridge that bypasses NiFi’s strict Single User Auth lockdown. We didn’t just find a workaround for the “401 Unauthorized” errors; we architected a secure, automated discovery path that allows Prometheus to scrape sensitive metrics without compromising the security of your data orchestration layer.</p>
+<p>By leveraging the CFM Operator’s native <code class="language-plaintext highlighter-rouge">mynifi-cfm-operator-user-cert</code>, you have successfully engineered an mTLS bridge that bypasses NiFi’s strict Single User Auth lockdown. We didn’t just find a workaround for the “401 Unauthorized” errors; we architected a secure, automated discovery path that allows Prometheus to scrape sensitive metrics without compromising the security of your data orchestration layer.</p>
 
-<p>This configuration effectively solves the “networking puzzle” of NiFi 2.x observability. By aligning your ServiceMonitor with NiFi’s strict SNI and Host header requirements, you’ve ensured that your monitoring stack remains as resilient and production-ready as the pipelines it tracks. You now have the declarative tools to move beyond basic health checks and into deep, cross-namespace correlation.</p>
+<p>This configuration effectively solves the “networking puzzle” of NiFi 2.x observability. By aligning your ServiceMonitor with NiFi’s strict SNI and Host header requirements, you’ve ensured that your monitoring stack remains as resilient as the pipelines it tracks. You now have the declarative tools to move beyond basic health checks and into deep, cross-namespace correlation.</p>
 
 <p>With this piece of the puzzle in place, you can finally realize the “Master Plan”: a single pane of glass where you can watch NiFi’s outbound data rates flow in perfect synchronization with Kafka’s inbound throughput. You no longer have to guess where a bottleneck resides; you have the real-time telemetry required to prove exactly how data is moving through your entire Cloudera Streaming architecture.</p>
 

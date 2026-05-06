@@ -450,7 +450,7 @@ var store = [{
         "teaser": "/assets/images/2026-05-05-CSA_metrics.png"
       },{
         "title": "Monitoring Cloudera Flow Management (CFM) with Prometheus",
-        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. In the previous guide on monitoring Cloudera Streams Messaging (CSM) we added visibility into your Kafka Brokers. Data pipelines don’t start at the broker—they often start with NiFi. When running...","categories": ["blog"],
+        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. In the previous guide on monitoring Cloudera Streams Messaging (CSM) we added visibility into your Kafka cluster. Data pipelines don’t start at the broker—they often start with NiFi. When running...","categories": ["blog"],
         "tags": ["prometheus","grafana","nifi","cfm"],
         "url": "/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/",
         "teaser": "/assets/images/2026-05-05-CFM_metrics.png"
@@ -462,7 +462,7 @@ var store = [{
         "teaser": "/assets/images/2026-05-05-CSM_metrics.png"
       },{
         "title": "Observability with Cloudera Streaming Operators",
-        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. If you are running anything in kubernetes, you know that visibility is everything. You can build the most complex data pipelines in the world, but without eyes on your throughput,...","categories": ["blog"],
+        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. If you are running applications and workloads in kubernetes, you know that visibility is everything. You can build the most complex data pipelines in the world, but without eyes on...","categories": ["blog"],
         "tags": ["prometheus","grafana","kubernetes","operator"],
         "url": "/blog/Observability-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png"

@@ -17,7 +17,7 @@ tags:
 
 Apache Kafka is the undeniable backbone of modern real-time data, but monitoring its internal health on Kubernetes can often feel like trying to pick a lock. While the Strimzi-powered Cloudera Streams Messaging (CSM) Operator effortlessly spins up your brokers, the critical metrics you need to keep things running smoothly—like byte throughput and under-replicated partitions—are trapped deep inside the JVM. Because Prometheus doesn't natively speak JMX, we can't just open a port and call it a day. 
 
-In Part 1 of this series, we are going to crack open that black box. We will walk step-by-step through injecting a custom JMX Prometheus Exporter into your CSM cluster and deploying a specialized PodMonitor to translate those buried JVM metrics into  crystal-clear results in Prometheus and Grafana.
+In Part 1 of this series, we are going to crack open that black box around Kafka. We will walk step-by-step through injecting a custom JMX Prometheus Exporter into your CSM cluster and deploying a specialized PodMonitor to translate those buried JVM metrics into  crystal-clear results in Prometheus and Grafana.
 
 ---
 
@@ -329,7 +329,7 @@ minikube service prometheus-kube-prometheus-prometheus -n cld-streaming --url
 minikube service prometheus-grafana -n cld-streaming --url
 ```
 
-use this command to get the admin password
+You can use this command to get the admin password:
 ```bash
 kubectl get secret --namespace cld-streaming prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
@@ -342,7 +342,7 @@ Now that you have the Prometheus UI exposed via `minikube service` (from Section
 
 The JMX Prometheus Exporter is successfully scraping your brokers on port 9404. Your Kafka brokers are named `my-cluster-combined-*` due to the `combined` KafkaNodePool.
 
-Head to the Prometheus UI in your browser (usually at `http://<minikube-ip>:9090`). Switch to the **Graph** tab, and paste in the queries below. Use the autocomplete dropdown to explore other available metrics, or check **Status → Targets** to confirm everything is still scraping correctly.
+Head to the Prometheus UI in your browser. Check **Status → Targets** to confirm everything is still scraping correctly.  Switch to the **Graph** tab, and paste in the queries below. 
 
 **Sample Query 1: Topic Messages In Per Second (Confirmed Throughput)**  
 
@@ -374,15 +374,15 @@ This query shows the incoming byte rate per topic over a 5-minute window. It giv
   kubectl rollout restart statefulset prometheus-prometheus-kube-prometheus-prometheus -n cld-streaming
   ```
 
-Run both queries while your producers or NiFi flows are actively sending data to `txn1`, `txn2`, and `txn_fraud`. You should now see clear, live throughput numbers appearing in the Prometheus graphs.
+Run these sample queries while your NiFi flow is actively sending data to `txn1`, `txn2`, and `txn_fraud`. You should now see clear, live throughput numbers appearing in the Prometheus graphs.
 
-This gives you immediate visibility into both message rate and data volume — perfect for evaluating how well your CSM Kafka cluster is handling the workload.
+This gives you immediate visibility into both message rate and data volume — perfect for evaluating how well your CSM Opeator deployed Kafka cluster is handling the workload.
 
 ---
 
 ### Visualizing CSM Kafka with Grafana Dashboards
 
-With Prometheus feeding live data, Grafana turns those raw metrics into professional dashboards. However, “no data” is the most common issue at this stage — usually because Prometheus is not yet scraping the Kafka brokers or the dashboard variables don’t match your labels.
+With Prometheus feeding live data, Grafana turns those raw metrics into professional dashboards. However, “no data” is a common issue at this stage — usually because Prometheus is not yet scraping the Kafka brokers or the dashboard variables don’t match your labels.
 
 Open Grafana (`minikube service grafana -n cld-streaming`). Login with `admin` and the password from the secret (see Section 4).
 
@@ -390,7 +390,7 @@ Open Grafana (`minikube service grafana -n cld-streaming`). Login with `admin` a
 Go to **Configuration → Data Sources**.  
 - The “Prometheus” source should point to something like `http://prometheus-operated.monitoring.svc:9090`.  
 - Click **Save & Test**. It must say “Data source is working”.  
-(Note: There is no separate “Test” button on every screen — use the one at the bottom of the datasource edit page.)
+(Note: The “Test” button is at the bottom of the datasource edit page.)
 
 **Import the Strimzi Kafka Dashboard**  
 1. Download the JSON:
@@ -407,11 +407,11 @@ Go to **Configuration → Data Sources**.
 
 With the JMX exporter successfully injected and the PodMonitor active, you have cleared the first major hurdle in building an end-to-end observability pipeline. We didn’t just flip a switch; we architected a robust, Kubernetes-native discovery mechanism that respects the Strimzi-based Operator's strict validation rules while still providing deep, granular visibility into broker performance.
 
-By bridging the gap between Kafka’s internal JMX metrics and Prometheus, you now have a declarative, Git-trackable way to monitor everything from message rates to partition health. Whether you are troubleshooting high CPU usage on a specific broker or watching for under-replicated partitions during a scaling event, you now have the raw data required to maintain a healthy cluster.
+By bridging the gap between Kafka’s internal JMX metrics and Prometheus, you now have the observability needed to monitor everything from message rates to partition health. Whether you are troubleshooting high CPU usage on a specific broker or watching for under-replicated partitions during a scaling event, you now have the raw data required to maintain a healthy cluster.
 
-This setup serves as the foundation for the rest of your streaming stack. Now that your event backbone (Kafka) is visible, you are ready to plug in your ingestion (NiFi) and processing (Flink) engines to achieve that elusive "single pane of glass" view across your entire data lifecycle.
+This setup serves as the foundation for the rest of Cloudera Streaming Operator stack. Now that your event backbone (Kafka) is visible, you are ready to plug in your ingestion (NiFi) and processing (Flink) engines to achieve that elusive "single pane of glass" view across the entire data lifecycle in kubernetes.
 
-Lets move to the next post where we wire up CFM (NiFi 2.x) to this same stack!
+Lets move to the next post where we wire up CFM (NiFi 2.0) to this same stack!
 
 [Part 2: Monitoring Cloudera Flow Management (CFM) with Prometheus](/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/)
 
@@ -450,7 +450,7 @@ kafka_server_brokertopicmetrics_messagesinpersec{topic="txn_fraud"}
 sum(kafka_server_brokertopicmetrics_messagesinpersec{topic=~"txn1|txn2|txn_fraud"}) by (topic)
 sum(kafka_server_brokertopicmetrics_messagesinpersec{topic=~"txn1|txn2|txn_fraud"}) by (pod, topic)
 
-# in this session, a :lightbulb: moment.   When hem upgrade failed  rollback worked to revert
+# in this session, a :lightbulb: moment.   When helm upgrade failed  rollback worked to revert
 # also be careful in test iterations,  if we do a live patch,  we need to make sure we go back to get the same change reflected in cli or yaml commands
 
 
@@ -463,7 +463,7 @@ kubectl get podmonitors -n cld-streaming
 kubectl exec -it my-cluster-combined-0 -n cld-streaming -- curl localhost:9404/metrics
 kubectl patch podmonitor strimzi-pod-monitor -n cld-streaming --type merge -p '{"spec":{"jobLabel":"strimzi.io/cluster"}}'
 helm upgrade prometheus prometheus-community/kube-prometheus-stack \\n  --namespace cld-streaming \\n  --reuse-values \\n  --set 'grafana.additionalDataSources[0].jsonData.timeInterval=30s' \\n  --set 'grafana.additionalDataSources[0].jsonData.httpMethod=POST' \\n  --set 'grafana.additionalDataSources[0].jsonData.incrementalQuerying=true'
- helm rollback prometheus -n cld-streaming
+helm rollback prometheus -n cld-streaming
 helm upgrade prometheus prometheus-community/kube-prometheus-stack \\n  --namespace cld-streaming \\n  --reuse-values \\n  --set 'grafana.sidecar.datasources.isDefaultDatasourceEditable=true' \\n  --set 'grafana.additionalDataSources[0].jsonData.scrapeInterval=30s'
 kubectl get secret --namespace cld-streaming -l app.kubernetes.io/component=admin-secret -o jsonpath="{.items[0].data.admin-password}" | base64 --decode ; echo
 helm rollback prometheus -n cld-streaming
@@ -511,8 +511,7 @@ kubectl rollout restart statefulset prometheus-prometheus-kube-prometheus-promet
 kubectl rollout restart deployment prometheus-kube-prometheus-operator -n cld-streaming
 ```
 
-
-#### Quick custom panels (while dashboard finishes loading)
+#### 6. Quick custom panels (while dashboard finishes loading)
 Use these in a temporary dashboard (they match your working queries):
 
 - **Messages In Per Second**

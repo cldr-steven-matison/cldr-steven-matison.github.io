@@ -15,11 +15,13 @@ tags:
 :warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
 {: .notice--danger}
 
-If you are running anything in kubernetes, you know that visibility is everything. You can build the most complex data pipelines in the world, but without eyes on your throughput, queues, or other streaming metrics, you’re essentially flying blind. 
+![Observability with Cloudera Streaming Operators](/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png)
 
-Welcome to the ultimate landing page for my 3-part series on Kubernetes-native observability. In this series, we walk through the exact steps to wire up the entire Cloudera Streaming Operator architecture—**NiFi, Kafka, and Flink**—into a unified Prometheus and Grafana stack. 
+If you are running applications and workloads in kubernetes, you know that visibility is everything. You can build the most complex data pipelines in the world, but without eyes on your throughput, queues, or other streaming metrics, you’re essentially flying blind. 
 
-By the end of this journey, you won't just have basic health checks; you will have a single pane of glass correlating NiFi's outbound flow perfectly with Kafka's inbound throughput and Flink's sql job processing metrics.
+Welcome to the ultimate landing page for my 3 part series on Kubernetes native observability. In this series, we walk through the exact steps to wire up the entire Cloudera Streaming Operator architecture—**NiFi, Kafka, and Flink**—into a unified Prometheus and Grafana stack. 
+
+By the end of this journey, you won't just have basic health checks; you will have a single pane of glass correlating NiFi's data flow metrics perfectly with Kafka's topic throughput and Flink's stream processing metrics.
 
 ---
 
@@ -31,12 +33,12 @@ This lesson assumes you have already:
 2. Have the `minikube` branch of [Streams Processing Hands on Lab ](https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab) setup completed, nifi flow is running, topics `txn`,`tnx2`, and `txn_fraud` exist, Sql Stream Builder Jobs running with operational polling.
 3. Cloned the latest [Cloudera Streaming Operators GitHub](https://github.com/cldr-steven-matison/ClouderaStreamingOperators) repo in ~/ local path.
 
-:warning: **Warning!** Some of the excercises below include new helm install commands.  Be prepared to use your helm uninstall commands as needed.  This is good practice to reset. However if you are using AI to execute against this plan,  you can helm upgrade or apply patches to get desired outcome(s)
+:warning: **Warning!** Some of the excercises include new helm install commands.  Be prepared to use your helm uninstall commands as needed.  Install/Uninstall is good practice to reset your stage. However if you are using AI to execute against this plan,  you can h`elm upgrade` or `kubectl apply` patches to get desired outcome(s).
 {: .notice--warning}
 
 ### Prometheus Install
 
-Before diving into the specific operators, you need a central monitoring stack. We will be using the community Prometheus Operator. Ensure your Kubernetes environment (like Minikube) is ready, and run the following commands to install the Prometheus Operator and Grafana into the `cld-streaming` namespace.
+Before diving into the specific operators, you need to install the central monitoring stack. We will be using the community Prometheus Operator. Ensure your Kubernetes environment is ready, and run the following commands to install the Prometheus Operator and Grafana into the `cld-streaming` namespace.
 
 **1. Add the Helm Repo:**
 ```bash
@@ -44,7 +46,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 ```
 
 **2. Install the Kube-Prometheus-Stack:**
-This specific configuration enables proxy access, sets up the default datasources, and configures the Operator to watch for `PodMonitors` and `ServiceMonitors` across *all* namespaces (`{}`).
+This specific configuration enables proxy access, sets up the default datasources, and configures the Operator to watch for `PodMonitors` and `ServiceMonitors` across *all* namespaces (`{ }`).
 
 ```bash
 helm install prometheus prometheus-community/kube-prometheus-stack \
@@ -63,14 +65,14 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
 
 ---
 
-### The 3-Part Integration Series
+### The 3 Part Integration Series
 
-With the foundation laid, it's time to connect the engines. Follow these guides in order to build your end-to-end observability pipeline:
+With the observability foundation laid, it's time to connect the engines. Follow these guides in order to build your end-to-end observability pipeline:
 
 * **[Part 1: Monitoring Cloudera Streams Messaging (CSM) with Prometheus](/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/)**
     * **Description:** This guide covers how to inject a custom JMX Exporter configuration and deploy a specialized `PodMonitor` to extract metrics from your CSM Operator deployed Kafka cluster.
 * **[Part 2: Monitoring Cloudera Flow Management (CFM) with Prometheus](/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/)**
-    * **Description:** Learn how to architect a secure mTLS bypass using the CFM Operator's own client certificates to safely pull queue tracking and active thread metrics into Grafana.
+    * **Description:** Learn how to architect a secure mTLS bypass using the CFM Operator's own client certificates to safely pull queue tracking and active thread metrics into Prometheus and Grafana.
 * **[Part 3: Monitoring Cloudera Streaming Analytics (CSA) with Prometheus](/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/)**
     * **Description:** This guide solves the ssb flink and kubernetes networking puzzle using a Headless Service and `ServiceMonitor` to capture CSA Operator deployed flink sql job metrics.
 
