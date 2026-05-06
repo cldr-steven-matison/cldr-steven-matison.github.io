@@ -403,6 +403,10 @@ Go to **Configuration → Data Sources**.
    - Datasource → select your Prometheus data source  
    - Click **Import**
 
+*Boom. You now have the new Cloudera CSM Kafka Dashboard in Grafana:*
+
+![Cloudera CSM Kafka Dashboard](/assets/images/Cloudera_CSM_Kafka_Dashboard.png)
+
 ### Summary
 
 With the JMX exporter successfully injected and the PodMonitor active, you have cleared the first major hurdle in building an end-to-end observability pipeline. We didn’t just flip a switch; we architected a robust, Kubernetes-native discovery mechanism that respects the Strimzi-based Operator's strict validation rules while still providing deep, granular visibility into broker performance.
@@ -511,7 +515,7 @@ kubectl rollout restart statefulset prometheus-prometheus-kube-prometheus-promet
 kubectl rollout restart deployment prometheus-kube-prometheus-operator -n cld-streaming
 ```
 
-#### 6. Quick custom panels (while dashboard finishes loading)
+#### 6. Quick custom panels
 Use these in a temporary dashboard (they match your working queries):
 
 - **Messages In Per Second**

@@ -154,19 +154,7 @@ With Prometheus pulling the data, let's load up a beautiful community-built dash
 
 *Boom. You now have full JVM stats, FlowFile queue tracking, and throughput metrics.*
 
-**Step 2: The "Master Plan" Cross-Namespace Panel**
-To truly see your pipeline in action, add a custom Time Series panel to your dashboard that overlays NiFi's *outbound* data directly on top of Kafka's *inbound* data. 
-
-* **Query A (NiFi Send Rate):**
-  ```bash
-  sum(rate(nifi_bytes_sent{namespace="cfm-streaming"}[5m]))
-  ```
-* **Query B (Kafka Receive Rate):**
-  ```bash
-  sum(rate(kafka_server_brokertopicmetrics_bytesin_total{namespace="cld-streaming"}[5m]))
-  ```
-
-If Query A and Query B are flowing together, your pipeline is healthy. If they diverge, you know instantly where the bottleneck is.
+![Cloudera CFM NiFi Dashboard](/assets/images/Cloudera_CFM_NiFi_Dashboard.png)
 
 ---
 
@@ -199,3 +187,17 @@ If you want to verify what metrics the endpoint is outputting from inside the cl
 ```bash
 kubectl exec mynifi-0 -n cfm-streaming -- curl -k -v --cert /path/to/cert https://localhost:8443/nifi-api/flow/metrics/prometheus
 ```
+
+#### 3. **Cross-Namespace Panels**
+To truly see your pipeline in action, add a custom Time Series panel to your dashboard that overlays NiFi's *outbound* data directly on top of Kafka's *inbound* data. 
+
+* **Query A (NiFi Send Rate):**
+  ```bash
+  sum(rate(nifi_bytes_sent{namespace="cfm-streaming"}[5m]))
+  ```
+* **Query B (Kafka Receive Rate):**
+  ```bash
+  sum(rate(kafka_server_brokertopicmetrics_bytesin_total{namespace="cld-streaming"}[5m]))
+  ```
+
+If Query A and Query B are flowing together, your pipeline is healthy. If they diverge, you know instantly where the bottleneck is.

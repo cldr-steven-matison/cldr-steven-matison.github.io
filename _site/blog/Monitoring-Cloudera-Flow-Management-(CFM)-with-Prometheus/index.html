@@ -457,25 +457,7 @@
 
 <p><em>Boom. You now have full JVM stats, FlowFile queue tracking, and throughput metrics.</em></p>
 
-<p><strong>Step 2: The “Master Plan” Cross-Namespace Panel</strong>
-To truly see your pipeline in action, add a custom Time Series panel to your dashboard that overlays NiFi’s <em>outbound</em> data directly on top of Kafka’s <em>inbound</em> data.</p>
-
-<ul>
-  <li>
-<strong>Query A (NiFi Send Rate):</strong>
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>nifi_bytes_sent<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cfm-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-<strong>Query B (Kafka Receive Rate):</strong>
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>kafka_server_brokertopicmetrics_bytesin_total<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<p>If Query A and Query B are flowing together, your pipeline is healthy. If they diverge, you know instantly where the bottleneck is.</p>
+<p><img src="/assets/images/Cloudera_CFM_NiFi_Dashboard.png" alt="Cloudera CFM NiFi Dashboard"></p>
 
 <hr>
 
@@ -506,6 +488,27 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
 <p>If you want to verify what metrics the endpoint is outputting from inside the cluster using the Operator cert:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec </span>mynifi-0 <span class="nt">-n</span> cfm-streaming <span class="nt">--</span> curl <span class="nt">-k</span> <span class="nt">-v</span> <span class="nt">--cert</span> /path/to/cert https://localhost:8443/nifi-api/flow/metrics/prometheus
 </code></pre></div></div>
+
+<h4 id="3-cross-namespace-panels">3. <strong>Cross-Namespace Panels</strong>
+</h4>
+<p>To truly see your pipeline in action, add a custom Time Series panel to your dashboard that overlays NiFi’s <em>outbound</em> data directly on top of Kafka’s <em>inbound</em> data.</p>
+
+<ul>
+  <li>
+<strong>Query A (NiFi Send Rate):</strong>
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>nifi_bytes_sent<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cfm-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+<strong>Query B (Kafka Receive Rate):</strong>
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>kafka_server_brokertopicmetrics_bytesin_total<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>If Query A and Query B are flowing together, your pipeline is healthy. If they diverge, you know instantly where the bottleneck is.</p>
 
         
       </section>
