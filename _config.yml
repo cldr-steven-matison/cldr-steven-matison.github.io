@@ -293,4 +293,5 @@ defaults:
       share: true
       related: true
       #last_modified_at: true
+      classes: wide
 

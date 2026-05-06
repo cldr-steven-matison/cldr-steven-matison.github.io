@@ -33,7 +33,7 @@ This lesson assumes you have already:
 2. Have the `minikube` branch of [Streams Processing Hands on Lab ](https://github.com/cldr-steven-matison/Streams-Processing-Hands-on-Lab) setup completed, nifi flow is running, topics `txn`,`tnx2`, and `txn_fraud` exist, Sql Stream Builder Jobs running with operational polling.
 3. Cloned the latest [Cloudera Streaming Operators GitHub](https://github.com/cldr-steven-matison/ClouderaStreamingOperators) repo in ~/ local path.
 
-:warning: **Warning!** Some of the excercises include new helm install commands.  Be prepared to use your helm uninstall commands as needed.  Install/Uninstall is good practice to reset your stage. However if you are using AI to execute against this plan,  you can h`elm upgrade` or `kubectl apply` patches to get desired outcome(s).
+:warning: **Warning!** Some of the excercises include new helm install commands.  Be prepared to use your helm uninstall commands as needed.  Install/Uninstall is good practice to reset your stage. However if you are using AI to execute against this plan, you can `helm upgrade` or `kubectl apply` patches to get desired outcome(s).
 {: .notice--warning}
 
 ### Prometheus Install
