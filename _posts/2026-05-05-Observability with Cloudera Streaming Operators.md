@@ -73,7 +73,6 @@ Grab the URLs and keep the tunnels alive in separate terminals.
 ```bash
 minikube service prometheus-kube-prometheus-prometheus -n cld-streaming --url
 ```
-* **Verification:** Go to `Status -> Targets`. Look for `strimzi-pod-monitor`. It should be **UP**.
 
 **Tab 2: Grafana UI**
 ```bash

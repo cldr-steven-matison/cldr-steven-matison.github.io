@@ -379,10 +379,6 @@ This specific configuration enables proxy access, sets up the default datasource
 <p><strong>Tab 1: Prometheus UI</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service prometheus-kube-prometheus-prometheus <span class="nt">-n</span> cld-streaming <span class="nt">--url</span>
 </code></pre></div></div>
-<ul>
-  <li>
-<strong>Verification:</strong> Go to <code class="language-plaintext highlighter-rouge">Status -&gt; Targets</code>. Look for <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor</code>. It should be <strong>UP</strong>.</li>
-</ul>
 
 <p><strong>Tab 2: Grafana UI</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service prometheus-grafana <span class="nt">-n</span> cld-streaming <span class="nt">--url</span>

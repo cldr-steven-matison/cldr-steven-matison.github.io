@@ -618,11 +618,18 @@
 
 <h3 id="querying-kafka-metrics-in-prometheus-ui">Querying Kafka Metrics in Prometheus UI</h3>
 
-<p>Now that you have the Prometheus UI exposed via <code class="language-plaintext highlighter-rouge">minikube service</code> (from Section 4) and your <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor</code> shows <strong>3/3 targets UP</strong>, you can start exploring live metrics from your <strong>CSM Operator</strong> Kafka cluster in real time.</p>
+<p>You should you have the Prometheus UI exposed via <code class="language-plaintext highlighter-rouge">minikube service</code>  and your <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor</code> shows <strong>3/3 targets UP</strong>.</p>
+
+<ul>
+  <li>
+<strong>Verification:</strong> Go to <code class="language-plaintext highlighter-rouge">Status -&gt; Targets</code>. Look for <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor</code>. It should be <strong>UP</strong>.</li>
+</ul>
+
+<p>Now you can start exploring live metrics from your <strong>CSM Operator</strong> Kafka cluster in real time.</p>
 
 <p>The JMX Prometheus Exporter is successfully scraping your brokers on port 9404. Your Kafka brokers are named <code class="language-plaintext highlighter-rouge">my-cluster-combined-*</code> due to the <code class="language-plaintext highlighter-rouge">combined</code> KafkaNodePool.</p>
 
-<p>Head to the Prometheus UI in your browser. Check <strong>Status → Targets</strong> to confirm everything is still scraping correctly.  Switch to the <strong>Graph</strong> tab, and paste in the queries below.</p>
+<p>In the Prometheus UI switch to the <strong>Graph</strong> tab, and paste in the queries below.</p>
 
 <p><strong>Sample Query 1: Topic Messages In Per Second (Confirmed Throughput)</strong></p>
 
