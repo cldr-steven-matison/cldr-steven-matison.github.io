@@ -55,7 +55,7 @@ Run this **exact** command:
 
 ```bash
 helm install csa-operator \
-  oci://[container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator](https://container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator) \
+  oci://container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator \
   --namespace cld-streaming \
   --create-namespace \
   --version 1.5.0-b275 \

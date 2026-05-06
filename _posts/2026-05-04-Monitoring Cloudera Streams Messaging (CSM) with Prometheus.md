@@ -392,10 +392,10 @@ Go to **Configuration → Data Sources**.
 - Click **Save & Test**. It must say “Data source is working”.  
 (Note: The “Test” button is at the bottom of the datasource edit page.)
 
-**Import the Strimzi Kafka Dashboard**  
+**Import the Cloudera CSM Kafka Dashboard**  
 1. Download the JSON:
    ```bash
-   curl -O https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/main/examples/metrics/grafana-dashboards/strimzi-kafka.json
+   curl -O https://raw.githubusercontent.com/cldr-steven-matison/ClouderaStreamingOperators/refs/heads/main/csm-kafka-dashboard.json
    ```
 2. In Grafana → **Dashboards** → **New** → **Import**  
 3. Click **Upload JSON file** and select the downloaded file.  
