@@ -65,7 +65,29 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
 
 ---
 
-### The 3 Part Integration Series
+### Exposing the Prometheus and Grafana UIs
+
+Grab the URLs and keep the tunnels alive in separate terminals.
+
+**Tab 1: Prometheus UI**
+```bash
+minikube service prometheus-kube-prometheus-prometheus -n cld-streaming --url
+```
+* **Verification:** Go to `Status -> Targets`. Look for `strimzi-pod-monitor`. It should be **UP**.
+
+**Tab 2: Grafana UI**
+```bash
+minikube service prometheus-grafana -n cld-streaming --url
+```
+
+You can use this command to get the admin password:
+```bash
+kubectl get secret --namespace cld-streaming prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
+---
+
+
+### The 3 Part Cloudera Streaming Operators Integration Series
 
 With the observability foundation laid, it's time to connect the engines. Follow these guides in order to build your end-to-end observability pipeline:
 
@@ -80,7 +102,7 @@ With the observability foundation laid, it's time to connect the engines. Follow
 
 ### End to End CSO Dashboard with Grafana
 
-[ insert content here ]
+[ insert content here to build a new Cloudera Streaming Operators Grafana Dashboard ]
 
 ### Summary: Observability in Kubernetes Achieved
 

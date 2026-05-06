@@ -314,28 +314,6 @@ spec:
 
 ---
 
-### Exposing the UIs
-
-Grab the URLs and keep the tunnels alive in separate terminals.
-
-**Tab 1: Prometheus UI**
-```bash
-minikube service prometheus-kube-prometheus-prometheus -n cld-streaming --url
-```
-* **Verification:** Go to `Status -> Targets`. Look for `strimzi-pod-monitor`. It should be **UP**.
-
-**Tab 2: Grafana UI**
-```bash
-minikube service prometheus-grafana -n cld-streaming --url
-```
-
-You can use this command to get the admin password:
-```bash
-kubectl get secret --namespace cld-streaming prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-```
----
-
-
 ### Querying Kafka Metrics in Prometheus UI
 
 Now that you have the Prometheus UI exposed via `minikube service` (from Section 4) and your `strimzi-pod-monitor` shows **3/3 targets UP**, you can start exploring live metrics from your **CSM Operator** Kafka cluster in real time.
@@ -406,6 +384,8 @@ Go to **Configuration → Data Sources**.
 *Boom. You now have the new Cloudera CSM Kafka Dashboard in Grafana:*
 
 ![Cloudera CSM Kafka Dashboard](/assets/images/Cloudera_CSM_Kafka_Dashboard.png)
+
+---
 
 ### Summary
 

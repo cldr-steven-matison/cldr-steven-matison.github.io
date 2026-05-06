@@ -616,27 +616,6 @@
 
 <hr>
 
-<h3 id="exposing-the-uis">Exposing the UIs</h3>
-
-<p>Grab the URLs and keep the tunnels alive in separate terminals.</p>
-
-<p><strong>Tab 1: Prometheus UI</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service prometheus-kube-prometheus-prometheus <span class="nt">-n</span> cld-streaming <span class="nt">--url</span>
-</code></pre></div></div>
-<ul>
-  <li>
-<strong>Verification:</strong> Go to <code class="language-plaintext highlighter-rouge">Status -&gt; Targets</code>. Look for <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor</code>. It should be <strong>UP</strong>.</li>
-</ul>
-
-<p><strong>Tab 2: Grafana UI</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service prometheus-grafana <span class="nt">-n</span> cld-streaming <span class="nt">--url</span>
-</code></pre></div></div>
-
-<p>You can use this command to get the admin password:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get secret <span class="nt">--namespace</span> cld-streaming prometheus-grafana <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">"{.data.admin-password}"</span> | <span class="nb">base64</span> <span class="nt">--decode</span> <span class="p">;</span> <span class="nb">echo</span>
-</code></pre></div></div>
-<hr>
-
 <h3 id="querying-kafka-metrics-in-prometheus-ui">Querying Kafka Metrics in Prometheus UI</h3>
 
 <p>Now that you have the Prometheus UI exposed via <code class="language-plaintext highlighter-rouge">minikube service</code> (from Section 4) and your <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor</code> shows <strong>3/3 targets UP</strong>, you can start exploring live metrics from your <strong>CSM Operator</strong> Kafka cluster in real time.</p>
@@ -723,6 +702,8 @@ Go to <strong>Configuration → Data Sources</strong>.</p>
 <p><em>Boom. You now have the new Cloudera CSM Kafka Dashboard in Grafana:</em></p>
 
 <p><img src="/assets/images/Cloudera_CSM_Kafka_Dashboard.png" alt="Cloudera CSM Kafka Dashboard"></p>
+
+<hr>
 
 <h3 id="summary">Summary</h3>
 
@@ -966,7 +947,7 @@ kubectl rollout restart deployment prometheus-kube-prometheus-operator <span cla
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          3 minute read
+          4 minute read
         
       </span>
     

@@ -372,7 +372,28 @@ This specific configuration enables proxy access, sets up the default datasource
 
 <hr>
 
-<h3 id="the-3-part-integration-series">The 3 Part Integration Series</h3>
+<h3 id="exposing-the-prometheus-and-grafana-uis">Exposing the Prometheus and Grafana UIs</h3>
+
+<p>Grab the URLs and keep the tunnels alive in separate terminals.</p>
+
+<p><strong>Tab 1: Prometheus UI</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service prometheus-kube-prometheus-prometheus <span class="nt">-n</span> cld-streaming <span class="nt">--url</span>
+</code></pre></div></div>
+<ul>
+  <li>
+<strong>Verification:</strong> Go to <code class="language-plaintext highlighter-rouge">Status -&gt; Targets</code>. Look for <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor</code>. It should be <strong>UP</strong>.</li>
+</ul>
+
+<p><strong>Tab 2: Grafana UI</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service prometheus-grafana <span class="nt">-n</span> cld-streaming <span class="nt">--url</span>
+</code></pre></div></div>
+
+<p>You can use this command to get the admin password:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get secret <span class="nt">--namespace</span> cld-streaming prometheus-grafana <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">"{.data.admin-password}"</span> | <span class="nb">base64</span> <span class="nt">--decode</span> <span class="p">;</span> <span class="nb">echo</span>
+</code></pre></div></div>
+<hr>
+
+<h3 id="the-3-part-cloudera-streaming-operators-integration-series">The 3 Part Cloudera Streaming Operators Integration Series</h3>
 
 <p>With the observability foundation laid, it’s time to connect the engines. Follow these guides in order to build your end-to-end observability pipeline:</p>
 
@@ -404,7 +425,7 @@ This specific configuration enables proxy access, sets up the default datasource
 
 <h3 id="end-to-end-cso-dashboard-with-grafana">End to End CSO Dashboard with Grafana</h3>
 
-<p>[ insert content here ]</p>
+<p>[ insert content here to build a new Cloudera Streaming Operators Grafana Dashboard ]</p>
 
 <h3 id="summary-observability-in-kubernetes-achieved">Summary: Observability in Kubernetes Achieved</h3>
 
