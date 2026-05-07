@@ -501,7 +501,10 @@
       <span class="s">name: kafka_server_brokermetadatametrics_$1</span>
       <span class="s">type: GAUGE</span>
 </code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">kubectl apply -f kafka-metrics-config.yaml -n cld-streaming</code></p>
+<p>Apply the yaml:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">kubectl apply -f kafka-metrics-config.yaml -n cld-streaming</span>
+</code></pre></div></div>
 
 <hr>
 
@@ -529,7 +532,11 @@
         <span class="na">kraftMetadata</span><span class="pi">:</span> <span class="s">shared</span>
         <span class="na">deleteClaim</span><span class="pi">:</span> <span class="kc">false</span>
 </code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">kubectl apply -f kafka-nodepool.yaml -n cld-streaming</code></p>
+
+<p>Apply the yaml:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">kubectl apply -f kafka-nodepool.yaml -n cld-streaming`</span>
+</code></pre></div></div>
 
 <p>Create the <code class="language-plaintext highlighter-rouge">kafka-eval-prometheus.yaml</code>:</p>
 
@@ -568,12 +575,16 @@
     <span class="na">topicOperator</span><span class="pi">:</span> <span class="pi">{}</span>
     <span class="na">userOperator</span><span class="pi">:</span> <span class="pi">{}</span>
 </code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">kubectl apply -f kafka-eval-prometheus.yaml -n cld-streaming</code></p>
+
+<p>Apply the yaml:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">kubectl apply -f kafka-eval-prometheus.yaml -n cld-streaming</span>
+</code></pre></div></div>
 
 <hr>
 
 <h3 id="discovery-with-podmonitor">Discovery with PodMonitor</h3>
-<p>Now we tell Prometheus to go find our brokers. Save as <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor.yaml</code>:</p>
+<p>Now we tell Prometheus to go find our brokers. Create our PodMoinitor <code class="language-plaintext highlighter-rouge">strimzi-pod-monitor.yaml</code>:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">monitoring.coreos.com/v1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">PodMonitor</span>
@@ -612,7 +623,11 @@
         <span class="pi">-</span> <span class="na">sourceLabels</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">__meta_kubernetes_pod_node_name</span><span class="pi">]</span>
           <span class="na">targetLabel</span><span class="pi">:</span> <span class="s">node_name</span>
 </code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">kubectl apply -f strimzi-pod-monitor.yaml -n cld-streaming</code></p>
+
+<p>Apply the yaml:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">kubectl apply -f strimzi-pod-monitor.yaml -n cld-streaming</span>
+</code></pre></div></div>
 
 <hr>
 
@@ -1053,7 +1068,7 @@ kubectl rollout restart deployment prometheus-kube-prometheus-operator <span cla
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          4 minute read
+          5 minute read
         
       </span>
     

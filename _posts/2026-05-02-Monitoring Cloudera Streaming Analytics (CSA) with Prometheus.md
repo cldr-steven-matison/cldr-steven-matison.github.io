@@ -230,6 +230,9 @@ In this specific guide we implemented a Headless Service and a ServiceMonitor to
 
 You can now reliably execute complex PromQL queries in Prometheus across namespaces and correlate behavior across entirely different engines. Whether you are tracking backpressure in NiFi, monitoring consumer lag in Kafka, or measuring checkpoint durations and records-per-second in Flink, you finally have the single pane of glass required to confidently debug, tune, scale, and monitor your streaming data pipelines.
 
+
+Now that we have finished our 3 Parts , let's go back to the beginnning.  Now we can build that [End to End Cloudera Streaming Operator Dashboard with Grafana](/blog/Observability-with-Cloudera-Streaming-Operators/#end-to-end-cso-dashboard-with-grafana).
+
 ---
 
 ### Appendix

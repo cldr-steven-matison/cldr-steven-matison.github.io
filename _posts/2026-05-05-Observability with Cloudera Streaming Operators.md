@@ -101,7 +101,7 @@ With the observability foundation laid, it's time to connect the engines. Follow
 
 ### End to End CSO Dashboard with Grafana
 
-[ insert content here to build a new Cloudera Streaming Operators Grafana Dashboard ]
+[ Planning & Testing Now ]
 
 ### Summary: Observability in Kubernetes Achieved
 
@@ -117,7 +117,7 @@ You can now reliably execute complex PromQL queries across namespaces, correlati
 * [Cloudera Streams Messaging (CSM) 1.6 Docs](https://docs.cloudera.com/csm-operator/1.6/index.html)
 * [Cloudera Streaming Analytics (CSA) 1.5 Docs](https://docs.cloudera.com/csa-operator/1.5/index.html)
 * [Cloudera Flow Management (CFM) 3.0 Docs](http://docs.cloudera.com/cfm-operator/3.0.0/index.html)
-* [ClouderaStreamingOperators GitHub Repo](https://github.com/cldr-steven-matison/ClouderaStreamingOperators)
+* [Cloudera Streaming Operators GitHub Repo](https://github.com/cldr-steven-matison/ClouderaStreamingOperators)
 * [Cloudera Streaming Operators Blog](https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/)
 
 ## {{ page.title }}

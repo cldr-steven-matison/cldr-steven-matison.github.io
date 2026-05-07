@@ -195,7 +195,11 @@ data:
       name: kafka_server_brokermetadatametrics_$1
       type: GAUGE
 ```
-`kubectl apply -f kafka-metrics-config.yaml -n cld-streaming`
+Apply the yaml:
+
+```yaml
+kubectl apply -f kafka-metrics-config.yaml -n cld-streaming
+```
 
 ---
 
@@ -224,8 +228,12 @@ spec:
         kraftMetadata: shared
         deleteClaim: false
 ```
-`kubectl apply -f kafka-nodepool.yaml -n cld-streaming`
 
+Apply the yaml:
+
+```yaml
+kubectl apply -f kafka-nodepool.yaml -n cld-streaming`
+```
 
 Create the `kafka-eval-prometheus.yaml`:
 
@@ -265,12 +273,17 @@ spec:
     topicOperator: {}
     userOperator: {}
 ```
-`kubectl apply -f kafka-eval-prometheus.yaml -n cld-streaming`
+
+Apply the yaml:
+
+```yaml
+kubectl apply -f kafka-eval-prometheus.yaml -n cld-streaming
+```
 
 ---
 
 ### Discovery with PodMonitor
-Now we tell Prometheus to go find our brokers. Save as `strimzi-pod-monitor.yaml`:
+Now we tell Prometheus to go find our brokers. Create our PodMoinitor `strimzi-pod-monitor.yaml`:
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -310,7 +323,12 @@ spec:
         - sourceLabels: [__meta_kubernetes_pod_node_name]
           targetLabel: node_name
 ```
-`kubectl apply -f strimzi-pod-monitor.yaml -n cld-streaming`
+
+Apply the yaml:
+
+```yaml
+kubectl apply -f strimzi-pod-monitor.yaml -n cld-streaming
+```
 
 ---
 
