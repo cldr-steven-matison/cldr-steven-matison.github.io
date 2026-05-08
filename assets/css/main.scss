@@ -97,3 +97,45 @@ code,
 .highlight {
   overflow-x: hidden !important;
 }
+
+/* --- Professional Clipboard.js Button --- */
+.highlight {
+  position: relative; /* Anchor for the button */
+}
+
+.copy-code-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #2f5d3e !important;       /* Your theme Green */
+  background-color: #f0f4f1 !important; /* Mint background */
+  border: 1px solid #d1dbd3 !important;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;                       /* Hidden until hover */
+  transition: opacity 0.2s, background-color 0.2s;
+  
+  /* --- THE CRITICAL FIX --- */
+  user-select: none !important;     /* Prevents button text from being highlighted */
+  -webkit-user-select: none;
+}
+
+/* Show button when hovering over the code block */
+.highlight:hover .copy-code-button {
+  opacity: 1;
+}
+
+.copy-code-button:hover {
+  background-color: #2f5d3e !important;
+  color: #ffffff !important;
+  border-color: #2f5d3e !important;
+}
+
+/* Ensure the code itself doesn't wrap UNDER the button */
+.highlight code {
+  padding-right: 45px !important;
+}
