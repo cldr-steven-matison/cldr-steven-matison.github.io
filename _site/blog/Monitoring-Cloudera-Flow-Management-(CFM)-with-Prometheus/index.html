@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          4 minute read
+          5 minute read
         
       </span>
     
@@ -509,6 +509,12 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
 </ul>
 
 <p>If Query A and Query B are flowing together, your pipeline is healthy. If they diverge, you know instantly where the bottleneck is.</p>
+
+<h4 id="4-hammer-nuke-stuck-pods">4. <strong>Hammer Nuke Stuck Pods</strong>
+</h4>
+<p>If your NiFi pods get stuck in terminate 6/7 give this a try.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete pod mynifi-0 <span class="nt">-n</span> cfm-streaming <span class="nt">--force</span> <span class="nt">--grace-period</span><span class="o">=</span>0
+</code></pre></div></div>
 
         
       </section>
@@ -724,7 +730,7 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          5 minute read
+          4 minute read
         
       </span>
     

@@ -202,19 +202,16 @@ sum(rate(kafka_server_brokertopicmetrics_bytesin_total{namespace="cld-streaming"
 
 ### Visualizing in Grafana
 
-* **ID `11049` (Recommended First Test)**
-  * **Name:** Flink Dashboard
-  * **Description:** The standard, most reliable community dashboard built explicitly for the Flink Prometheus Exporter. It tracks JobManagers, TaskManagers, JVM metrics, and basic job health.
-
-* **ID `14911`**
-  * **Name:** Apache Flink Dashboard for Job / Task Manager
-  * **Description:** A slightly more modern layout that breaks down metrics specifically between the Job Manager and Task Manager. Good for digging into CPU/Memory constraints.
-
-* **ID `14840`**
-  * **Name:** Flink Metrics (with Kafka) on K8S
-  * **Description:** Since you are running CSA alongside Kafka, this dashboard is actually built to monitor Flink applications *and* includes Kafka throughput parameters alongside Kubernetes memory/CPU stats.
-
- [ this needs work,  need to check all 3 dashboards, build a cloudera dashboard ]
+**Import the Cloudera CSA Flink Dashboard**  
+1. Download the [CSA Flink Dashboard JSON](https://github.com/cldr-steven-matison/ClouderaStreamingOperators/blob/main/csa-flink-dashboard.json):
+   ```bash
+   curl -O https://raw.githubusercontent.com/cldr-steven-matison/ClouderaStreamingOperators/refs/heads/main/csa-flink-dashboard.json
+   ```
+2. In Grafana → **Dashboards** → **New** → **Import**  
+3. Click **Upload JSON file** and select the downloaded file.  
+4. On the next screen:
+   - Datasource → select your Prometheus data source  
+   - Click **Import**
 
   *Boom. You now have the new Cloudera CSA Flink Dashboard in Grafana:*
 

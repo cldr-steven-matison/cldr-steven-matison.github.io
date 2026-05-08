@@ -201,3 +201,9 @@ To truly see your pipeline in action, add a custom Time Series panel to your das
   ```
 
 If Query A and Query B are flowing together, your pipeline is healthy. If they diverge, you know instantly where the bottleneck is.
+
+#### 4. **Hammer Nuke Stuck Pods**
+If your NiFi pods get stuck in terminate 6/7 give this a try.
+```bash
+kubectl delete pod mynifi-0 -n cfm-streaming --force --grace-period=0
+```
