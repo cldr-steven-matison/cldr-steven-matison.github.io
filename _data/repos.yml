@@ -1,23 +1,23 @@
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 110963
+  size: 111512
   lang: "HTML"
-  updated: "2026-05-07"
+  updated: "2026-05-08"
   fork: false
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 1002
+  size: 931
   lang: "Python"
-  updated: "2026-05-07"
+  updated: "2026-05-08"
   fork: false
 - name: "ClouderaStreamingOperators"
   description: "Repo for yaml used in installing Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 54
+  size: 60
   lang: ""
-  updated: "2026-05-06"
+  updated: "2026-05-08"
   fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
