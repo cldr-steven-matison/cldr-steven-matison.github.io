@@ -115,17 +115,13 @@
         
           <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
         
-        <ul class="visible-links">
-<li class="masthead__menu-item">
+        <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/blog/">Blog</a>
-            </li>
-<li class="masthead__menu-item">
+            </li><li class="masthead__menu-item">
               <a href="/about/">About</a>
-            </li>
-<li class="masthead__menu-item">
+            </li><li class="masthead__menu-item">
               <a href="/repos/">Repos</a>
-            </li>
-</ul>
+            </li></ul>
         
         <button class="search__toggle" type="button">
           <span class="visually-hidden">Toggle search</span>
@@ -303,8 +299,7 @@
     
     
       
-        </p>
-<p class="page__date">
+        <p class="page__date">
           <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
           <time datetime="2026-05-02T00:00:00-04:00">
             May 02, 2026
@@ -312,7 +307,7 @@
         </p>
       
     
-  
+  </p>
 
 
         </header>
@@ -320,15 +315,13 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
-
-<p>If you followed our previous guides on monitoring Cloudera Streams Messaging (CSM) and Cloudera Flow Management (CFM), you now have visibility into your data ingestion (NiFi) and event streaming (Kafka). But what about monitoring the streams processing jobs (FLINK) in Cloudera Streaming Analytics (CSA)?</p>
+        <p>If you followed our previous guides on monitoring Cloudera Streams Messaging (CSM) and Cloudera Flow Management (CFM), you now have visibility into your data ingestion (NiFi) and event streaming (Kafka). But what about monitoring the streams processing jobs (FLINK) in Cloudera Streaming Analytics (CSA)?</p>
 
 <p>When running Flink and SQL Stream Builder (SSB) via the CSA Operator, flink jobs spin up dynamically on Kubernetes. Because these dynamically generated TaskManager pods don’t explicitly declare metric ports in their Kubernetes spec, standard Prometheus PodMonitors will silently drop the targets—making job metric discovery a bit of kubernetes spaghetti.</p>
 
 <p>In this third and final post of the series, we’re going to wire up our CSA Flink jobs to our existing Prometheus + Grafana stack. By utilizing a Headless Service to bypass strict pod-spec validation natively, we will finally complete plugging our CFM NiFi Operator, CSA Flink Operator, and CSM Kafka Operator into Prometheus and Grafana stack for monitoring.</p>
 
-<hr>
+<hr />
 
 <h3 id="create-the-prometheus-values-file">Create the Prometheus Values File</h3>
 
@@ -353,7 +346,7 @@
       <span class="s">metrics.scope.job: "flink.job.&lt;job_id&gt;.&lt;job_name&gt;"</span>
 </code></pre></div></div>
 
-<hr>
+<hr />
 
 <h3 id="helm-install-command">Helm Install Command</h3>
 
@@ -374,7 +367,7 @@
   <span class="nt">--set-file</span> flink-kubernetes-operator.clouderaLicense.fileContent<span class="o">=</span>./license.txt
 </code></pre></div></div>
 
-<hr>
+<hr />
 
 <h3 id="verify-the-install">Verify the Install</h3>
 
@@ -388,7 +381,7 @@ kubectl get pods <span class="nt">-n</span> cld-streaming
 helm get values csa-operator <span class="nt">-n</span> cld-streaming | <span class="nb">grep</span> <span class="nt">-A</span> 20 <span class="s2">"flink-conf.yaml"</span>
 </code></pre></div></div>
 
-<hr>
+<hr />
 
 <h3 id="discovery-with-headless-service--servicemonitor">Discovery with Headless Service &amp; ServiceMonitor</h3>
 
@@ -451,22 +444,20 @@ kubectl apply <span class="nt">-f</span> csa-flink-service-monitor.yaml <span cl
 
 <p><em>Wait ~30 seconds, then check Prometheus UI (<code class="language-plaintext highlighter-rouge">Status -&gt; Targets</code>). You should see your JobManagers and TaskManagers listed as <code class="language-plaintext highlighter-rouge">UP</code> under <code class="language-plaintext highlighter-rouge">serviceMonitor/cld-streaming/csa-flink-metrics-monitor/0</code>.</em></p>
 
-<hr>
+<hr />
 
 <h3 id="test-prometheus-metrics">Test Prometheus Metrics</h3>
 
 <ol>
   <li>Open SSB UI:
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>minikube service ssb-sse <span class="nt">--namespace</span> cld-streaming
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube service ssb-sse <span class="nt">--namespace</span> cld-streaming
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Run any SQL job in Sql Stream Builder.</p>
   </li>
   <li>Verify metrics are exposed directly from a pod:
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="c"># Replace with your actual taskmanager pod name</span>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Replace with your actual taskmanager pod name</span>
 kubectl <span class="nb">exec</span> <span class="nt">-it</span> ssb-session-admin-taskmanager-1-3 <span class="nt">-n</span> cld-streaming <span class="nt">--</span> <span class="se">\</span>
   curl <span class="nt">-s</span> http://localhost:9249/metrics | <span class="nb">head</span> <span class="nt">-20</span>
 </code></pre></div>    </div>
@@ -475,7 +466,7 @@ kubectl <span class="nb">exec</span> <span class="nt">-it</span> ssb-session-adm
 
 <p>You should see <code class="language-plaintext highlighter-rouge">flink_</code> metrics.</p>
 
-<hr>
+<hr />
 
 <h3 id="querying-ssb--flink-metrics-in-prometheus-ui">Querying SSB / Flink Metrics in Prometheus UI</h3>
 
@@ -499,34 +490,31 @@ or
 <span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>kafka_server_brokertopicmetrics_bytesin_total<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
 </code></pre></div></div>
 
-<hr>
+<hr />
 
 <h3 id="visualizing-in-grafana">Visualizing in Grafana</h3>
 
 <p><strong>Import the Cloudera CSA Flink Dashboard</strong></p>
 <ol>
   <li>Download the <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators/blob/main/csa-flink-dashboard.json">CSA Flink Dashboard JSON</a>:
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>curl <span class="nt">-O</span> https://raw.githubusercontent.com/cldr-steven-matison/ClouderaStreamingOperators/refs/heads/main/csa-flink-dashboard.json
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-O</span> https://raw.githubusercontent.com/cldr-steven-matison/ClouderaStreamingOperators/refs/heads/main/csa-flink-dashboard.json
 </code></pre></div>    </div>
   </li>
-  <li>In Grafana → <strong>Dashboards</strong> → <strong>New</strong> → <strong>Import</strong>
-</li>
+  <li>In Grafana → <strong>Dashboards</strong> → <strong>New</strong> → <strong>Import</strong></li>
   <li>Click <strong>Upload JSON file</strong> and select the downloaded file.</li>
   <li>On the next screen:
     <ul>
       <li>Datasource → select your Prometheus data source</li>
-      <li>Click <strong>Import</strong>
-</li>
+      <li>Click <strong>Import</strong></li>
     </ul>
   </li>
 </ol>
 
 <p><em>Boom. You now have the new Cloudera CSA Flink Dashboard in Grafana:</em></p>
 
-<p><img src="/assets/images/Cloudera_CSA_Flink_Dashboard.png" alt="Cloudera CSA Flink Dashboard"></p>
+<p><img src="/assets/images/Cloudera_CSA_Flink_Dashboard.png" alt="Cloudera CSA Flink Dashboard" /></p>
 
-<hr>
+<hr />
 
 <h3 id="summary">Summary</h3>
 
@@ -538,7 +526,7 @@ or
 
 <p>Now that we have finished our 3 Parts , let’s go back to the beginnning.  Now we can build that <a href="/blog/Observability-with-Cloudera-Streaming-Operators/#end-to-end-cso-dashboard-with-grafana">End to End Cloudera Streaming Operator Dashboard with Grafana</a>.</p>
 
-<hr>
+<hr />
 
 <h3 id="appendix">Appendix</h3>
 
@@ -615,7 +603,7 @@ kubectl get pods <span class="nt">-n</span> cld-streaming <span class="nt">-l</s
 
   <a href="https://twitter.com/intent/tweet?text=Monitoring+Cloudera+Streaming+Analytics+%28CSA%29+with+Prometheus%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FMonitoring-Cloudera-Streaming-Analytics-%28CSA%29-with-Prometheus%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FMonitoring-Cloudera-Streaming-Analytics-%28CSA%29-with-Prometheus%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FMonitoring-Cloudera-Streaming-Analytics-%28CSA%29-with-Prometheus%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -684,7 +672,7 @@ kubectl get pods <span class="nt">-n</span> cld-streaming <span class="nt">-l</s
     
   <div class="archive__item-excerpt" itemprop="description">
     The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Promethe...
-    <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More →</a>
+    <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>
@@ -734,7 +722,7 @@ kubectl get pods <span class="nt">-n</span> cld-streaming <span class="nt">-l</s
   <div class="archive__item-excerpt" itemprop="description">
     Unlock deep Kafka broker metrics in Cloudera Streams Messaging (CSM) by injecting a custom JMX Prometheus Exporter and deploying a targeted PodMonitor.
 
-    <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" class="read-more-pill">Read More →</a>
+    <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>
@@ -784,7 +772,7 @@ kubectl get pods <span class="nt">-n</span> cld-streaming <span class="nt">-l</s
   <div class="archive__item-excerpt" itemprop="description">
     Discover how to securely expose Cloudera Flow Management (CFM) NiFi metrics to Prometheus by configuring an mTLS bypass for Single User Auth.
 
-    <a href="/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/" class="read-more-pill">Read More →</a>
+    <a href="/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>
@@ -834,7 +822,7 @@ kubectl get pods <span class="nt">-n</span> cld-streaming <span class="nt">-l</s
   <div class="archive__item-excerpt" itemprop="description">
     Learn how to use CSA Operator’s PostgreSQL pod to persist schemas in the Schema Registry.
 
-    <a href="/blog/Persiting-Schema-with-Schema-Registry/" class="read-more-pill">Read More →</a>
+    <a href="/blog/Persiting-Schema-with-Schema-Registry/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>
@@ -851,15 +839,13 @@ kubectl get pods <span class="nt">-n</span> cld-streaming <span class="nt">-l</s
 
     
       <div class="search-content">
-        <div class="search-content__inner-wrap">
-<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
     <label class="sr-only" for="search">
       Enter your search term...
     </label>
-    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
   </form>
-  <div id="results" class="results"></div>
-</div>
+  <div id="results" class="results"></div></div>
 
       </div>
     
@@ -901,7 +887,7 @@ kubectl get pods <span class="nt">-n</span> cld-streaming <span class="nt">-l</s
   </ul>
 </div>
 
-<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 <script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
       </footer>
     </div>

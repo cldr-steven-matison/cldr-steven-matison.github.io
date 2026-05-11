@@ -91,18 +91,17 @@ kubectl get secret --namespace cld-streaming prometheus-grafana -o jsonpath="{.d
 With the observability foundation laid, it's time to connect the engines. Follow these guides in order to build your end-to-end observability pipeline:
 
 * **[Part 1: Monitoring Cloudera Streams Messaging (CSM) with Prometheus](/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/)**
-    * **Description:** This guide covers how to inject a custom JMX Exporter configuration and deploy a specialized `PodMonitor` to extract metrics from your CSM Operator deployed Kafka cluster.
+    * This guide covers how to inject a custom JMX Exporter configuration and deploy a specialized `PodMonitor` to extract metrics from your CSM Operator deployed Kafka cluster.
 * **[Part 2: Monitoring Cloudera Flow Management (CFM) with Prometheus](/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/)**
-    * **Description:** Learn how to architect a secure mTLS bypass using the CFM Operator's own client certificates to safely pull queue tracking and active thread metrics into Prometheus and Grafana.
+    * Learn how to architect a secure mTLS bypass using the CFM Operator's own client certificates to safely pull queue tracking and active thread metrics into Prometheus and Grafana.
 * **[Part 3: Monitoring Cloudera Streaming Analytics (CSA) with Prometheus](/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/)**
-    * **Description:** This guide solves the ssb flink and kubernetes networking puzzle using a Headless Service and `ServiceMonitor` to capture CSA Operator deployed flink sql job metrics.
+    * This guide solves the ssb flink and kubernetes networking puzzle using a Headless Service and `ServiceMonitor` to capture CSA Operator deployed flink sql job metrics.
 
 ---
 
 ### End to End CSO Dashboard with Grafana
 
 Now that we have all of our operator based metrics flowing, all of the operator dashboards setup, and a good understanding of how Prometheus and Grafana queries work.  We can easily build a new Fraud Dashboard with Grafana.
-
 
 Download the [CSO Fraud Detection Dashboard JSON](https://github.com/cldr-steven-matison/ClouderaStreamingOperators/blob/main/cso-fraud-dashboard.json) and import it into Grafana.
 

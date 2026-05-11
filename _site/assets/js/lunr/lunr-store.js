@@ -444,19 +444,19 @@ var store = [{
         "teaser": "/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png"
       },{
         "title": "Monitoring Cloudera Streaming Analytics (CSA) with Prometheus",
-        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. If you followed our previous guides on monitoring Cloudera Streams Messaging (CSM) and Cloudera Flow Management (CFM), you now have visibility into your data ingestion (NiFi) and event streaming (Kafka)....","categories": ["blog"],
+        "excerpt":"If you followed our previous guides on monitoring Cloudera Streams Messaging (CSM) and Cloudera Flow Management (CFM), you now have visibility into your data ingestion (NiFi) and event streaming (Kafka). But what about monitoring the streams processing jobs (FLINK) in Cloudera Streaming Analytics (CSA)? When running Flink and SQL Stream...","categories": ["blog"],
         "tags": ["prometheus","grafana","flink","csa"],
         "url": "/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/",
         "teaser": "/assets/images/2026-05-05-CSA_metrics.png"
       },{
         "title": "Monitoring Cloudera Flow Management (CFM) with Prometheus",
-        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. In the previous guide on monitoring Cloudera Streams Messaging (CSM) we added visibility into your Kafka cluster. Data pipelines don’t start at the broker—they often start with NiFi. When running...","categories": ["blog"],
+        "excerpt":"In the previous guide on monitoring Cloudera Streams Messaging (CSM) we added visibility into your Kafka cluster. Data pipelines don’t start at the broker—they often start with NiFi. When running NiFi via the Cloudera Flow Management (CFM) Operator, securing the cluster with Single User Auth puts the APIs into a...","categories": ["blog"],
         "tags": ["prometheus","grafana","nifi","cfm"],
         "url": "/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/",
         "teaser": "/assets/images/2026-05-05-CFM_metrics.png"
       },{
         "title": "Monitoring Cloudera Streams Messaging (CSM) with Prometheus",
-        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. Apache Kafka is the undeniable backbone of modern real-time data, but monitoring its internal health on Kubernetes can often feel like trying to pick a lock. While the Strimzi-powered Cloudera...","categories": ["blog"],
+        "excerpt":"Apache Kafka is the undeniable backbone of modern real-time data, but monitoring its internal health on Kubernetes can often feel like trying to pick a lock. While the Strimzi-powered Cloudera Streams Messaging (CSM) Operator effortlessly spins up your brokers, the critical metrics you need to keep things running smoothly—like byte...","categories": ["blog"],
         "tags": ["prometheus","grafana","kafka","csm"],
         "url": "/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/",
         "teaser": "/assets/images/2026-05-05-CSM_metrics.png"

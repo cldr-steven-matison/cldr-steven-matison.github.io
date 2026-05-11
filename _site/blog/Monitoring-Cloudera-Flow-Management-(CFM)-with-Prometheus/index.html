@@ -115,17 +115,13 @@
         
           <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
         
-        <ul class="visible-links">
-<li class="masthead__menu-item">
+        <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/blog/">Blog</a>
-            </li>
-<li class="masthead__menu-item">
+            </li><li class="masthead__menu-item">
               <a href="/about/">About</a>
-            </li>
-<li class="masthead__menu-item">
+            </li><li class="masthead__menu-item">
               <a href="/repos/">Repos</a>
-            </li>
-</ul>
+            </li></ul>
         
         <button class="search__toggle" type="button">
           <span class="visually-hidden">Toggle search</span>
@@ -297,14 +293,13 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          5 minute read
+          4 minute read
         
       </span>
     
     
       
-        </p>
-<p class="page__date">
+        <p class="page__date">
           <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
           <time datetime="2026-05-03T00:00:00-04:00">
             May 03, 2026
@@ -312,7 +307,7 @@
         </p>
       
     
-  
+  </p>
 
 
         </header>
@@ -320,15 +315,13 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article, content and code is updating frequently until this notice is removed.</p>
-
-<p>In the previous guide on monitoring Cloudera Streams Messaging (CSM) we added visibility into your Kafka cluster. Data pipelines don’t start at the broker—they often start with <strong>NiFi</strong>.</p>
+        <p>In the previous guide on monitoring Cloudera Streams Messaging (CSM) we added visibility into your Kafka cluster. Data pipelines don’t start at the broker—they often start with <strong>NiFi</strong>.</p>
 
 <p>When running NiFi via the <strong>Cloudera Flow Management (CFM) Operator</strong>, securing the cluster with Single User Auth puts the APIs into a strict lockdown. This makes scraping native metrics a bit of a kubernetes challenge.</p>
 
 <p>In this post, we’re going to wire up a secure CFM NiFi 2.x cluster to the <strong>Prometheus + Grafana</strong> stack, bypassing web authentication safely using mTLS, and ultimately bridging our cross-namespace metrics into a single pane of glass.</p>
 
-<hr>
+<hr />
 
 <h3 id="the-nifi-cluster-config-the-cr">The NiFi Cluster Config (The CR)</h3>
 
@@ -362,7 +355,7 @@
 </code></pre></div></div>
 <p><em>Apply this configuration and allow the NiFi pods to perform a rolling restart if necessary.</em></p>
 
-<hr>
+<hr />
 
 <h3 id="the-mtls-vip-bypass-finding-the-cert">The mTLS VIP Bypass (Finding the Cert)</h3>
 
@@ -375,7 +368,7 @@
 </code></pre></div></div>
 <p>Look for <strong><code class="language-plaintext highlighter-rouge">mynifi-cfm-operator-user-cert</code></strong>. This is our golden ticket which we will take with us below into our NiFi ServiceMonitor.</p>
 
-<hr>
+<hr />
 
 <h3 id="discovery-with-servicemonitor">Discovery with ServiceMonitor</h3>
 
@@ -423,7 +416,7 @@
 
 <p><em>(Wait about 30 seconds. In your Prometheus UI under <strong>Status -&gt; Targets</strong>, <code class="language-plaintext highlighter-rouge">nifi-service-monitor</code> should now show as <strong>1/1 UP</strong>).</em></p>
 
-<hr>
+<hr />
 
 <h3 id="querying-nifi-metrics-in-prometheus-ui">Querying NiFi Metrics in Prometheus UI</h3>
 
@@ -442,7 +435,7 @@
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>nifi_active_threads<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cfm-streaming"</span><span class="o">})</span>
 </code></pre></div></div>
 
-<hr>
+<hr />
 
 <h3 id="visualizing-cfm-nifi-with-grafana-dashboards">Visualizing CFM NiFi with Grafana Dashboards</h3>
 
@@ -457,9 +450,9 @@
 
 <p><em>Boom. You now have full JVM stats, FlowFile queue tracking, and throughput metrics.</em></p>
 
-<p><img src="/assets/images/Cloudera_CFM_NiFi_Dashboard.png" alt="Cloudera CFM NiFi Dashboard"></p>
+<p><img src="/assets/images/Cloudera_CFM_NiFi_Dashboard.png" alt="Cloudera CFM NiFi Dashboard" /></p>
 
-<hr>
+<hr />
 
 <h3 id="summary">Summary</h3>
 
@@ -473,7 +466,7 @@
 
 <p><a href="/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/">Part 3: Monitoring Cloudera Streaming Analytics (CSA) with Prometheus</a></p>
 
-<hr>
+<hr />
 
 <h3 id="appendix">Appendix</h3>
 
@@ -489,29 +482,23 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec </span>mynifi-0 <span class="nt">-n</span> cfm-streaming <span class="nt">--</span> curl <span class="nt">-k</span> <span class="nt">-v</span> <span class="nt">--cert</span> /path/to/cert https://localhost:8443/nifi-api/flow/metrics/prometheus
 </code></pre></div></div>
 
-<h4 id="3-cross-namespace-panels">3. <strong>Cross-Namespace Panels</strong>
-</h4>
+<h4 id="3-cross-namespace-panels">3. <strong>Cross-Namespace Panels</strong></h4>
 <p>To truly see your pipeline in action, add a custom Time Series panel to your dashboard that overlays NiFi’s <em>outbound</em> data directly on top of Kafka’s <em>inbound</em> data.</p>
 
 <ul>
-  <li>
-<strong>Query A (NiFi Send Rate):</strong>
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>nifi_bytes_sent<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cfm-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
+  <li><strong>Query A (NiFi Send Rate):</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>nifi_bytes_sent<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cfm-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
 </code></pre></div>    </div>
   </li>
-  <li>
-<strong>Query B (Kafka Receive Rate):</strong>
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>kafka_server_brokertopicmetrics_bytesin_total<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
+  <li><strong>Query B (Kafka Receive Rate):</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sum</span><span class="o">(</span>rate<span class="o">(</span>kafka_server_brokertopicmetrics_bytesin_total<span class="o">{</span><span class="nv">namespace</span><span class="o">=</span><span class="s2">"cld-streaming"</span><span class="o">}[</span>5m]<span class="o">))</span>
 </code></pre></div>    </div>
   </li>
 </ul>
 
 <p>If Query A and Query B are flowing together, your pipeline is healthy. If they diverge, you know instantly where the bottleneck is.</p>
 
-<h4 id="4-hammer-nuke-stuck-pods">4. <strong>Hammer Nuke Stuck Pods</strong>
-</h4>
+<h4 id="4-hammer-nuke-stuck-pods">4. <strong>Hammer Nuke Stuck Pods</strong></h4>
 <p>If your NiFi pods get stuck in terminate 6/7 give this a try.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete pod mynifi-0 <span class="nt">-n</span> cfm-streaming <span class="nt">--force</span> <span class="nt">--grace-period</span><span class="o">=</span>0
 </code></pre></div></div>
@@ -573,7 +560,7 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
 
   <a href="https://twitter.com/intent/tweet?text=Monitoring+Cloudera+Flow+Management+%28CFM%29+with+Prometheus%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FMonitoring-Cloudera-Flow-Management-%28CFM%29-with-Prometheus%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FMonitoring-Cloudera-Flow-Management-%28CFM%29-with-Prometheus%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FMonitoring-Cloudera-Flow-Management-%28CFM%29-with-Prometheus%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -642,7 +629,7 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
     
   <div class="archive__item-excerpt" itemprop="description">
     The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Promethe...
-    <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More →</a>
+    <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>
@@ -692,7 +679,7 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
   <div class="archive__item-excerpt" itemprop="description">
     Unlock deep Kafka broker metrics in Cloudera Streams Messaging (CSM) by injecting a custom JMX Prometheus Exporter and deploying a targeted PodMonitor.
 
-    <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" class="read-more-pill">Read More →</a>
+    <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>
@@ -741,7 +728,7 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
     
   <div class="archive__item-excerpt" itemprop="description">
     Learn how to monitor dynamic Flink and SQL Stream Builder jobs in Cloudera Streaming Analytics (CSA) by utilizing a Headless Service and ServiceMonitor for P...
-    <a href="/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/" class="read-more-pill">Read More →</a>
+    <a href="/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>
@@ -791,7 +778,7 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
   <div class="archive__item-excerpt" itemprop="description">
     Learn how to use CSA Operator’s PostgreSQL pod to persist schemas in the Schema Registry.
 
-    <a href="/blog/Persiting-Schema-with-Schema-Registry/" class="read-more-pill">Read More →</a>
+    <a href="/blog/Persiting-Schema-with-Schema-Registry/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>
@@ -808,15 +795,13 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
 
     
       <div class="search-content">
-        <div class="search-content__inner-wrap">
-<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
     <label class="sr-only" for="search">
       Enter your search term...
     </label>
-    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
   </form>
-  <div id="results" class="results"></div>
-</div>
+  <div id="results" class="results"></div></div>
 
       </div>
     
@@ -858,7 +843,7 @@ kubectl apply <span class="nt">-f</span> nifi-service-monitor.yaml <span class="
   </ul>
 </div>
 
-<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 <script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
       </footer>
     </div>
