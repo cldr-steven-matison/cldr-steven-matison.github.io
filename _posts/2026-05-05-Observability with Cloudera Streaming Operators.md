@@ -101,7 +101,13 @@ With the observability foundation laid, it's time to connect the engines. Follow
 
 ### End to End CSO Dashboard with Grafana
 
-[ Planning & Testing Now ]
+Now that we have all of our operator based metrics flowing, all of the operator dashboards setup, and a good understanding of how Prometheus and Grafana queries work.  We can easily build a new Fraud Dashboard with Grafana.
+
+
+Download the [CSO Fraud Detection Dashboard JSON](https://github.com/cldr-steven-matison/ClouderaStreamingOperators/blob/main/cso-fraud-dashboard.json) and import it into Grafana.
+
+![Cloudera CSO Fraud Detection Dashboard](/assets/images/Cloudera_CSO_Fraud_Dashboard.png)
+
 
 ### Summary: Observability in Kubernetes Achieved
 
