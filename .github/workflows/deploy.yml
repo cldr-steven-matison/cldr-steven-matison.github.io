@@ -57,7 +57,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./_site_ftp/
-          server-dir: /sceneserver/stevenmatisoncom/
+          server-dir: /
           protocol: ftp
 
       # --- 2. BUILD & DEPLOY FOR GITHUB PAGES ---
