@@ -38,8 +38,9 @@ jobs:
 
       # --- 1. BUILD & DEPLOY FOR FTP ---
       - name: Create FTP Config Override
-        # Dynamically injects the FTP domain into the build
-        run: echo -e 'url: "http://sceneserver.net"\nbaseurl: ""' > _config_ftp.yml
+        # Added the pipe (|) below to fix the YAML colon parsing error
+        run: |
+          echo -e 'url: "http://sceneserver.net"\nbaseurl: ""' > _config_ftp.yml
 
       - name: Build for FTP
         run: |
@@ -61,8 +62,9 @@ jobs:
 
       # --- 2. BUILD & DEPLOY FOR GITHUB PAGES ---
       - name: Create GitHub Pages Config Override
-        # Dynamically injects your GitHub Pages domain into the build
-        run: echo -e 'url: "https://cldr-steven-matison.github.io"\nbaseurl: ""' > _config_gh.yml
+        # Added the pipe (|) below to fix the YAML colon parsing error
+        run: |
+          echo -e 'url: "https://cldr-steven-matison.github.io"\nbaseurl: ""' > _config_gh.yml
 
       - name: Build for GitHub Pages
         run: |
