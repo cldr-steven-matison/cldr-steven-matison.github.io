@@ -1,0 +1,63 @@
+name: Deploy Hugo to FTP and GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # --- 1. BUILD & DEPLOY FOR FTP ---
+      - name: Build for FTP
+        run: hugo --minify --baseURL "https://www.stevenmatison.com/"
+
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public/
+          server-dir: /stevenmatison.com/
+          protocol: ftp
+
+      # --- 2. BUILD & DEPLOY FOR GITHUB PAGES ---
+      # This rebuilds with the correct GitHub URL to fix the 404/broken links
+      - name: Build for GitHub Pages
+        run: hugo --minify --baseURL "https://cldr-steven-matison.github.io/"
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
