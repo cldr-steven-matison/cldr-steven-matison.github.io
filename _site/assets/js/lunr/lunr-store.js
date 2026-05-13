@@ -466,4 +466,10 @@ var store = [{
         "tags": ["prometheus","grafana","kubernetes","operator"],
         "url": "/blog/Observability-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png"
+      },{
+        "title": "How to AI with NiFi and Python",
+        "excerpt":"We are all using AI to write code, but when it comes to Apache NiFi, the current landscape often resembles the Wild West. Whether you are generating synthetic data scripts or translating complex machine learning models, Large Language Models (LLMs) are incredible accelerators. However, if you ask an AI to...","categories": ["blog"],
+        "tags": ["nifi","python","ai","processor"],
+        "url": "/blog/How-to-AI-with-NiFi-and-Python/",
+        "teaser": "/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png"
       }]

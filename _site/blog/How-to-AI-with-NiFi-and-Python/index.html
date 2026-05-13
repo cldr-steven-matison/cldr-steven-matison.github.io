@@ -1,0 +1,1134 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>How to AI with NiFi and Python - Cloudera Solutions Engineer</title>
+<meta name="description" content="How to Build and Test Custom NiFi Python Processors with AI (Without Breaking NiFi)">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="How to AI with NiFi and Python">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/How-to-AI-with-NiFi-and-Python/">
+
+
+  <meta property="og:description" content="How to Build and Test Custom NiFi Python Processors with AI (Without Breaking NiFi)">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-05-06T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/How-to-AI-with-NiFi-and-Python/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How to AI with NiFi and Python">
+    <meta itemprop="description" content="How to Build and Test Custom NiFi Python Processors with AI (Without Breaking NiFi)">
+    <meta itemprop="datePublished" content="2026-05-06T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/How-to-AI-with-NiFi-and-Python/" class="u-url" itemprop="url">How to AI with NiFi and Python
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          11 minute read
+        
+      </span>
+    
+    
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-05-06T00:00:00-04:00">
+            May 06, 2026
+          </time>
+        </p>
+      
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>We are all using AI to write code, but when it comes to Apache NiFi, the current landscape often resembles the Wild West. Whether you are generating synthetic data scripts or translating complex machine learning models, Large Language Models (LLMs) are incredible accelerators. However, if you ask an AI to write a native Apache NiFi 2.0 Python processor from scratch, there is a very high probability it will confidently hand you code that instantly breaks your canvas.</p>
+
+<p>NiFi 2.0’s Python API is relatively new, and most AI training data is heavily saturated with legacy NiFi 1.x <code class="language-plaintext highlighter-rouge">ExecuteScript</code> solutions (using Jython or Groovy). Even when an AI correctly identifies the 2.0 API, it frequently misconfigures the underlying Java-to-Python bridge, resulting in “ghost” processors with dashed lines and missing routing relationships.</p>
+
+<p>In this post, I am going to share the exact methodology I used to leverage AI for writing custom NiFi processors safely, ensuring my dataflows operate seamlessly with my custom Python logic.</p>
+
+<h2 id="the-input-example-fraud-python-script">The Input: Example Fraud Python Script</h2>
+
+<p>This script’s logic assumes that transactions originating from two specific cities, or those exceeding $10,000, constitute fraud. Traditionally, this fraud model is intended to be deployed on Cloudera Machine Learning (CML) in a Workbench session and invoked in NiFi via the <code class="language-plaintext highlighter-rouge">InvokeHTTP</code> processor. I have tested this architecture, and it works flawlessly.</p>
+
+<p>Unfortunately, this integration is often unavailable during local Kubernetes testing (which is the focus of this post) outside of the Cloudera Public Cloud. Therefore, this script serves as a bridge to ensure the same Python responses can be tested natively, allowing downstream test data to flow in non-CML-connected environments.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">cml.models_v1</span> <span class="k">as</span> <span class="n">models</span>
+
+
+<span class="n">SUSPICIOUS_CITIES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"Lagos"</span><span class="p">:</span> <span class="p">{</span><span class="s">"lat"</span><span class="p">:</span> <span class="mf">6.5244</span><span class="p">,</span> <span class="s">"lon"</span><span class="p">:</span> <span class="mf">3.3792</span><span class="p">},</span>
+    <span class="s">"New Delhi"</span><span class="p">:</span> <span class="p">{</span><span class="s">"lat"</span><span class="p">:</span> <span class="mf">28.6139</span><span class="p">,</span> <span class="s">"lon"</span><span class="p">:</span> <span class="mf">77.2090</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># 0.45 degrees (~50km) is the exact mathematical net needed to catch all of Steven's regional fraud
+</span><span class="n">TOLERANCE</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="c1"># These 3 accounts have valid data that geographically overlaps with the fraud zones. 
+# We whitelist them from the location-based heuristic to ensure a pristine demo.
+</span><span class="n">DEMO_SAFE_ACCOUNTS</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">is_suspicious_location</span><span class="p">(</span><span class="n">lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">city</span><span class="p">,</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">SUSPICIOUS_CITIES</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="nf">if </span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">lat</span> <span class="o">-</span> <span class="n">coords</span><span class="p">[</span><span class="s">"lat"</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">TOLERANCE</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">lon</span> <span class="o">-</span> <span class="n">coords</span><span class="p">[</span><span class="s">"lon"</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">TOLERANCE</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">city</span>
+    <span class="k">return</span> <span class="bp">None</span>
+
+<span class="nd">@models.cml_model</span>
+<span class="k">def</span> <span class="nf">detect_fraud</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">is_fraud</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">explanations</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1"># Rule 1: High Amount Threshold (&gt;$10k is ALWAYS flagged)
+</span>    <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s">"amount"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10000</span><span class="p">:</span>
+        <span class="n">is_fraud</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">explanations</span><span class="p">[</span><span class="s">"amount"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"Transaction amount (</span><span class="si">{</span><span class="n">args</span><span class="p">[</span><span class="s">'amount'</span><span class="p">]</span><span class="si">}</span><span class="s">) exceeds the 10,000 limit."</span>
+        
+
+    <span class="c1"># Rule 2: Originates strictly around restricted geographies
+</span>    <span class="c1"># We skip this check if it's one of the overlapping good accounts
+</span>    <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s">"account_id"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DEMO_SAFE_ACCOUNTS</span><span class="p">:</span>
+        <span class="n">suspicious_city</span> <span class="o">=</span> <span class="nf">is_suspicious_location</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s">"lat"</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="s">"lon"</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">suspicious_city</span><span class="p">:</span>
+            <span class="n">is_fraud</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">explanations</span><span class="p">[</span><span class="s">"location"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"Transaction originated from a high-risk region near </span><span class="si">{</span><span class="n">suspicious_city</span><span class="si">}</span><span class="s">."</span>
+
+    <span class="k">if</span> <span class="n">is_fraud</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s">"fraud_score"</span><span class="p">:</span> <span class="mf">0.99</span><span class="p">,</span>
+            <span class="s">"risk_level"</span><span class="p">:</span> <span class="s">"HIGH"</span><span class="p">,</span>
+            <span class="s">"decision"</span><span class="p">:</span> <span class="s">"REVIEW"</span><span class="p">,</span>
+            <span class="s">"explanations"</span><span class="p">:</span> <span class="n">explanations</span>
+        <span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s">"fraud_score"</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+            <span class="s">"risk_level"</span><span class="p">:</span> <span class="s">"LOW"</span><span class="p">,</span>
+            <span class="s">"decision"</span><span class="p">:</span> <span class="s">"APPROVE"</span><span class="p">,</span>
+            <span class="s">"explanations"</span><span class="p">:</span> <span class="p">{</span><span class="s">"status"</span><span class="p">:</span> <span class="s">"all heuristic checks passed"</span><span class="p">}</span>
+        <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="rule-1-the-ai-writes-the-logic-you-own-the-framework">Rule 1: The AI Writes the Logic, You Own the Framework</h2>
+
+<p>The biggest mistake you can make is copying and pasting a complete Python processor generated by an AI directly into your <code class="language-plaintext highlighter-rouge">/extensions</code> directory.</p>
+
+<p>AI models often hallucinate complex, aspirational examples that do not function as expected in your specific environment. When an AI provides malformed custom processor code, NiFi will either fail to load the processor entirely or, worse, load it but refuse to display the <code class="language-plaintext highlighter-rouge">success</code> and <code class="language-plaintext highlighter-rouge">failure</code> relationships in the UI.</p>
+
+<p><strong>The Pro Move:</strong> Pin the AI within a strict, proven architectural skeleton for the NiFi wrapper. <em>I am going to show you one right now!</em> By “pin,” I mean I essentially had to wrestle the AI and lock it down using my first processor <a href="https://cldr-steven-matison.github.io/blog/Custom-Processors-With-Cloudera-Streaming-Operators/">example</a>. I proved to the AI that my example processor worked, and together we confirmed the baseline processor <code class="language-plaintext highlighter-rouge">GenericTransform</code> framework functioned correctly. Finally, we moved forward with constructing the actual custom nifi processor I needed. 💪</p>
+
+<h2 id="rule-2-prove-the-skeleton-first">Rule 2: Prove the Skeleton First</h2>
+
+<p>Before you introduce a single line of AI-generated business logic, deploy a bare-minimum structural template to the canvas. If the skeleton doesn’t load and route data, your complex logic will fail as well. This exercise also proves that you understand how to deliver and iterate versions of a processor for rapid testing in the NiFi UI.</p>
+
+<p>Here is the exact <code class="language-plaintext highlighter-rouge">GenericTransform</code> framework I used. It does nothing but pass data through, but it proves the custom processor can compile and expose its relationships natively.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
+<span class="kn">from</span> <span class="n">nifiapi.flowfiletransform</span> <span class="kn">import</span> <span class="n">FlowFileTransform</span><span class="p">,</span> <span class="n">FlowFileTransformResult</span>
+
+<span class="k">class</span> <span class="nc">GenericTransformTemplate</span><span class="p">(</span><span class="n">FlowFileTransform</span><span class="p">):</span>
+    <span class="c1"># Mandatory: Registers the processor with the NiFi backend
+</span>    <span class="k">class</span> <span class="nc">Java</span><span class="p">:</span>
+        <span class="n">implements</span> <span class="o">=</span> <span class="p">[</span><span class="s">'org.apache.nifi.python.processor.FlowFileTransform'</span><span class="p">]</span>
+
+    <span class="k">class</span> <span class="nc">ProcessorDetails</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s">'0.0.1-BASE'</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s">'Bare-minimum framework to test NiFi UI integration.'</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s">'template'</span><span class="p">,</span> <span class="s">'framework'</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># 'pass' is the safest initialization in many containerized environments
+</span>        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">flowfile</span><span class="p">):</span>
+        <span class="n">contents_str</span> <span class="o">=</span> <span class="n">flowfile</span><span class="p">.</span><span class="nf">getContentsAsBytes</span><span class="p">().</span><span class="nf">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+        <span class="n">attributes</span> <span class="o">=</span> <span class="n">flowfile</span><span class="p">.</span><span class="nf">getAttributes</span><span class="p">()</span>
+        
+        <span class="c1"># Route directly to success without modification
+</span>        <span class="k">return</span> <span class="nc">FlowFileTransformResult</span><span class="p">(</span>
+            <span class="n">relationship</span><span class="o">=</span><span class="s">'success'</span><span class="p">,</span> 
+            <span class="n">attributes</span><span class="o">=</span><span class="n">attributes</span><span class="p">,</span> 
+            <span class="n">contents</span><span class="o">=</span><span class="n">contents_str</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Test it:</strong> Drop this into your extensions folder. Wait 30 seconds. Drag it onto the canvas. Can you connect the <code class="language-plaintext highlighter-rouge">success</code> relationship to a <code class="language-plaintext highlighter-rouge">LogAttribute</code> processor? Yes? <em>Now</em> you are ready for the AI code.</p>
+
+<h2 id="rule-3-inject-python-logic-defensively">Rule 3: Inject Python Logic Defensively</h2>
+
+<p>Once your skeleton is proven, prompt your AI to write strictly isolated Python changes within the confines of the processor framework. By this point, the AI should understand your exact architectural approach, making functional Python improvements relatively straightforward.</p>
+
+<p>When injecting new Python logic into your data pipeline, you must code defensively against edge cases:</p>
+
+<ol>
+  <li><strong>The Array Trap:</strong> AI assumes FlowFiles contain a single JSON object. If your upstream generator creates an array of transactions, the AI’s <code class="language-plaintext highlighter-rouge">.get()</code> dictionary methods will trigger fatal <code class="language-plaintext highlighter-rouge">AttributeErrors</code>. Always wrap your logic to handle both <code class="language-plaintext highlighter-rouge">isinstance(payload, list)</code> and single dictionaries.</li>
+  <li><strong>Never Overwrite the Payload:</strong> AI scripts often return <em>only</em> the result of their computation. If you replace your FlowFile content with just the ML score, you lose your original <code class="language-plaintext highlighter-rouge">transaction_id</code> and break downstream routing. Always append the AI’s output to the existing payload (e.g., <code class="language-plaintext highlighter-rouge">payload["ai_response"] = result</code>).</li>
+  <li><strong>Trap Everything:</strong> Wrap the AI logic in a <code class="language-plaintext highlighter-rouge">try/except</code> block that catches failures, writes the error to an attribute (<code class="language-plaintext highlighter-rouge">attributes['python_error'] = str(e)</code>), and safely routes the FlowFile to <code class="language-plaintext highlighter-rouge">failure</code> instead of crashing the processor.</li>
+  <li><strong>Anticipate Iteration:</strong> Expect to find more edge cases. Keep iterating, and you will get it to work.</li>
+</ol>
+
+<h2 id="rule-4-master-the-hot-reload-workflow">Rule 4: Master the Hot-Reload Workflow</h2>
+
+<p>The NiFi 2.0 Python API features auto-reloading. You do not need to restart your pod or execute manual scripts to test new custom NiFi Python processor logic.</p>
+
+<p>If you are using a local mount (e.g., <code class="language-plaintext highlighter-rouge">minikube mount ~/nifi-custom-processors:/extensions</code>):</p>
+<ol>
+  <li>Save your <code class="language-plaintext highlighter-rouge">.py</code> file.</li>
+  <li><strong>Wait 30 to 60 seconds.</strong> The background thread will detect the file change and recompile it.</li>
+  <li><strong>The UI Catch:</strong> The NiFi web canvas aggressively caches UI elements. Refresh your browser and check the processor list for your new version tag to ensure the changes are reflected.</li>
+</ol>
+
+<h2 id="the-example-the-output-and-working-custom-nifi-processor">The Example: The Output and Working Custom NiFi Processor</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
+<span class="kn">from</span> <span class="n">nifiapi.flowfiletransform</span> <span class="kn">import</span> <span class="n">FlowFileTransform</span><span class="p">,</span> <span class="n">FlowFileTransformResult</span>
+
+<span class="k">class</span> <span class="nc">FraudModel</span><span class="p">(</span><span class="n">FlowFileTransform</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Java</span><span class="p">:</span>
+        <span class="n">implements</span> <span class="o">=</span> <span class="p">[</span><span class="s">'org.apache.nifi.python.processor.FlowFileTransform'</span><span class="p">]</span>
+
+    <span class="k">class</span> <span class="nc">ProcessorDetails</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s">'0.0.4-SNAPSHOT'</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s">'Executes the CML fraud detection model natively in NiFi.'</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s">'fraud'</span><span class="p">,</span> <span class="s">'detection'</span><span class="p">,</span> <span class="s">'cml'</span><span class="p">,</span> <span class="s">'replacement'</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># ==========================================
+</span>    <span class="c1"># CML MODEL LOGIC
+</span>    <span class="c1"># ==========================================
+</span>    <span class="n">SUSPICIOUS_CITIES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">"Lagos"</span><span class="p">:</span> <span class="p">{</span><span class="s">"lat"</span><span class="p">:</span> <span class="mf">6.5244</span><span class="p">,</span> <span class="s">"lon"</span><span class="p">:</span> <span class="mf">3.3792</span><span class="p">},</span>
+        <span class="s">"New Delhi"</span><span class="p">:</span> <span class="p">{</span><span class="s">"lat"</span><span class="p">:</span> <span class="mf">28.6139</span><span class="p">,</span> <span class="s">"lon"</span><span class="p">:</span> <span class="mf">77.2090</span><span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">TOLERANCE</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">DEMO_SAFE_ACCOUNTS</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">is_suspicious_location</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">city</span><span class="p">,</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">SUSPICIOUS_CITIES</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="nf">if </span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">lat</span> <span class="o">-</span> <span class="n">coords</span><span class="p">[</span><span class="s">"lat"</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">self</span><span class="p">.</span><span class="n">TOLERANCE</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">lon</span> <span class="o">-</span> <span class="n">coords</span><span class="p">[</span><span class="s">"lon"</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">self</span><span class="p">.</span><span class="n">TOLERANCE</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">city</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">detect_fraud</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">is_fraud</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">explanations</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="c1"># Rule 1: High Amount Threshold
+</span>        <span class="k">if</span> <span class="n">args</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"amount"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10000</span><span class="p">:</span>
+            <span class="n">is_fraud</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">explanations</span><span class="p">[</span><span class="s">"amount"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"Transaction amount (</span><span class="si">{</span><span class="n">args</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">'amount'</span><span class="p">)</span><span class="si">}</span><span class="s">) exceeds the 10,000 limit."</span>
+
+        <span class="c1"># Rule 2: Originates strictly around restricted geographies
+</span>        <span class="k">if</span> <span class="n">args</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"account_id"</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">DEMO_SAFE_ACCOUNTS</span><span class="p">:</span>
+            <span class="n">suspicious_city</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">is_suspicious_location</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"lat"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">args</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"lon"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">suspicious_city</span><span class="p">:</span>
+                <span class="n">is_fraud</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="n">explanations</span><span class="p">[</span><span class="s">"location"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"Transaction originated from a high-risk region near </span><span class="si">{</span><span class="n">suspicious_city</span><span class="si">}</span><span class="s">."</span>
+
+        <span class="k">if</span> <span class="n">is_fraud</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s">"fraud_score"</span><span class="p">:</span> <span class="mf">0.99</span><span class="p">,</span>
+                <span class="s">"risk_level"</span><span class="p">:</span> <span class="s">"HIGH"</span><span class="p">,</span>
+                <span class="s">"decision"</span><span class="p">:</span> <span class="s">"REVIEW"</span><span class="p">,</span>
+                <span class="s">"explanations"</span><span class="p">:</span> <span class="n">explanations</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s">"fraud_score"</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+                <span class="s">"risk_level"</span><span class="p">:</span> <span class="s">"LOW"</span><span class="p">,</span>
+                <span class="s">"decision"</span><span class="p">:</span> <span class="s">"APPROVE"</span><span class="p">,</span>
+                <span class="s">"explanations"</span><span class="p">:</span> <span class="p">{</span><span class="s">"status"</span><span class="p">:</span> <span class="s">"all heuristic checks passed"</span><span class="p">}</span>
+            <span class="p">}</span>
+    <span class="c1"># ==========================================
+</span>
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">flowfile</span><span class="p">):</span>
+        <span class="n">contents_str</span> <span class="o">=</span> <span class="n">flowfile</span><span class="p">.</span><span class="nf">getContentsAsBytes</span><span class="p">().</span><span class="nf">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+        <span class="n">attributes</span> <span class="o">=</span> <span class="n">flowfile</span><span class="p">.</span><span class="nf">getAttributes</span><span class="p">()</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Parse incoming JSON
+</span>            <span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">loads</span><span class="p">(</span><span class="n">contents_str</span><span class="p">)</span>
+            
+            <span class="c1"># The upstream generator sometimes creates lists of transactions.
+</span>            <span class="c1"># Handle both lists and single dictionaries safely.
+</span>            <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">tx</span> <span class="ow">in</span> <span class="n">payload</span><span class="p">:</span>
+                    <span class="n">tx</span><span class="p">[</span><span class="s">"cml_response"</span><span class="p">]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">detect_fraud</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
+                <span class="n">enriched_data</span> <span class="o">=</span> <span class="n">payload</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">payload</span><span class="p">[</span><span class="s">"cml_response"</span><span class="p">]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">detect_fraud</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+                <span class="n">enriched_data</span> <span class="o">=</span> <span class="n">payload</span>
+
+            <span class="k">return</span> <span class="nc">FlowFileTransformResult</span><span class="p">(</span>
+                <span class="n">relationship</span><span class="o">=</span><span class="s">'success'</span><span class="p">,</span> 
+                <span class="n">attributes</span><span class="o">=</span><span class="n">attributes</span><span class="p">,</span> 
+                <span class="n">contents</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">enriched_data</span><span class="p">)</span>
+            <span class="p">)</span>
+            
+        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># If JSON parsing fails, route to failure and tag the error
+</span>            <span class="n">attributes</span><span class="p">[</span><span class="s">'cml_error'</span><span class="p">]</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nc">FlowFileTransformResult</span><span class="p">(</span>
+                <span class="n">relationship</span><span class="o">=</span><span class="s">'failure'</span><span class="p">,</span> 
+                <span class="n">attributes</span><span class="o">=</span><span class="n">attributes</span><span class="p">,</span> 
+                <span class="n">contents</span><span class="o">=</span><span class="n">contents_str</span>
+            <span class="p">)</span>
+</code></pre></div></div>
+<h2 id="the-verdict">The Verdict</h2>
+
+<p>AI is an incredible tool for writing the heavy-lifting logic inside NiFi 2.0 Python processors, but it is a terrible architect for the processor framework itself. By treating my example NiFi API wrapper as a rigid, protected skeleton and carefully injecting Python logic inside of it, I was able to create this processor at lightning speed.</p>
+
+<p>How many times do you think it took me to get this Python processor code to work?</p>
+
+<p>Now fire up your cluster, open up a Python script, and see if you can transform it into a custom NiFi processor!</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="/blog/Custom-Processors-With-Cloudera-Streaming-Operators/">Custom NiFi Processors with Cloudera Streaming Operators</a></li>
+  <li><a href="https://github.com/cldr-steven-matison/NiFi2-Processor-Playground">NiFi2 Processor Playground</a></li>
+  <li><a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">Cloudera Streaming Operators GitHub Repo</a></li>
+  <li><a href="https://nifi.apache.org/nifi-docs/python-developer-guide.html">NiFi Python Developer’s Guide</a></li>
+</ul>
+
+<h2 id="how-to-ai-with-nifi-and-python">How to AI with NiFi and Python</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about How to AI with NiFi and Python please reach out to schedule a discussion.</p>
+
+<h2 id="appendix">Appendix</h2>
+
+<h3 id="nifi-20-custom-python-processor-with-pandas">NiFi 2.0 Custom Python Processor with Pandas</h3>
+
+<p>This is written as a complete, copy-paste-ready sample that any engineer can drop into a new environment for immediate testing. No changes to the K8s CR, mount, or pod are required to build this new python processor in the CSO footprint.  Similar steps can be duplicated in any appropriate NiFi 2.0 context.</p>
+
+<p><strong>Objective</strong></p>
+
+<p>Create a new, self-contained native Python processor named <strong>PandasJSONTransformer</strong>:</p>
+<ul>
+  <li>Accepts JSON content in a FlowFile (e.g. output from TransactionGenerator).</li>
+  <li>Loads it into a Pandas DataFrame.</li>
+  <li>Using lon/lat determines distance from home (defined in script).</li>
+  <li>Outputs the transformed JSON on the <code class="language-plaintext highlighter-rouge">success</code> relationship.</li>
+</ul>
+
+<p>Input Flow File:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"ts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-05 14:55:11"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"account_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"943"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transaction_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"6a9b1242-4892-11f1-b035-3a8bcd2ccadb"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">44.3568905517</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lon"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">-0.6186160357</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"nearest_city"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Lagos"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"nearest_country"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Nigeria"</span><span class="w">
+</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Step 1: Create the New Processor File</strong><br />
+Navigate to the exact directory where <code class="language-plaintext highlighter-rouge">TransactionGenerator.py</code> lives:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/nifi-custom-processors   <span class="c"># ← adjust only if your local path is different</span>
+</code></pre></div></div>
+
+<p>Create the new file <code class="language-plaintext highlighter-rouge">PandasJSONTransformer.py</code> with the following code:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import json
+import io
+import pandas as pd
+import numpy as np
+from nifiapi.flowfiletransform import FlowFileTransform, FlowFileTransformResult
+
+class PandasJSONTransformer<span class="o">(</span>FlowFileTransform<span class="o">)</span>:
+    class Java:
+        <span class="c"># Essential: Ensures success and failure relationships appear in NiFi</span>
+        implements <span class="o">=</span> <span class="o">[</span><span class="s1">'org.apache.nifi.python.processor.FlowFileTransform'</span><span class="o">]</span>
+
+    class ProcessorDetails:
+        version <span class="o">=</span> <span class="s1">'1.0.7-FINAL'</span>
+        description <span class="o">=</span> <span class="s1">'An example processor using python pandas.'</span>
+        tags <span class="o">=</span> <span class="o">[</span><span class="s1">'pandas'</span>, <span class="s1">'poc'</span>, <span class="s1">'geospatial'</span><span class="o">]</span>
+        dependencies <span class="o">=</span> <span class="o">[</span><span class="s1">'pandas'</span>, <span class="s1">'numpy'</span><span class="o">]</span> <span class="c"># NiFi auto-installs these</span>
+
+    def __init__<span class="o">(</span>self, <span class="k">**</span>kwargs<span class="o">)</span>:
+        <span class="c"># 'pass' is the safest initialization for this environment</span>
+        pass
+
+    def transform<span class="o">(</span>self, context, flowfile<span class="o">)</span>:
+        content_bytes <span class="o">=</span> flowfile.getContentsAsBytes<span class="o">()</span>
+        attributes <span class="o">=</span> flowfile.getAttributes<span class="o">()</span>
+
+        <span class="c"># Merritt Island, FL Coordinates</span>
+        HOME_LAT, HOME_LON <span class="o">=</span> 28.3181, <span class="nt">-80</span>.6660
+
+        try:
+            <span class="c"># Step 1: Handle the "Array Trap"</span>
+            <span class="c"># Even for single records, we wrap in a list so Pandas creates a proper DataFrame row</span>
+            raw_data <span class="o">=</span> json.loads<span class="o">(</span>content_bytes.decode<span class="o">(</span><span class="s1">'utf-8'</span><span class="o">))</span>
+            <span class="k">if </span>not isinstance<span class="o">(</span>raw_data, list<span class="o">)</span>:
+                raw_data <span class="o">=</span> <span class="o">[</span>raw_data]
+
+            <span class="nb">df</span> <span class="o">=</span> pd.DataFrame<span class="o">(</span>raw_data<span class="o">)</span>
+
+            <span class="c"># Step 2: Proof of Concept Math</span>
+            <span class="k">if</span> <span class="s1">'lat'</span> <span class="k">in </span>df.columns and <span class="s1">'lon'</span> <span class="k">in </span>df.columns:
+                <span class="nb">df</span><span class="o">[</span><span class="s1">'lat'</span><span class="o">]</span> <span class="o">=</span> pd.to_numeric<span class="o">(</span><span class="nb">df</span><span class="o">[</span><span class="s1">'lat'</span><span class="o">]</span>, <span class="nv">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="o">)</span>
+                <span class="nb">df</span><span class="o">[</span><span class="s1">'lon'</span><span class="o">]</span> <span class="o">=</span> pd.to_numeric<span class="o">(</span><span class="nb">df</span><span class="o">[</span><span class="s1">'lon'</span><span class="o">]</span>, <span class="nv">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="o">)</span>
+
+                <span class="c"># Calculate Euclidean distance from Merritt Island:</span>
+                <span class="c"># dist = sqrt((lat1 - lat2)^2 + (lon1 - lon2)^2)</span>
+                <span class="nb">df</span><span class="o">[</span><span class="s1">'dist_from_home'</span><span class="o">]</span> <span class="o">=</span> np.sqrt<span class="o">(</span>
+                    <span class="o">(</span><span class="nb">df</span><span class="o">[</span><span class="s1">'lat'</span><span class="o">]</span> - HOME_LAT<span class="o">)</span><span class="k">**</span>2 + <span class="o">(</span><span class="nb">df</span><span class="o">[</span><span class="s1">'lon'</span><span class="o">]</span> - HOME_LON<span class="o">)</span><span class="k">**</span>2
+                <span class="o">)</span>
+                
+                <span class="c"># Add a simple flag to show Pandas touched the data</span>
+                <span class="nb">df</span><span class="o">[</span><span class="s1">'pandas_processed'</span><span class="o">]</span> <span class="o">=</span> True
+
+            <span class="c"># Step 3: Output Generation</span>
+            output_json <span class="o">=</span> df.to_json<span class="o">(</span><span class="nv">orient</span><span class="o">=</span><span class="s1">'records'</span>, <span class="nv">indent</span><span class="o">=</span>None<span class="o">)</span>
+            
+            <span class="k">return </span>FlowFileTransformResult<span class="o">(</span>
+                <span class="nv">relationship</span><span class="o">=</span><span class="s1">'success'</span>,
+                <span class="nv">contents</span><span class="o">=</span>output_json.encode<span class="o">(</span><span class="s1">'utf-8'</span><span class="o">)</span>,
+                <span class="nv">attributes</span><span class="o">={</span>
+                    <span class="k">**</span>attributes,
+                    <span class="s1">'pandas.transformed'</span>: <span class="s1">'true'</span>,
+                    <span class="s1">'pandas.version'</span>: pd.__version__
+                <span class="o">}</span>
+            <span class="o">)</span>
+
+        except Exception as e:
+            <span class="c"># Rule 3: Defensive failure routing</span>
+            <span class="k">return </span>FlowFileTransformResult<span class="o">(</span>
+                <span class="nv">relationship</span><span class="o">=</span><span class="s1">'failure'</span>,
+                <span class="nv">contents</span><span class="o">=</span>content_bytes,
+                <span class="nv">attributes</span><span class="o">={</span><span class="k">**</span>attributes, <span class="s1">'pandas.error'</span>: str<span class="o">(</span>e<span class="o">)}</span>
+            <span class="o">)</span>
+</code></pre></div></div>
+
+<p><strong>Step 2: Deploy &amp; Activate</strong></p>
+
+<p>Ensure the minikube mount is still running:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube mount ~/nifi-custom-processors:/extensions <span class="nt">--uid</span> 10001 <span class="nt">--gid</span> 10001
+</code></pre></div></div>
+<p>NiFi 2.0 will automatically detect new/updated <code class="language-plaintext highlighter-rouge">.py</code> files in the extensions directory (usually within 10–30 seconds). When testing python changes, increment the <code class="language-plaintext highlighter-rouge">version</code> in the code (<code class="language-plaintext highlighter-rouge">1.0.1</code>) and re-save the file after each code change — this forces a clean reload.  If you are impatient like me you may be refreshing the page to notice new processors.</p>
+
+<p><strong>Step 3: Verification in NiFi UI</strong></p>
+
+<ul>
+  <li>Open NiFi canvas.</li>
+  <li>Drag a new processor and search for <strong>PandasJSONTransformer</strong>.</li>
+  <li>The new processor should appear with the exact description and version from the code.</li>
+  <li>Simple test flow:<br />
+<code class="language-plaintext highlighter-rouge">TransactionGenerator</code> → <code class="language-plaintext highlighter-rouge">PandasJSONTransformer</code>.   <a href="https://raw.githubusercontent.com/cldr-steven-matison/NiFi-Templates/refs/heads/main/CustomPythonProcessorWithPandas.json">Flow Definition File</a>.</li>
+  <li>Run the flow.</li>
+  <li>Check output flowfile for the new columns <code class="language-plaintext highlighter-rouge">dist_from_home</code> and <code class="language-plaintext highlighter-rouge">pandas_processed</code>.</li>
+</ul>
+
+<p>Be patient on first processor attempt after dragging it to the canvas.  The processor will indicate dependencies are downloading when it is first introduced to the canvas.  The processor must complete this dependency state before allowing you to route Success/Failure.</p>
+
+<p><strong>Step 4: Hand-Off Framework for Any Other Environment</strong></p>
+
+<p>To replicate this exact processor in a different NiFi 2.0 environment:</p>
+<ol>
+  <li>Place <code class="language-plaintext highlighter-rouge">PandasJSONTransformer.py</code> in the Python extensions path.</li>
+  <li>Complete the Deployment Steps 1–3 above.</li>
+  <li>Verify pandas are installed by NiFi.</li>
+  <li>Confirm flowfile output is as expected.</li>
+</ol>
+
+<p>Output Flow File:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"ts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-05 15:10:13"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"account_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"487"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transaction_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx84324584-4894-11f1-b035-3a8bcd2ccadb"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">48.4010217027</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lon"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">4.7099962916</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"dist_from_home"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">87.7062397261</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pandas_processed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Troubleshooting</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check NiFi pod logs for processor loading</span>
+kubectl logs <span class="nt">-n</span> cld-streaming mynifi-0 | <span class="nb">grep</span> <span class="nt">-i</span> pandas
+
+<span class="c"># check pod for python extensions</span>
+kubectl <span class="nb">exec</span> <span class="nt">-n</span> cfm-streaming mynifi-0 <span class="nt">--</span> <span class="nb">ls</span> <span class="nt">-la</span> /opt/nifi/nifi-current/python/extensions
+
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ai" class="page__taxonomy-item p-category" rel="tag">ai</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#processor" class="page__taxonomy-item p-category" rel="tag">processor</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-05-06T00:00:00-04:00">May 6, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=How+to+AI+with+NiFi+and+Python%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-to-AI-with-NiFi-and-Python%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-to-AI-with-NiFi-and-Python%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="pagination--pager" title="Observability with Cloudera Streaming Operators
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" rel="permalink">Observability with Cloudera Streaming Operators
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Promethe...
+    <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-CSM_metrics.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" rel="permalink">Monitoring Cloudera Streams Messaging (CSM) with Prometheus
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Unlock deep Kafka broker metrics in Cloudera Streams Messaging (CSM) by injecting a custom JMX Prometheus Exporter and deploying a targeted PodMonitor.
+
+    <a href="/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-CFM_metrics.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/" rel="permalink">Monitoring Cloudera Flow Management (CFM) with Prometheus
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Discover how to securely expose Cloudera Flow Management (CFM) NiFi metrics to Prometheus by configuring an mTLS bypass for Single User Auth.
+
+    <a href="/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-CSA_metrics.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/" rel="permalink">Monitoring Cloudera Streaming Analytics (CSA) with Prometheus
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Learn how to monitor dynamic Flink and SQL Stream Builder jobs in Cloudera Streaming Analytics (CSA) by utilizing a Headless Service and ServiceMonitor for P...
+    <a href="/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>
