@@ -1,9 +1,9 @@
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 111744
+  size: 111756
   lang: "HTML"
-  updated: "2026-05-11"
+  updated: "2026-05-12"
   fork: false
 - name: "ClouderaStreamingOperators"
   description: "Repo for yaml used in installing Cloudera Streaming Operators"
