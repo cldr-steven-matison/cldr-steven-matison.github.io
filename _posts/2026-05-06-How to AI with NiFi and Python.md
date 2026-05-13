@@ -269,7 +269,7 @@ If you would like a deeper dive, hands on experience, demos, or are interested i
 
 ### NiFi 2.0 Custom Python Processor with Pandas
 
-This is written as a complete, copy-paste-ready sample that any engineer can drop into a new environment for immediate testing. No changes to the K8s CR, mount, or pod are required to build this new python processor in the CSO footprint.  Similar steps can be duplicated in any appropriate NiFi 2.0 context.
+This is written as a complete, copy-paste-ready sample that any engineer can drop into a new environment for immediate testing. No changes to the K8s CR, mount, or pod are required to build this new python processor in the Clouders Streaming Operator footprint.  Similar steps can be duplicated in any appropriate NiFi 2.0 context.
 
 **Objective**  
 
