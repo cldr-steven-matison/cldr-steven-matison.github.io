@@ -6,6 +6,18 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Real-Time Monitoring with Observability</title>
+        <link>https://cldr-steven-matison.github.io/release/Real-Time-Monitoring-with-Observability/</link>
+        <pubDate>Mon, 11 May 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/Real-Time_Monitoring_with_Observability.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/Real-Time_Monitoring_with_Observability.png" medium="image" />
+        
+        <description>CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA
+</description>
+      </item>
+    
+      <item>
         <title>How to AI with NiFi and Python</title>
         <link>https://cldr-steven-matison.github.io/blog/How-to-AI-with-NiFi-and-Python/</link>
         <pubDate>Wed, 06 May 2026 00:00:00 -0400</pubDate>
@@ -25,6 +37,18 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png" medium="image" />
         
         <description>The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Prometheus, and Grafana.</description>
+      </item>
+    
+      <item>
+        <title>Announcing Cloudera Streaming Analytics 1.17.0</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Streaming-Analytics-1.17.0/</link>
+        <pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/Cloudera_Streaming_Analytics_1.17.0.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/Cloudera_Streaming_Analytics_1.17.0.png" medium="image" />
+        
+        <description>We are excited to announce the release of Cloudera Streaming Analytics 1.17.0 for on-premises deployments. This update reinforces our commitment to a stable, secure, and high-performance streaming offering. By aligning with Cloudera 7.3.2.0 and modernizing our User-Defined Function (UDF) framework, we’re providing a more robust foundation for Apache Flink and Cloudera SQL Stream Builder.
+</description>
       </item>
     
       <item>
@@ -92,28 +116,6 @@
         
         <description>We are excited to announce the latest release of Cloudera AI. This update focuses on streamlining model deployment, enhancing user experience, and expanding our ecosystem integrations within the Cloudera AI Inference service. Key highlights include the introduction of long-lived API keys for persistent authentication, new model additions, and a new public Model Hub Catalog to accelerate model discovery, alongside several key performance and stability fixes within the Cloudera AI Workbench.
 </description>
-      </item>
-    
-      <item>
-        <title>Introducing Cloudera Data Explorer</title>
-        <link>https://cldr-steven-matison.github.io/blog/Introducing-Cloudera-Data-Explorer/</link>
-        <pubDate>Mon, 20 Apr 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-04-20-Cloudera_Data_Explorer.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-04-20-Cloudera_Data_Explorer.png" medium="image" />
-        
-        <description>As of Cloudera Runtime 7.3.2, Hue is now Cloudera Data Explorer — the modern SQL editor for the lakehouse era, with a new REST API that turns natural language into production-ready SQL.</description>
-      </item>
-    
-      <item>
-        <title>All The New In Cloudera 7.3.2</title>
-        <link>https://cldr-steven-matison.github.io/blog/All-the-New-in-7.3.2/</link>
-        <pubDate>Tue, 14 Apr 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-04-14-all_the_new_in_7_3_2.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-04-14-all_the_new_in_7_3_2.png" medium="image" />
-        
-        <description>Explore the major modernization of CDP Private Cloud Base in Cloudera Runtime 7.3.2. This comprehensive guide covers the JDK 17 transition, the new React-based Atlas UI, IPv6 support, and the Hadoop 3.4 rebase, alongside every official update for the platform.</description>
       </item>
     
   </channel>

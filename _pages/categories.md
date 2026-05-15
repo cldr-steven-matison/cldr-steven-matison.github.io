@@ -1,7 +1,8 @@
 ---
-layout: categories
+layout: collection
 title: Categories
 permalink: /categories/
+classes: wide
 ---
 
 <div class="feature__wrapper">
@@ -15,15 +16,15 @@ permalink: /categories/
 
 {% for category in categories %}
   <section id="{{ category[0] | slugify }}">
-    <h2>{{ category[0] }}</h2>
-    <ul>
+    <h2 class="archive__subtitle">{{ category[0] }}</h2>
+    
+    <div class="entries-grid">
       {% for post in category[1] %}
-        <li>
-          <span style="color: #666;">{{ post.date | date: "%Y-%m-%d" }}</span> — 
-          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        </li>
+        {% include archive-single.html type="grid" %}
       {% endfor %}
-    </ul>
-    <a href="#top" style="font-size: 0.8em;">Back to top ↑</a>
+    </div>
+    
+    <a href="#top" class="back-to-top" style="font-size: 0.8em; display: block; margin-top: 20px;">Back to top ↑</a>
+    <hr>
   </section>
 {% endfor %}

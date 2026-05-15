@@ -461,6 +461,12 @@ var store = [{
         "url": "/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/",
         "teaser": "/assets/images/2026-05-05-CSM_metrics.png"
       },{
+        "title": "Announcing Cloudera Streaming Analytics 1.17.0",
+        "excerpt":"We are excited to announce the release of Cloudera Streaming Analytics 1.17.0 for on-premises deployments. This update reinforces our commitment to a stable, secure, and high-performance streaming offering. By aligning with Cloudera 7.3.2.0 and modernizing our User-Defined Function (UDF) framework, we’re providing a more robust foundation for Apache Flink and...","categories": ["release"],
+        "tags": ["cloudera","csa","flink"],
+        "url": "/release/Cloudera-Streaming-Analytics-1.17.0/",
+        "teaser": "/assets/images/Cloudera_Streaming_Analytics_1.17.0.png"
+      },{
         "title": "Observability with Cloudera Streaming Operators",
         "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. If you are running applications and workloads in kubernetes, you know that visibility is everything. You can build the most complex data pipelines in the world, but without eyes on...","categories": ["blog"],
         "tags": ["prometheus","grafana","kubernetes","operator"],
@@ -472,4 +478,10 @@ var store = [{
         "tags": ["nifi","python","ai","processor"],
         "url": "/blog/How-to-AI-with-NiFi-and-Python/",
         "teaser": "/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png"
+      },{
+        "title": "Real-Time Monitoring with Observability",
+        "excerpt":"CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA Executive Summary We are announcing the general availability of Real-Time Monitoring (RTM) capabilities for Cloudera Data Platform (CDP) customers through our Observability SaaS offering. This update allows organizations to move beyond reactive troubleshooting by providing...","categories": ["release"],
+        "tags": ["cloudera","observability","cdp"],
+        "url": "/release/Real-Time-Monitoring-with-Observability/",
+        "teaser": "/assets/images/Real-Time_Monitoring_with_Observability.png"
       }]
