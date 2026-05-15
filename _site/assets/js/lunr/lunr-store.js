@@ -480,7 +480,7 @@ var store = [{
         "teaser": "/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png"
       },{
         "title": "Real-Time Monitoring with Observability",
-        "excerpt":"CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA Executive Summary We are announcing the general availability of Real-Time Monitoring (RTM) capabilities for Cloudera Data Platform (CDP) customers through our Observability SaaS offering. This update allows organizations to move beyond reactive troubleshooting by providing...","categories": ["release"],
+        "excerpt":"CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA We are announcing the general availability of Real-Time Monitoring (RTM) capabilities for Cloudera Data Platform (CDP) customers through our Observability SaaS offering. This update allows organizations to move beyond reactive troubleshooting by providing a live,...","categories": ["release"],
         "tags": ["cloudera","observability","cdp"],
         "url": "/release/Real-Time-Monitoring-with-Observability/",
         "teaser": "/assets/images/Real-Time_Monitoring_with_Observability.png"

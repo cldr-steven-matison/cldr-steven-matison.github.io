@@ -14,6 +14,7 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/Real-Time_Monitoring_with_Observability.png" medium="image" />
         
         <description>CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA
+We are announcing the general availability of Real-Time Monitoring (RTM) capabilities for Cloudera Data Platform (CDP) customers through our Observability SaaS offering.
 </description>
       </item>
     

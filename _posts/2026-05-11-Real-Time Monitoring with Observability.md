@@ -10,10 +10,7 @@ tags:
   - cdp
 ---
 
-
-## CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA
-
-### Executive Summary
+### CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA
 We are announcing the general availability of Real-Time Monitoring (RTM) capabilities for Cloudera Data Platform (CDP) customers through our Observability SaaS offering.
 
 This update allows organizations to move beyond reactive troubleshooting by providing a live, continuous pulse of their data ecosystem. By delivering instant visibility into infrastructure, services, and active workloads, RTM ensures that your platform remains healthy, performant, and reliable.
