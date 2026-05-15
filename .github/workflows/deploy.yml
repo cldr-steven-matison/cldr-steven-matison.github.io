@@ -40,7 +40,7 @@ jobs:
       - name: Create FTP Config Override
         # Added the pipe (|) below to fix the YAML colon parsing error
         run: |
-          echo -e 'url: "http://sceneserver.net"\nbaseurl: ""' > _config_ftp.yml
+          echo -e 'url: "http://stevenmatison.com"\nbaseurl: ""' > _config_ftp.yml
 
       - name: Build for FTP
         run: |
