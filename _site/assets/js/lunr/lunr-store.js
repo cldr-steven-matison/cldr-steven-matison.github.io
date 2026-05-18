@@ -484,4 +484,10 @@ var store = [{
         "tags": ["cloudera","observability","cdp"],
         "url": "/release/Real-Time-Monitoring-with-Observability/",
         "teaser": "/assets/images/Real-Time_Monitoring_with_Observability.png"
+      },{
+        "title": "How To Install Cloudera NiFi MCP Server",
+        "excerpt":"The Cloudera NiFi MCP Server is a standard Model Context Protocol (MCP) server (an open protocol originally from Anthropic but now client-agnostic). The Cloudera NiFi MCP Server simply exposes tools for reading/writing Apache NiFi flows via Knox. Any MCP-compatible client can talk to it. In this post I am going...","categories": ["blog"],
+        "tags": ["nifi","mcp"],
+        "url": "/blog/How-To-Install-Cloudera-NiFi-MCP-Server/",
+        "teaser": "/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png"
       }]
