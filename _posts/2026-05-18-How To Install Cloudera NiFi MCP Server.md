@@ -152,10 +152,11 @@ Now that we have our `process_group_id`, let's try **`list_processors`**:
 
 The Tools panel should now also display the `WRITE` NiFi tools the server supports (e.g., `start_processor`, `stop_processor`, `create_processor`).  
 
-:unlock: **UnLocked** You have now unlocked the full power of agentic ai against your nifi canvas.  
-{: .notice--warning}
+---
 
-You’ve now successfully installed and configured the Apache NiFi MCP Server from Cloudera and connected it to your Cloudera Public Cloud NiFi cluster. With MCP Inspector up and running, you can explore processors, process groups, check versions, and manage dataflows — all through natural-language commands via any MCP-compatible AI client. This setup turns your governed NiFi environment into an AI-native data orchestration platform, unlocking true agentic workflows inside Cloudera DataFlow. 
+## Summary
+
+You’ve now successfully installed and configured the Apache NiFi MCP Server from Cloudera and connected it to your Cloudera Public Cloud NiFi cluster. With the NiFI MCP Server up and running, you can explore processors, process groups, check versions, and manage dataflows — all through natural-language commands via any MCP-compatible AI client. This setup turns your governed NiFi environment into an AI-native data orchestration platform, unlocking true agentic workflows inside any Cloudera secured Nifi environment. 
 
 ---
 
