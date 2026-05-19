@@ -13,7 +13,7 @@
           <image>https://cldr-steven-matison.github.io/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png</image>
           <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png" medium="image" />
         
-        <description>How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi in a data hub.</description>
+        <description>How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi deployed on AWS in a Data.</description>
       </item>
     
       <item>

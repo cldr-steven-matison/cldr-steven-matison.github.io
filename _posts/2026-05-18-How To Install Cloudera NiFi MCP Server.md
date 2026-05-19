@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "How To Install Cloudera NiFi MCP Server"
-excerpt: "How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi in a data hub."
+excerpt: "How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi deployed on AWS in a Data."
 header:
   teaser: "/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png"
 categories:
@@ -54,18 +54,16 @@ Once your MCP server is successfully **Connected**, the MCP Inspector acts as a 
 * Click on the **"Tools"** tab located at the top of the main interface.
 * Click the **"List Tools"** button.
 
-The Tools panel should display the `READ-ONLY` NiFi tools the server supports (e.g., `list_processors`, `get_nifi_version`, `create_process_group`).  Later we will take a look at the `WRITE` NiFi tools.
+The Tools panel should display the `READ-ONLY` NiFi tools the server supports (e.g., `list_processors`, `get_nifi_version`, `get_processor_details`).  Later we will take a look at the `WRITE` NiFi tools.
 
 ---
 
 ## Running Your First Test (`get_nifi_version`)
 
-Testing the version is the best "smoke test" because it doesn't require complex JSON arguments and confirms the NiFi API connection is alive.
+Testing the version is the best "smoke test" because it doesn't require any arguments and confirms the NiFi API connection is alive.
 
 * **Select the Tool:** Click on **`get_nifi_version`** from the tool list on the left.
-* **Review Arguments:** Since this tool requires no input, the **"Arguments"** box in the center of the screen will remain empty or show `{}`.
 * **Execute:** Click the **"Run Tool"** button.   
-
 
 You should see:
 
@@ -94,19 +92,41 @@ Followed by the expected JSON output with the NiFi Version:
     "major_version": 1
   }
 }
-
 ```
 
 ---
 
 ## Running a Parameterized Test
 
-If the version check works, try **`list_processors`**:
+Next lets use `get_root_process_group` to get the `UUID` for the root process group.  You could also just use any UUID from the NiFi Canvas.
 
-* **Input:** This tool requires a `process_group_id`.
-* **Action:** Paste a valid UUID from your NiFi canvas into the JSON argument box (e.g., `{"process_group_id": "root"}`).
-* **Run:** Click "Call Tool" to see the list of processors in that group.
+* **Select the Tool:** Click on **`get_root_process_group`** from the tool list on the left.
+* **Run:** Click "Run Tool" to see the list of processors in that group.
+* **Copy:** Save the UUID such as `25d98a86-0182-1000-9624-7b3ffa192883` for use later.
 
+Now that we have our `process_group_id`, let's try **`list_processors`**:
+
+* **Input:** Paste the `process_group_id` you got in the previous step.
+* **Run:** Click "Run Tool" to see the list of processors in that group.
+
+```bash
+{
+  "result": {
+    "permissions": {
+      "canRead": true,
+      "canWrite": true
+    },
+    "processGroupFlow": {
+      "id": "25d98a86-0182-1000-9624-7b3ffa192883",
+
+
+  [ truncated ]
+```
+
+:warning: **Danger!** The JSON output is substantial so I have truncated it here.  If you have a big NiFi canvas with a lot of process groups on the root canvas you can expect over 10,000 lines of JSON response.
+{: .notice--danger}
+
+---
 
 ## Test with **MCP Inspector** in Write Mode
 
@@ -123,6 +143,7 @@ If the version check works, try **`list_processors`**:
    ```
    npx @modelcontextprotocol/inspector .venv/bin/python -m nifi_mcp_server.server
    ```
+---
 
 ## Listing NiFi MCP Server NiFi Tools in Write Mode
 
@@ -131,8 +152,12 @@ If the version check works, try **`list_processors`**:
 
 The Tools panel should now also display the `WRITE` NiFi tools the server supports (e.g., `start_processor`, `stop_processor`, `create_processor`).  
 
----
+:unlock: **UnLocked** You have now unlocked the full power of agentic ai against your nifi canvas.  
+{: .notice--warning}
 
+You’ve now successfully installed and configured the Apache NiFi MCP Server from Cloudera and connected it to your Cloudera Public Cloud NiFi cluster. With MCP Inspector up and running, you can explore processors, process groups, check versions, and manage dataflows — all through natural-language commands via any MCP-compatible AI client. This setup turns your governed NiFi environment into an AI-native data orchestration platform, unlocking true agentic workflows inside Cloudera DataFlow. 
+
+---
 
 ## Terminal History
 
@@ -171,6 +196,15 @@ export $(grep -v '^#' .env | xargs)\
 .venv/bin/python -m nifi_mcp_server.server
 
 ```
+
+---
+
+## Cloudera MCP Servers
+
+* [Cloudera NiFi MCP Server](https://github.com/cloudera/NiFi-MCP-Server)
+* [Cloudera Iceberg MCP Server](https://github.com/cloudera/iceberg-mcp-server)
+* [Cloudera AI WorkBech MCP Server](https://github.com/cloudera/CAI_Workbench_MCP_Server)
+* [Cloudera Dataviz MCP Server](https://github.com/cloudera/CDV-MCP-Server)
 
 ## {{ page.title }}
 If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about {{ page.title }} please reach out to schedule a discussion.

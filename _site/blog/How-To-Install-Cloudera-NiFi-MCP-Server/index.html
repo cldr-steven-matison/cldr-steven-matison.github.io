@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- begin _includes/seo.html --><title>How To Install Cloudera NiFi MCP Server - Cloudera Solutions Engineer</title>
-<meta name="description" content="How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi in a data hub.">
+<meta name="description" content="How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi deployed on AWS in a Data.">
 
 
   <meta name="author" content="Steven Matison">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="https://cldr-steven-matison.github.io/blog/How-To-Install-Cloudera-NiFi-MCP-Server/">
 
 
-  <meta property="og:description" content="How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi in a data hub.">
+  <meta property="og:description" content="How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi deployed on AWS in a Data.">
 
 
 
@@ -115,13 +115,17 @@
         
           <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
         
-        <ul class="visible-links"><li class="masthead__menu-item">
+        <ul class="visible-links">
+<li class="masthead__menu-item">
               <a href="/blog/">Blog</a>
-            </li><li class="masthead__menu-item">
+            </li>
+<li class="masthead__menu-item">
               <a href="/about/">About</a>
-            </li><li class="masthead__menu-item">
+            </li>
+<li class="masthead__menu-item">
               <a href="/repos/">Repos</a>
-            </li></ul>
+            </li>
+</ul>
         
         <button class="search__toggle" type="button">
           <span class="visually-hidden">Toggle search</span>
@@ -268,7 +272,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="How To Install Cloudera NiFi MCP Server">
-    <meta itemprop="description" content="How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi in a data hub.">
+    <meta itemprop="description" content="How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi deployed on AWS in a Data.">
     <meta itemprop="datePublished" content="2026-05-18T00:00:00-04:00">
     
 
@@ -293,13 +297,14 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          3 minute read
+          4 minute read
         
       </span>
     
     
       
-        <p class="page__date">
+        </p>
+<p class="page__date">
           <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
           <time datetime="2026-05-18T00:00:00-04:00">
             May 18, 2026
@@ -307,7 +312,7 @@
         </p>
       
     
-  </p>
+  
 
 
         </header>
@@ -321,7 +326,8 @@
 
 <ol>
   <li>Clone and install the NiFI MCP Server:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/cloudera/NiFi-MCP-Server.git
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>git clone https://github.com/cloudera/NiFi-MCP-Server.git
 cd NiFi-MCP-Server
 python3 -m venv .venv
 source .venv/bin/activate
@@ -330,20 +336,27 @@ pip install -e .
   </li>
   <li>Set the required environment variables in your local environment:
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">NIFI_API_BASE</code>= https://<your-nifi-host><data-hub-name>/cdp-proxy/nifi-app/nifi-api</data-hub-name></your-nifi-host></li>
-      <li><code class="language-plaintext highlighter-rouge">KNOX_TOKEN</code>= [token]</li>
-      <li><code class="language-plaintext highlighter-rouge">NIFI_READONLY</code> true</li>
-      <li><code class="language-plaintext highlighter-rouge">KNOX_VERIFY_SSL</code> false</li>
+      <li>
+<code class="language-plaintext highlighter-rouge">NIFI_API_BASE</code>= https://<your-nifi-host><data-hub-name>/cdp-proxy/nifi-app/nifi-api</data-hub-name></your-nifi-host>
+</li>
+      <li>
+<code class="language-plaintext highlighter-rouge">KNOX_TOKEN</code>= [token]</li>
+      <li>
+<code class="language-plaintext highlighter-rouge">NIFI_READONLY</code> true</li>
+      <li>
+<code class="language-plaintext highlighter-rouge">KNOX_VERIFY_SSL</code> false</li>
     </ul>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">NIFI_API_BASE</span><span class="o">=</span>https://[datahub]-gateway.[env].cloudera.site/[datahub]/cdp-proxy/nifi-app/nifi-api
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">NIFI_API_BASE</span><span class="o">=</span>https://[datahub]-gateway.[env].cloudera.site/[datahub]/cdp-proxy/nifi-app/nifi-api
 <span class="nv">KNOX_TOKEN</span><span class="o">=</span>
 <span class="nv">NIFI_READONLY</span><span class="o">=</span><span class="nb">true
 </span><span class="nv">KNOX_VERIFY_SSL</span><span class="o">=</span><span class="nb">false</span>
 </code></pre></div>    </div>
   </li>
   <li>Run the <strong>MCP Inspector</strong>:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx @modelcontextprotocol/inspector .venv/bin/python -m nifi_mcp_server.server
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>npx @modelcontextprotocol/inspector .venv/bin/python -m nifi_mcp_server.server
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -362,18 +375,19 @@ Once your MCP server is successfully <strong>Connected</strong>, the MCP Inspect
   <li>Click the <strong>“List Tools”</strong> button.</li>
 </ul>
 
-<p>The Tools panel should display the <code class="language-plaintext highlighter-rouge">READ-ONLY</code> NiFi tools the server supports (e.g., <code class="language-plaintext highlighter-rouge">list_processors</code>, <code class="language-plaintext highlighter-rouge">get_nifi_version</code>, <code class="language-plaintext highlighter-rouge">create_process_group</code>).  Later we will take a look at the <code class="language-plaintext highlighter-rouge">WRITE</code> NiFi tools.</p>
+<p>The Tools panel should display the <code class="language-plaintext highlighter-rouge">READ-ONLY</code> NiFi tools the server supports (e.g., <code class="language-plaintext highlighter-rouge">list_processors</code>, <code class="language-plaintext highlighter-rouge">get_nifi_version</code>, <code class="language-plaintext highlighter-rouge">get_processor_details</code>).  Later we will take a look at the <code class="language-plaintext highlighter-rouge">WRITE</code> NiFi tools.</p>
 
-<hr />
+<hr>
 
 <h2 id="running-your-first-test-get_nifi_version">Running Your First Test (<code class="language-plaintext highlighter-rouge">get_nifi_version</code>)</h2>
 
-<p>Testing the version is the best “smoke test” because it doesn’t require complex JSON arguments and confirms the NiFi API connection is alive.</p>
+<p>Testing the version is the best “smoke test” because it doesn’t require any arguments and confirms the NiFi API connection is alive.</p>
 
 <ul>
-  <li><strong>Select the Tool:</strong> Click on <strong><code class="language-plaintext highlighter-rouge">get_nifi_version</code></strong> from the tool list on the left.</li>
-  <li><strong>Review Arguments:</strong> Since this tool requires no input, the <strong>“Arguments”</strong> box in the center of the screen will remain empty or show <code class="language-plaintext highlighter-rouge">{}</code>.</li>
-  <li><strong>Execute:</strong> Click the <strong>“Run Tool”</strong> button.</li>
+  <li>
+<strong>Select the Tool:</strong> Click on <strong><code class="language-plaintext highlighter-rouge">get_nifi_version</code></strong> from the tool list on the left.</li>
+  <li>
+<strong>Execute:</strong> Click the <strong>“Run Tool”</strong> button.</li>
 </ul>
 
 <p>You should see:</p>
@@ -402,38 +416,70 @@ Once your MCP server is successfully <strong>Connected</strong>, the MCP Inspect
     </span><span class="nl">"major_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div></div>
 
-<hr />
+<hr>
 
 <h2 id="running-a-parameterized-test">Running a Parameterized Test</h2>
 
-<p>If the version check works, try <strong><code class="language-plaintext highlighter-rouge">list_processors</code></strong>:</p>
+<p>Next lets use <code class="language-plaintext highlighter-rouge">get_root_process_group</code> to get the <code class="language-plaintext highlighter-rouge">UUID</code> for the root process group.  You could also just use any UUID from the NiFi Canvas.</p>
 
 <ul>
-  <li><strong>Input:</strong> This tool requires a <code class="language-plaintext highlighter-rouge">process_group_id</code>.</li>
-  <li><strong>Action:</strong> Paste a valid UUID from your NiFi canvas into the JSON argument box (e.g., <code class="language-plaintext highlighter-rouge">{"process_group_id": "root"}</code>).</li>
-  <li><strong>Run:</strong> Click “Call Tool” to see the list of processors in that group.</li>
+  <li>
+<strong>Select the Tool:</strong> Click on <strong><code class="language-plaintext highlighter-rouge">get_root_process_group</code></strong> from the tool list on the left.</li>
+  <li>
+<strong>Run:</strong> Click “Run Tool” to see the list of processors in that group.</li>
+  <li>
+<strong>Copy:</strong> Save the UUID such as <code class="language-plaintext highlighter-rouge">25d98a86-0182-1000-9624-7b3ffa192883</code> for use later.</li>
 </ul>
+
+<p>Now that we have our <code class="language-plaintext highlighter-rouge">process_group_id</code>, let’s try <strong><code class="language-plaintext highlighter-rouge">list_processors</code></strong>:</p>
+
+<ul>
+  <li>
+<strong>Input:</strong> Paste the <code class="language-plaintext highlighter-rouge">process_group_id</code> you got in the previous step.</li>
+  <li>
+<strong>Run:</strong> Click “Run Tool” to see the list of processors in that group.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+  <span class="s2">"result"</span>: <span class="o">{</span>
+    <span class="s2">"permissions"</span>: <span class="o">{</span>
+      <span class="s2">"canRead"</span>: <span class="nb">true</span>,
+      <span class="s2">"canWrite"</span>: <span class="nb">true</span>
+    <span class="o">}</span>,
+    <span class="s2">"processGroupFlow"</span>: <span class="o">{</span>
+      <span class="s2">"id"</span>: <span class="s2">"25d98a86-0182-1000-9624-7b3ffa192883"</span>,
+
+
+  <span class="o">[</span> truncated <span class="o">]</span>
+</code></pre></div></div>
+
+<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> The JSON output is substantial so I have truncated it here.  If you have a big NiFi canvas with a lot of process groups on the root canvas you can expect over 10,000 lines of JSON response.</p>
+
+<hr>
 
 <h2 id="test-with-mcp-inspector-in-write-mode">Test with <strong>MCP Inspector</strong> in Write Mode</h2>
 
 <ol>
   <li>Set the env <code class="language-plaintext highlighter-rouge">NIFI_READONLY</code> environment variables to false:
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">NIFI_READONLY</code> false</li>
+      <li>
+<code class="language-plaintext highlighter-rouge">NIFI_READONLY</code> false</li>
     </ul>
   </li>
   <li>Apply the changes:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set -a
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>set -a
 source .env
 set +a
 </code></pre></div>    </div>
   </li>
   <li>Run the <strong>MCP Inspector</strong>:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx @modelcontextprotocol/inspector .venv/bin/python -m nifi_mcp_server.server
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>npx @modelcontextprotocol/inspector .venv/bin/python -m nifi_mcp_server.server
 </code></pre></div>    </div>
+    <hr>
   </li>
 </ol>
 
@@ -446,7 +492,11 @@ set +a
 
 <p>The Tools panel should now also display the <code class="language-plaintext highlighter-rouge">WRITE</code> NiFi tools the server supports (e.g., <code class="language-plaintext highlighter-rouge">start_processor</code>, <code class="language-plaintext highlighter-rouge">stop_processor</code>, <code class="language-plaintext highlighter-rouge">create_processor</code>).</p>
 
-<hr />
+<p class="notice--warning"><img class="emoji" title=":unlock:" alt=":unlock:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f513.png" height="20" width="20"> <strong>UnLocked</strong> You have now unlocked the full power of agentic ai against your nifi canvas.</p>
+
+<p>You’ve now successfully installed and configured the Apache NiFi MCP Server from Cloudera and connected it to your Cloudera Public Cloud NiFi cluster. With MCP Inspector up and running, you can explore processors, process groups, check versions, and manage dataflows — all through natural-language commands via any MCP-compatible AI client. This setup turns your governed NiFi environment into an AI-native data orchestration platform, unlocking true agentic workflows inside Cloudera DataFlow.</p>
+
+<hr>
 
 <h2 id="terminal-history">Terminal History</h2>
 
@@ -484,6 +534,17 @@ pkill -f nifi_mcp_server
 <span class="go">.venv/bin/python -m nifi_mcp_server.server
 
 </span></code></pre></div></div>
+
+<hr>
+
+<h2 id="cloudera-mcp-servers">Cloudera MCP Servers</h2>
+
+<ul>
+  <li><a href="https://github.com/cloudera/NiFi-MCP-Server">Cloudera NiFi MCP Server</a></li>
+  <li><a href="https://github.com/cloudera/iceberg-mcp-server">Cloudera Iceberg MCP Server</a></li>
+  <li><a href="https://github.com/cloudera/CAI_Workbench_MCP_Server">Cloudera AI WorkBech MCP Server</a></li>
+  <li><a href="https://github.com/cloudera/CDV-MCP-Server">Cloudera Dataviz MCP Server</a></li>
+</ul>
 
 <h2 id="how-to-install-cloudera-nifi-mcp-server">How To Install Cloudera NiFi MCP Server</h2>
 <p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about How To Install Cloudera NiFi MCP Server please reach out to schedule a discussion.</p>
@@ -541,7 +602,7 @@ pkill -f nifi_mcp_server
 
   <a href="https://twitter.com/intent/tweet?text=How+To+Install+Cloudera+NiFi+MCP+Server%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-To-Install-Cloudera-NiFi-MCP-Server%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-To-Install-Cloudera-NiFi-MCP-Server%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-To-Install-Cloudera-NiFi-MCP-Server%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -610,7 +671,7 @@ pkill -f nifi_mcp_server
   <div class="archive__item-excerpt" itemprop="description">
     CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA
 We are announcing the general availability of Real-Time Monitoring...
-    <a href="/release/Real-Time-Monitoring-with-Observability/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/release/Real-Time-Monitoring-with-Observability/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -660,7 +721,7 @@ We are announcing the general availability of Real-Time Monitoring...
   <div class="archive__item-excerpt" itemprop="description">
     How to Build and Test Custom NiFi Python Processors with AI (Without Breaking NiFi)
 
-    <a href="/blog/How-to-AI-with-NiFi-and-Python/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/blog/How-to-AI-with-NiFi-and-Python/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -709,7 +770,7 @@ We are announcing the general availability of Real-Time Monitoring...
     
   <div class="archive__item-excerpt" itemprop="description">
     The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Promethe...
-    <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -758,7 +819,7 @@ We are announcing the general availability of Real-Time Monitoring...
     
   <div class="archive__item-excerpt" itemprop="description">
     We are excited to announce the release of Cloudera Streaming Analytics 1.17.0 for on-premises deployments. This update reinforces our commitment to a stable,...
-    <a href="/release/Cloudera-Streaming-Analytics-1.17.0/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/release/Cloudera-Streaming-Analytics-1.17.0/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -775,13 +836,15 @@ We are announcing the general availability of Real-Time Monitoring...
 
     
       <div class="search-content">
-        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
     <label class="sr-only" for="search">
       Enter your search term...
     </label>
-    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
   </form>
-  <div id="results" class="results"></div></div>
+  <div id="results" class="results"></div>
+</div>
 
       </div>
     
@@ -823,7 +886,7 @@ We are announcing the general availability of Real-Time Monitoring...
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 <script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
       </footer>
     </div>
