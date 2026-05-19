@@ -1,17 +1,66 @@
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 120611
-  lang: "HTML"
-  updated: "2026-05-17"
-  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
   size: 36
   lang: ""
-  updated: "2026-05-16"
+  updated: "2026-05-19"
   fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 121012
+  lang: "HTML"
+  updated: "2026-05-18"
+  fork: false
+- name: "flink-tutorials"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/flink-tutorials"
+  size: 4866
+  lang: ""
+  updated: "2026-05-18"
+  fork: true
+- name: "CAI_Workbench_MCP_Server"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/CAI_Workbench_MCP_Server"
+  size: 444
+  lang: ""
+  updated: "2026-05-18"
+  fork: true
+- name: "CDV-MCP-Server"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/CDV-MCP-Server"
+  size: 290
+  lang: ""
+  updated: "2026-05-18"
+  fork: true
+- name: "cod-examples"
+  description: "cod-examples"
+  url: "https://github.com/cldr-steven-matison/cod-examples"
+  size: 90
+  lang: ""
+  updated: "2026-05-18"
+  fork: true
+- name: "NiFi-MCP-Server"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/NiFi-MCP-Server"
+  size: 1729
+  lang: ""
+  updated: "2026-05-18"
+  fork: true
+- name: "ClouderaSetup"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/ClouderaSetup"
+  size: 79491
+  lang: ""
+  updated: "2026-05-18"
+  fork: true
+- name: "cloudera-partners"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/cloudera-partners"
+  size: 215635
+  lang: ""
+  updated: "2026-05-18"
+  fork: true
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
