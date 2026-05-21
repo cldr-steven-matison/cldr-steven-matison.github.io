@@ -11,22 +11,22 @@ PASSWORD = os.environ.get('CONFLUENCE_TOKEN')
 SPACE_KEY = 'person'
 PARENT_ID = '11962745157' 
 
-# --- TEST SETTINGS ---
-# Set this to True to only process ONE specific file for testing
-TEST_MODE = True 
-TEST_FILE = 'posts/my-test-post.md' # UPDATE THIS to an existing file path
+# Set to True to only process the TEST_FILE
+TEST_MODE = False 
+TEST_FILE = 'posts/your-test-file.md' 
 
 confluence = Confluence(url=URL, username=USERNAME, password=PASSWORD)
 
 def sync_posts():
     if TEST_MODE:
         post_files = [TEST_FILE]
-        print(f"🛠️ TEST MODE: Processing only {TEST_FILE}")
+        print(f"🛠️ TEST MODE: Processing {TEST_FILE}")
     else:
-        post_files = glob.glob("posts/*.md")
+        # Check both 'posts' and '_posts' just in case
+        post_files = glob.glob("posts/*.md") + glob.glob("_posts/*.md")
     
     if not post_files:
-        print("No markdown files found.")
+        print("No markdown files found. Check your folder names.")
         return
 
     for file_path in post_files:
@@ -36,13 +36,12 @@ def sync_posts():
 
         post = frontmatter.load(file_path)
         
-        # CATEGORIES FILTER
-        # Handles both strings 'BLOG' and lists ['BLOG', 'NEWS']
+        # Check categories
         raw_categories = post.get('categories', [])
         if isinstance(raw_categories, str):
             category_list = [raw_categories.upper()]
         else:
-            category_list = [c.upper() for c in raw_categories]
+            category_list = [str(c).upper() for c in raw_categories]
 
         if 'BLOG' not in category_list and not TEST_MODE:
             print(f"⏭️ Skipping {file_path}: 'BLOG' not in {category_list}")
@@ -56,19 +55,31 @@ def sync_posts():
         print(f"Syncing: {title}...")
 
         try:
-            if confluence.page_exists(SPACE_KEY, title):
-                page_id = confluence.get_page_id(SPACE_KEY, title)
+            if confluence.page_exists(space=SPACE_KEY, title=title):
+                page_id = confluence.get_page_id(space=SPACE_KEY, title=title)
+                # Update existing page
                 confluence.update_page(
                     page_id=page_id,
                     title=title,
                     body=html_body,
                     parent_id=PARENT_ID,
-                    type='page'
+                    type='page',
+                    representation='storage'
                 )
                 print(f"✅ Updated: {title}")
             else:
+                # Create brand new page
                 confluence.create_page(
                     space=SPACE_KEY,
                     title=title,
                     body=html_body,
-                    parent_
+                    parent_id=PARENT_ID,
+                    type='page',
+                    representation='storage'
+                )
+                print(f"✨ Created: {title}")
+        except Exception as e:
+            print(f"❌ Failed to sync {title}: {e}")
+
+if __name__ == "__main__":
+    sync_posts()
