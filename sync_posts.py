@@ -12,7 +12,7 @@ SPACE_KEY = 'person'
 PARENT_ID = '11962745157' 
 
 # --- TEST SETTINGS ---
-TEST_MODE = True
+TEST_MODE = False
 # IMPORTANT: Update this to point to the exact file you want to test
 TEST_FILE = '_posts/2023-05-17-welcome.md' 
 
