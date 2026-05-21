@@ -3,9 +3,7 @@ name: Sync Blog to Confluence
 on:
   push:
     branches:
-      - main
-    paths:
-      - 'posts/**'
+      - main  # This ensures it runs every time you push to main
 
 jobs:
   confluence-sync:
