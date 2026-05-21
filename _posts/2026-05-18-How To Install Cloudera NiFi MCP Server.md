@@ -9,6 +9,7 @@ categories:
 tags:
   - nifi
   - mcp
+  - ai
 ---
 
 The [Cloudera NiFi MCP Server](https://github.com/cloudera/NiFi-MCP-Server) is a standard **Model Context Protocol (MCP)** server (an open protocol originally from Anthropic but now client-agnostic). The Cloudera NiFi MCP Server simply exposes tools for reading/writing Apache NiFi flows via Knox. Any MCP-compatible client can talk to it.  In this post I am going to share how I used MCP Inspector to test the Cloudera NiFi MCP Server against a Cloudera on Cloud deployed NiFi Cluster.
