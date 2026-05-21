@@ -14,20 +14,19 @@ PARENT_ID = '11962745157'
 # --- TEST SETTINGS ---
 # Set this to True to only process ONE specific file for testing
 TEST_MODE = True 
-TEST_FILE = 'posts/2023-05-17-welcome.md' # Replace with an actual file path in your repo
+TEST_FILE = 'posts/my-test-post.md' # UPDATE THIS to an existing file path
 
 confluence = Confluence(url=URL, username=USERNAME, password=PASSWORD)
 
 def sync_posts():
-    # Determine which files to process
     if TEST_MODE:
         post_files = [TEST_FILE]
-        print(f"🛠️ Running in TEST MODE. Processing only: {TEST_FILE}")
+        print(f"🛠️ TEST MODE: Processing only {TEST_FILE}")
     else:
         post_files = glob.glob("posts/*.md")
     
     if not post_files:
-        print("No markdown files found to process.")
+        print("No markdown files found.")
         return
 
     for file_path in post_files:
@@ -35,20 +34,23 @@ def sync_posts():
             print(f"⚠️ File not found: {file_path}")
             continue
 
-        # Load file and parse YAML Frontmatter
         post = frontmatter.load(file_path)
         
-        # CATEGORY FILTER: Only take posts where category is 'BLOG'
-        # This assumes your YAML has: category: BLOG
-        category = post.get('category', '').upper()
-        if category != 'BLOG' and not TEST_MODE:
-            print(f"⏭️ Skipping {file_path}: Category is '{category}', not 'BLOG'")
+        # CATEGORIES FILTER
+        # Handles both strings 'BLOG' and lists ['BLOG', 'NEWS']
+        raw_categories = post.get('categories', [])
+        if isinstance(raw_categories, str):
+            category_list = [raw_categories.upper()]
+        else:
+            category_list = [c.upper() for c in raw_categories]
+
+        if 'BLOG' not in category_list and not TEST_MODE:
+            print(f"⏭️ Skipping {file_path}: 'BLOG' not in {category_list}")
             continue
         
-        # Priority: 1. Title from YAML, 2. Filename
         title = post.get('title') or os.path.basename(file_path).replace(".md", "").replace("-", " ").title()
         
-        # Convert Markdown body to HTML
+        # Convert Markdown to HTML
         html_body = markdown2.markdown(post.content, extras=["tables", "fenced-code-blocks", "break-on-newline"])
 
         print(f"Syncing: {title}...")
@@ -69,12 +71,4 @@ def sync_posts():
                     space=SPACE_KEY,
                     title=title,
                     body=html_body,
-                    parent_id=PARENT_ID,
-                    type='page'
-                )
-                print(f"✨ Created: {title}")
-        except Exception as e:
-            print(f"❌ Failed to sync {title}: {e}")
-
-if __name__ == "__main__":
-    sync_posts()
+                    parent_
