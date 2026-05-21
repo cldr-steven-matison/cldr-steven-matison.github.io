@@ -1,16 +1,44 @@
+- name: "mcp-kafka"
+  description: "A Model Context Protocol Server to perform Kafka client operations"
+  url: "https://github.com/cldr-steven-matison/mcp-kafka"
+  size: 15098
+  lang: ""
+  updated: "2026-05-20"
+  fork: true
+- name: "SMM-MCP-Server"
+  description: "A Model Context Protocol (MCP) server for Cloudera Streams Messaging Manager (SMM) that provides 86+ tools for monitoring and managing Kafka environments through Claude Desktop."
+  url: "https://github.com/cldr-steven-matison/SMM-MCP-Server"
+  size: 887
+  lang: ""
+  updated: "2026-05-20"
+  fork: true
+- name: "SSB-MCP-Server"
+  description: "Model Context Protocol (MCP) server for SQL Steam Builder (SSB)"
+  url: "https://github.com/cldr-steven-matison/SSB-MCP-Server"
+  size: 1617
+  lang: ""
+  updated: "2026-05-20"
+  fork: true
+- name: "DesktopShare"
+  description: "Share spot for Macbook & Windows MD & Test Files"
+  url: "https://github.com/cldr-steven-matison/DesktopShare"
+  size: 989
+  lang: "Python"
+  updated: "2026-05-20"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 121225
+  lang: "HTML"
+  updated: "2026-05-20"
+  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
   size: 37
   lang: ""
   updated: "2026-05-20"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 121218
-  lang: "HTML"
-  updated: "2026-05-19"
   fork: false
 - name: "flink-tutorials"
   description: ""
@@ -61,13 +89,6 @@
   lang: ""
   updated: "2026-05-18"
   fork: true
-- name: "DesktopShare"
-  description: "Share spot for Macbook & Windows MD & Test Files"
-  url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 970
-  lang: "Python"
-  updated: "2026-05-15"
-  fork: false
 - name: "x-algorithm"
   description: "Algorithm powering the For You feed on X"
   url: "https://github.com/cldr-steven-matison/x-algorithm"
@@ -295,7 +316,7 @@
 - name: "iceberg-mcp-server"
   description: ""
   url: "https://github.com/cldr-steven-matison/iceberg-mcp-server"
-  size: 57
+  size: 64
   lang: ""
   updated: "2025-07-24"
   fork: true
