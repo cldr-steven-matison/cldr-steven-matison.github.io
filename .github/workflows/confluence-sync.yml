@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '_posts/**'
 
 jobs:
   confluence-sync:
