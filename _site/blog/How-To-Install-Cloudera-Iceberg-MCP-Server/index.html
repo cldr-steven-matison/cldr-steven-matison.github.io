@@ -1,0 +1,922 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>How To Install Cloudera Iceberg MCP Server - Cloudera Solutions Engineer</title>
+<meta name="description" content="How to build and locally test the Cloudera Iceberg MCP Server with MCP Inspector using Cloudera Apache Iceberg deployed on AWS in a Cloudera Data Warehouse.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="How To Install Cloudera Iceberg MCP Server">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/">
+
+
+  <meta property="og:description" content="How to build and locally test the Cloudera Iceberg MCP Server with MCP Inspector using Cloudera Apache Iceberg deployed on AWS in a Cloudera Data Warehouse.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/how_to_install_iceberg_mcp_server.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-05-20T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How To Install Cloudera Iceberg MCP Server">
+    <meta itemprop="description" content="How to build and locally test the Cloudera Iceberg MCP Server with MCP Inspector using Cloudera Apache Iceberg deployed on AWS in a Cloudera Data Warehouse.">
+    <meta itemprop="datePublished" content="2026-05-20T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/" class="u-url" itemprop="url">How To Install Cloudera Iceberg MCP Server
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-05-20T00:00:00-04:00">
+            May 20, 2026
+          </time>
+        </p>
+      
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>This next guide walks you through <strong>Option 2 (Local Install)</strong> of the <a href="https://github.com/cloudera/iceberg-mcp-server">Cloudera Iceberg MCP Server</a> on a local machine. The instructions mirror the style and detail of my previous guide: <a href="https://stevenmatison.com/blog/How-To-Install-Cloudera-NiFi-MCP-Server/">How To Install Cloudera NiFi MCP Server</a>.  The Iceberg MCP Server is a Model Context Protocol (MCP) server that gives LLMs and AI agents read-only access to Iceberg tables via Apache Impala. It exposes two powerful tools:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">get_schema()</code> – Lists all tables available in the current database.</li>
+  <li><code class="language-plaintext highlighter-rouge">execute_query(query: str)</code> – Runs any SQL query on Impala and returns results as JSON.</li>
+</ul>
+
+<p>This setup is tested against a <strong>Cloudera Public Cloud (CDP) on AWS</strong> environment and confirmed to work perfectly with <strong>MCP Inspector</strong> on macbook.  Other environments and instances; including AI clients of the MCP Server(s) should behave the same.   This excercise is good to understand how it works or even better to master the tools and contribute back to the tool(See Appendix).</p>
+
+<hr />
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Before you begin, make sure you have the following on your Mac:</p>
+
+<ol>
+  <li><strong>Git</strong> – <code class="language-plaintext highlighter-rouge">brew install git</code> (or already installed via Xcode Command Line Tools).</li>
+  <li><strong>Node.js</strong> – Required for <code class="language-plaintext highlighter-rouge">npx</code> and MCP Inspector. Install with:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>node
+</code></pre></div>    </div>
+  </li>
+  <li><strong>uv</strong> – Modern Python package manager (used by the Iceberg MCP Server). Install with:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-LsSf</span> https://astral.sh/uv/install.sh | sh
+</code></pre></div>    </div>
+    <p>Then restart your terminal or run <code class="language-plaintext highlighter-rouge">source $HOME/.cargo/env</code>.</p>
+  </li>
+  <li><strong>Cloudera Public Cloud (AWS) access</strong> – You need Impala connection details (see next section).</li>
+</ol>
+
+<hr />
+
+<h2 id="step-1-obtain-impala-connection-details-from-cloudera-public-cloud-on-aws">Step 1: Obtain Impala Connection Details from Cloudera Public Cloud on AWS</h2>
+
+<p>The MCP Server connects to your <strong>Impala Virtual Warehouse</strong> (or Data Hub cluster with Impala) in CDP Public Cloud on AWS. Connection is via the Knox gateway (HTTPS, port 443).</p>
+
+<h3 id="how-to-get-the-details">How to get the details:</h3>
+<ol>
+  <li>Log in to the <strong>Cloudera Management Console</strong> → <strong>Data Warehouse</strong> service.</li>
+  <li>Select your <strong>Virtual Warehouse</strong> (Impala type).</li>
+  <li>In the <strong>Details</strong> tab or <strong>Connection</strong> section, click <strong>Copy JDBC URL</strong> (or find the Impala coordinator endpoint).</li>
+  <li>The JDBC URL will look similar to this:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jdbc:impala://coordinator-default-impala-aws.[dw name].[env name].cloudera.site:443/default;AuthMech=12;transportMode=http;httpPath=cliservice;ssl=1;auth=browser
+</code></pre></div>    </div>
+  </li>
+  <li>Extract these values for the MCP Server environment variables:
+    <ul>
+      <li><strong>IMPALA_HOST</strong> → <code class="language-plaintext highlighter-rouge">coordinator-default-impala-aws.[dw name].[env name].cloudera.site</code> (the hostname only)</li>
+      <li><strong>IMPALA_PORT</strong> → <code class="language-plaintext highlighter-rouge">443</code></li>
+      <li><strong>IMPALA_USER</strong> → Your workload username (e.g., <code class="language-plaintext highlighter-rouge">srv_cia_test_user</code> or IAM user)</li>
+      <li><strong>IMPALA_PASSWORD</strong> → The corresponding password</li>
+      <li><strong>IMPALA_DATABASE</strong> → Usually <code class="language-plaintext highlighter-rouge">default</code> (or your target database)</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>Tip</strong>: Use a <strong>workload user</strong> or service account with appropriate Impala permissions.</p>
+
+<hr />
+
+<h2 id="step-2-clone-the-repository">Step 2: Clone the Repository</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/cldr-steven-matison/iceberg-mcp-server.git
+<span class="nb">cd </span>iceberg-mcp-server
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="step-3-set-environment-variables">Step 3: Set Environment Variables</h2>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">.env</code> file in the root of the repository for easy loading (recommended):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&gt;</span> .env <span class="o">&lt;&lt;</span> <span class="no">EOF</span><span class="sh">
+IMPALA_HOST=coordinator-default-impala-aws.[dw name].[env name].cloudera.site
+IMPALA_PORT=443
+IMPALA_USER=yourworkloaduser
+IMPALA_PASSWORD=yourpassword
+IMPALA_DATABASE=default
+# Optional: Change transport if needed (default is stdio)
+# MCP_TRANSPORT=stdio
+</span><span class="no">EOF
+</span></code></pre></div></div>
+
+<p>Load the variables in your current terminal session:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span> <span class="nt">-a</span><span class="p">;</span> <span class="nb">source</span> .env<span class="p">;</span> <span class="nb">set</span> +a
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="step-4-run-the-mcp-server-with-mcp-inspector">Step 4: Run the MCP Server with MCP Inspector</h2>
+
+<p>MCP Inspector is the easiest way to test the server locally.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx @modelcontextprotocol/inspector uv run src/iceberg_mcp_server/server.py
+</code></pre></div></div>
+
+<p>This command:</p>
+<ul>
+  <li>Opens the MCP Inspector in your browser.</li>
+  <li>Launches the Iceberg MCP Server locally using <code class="language-plaintext highlighter-rouge">uv</code>.</li>
+</ul>
+
+<hr />
+
+<h2 id="step-5-testing--confirmation-iceberg-mcp-services-work-with-mcp-inspector">Step 5: Testing – Confirmation Iceberg MCP Services Work with MCP Inspector</h2>
+
+<p>Once the MCP inspector loads:</p>
+
+<ol>
+  <li><strong>Connect</strong> to the server (it auto-detects the running process).</li>
+  <li>Confirm the server version and status.</li>
+  <li><strong>List Tools</strong> – You should see:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">get_schema()</code></li>
+      <li><code class="language-plaintext highlighter-rouge">execute_query(query: str)</code></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="example-tests">Example Tests</h3>
+
+<p><strong>Test 1: Get Schema</strong></p>
+
+<p>Click Run Tool</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  → Returns a JSON list of all tables in the `IMPALA_DATABASE`.
+</code></pre></div></div>
+
+<p><strong>Test 2: Execute a Simple Query</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">SHOW TABLES</code></p>
+
+<p>Click Run Tool</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  → Returns table names as JSON.
+</code></pre></div></div>
+
+<p><strong>Test 3: Real Iceberg Query</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">SELECT * FROM your_iceberg_table LIMIT 5</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Click Run Tool
+
+  → Returns actual data rows.
+</code></pre></div></div>
+
+<h3 id="success">Success</h3>
+
+<p>All tests complete without errors, tools are listed correctly, and queries return valid JSON results from your Cloudera Public Cloud Impala/Iceberg environment. The Cloudera Iceberg MCP Server is ready for use with Claude Desktop, LangChain, or any MCP client.</p>
+
+<hr />
+
+<h2 id="cloudera-mcp-servers">Cloudera MCP Servers</h2>
+
+<ul>
+  <li><a href="https://github.com/cloudera/NiFi-MCP-Server">Cloudera NiFi MCP Server</a></li>
+  <li><a href="https://github.com/cloudera/iceberg-mcp-server">Cloudera Iceberg MCP Server</a></li>
+  <li><a href="https://github.com/cloudera/CAI_Workbench_MCP_Server">Cloudera AI WorkBech MCP Server</a></li>
+  <li><a href="https://github.com/cloudera/CDV-MCP-Server">Cloudera Dataviz MCP Server</a></li>
+</ul>
+
+<h2 id="how-to-install-cloudera-iceberg-mcp-server">How To Install Cloudera Iceberg MCP Server</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about How To Install Cloudera Iceberg MCP Server please reach out to schedule a discussion.</p>
+
+<h2 id="appendix">Appendix</h2>
+
+<h3 id="1-contributing-back--example-pr-from-develop-branch">1. Contributing Back – Example PR from Develop Branch</h3>
+
+<p>The goal of this exercise post installation — is to teach <strong>how to contribute</strong> back to the upstream Cloudera project.</p>
+
+<h4 id="suggested-contribution-easy-starter-pr">Suggested Contribution (Easy Starter PR)</h4>
+<p><strong>Item/Adjustment</strong>: Add more local-install instructions + <code class="language-plaintext highlighter-rouge">.env</code> support to the README.</p>
+
+<p><strong>Why this is valuable</strong>:</p>
+<ul>
+  <li>The current upstream README (<code class="language-plaintext highlighter-rouge">cloudera/iceberg-mcp-server</code>) only has minimal Option 2 instructions.</li>
+</ul>
+
+<h4 id="how-to-contribute-step-by-step">How to Contribute (Step-by-Step)</h4>
+
+<ol>
+  <li>In <strong>your fork</strong> (<code class="language-plaintext highlighter-rouge">cldr-steven-matison/iceberg-mcp-server</code>):
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> develop
+git push <span class="nt">-u</span> origin develop
+</code></pre></div>    </div>
+  </li>
+  <li>Make the change (example):
+    <ul>
+      <li>Update <code class="language-plaintext highlighter-rouge">README.md</code> with the steps you just followed.</li>
+    </ul>
+  </li>
+  <li>Commit and push:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add README.md
+git commit <span class="nt">-m</span> <span class="s2">"feat: update readme local install"</span>
+git push
+</code></pre></div>    </div>
+  </li>
+  <li>Open a <strong>Pull Request</strong>:
+    <ul>
+      <li>Go to your fork on GitHub → Compare &amp; pull request → Base repository: <code class="language-plaintext highlighter-rouge">cloudera/iceberg-mcp-server</code> → Base branch: <code class="language-plaintext highlighter-rouge">main</code></li>
+      <li>Title: “Update Readme for Local Install”</li>
+      <li>Link back to this blog post for context.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>This PR would be merged quickly because it improves documentation for the entire community.</p>
+
+<hr />
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ai" class="page__taxonomy-item p-category" rel="tag">ai</a><span class="sep">, </span>
+    
+      <a href="/tags/#iceberg" class="page__taxonomy-item p-category" rel="tag">iceberg</a><span class="sep">, </span>
+    
+      <a href="/tags/#mcp" class="page__taxonomy-item p-category" rel="tag">mcp</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-05-20T00:00:00-04:00">May 20, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=How+To+Install+Cloudera+Iceberg+MCP+Server%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-To-Install-Cloudera-Iceberg-MCP-Server%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-To-Install-Cloudera-Iceberg-MCP-Server%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/How-To-Install-Cloudera-NiFi-MCP-Server/" class="pagination--pager" title="How To Install Cloudera NiFi MCP Server
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-To-Install-Cloudera-NiFi-MCP-Server/" rel="permalink">How To Install Cloudera NiFi MCP Server
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi deployed on AWS in a Data.
+
+    <a href="/blog/How-To-Install-Cloudera-NiFi-MCP-Server/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Real-Time_Monitoring_with_Observability.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Real-Time-Monitoring-with-Observability/" rel="permalink">Real-Time Monitoring with Observability
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA
+We are announcing the general availability of Real-Time Monitoring...
+    <a href="/release/Real-Time-Monitoring-with-Observability/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-to-AI-with-NiFi-and-Python/" rel="permalink">How to AI with NiFi and Python
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          11 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How to Build and Test Custom NiFi Python Processors with AI (Without Breaking NiFi)
+
+    <a href="/blog/How-to-AI-with-NiFi-and-Python/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" rel="permalink">Observability with Cloudera Streaming Operators
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Promethe...
+    <a href="/blog/Observability-with-Cloudera-Streaming-Operators/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>

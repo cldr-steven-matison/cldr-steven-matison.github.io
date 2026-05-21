@@ -1,24 +1,22 @@
 ---
 layout: single
 title: "How To Install Cloudera Iceberg MCP Server"
-excerpt: ""
+excerpt: "How to build and locally test the Cloudera Iceberg MCP Server with MCP Inspector using Cloudera Apache Iceberg deployed on AWS in a Cloudera Data Warehouse."
 header:
-  teaser: "/assets/images/2026-05-18-how_to_install_iceberg_mcp_server.png"
+  teaser: "/assets/images/how_to_install_iceberg_mcp_server.png"
 categories:
   - blog
 tags:
-  - icerberg
+  - iceberg
   - ai
   - mcp
 ---
 
-This guide walks you through **Option 2 (Local Install)** of the [Cloudera Iceberg MCP Server](https://github.com/cloudera/iceberg-mcp-server) on a local machine. The Iceberg MCP Server is a Model Context Protocol (MCP) server that gives LLMs and AI agents read-only access to Iceberg tables via Apache Impala. It exposes two powerful tools:  
+This next guide walks you through **Option 2 (Local Install)** of the [Cloudera Iceberg MCP Server](https://github.com/cloudera/iceberg-mcp-server) on a local machine. The instructions mirror the style and detail of my previous guide: [How To Install Cloudera NiFi MCP Server](https://stevenmatison.com/blog/How-To-Install-Cloudera-NiFi-MCP-Server/).  The Iceberg MCP Server is a Model Context Protocol (MCP) server that gives LLMs and AI agents read-only access to Iceberg tables via Apache Impala. It exposes two powerful tools:  
 - `get_schema()` – Lists all tables available in the current database.  
 - `execute_query(query: str)` – Runs any SQL query on Impala and returns results as JSON.  
 
-This setup is tested against a **Cloudera Public Cloud (CDP) on AWS** environment and confirmed to work perfectly with **MCP Inspector**.  
-
-The instructions mirror the style and detail of my previous guide: [How To Install Cloudera NiFi MCP Server](https://stevenmatison.com/blog/How-To-Install-Cloudera-NiFi-MCP-Server/).  
+This setup is tested against a **Cloudera Public Cloud (CDP) on AWS** environment and confirmed to work perfectly with **MCP Inspector** on macbook.  Other environments and instances; including AI clients of the MCP Server(s) should behave the same.   This excercise is good to understand how it works or even better to master the tools and contribute back to the tool(See Appendix).  
 
 ---
 
@@ -127,25 +125,27 @@ Once the MCP inspector loads:
 
    Click Run Tool
 
-→ Returns a JSON list of all tables in the `IMPALA_DATABASE`.
+      → Returns a JSON list of all tables in the `IMPALA_DATABASE`.
 
 **Test 2: Execute a Simple Query**
 
    `SHOW TABLES`
-    Click Run Tool
 
-→ Returns table names as JSON.
+   Click Run Tool
+
+      → Returns table names as JSON.
 
 **Test 3: Real Iceberg Query**
 
    `SELECT * FROM your_iceberg_table LIMIT 5`
+
     Click Run Tool
 
-→ Returns actual data rows.
+      → Returns actual data rows.
 
 ### Success
 
-All tests complete without errors, tools are listed correctly, and queries return valid JSON results from your Cloudera Public Cloud Impala/Iceberg environment. The server is ready for use with Claude Desktop, LangChain, or any MCP client.
+All tests complete without errors, tools are listed correctly, and queries return valid JSON results from your Cloudera Public Cloud Impala/Iceberg environment. The Cloudera Iceberg MCP Server is ready for use with Claude Desktop, LangChain, or any MCP client.  
 
 ---
 

@@ -487,7 +487,13 @@ var store = [{
       },{
         "title": "How To Install Cloudera NiFi MCP Server",
         "excerpt":"The Cloudera NiFi MCP Server is a standard Model Context Protocol (MCP) server (an open protocol originally from Anthropic but now client-agnostic). The Cloudera NiFi MCP Server simply exposes tools for reading/writing Apache NiFi flows via Knox. Any MCP-compatible client can talk to it. In this post I am going...","categories": ["blog"],
-        "tags": ["nifi","mcp"],
+        "tags": ["nifi","mcp","ai"],
         "url": "/blog/How-To-Install-Cloudera-NiFi-MCP-Server/",
         "teaser": "/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png"
+      },{
+        "title": "How To Install Cloudera Iceberg MCP Server",
+        "excerpt":"This next guide walks you through Option 2 (Local Install) of the Cloudera Iceberg MCP Server on a local machine. The instructions mirror the style and detail of my previous guide: How To Install Cloudera NiFi MCP Server. The Iceberg MCP Server is a Model Context Protocol (MCP) server that...","categories": ["blog"],
+        "tags": ["iceberg","ai","mcp"],
+        "url": "/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/",
+        "teaser": "/assets/images/how_to_install_iceberg_mcp_server.png"
       }]
