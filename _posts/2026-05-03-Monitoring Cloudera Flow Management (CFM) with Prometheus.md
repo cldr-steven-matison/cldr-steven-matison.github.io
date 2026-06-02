@@ -76,7 +76,7 @@ Now we tell Prometheus to scrape NiFi, handing it the certificate so it can bree
 Save this as `nifi-service-monitor.yaml`:
 
 ```yaml
-apiVersion: [monitoring.coreos.com/v1](https://monitoring.coreos.com/v1)
+apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: nifi-service-monitor
@@ -93,13 +93,18 @@ spec:
       - cfm-streaming
   endpoints:
   - port: https
-    path: /nifi-api/flow/metrics/prometheus  # The native NiFi 2.x endpoint
+    path: /nifi-api/flow/metrics/prometheus
     interval: 30s
     scheme: https
     tlsConfig:
       insecureSkipVerify: true
       serverName: mynifi-web.cfm-streaming.svc.cluster.local
-      # The mTLS Bypass
+      # Explicit CA mapping fixes the "none configured" error
+      ca:
+        secret:
+          name: mynifi-cfm-operator-user-cert
+          key: ca.crt
+      # The mTLS Bypass Client Certs
       cert:
         secret:
           name: mynifi-cfm-operator-user-cert
@@ -108,7 +113,6 @@ spec:
         name: mynifi-cfm-operator-user-cert
         key: tls.key
     relabelings:
-      # Satisfies NiFi's strict SNI and Host header checks
       - targetLabel: __address__
         replacement: mynifi-web.cfm-streaming.svc.cluster.local:8443
 ```

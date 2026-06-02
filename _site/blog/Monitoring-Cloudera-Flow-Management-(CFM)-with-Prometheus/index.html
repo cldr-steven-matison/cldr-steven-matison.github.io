@@ -376,7 +376,7 @@
 
 <p>Save this as <code class="language-plaintext highlighter-rouge">nifi-service-monitor.yaml</code>:</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">monitoring.coreos.com/v1</span><span class="pi">]</span><span class="s">(https://monitoring.coreos.com/v1)</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">monitoring.coreos.com/v1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceMonitor</span>
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">nifi-service-monitor</span>
@@ -393,13 +393,18 @@
       <span class="pi">-</span> <span class="s">cfm-streaming</span>
   <span class="na">endpoints</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">https</span>
-    <span class="na">path</span><span class="pi">:</span> <span class="s">/nifi-api/flow/metrics/prometheus</span>  <span class="c1"># The native NiFi 2.x endpoint</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">/nifi-api/flow/metrics/prometheus</span>
     <span class="na">interval</span><span class="pi">:</span> <span class="s">30s</span>
     <span class="na">scheme</span><span class="pi">:</span> <span class="s">https</span>
     <span class="na">tlsConfig</span><span class="pi">:</span>
       <span class="na">insecureSkipVerify</span><span class="pi">:</span> <span class="kc">true</span>
       <span class="na">serverName</span><span class="pi">:</span> <span class="s">mynifi-web.cfm-streaming.svc.cluster.local</span>
-      <span class="c1"># The mTLS Bypass</span>
+      <span class="c1"># Explicit CA mapping fixes the "none configured" error</span>
+      <span class="na">ca</span><span class="pi">:</span>
+        <span class="na">secret</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">mynifi-cfm-operator-user-cert</span>
+          <span class="na">key</span><span class="pi">:</span> <span class="s">ca.crt</span>
+      <span class="c1"># The mTLS Bypass Client Certs</span>
       <span class="na">cert</span><span class="pi">:</span>
         <span class="na">secret</span><span class="pi">:</span>
           <span class="na">name</span><span class="pi">:</span> <span class="s">mynifi-cfm-operator-user-cert</span>
@@ -408,7 +413,6 @@
         <span class="na">name</span><span class="pi">:</span> <span class="s">mynifi-cfm-operator-user-cert</span>
         <span class="na">key</span><span class="pi">:</span> <span class="s">tls.key</span>
     <span class="na">relabelings</span><span class="pi">:</span>
-      <span class="c1"># Satisfies NiFi's strict SNI and Host header checks</span>
       <span class="pi">-</span> <span class="na">targetLabel</span><span class="pi">:</span> <span class="s">__address__</span>
         <span class="na">replacement</span><span class="pi">:</span> <span class="s">mynifi-web.cfm-streaming.svc.cluster.local:8443</span>
 </code></pre></div></div>
