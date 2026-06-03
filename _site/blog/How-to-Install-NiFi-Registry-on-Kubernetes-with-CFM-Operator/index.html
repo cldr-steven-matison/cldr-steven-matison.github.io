@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- begin _includes/seo.html --><title>Cloudera Streaming Analytics - Kubernetes Operator 1.3 - Cloudera Solutions Engineer</title>
-<meta name="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.">
+<!-- begin _includes/seo.html --><title>How to Install NiFi Registry on Kubernetes with CFM Operator - Cloudera Solutions Engineer</title>
+<meta name="description" content="A quick how to guide for installing NiFi Registry on minikube with the CFM Operator">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Cloudera Streaming Analytics - Kubernetes Operator 1.3">
-<meta property="og:url" content="http://localhost:4000/release/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/">
+<meta property="og:title" content="How to Install NiFi Registry on Kubernetes with CFM Operator">
+<meta property="og:url" content="http://localhost:4000/blog/How-to-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/">
 
 
-  <meta property="og:description" content="Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.">
-
-
-
-  <meta property="og:image" content="http://localhost:4000/assets/images/csa-architecture.png">
+  <meta property="og:description" content="A quick how to guide for installing NiFi Registry on minikube with the CFM Operator">
 
 
 
-
-
-  <meta property="article:published_time" content="2025-07-22T00:00:00-04:00">
+  <meta property="og:image" content="http://localhost:4000/assets/images/NiFi_Registry_on_Kubernetes.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2026-06-03T00:00:00-04:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/release/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/">
+
+<link rel="canonical" href="http://localhost:4000/blog/How-to-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/">
 
 
 
@@ -267,235 +267,19 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Cloudera Streaming Analytics - Kubernetes Operator 1.3">
-    <meta itemprop="description" content="Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.">
-    <meta itemprop="datePublished" content="2025-07-22T00:00:00-04:00">
+    <meta itemprop="headline" content="How to Install NiFi Registry on Kubernetes with CFM Operator">
+    <meta itemprop="description" content="A quick how to guide for installing NiFi Registry on minikube with the CFM Operator">
+    <meta itemprop="datePublished" content="2026-06-03T00:00:00-04:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/release/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/" class="u-url" itemprop="url">Cloudera Streaming Analytics - Kubernetes Operator 1.3
+            <a href="http://localhost:4000/blog/How-to-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/" class="u-url" itemprop="url">How to Install NiFi Registry on Kubernetes with CFM Operator
 </a>
           </h1>
           
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          3 minute read
-        
-      </span>
-    
-    
-      
-        <p class="page__date">
-          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
-          <time datetime="2025-07-22T00:00:00-04:00">
-            July 22, 2025
-          </time>
-        </p>
-      
-    
-  </p>
-
-
-        </header>
-      
-
-      <section class="page__content e-content" itemprop="text">
-        
-        <p>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streaming Analytics - Kubernetes Operator 1.3, an integral component of Cloudera Streaming - Kubernetes Operators.</p>
-
-<p>This release includes rebases to Apache Flink 1.20 and Apache Flink Kubernetes Operator 1.11.0. Other changes and updates are focused on enhancing security, usability, and making the product more robust.</p>
-
-<h3 id="release-highlights">Release Highlights</h3>
-
-<ul>
-  <li>
-    <p><strong>Rebase to Flink 1.20</strong>
-  For more information, see the <a href="https://flink.apache.org/news/2024/07/22/flink-1.20-release.html">Flink 1.20 Release Notes</a> and the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Flink 1.20 Documentation</a>.</p>
-  </li>
-  <li>
-    <p><strong>Rebase to Flink Kubernetes Operator 1.11.0</strong>
-  For more information, see the <a href="https://github.com/apache/flink-kubernetes-operator/releases/tag/v1.11.0">Flink Kubernetes Operator 1.11.0 Release Notes</a> and the <a href="https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-release-1.11/">Flink Kubernetes Operator 1.11.0 Documentation</a>.</p>
-  </li>
-  <li>
-    <p><strong>Flink OpenTelemetry Metrics Reporter (Technical Preview)</strong>
-  The OpenTelemetry metrics reporter is now included, in Tech Preview, in the operator image. It makes it easier and more efficient to aggregate job metrics to a central service like Prometheus or any OpenTelemetry-compatible service, and aggregate metrics using open standards. To learn more about using the OpenTelemetry reporter with Flink, see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/deployment/metric_reporters/opentelemetry/">Monitoring Flink with OpenTelemetry</a>.</p>
-  </li>
-  <li>
-    <p><strong>Flink image with Hadoop, Hive, Iceberg, and Kudu connectors</strong>
-  Cloudera now offers alternative images for Cloudera Streaming Analytics - Kubernetes Operator that include popular connectors and their dependencies. This makes it easier to launch jobs right after installation and saves time because there’s no need to create custom images. For more information, refer to the Operator’s <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/concepts/csa-k8s-operator-images.html">Documentation</a>.</p>
-  </li>
-  <li>
-    <p><strong>Basic authentication for Flink UI and rest API</strong>
-  The Operator now includes the Flink Basic Authentication Handler, enabling users to secure their deployments without the need for external or third-party JARs.</p>
-  </li>
-</ul>
-
-<p>Please see the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/release-notes/csa-k8s-operator-rn.html">Release Notes</a> for the complete list of fixes and improvements.</p>
-
-<h3 id="getting-the-new-release">Getting the New Release</h3>
-
-<ul>
-  <li>To upgrade to Cloudera Streaming Analytics - Kubernetes Operator 1.3, check out the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/installation/csa-k8s-operator-upgrade.html">Upgrade Guide</a>.</li>
-  <li>If you are installing this operator for the first time, consult the <a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/installation/csa-k8s-operator-install.html">Installation Guide</a>.</li>
-</ul>
-
-<h3 id="use-cases">Use Cases</h3>
-
-<ul>
-  <li><strong>Event-Driven Applications:</strong> Stateful applications that ingest events from one or more event streams and react to incoming events by triggering computations, state updates, or external actions. Apache Flink excels in handling the concept of time and state for these applications, and can scale to manage very large data volumes (up to several terabytes). It has a rich set of APIs, ranging from low-level controls to high-level functionality, like Flink SQL, enabling developers to choose the most suitable options for the implementation of advanced business logic. One of Apache Flink’s most popular features for event-driven applications is its support for savepoints. A savepoint is a consistent state image that can be used as a starting point for compatible applications. With a savepoint, an application can be updated or adapt its scale, or multiple versions of an application can be started for A/B testing.
-  <strong>Examples:</strong>
-    <ul>
-      <li>Fraud detection</li>
-      <li>Anomaly detection</li>
-      <li>Rule-based alerting</li>
-      <li>Business process monitoring</li>
-      <li>Web application (social network)</li>
-    </ul>
-  </li>
-  <li><strong>Data Analytics Applications:</strong> With a sophisticated stream processing engine, analytics can be performed in real time. Streaming queries or applications ingest real-time event streams and continuously produce and update results as events are consumed. The results are written to an external database or maintained as internal state. A dashboard application can read the latest results from the external database or directly query the internal state of the application. Apache Flink supports streaming as well as batch analytical applications.
-  <strong>Examples:</strong>
-    <ul>
-      <li>Quality monitoring of telco networks</li>
-      <li>Analysis of product updates and experiment evaluation in mobile applications</li>
-      <li>Ad-hoc analysis of live data in consumer technology</li>
-      <li>Large-scale graph analysis</li>
-    </ul>
-  </li>
-  <li><strong>Data Pipeline Applications:</strong> Streaming data pipelines serve a similar purpose as Extract-Transform-Load (ETL) jobs. They transform and enrich data and can move it from one storage system to another. However, they operate in a continuous streaming mode instead of being periodically triggered. Hence, they can read records from sources that continuously produce data and move it with low latency to their destination.
-  <strong>Examples:</strong>
-    <ul>
-      <li>Real-time search index building in e-commerce</li>
-      <li>Continuous ETL in e-commerce</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="resources">Resources</h3>
-
-<ul>
-  <li><a href="https://www.cloudera.com/products/streaming-analytics.html">New - Cloudera Streaming Analytics Community Page</a></li>
-  <li><a href="https://www.cloudera.com/products/streaming-analytics/kubernetes-operator.html">New - Cloudera Streaming Analytics - Kubernetes Operator Product Page</a></li>
-  <li><a href="https://blog.cloudera.com/cloudera-streaming-analytics-kubernetes-operator-1-3-release/">New - Cloudera Streaming Analytics - Kubernetes Operator 1.3 Blog Post</a> (to share)</li>
-  <li><a href="https://docs.cloudera.com/csa/1.3.x/kubernetes-operator/index.html">Updated - Cloudera Streaming Analytics - Kubernetes Operator Documentation</a></li>
-  <li><a href="https://www.cloudera.com/webinars/streaming-analytics-overview.html">Cloudera Streaming Analytics Overview (webinar recording)</a></li>
-</ul>
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
-    
-      <a href="/tags/#Cloudera Streaming Analytics" class="page__taxonomy-item p-category" rel="tag">Cloudera Streaming Analytics</a><span class="sep">, </span>
-    
-      <a href="/tags/#flink" class="page__taxonomy-item p-category" rel="tag">flink</a><span class="sep">, </span>
-    
-      <a href="/tags/#kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a>
-    
-    </span>
-  </p>
-
-
-
-
-  
-
-
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
-    <span itemprop="keywords">
-    
-      <a href="/categories/#release" class="page__taxonomy-item p-category" rel="tag">release</a>
-    
-    </span>
-  </p>
-
-
-        
-
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-07-22T00:00:00-04:00">July 22, 2025</time></p>
-
-      </footer>
-
-      <section class="page__share">
-  
-    <h4 class="page__share-title">Share on</h4>
-  
-
-  <a href="https://twitter.com/intent/tweet?text=Cloudera+Streaming+Analytics+-+Kubernetes+Operator+1.3%20http%3A%2F%2Flocalhost%3A4000%2Frelease%2FCloudera-Streaming-Analytics-Kubernetes-Operator-1.3%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
-
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Frelease%2FCloudera-Streaming-Analytics-Kubernetes-Operator-1.3%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
-</section>
-
-
-      
-  <nav class="pagination">
-    
-      <a href="/release/Cloudera-Flow-Management-2.2.9-General-Availability/" class="pagination--pager" title="Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400
-">Previous</a>
-    
-    
-      <a href="/release/Cloudera-Streams-Messaging-Kubernetes-Operator-1.4/" class="pagination--pager" title="Cloudera Streams Messaging - Kubernetes Operator 1.4
-">Next</a>
-    
-  </nav>
-
-    </div>
-
-    
-  </article>
-
-  
-  
-    <div class="page__related">
-      <h2 class="page__related-title">You may also enjoy</h2>
-      <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/NiFi_Registry_on_Kubernetes.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/How-to-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/" rel="permalink">How to Install NiFi Registry on Kubernetes with CFM Operator
-</a>
-      
-    </h2>
-    
 
   <p class="page__meta">
     
@@ -514,19 +298,189 @@
       </span>
     
     
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-06-03T00:00:00-04:00">
+            June 03, 2026
+          </time>
+        </p>
+      
+    
   </p>
 
 
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Quick and dirty guide for getting a NiFi Registry up and running on your CFM Operator deployed Kubernetes cluster using the native LoadBalancer route. No extra ingress nonsense, no custom routes—just a clean LoadBalancer service pointed straight at the pod.</p>
+
+<p>This setup is perfect for edge deployments, local dev, or Minikube testing.</p>
+
+<hr />
+
+<h2 id="1-create-the-deployment-file">1. Create the Deployment File</h2>
+
+<p>Save the following as <code class="language-plaintext highlighter-rouge">nifi-registry.yaml</code>. It bundles the <code class="language-plaintext highlighter-rouge">NifiRegistry</code> custom resource <strong>and</strong> the LoadBalancer service in one shot.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">cfm.cloudera.com/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">NifiRegistry</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nifi-registry-edge</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cfm-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">image</span><span class="pi">:</span>
+    <span class="na">repository</span><span class="pi">:</span> <span class="s">container.repository.cloudera.com/cloudera/cfm-nifiregistry-k8s</span>
+    <span class="na">tag</span><span class="pi">:</span> <span class="s">3.0.0-b126-nifi_2.6.0.4.3.4.0-234</span>
+  <span class="na">tiniImage</span><span class="pi">:</span>
+    <span class="na">repository</span><span class="pi">:</span> <span class="s">container.repository.cloudera.com/cloudera/cfm-tini</span>
+    <span class="na">tag</span><span class="pi">:</span> <span class="s">3.0.0-b126</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nifi-registry-edge-svc</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cfm-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">LoadBalancer</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">http</span>
+      <span class="na">port</span><span class="pi">:</span> <span class="m">18080</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">18080</span>
+      <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">statefulset.kubernetes.io/pod-name</span><span class="pi">:</span> <span class="s">nifi-registry-edge-0</span>
+</code></pre></div></div>
+
+<h2 id="2-apply-the-manifest">2. Apply the Manifest</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> nifi-registry.yaml
+</code></pre></div></div>
+
+<h2 id="3-route-the-loadbalancer-minikube-only">3. Route the LoadBalancer (Minikube Only)</h2>
+
+<p>Minikube needs a little help to assign an external IP. In a <strong>separate terminal</strong>, run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube tunnel
+</code></pre></div></div>
+
+<p>Leave this running in the background.</p>
+
+<h2 id="4-verify-external-access">4. Verify External Access</h2>
+
+<p>Check the service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get svc nifi-registry-edge-svc <span class="nt">-n</span> cfm-streaming
+</code></pre></div></div>
+
+<p><strong>Success criteria:</strong> The <code class="language-plaintext highlighter-rouge">EXTERNAL-IP</code> column should show <code class="language-plaintext highlighter-rouge">127.0.0.1</code> (not <code class="language-plaintext highlighter-rouge">&lt;pending&gt;</code>).</p>
+
+<h2 id="5-access-the-ui--initialize-the-bucket">5. Access the UI &amp; Initialize the Bucket</h2>
+
+<p>Open your browser and go to:</p>
+
+<p><strong>http://127.0.0.1:18080/nifi-registry/</strong></p>
+
+<p>You’re in. Create your first bucket and start versioning those flows.</p>
+
+<h2 id="resources">Resources</h2>
+<ul>
+  <li><a href="http://docs.cloudera.com/cfm-operator/3.0.0/index.html">Cloudera Flow Management (CFM) 3.0 Docs</a></li>
+  <li><a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">Cloudera Streaming Operators GitHub Repo</a></li>
+  <li><a href="https://cldr-steven-matison.github.io/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators Blog</a></li>
+</ul>
+
+<hr />
+
+<h2 id="how-to-install-nifi-registry-on-kubernetes-with-cfm-operator">How to Install NiFi Registry on Kubernetes with CFM Operator</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about How to Install NiFi Registry on Kubernetes with CFM Operator please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
     
-  <div class="archive__item-excerpt" itemprop="description">
-    A quick how to guide for installing NiFi Registry on minikube with the CFM Operator
+      <a href="/tags/#cfm" class="page__taxonomy-item p-category" rel="tag">cfm</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi registry" class="page__taxonomy-item p-category" rel="tag">nifi registry</a><span class="sep">, </span>
+    
+      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a>
+    
+    </span>
+  </p>
 
-    <a href="/blog/How-to-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/" class="read-more-pill">Read More &rarr;</a>
-  </div>
 
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-06-03T00:00:00-04:00">June 3, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=How+to+Install+NiFi+Registry+on+Kubernetes+with+CFM+Operator%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2FHow-to-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2FHow-to-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/" class="pagination--pager" title="How To Install Cloudera Iceberg MCP Server
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
   </article>
-</div>
 
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
         
           
 
@@ -672,6 +626,56 @@
     CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA
 We are announcing the general availability of Real-Time Monitoring...
     <a href="/release/Real-Time-Monitoring-with-Observability/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-to-AI-with-NiFi-and-Python/" rel="permalink">How to AI with NiFi and Python
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          11 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How to Build and Test Custom NiFi Python Processors with AI (Without Breaking NiFi)
+
+    <a href="/blog/How-to-AI-with-NiFi-and-Python/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>

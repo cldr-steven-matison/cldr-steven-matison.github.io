@@ -2,38 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Cloudera Solutions Engineer</title>
-    <link>https://cldr-steven-matison.github.io/</link>
-    <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>How to Install NiFi Registry on Kubernetes with CFM Operator</title>
+        <link>http://localhost:4000/blog/How-to-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/</link>
+        <pubDate>Wed, 03 Jun 2026 00:00:00 -0400</pubDate>
+        
+          <image>http://localhost:4000/assets/images/NiFi_Registry_on_Kubernetes.png</image>
+          <media:content url="http://localhost:4000/assets/images/NiFi_Registry_on_Kubernetes.png" medium="image" />
+        
+        <description>A quick how to guide for installing NiFi Registry on minikube with the CFM Operator</description>
+      </item>
     
       <item>
         <title>How To Install Cloudera Iceberg MCP Server</title>
-        <link>https://cldr-steven-matison.github.io/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/</link>
+        <link>http://localhost:4000/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/</link>
         <pubDate>Wed, 20 May 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io/assets/images/how_to_install_iceberg_mcp_server.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/how_to_install_iceberg_mcp_server.png" medium="image" />
+          <image>http://localhost:4000/assets/images/how_to_install_iceberg_mcp_server.png</image>
+          <media:content url="http://localhost:4000/assets/images/how_to_install_iceberg_mcp_server.png" medium="image" />
         
         <description>How to build and locally test the Cloudera Iceberg MCP Server with MCP Inspector using Cloudera Apache Iceberg deployed on AWS in a Cloudera Data Warehouse.</description>
       </item>
     
       <item>
         <title>How To Install Cloudera NiFi MCP Server</title>
-        <link>https://cldr-steven-matison.github.io/blog/How-To-Install-Cloudera-NiFi-MCP-Server/</link>
+        <link>http://localhost:4000/blog/How-To-Install-Cloudera-NiFi-MCP-Server/</link>
         <pubDate>Mon, 18 May 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png" medium="image" />
+          <image>http://localhost:4000/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png</image>
+          <media:content url="http://localhost:4000/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png" medium="image" />
         
         <description>How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi deployed on AWS in a Data.</description>
       </item>
     
       <item>
         <title>Real-Time Monitoring with Observability</title>
-        <link>https://cldr-steven-matison.github.io/release/Real-Time-Monitoring-with-Observability/</link>
+        <link>http://localhost:4000/release/Real-Time-Monitoring-with-Observability/</link>
         <pubDate>Mon, 11 May 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io/assets/images/Real-Time_Monitoring_with_Observability.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/Real-Time_Monitoring_with_Observability.png" medium="image" />
+          <image>http://localhost:4000/assets/images/Real-Time_Monitoring_with_Observability.png</image>
+          <media:content url="http://localhost:4000/assets/images/Real-Time_Monitoring_with_Observability.png" medium="image" />
         
         <description>CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA
 We are announcing the general availability of Real-Time Monitoring (RTM) capabilities for Cloudera Data Platform (CDP) customers through our Observability SaaS offering.
@@ -42,33 +53,33 @@ We are announcing the general availability of Real-Time Monitoring (RTM) capabil
     
       <item>
         <title>How to AI with NiFi and Python</title>
-        <link>https://cldr-steven-matison.github.io/blog/How-to-AI-with-NiFi-and-Python/</link>
+        <link>http://localhost:4000/blog/How-to-AI-with-NiFi-and-Python/</link>
         <pubDate>Wed, 06 May 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png" medium="image" />
+          <image>http://localhost:4000/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png</image>
+          <media:content url="http://localhost:4000/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png" medium="image" />
         
         <description>How to Build and Test Custom NiFi Python Processors with AI (Without Breaking NiFi)</description>
       </item>
     
       <item>
         <title>Observability with Cloudera Streaming Operators</title>
-        <link>https://cldr-steven-matison.github.io/blog/Observability-with-Cloudera-Streaming-Operators/</link>
+        <link>http://localhost:4000/blog/Observability-with-Cloudera-Streaming-Operators/</link>
         <pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png" medium="image" />
+          <image>http://localhost:4000/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png</image>
+          <media:content url="http://localhost:4000/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png" medium="image" />
         
         <description>The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Prometheus, and Grafana.</description>
       </item>
     
       <item>
         <title>Announcing Cloudera Streaming Analytics 1.17.0</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Streaming-Analytics-1.17.0/</link>
+        <link>http://localhost:4000/release/Cloudera-Streaming-Analytics-1.17.0/</link>
         <pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io/assets/images/Cloudera_Streaming_Analytics_1.17.0.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/Cloudera_Streaming_Analytics_1.17.0.png" medium="image" />
+          <image>http://localhost:4000/assets/images/Cloudera_Streaming_Analytics_1.17.0.png</image>
+          <media:content url="http://localhost:4000/assets/images/Cloudera_Streaming_Analytics_1.17.0.png" medium="image" />
         
         <description>We are excited to announce the release of Cloudera Streaming Analytics 1.17.0 for on-premises deployments. This update reinforces our commitment to a stable, secure, and high-performance streaming offering. By aligning with Cloudera 7.3.2.0 and modernizing our User-Defined Function (UDF) framework, we’re providing a more robust foundation for Apache Flink and Cloudera SQL Stream Builder.
 </description>
@@ -76,46 +87,35 @@ We are announcing the general availability of Real-Time Monitoring (RTM) capabil
     
       <item>
         <title>Monitoring Cloudera Streams Messaging (CSM) with Prometheus</title>
-        <link>https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/</link>
+        <link>http://localhost:4000/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/</link>
         <pubDate>Mon, 04 May 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSM_metrics.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSM_metrics.png" medium="image" />
+          <image>http://localhost:4000/assets/images/2026-05-05-CSM_metrics.png</image>
+          <media:content url="http://localhost:4000/assets/images/2026-05-05-CSM_metrics.png" medium="image" />
         
         <description>Unlock deep Kafka broker metrics in Cloudera Streams Messaging (CSM) by injecting a custom JMX Prometheus Exporter and deploying a targeted PodMonitor.</description>
       </item>
     
       <item>
         <title>Monitoring Cloudera Flow Management (CFM) with Prometheus</title>
-        <link>https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/</link>
+        <link>http://localhost:4000/blog/Monitoring-Cloudera-Flow-Management-(CFM)-with-Prometheus/</link>
         <pubDate>Sun, 03 May 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-05-CFM_metrics.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-CFM_metrics.png" medium="image" />
+          <image>http://localhost:4000/assets/images/2026-05-05-CFM_metrics.png</image>
+          <media:content url="http://localhost:4000/assets/images/2026-05-05-CFM_metrics.png" medium="image" />
         
         <description>Discover how to securely expose Cloudera Flow Management (CFM) NiFi metrics to Prometheus by configuring an mTLS bypass for Single User Auth.</description>
       </item>
     
       <item>
         <title>Monitoring Cloudera Streaming Analytics (CSA) with Prometheus</title>
-        <link>https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/</link>
+        <link>http://localhost:4000/blog/Monitoring-Cloudera-Streaming-Analytics-(CSA)-with-Prometheus/</link>
         <pubDate>Sat, 02 May 2026 00:00:00 -0400</pubDate>
         
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSA_metrics.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSA_metrics.png" medium="image" />
+          <image>http://localhost:4000/assets/images/2026-05-05-CSA_metrics.png</image>
+          <media:content url="http://localhost:4000/assets/images/2026-05-05-CSA_metrics.png" medium="image" />
         
         <description>Learn how to monitor dynamic Flink and SQL Stream Builder jobs in Cloudera Streaming Analytics (CSA) by utilizing a Headless Service and ServiceMonitor for Prometheus discovery.</description>
-      </item>
-    
-      <item>
-        <title>Persisting Schema Registry with PostgreSQL</title>
-        <link>https://cldr-steven-matison.github.io/blog/Persiting-Schema-with-Schema-Registry/</link>
-        <pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-04-Schema_Registry_PostgreSQL.png" medium="image" />
-        
-        <description>Learn how to use CSA Operator&apos;s PostgreSQL pod to persist schemas in the Schema Registry.</description>
       </item>
     
   </channel>
