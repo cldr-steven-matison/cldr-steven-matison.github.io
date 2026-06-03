@@ -1,9 +1,16 @@
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 996
+  size: 1029
   lang: "Python"
-  updated: "2026-06-01"
+  updated: "2026-06-02"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 121734
+  lang: "HTML"
+  updated: "2026-06-02"
   fork: false
 - name: "jetson-ai-lab"
   description: "GitHub repo for Jetson AI Lab"
@@ -12,13 +19,6 @@
   lang: ""
   updated: "2026-06-01"
   fork: true
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 121730
-  lang: "HTML"
-  updated: "2026-06-01"
-  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
