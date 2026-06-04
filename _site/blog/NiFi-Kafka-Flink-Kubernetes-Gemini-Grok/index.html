@@ -422,11 +422,11 @@ useful and it is relevant as these 3 technologies apply deeper into popular kube
   <li>
 <strong>The Reality:</strong> It provides the essential guardrails to keep deployments functioning. For example, Kyverno can automatically validate and enforce that the exact, correctly named Kubernetes secret is attached to a specific deployment namespace, preventing catastrophic authorization failures and broken application states before the containers even attempt to pull.</li>
   <li>
-    <h2 id="source-httpskyvernoio">
 <strong>Source:</strong> <a href="https://kyverno.io/">https://kyverno.io/</a>
-</h2>
-  </li>
+</li>
 </ul>
+
+<hr>
 
 <h3 id="groks-top-10-kubernetes-technologies--2026-edition">Grok’s Top 10 Kubernetes Technologies – 2026 Edition</h3>
 
@@ -475,7 +475,7 @@ Because at some point you want your cloud resources (buckets, databases, queues)
 
 <hr>
 
-<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Did you see what AI did there?</strong> AI knows, lets explain The Trinity</p>
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Did you see what AI did there?</strong> AI knows, let’s explain “The Trinity”.  Grok got spicy 🌶️ 😂</p>
 
 <hr>
 
@@ -554,98 +554,7 @@ We use Python + Hatch to build them, then the Cloudera operator injects them str
 
 <hr>
 
-<h2 id="how-the-streaming-trinity-supercharges-other-top-kubernetes-technologies">How the Streaming Trinity Supercharges Other Top Kubernetes Technologies**</h2>
-
-<p>Recent “Top 10 Kubernetes Technologies” lists (and broader CNCF ecosystem roundups from 2025–2026) consistently highlight tools beyond streaming platforms. While Kafka and Flink often dominate the conversation, the real production power comes from how a solid <strong>NiFi → Kafka → Flink</strong> foundation integrates with the rest of the stack.</p>
-
-<p>The Streaming Trinity turns these technologies from “nice-to-have” into force multipliers by providing reliable, real-time data ingestion, buffering, and processing that most other tools assume already exists.</p>
-
-<p>Here’s how the Trinity enhances the most commonly cited technologies in current Kubernetes landscapes:</p>
-
-<h3 id="1-gitops-argocd--flux">1. GitOps (ArgoCD / Flux)</h3>
-<p><strong>What it is</strong>: Declarative, version-controlled management of Kubernetes resources via Git. The gold standard for reproducible, auditable infrastructure.</p>
-
-<p><strong>How the Trinity integrates</strong>:</p>
-<ul>
-  <li>All three components are managed as native CRDs (<code class="language-plaintext highlighter-rouge">NifiCluster</code>, <code class="language-plaintext highlighter-rouge">KafkaTopic</code>, <code class="language-plaintext highlighter-rouge">FlinkDeployment</code>), so your entire streaming pipeline lives in Git alongside the rest of your cluster config.</li>
-  <li>Change a custom NAR version, Flink job spec, or Kafka topic retention policy → commit → ArgoCD/Flux syncs → operators handle rollout with zero manual intervention.</li>
-  <li>NiFi’s processor flows and Flink savepoint configurations become first-class GitOps citizens, eliminating “works on my laptop” drift between data engineering and platform teams.</li>
-</ul>
-
-<h3 id="2-observability-prometheus--opentelemetry--grafana">2. Observability (Prometheus + OpenTelemetry + Grafana)</h3>
-<p><strong>What it is</strong>: Unified metrics, logs, traces, and dashboards for monitoring complex distributed systems.</p>
-
-<p><strong>How the Trinity integrates</strong>:</p>
-<ul>
-  <li>NiFi and Flink ship rich, built-in exporters (backpressure, flowfile rates, JVM metrics, checkpoint latency, exactly-once guarantees).</li>
-  <li>Kafka (via Strimzi) exposes broker, topic, and consumer lag metrics out of the box.</li>
-  <li>Pipe everything through OpenTelemetry collectors into Prometheus → Grafana gives you a single pane of glass for the full data lifecycle (from messy ingress in NiFi to real-time processing in Flink).</li>
-  <li>You can set alerts on NiFi processor failures or Flink backpressure exactly like you would for a node outage — no more blind spots in the data layer.</li>
-</ul>
-
-<h3 id="3-service-mesh--networking-cilium--istio">3. Service Mesh &amp; Networking (Cilium / Istio)</h3>
-<p><strong>What it is</strong>: Zero-trust networking, mTLS, traffic management, and advanced observability at the network level.</p>
-
-<p><strong>How the Trinity integrates</strong>:</p>
-<ul>
-  <li>Operators already manage the complex mTLS and certificate rotation between NiFi, Kafka, and Flink.</li>
-  <li>Add Cilium network policies and you can enforce strict rules like “only Flink pods may consume from these Kafka topics” or “NiFi ingress pods are the only ones allowed to accept external traffic.”</li>
-  <li>Istio or Cilium service mesh gives you fine-grained traffic shifting during Flink job upgrades or NiFi scaling events without breaking exactly-once semantics.</li>
-  <li>Result: a hardened, observable data platform that meets enterprise security standards without extra custom networking hacks.</li>
-</ul>
-
-<h3 id="4-aiml--real-time-inference-kuberay--kubeflow--vllm--kserve">4. AI/ML &amp; Real-Time Inference (KubeRay / Kubeflow / vLLM / KServe)</h3>
-<p><strong>What it is</strong>: Platforms for training, serving, and running large-scale AI workloads on Kubernetes.</p>
-
-<p><strong>How the Trinity integrates</strong>:</p>
-<ul>
-  <li>NiFi ingests raw/unstructured data (documents, logs, sensor streams) and normalizes it at scale.</li>
-  <li>Kafka acts as the reliable buffer for high-velocity event streams.</li>
-  <li>Flink performs real-time feature engineering, embedding generation, or lightweight inference before handing off to vLLM/KServe inference pods or Qdrant vector stores.</li>
-  <li>The output is production-ready real-time RAG or online ML features with full lineage and exactly-once guarantees — no more nightly batch jobs or manual data loading.</li>
-</ul>
-
-<h3 id="5-persistent-storage-longhorn--rook--ceph">5. Persistent Storage (Longhorn / Rook / Ceph)</h3>
-<p><strong>What it is</strong>: Cloud-native, distributed block/object storage solutions that provide PVCs and snapshots inside Kubernetes.</p>
-
-<p><strong>How the Trinity integrates</strong>:</p>
-<ul>
-  <li>NiFi uses persistent volumes for content, provenance, and flowfile repositories (critical for large ingest jobs).</li>
-  <li>Kafka leverages storage for durable logs and tiered storage.</li>
-  <li>Flink checkpoints and savepoints land on high-performance PVCs managed by Longhorn or Rook — making stateful recovery fast and reliable even during node failures or cluster upgrades.</li>
-  <li>You get operator-driven snapshots and backups of your entire streaming state, turning “stateful is scary” into “stateful is boringly reliable.”</li>
-</ul>
-
-<h3 id="6-database-operators-cloudnativepg-crunchy-postgres-mongodb-etc">6. Database Operators (CloudNativePG, Crunchy Postgres, MongoDB, etc.)</h3>
-<p><strong>What it is</strong>: Kubernetes-native operators that manage full lifecycle of production databases.</p>
-
-<p><strong>How the Trinity integrates</strong>:</p>
-<ul>
-  <li>NiFi sources data from legacy systems or external APIs and streams it cleanly into Kafka.</li>
-  <li>Flink performs transformations, aggregations, or CDC-style enrichment, then sinks directly into database CRDs via JDBC or specialized connectors.</li>
-  <li>Real-time materialized views or event-driven updates flow into Postgres/Mongo without custom ETL jobs.</li>
-  <li>The database operator handles scaling and backups while the Trinity ensures the data arriving is clean, schema-validated, and exactly-once delivered.</li>
-</ul>
-
-<h3 id="7-serverless--event-driven-knative">7. Serverless &amp; Event-Driven (Knative)</h3>
-<p><strong>What it is</strong>: Scale-to-zero, event-driven workloads that only consume resources when there’s work to do.</p>
-
-<p><strong>How the Trinity integrates</strong>:</p>
-<ul>
-  <li>Kafka topics become the event backbone that triggers Knative services.</li>
-  <li>Flink handles heavy stateful processing upstream, then fans out lightweight events to Knative functions for simple actions (notifications, webhooks, etc.).</li>
-  <li>NiFi can ingest and route events that kick off serverless workflows — giving you the best of both worlds: heavy lifting in Flink, bursty/lightweight execution in Knative.</li>
-</ul>
-
-<h3 id="8-policy-as-code--security-kyverno--opa-gatekeeper">8. Policy-as-Code &amp; Security (Kyverno / OPA Gatekeeper)</h3>
-<p><strong>What it is</strong>: Enforcing security, compliance, and governance policies declaratively on every resource.</p>
-
-<p><strong>How the Trinity integrates</strong>:</p>
-<ul>
-  <li>Kyverno policies can validate that every <code class="language-plaintext highlighter-rouge">NifiCluster</code> has custom processors signed and injected correctly, that <code class="language-plaintext highlighter-rouge">KafkaTopic</code> configs meet retention/compliance rules, and that <code class="language-plaintext highlighter-rouge">FlinkDeployment</code> jobs run with required security contexts.</li>
-  <li>Network policies (enforced via Cilium) and pod security policies become part of the same GitOps workflow.</li>
-  <li>You get automated guardrails across the entire data platform — no more “accidental” open Kafka listeners or unvetted NAR files in production.</li>
-</ul>
+<p class="notice--success"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Grok is not wrong!</strong> Even if this is AI aspirational, Grok makes valid points 🔥 Let ai cook 🧑‍🍳</p>
 
 <hr>
 
@@ -769,6 +678,105 @@ No more “works on my laptop” drift between data engineers and platform teams
 </ul>
 
 <p>It’s not as deeply intertwined as the others, but it keeps your entire data + infra stack in the same YAML/git workflow.</p>
+
+<hr>
+
+<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> The power of AI will get you a lot of content, use it wisely.  ❄️ 🌀 🕸️</p>
+
+<hr>
+
+<h2 id="how-the-streaming-trinity-supercharges-other-top-kubernetes-technologies">How the Streaming Trinity Supercharges Other Top Kubernetes Technologies**</h2>
+
+<p>Recent “Top 10 Kubernetes Technologies” lists (and broader CNCF ecosystem roundups from 2025–2026) consistently highlight tools beyond streaming platforms. While Kafka and Flink often dominate the conversation, the real production power comes from how a solid <strong>NiFi → Kafka → Flink</strong> foundation integrates with the rest of the stack.</p>
+
+<p>The Streaming Trinity turns these technologies from “nice-to-have” into force multipliers by providing reliable, real-time data ingestion, buffering, and processing that most other tools assume already exists.</p>
+
+<p>Here’s how the Trinity enhances the most commonly cited technologies in current Kubernetes landscapes:</p>
+
+<h3 id="1-gitops-argocd--flux">1. GitOps (ArgoCD / Flux)</h3>
+<p><strong>What it is</strong>: Declarative, version-controlled management of Kubernetes resources via Git. The gold standard for reproducible, auditable infrastructure.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>All three components are managed as native CRDs (<code class="language-plaintext highlighter-rouge">NifiCluster</code>, <code class="language-plaintext highlighter-rouge">KafkaTopic</code>, <code class="language-plaintext highlighter-rouge">FlinkDeployment</code>), so your entire streaming pipeline lives in Git alongside the rest of your cluster config.</li>
+  <li>Change a custom NAR version, Flink job spec, or Kafka topic retention policy → commit → ArgoCD/Flux syncs → operators handle rollout with zero manual intervention.</li>
+  <li>NiFi’s processor flows and Flink savepoint configurations become first-class GitOps citizens, eliminating “works on my laptop” drift between data engineering and platform teams.</li>
+</ul>
+
+<h3 id="2-observability-prometheus--opentelemetry--grafana">2. Observability (Prometheus + OpenTelemetry + Grafana)</h3>
+<p><strong>What it is</strong>: Unified metrics, logs, traces, and dashboards for monitoring complex distributed systems.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>NiFi and Flink ship rich, built-in exporters (backpressure, flowfile rates, JVM metrics, checkpoint latency, exactly-once guarantees).</li>
+  <li>Kafka (via Strimzi) exposes broker, topic, and consumer lag metrics out of the box.</li>
+  <li>Pipe everything through OpenTelemetry collectors into Prometheus → Grafana gives you a single pane of glass for the full data lifecycle (from messy ingress in NiFi to real-time processing in Flink).</li>
+  <li>You can set alerts on NiFi processor failures or Flink backpressure exactly like you would for a node outage — no more blind spots in the data layer.</li>
+</ul>
+
+<h3 id="3-service-mesh--networking-cilium--istio">3. Service Mesh &amp; Networking (Cilium / Istio)</h3>
+<p><strong>What it is</strong>: Zero-trust networking, mTLS, traffic management, and advanced observability at the network level.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>Operators already manage the complex mTLS and certificate rotation between NiFi, Kafka, and Flink.</li>
+  <li>Add Cilium network policies and you can enforce strict rules like “only Flink pods may consume from these Kafka topics” or “NiFi ingress pods are the only ones allowed to accept external traffic.”</li>
+  <li>Istio or Cilium service mesh gives you fine-grained traffic shifting during Flink job upgrades or NiFi scaling events without breaking exactly-once semantics.</li>
+  <li>Result: a hardened, observable data platform that meets enterprise security standards without extra custom networking hacks.</li>
+</ul>
+
+<h3 id="4-aiml--real-time-inference-kuberay--kubeflow--vllm--kserve">4. AI/ML &amp; Real-Time Inference (KubeRay / Kubeflow / vLLM / KServe)</h3>
+<p><strong>What it is</strong>: Platforms for training, serving, and running large-scale AI workloads on Kubernetes.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>NiFi ingests raw/unstructured data (documents, logs, sensor streams) and normalizes it at scale.</li>
+  <li>Kafka acts as the reliable buffer for high-velocity event streams.</li>
+  <li>Flink performs real-time feature engineering, embedding generation, or lightweight inference before handing off to vLLM/KServe inference pods or Qdrant vector stores.</li>
+  <li>The output is production-ready real-time RAG or online ML features with full lineage and exactly-once guarantees — no more nightly batch jobs or manual data loading.</li>
+</ul>
+
+<h3 id="5-persistent-storage-longhorn--rook--ceph">5. Persistent Storage (Longhorn / Rook / Ceph)</h3>
+<p><strong>What it is</strong>: Cloud-native, distributed block/object storage solutions that provide PVCs and snapshots inside Kubernetes.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>NiFi uses persistent volumes for content, provenance, and flowfile repositories (critical for large ingest jobs).</li>
+  <li>Kafka leverages storage for durable logs and tiered storage.</li>
+  <li>Flink checkpoints and savepoints land on high-performance PVCs managed by Longhorn or Rook — making stateful recovery fast and reliable even during node failures or cluster upgrades.</li>
+  <li>You get operator-driven snapshots and backups of your entire streaming state, turning “stateful is scary” into “stateful is boringly reliable.”</li>
+</ul>
+
+<h3 id="6-database-operators-cloudnativepg-crunchy-postgres-mongodb-etc">6. Database Operators (CloudNativePG, Crunchy Postgres, MongoDB, etc.)</h3>
+<p><strong>What it is</strong>: Kubernetes-native operators that manage full lifecycle of production databases.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>NiFi sources data from legacy systems or external APIs and streams it cleanly into Kafka.</li>
+  <li>Flink performs transformations, aggregations, or CDC-style enrichment, then sinks directly into database CRDs via JDBC or specialized connectors.</li>
+  <li>Real-time materialized views or event-driven updates flow into Postgres/Mongo without custom ETL jobs.</li>
+  <li>The database operator handles scaling and backups while the Trinity ensures the data arriving is clean, schema-validated, and exactly-once delivered.</li>
+</ul>
+
+<h3 id="7-serverless--event-driven-knative">7. Serverless &amp; Event-Driven (Knative)</h3>
+<p><strong>What it is</strong>: Scale-to-zero, event-driven workloads that only consume resources when there’s work to do.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>Kafka topics become the event backbone that triggers Knative services.</li>
+  <li>Flink handles heavy stateful processing upstream, then fans out lightweight events to Knative functions for simple actions (notifications, webhooks, etc.).</li>
+  <li>NiFi can ingest and route events that kick off serverless workflows — giving you the best of both worlds: heavy lifting in Flink, bursty/lightweight execution in Knative.</li>
+</ul>
+
+<h3 id="8-policy-as-code--security-kyverno--opa-gatekeeper">8. Policy-as-Code &amp; Security (Kyverno / OPA Gatekeeper)</h3>
+<p><strong>What it is</strong>: Enforcing security, compliance, and governance policies declaratively on every resource.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>Kyverno policies can validate that every <code class="language-plaintext highlighter-rouge">NifiCluster</code> has custom processors signed and injected correctly, that <code class="language-plaintext highlighter-rouge">KafkaTopic</code> configs meet retention/compliance rules, and that <code class="language-plaintext highlighter-rouge">FlinkDeployment</code> jobs run with required security contexts.</li>
+  <li>Network policies (enforced via Cilium) and pod security policies become part of the same GitOps workflow.</li>
+  <li>You get automated guardrails across the entire data platform — no more “accidental” open Kafka listeners or unvetted NAR files in production.</li>
+</ul>
 
 <hr>
 
