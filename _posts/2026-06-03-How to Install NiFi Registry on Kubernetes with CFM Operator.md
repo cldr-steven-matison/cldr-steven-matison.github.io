@@ -1,5 +1,5 @@
 ---
-title:  "How to Install NiFi Registry on Kubernetes with CFM Operator"
+title:  "How To Install NiFi Registry on Kubernetes with CFM Operator"
 excerpt: "A quick how to guide for installing NiFi Registry on minikube with the CFM Operator"
 header:
   teaser: "/assets/images/NiFi_Registry_on_Kubernetes.png"

@@ -497,9 +497,9 @@ var store = [{
         "url": "/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/",
         "teaser": "/assets/images/how_to_install_iceberg_mcp_server.png"
       },{
-        "title": "How to Install NiFi Registry on Kubernetes with CFM Operator",
+        "title": "How To Install NiFi Registry on Kubernetes with CFM Operator",
         "excerpt":"Quick and dirty guide for getting a NiFi Registry up and running on your CFM Operator deployed Kubernetes cluster using the native LoadBalancer route. No extra ingress nonsense, no custom routes—just a clean LoadBalancer service pointed straight at the pod. This setup is perfect for edge deployments, local dev, or...","categories": ["blog"],
         "tags": ["cloudera","nifi","nifi registry","operator","cfm"],
-        "url": "/blog/How-to-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/",
+        "url": "/blog/How-To-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/",
         "teaser": "/assets/images/NiFi_Registry_on_Kubernetes.png"
       }]
