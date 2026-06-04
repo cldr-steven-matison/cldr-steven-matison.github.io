@@ -1,0 +1,1178 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>NiFi Kafka Flink Kubernetes with Gemini and Grok - Cloudera Solutions Engineer</title>
+<meta name="description" content="AI dump of markdown discussing top 10 kubernetes technologies and in terms of nifi kafka and flink on kubernetes.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="NiFi Kafka Flink Kubernetes with Gemini and Grok">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/NiFi-Kafka-Flink-Kubernetes-Gemini-Grok/">
+
+
+  <meta property="og:description" content="AI dump of markdown discussing top 10 kubernetes technologies and in terms of nifi kafka and flink on kubernetes.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/SRM.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-06-04T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/NiFi-Kafka-Flink-Kubernetes-Gemini-Grok/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="NiFi Kafka Flink Kubernetes with Gemini and Grok">
+    <meta itemprop="description" content="AI dump of markdown discussing top 10 kubernetes technologies and in terms of nifi kafka and flink on kubernetes.">
+    <meta itemprop="datePublished" content="2026-06-04T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/NiFi-Kafka-Flink-Kubernetes-Gemini-Grok/" class="u-url" itemprop="url">NiFi Kafka Flink Kubernetes with Gemini and Grok
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          18 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-06-04T00:00:00-04:00">
+            June 04, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>I wanted to dump some markdown that got old and figured why not capture it into a new post here. <br>
+I like to plan with Grok and sometimes Gemini.  In this series of MD I was trying to see where NiFi Kafka and Flink landed in top 10 lists.   I was surprised they were in there, but AI was AIing.  At any rate some of the content is
+useful and it is relevant as these 3 technologies apply deeper into popular Kubernetes technologies now and into the future.</p>
+
+<h2 id="geminis-top-10-kubernetes-technologies--2026-edition">Gemini’s Top 10 Kubernetes Technologies – 2026 Edition</h2>
+
+<h3 id="1-vllm--kserve-aiml-inference-orchestration">1. vLLM &amp; KServe (AI/ML Inference Orchestration)</h3>
+<p>Kubernetes has become the de facto operating system for Artificial Intelligence. vLLM has locked in its position as the standard for serving large language models due to its PagedAttention memory management.</p>
+<ul>
+  <li>
+<strong>The Reality:</strong> In the cloud, this scales seamlessly with tools like KEDA. But when running on isolated local hardware with dedicated GPUs, the engineering challenge shifts to container image management. Fighting <code class="language-plaintext highlighter-rouge">ErrImagePull</code> and <code class="language-plaintext highlighter-rouge">ImagePullBackOff</code> loops for massive multi-gigabyte weights requires pre-loading images directly into the local registry (via <code class="language-plaintext highlighter-rouge">minikube image load</code>) and utilizing specific <code class="language-plaintext highlighter-rouge">imagePullPolicy</code> configurations to squeeze maximum inference out of available compute.</li>
+  <li>
+<strong>Source:</strong> <a href="https://github.com/vllm-project/production-stack">https://github.com/vllm-project/production-stack</a>
+</li>
+</ul>
+
+<h3 id="2-strimzi-apache-kafka-operator">2. Strimzi (Apache Kafka Operator)</h3>
+<p>Strimzi is the undisputed king of running stateful Kafka on K8s. It abstracts the brutal complexity of broker scaling and cluster consensus into custom resources.</p>
+<ul>
+  <li>
+<strong>The Reality:</strong> Whether acting as the nervous system for a globally distributed cloud architecture or routing data in an isolated local cluster, Strimzi provides the decoupled, asynchronous event-driven backbone required to move data without loss. It natively feeds everything from analytics to real-time machine learning pipelines.</li>
+  <li>
+<strong>Source:</strong> <a href="https://strimzi.io/">https://strimzi.io/</a>
+</li>
+</ul>
+
+<h3 id="3-apache-flink-kubernetes-operator--sql-stream-builder">3. Apache Flink Kubernetes Operator &amp; SQL Stream Builder</h3>
+<p>Batch processing is dead; continuous stream processing is the baseline. The Flink K8s Operator allows developers to deploy highly available, stateful streaming jobs natively.</p>
+<ul>
+  <li>
+<strong>The Reality:</strong> The true power unlocked recently is the seamless deployment of SQL Stream Builder (SSB) environments directly within the cluster. This allows complex temporal windowing and continuous operations—like real-time fraud detection—to be managed via UIs that are securely tunneled (using <code class="language-plaintext highlighter-rouge">minikube service</code> or cloud LoadBalancers) directly to the developer’s local environment.</li>
+  <li>
+<strong>Source:</strong> <a href="https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-main/">https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-main/</a>
+</li>
+</ul>
+
+<h3 id="4-apache-nifi-on-kubernetes-streaming-data-ingestion">4. Apache NiFi on Kubernetes (Streaming Data Ingestion)</h3>
+<p>Moving Apache NiFi from monolithic VMs to isolated K8s pods has fundamentally changed data engineering.</p>
+<ul>
+  <li>
+<strong>The Reality:</strong> Modern Cloudera Flow Management (CFM) deployments involve pushing individual NiFi pods to their compute limits—pinning exact allocations like 6.3 CPU cores and 5.3 GiB RAM during thermal and stress testing—to establish predictable scaling metrics. Developers are aggressively streamlining pod specs, intentionally dropping default boilerplate like liveness probes when they aren’t strictly needed for custom flows, and deploying custom Python-based processors packaged as NiFi Archives (NARs) using modern build systems like Hatch.</li>
+  <li>
+<strong>Source:</strong> <a href="https://docs.cloudera.com/cfm/latest/index.html">https://docs.cloudera.com/cfm/latest/index.html</a>
+</li>
+</ul>
+
+<h3 id="5-qdrant-vector-database-operators">5. Qdrant (Vector Database Operators)</h3>
+<p>Traditional relational databases choke on the high-dimensional embeddings required for modern AI context. Qdrant, deployed via its native K8s operator, provides a highly scalable vector similarity search engine.</p>
+<ul>
+  <li>
+<strong>The Reality:</strong> When wired directly to a data ingestion layer (like NiFi) and an inference server (like vLLM), Qdrant forms the high-speed memory layer. This triad is the cutting-edge standard for building highly responsive, localized Retrieval-Augmented Generation (RAG) pipelines on Kubernetes.</li>
+  <li>
+<strong>Source:</strong> <a href="https://qdrant.tech/documentation/hybrid-cloud/">https://qdrant.tech/documentation/hybrid-cloud/</a>
+</li>
+</ul>
+
+<h3 id="6-cilium-ebpf-powered-networking">6. Cilium (eBPF-Powered Networking)</h3>
+<p>The traditional sidecar proxy pattern is being aggressively phased out in favor of kernel-level networking.</p>
+<ul>
+  <li>
+<strong>The Reality:</strong> Cilium leverages eBPF to handle routing, enforce network policies, and provide deep observability without the compute bloat of injecting a proxy container into every single pod. When dealing with the massive, constant network throughput required between streaming operators and vector databases, dropping the sidecar overhead is mandatory.</li>
+  <li>
+<strong>Source:</strong> <a href="https://cilium.io/">https://cilium.io/</a>
+</li>
+</ul>
+
+<h3 id="7-argocd-declarative-gitops">7. ArgoCD (Declarative GitOps)</h3>
+<p>Executing <code class="language-plaintext highlighter-rouge">kubectl apply -f</code> manually is a catastrophic anti-pattern in 2026. ArgoCD continuously reconciles the cluster state against a Git repository.</p>
+<ul>
+  <li>
+<strong>The Reality:</strong> If a YAML spec is malformed—such as triggering a strict decoding error due to an unknown field like <code class="language-plaintext highlighter-rouge">spec.configOverride.loginIdentityProviders.upsert</code> or an invalid <code class="language-plaintext highlighter-rouge">narProviders</code> block—ArgoCD catches the drift and halts the deployment immediately. It forces absolute infrastructure-as-code discipline across the entire stack.</li>
+  <li>
+<strong>Source:</strong> <a href="https://argo-cd.readthedocs.io/">https://argo-cd.readthedocs.io/</a>
+</li>
+</ul>
+
+<h3 id="8-portworx--rook-ceph-cloud-native-storage">8. Portworx / Rook-Ceph (Cloud-Native Storage)</h3>
+<p>Stateful workloads (Kafka logs, Flink snapshots, Qdrant vector indices) require bulletproof storage layers that understand K8s pod lifecycles.</p>
+<ul>
+  <li>
+<strong>The Reality:</strong> In the cloud, these operators bind fluidly to EBS or persistent disks. On-prem, they transform locally attached drives into a distributed, replicated storage fabric, ensuring that a node failure or pod eviction does not result in a corrupted streaming state or lost data.</li>
+  <li>
+<strong>Source:</strong> <a href="https://rook.io/">https://rook.io/</a>
+</li>
+</ul>
+
+<h3 id="9-whisper--audio-to-text-containers-multimodal-ml">9. Whisper &amp; Audio-to-Text Containers (Multimodal ML)</h3>
+<p>AI orchestration has expanded far beyond text generation. Containerized Whisper models and automated speech recognition (ASR) pipelines are standard for processing audio streams.</p>
+<ul>
+  <li>
+<strong>The Reality:</strong> Running these efficiently—especially on heavily optimized local development setups utilizing WSL2—requires precise node affinity and strict hardware exposure. Misconfiguring the GPU pass-through results in immediate CPU bottlenecking during intensive transcription workloads.</li>
+  <li>
+<strong>Source:</strong> <a href="https://github.com/openai/whisper">https://github.com/openai/whisper</a>
+</li>
+</ul>
+
+<h3 id="10-kyverno-kubernetes-native-policy-management">10. Kyverno (Kubernetes Native Policy Management)</h3>
+<p>Managing RBAC, security contexts, and pod configurations manually across dozens of namespaces is impossible. Kyverno operates entirely as native Kubernetes resources, validating and mutating configurations on the fly.</p>
+<ul>
+  <li>
+<strong>The Reality:</strong> It provides the essential guardrails to keep deployments functioning. For example, Kyverno can automatically validate and enforce that the exact, correctly named Kubernetes secret is attached to a specific deployment namespace, preventing catastrophic authorization failures and broken application states before the containers even attempt to pull.</li>
+  <li>
+    <h2 id="source-httpskyvernoio">
+<strong>Source:</strong> <a href="https://kyverno.io/">https://kyverno.io/</a>
+</h2>
+  </li>
+</ul>
+
+<h3 id="groks-top-10-kubernetes-technologies--2026-edition">Grok’s Top 10 Kubernetes Technologies – 2026 Edition</h3>
+
+<ol>
+  <li>
+    <p><strong>The Streaming Trinity (NiFi + Kafka + Flink Operators)</strong><br>
+The actual foundation. NiFi cleans the real-world garbage, Kafka buffers it, Flink does the heavy stateful lifting. Without this trio running as proper CRDs, everything else is just expensive theater.</p>
+  </li>
+  <li>
+    <p><strong>ArgoCD / Flux (GitOps)</strong><br>
+Turns your entire cluster into version-controlled code. Once the Trinity is in Git, data pipelines finally feel like real infrastructure.</p>
+  </li>
+  <li>
+    <p><strong>Cilium (Service Mesh + Networking)</strong><br>
+Zero-trust networking, mTLS, and network policies that actually work. Makes the Trinity secure without you writing a single iptables rule.</p>
+  </li>
+  <li>
+    <p><strong>Prometheus + OpenTelemetry + Grafana</strong><br>
+Real observability. Backpressure, checkpoint latency, flow rates, consumer lag — all in one pane. No more “where the hell is my data stuck?”</p>
+  </li>
+  <li>
+    <p><strong>KubeRay / vLLM / KServe (AI/ML Inference)</strong><br>
+Real-time inference and RAG pipelines. The Trinity feeds clean, real-time data straight into your models instead of nightly batch jobs.</p>
+  </li>
+  <li>
+    <p><strong>Longhorn / Rook (Cloud-Native Storage)</strong><br>
+Persistent volumes that don’t suck for stateful workloads. NiFi repos, Kafka logs, and Flink checkpoints actually survive node failures.</p>
+  </li>
+  <li>
+    <p><strong>Knative (Serverless + Event-Driven)</strong><br>
+Scale-to-zero functions triggered by Kafka events. Heavy lifting stays in Flink, lightweight stuff bursts in Knative.</p>
+  </li>
+  <li>
+    <p><strong>Kyverno / OPA Gatekeeper (Policy-as-Code)</strong><br>
+Enforces that your NAR files are signed, your Kafka topics meet compliance, and your Flink jobs run with the right security contexts — automatically.</p>
+  </li>
+  <li>
+    <p><strong>CloudNativePG / Crunchy Postgres (Database Operators)</strong><br>
+Production databases that the Trinity can stream clean data into in real time. No more brittle ETL.</p>
+  </li>
+  <li>
+    <p><strong>Crossplane (Infrastructure from YAML)</strong><br>
+Because at some point you want your cloud resources (buckets, databases, queues) managed the same way as your Trinity — all in Git.</p>
+  </li>
+</ol>
+
+<hr>
+
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Did you see what AI did there?</strong> AI knows, lets explain The Trinity</p>
+
+<hr>
+
+<h2 id="the-dirty-little-secret-nobody-puts-in-their-top-10-k8s-tools-list">The Dirty Little Secret Nobody Puts in Their “Top 10 K8s Tools” List</h2>
+
+<p>Every influencer drooling over “Apache Kafka + Flink on Kubernetes” is missing the real story.</p>
+
+<p>You can spin up all the Strimzi brokers and FlinkDeployments you want… but the moment real-world garbage hits your cluster — legacy FTP dumps, janky IoT protobufs, CSV vomited out of some 2009 mainframe, or whatever cursed API your customer is forcing on you — your pristine streaming stack turns into a $50k/month dumpster fire.</p>
+
+<p>That missing link is <strong>Apache NiFi</strong>.</p>
+
+<p>Not the pretty UI version you played with in 2018. The <strong>operator-driven, NAR-injected, GitOps-controlled beast</strong> that turns dirty data into clean events <em>before</em> it ever touches Kafka.</p>
+
+<p>This is the actual Streaming Trinity: <strong>NiFi → Kafka → Flink</strong>.<br>
+Everything else is just cosplay.</p>
+
+<p>We’re running this exact stack in production right now using the <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">Cloudera Streaming Operators</a> because vanilla NiFi Operator is still playing catch-up. Fight me.</p>
+
+<h3 id="1-nifi-the-filthy-ingress-layer-the-part-everyone-pretends-doesnt-exist">1. NiFi: The Filthy Ingress Layer (The Part Everyone Pretends Doesn’t Exist)</h3>
+
+<p>Kafka and Flink are spoiled rich kids — they only eat clean, structured, typed data.<br>
+Real life is a back alley.</p>
+
+<p>NiFi is the guy in the alley who beats the data into shape with a rusty pipe.</p>
+
+<ul>
+  <li>
+<strong>Operator reality</strong>: <code class="language-plaintext highlighter-rouge">NifiCluster</code> CRD + persistent volume claims for content repo, provenance, etc.</li>
+  <li>
+<strong>The real power move</strong>: Custom Processors packaged as <strong>NAR files</strong> (yes, still the 2016 format, we know).<br>
+We use Python + Hatch to build them, then the Cloudera operator injects them straight into every NiFi pod at startup. No more manual <code class="language-plaintext highlighter-rouge">docker cp</code> bullshit or sidecar hacks unless you’re feeling cute.</li>
+  <li>
+<strong>Why this matters</strong>: You normalize, enrich, decrypt, schema-validate, and rate-limit <em>before</em> it hits Kafka. Garbage In, Garbage Out is now your enemy’s problem.</li>
+</ul>
+
+<h3 id="2-kafka-the-immutable-spine-strimzi-or-die-trying">2. Kafka: The Immutable Spine (Strimzi or die trying)</h3>
+
+<p>Once NiFi has cleaned the data, we dump it into <code class="language-plaintext highlighter-rouge">KafkaTopic</code> CRDs like it’s fucking version-controlled infrastructure.</p>
+
+<p>Strimzi (or Cloudera’s fork) handles:</p>
+<ul>
+  <li>Automatic broker rebalancing</li>
+  <li>mTLS cert rotation that doesn’t eat your lunch</li>
+  <li>Schema Registry + exactly-once semantics</li>
+</ul>
+
+<p>You define your topics in the same namespace as everything else. GitOps becomes trivial.</p>
+
+<h3 id="3-flink-the-stateful-assassin">3. Flink: The Stateful Assassin</h3>
+
+<p>This is where the real dark magic happens — complex event processing, windowing, ML inference inside the stream, fraud detection that actually works in real time.</p>
+
+<p>Flink Kubernetes Operator is non-negotiable because:</p>
+<ul>
+  <li>Savepoints actually work</li>
+  <li>Checkpoints survive pod evictions</li>
+  <li>You can upgrade jobs without losing state (most of the time… we’ve all been there)</li>
+</ul>
+
+<hr>
+
+<h3 id="how-the-trinity-actually-unlocks-the-rest-of-the-stack">How the Trinity Actually Unlocks the Rest of the Stack</h3>
+
+<p>Once these three are running as real CRDs, the rest of the “Top 10 K8s” list stops being marketing slides and starts being weapons:</p>
+
+<ul>
+  <li>
+<strong>AI/RAG pipeline</strong>: NiFi slurps unstructured docs → Kafka → Flink does embeddings → straight into Qdrant or vLLM. Real-time RAG without the usual data scientist crying in Slack.</li>
+  <li>
+<strong>GitOps (ArgoCD/Flux)</strong>: Your entire data platform is now just YAML in a repo. Change a NAR version → <code class="language-plaintext highlighter-rouge">git push</code> → operator does the rest. Data engineering finally graduates from “clicky UI guy” to actual DevOps.</li>
+  <li>
+<strong>Observability</strong>: NiFi + Flink both vomit rich metrics (backpressure, JVM, flowfiles/sec). Pipe it to Prometheus + OpenTelemetry and you can alert on a single processor failure like it’s a node dying.</li>
+  <li>
+<strong>Security (Cilium/Istio)</strong>: Operators already handle the mTLS mess between NiFi/Kafka/Flink. Throw Cilium network policies on top and now only Flink pods can talk to Kafka. Everything else gets the firewall middle finger.</li>
+</ul>
+
+<hr>
+
+<h2 id="how-the-streaming-trinity-supercharges-other-top-kubernetes-technologies">How the Streaming Trinity Supercharges Other Top Kubernetes Technologies**</h2>
+
+<p>Recent “Top 10 Kubernetes Technologies” lists (and broader CNCF ecosystem roundups from 2025–2026) consistently highlight tools beyond streaming platforms. While Kafka and Flink often dominate the conversation, the real production power comes from how a solid <strong>NiFi → Kafka → Flink</strong> foundation integrates with the rest of the stack.</p>
+
+<p>The Streaming Trinity turns these technologies from “nice-to-have” into force multipliers by providing reliable, real-time data ingestion, buffering, and processing that most other tools assume already exists.</p>
+
+<p>Here’s how the Trinity enhances the most commonly cited technologies in current Kubernetes landscapes:</p>
+
+<h3 id="1-gitops-argocd--flux">1. GitOps (ArgoCD / Flux)</h3>
+<p><strong>What it is</strong>: Declarative, version-controlled management of Kubernetes resources via Git. The gold standard for reproducible, auditable infrastructure.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>All three components are managed as native CRDs (<code class="language-plaintext highlighter-rouge">NifiCluster</code>, <code class="language-plaintext highlighter-rouge">KafkaTopic</code>, <code class="language-plaintext highlighter-rouge">FlinkDeployment</code>), so your entire streaming pipeline lives in Git alongside the rest of your cluster config.</li>
+  <li>Change a custom NAR version, Flink job spec, or Kafka topic retention policy → commit → ArgoCD/Flux syncs → operators handle rollout with zero manual intervention.</li>
+  <li>NiFi’s processor flows and Flink savepoint configurations become first-class GitOps citizens, eliminating “works on my laptop” drift between data engineering and platform teams.</li>
+</ul>
+
+<h3 id="2-observability-prometheus--opentelemetry--grafana">2. Observability (Prometheus + OpenTelemetry + Grafana)</h3>
+<p><strong>What it is</strong>: Unified metrics, logs, traces, and dashboards for monitoring complex distributed systems.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>NiFi and Flink ship rich, built-in exporters (backpressure, flowfile rates, JVM metrics, checkpoint latency, exactly-once guarantees).</li>
+  <li>Kafka (via Strimzi) exposes broker, topic, and consumer lag metrics out of the box.</li>
+  <li>Pipe everything through OpenTelemetry collectors into Prometheus → Grafana gives you a single pane of glass for the full data lifecycle (from messy ingress in NiFi to real-time processing in Flink).</li>
+  <li>You can set alerts on NiFi processor failures or Flink backpressure exactly like you would for a node outage — no more blind spots in the data layer.</li>
+</ul>
+
+<h3 id="3-service-mesh--networking-cilium--istio">3. Service Mesh &amp; Networking (Cilium / Istio)</h3>
+<p><strong>What it is</strong>: Zero-trust networking, mTLS, traffic management, and advanced observability at the network level.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>Operators already manage the complex mTLS and certificate rotation between NiFi, Kafka, and Flink.</li>
+  <li>Add Cilium network policies and you can enforce strict rules like “only Flink pods may consume from these Kafka topics” or “NiFi ingress pods are the only ones allowed to accept external traffic.”</li>
+  <li>Istio or Cilium service mesh gives you fine-grained traffic shifting during Flink job upgrades or NiFi scaling events without breaking exactly-once semantics.</li>
+  <li>Result: a hardened, observable data platform that meets enterprise security standards without extra custom networking hacks.</li>
+</ul>
+
+<h3 id="4-aiml--real-time-inference-kuberay--kubeflow--vllm--kserve">4. AI/ML &amp; Real-Time Inference (KubeRay / Kubeflow / vLLM / KServe)</h3>
+<p><strong>What it is</strong>: Platforms for training, serving, and running large-scale AI workloads on Kubernetes.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>NiFi ingests raw/unstructured data (documents, logs, sensor streams) and normalizes it at scale.</li>
+  <li>Kafka acts as the reliable buffer for high-velocity event streams.</li>
+  <li>Flink performs real-time feature engineering, embedding generation, or lightweight inference before handing off to vLLM/KServe inference pods or Qdrant vector stores.</li>
+  <li>The output is production-ready real-time RAG or online ML features with full lineage and exactly-once guarantees — no more nightly batch jobs or manual data loading.</li>
+</ul>
+
+<h3 id="5-persistent-storage-longhorn--rook--ceph">5. Persistent Storage (Longhorn / Rook / Ceph)</h3>
+<p><strong>What it is</strong>: Cloud-native, distributed block/object storage solutions that provide PVCs and snapshots inside Kubernetes.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>NiFi uses persistent volumes for content, provenance, and flowfile repositories (critical for large ingest jobs).</li>
+  <li>Kafka leverages storage for durable logs and tiered storage.</li>
+  <li>Flink checkpoints and savepoints land on high-performance PVCs managed by Longhorn or Rook — making stateful recovery fast and reliable even during node failures or cluster upgrades.</li>
+  <li>You get operator-driven snapshots and backups of your entire streaming state, turning “stateful is scary” into “stateful is boringly reliable.”</li>
+</ul>
+
+<h3 id="6-database-operators-cloudnativepg-crunchy-postgres-mongodb-etc">6. Database Operators (CloudNativePG, Crunchy Postgres, MongoDB, etc.)</h3>
+<p><strong>What it is</strong>: Kubernetes-native operators that manage full lifecycle of production databases.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>NiFi sources data from legacy systems or external APIs and streams it cleanly into Kafka.</li>
+  <li>Flink performs transformations, aggregations, or CDC-style enrichment, then sinks directly into database CRDs via JDBC or specialized connectors.</li>
+  <li>Real-time materialized views or event-driven updates flow into Postgres/Mongo without custom ETL jobs.</li>
+  <li>The database operator handles scaling and backups while the Trinity ensures the data arriving is clean, schema-validated, and exactly-once delivered.</li>
+</ul>
+
+<h3 id="7-serverless--event-driven-knative">7. Serverless &amp; Event-Driven (Knative)</h3>
+<p><strong>What it is</strong>: Scale-to-zero, event-driven workloads that only consume resources when there’s work to do.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>Kafka topics become the event backbone that triggers Knative services.</li>
+  <li>Flink handles heavy stateful processing upstream, then fans out lightweight events to Knative functions for simple actions (notifications, webhooks, etc.).</li>
+  <li>NiFi can ingest and route events that kick off serverless workflows — giving you the best of both worlds: heavy lifting in Flink, bursty/lightweight execution in Knative.</li>
+</ul>
+
+<h3 id="8-policy-as-code--security-kyverno--opa-gatekeeper">8. Policy-as-Code &amp; Security (Kyverno / OPA Gatekeeper)</h3>
+<p><strong>What it is</strong>: Enforcing security, compliance, and governance policies declaratively on every resource.</p>
+
+<p><strong>How the Trinity integrates</strong>:</p>
+<ul>
+  <li>Kyverno policies can validate that every <code class="language-plaintext highlighter-rouge">NifiCluster</code> has custom processors signed and injected correctly, that <code class="language-plaintext highlighter-rouge">KafkaTopic</code> configs meet retention/compliance rules, and that <code class="language-plaintext highlighter-rouge">FlinkDeployment</code> jobs run with required security contexts.</li>
+  <li>Network policies (enforced via Cilium) and pod security policies become part of the same GitOps workflow.</li>
+  <li>You get automated guardrails across the entire data platform — no more “accidental” open Kafka listeners or unvetted NAR files in production.</li>
+</ul>
+
+<hr>
+
+<h2 id="groks-top-10-kubernetes-technologies--2026-edition-with-the-streaming-trinity-lens">Grok’s Top 10 Kubernetes Technologies – 2026 Edition (with the Streaming Trinity Lens)**</h2>
+
+<p>Here’s the full expanded take. For each one I’m showing exactly where (and how deeply) the <strong>NiFi → Kafka → Flink</strong> Streaming Trinity plugs in. Some are tight, battle-tested integrations. Others are lighter or optional. I’m keeping it real — no forced connections.</p>
+
+<h3 id="1-the-streaming-trinity-nifi--kafka--flink-operators">1. The Streaming Trinity (NiFi + Kafka + Flink Operators)</h3>
+<p>This is the foundation, so the integration is 100% native — it <em>is</em> the Trinity.</p>
+
+<ul>
+  <li>
+<strong>NiFi</strong> acts as the dirty-ingress gateway, cleaning and normalizing real-world data (FTP, CSVs, APIs, IoT, etc.) via custom NAR processors before anything touches Kafka.</li>
+  <li>
+<strong>Kafka</strong> (via Strimzi or Cloudera operator) is the durable, immutable buffer with <code class="language-plaintext highlighter-rouge">KafkaTopic</code> CRDs.</li>
+  <li>
+<strong>Flink</strong> (via Flink Kubernetes Operator) does the heavy stateful processing — windowing, aggregations, real-time ML features, exactly-once guarantees.</li>
+</ul>
+
+<p>The three talk to each other natively through the operators: NiFi sinks directly to Kafka topics, Flink consumes with checkpointed exactly-once semantics, and everything is managed as version-controlled YAML. Without this trio working together, the other nine items on the list are just shiny tools with no reliable data to act on.</p>
+
+<h3 id="2-argocd--flux-gitops">2. ArgoCD / Flux (GitOps)</h3>
+<p><strong>Deep integration</strong> — this is where the Trinity becomes truly production-grade.</p>
+
+<p>All three components are first-class CRDs (<code class="language-plaintext highlighter-rouge">NifiCluster</code>, <code class="language-plaintext highlighter-rouge">KafkaTopic</code>, <code class="language-plaintext highlighter-rouge">FlinkDeployment</code>). Your entire streaming pipeline lives in Git exactly like the rest of your cluster.</p>
+<ul>
+  <li>Change a custom processor NAR version or Flink job spec → commit → ArgoCD/Flux syncs → operators roll it out safely.</li>
+  <li>NiFi flow definitions, Kafka topic configs, and Flink savepoint strategies all become GitOps citizens.<br>
+No more “works on my laptop” drift between data engineers and platform teams. The Trinity turns data pipelines into real infrastructure-as-code.</li>
+</ul>
+
+<h3 id="3-cilium-service-mesh--networking">3. Cilium (Service Mesh + Networking)</h3>
+<p><strong>Very tight integration</strong> — security and traffic management become almost automatic.</p>
+
+<p>The operators already handle mTLS certificate rotation between NiFi, Kafka, and Flink. Cilium sits on top and enforces network policies like:</p>
+<ul>
+  <li>Only Flink pods are allowed to consume from specific Kafka topics.</li>
+  <li>NiFi ingress pods are the only ones permitted to accept external traffic.</li>
+  <li>Fine-grained traffic shifting during Flink job upgrades or NiFi scaling without breaking exactly-once semantics.</li>
+</ul>
+
+<p>Result: zero-trust data platform that meets enterprise security standards with almost zero extra YAML.</p>
+
+<h3 id="4-prometheus--opentelemetry--grafana-observability">4. Prometheus + OpenTelemetry + Grafana (Observability)</h3>
+<p><strong>Extremely deep integration</strong> — this is one of the strongest pairings on the list.</p>
+
+<ul>
+  <li>NiFi exposes rich metrics (flowfile rates, backpressure, processor latency, custom NAR stats).</li>
+  <li>Kafka (Strimzi) gives broker, topic, partition, and consumer-lag metrics.</li>
+  <li>Flink ships checkpoint latency, state size, backpressure, and exactly-once guarantees.</li>
+</ul>
+
+<p>Pipe all of it through OpenTelemetry collectors into Prometheus → Grafana. You get a single pane of glass for the full data lifecycle. You can alert on a single NiFi processor failure or Flink backpressure spike exactly the same way you alert on a node outage. No blind spots.</p>
+
+<h3 id="5-kuberay--vllm--kserve-aiml-inference">5. KubeRay / vLLM / KServe (AI/ML Inference)</h3>
+<p><strong>Strong, real-time integration</strong> — this is where the Trinity makes AI actually feel real-time.</p>
+
+<ul>
+  <li>NiFi ingests raw/unstructured data (docs, logs, sensor streams) and normalizes it at scale.</li>
+  <li>Kafka buffers the high-velocity event stream reliably.</li>
+  <li>Flink performs real-time feature engineering, embedding generation, or lightweight inference before handing off to vLLM/KServe pods or Qdrant vector stores.</li>
+</ul>
+
+<p>You get production-ready real-time RAG or online ML features with full lineage and exactly-once delivery — no more nightly batch jobs or manual data loading.</p>
+
+<h3 id="6-longhorn--rook-cloud-native-storage">6. Longhorn / Rook (Cloud-Native Storage)</h3>
+<p><strong>Direct and critical integration</strong> — stateful workloads finally become reliable.</p>
+
+<ul>
+  <li>NiFi uses persistent volumes for content repo, provenance, and flowfile repositories (essential for large ingest jobs).</li>
+  <li>Kafka leverages the storage for durable logs and tiered storage.</li>
+  <li>Flink checkpoints and savepoints land on high-performance PVCs managed by Longhorn or Rook.</li>
+</ul>
+
+<p>Operator-driven snapshots and backups of your entire streaming state turn “stateful is scary” into “stateful is boringly reliable.” Node failures or cluster upgrades no longer feel like Russian roulette.</p>
+
+<h3 id="7-knative-serverless--event-driven">7. Knative (Serverless + Event-Driven)</h3>
+<p><strong>Clean event-driven integration</strong> — best of both worlds.</p>
+
+<p>Kafka topics become the event backbone that triggers Knative services.</p>
+<ul>
+  <li>Flink handles the heavy stateful processing upstream.</li>
+  <li>Then it fans out lightweight events to Knative functions for simple actions (notifications, webhooks, API calls).</li>
+  <li>NiFi can ingest and route events that kick off serverless workflows.</li>
+</ul>
+
+<p>Heavy lifting stays in Flink where it belongs; bursty or lightweight execution scales to zero in Knative.</p>
+
+<h3 id="8-kyverno--opa-gatekeeper-policy-as-code">8. Kyverno / OPA Gatekeeper (Policy-as-Code)</h3>
+<p><strong>Solid governance integration</strong> — keeps the Trinity from becoming a wild west.</p>
+
+<p>Kyverno policies can automatically validate:</p>
+<ul>
+  <li>Every <code class="language-plaintext highlighter-rouge">NifiCluster</code> has properly signed custom processors injected.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">KafkaTopic</code> configs meet retention and compliance rules.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">FlinkDeployment</code> jobs run with the required security contexts and resource limits.</li>
+</ul>
+
+<p>Network policies (enforced via Cilium) and pod security policies become part of the same GitOps workflow. Automated guardrails across the entire data platform.</p>
+
+<h3 id="9-cloudnativepg--crunchy-postgres-database-operators">9. CloudNativePG / Crunchy Postgres (Database Operators)</h3>
+<p><strong>Practical, real-time integration</strong> — streaming into databases done right.</p>
+
+<ul>
+  <li>NiFi sources data from legacy systems and streams it cleanly into Kafka.</li>
+  <li>Flink performs transformations, aggregations, or CDC-style enrichment.</li>
+  <li>Then it sinks directly into the database CRDs via JDBC or specialized connectors.</li>
+</ul>
+
+<p>Real-time materialized views or event-driven updates flow into Postgres without custom ETL jobs. The database operator handles scaling and backups while the Trinity ensures the incoming data is clean, schema-validated, and exactly-once delivered.</p>
+
+<h3 id="10-crossplane-infrastructure-from-yaml">10. Crossplane (Infrastructure from YAML)</h3>
+<p><strong>Looser but useful integration</strong> — more of an extension than a core dependency.</p>
+
+<p>Crossplane lets you manage cloud resources (S3 buckets, external databases, queues) as Kubernetes CRDs in the same GitOps repo as your Trinity.</p>
+<ul>
+  <li>You can have NiFi or Flink reference Crossplane-managed external resources declaratively.</li>
+  <li>Kafka topics or Flink sinks can point to Crossplane-provisioned cloud storage or databases without hard-coding credentials.</li>
+</ul>
+
+<p>It’s not as deeply intertwined as the others, but it keeps your entire data + infra stack in the same YAML/git workflow.</p>
+
+<hr>
+
+<h2 id="nifi-kafka-flink-kubernetes-with-gemini-and-grok">NiFi Kafka Flink Kubernetes with Gemini and Grok</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about NiFi Kafka Flink Kubernetes with Gemini and Grok please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#flink" class="page__taxonomy-item p-category" rel="tag">flink</a><span class="sep">, </span>
+    
+      <a href="/tags/#kafka" class="page__taxonomy-item p-category" rel="tag">kafka</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-06-04T00:00:00-04:00">June 4, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=NiFi+Kafka+Flink+Kubernetes+with+Gemini+and+Grok%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FNiFi-Kafka-Flink-Kubernetes-Gemini-Grok%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FNiFi-Kafka-Flink-Kubernetes-Gemini-Grok%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/How-To-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/" class="pagination--pager" title="How To Install NiFi Registry on Kubernetes with CFM Operator
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/NiFi_Registry_on_Kubernetes.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-To-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/" rel="permalink">How To Install NiFi Registry on Kubernetes with CFM Operator
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    A quick how to guide for installing NiFi Registry on minikube with the CFM Operator
+
+    <a href="/blog/How-To-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/how_to_install_iceberg_mcp_server.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/" rel="permalink">How To Install Cloudera Iceberg MCP Server
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How to build and locally test the Cloudera Iceberg MCP Server with MCP Inspector using Cloudera Apache Iceberg deployed on AWS in a Cloudera Data Warehouse.
+
+    <a href="/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-To-Install-Cloudera-NiFi-MCP-Server/" rel="permalink">How To Install Cloudera NiFi MCP Server
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi deployed on AWS in a Data.
+
+    <a href="/blog/How-To-Install-Cloudera-NiFi-MCP-Server/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Real-Time_Monitoring_with_Observability.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Real-Time-Monitoring-with-Observability/" rel="permalink">Real-Time Monitoring with Observability
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA
+We are announcing the general availability of Real-Time Monitoring...
+    <a href="/release/Real-Time-Monitoring-with-Observability/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>

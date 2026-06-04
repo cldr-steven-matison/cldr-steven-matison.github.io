@@ -502,4 +502,10 @@ var store = [{
         "tags": ["cloudera","nifi","nifi registry","operator","cfm"],
         "url": "/blog/How-To-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/",
         "teaser": "/assets/images/NiFi_Registry_on_Kubernetes.png"
+      },{
+        "title": "NiFi Kafka Flink Kubernetes with Gemini and Grok",
+        "excerpt":"I wanted to dump some markdown that got old and figured why not capture it into a new post here. I like to plan with Grok and sometimes Gemini. In this series of MD I was trying to see where NiFi Kafka and Flink landed in top 10 lists. I...","categories": ["blog"],
+        "tags": ["cloudera","nifi","kafka","flink"],
+        "url": "/blog/NiFi-Kafka-Flink-Kubernetes-Gemini-Grok/",
+        "teaser": "/assets/images/SRM.png"
       }]
