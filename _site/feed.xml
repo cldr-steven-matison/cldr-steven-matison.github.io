@@ -13,7 +13,7 @@
           <image>https://cldr-steven-matison.github.io/assets/images/SRM.png</image>
           <media:content url="https://cldr-steven-matison.github.io/assets/images/SRM.png" medium="image" />
         
-        <description>AI dump of markdown discussing top 10 kubernetes technologies and in terms of nifi kafka and flink on kubernetes.</description>
+        <description>AI dump of markdown discussing top 10 kubernetes technologies in terms of nifi kafka and flink as operators.</description>
       </item>
     
       <item>

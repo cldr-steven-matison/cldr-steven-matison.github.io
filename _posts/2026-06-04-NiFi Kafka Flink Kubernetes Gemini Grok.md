@@ -1,6 +1,6 @@
 ---
 title:  "NiFi Kafka Flink Kubernetes with Gemini and Grok"
-excerpt: "AI dump of markdown discussing top 10 kubernetes technologies and in terms of nifi kafka and flink on kubernetes."
+excerpt: "AI dump of markdown discussing top 10 kubernetes technologies in terms of nifi kafka and flink as operators."
 header:
   teaser: "/assets/images/SRM.png"
 categories: 
@@ -13,8 +13,8 @@ tags:
 ---
 
 I wanted to dump some markdown that got old and figured why not capture it into a new post here.   
-I like to plan with Grok and sometimes Gemini.  In this series of MD I was trying to see where NiFi Kafka and Flink landed in top 10 lists.   I was surprised they were in there, but AI was AIing.  At any rate some of the content is
-useful and it is relevant as these 3 technologies apply deeper into popular Kubernetes technologies now and into the future.
+I like to plan with Grok and sometimes Gemini.  In this series of MD I was trying to see where NiFi Kafka and Flink landed in top 10 lists. I was surprised they were in there, but AI was AIing.  At any rate some of the content is
+useful and it is relevant as these 3 technologies apply deeper into popular kubernetes technolog spaces now and into the future.
 
 
 ## Gemini's Top 10 Kubernetes Technologies – 2026 Edition
