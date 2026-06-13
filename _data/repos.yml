@@ -1,16 +1,23 @@
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 1655
+  size: 1722
   lang: "Shell"
+  updated: "2026-06-12"
+  fork: false
+- name: "ClouderaStreamingOperators"
+  description: "Repo for yaml used in installing Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
+  size: 73
+  lang: ""
   updated: "2026-06-12"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 122884
+  size: 122885
   lang: "HTML"
-  updated: "2026-06-11"
+  updated: "2026-06-12"
   fork: false
 - name: "NiFi-Templates"
   description: "NiFI Templates of example flows I share with the community."
@@ -25,13 +32,6 @@
   size: 38
   lang: ""
   updated: "2026-06-05"
-  fork: false
-- name: "ClouderaStreamingOperators"
-  description: "Repo for yaml used in installing Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 66
-  lang: ""
-  updated: "2026-06-04"
   fork: false
 - name: "hermes-agent"
   description: "The agent that grows with you"
