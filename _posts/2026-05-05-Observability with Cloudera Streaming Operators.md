@@ -12,12 +12,9 @@ tags:
   - operator
 ---
 
-:warning: **Danger!** This is a Work in Progress article, content and code is updating frequently until this notice is removed.
-{: .notice--danger}
-
 ![Observability with Cloudera Streaming Operators](/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png)
 
-If you are running applications and workloads in kubernetes, you know that visibility is everything. You can build the most complex data pipelines in the world, but without eyes on your throughput, queues, or other streaming metrics, you’re essentially flying blind. 
+If you are running NiFi Kafka or Flink based applications and workloads in kubernetes, you know that visibility is everything. You can build the most complex data pipelines in the world, but without eyes on your throughput, queues, or other streaming metrics, you’re essentially flying blind. 
 
 Welcome to the ultimate landing page for my 3 part series on Kubernetes native observability. In this series, we walk through the exact steps to wire up the entire Cloudera Streaming Operator architecture—**NiFi, Kafka, and Flink**—into a unified Prometheus and Grafana stack. 
 

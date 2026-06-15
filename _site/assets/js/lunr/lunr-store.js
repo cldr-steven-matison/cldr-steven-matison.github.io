@@ -468,7 +468,7 @@ var store = [{
         "teaser": "/assets/images/Cloudera_Streaming_Analytics_1.17.0.png"
       },{
         "title": "Observability with Cloudera Streaming Operators",
-        "excerpt":":warning: Danger! This is a Work in Progress article, content and code is updating frequently until this notice is removed. If you are running applications and workloads in kubernetes, you know that visibility is everything. You can build the most complex data pipelines in the world, but without eyes on...","categories": ["blog"],
+        "excerpt":"If you are running NiFi Kafka or Flink based applications and workloads in kubernetes, you know that visibility is everything. You can build the most complex data pipelines in the world, but without eyes on your throughput, queues, or other streaming metrics, you’re essentially flying blind. Welcome to the ultimate...","categories": ["blog"],
         "tags": ["prometheus","grafana","kubernetes","operator"],
         "url": "/blog/Observability-with-Cloudera-Streaming-Operators/",
         "teaser": "/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png"
