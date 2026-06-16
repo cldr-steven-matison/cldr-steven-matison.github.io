@@ -209,7 +209,10 @@ steven.matison@FTF3XR2065 DesktopShare % claude
   Pushed — 35c57c0..03c952e is now on origin/main.
 ```
 
-How many tokens does it take for a Quickstart and First Commit?
+<figure>
+  <img src="/assets/images/Day1ClaudeTokens.png" alt="Day 1 Claude Code token usage">
+  <figcaption>How many tokens does it take for a Quickstart and First Commit?</figcaption>
+</figure>
 
 Wow, ok, I feel like all the work I have done up to this point was for you to read this. I now have claude doing my repo work in the macbook space. After I finished the commit, one simple chat to my telegram bot and the same repo is pulled in my windows space. 🤖🤖🤖🤖🤖
 
@@ -230,19 +233,15 @@ Wow, ok, I feel like all the work I have done up to this point was for you to re
 | `/loop <interval> <cmd>` | Run a prompt on a recurring interval |
 | `/desktop` | Hand off the terminal session to the Desktop app |
 
-## Suggested Reading
-
-- [Common Workflows](https://code.claude.com/docs/en/common-workflows)
-- [Memory (CLAUDE.md and auto memory)](https://code.claude.com/docs/en/memory)
-- [Skills](https://code.claude.com/docs/en/skills)
-- [Model Context Protocol (MCP)](https://code.claude.com/docs/en/mcp)
 
 ## Resources
 
 - [https://github.com/cldr-steven-matison/DesktopShare](https://github.com/cldr-steven-matison/DesktopShare)
 - [https://code.claude.com/docs/en/quickstart](https://code.claude.com/docs/en/quickstart)
 
-<figure>
-  <img src="/assets/images/Day1ClaudeTokens.png" alt="Day 1 Claude Code token usage">
-  <figcaption>How many tokens does it take for a Quickstart and First Commit?</figcaption>
-</figure>
+## Suggested Reading
+
+- [Common Workflows](https://code.claude.com/docs/en/common-workflows)
+- [Memory (CLAUDE.md and auto memory)](https://code.claude.com/docs/en/memory)
+- [Skills](https://code.claude.com/docs/en/skills)
+- [Model Context Protocol (MCP)](https://code.claude.com/docs/en/mcp)
