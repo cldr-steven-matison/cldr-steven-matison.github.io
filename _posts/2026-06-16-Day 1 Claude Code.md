@@ -2,7 +2,7 @@
 title:  "Day 1: Claude Code"
 excerpt: "First day with Claude Code on the MacBook — install, a few questions about my DesktopShare repo, and a commit + push, end to end from the terminal."
 header:
-  teaser: "/assets/images/SRM.png"
+  teaser: "/assets/images/Day1ClaudeCode.png"
 categories:
   - blog
 tags:
@@ -11,6 +11,8 @@ tags:
   - ai
   - cloudera
 ---
+
+![Day 1 Claude Code](/assets/images/Day1ClaudeCode.png)
 
 ## Summary
 
@@ -239,3 +241,8 @@ Wow, ok, I feel like all the work I have done up to this point was for you to re
 
 - [https://github.com/cldr-steven-matison/DesktopShare](https://github.com/cldr-steven-matison/DesktopShare)
 - [https://code.claude.com/docs/en/quickstart](https://code.claude.com/docs/en/quickstart)
+
+<figure>
+  <img src="/assets/images/Day1ClaudeTokens.png" alt="Day 1 Claude Code token usage">
+  <figcaption>How many tokens does it take for a Quickstart and First Commit?</figcaption>
+</figure>

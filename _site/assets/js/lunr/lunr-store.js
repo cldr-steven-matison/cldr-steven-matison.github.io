@@ -513,5 +513,5 @@ var store = [{
         "excerpt":"Summary Day 1 with Claude Code. Installed via brew, pointed it at my DesktopShare repo, and ran a handful of agent tasks end to end from the terminal — answering questions about the project, explaining the folder structure, capturing the session into history/, then committing and pushing the change to...","categories": ["blog"],
         "tags": ["claude","claude-code","ai","cloudera"],
         "url": "/blog/Day-1-Claude-Code/",
-        "teaser": "/assets/images/SRM.png"
+        "teaser": "/assets/images/Day1ClaudeCode.png"
       }]
