@@ -241,7 +241,12 @@ Wow, ok, I feel like all the work I have done up to this point was for you to re
 
 ## Suggested Reading
 
+- [How Claude Code Works](https://code.claude.com/docs/en/how-claude-code-works)
+- [Best Practices](https://code.claude.com/docs/en/best-practices)
+- [Features Overview](https://code.claude.com/docs/en/features-overview)
 - [Common Workflows](https://code.claude.com/docs/en/common-workflows)
 - [Memory (CLAUDE.md and auto memory)](https://code.claude.com/docs/en/memory)
 - [Skills](https://code.claude.com/docs/en/skills)
 - [Model Context Protocol (MCP)](https://code.claude.com/docs/en/mcp)
+
+
