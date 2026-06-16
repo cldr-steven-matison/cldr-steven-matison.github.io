@@ -1,16 +1,23 @@
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 122888
-  lang: "HTML"
-  updated: "2026-06-14"
-  fork: false
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 1722
+  size: 1460
   lang: "Shell"
-  updated: "2026-06-12"
+  updated: "2026-06-15"
+  fork: false
+- name: "litellm"
+  description: "Python SDK, Proxy Server (AI Gateway) to call 100+ LLM APIs in OpenAI (or native) format, with cost tracking, guardrails, loadbalancing and logging. [Bedrock, Azure, OpenAI, VertexAI, Cohere, Anthropic, Sagemaker, HuggingFace, VLLM, NVIDIA NIM]"
+  url: "https://github.com/cldr-steven-matison/litellm"
+  size: 1122766
+  lang: ""
+  updated: "2026-06-15"
+  fork: true
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 122911
+  lang: "HTML"
+  updated: "2026-06-15"
   fork: false
 - name: "ClouderaStreamingOperators"
   description: "Repo for yaml used in installing Cloudera Streaming Operators"
