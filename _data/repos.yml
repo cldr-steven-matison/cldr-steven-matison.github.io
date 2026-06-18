@@ -1,22 +1,22 @@
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 38
-  lang: ""
+- name: "DesktopShare"
+  description: "Share spot for Macbook & Windows MD & Test Files"
+  url: "https://github.com/cldr-steven-matison/DesktopShare"
+  size: 7131
+  lang: "Shell"
   updated: "2026-06-17"
   fork: false
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 117
-  lang: "TypeScript"
+  size: 250
+  lang: "Python"
   updated: "2026-06-17"
   fork: false
-- name: "DesktopShare"
-  description: "Share spot for Macbook & Windows MD & Test Files"
-  url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 1562
-  lang: "Shell"
+- name: "NiFi-Templates"
+  description: "NiFI Templates of example flows I share with the community."
+  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
+  size: 922
+  lang: "Python"
   updated: "2026-06-17"
   fork: false
 - name: "cldr-steven-matison.github.io"
@@ -24,7 +24,14 @@
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
   size: 133528
   lang: "HTML"
-  updated: "2026-06-16"
+  updated: "2026-06-17"
+  fork: false
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 39
+  lang: ""
+  updated: "2026-06-17"
   fork: false
 - name: "litellm"
   description: "Python SDK, Proxy Server (AI Gateway) to call 100+ LLM APIs in OpenAI (or native) format, with cost tracking, guardrails, loadbalancing and logging. [Bedrock, Azure, OpenAI, VertexAI, Cohere, Anthropic, Sagemaker, HuggingFace, VLLM, NVIDIA NIM]"
@@ -39,13 +46,6 @@
   size: 73
   lang: ""
   updated: "2026-06-12"
-  fork: false
-- name: "NiFi-Templates"
-  description: "NiFI Templates of example flows I share with the community."
-  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 908
-  lang: "Python"
-  updated: "2026-06-09"
   fork: false
 - name: "hermes-agent"
   description: "The agent that grows with you"
