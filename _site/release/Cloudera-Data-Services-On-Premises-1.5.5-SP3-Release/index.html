@@ -1,0 +1,856 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Cloudera Data Services On Premises 1.5.5 SP3 Release - Cloudera Solutions Engineer</title>
+<meta name="description" content="Cloudera is pleased to announce the release of Cloudera Data Services on premises 1.5.5 SP3.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Cloudera Data Services On Premises 1.5.5 SP3 Release">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-Release/">
+
+
+  <meta property="og:description" content="Cloudera is pleased to announce the release of Cloudera Data Services on premises 1.5.5 SP3.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/Cloudera-Data-Platform.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-06-25T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-Release/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Cloudera Data Services On Premises 1.5.5 SP3 Release">
+    <meta itemprop="description" content="Cloudera is pleased to announce the release of Cloudera Data Services on premises 1.5.5 SP3.">
+    <meta itemprop="datePublished" content="2026-06-25T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-Release/" class="u-url" itemprop="url">Cloudera Data Services On Premises 1.5.5 SP3 Release
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+    
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-06-25T00:00:00-04:00">
+            June 25, 2026
+          </time>
+        </p>
+      
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Cloudera is pleased to announce the release of Cloudera Data Services on premises 1.5.5 SP3.</p>
+
+<p>This milestone Service Pack delivers powerful, production-grade upgrades to the 1.5.5 product line, specifically engineered to advance enterprise AI initiatives, maximize administrative efficiency, and harden platform resilience.</p>
+
+<p>Highlights include the General Availability (GA) of Cloudera AI Agent Studio for production-grade agentic workflows, the airgapped release of Cloudera Observability 3.7.1. The new Observability release brings comprehensive workload optimization, query debugging, and the ability to export all platform level metrics to 3rd party tools.</p>
+
+<h2 id="key-features-and-benefits">Key Features and Benefits</h2>
+
+<h3 id="cloudera-ai">Cloudera AI</h3>
+
+<p><strong>Agent Studio</strong></p>
+<ul>
+  <li><strong>Ready for big business:</strong> Now Generally Available (3.0), delivering its powerful agentic capabilities in a more hardened, secure, and production-ready experience, enhanced with new capabilities.</li>
+  <li><strong>Native function calling:</strong> Agent Studio now uses native LLM function-calling protocols for agentic operations. This improves tool-call reliability and parameter accuracy, reduces latency caused by malformed retries, and enables agents to sustain complex, long-running workflows.</li>
+  <li><strong>Smart planning:</strong> “Task Planning” is a powerful workflow feature that empowers agents to manage complex, multi-step projects by creating structured, automated to-do lists before processing begins. It provides real-time visibility into agent progress, allowing you to track exactly how work is being completed. The agent systematically plans and performs each task in sequence, ensuring every step is completed and verified, thereby improving performance and accuracy of the workflow.</li>
+  <li><strong>Guardrails:</strong> Guardrails protect sensitive data and control how information is exchanged between workflows and Large Language Models (LLMs). They can:
+    <ul>
+      <li>Detect and block prompt injection attempts</li>
+      <li>Filter sensitive keywords</li>
+      <li>Anonymize Personally Identifiable Information (PII)</li>
+      <li>Enforce topic policies</li>
+      <li>Run custom guardrail logic written in Python</li>
+    </ul>
+  </li>
+  <li><strong>Full tracking:</strong> The system now automatically logs who creates or changes tools, and tracks exactly how workflows run.</li>
+</ul>
+
+<p><strong>Cloudera AI Registry</strong></p>
+<ul>
+  <li><strong>Faster upgrades:</strong> The new in-place upgrade preserves all Kubernetes resources, allowing the process to complete in a short time, typically within 15 minutes.</li>
+  <li><strong>Complex Deployments:</strong> Cloudera now supports deploying Cloudera AI Inference connecting to multiple Cloudera AI Registries.</li>
+  <li><strong>Model export:</strong> Added a new API endpoint to download specific MLFlow model versions.</li>
+</ul>
+
+<p><strong>Cloudera AI Inference Service</strong></p>
+<ul>
+  <li><strong>API Key support:</strong> The Inference service now accepts the new Knox API Keys, enabling long-lived connectivity to Inference Model Endpoints.</li>
+  <li><strong>Better security control:</strong> Fine-grained access control allows Administrators to define specific access levels for Model Endpoints for individual users or groups.</li>
+  <li><strong>Broader model support:</strong> New Models are available following our upgrades of vLLM to 0.20 version.</li>
+</ul>
+
+<p><strong>Cloudera AI Workbench</strong></p>
+<ul>
+  <li><strong>Targeted resource limits:</strong> Teams can now set limits on CPU and memory so one heavy job doesn’t hog the whole system.</li>
+  <li><strong>Low quota warning:</strong> The UI will now warn you if you don’t have enough resource quota before you launch a new job or session.</li>
+  <li><strong>Self-healing apps:</strong> If an app fails, it will now try to restart itself up to three times automatically to save you time.</li>
+  <li><strong>Cleaner project lists:</strong> A new filter separates your personal projects from your team’s shared work, making things easier to find.</li>
+  <li><strong>Easier service accounts:</strong> Users can now assign service accounts to their own jobs without waiting for an admin, as long as they have the right permissions.</li>
+  <li><strong>Better logs:</strong> You can now download user logs directly from the diagnostics page to troubleshoot issues faster.</li>
+</ul>
+
+<p><strong>ML Runtimes</strong></p>
+<ul>
+  <li><strong>Extra security:</strong> We added new, “Hardened” runtimes built on Chainguard images.</li>
+  <li><strong>Updated base:</strong> Standard Hadoop add-on images have been updated to Ubuntu 24.04 LTS.</li>
+</ul>
+
+<h3 id="cloudera-data-engineering">Cloudera Data Engineering</h3>
+<p><strong>Increased Operational Efficiency Through Enhanced Administration</strong></p>
+<ul>
+  <li><strong>Accelerated Node Setup with Automated Taint Support:</strong> Eliminates resource contention by automatically applying both Kubernetes taints and labels when a node profile is selected in Cloudera Manager, significantly speeding up ECS deployments.</li>
+  <li><strong>Zero-Downtime Administration via Configuration Change Detection:</strong> Empowers administrators to propagate Management Console updates (such as proxy, LDAP, or Kerberos) with a single click. This eliminates manual configurations and the need for service redeployments.</li>
+</ul>
+
+<p><strong>Accelerate Project Delivery and Hardened Security with Practitioner enhancements</strong></p>
+<ul>
+  <li><strong>Boosted Developer Productivity via Spark Connect (GA):</strong> Bridges the gap between local development and production by allowing practitioners to build pipelines from familiar local IDEs (Python/Java/Scala) with long-running sessions and dynamic allocation.</li>
+  <li><strong>Granular Pipeline Governance:</strong> Hardens security by restricting access to sensitive Airflow UI elements - including connections, variables, and XCOM - to Administrator roles (DEAdmin, Service Admin, and VC Admin). Regular users retain the ability to manage and run their jobs.</li>
+  <li><strong>Improved Workload Visibility:</strong> Deepens integration with Cloudera Observability to provide faster root-cause resolution for complex engineering tasks. Refer to the Observability section for additional details.</li>
+</ul>
+
+<h3 id="cloudera-observability">Cloudera Observability</h3>
+<ul>
+  <li><strong>Observability Airgapped release:</strong> Observability 3.7.1 covers Cloudera Data Warehouse and Cloudera Data Engineering essential for Data Services on premises customers.
+    <ul>
+      <li>Release covers workload optimization, query/job history and debugging, usage analysis at workload, user and table level.</li>
+      <li><strong>Metrics Export:</strong> ability to export all platform level metrics collected by Observability across Cloudera Data Warehouse, Cloudera Data Engineering and Cloudera AI via open telemetry protocol to 3rd party tools.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="cloudera-data-warehouse">Cloudera Data Warehouse</h3>
+<ul>
+  <li><strong>Protect Cluster Stability via Proactive Configuration Change Detection:</strong> Cloudera Data Warehouse on premises proactively identifies configuration drift to improve cluster stability, simplify troubleshooting, and strengthen compliance tracking.</li>
+  <li><strong>Eliminate Manual Storage Setup: Automated Ozone Integration:</strong> Streamlines object-store workloads by automatically applying centrally managed S3A credentials and endpoints to Hive, Impala, and Trino Virtual Warehouses at launch.</li>
+  <li><strong>Guaranteed Operational Continuity via Instant Upgrade Rollbacks:</strong> Provides peace of mind by allowing administrators to instantly revert failed Hive or Impala Virtual Warehouse upgrades to their last working state.</li>
+  <li><strong>Faster Failure Resolution through Proactive Troubleshooting:</strong> Automatically captures OOM heap dumps and JVM crash dumps, accelerating root-cause analysis for infrastructure and service failures.</li>
+  <li><strong>Mitigate Security and Performance Vulnerabilities with Modernized Ingress:</strong> Migrates Cloudera Data Warehouse on RKE from NGINX to Istio (via Kubernetes Gateway API), delivering superior long-term support, enhanced security, and improved memory stability.</li>
+  <li><strong>Ensure Predictable Query Performance via Core Impala Standardization:</strong> Standardize Virtual Warehouses on the core Impala architecture following the removal of legacy Unified Analytics.
+    <ul>
+      <li><em>Note: Practitioners may need to migrate legacy Hive snippets and saved Hue queries to ensure they continue to run correctly.</em></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="platform">Platform</h3>
+<p><strong>Increased Audit Accuracy Through Enhanced Security &amp; Compliance</strong></p>
+<ul>
+  <li><strong>Accurate user activity tracking:</strong> Cloudera AI audit events now capture the real client IP improving accuracy for user activity tracking and audit investigations.</li>
+  <li><strong>Secure Ozone S3 access for Data Services applications:</strong> This enables Data Service applications to securely access Ozone-backed S3 storage and improves integration with object-store-based workloads.</li>
+</ul>
+
+<p><strong>Enhanced Reliability and Scalability With Improved Performance and Resource Optimization</strong></p>
+<ul>
+  <li><strong>Workload isolation enhancement:</strong> The platform now supports node labeling and tainting to help administrators dedicate specific nodes for selected workloads, reducing resource contention across services.</li>
+  <li><strong>Improved traffic management:</strong> Platform ingress capabilities have been enhanced to improve reliability and enable more scalable traffic management across Data Services.</li>
+</ul>
+
+<p><strong>Improved Resilience Through Better Troubleshooting and Supportability</strong></p>
+<ul>
+  <li><strong>Enhanced log handling for faster troubleshooting:</strong> The logging architecture has been enhanced to better handle large and variable log volumes, memory pressure and log collection failures. This improves troubleshooting efficiency and supportability for Data Services environments.</li>
+  <li><strong>Scalable Diagnostic Bundle collection:</strong> Diagnostics processing has been redesigned to use memory more efficiently when handling large data volumes, reducing the risk of out-of-memory failures and failed bundle generation.</li>
+</ul>
+
+<p><strong>New Certifications:</strong></p>
+<ul>
+  <li>Certified with Cloudera Base 7.3.2, 7.3.1 SP3, 7.1.9 SP2; Cloudera Manager 7.13.1.800, 7.13.2; OCP 4.20, and RKE2 1.33, Longhorn 1.9, RHEL 9.7.</li>
+</ul>
+
+<h3 id="security-and-cve-reduction">Security and CVE Reduction</h3>
+<p>Cloudera Data Services on premises 1.5.5 SP3 represents a major hardening of the platform, driving aggressively toward a zero-vulnerability posture for enterprise peace of mind.</p>
+<ul>
+  <li><strong>KEV Milestone:</strong> Successfully eliminated virtually all Known Exploited Vulnerabilities (KEVs) across the vast majority of platform components and services. Only two KEVs remain under approved exceptions.</li>
+  <li><strong>Continued Risk Reduction:</strong> Total CVE instances dropped by 19% since 1.5.5 SP2 release.</li>
+</ul>
+
+<hr />
+<h3 id="links">Links</h3>
+<ul>
+  <li><a href="https://docs.cloudera.com/cdp-private-cloud-data-services/1.5.5/release-notes/topics/mc-private-cloud-whats-new-155-sp3.html">Release Notes</a></li>
+  <li><a href="https://docs.cloudera.com/cdp-private-cloud-data-services/1.5.5/release-notes/topics/cdppvc-service-packs-155-sp3.html">Public Documentation for 1.5.5 SP3</a></li>
+  <li><a href="https://archive.cloudera.com/p/cdp-pvc-ds/latest/">Cloudera Data Services on premises 1.5.5 SP3 Archive</a></li>
+  <li><a href="https://supportmatrix.cloudera.com/">Support Matrix</a></li>
+</ul>
+
+<p>A massive thank you to everyone who helped bring this release across the finish line — your efforts were outstanding.</p>
+
+<hr />
+
+<h2 id="cloudera-data-services-on-premises-155-sp3-release">Cloudera Data Services On Premises 1.5.5 SP3 Release</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Data Services On Premises 1.5.5 SP3 Release please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ai" class="page__taxonomy-item p-category" rel="tag">ai</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#data services" class="page__taxonomy-item p-category" rel="tag">data services</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#release" class="page__taxonomy-item p-category" rel="tag">release</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-06-25T00:00:00-04:00">June 25, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Data+Services+On+Premises+1.5.5+SP3+Release%20https%3A%2F%2Fcldr-steven-matison.github.io%2Frelease%2FCloudera-Data-Services-On-Premises-1.5.5-SP3-Release%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Frelease%2FCloudera-Data-Services-On-Premises-1.5.5-SP3-Release%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Day-1-Claude-Code/" class="pagination--pager" title="Day 1: Claude Code
+">Previous</a>
+    
+    
+      <a href="/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/" class="pagination--pager" title="Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/nifi-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/" rel="permalink">Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    The Data in Motion team is pleased to announce the release of Cloudera Flow Management 2.1.7 Service Pack 4. This release is based on Apache NiFi 1.28.1 and ...
+    <a href="/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Day1ClaudeCode.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Day-1-Claude-Code/" rel="permalink">Day 1: Claude Code
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    First day with Claude Code on the MacBook — install, a few questions about my DesktopShare repo, and a commit + push, end to end from the terminal.
+
+    <a href="/blog/Day-1-Claude-Code/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-02-03-cloudera_data_lineage.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Data-Lineage-Custom-Lineage-Connector-Relaunch/" rel="permalink">Cloudera Data Lineage Custom Lineage Connector Relaunch
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Executive Summary
+The Cloudera Data Lineage team is pleased to announce that we’ve enhanced the Custom Lineage Connector (F.K.A Universal Connector) to suppo...
+    <a href="/blog/Cloudera-Data-Lineage-Custom-Lineage-Connector-Relaunch/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/SRM.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/NiFi-Kafka-Flink-Kubernetes-Gemini-Grok/" rel="permalink">NiFi Kafka Flink Kubernetes with Gemini and Grok
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          18 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    AI dump of markdown discussing top 10 kubernetes technologies in terms of nifi kafka and flink as operators.
+
+    <a href="/blog/NiFi-Kafka-Flink-Kubernetes-Gemini-Grok/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>

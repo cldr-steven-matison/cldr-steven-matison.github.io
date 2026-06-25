@@ -215,6 +215,12 @@ var store = [{
         "url": "/release/Cloudera-Data-Services-1.5.5-GA/",
         "teaser": "/assets/images/Cloudera-Data-Platform.png"
       },{
+        "title": "Cloudera Flow Management Migration Tool 7.0.1 Release Announcement",
+        "excerpt":"Cloudera Flow Management Flow Migration Tool 7.0.1 General Availability The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management Flow Migration Tool 7.0.1, supporting migrations from Cloudera Flow Management 2.1.7 Service Pack 3 to Cloudera Flow Management 4.12.0.1 on Cloudera on premises....","categories": ["release"],
+        "tags": ["nifi","cloudera"],
+        "url": "/release/Cloudera-Flow-Management-Migration-Tool-7.0.1-Release-Announcement/",
+        "teaser": "/assets/images/nifi-logo.png"
+      },{
         "title": "Cloudera Flow Management on DataHub 2.2.9 GA for Cloudera 7.3.1.400",
         "excerpt":"The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management 2.2.9 supporting Apache NiFi 2.3.0 and 1.28.1 for Cloudera Data Platform 7.3.1.400. This release offers a number of new features and improvements as well as upgraded dependencies. Key features for this release...","categories": ["release"],
         "tags": ["cloudera","nifi"],
@@ -485,17 +491,35 @@ var store = [{
         "url": "/release/Real-Time-Monitoring-with-Observability/",
         "teaser": "/assets/images/Real-Time_Monitoring_with_Observability.png"
       },{
+        "title": "Cloudera Data Services On Premises 1.5.5 SP3 GA Schedule Revised",
+        "excerpt":"To meet customer demand (e.g. Exxon, Mastercard, BofA, OCBC, Citibank, LaPoste, Australia DoD etc.) for key new features, we have moved the general availability of 1.5.5 SP3 from May 30, 2026, to the end of Q2, CY2026. This release will now contain the following capabilities added to the scope: General...","categories": ["release"],
+        "tags": ["cloudera","data services","ai"],
+        "url": "/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-GA-Schedule-Revised/",
+        "teaser": "/assets/images/Cloudera-Data-Platform.png"
+      },{
         "title": "How To Install Cloudera NiFi MCP Server",
         "excerpt":"The Cloudera NiFi MCP Server is a standard Model Context Protocol (MCP) server (an open protocol originally from Anthropic but now client-agnostic). The Cloudera NiFi MCP Server simply exposes tools for reading/writing Apache NiFi flows via Knox. Any MCP-compatible client can talk to it. In this post I am going...","categories": ["blog"],
         "tags": ["nifi","mcp","ai"],
         "url": "/blog/How-To-Install-Cloudera-NiFi-MCP-Server/",
         "teaser": "/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png"
       },{
+        "title": "Cloudera Data Flow 3.1 for Cloudera on Cloud",
+        "excerpt":"The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.1 for Cloudera on cloud. In this release, we’ve focused on removing friction that slows teams down. By introducing command-line interface (CLI) automations and advanced debugging tools, we’re giving developers more visibility and admins more...","categories": ["release"],
+        "tags": ["cloudera","nifi","dataflow"],
+        "url": "/release/Cloudera-Data-Flow-3.1-for-Cloudera-on-Cloud/",
+        "teaser": "/assets/images/clouderadataflow.png"
+      },{
         "title": "How To Install Cloudera Iceberg MCP Server",
         "excerpt":"This next guide walks you through Option 2 (Local Install) of the Cloudera Iceberg MCP Server on a local machine. The instructions mirror the style and detail of my previous guide: How To Install Cloudera NiFi MCP Server. The Iceberg MCP Server is a Model Context Protocol (MCP) server that...","categories": ["blog"],
         "tags": ["iceberg","ai","mcp"],
         "url": "/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/",
         "teaser": "/assets/images/how_to_install_iceberg_mcp_server.png"
+      },{
+        "title": "Cloudera Flow Management Operator for Kubernetes 3.1",
+        "excerpt":"The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.1. This release introduces powerful new security and automation features, focusing on programmatic identity and access management, automated certificate generation, and intelligent cluster lifecycle enhancements that significantly reduce admin overhead and...","categories": ["release"],
+        "tags": ["cloudera","nifi","kubernetes","cfm"],
+        "url": "/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.1/",
+        "teaser": "/assets/images/kubernetes-logo.png"
       },{
         "title": "How To Install NiFi Registry on Kubernetes with CFM Operator",
         "excerpt":"Quick and dirty guide for getting a NiFi Registry up and running on your CFM Operator deployed Kubernetes cluster using the native LoadBalancer route. No extra ingress nonsense, no custom routes—just a clean LoadBalancer service pointed straight at the pod. This setup is perfect for edge deployments, local dev, or...","categories": ["blog"],
@@ -509,9 +533,27 @@ var store = [{
         "url": "/blog/NiFi-Kafka-Flink-Kubernetes-Gemini-Grok/",
         "teaser": "/assets/images/SRM.png"
       },{
+        "title": "Cloudera Data Lineage Custom Lineage Connector Relaunch",
+        "excerpt":"Executive Summary The Cloudera Data Lineage team is pleased to announce that we’ve enhanced the Custom Lineage Connector (F.K.A Universal Connector) to support inner system lineage and transformations. This update effectively closes the visibility gap for source systems we don’t natively support yet. Bridging the Visibility Gap for Legacy and...","categories": ["blog"],
+        "tags": ["cloudera","octopai","data","lineage"],
+        "url": "/blog/Cloudera-Data-Lineage-Custom-Lineage-Connector-Relaunch/",
+        "teaser": "/assets/images/2026-02-03-cloudera_data_lineage.png"
+      },{
         "title": "Day 1: Claude Code",
         "excerpt":"Summary Day 1 with Claude Code. Installed via brew, pointed it at my DesktopShare repo, and ran a handful of agent tasks end to end from the terminal — answering questions about the project, explaining the folder structure, capturing the session into history/, then committing and pushing the change to...","categories": ["blog"],
         "tags": ["claude","claude-code","ai","cloudera"],
         "url": "/blog/Day-1-Claude-Code/",
         "teaser": "/assets/images/Day1ClaudeCode.png"
+      },{
+        "title": "Cloudera Data Services On Premises 1.5.5 SP3 Release",
+        "excerpt":"Cloudera is pleased to announce the release of Cloudera Data Services on premises 1.5.5 SP3. This milestone Service Pack delivers powerful, production-grade upgrades to the 1.5.5 product line, specifically engineered to advance enterprise AI initiatives, maximize administrative efficiency, and harden platform resilience. Highlights include the General Availability (GA) of Cloudera...","categories": ["release"],
+        "tags": ["cloudera","data services","ai"],
+        "url": "/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-Release/",
+        "teaser": "/assets/images/Cloudera-Data-Platform.png"
+      },{
+        "title": "Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1",
+        "excerpt":"The Data in Motion team is pleased to announce the release of Cloudera Flow Management 2.1.7 Service Pack 4. This release is based on Apache NiFi 1.28.1 and supports Cloudera on-premises 7.1.9 (all service packs) and Cloudera on-premises 7.3.1 (all service packs). This service pack improves stability and security through...","categories": ["release"],
+        "tags": ["cloudera","nifi","cfm"],
+        "url": "/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/",
+        "teaser": "/assets/images/nifi-logo.png"
       }]

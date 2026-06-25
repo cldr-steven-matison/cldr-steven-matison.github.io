@@ -6,6 +6,30 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/</link>
+        <pubDate>Thu, 25 Jun 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/nifi-logo.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/nifi-logo.png" medium="image" />
+        
+        <description>The Data in Motion team is pleased to announce the release of Cloudera Flow Management 2.1.7 Service Pack 4. This release is based on Apache NiFi 1.28.1 and supports Cloudera on-premises 7.1.9 (all service packs) and Cloudera on-premises 7.3.1 (all service packs).
+</description>
+      </item>
+    
+      <item>
+        <title>Cloudera Data Services On Premises 1.5.5 SP3 Release</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-Release/</link>
+        <pubDate>Thu, 25 Jun 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/Cloudera-Data-Platform.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/Cloudera-Data-Platform.png" medium="image" />
+        
+        <description>Cloudera is pleased to announce the release of Cloudera Data Services on premises 1.5.5 SP3.
+</description>
+      </item>
+    
+      <item>
         <title>Day 1: Claude Code</title>
         <link>https://cldr-steven-matison.github.io/blog/Day-1-Claude-Code/</link>
         <pubDate>Tue, 16 Jun 2026 00:00:00 -0400</pubDate>
@@ -14,6 +38,19 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/Day1ClaudeCode.png" medium="image" />
         
         <description>First day with Claude Code on the MacBook — install, a few questions about my DesktopShare repo, and a commit + push, end to end from the terminal.</description>
+      </item>
+    
+      <item>
+        <title>Cloudera Data Lineage Custom Lineage Connector Relaunch</title>
+        <link>https://cldr-steven-matison.github.io/blog/Cloudera-Data-Lineage-Custom-Lineage-Connector-Relaunch/</link>
+        <pubDate>Mon, 08 Jun 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/2026-02-03-cloudera_data_lineage.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-02-03-cloudera_data_lineage.png" medium="image" />
+        
+        <description>Executive Summary
+The Cloudera Data Lineage team is pleased to announce that we’ve enhanced the Custom Lineage Connector (F.K.A Universal Connector) to support inner system lineage and transformations. This update effectively closes the visibility gap for source systems we don’t natively support yet.
+</description>
       </item>
     
       <item>
@@ -39,6 +76,18 @@
       </item>
     
       <item>
+        <title>Cloudera Flow Management Operator for Kubernetes 3.1</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.1/</link>
+        <pubDate>Mon, 01 Jun 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/kubernetes-logo.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/kubernetes-logo.png" medium="image" />
+        
+        <description>The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.1. This release introduces powerful new security and automation features, focusing on programmatic identity and access management, automated certificate generation, and intelligent cluster lifecycle enhancements that significantly reduce admin overhead and streamline user onboarding.
+</description>
+      </item>
+    
+      <item>
         <title>How To Install Cloudera Iceberg MCP Server</title>
         <link>https://cldr-steven-matison.github.io/blog/How-To-Install-Cloudera-Iceberg-MCP-Server/</link>
         <pubDate>Wed, 20 May 2026 00:00:00 -0400</pubDate>
@@ -50,6 +99,18 @@
       </item>
     
       <item>
+        <title>Cloudera Data Flow 3.1 for Cloudera on Cloud</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Data-Flow-3.1-for-Cloudera-on-Cloud/</link>
+        <pubDate>Wed, 20 May 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/clouderadataflow.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/clouderadataflow.png" medium="image" />
+        
+        <description>The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.1 for Cloudera on cloud.
+</description>
+      </item>
+    
+      <item>
         <title>How To Install Cloudera NiFi MCP Server</title>
         <link>https://cldr-steven-matison.github.io/blog/How-To-Install-Cloudera-NiFi-MCP-Server/</link>
         <pubDate>Mon, 18 May 2026 00:00:00 -0400</pubDate>
@@ -58,64 +119,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png" medium="image" />
         
         <description>How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi deployed on AWS in a Data.</description>
-      </item>
-    
-      <item>
-        <title>Real-Time Monitoring with Observability</title>
-        <link>https://cldr-steven-matison.github.io/release/Real-Time-Monitoring-with-Observability/</link>
-        <pubDate>Mon, 11 May 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/Real-Time_Monitoring_with_Observability.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/Real-Time_Monitoring_with_Observability.png" medium="image" />
-        
-        <description>CDP Real time Monitoring for 7.1.9+ and 7.2.18+ with Cloudera Observability SaaS is now GA
-We are announcing the general availability of Real-Time Monitoring (RTM) capabilities for Cloudera Data Platform (CDP) customers through our Observability SaaS offering.
-</description>
-      </item>
-    
-      <item>
-        <title>How to AI with NiFi and Python</title>
-        <link>https://cldr-steven-matison.github.io/blog/How-to-AI-with-NiFi-and-Python/</link>
-        <pubDate>Wed, 06 May 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-06-how_to_ai_with_nifi_and_python.png" medium="image" />
-        
-        <description>How to Build and Test Custom NiFi Python Processors with AI (Without Breaking NiFi)</description>
-      </item>
-    
-      <item>
-        <title>Observability with Cloudera Streaming Operators</title>
-        <link>https://cldr-steven-matison.github.io/blog/Observability-with-Cloudera-Streaming-Operators/</link>
-        <pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-Observabiliy_With_Cloudera_Streaming_Operators.png" medium="image" />
-        
-        <description>The complete guide to building an end-to-end observability pipeline for NiFi, Kafka, and Flink on Kubernetes using the Cloudera Streaming Operators, Prometheus, and Grafana.</description>
-      </item>
-    
-      <item>
-        <title>Announcing Cloudera Streaming Analytics 1.17.0</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Streaming-Analytics-1.17.0/</link>
-        <pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/Cloudera_Streaming_Analytics_1.17.0.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/Cloudera_Streaming_Analytics_1.17.0.png" medium="image" />
-        
-        <description>We are excited to announce the release of Cloudera Streaming Analytics 1.17.0 for on-premises deployments. This update reinforces our commitment to a stable, secure, and high-performance streaming offering. By aligning with Cloudera 7.3.2.0 and modernizing our User-Defined Function (UDF) framework, we’re providing a more robust foundation for Apache Flink and Cloudera SQL Stream Builder.
-</description>
-      </item>
-    
-      <item>
-        <title>Monitoring Cloudera Streams Messaging (CSM) with Prometheus</title>
-        <link>https://cldr-steven-matison.github.io/blog/Monitoring-Cloudera-Streams-Messaging-(CSM)-with-Prometheus/</link>
-        <pubDate>Mon, 04 May 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSM_metrics.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-05-CSM_metrics.png" medium="image" />
-        
-        <description>Unlock deep Kafka broker metrics in Cloudera Streams Messaging (CSM) by injecting a custom JMX Prometheus Exporter and deploying a targeted PodMonitor.</description>
       </item>
     
   </channel>
