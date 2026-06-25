@@ -1,16 +1,23 @@
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 7186
+  size: 7222
   lang: "Shell"
-  updated: "2026-06-23"
+  updated: "2026-06-25"
   fork: false
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 289
-  lang: "Python"
-  updated: "2026-06-23"
+  size: 329
+  lang: "TypeScript"
+  updated: "2026-06-25"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 133539
+  lang: "HTML"
+  updated: "2026-06-24"
   fork: false
 - name: "andrej-karpathy-skills"
   description: "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
@@ -19,13 +26,6 @@
   lang: ""
   updated: "2026-06-23"
   fork: true
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 133537
-  lang: "HTML"
-  updated: "2026-06-23"
-  fork: false
 - name: "ClouderaStreamingOperators"
   description: "Repo for yaml used in installing Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
