@@ -1,23 +1,30 @@
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 39
+  lang: ""
+  updated: "2026-06-26"
+  fork: false
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 7222
+  size: 7548
   lang: "Shell"
   updated: "2026-06-25"
   fork: false
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 329
+  size: 337
   lang: "TypeScript"
   updated: "2026-06-25"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 133539
+  size: 133842
   lang: "HTML"
-  updated: "2026-06-24"
+  updated: "2026-06-25"
   fork: false
 - name: "andrej-karpathy-skills"
   description: "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
@@ -38,13 +45,6 @@
   url: "https://github.com/cldr-steven-matison/NiFi-Templates"
   size: 922
   lang: "Python"
-  updated: "2026-06-17"
-  fork: false
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 39
-  lang: ""
   updated: "2026-06-17"
   fork: false
 - name: "litellm"
