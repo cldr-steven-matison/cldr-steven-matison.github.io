@@ -1,23 +1,23 @@
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 7449
+  size: 7505
   lang: "Shell"
   updated: "2026-07-01"
   fork: false
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 826
+  size: 912
   lang: "Python"
   updated: "2026-07-01"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 133450
+  size: 133451
   lang: "HTML"
-  updated: "2026-06-30"
+  updated: "2026-07-01"
   fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
