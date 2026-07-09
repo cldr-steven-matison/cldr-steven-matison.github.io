@@ -1,9 +1,9 @@
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 133458
+  size: 133460
   lang: "HTML"
-  updated: "2026-07-07"
+  updated: "2026-07-08"
   fork: false
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
