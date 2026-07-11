@@ -1,23 +1,30 @@
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 133461
-  lang: "HTML"
-  updated: "2026-07-09"
-  fork: false
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 7905
+  size: 7511
   lang: "Shell"
-  updated: "2026-07-04"
+  updated: "2026-07-10"
+  fork: false
+- name: "ClouderaStreamingOperators"
+  description: "Repo for yaml used in installing Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
+  size: 76
+  lang: ""
+  updated: "2026-07-10"
   fork: false
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 1012
+  size: 1050
   lang: "Python"
-  updated: "2026-07-03"
+  updated: "2026-07-10"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 133462
+  lang: "HTML"
+  updated: "2026-07-10"
   fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
@@ -33,13 +40,6 @@
   lang: ""
   updated: "2026-06-23"
   fork: true
-- name: "ClouderaStreamingOperators"
-  description: "Repo for yaml used in installing Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 73
-  lang: ""
-  updated: "2026-06-19"
-  fork: false
 - name: "NiFi-Templates"
   description: "NiFI Templates of example flows I share with the community."
   url: "https://github.com/cldr-steven-matison/NiFi-Templates"
