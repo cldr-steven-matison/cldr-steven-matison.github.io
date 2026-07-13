@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- begin _includes/seo.html --><title>Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1 - Cloudera Solutions Engineer</title>
-<meta name="description" content="The Data in Motion team is pleased to announce the release of Cloudera Flow Management 2.1.7 Service Pack 4. This release is based on Apache NiFi 1.28.1 and supports Cloudera on-premises 7.1.9 (all service packs) and Cloudera on-premises 7.3.1 (all service packs).">
+<!-- begin _includes/seo.html --><title>Using Kftray and Zellij - Cloudera Solutions Engineer</title>
+<meta name="description" content="Two small tools that make working against a Kubernetes cluster feel less like a chore — kftray for reusable port-forward configs, and Zellij for pinning every long-running dev command into one terminal workspace.">
 
 
   <meta name="author" content="Steven Matison">
@@ -22,32 +22,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Cloudera Solutions Engineer">
-<meta property="og:title" content="Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1">
-<meta property="og:url" content="https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/">
+<meta property="og:title" content="Using Kftray and Zellij">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Using-Kftray-and-Zellij/">
 
 
-  <meta property="og:description" content="The Data in Motion team is pleased to announce the release of Cloudera Flow Management 2.1.7 Service Pack 4. This release is based on Apache NiFi 1.28.1 and supports Cloudera on-premises 7.1.9 (all service packs) and Cloudera on-premises 7.3.1 (all service packs).">
-
-
-
-  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/nifi-logo.png">
+  <meta property="og:description" content="Two small tools that make working against a Kubernetes cluster feel less like a chore — kftray for reusable port-forward configs, and Zellij for pinning every long-running dev command into one terminal workspace.">
 
 
 
-
-
-  <meta property="article:published_time" content="2026-06-25T00:00:00-04:00">
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/SRM.png">
 
 
 
 
 
-  
+  <meta property="article:published_time" content="2026-07-13T00:00:00-04:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/">
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Using-Kftray-and-Zellij/">
 
 
 
@@ -115,13 +115,17 @@
         
           <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
         
-        <ul class="visible-links"><li class="masthead__menu-item">
+        <ul class="visible-links">
+<li class="masthead__menu-item">
               <a href="/blog/">Blog</a>
-            </li><li class="masthead__menu-item">
+            </li>
+<li class="masthead__menu-item">
               <a href="/about/">About</a>
-            </li><li class="masthead__menu-item">
+            </li>
+<li class="masthead__menu-item">
               <a href="/repos/">Repos</a>
-            </li></ul>
+            </li>
+</ul>
         
         <button class="search__toggle" type="button">
           <span class="visually-hidden">Toggle search</span>
@@ -267,16 +271,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1">
-    <meta itemprop="description" content="The Data in Motion team is pleased to announce the release of Cloudera Flow Management 2.1.7 Service Pack 4. This release is based on Apache NiFi 1.28.1 and supports Cloudera on-premises 7.1.9 (all service packs) and Cloudera on-premises 7.3.1 (all service packs).">
-    <meta itemprop="datePublished" content="2026-06-25T00:00:00-04:00">
+    <meta itemprop="headline" content="Using Kftray and Zellij">
+    <meta itemprop="description" content="Two small tools that make working against a Kubernetes cluster feel less like a chore — kftray for reusable port-forward configs, and Zellij for pinning every long-running dev command into one terminal workspace.">
+    <meta itemprop="datePublished" content="2026-07-13T00:00:00-04:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/" class="u-url" itemprop="url">Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1
+            <a href="https://cldr-steven-matison.github.io/blog/Using-Kftray-and-Zellij/" class="u-url" itemprop="url">Using Kftray and Zellij
 </a>
           </h1>
           
@@ -293,21 +297,22 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          2 minute read
+          1 minute read
         
       </span>
     
     
       
-        <p class="page__date">
+        </p>
+<p class="page__date">
           <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
-          <time datetime="2026-06-25T00:00:00-04:00">
-            June 25, 2026
+          <time datetime="2026-07-13T00:00:00-04:00">
+            July 13, 2026
           </time>
         </p>
       
     
-  </p>
+  
 
 
         </header>
@@ -315,44 +320,115 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <p>The Data in Motion team is pleased to announce the release of Cloudera Flow Management 2.1.7 Service Pack 4. This release is based on Apache NiFi 1.28.1 and supports Cloudera on-premises 7.1.9 (all service packs) and Cloudera on-premises 7.3.1 (all service packs).</p>
+        <p>If you spend any real time developing against a Kubernetes cluster — minikube on your laptop, a shared dev cluster, whatever — you end up with the same painful pattern: five terminal tabs, each holding a <code class="language-plaintext highlighter-rouge">kubectl port-forward</code>, a <code class="language-plaintext highlighter-rouge">minikube tunnel</code>, or a <code class="language-plaintext highlighter-rouge">minikube service</code> command that has to stay running for the day to make sense. Close the wrong tab and half your app stops working.</p>
 
-<p>This service pack improves stability and security through bug fixes and upgraded dependencies. Additionally, customers can use the NiFi 2 Pre-upgrade check to get ready for Cloudera Flow Management 4.12.0.1 (based on Apache NiFi 2).</p>
+<p>This post covers two small tools I keep coming back to that make that dance a lot less annoying. <strong>Kftray</strong> turns port-forwards into named, saved configs you can start and stop like services. <strong>Zellij</strong> is a Rust-based terminal multiplexer with layouts — a single command spins up every long-running process you need, in the right panes, at the right time. Together they replace the “wall of tabs” I used to keep open when working against my Cloudera Streaming Operators stack on minikube.</p>
 
-<h2 id="key-features-for-this-release">Key features for this release</h2>
+<h2 id="kftray">Kftray</h2>
 
-<ul>
-  <li>Add nifi.web.request.timeout property to Cloudera Manager for user configuration: This setting allows users to increase the web request timeout property, allowing more time for cluster coordination, thereby reducing the occurrences of node dropouts from the cluster.</li>
-  <li>Added FlowFile Expression Language support for Hostname and Share properties in PutSmbFile: This improvement allows for more flexibility and dynamic routing of files to SMB shares, reducing the number of PutSmbFile instances in the flow, which simplifies flow design.</li>
-  <li>OAuth authentication with SASL Extensions support for Kafka components: This feature allows OAuth-based authentication to Kafka, important because as an industry standard many customers are required or are recommended to select OAuth as the authentication mechanism.</li>
-  <li>Added Sawmill processors: Sawmill is a JSON transformation library enabling the user to enrich, transform, and filter your record-based FlowFiles. This, along with the JOLT and JSLT processors, provides a comprehensive set of Domain-Specific Languages (DSLs) with which to transform structured data.</li>
-  <li>Cloudera Flow Management 2.1.7 Service Pack 4 is based on the latest Apache NiFi 1.x release (1.28.1): Cloudera continues to provide the newest features, upgrades, and patches to our on-premises customers. This effort ensures a secure application and minimizes vulnerabilities, covering essential CVEs necessary for compliance in most organizations.</li>
-  <li>Bug fixes, security patches, performance improvements, and more.</li>
-</ul>
-
-<p>We strongly encourage our customers to upgrade to this release.</p>
-
-<h2 id="use-cases">Use Cases</h2>
+<p>kftray Graphical UI to start/stop multiple saved port forward configs.</p>
 
 <ul>
-  <li>For organizations, including self supporters, who cannot upgrade to NiFi 2.x soon, Cloudera Flow Management 2.1.7 SP4 is the most secure and stable release to run NiFi 1.x flows on and is <a href="https://www.cloudera.com/services-and-support/support-lifecycle-policy.html">supported until September 2027</a>.</li>
-  <li>Cloudera is shipping a Pre-Upgrade check tool to analyze the customers’ current flows and identify any known changes in NiFi 2.x that will require changes in their NiFi 1 flows.</li>
-  <li>The Cloudera Flow Migration Tool 7.0.1 allows customers to migrate their Cloudera Flow Management 2.1.7 Service Pack 4 flows into a Cloudera Flow Management 4.12.0.1 (based on NiFi 2.x) compatible format.</li>
+  <li>https://kftray.app/downloads</li>
+  <li>https://kftray.app/docs/getting-started/quick-start</li>
 </ul>
 
-<h2 id="links">Links</h2>
+<p>Create the config <code class="language-plaintext highlighter-rouge">~/.config/kftray/config.json</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>
+  <span class="o">{</span>
+    <span class="s2">"alias"</span>: <span class="s2">"kafka"</span>,
+    <span class="s2">"context"</span>: <span class="s2">"my-cluster"</span>,
+    <span class="s2">"namespace"</span>: <span class="s2">"cld-streaming"</span>,
+    <span class="s2">"workload_type"</span>: <span class="s2">"service"</span>,
+    <span class="s2">"service"</span>: <span class="s2">"my-cluster-kafka-bootstrap"</span>,
+    <span class="s2">"protocol"</span>: <span class="s2">"tcp"</span>,
+    <span class="s2">"local_port"</span>: 9092,
+    <span class="s2">"remote_port"</span>: 9092,
+    <span class="s2">"local_address"</span>: <span class="s2">"0.0.0.0"</span>
+  <span class="o">}</span>,
+  <span class="o">{</span>
+    <span class="s2">"alias"</span>: <span class="s2">"web-efm"</span>,
+    <span class="s2">"context"</span>: <span class="s2">"my-cluster"</span>,
+    <span class="s2">"namespace"</span>: <span class="s2">"cld-streaming"</span>,
+    <span class="s2">"workload_type"</span>: <span class="s2">"service"</span>,
+    <span class="s2">"service"</span>: <span class="s2">"efm"</span>,
+    <span class="s2">"protocol"</span>: <span class="s2">"tcp"</span>,
+    <span class="s2">"local_port"</span>: 10090,
+    <span class="s2">"remote_port"</span>: 10090,
+    <span class="s2">"local_address"</span>: <span class="s2">"0.0.0.0"</span>
+  <span class="o">}</span>
+<span class="o">]</span>
+</code></pre></div></div>
+
+<p>Run it with this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kftui
+</code></pre></div></div>
+
+<h2 id="zellij">Zellij</h2>
+
+<p>Zellij is a modern, Rust-based terminal workspace and multiplexer.</p>
 
 <ul>
-  <li><a href="https://docs.cloudera.com/cfm/2.1.7/release-notes/topics/cfm-whats-new.html#concept_wlv_sl3_5gb">Release notes</a></li>
-  <li><a href="https://docs.cloudera.com/cfm/2.1.7/release-notes/topics/cfm-download-locations.html">Download</a></li>
+  <li>https://zellij.dev/about/</li>
+  <li>https://zellij.dev/documentation/</li>
 </ul>
 
-<p>Sincere thanks to everyone who helped with this release. You each did an incredible job.</p>
+<p>Create the layout: <code class="language-plaintext highlighter-rouge">~/.config/zellij/layout/kube-service-ports-mac-cso-observability.kdl</code></p>
 
-<hr />
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>layout <span class="o">{</span>
+    split_direction <span class="s2">"Horizontal"</span>
 
-<h2 id="cloudera-flow-management-217-service-pack-4-for-cloudera-data-platform-719-and-731">Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1</h2>
-<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1 please reach out to schedule a discussion.</p>
+    pane <span class="o">{</span>
+        <span class="nb">command</span> <span class="s2">"/opt/homebrew/bin/minikube"</span>
+        args <span class="s2">"mount"</span> <span class="s2">"/Users/steven.matison/Documents/GitHub/NiFi2 Processor Playground/nifi-custom-processors/:/extensions"</span> <span class="s2">"--uid"</span> <span class="s2">"10001"</span> <span class="s2">"--gid"</span> <span class="s2">"10001"</span>
+    <span class="o">}</span>
+
+    pane <span class="o">{</span>
+        <span class="nb">command</span> <span class="s2">"bash"</span>
+        args <span class="s2">"-lc"</span> <span class="s2">"sudo /opt/homebrew/bin/minikube tunnel"</span>
+    <span class="o">}</span>
+
+    pane <span class="o">{</span>
+        <span class="nb">command</span> <span class="s2">"/opt/homebrew/bin/minikube"</span>
+        args <span class="s2">"service"</span> <span class="s2">"efm"</span> <span class="s2">"-n"</span> <span class="s2">"cld-streaming"</span>
+    <span class="o">}</span>
+
+    pane <span class="o">{</span>
+        <span class="nb">command</span> <span class="s2">"/opt/homebrew/bin/minikube"</span>
+        args <span class="s2">"service"</span> <span class="s2">"cloudera-surveyor-service"</span> <span class="s2">"--namespace"</span> <span class="s2">"cld-streaming"</span>
+    <span class="o">}</span>
+
+    pane <span class="o">{</span>
+        <span class="nb">command</span> <span class="s2">"/opt/homebrew/bin/minikube"</span>
+        args <span class="s2">"service"</span> <span class="s2">"prometheus-grafana"</span> <span class="s2">"--namespace"</span> <span class="s2">"cld-streaming"</span>
+    <span class="o">}</span>
+
+    pane <span class="o">{</span>
+        <span class="nb">command</span> <span class="s2">"/usr/local/bin/kubectl"</span>
+        args <span class="s2">"port-forward"</span> <span class="s2">"--address"</span> <span class="s2">"0.0.0.0"</span> <span class="s2">"service/my-cluster-kafka-bootstrap"</span> <span class="s2">"9092:9092"</span> <span class="s2">"-n"</span> <span class="s2">"cld-streaming"</span>
+    <span class="o">}</span>
+
+    pane <span class="o">{</span>
+        <span class="nb">command</span> <span class="s2">"/usr/local/bin/kubectl"</span>
+        args <span class="s2">"port-forward"</span> <span class="s2">"--address"</span> <span class="s2">"0.0.0.0"</span> <span class="s2">"service/efm"</span> <span class="s2">"10090:10090"</span> <span class="s2">"-n"</span> <span class="s2">"cld-streaming"</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> Notice the main command format.  Notice all additional args are each “individually” “quoted” “like” “this”</p>
+
+<p>Run it with this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zellij <span class="nt">--layout</span> kube-service-ports-mac-cso-observability
+</code></pre></div></div>
+
+<hr>
+
+<h2 id="using-kftray-and-zellij">Using Kftray and Zellij</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Using Kftray and Zellij please reach out to schedule a discussion.</p>
 
         
       </section>
@@ -369,11 +445,11 @@
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      <a href="/tags/#cfm" class="page__taxonomy-item p-category" rel="tag">cfm</a><span class="sep">, </span>
+      <a href="/tags/#kftray" class="page__taxonomy-item p-category" rel="tag">kftray</a><span class="sep">, </span>
     
-      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+      <a href="/tags/#kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
     
-      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
+      <a href="/tags/#zellij" class="page__taxonomy-item p-category" rel="tag">zellij</a>
     
     </span>
   </p>
@@ -390,7 +466,7 @@
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
     
-      <a href="/categories/#release" class="page__taxonomy-item p-category" rel="tag">release</a>
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
     
     </span>
   </p>
@@ -398,7 +474,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-06-25T00:00:00-04:00">June 25, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-07-13T00:00:00-04:00">July 13, 2026</time></p>
 
       </footer>
 
@@ -407,21 +483,20 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Cloudera+Flow+Management+2.1.7+Service+Pack+4+for+Cloudera+Data+Platform+7.1.9+and+7.3.1%20https%3A%2F%2Fcldr-steven-matison.github.io%2Frelease%2FCloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Using+Kftray+and+Zellij%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FUsing-Kftray-and-Zellij%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Frelease%2FCloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FUsing-Kftray-and-Zellij%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-Release/" class="pagination--pager" title="Cloudera Data Services On Premises 1.5.5 SP3 Release
+      <a href="/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/" class="pagination--pager" title="Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1
 ">Previous</a>
     
     
-      <a href="/blog/Using-Kftray-and-Zellij/" class="pagination--pager" title="Using Kftray and Zellij
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -444,12 +519,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/SRM.png" alt="">
+        <img src="/assets/images/nifi-logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/blog/Using-Kftray-and-Zellij/" rel="permalink">Using Kftray and Zellij
+        <a href="/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/" rel="permalink">Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1
 </a>
       
     </h2>
@@ -467,7 +542,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          1 minute read
+          2 minute read
         
       </span>
     
@@ -477,8 +552,8 @@
 
     
   <div class="archive__item-excerpt" itemprop="description">
-    Two small tools that make working against a Kubernetes cluster feel less like a chore — kftray for reusable port-forward configs, and Zellij for pinning ever...
-    <a href="/blog/Using-Kftray-and-Zellij/" class="read-more-pill">Read More &rarr;</a>
+    The Data in Motion team is pleased to announce the release of Cloudera Flow Management 2.1.7 Service Pack 4. This release is based on Apache NiFi 1.28.1 and ...
+    <a href="/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -528,7 +603,7 @@
   <div class="archive__item-excerpt" itemprop="description">
     Cloudera is pleased to announce the release of Cloudera Data Services on premises 1.5.5 SP3.
 
-    <a href="/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-Release/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-Release/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -578,7 +653,7 @@
   <div class="archive__item-excerpt" itemprop="description">
     First day with Claude Code on the MacBook — install, a few questions about my DesktopShare repo, and a commit + push, end to end from the terminal.
 
-    <a href="/blog/Day-1-Claude-Code/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/blog/Day-1-Claude-Code/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -628,7 +703,7 @@
   <div class="archive__item-excerpt" itemprop="description">
     Executive Summary
 The Cloudera Data Lineage team is pleased to announce that we’ve enhanced the Custom Lineage Connector (F.K.A Universal Connector) to suppo...
-    <a href="/blog/Cloudera-Data-Lineage-Custom-Lineage-Connector-Relaunch/" class="read-more-pill">Read More &rarr;</a>
+    <a href="/blog/Cloudera-Data-Lineage-Custom-Lineage-Connector-Relaunch/" class="read-more-pill">Read More →</a>
   </div>
 
   </article>
@@ -645,13 +720,15 @@ The Cloudera Data Lineage team is pleased to announce that we’ve enhanced the 
 
     
       <div class="search-content">
-        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
     <label class="sr-only" for="search">
       Enter your search term...
     </label>
-    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
   </form>
-  <div id="results" class="results"></div></div>
+  <div id="results" class="results"></div>
+</div>
 
       </div>
     
@@ -693,7 +770,7 @@ The Cloudera Data Lineage team is pleased to announce that we’ve enhanced the 
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 <script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
       </footer>
     </div>

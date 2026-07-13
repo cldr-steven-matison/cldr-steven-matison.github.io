@@ -556,4 +556,10 @@ var store = [{
         "tags": ["cloudera","nifi","cfm"],
         "url": "/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/",
         "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "Using Kftray and Zellij",
+        "excerpt":"If you spend any real time developing against a Kubernetes cluster — minikube on your laptop, a shared dev cluster, whatever — you end up with the same painful pattern: five terminal tabs, each holding a kubectl port-forward, a minikube tunnel, or a minikube service command that has to stay...","categories": ["blog"],
+        "tags": ["kftray","zellij","kubernetes"],
+        "url": "/blog/Using-Kftray-and-Zellij/",
+        "teaser": "/assets/images/SRM.png"
       }]

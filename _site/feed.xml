@@ -6,6 +6,17 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Using Kftray and Zellij</title>
+        <link>https://cldr-steven-matison.github.io/blog/Using-Kftray-and-Zellij/</link>
+        <pubDate>Mon, 13 Jul 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/SRM.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/SRM.png" medium="image" />
+        
+        <description>Two small tools that make working against a Kubernetes cluster feel less like a chore — kftray for reusable port-forward configs, and Zellij for pinning every long-running dev command into one terminal workspace.</description>
+      </item>
+    
+      <item>
         <title>Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1</title>
         <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/</link>
         <pubDate>Thu, 25 Jun 2026 00:00:00 -0400</pubDate>
@@ -108,17 +119,6 @@ The Cloudera Data Lineage team is pleased to announce that we’ve enhanced the 
         
         <description>The Data In Motion Team is pleased to announce the release of Cloudera Data Flow 3.1 for Cloudera on cloud.
 </description>
-      </item>
-    
-      <item>
-        <title>How To Install Cloudera NiFi MCP Server</title>
-        <link>https://cldr-steven-matison.github.io/blog/How-To-Install-Cloudera-NiFi-MCP-Server/</link>
-        <pubDate>Mon, 18 May 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-05-18-how_to_install_nifi_mcp_server.png" medium="image" />
-        
-        <description>How to build and locally test the Cloudera NiFi MCP Server with MCP Inspector using Cloudera Apache NiFi deployed on AWS in a Data.</description>
       </item>
     
   </channel>
