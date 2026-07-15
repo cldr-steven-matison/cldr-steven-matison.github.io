@@ -1,0 +1,1166 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Cloudera Edge Flow Manager on Kubernetes - Cloudera Solutions Engineer</title>
+<meta name="description" content="A full recipe for running Cloudera Edge Flow Manager (EFM) on minikube with everything — agent classes, flows, agent binaries, and uploaded resources — surviving pod restarts and cluster reboots.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Cloudera Edge Flow Manager on Kubernetes">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/">
+
+
+  <meta property="og:description" content="A full recipe for running Cloudera Edge Flow Manager (EFM) on minikube with everything — agent classes, flows, agent binaries, and uploaded resources — surviving pod restarts and cluster reboots.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/EFM_on_Kubernetes.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-07-15T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Cloudera Edge Flow Manager on Kubernetes">
+    <meta itemprop="description" content="A full recipe for running Cloudera Edge Flow Manager (EFM) on minikube with everything — agent classes, flows, agent binaries, and uploaded resources — surviving pod restarts and cluster reboots.">
+    <meta itemprop="datePublished" content="2026-07-15T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/" class="u-url" itemprop="url">Cloudera Edge Flow Manager on Kubernetes
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-07-15T00:00:00-04:00">
+            July 15, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>If you have ever run <a href="https://docs.cloudera.com/cem/2.3.1/index.html">Cloudera Edge Flow Manager (EFM)</a> out of the box on Kubernetes, you know the sad little moment when the pod restarts and every agent class, every flow, and every resource you painstakingly uploaded is just… gone. EFM’s default persistence lives inside the pod’s ephemeral filesystem, and unless you wire it up properly it never sees a second day.</p>
+
+<p>This post is the recipe I keep coming back to for running EFM <code class="language-plaintext highlighter-rouge">2.3.1.0-2</code> on minikube with <strong>full</strong> persistence. All state survives <code class="language-plaintext highlighter-rouge">kubectl rollout restart</code>, <code class="language-plaintext highlighter-rouge">minikube stop</code>, or the laptop lid closing on you at the wrong moment.</p>
+
+<p>Three things need a permanent home:</p>
+
+<ul>
+  <li>
+<strong>Metadata</strong> (agent classes, flows, agents, manifests) → PostgreSQL</li>
+  <li>
+<strong>Agent binaries</strong> (MiNiFi C++ / Java installers) → a PVC</li>
+  <li>
+<strong>Uploaded resources</strong> (Python scripts, JARs, custom assets) → a second PVC</li>
+</ul>
+
+<p>The third one is the piece a bare EFM install always loses on restart, and it is the reason this post exists.</p>
+
+<hr>
+
+<h2 id="1-prerequisites">1. Prerequisites</h2>
+
+<p>You will need a running minikube cluster with:</p>
+
+<ul>
+  <li>Installed <a href="/blog/Cloudera-Streaming-Operators/">Cloudera Streaming Operators</a> in the <code class="language-plaintext highlighter-rouge">cld-streaming</code> namespace</li>
+  <li>A PostgreSQL pod (I use <code class="language-plaintext highlighter-rouge">ssb-postgresql</code> from the SSB stack) — this becomes EFM’s backing store</li>
+  <li>Kafka pods if your flows publish to Kafka</li>
+  <li>Access to <code class="language-plaintext highlighter-rouge">container.repo.cloudera.com</code> (your Cloudera entitlement)</li>
+</ul>
+
+<p>Confirm they are all up:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods <span class="nt">-n</span> cld-streaming | <span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"postgres|kafka"</span>
+</code></pre></div></div>
+
+<hr>
+
+<h2 id="2-create-the-efm-database-in-postgresql">2. Create the EFM Database in PostgreSQL</h2>
+
+<p>EFM needs its own database and user inside the existing Postgres. One-time setup:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">PG</span><span class="o">=</span><span class="si">$(</span>kubectl get pods <span class="nt">-n</span> cld-streaming | <span class="nb">grep </span>postgres | <span class="nb">awk</span> <span class="s1">'{print $1}'</span> | <span class="nb">head</span> <span class="nt">-1</span><span class="si">)</span>
+kubectl <span class="nb">exec</span> <span class="nv">$PG</span> <span class="nt">-n</span> cld-streaming <span class="nt">--</span> psql <span class="nt">-U</span> postgres <span class="nt">-c</span> <span class="s2">"CREATE DATABASE efm;"</span>
+kubectl <span class="nb">exec</span> <span class="nv">$PG</span> <span class="nt">-n</span> cld-streaming <span class="nt">--</span> psql <span class="nt">-U</span> postgres <span class="nt">-c</span> <span class="s2">"CREATE USER efm WITH PASSWORD 'efm_password';"</span>
+kubectl <span class="nb">exec</span> <span class="nv">$PG</span> <span class="nt">-n</span> cld-streaming <span class="nt">--</span> psql <span class="nt">-U</span> postgres <span class="nt">-c</span> <span class="s2">"GRANT ALL PRIVILEGES ON DATABASE efm TO efm;"</span>
+kubectl <span class="nb">exec</span> <span class="nv">$PG</span> <span class="nt">-n</span> cld-streaming <span class="nt">--</span> psql <span class="nt">-U</span> postgres <span class="nt">-c</span> <span class="s2">"ALTER DATABASE efm OWNER TO efm;"</span>
+</code></pre></div></div>
+
+<hr>
+
+<h2 id="3-create-the-secrets">3. Create the Secrets</h2>
+
+<p>Three secrets: the DB password, the EFM encryption password, and the Cloudera registry pull secret.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create secret generic efm-db-pass <span class="se">\</span>
+  <span class="nt">--from-literal</span><span class="o">=</span><span class="nv">password</span><span class="o">=</span>efm_password <span class="se">\</span>
+  <span class="nt">--namespace</span> cld-streaming
+
+kubectl create secret generic efm-encryption <span class="se">\</span>
+  <span class="nt">--from-literal</span><span class="o">=</span>encryption.password<span class="o">=</span>efm_encryption_key <span class="se">\</span>
+  <span class="nt">--namespace</span> cld-streaming
+
+<span class="nb">source</span> ~/.env
+kubectl create secret docker-registry cloudera-registry <span class="se">\</span>
+  <span class="nt">--docker-server</span><span class="o">=</span>container.repo.cloudera.com <span class="se">\</span>
+  <span class="nt">--docker-username</span><span class="o">=</span><span class="nv">$CLOUDERA_USER</span> <span class="se">\</span>
+  <span class="nt">--docker-password</span><span class="o">=</span><span class="nv">$CLOUDERA_PASS</span> <span class="se">\</span>
+  <span class="nt">--namespace</span><span class="o">=</span>cld-streaming
+</code></pre></div></div>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Warning!</strong> <code class="language-plaintext highlighter-rouge">already exists</code> errors from prior sessions are fine — skip those.</p>
+
+<hr>
+
+<h2 id="4-pull-the-efm-image-into-minikube">4. Pull the EFM Image into Minikube</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">eval</span> <span class="si">$(</span>minikube docker-env<span class="si">)</span>
+docker login container.repo.cloudera.com
+docker pull container.repo.cloudera.com/cloudera/efm:2.3.1.0-2
+</code></pre></div></div>
+
+<p>Match the tag to your CSO / CEM entitlement.</p>
+
+<hr>
+
+<h2 id="5-the-configmap">5. The ConfigMap</h2>
+
+<p>Save the following as <code class="language-plaintext highlighter-rouge">efm-configMap.yaml</code>. This is the full <code class="language-plaintext highlighter-rouge">efm.properties</code> file, and the important part is the <code class="language-plaintext highlighter-rouge">efm.db.*</code> block — that is what points EFM at Postgres instead of its default embedded H2 database.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ConfigMap</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">efm-config</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="na">efm.properties</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s"># Web Server Properties</span>
+    <span class="s">efm.server.address=0.0.0.0</span>
+    <span class="s">efm.server.port=10090</span>
+    <span class="s">efm.server.servlet.contextPath=/efm</span>
+
+    <span class="s"># Cluster Properties</span>
+    <span class="s">efm.cluster.enabled=false</span>
+
+    <span class="s"># Web Server TLS Properties</span>
+    <span class="s">efm.server.ssl.enabled=false</span>
+    <span class="s">efm.server.ssl.keyStore=./conf/keystore.jks</span>
+    <span class="s">efm.server.ssl.keyStoreType=jks</span>
+    <span class="s">efm.server.ssl.keyStorePassword=</span>
+    <span class="s">efm.server.ssl.keyPassword=</span>
+    <span class="s">efm.server.ssl.trustStore=./conf/truststore.jks</span>
+    <span class="s">efm.server.ssl.trustStoreType=jks</span>
+    <span class="s">efm.server.ssl.trustStorePassword=</span>
+    <span class="s">efm.server.ssl.clientAuth=WANT</span>
+
+    <span class="s"># User Authentication Properties</span>
+    <span class="s">efm.security.user.auth.enabled=false</span>
+    <span class="s">efm.security.user.auth.adminIdentities=admin</span>
+    <span class="s">efm.security.user.auth.autoRegisterNewUsers=true</span>
+    <span class="s">efm.security.user.auth.authTokenExpiration=12h</span>
+    <span class="s">efm.security.user.auth.groups.manager=INTERNAL</span>
+    <span class="s">efm.security.user.auth.groups.adminIdentities=</span>
+    <span class="s">efm.security.user.auth.groups.filter=.*</span>
+    <span class="s">efm.security.user.certificate.enabled=false</span>
+    <span class="s">efm.security.user.oidc.enabled=false</span>
+    <span class="s">efm.security.user.saml.enabled=false</span>
+    <span class="s">efm.security.user.knox.enabled=false</span>
+    <span class="s">efm.security.user.proxy.enabled=false</span>
+
+    <span class="s"># Database Properties (PostgreSQL Persistence)</span>
+    <span class="s">efm.db.url=jdbc:postgresql://ssb-postgresql.cld-streaming.svc:5432/efm</span>
+    <span class="s">efm.db.driverClass=org.postgresql.Driver</span>
+    <span class="s">efm.db.username=efm</span>
+    <span class="s">efm.db.password=efm_password</span>
+    <span class="s">efm.db.maxConnections=50</span>
+    <span class="s">efm.db.sqlDebug=false</span>
+    <span class="s">efm.db.l2CacheEnabled=false</span>
+
+    <span class="s"># Heartbeat Properties</span>
+    <span class="s">efm.heartbeat.maxAgeToKeep=0</span>
+    <span class="s">efm.heartbeat.persistContent=false</span>
+    <span class="s">efm.heartbeat.kafka.publishEnabled=false</span>
+
+    <span class="s"># Edge Event Retention Properties</span>
+    <span class="s">efm.event.cleanupInterval=30s</span>
+    <span class="s">efm.event.maxAgeToKeep.debug=0m</span>
+    <span class="s">efm.event.maxAgeToKeep.info=1h</span>
+    <span class="s">efm.event.maxAgeToKeep.warn=1d</span>
+    <span class="s">efm.event.maxAgeToKeep.error=7d</span>
+
+    <span class="s"># Agent Class Flow Monitor Properties</span>
+    <span class="s">efm.agentClassMonitor.interval=15s</span>
+
+    <span class="s"># Agent Monitoring Properties</span>
+    <span class="s">efm.monitor.maxHeartbeatInterval=5m</span>
+    <span class="s">efm.monitor.agentCertExpiryWarningInterval=30d</span>
+
+    <span class="s"># Operation Properties</span>
+    <span class="s">efm.operation.monitoring.enabled=true</span>
+    <span class="s">efm.operation.monitoring.inQueuedStateTimeoutHeartbeatRate=1.0</span>
+    <span class="s">efm.operation.monitoring.inDeployedStateTimeout=5m</span>
+    <span class="s">efm.operation.monitoring.inDeployedStateCheckFrequency=1m</span>
+    <span class="s">efm.operation.monitoring.rollingBatchOperationsFrequency=10s</span>
+    <span class="s">efm.operation.monitoring.rollingBatchOperationsSize=100</span>
+    <span class="s">efm.operation.monitoring.rollingOperationsSize.update.asset=10</span>
+    <span class="s">efm.operation.monitoring.rollingOperationsSize.update.configuration=100</span>
+    <span class="s">efm.operation.monitoring.rollingOperationsSize.update.properties=100</span>
+    <span class="s">efm.operation.monitoring.rollingOperationsSize.sync.resource=10</span>
+
+    <span class="s"># Bulletin Registry Properties</span>
+    <span class="s">efm.bulletinregistry.agentBulletinMaxAgeToKeep=5m</span>
+    <span class="s">efm.bulletinregistry.agentClassBulletinMinAgeToKeep=10s</span>
+    <span class="s">efm.bulletinregistry.agentClassBulletinMaxAgeToKeep=5m</span>
+
+    <span class="s"># Metrics Properties</span>
+    <span class="s">management.metrics.efm.enabled=true</span>
+    <span class="s">management.simple.metrics.export.enabled=false</span>
+    <span class="s">management.prometheus.metrics.export.enabled=true</span>
+    <span class="s">management.prometheus.metrics.export.descriptions=true</span>
+    <span class="s">management.metrics.enable.efm.heartbeat=true</span>
+    <span class="s">management.metrics.enable.efm.repo=true</span>
+    <span class="s">management.metrics.efm.enableTag.host=true</span>
+    <span class="s">management.metrics.efm.enableTag.protocol=false</span>
+    <span class="s">management.metrics.efm.enableTag.agentClass=true</span>
+    <span class="s">management.metrics.efm.enableTag.agentManifestId=true</span>
+    <span class="s">management.metrics.efm.enableTag.agentId=true</span>
+    <span class="s">management.metrics.efm.maxTags.agentClass=20</span>
+    <span class="s">management.metrics.efm.maxTags.agentManifestId=10</span>
+    <span class="s">management.metrics.efm.maxTags.agentId=100</span>
+    <span class="s">management.metrics.tags.application=efm</span>
+    <span class="s">management.metrics.distribution.percentiles.all=.75,.95,.99</span>
+
+    <span class="s"># Health and Info Properties</span>
+    <span class="s">efm.actuator.clusterHealthUpdateFrequency=10s</span>
+    <span class="s">efm.actuator.clusterInfoUpdateFrequency=1m</span>
+    <span class="s">management.endpoint.health.showDetails=never</span>
+    <span class="s">management.endpoint.health.showComponents=always</span>
+    <span class="s">management.health.refresh.enabled=false</span>
+    <span class="s">management.health.livenessstate.enabled=false</span>
+    <span class="s">management.health.readinessstate.enabled=false</span>
+    <span class="s">spring.cloud.discovery.client.compositeIndicator.enabled=false</span>
+
+    <span class="s"># EL Specification Properties</span>
+    <span class="s">efm.el.specifications.dir=./specs</span>
+
+    <span class="s"># Logging Properties</span>
+    <span class="s">logging.pattern.level=%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]</span>
+    <span class="s">logging.level.com.cloudera.cem.efm=INFO</span>
+    <span class="s">logging.level.com.hazelcast=WARN</span>
+    <span class="s">logging.level.com.hazelcast.internal.cluster.ClusterService=INFO</span>
+    <span class="s">logging.level.com.hazelcast.internal.nio.tcp.TcpIpConnection=ERROR</span>
+    <span class="s">logging.level.com.hazelcast.internal.nio.tcp.TcpIpConnector=ERROR</span>
+
+    <span class="s"># General System Settings</span>
+    <span class="s">efm.data.transfer.maxFileSize=16MB</span>
+    <span class="s">efm.data.transfer.cleanupInterval=1h</span>
+    <span class="s">efm.data.transfer.maxAgeToKeep=1d</span>
+    <span class="s">efm.data.transfer.maxEntriesToKeep=100</span>
+    <span class="s">efm.agentManager.commands.displayLimit=20</span>
+    <span class="s">spring.main.banner-mode=log</span>
+    <span class="s">efm.asset.s3.downloadRootPath=/tmp/efm-asset-download</span>
+    <span class="s">efm.diagnosticBundle.enabled=false</span>
+    <span class="s">efm.agent-deployer.security.autoConfiguration=false</span>
+    <span class="s">efm.agent-deployer.security.ca.privateKeyPassword=</span>
+    <span class="s">spring.servlet.multipart.max-file-size=100MB</span>
+    <span class="s">spring.servlet.multipart.max-request-size=100MB</span>
+</code></pre></div></div>
+
+<hr>
+
+<h2 id="6-the-persistent-volume-claims">6. The Persistent Volume Claims</h2>
+
+<p>Save the following as <code class="language-plaintext highlighter-rouge">efm-pvc.yaml</code>. Two PVCs: one for agent installer binaries, one for uploaded resources like Python scripts and JARs.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">efm-agent-binaries</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">resources</span><span class="pi">:</span>
+    <span class="na">requests</span><span class="pi">:</span>
+      <span class="na">storage</span><span class="pi">:</span> <span class="s">2Gi</span>
+  <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">standard</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">efm-resources</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">resources</span><span class="pi">:</span>
+    <span class="na">requests</span><span class="pi">:</span>
+      <span class="na">storage</span><span class="pi">:</span> <span class="s">1Gi</span>
+  <span class="na">storageClassName</span><span class="pi">:</span> <span class="s">standard</span>
+</code></pre></div></div>
+
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> The <code class="language-plaintext highlighter-rouge">efm-resources</code> PVC is the one everyone forgets. Without it, uploaded scripts get tracked in the DB but the actual bytes vanish on restart — every flow that references an uploaded resource breaks.</p>
+
+<hr>
+
+<h2 id="7-the-deployment-and-service">7. The Deployment and Service</h2>
+
+<p>Save the following as <code class="language-plaintext highlighter-rouge">efm-deployment-persisted.yaml</code>. This mounts both PVCs, mounts the ConfigMap on top of <code class="language-plaintext highlighter-rouge">efm.properties</code>, wires in the secrets as environment variables, and exposes EFM through a LoadBalancer service.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">efm</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">efm</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">efm</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">efm</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">imagePullSecrets</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">cloudera-registry</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">efm</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">container.repo.cloudera.com/cloudera/efm:2.3.1.0-2</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">10090</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">9092</span>
+        <span class="na">env</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">EF_DB_URL</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">jdbc:postgresql://ssb-postgresql.cld-streaming.svc:5432/efm"</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">EF_REGISTRY_URL</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">http://host.minikube.internal:18080"</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">EF_REGISTRY_ENABLED</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">JAVA_OPTS</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">-Dspring.datasource.driver-class-name=org.postgresql.Driver</span><span class="nv"> </span><span class="s">-Def.db.driver.class.name=org.postgresql.Driver"</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">EF_JAVA_OPTS</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">-Dspring.datasource.driver-class-name=org.postgresql.Driver</span><span class="nv"> </span><span class="s">-Def.db.driver.class.name=org.postgresql.Driver"</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">EFM_DB_USER</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s">efm</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">EFM_DB_PASSWORD</span>
+          <span class="na">valueFrom</span><span class="pi">:</span>
+            <span class="na">secretKeyRef</span><span class="pi">:</span>
+              <span class="na">name</span><span class="pi">:</span> <span class="s">efm-db-pass</span>
+              <span class="na">key</span><span class="pi">:</span> <span class="s">password</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">EFM_ENCRYPTION_PASSWORD</span>
+          <span class="na">valueFrom</span><span class="pi">:</span>
+            <span class="na">secretKeyRef</span><span class="pi">:</span>
+              <span class="na">name</span><span class="pi">:</span> <span class="s">efm-encryption</span>
+              <span class="na">key</span><span class="pi">:</span> <span class="s">encryption.password</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">requests</span><span class="pi">:</span>
+            <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">250m"</span>
+            <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4Gi"</span>
+          <span class="na">limits</span><span class="pi">:</span>
+            <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">250m"</span>
+            <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4Gi"</span>
+        <span class="na">volumeMounts</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">agent-binaries</span>
+          <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/opt/efm/efm-2.3.1.0-2/agent-deployer/binaries</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">efm-resources</span>
+          <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/opt/efm/efm-2.3.1.0-2/resources</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">efm-config</span>
+          <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/opt/efm/efm-2.3.1.0-2/conf/efm.properties</span>
+          <span class="na">subPath</span><span class="pi">:</span> <span class="s">efm.properties</span>
+          <span class="na">readOnly</span><span class="pi">:</span> <span class="kc">true</span>
+
+      <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">agent-binaries</span>
+        <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="na">claimName</span><span class="pi">:</span> <span class="s">efm-agent-binaries</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">efm-resources</span>
+        <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="na">claimName</span><span class="pi">:</span> <span class="s">efm-resources</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">efm-config</span>
+        <span class="na">configMap</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">efm-config</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">efm</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">efm</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">LoadBalancer</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">10090</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">10090</span>
+    <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">efm-ui</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">9092</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">9092</span>
+    <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">metrics</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">efm</span>
+</code></pre></div></div>
+
+<hr>
+
+<h2 id="8-apply-everything">8. Apply Everything</h2>
+
+<p>Order matters — ConfigMap and PVCs first, deployment last:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> efm-configMap.yaml <span class="nt">-n</span> cld-streaming
+kubectl apply <span class="nt">-f</span> efm-pvc.yaml <span class="nt">-n</span> cld-streaming
+kubectl apply <span class="nt">-f</span> efm-deployment-persisted.yaml <span class="nt">-n</span> cld-streaming
+kubectl rollout status deployment/efm <span class="nt">-n</span> cld-streaming <span class="nt">--timeout</span><span class="o">=</span>180s
+</code></pre></div></div>
+
+<p>Quick sanity check that the ConfigMap actually mounted and that Postgres is in play (not H2):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">EFM_POD</span><span class="o">=</span><span class="si">$(</span>kubectl get pod <span class="nt">-n</span> cld-streaming <span class="nt">-l</span> <span class="nv">app</span><span class="o">=</span>efm <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span>
+kubectl <span class="nb">exec</span> <span class="nv">$EFM_POD</span> <span class="nt">-n</span> cld-streaming <span class="nt">--</span> sh <span class="nt">-c</span> <span class="se">\</span>
+  <span class="s1">'grep -E "db\.url|db\.driverClass" /opt/efm/efm-2.3.1.0-2/conf/efm.properties'</span>
+</code></pre></div></div>
+
+<p>You should see <code class="language-plaintext highlighter-rouge">jdbc:postgresql://...</code>. If you see <code class="language-plaintext highlighter-rouge">h2</code>, the ConfigMap did not mount — re-apply and restart the deployment.</p>
+
+<hr>
+
+<h2 id="9-route-the-loadbalancer-minikube-only">9. Route the LoadBalancer (Minikube Only)</h2>
+
+<p>Minikube needs a little help to assign an external IP. In a <strong>separate terminal</strong>, run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube tunnel
+</code></pre></div></div>
+
+<p>Leave it running. If you want the port-forwards and tunnels managed nicely across a workspace, I covered that in my <a href="/blog/Using-Kftray-and-Zellij/">Using Kftray and Zellij</a> post.</p>
+
+<hr>
+
+<h2 id="10-access-the-ui">10. Access the UI</h2>
+
+<p>Open your browser and go to:</p>
+
+<p><strong><a href="http://127.0.0.1:10090/efm/ui/">http://127.0.0.1:10090/efm/ui/</a></strong></p>
+
+<p>You are in. Create your first agent class, design a flow, publish it, and upload a resource — everything is now backed by Postgres and the two PVCs.</p>
+
+<hr>
+
+<h2 id="11-prove-the-persistence">11. Prove the Persistence</h2>
+
+<p>The whole point of this exercise. Bounce EFM and confirm nothing disappears:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl rollout restart deployment/efm <span class="nt">-n</span> cld-streaming
+kubectl rollout status deployment/efm <span class="nt">-n</span> cld-streaming <span class="nt">--timeout</span><span class="o">=</span>180s
+</code></pre></div></div>
+
+<p>Refresh the UI. Your agent classes, your flows, and your uploaded resources should all still be there. Agents re-download their assets from the PVC-backed file on the next heartbeat.</p>
+
+<p>For an even stronger test, run <code class="language-plaintext highlighter-rouge">minikube stop</code> and <code class="language-plaintext highlighter-rouge">minikube start</code>. Once EFM’s pod comes back Ready, everything reloads from Postgres and the PVCs automatically. Nothing to re-upload.</p>
+
+<hr>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://docs.cloudera.com/cem/2.3.1/index.html">Cloudera Edge Management (CEM) 2.3.1 Docs</a></li>
+  <li><a href="https://nifi.apache.org/minifi/">MiNiFi C++ Documentation</a></li>
+  <li><a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators">Cloudera Streaming Operators GitHub Repo</a></li>
+  <li><a href="/blog/Using-Kftray-and-Zellij/">Using Kftray and Zellij</a></li>
+</ul>
+
+<hr>
+
+<h2 id="cloudera-edge-flow-manager-on-kubernetes">Cloudera Edge Flow Manager on Kubernetes</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Edge Flow Manager on Kubernetes please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cem" class="page__taxonomy-item p-category" rel="tag">cem</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#Cloudera%20Edge%20Manager" class="page__taxonomy-item p-category" rel="tag">Cloudera Edge Manager</a><span class="sep">, </span>
+    
+      <a href="/tags/#edge%20flow%20manager" class="page__taxonomy-item p-category" rel="tag">edge flow manager</a><span class="sep">, </span>
+    
+      <a href="/tags/#efm" class="page__taxonomy-item p-category" rel="tag">efm</a><span class="sep">, </span>
+    
+      <a href="/tags/#kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      <a href="/tags/#minifi" class="page__taxonomy-item p-category" rel="tag">minifi</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-07-15T00:00:00-04:00">July 15, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Edge+Flow+Manager+on+Kubernetes%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FCloudera-Edge-Flow-Manager-on-Kubernetes%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FCloudera-Edge-Flow-Manager-on-Kubernetes%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Using-Kftray-and-Zellij/" class="pagination--pager" title="Using Kftray and Zellij
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/SRM.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Using-Kftray-and-Zellij/" rel="permalink">Using Kftray and Zellij
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Two small tools that make working against a Kubernetes cluster feel less like a chore — kftray for reusable port-forward configs, and Zellij for pinning ever...
+    <a href="/blog/Using-Kftray-and-Zellij/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/nifi-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/" rel="permalink">Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    The Data in Motion team is pleased to announce the release of Cloudera Flow Management 2.1.7 Service Pack 4. This release is based on Apache NiFi 1.28.1 and ...
+    <a href="/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Cloudera-Data-Platform.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-Release/" rel="permalink">Cloudera Data Services On Premises 1.5.5 SP3 Release
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Cloudera is pleased to announce the release of Cloudera Data Services on premises 1.5.5 SP3.
+
+    <a href="/release/Cloudera-Data-Services-On-Premises-1.5.5-SP3-Release/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Day1ClaudeCode.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Day-1-Claude-Code/" rel="permalink">Day 1: Claude Code
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    First day with Claude Code on the MacBook — install, a few questions about my DesktopShare repo, and a commit + push, end to end from the terminal.
+
+    <a href="/blog/Day-1-Claude-Code/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>

@@ -562,4 +562,10 @@ var store = [{
         "tags": ["kftray","zellij","kubernetes"],
         "url": "/blog/Using-Kftray-and-Zellij/",
         "teaser": "/assets/images/SRM.png"
+      },{
+        "title": "Cloudera Edge Flow Manager on Kubernetes",
+        "excerpt":"If you have ever run Cloudera Edge Flow Manager (EFM) out of the box on Kubernetes, you know the sad little moment when the pod restarts and every agent class, every flow, and every resource you painstakingly uploaded is just… gone. EFM’s default persistence lives inside the pod’s ephemeral filesystem,...","categories": ["blog"],
+        "tags": ["cloudera","efm","edge flow manager","minifi","kubernetes","cem","Cloudera Edge Manager"],
+        "url": "/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/",
+        "teaser": "/assets/images/EFM_on_Kubernetes.png"
       }]
