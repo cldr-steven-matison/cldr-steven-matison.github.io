@@ -120,6 +120,53 @@ Run it with this:
 zellij --layout kube-service-ports-mac-cso-observability
 ```
 
+## Update: split_direction is backwards from what you'd guess
+
+I have a second layout on the Windows gaming PC (via WSL2) that fronts the `cld-streaming` cluster's EFM and Kafka external access for the rest of my array — `~/.config/zellij/layouts/kube-service-ports-efm.kdl`. It grew to 15 panes once I added Tailscale-bound forwards for a third array machine (a Beelink on Starlink): Kafka needs 4 separate forwards (bootstrap + one per broker), each doubled for LAN + Tailscale, plus EFM doubled the same way. All of that was `split_direction "Horizontal"`-stacked into one unreadable column.
+
+**The gotcha**: `Horizontal` stacks panes top-to-bottom (splits along rows). `Vertical` puts panes side-by-side (splits along columns) — backwards from what the name suggests if your instinct is tmux's `-h`/`-v`. Confirmed straight from zellij's own source (`pane_size.rs`: `SplitDirection::Vertical => self.cols.is_percent()`, `SplitDirection::Horizontal => self.rows.is_percent()`) and the bundled `strider.kdl` example, which uses `split_direction="Vertical"` to put a narrow file-explorer sidebar next to a main pane.
+
+To get a real left/right split — services on the left, all the Kafka forwards grouped on the right — nest a `pane` with its own `split_direction` inside a top-level pane. The container pane doesn't run a command itself; its children do:
+
+```
+layout {
+    split_direction "Vertical"
+
+    pane split_direction="Horizontal" size="50%" {
+        pane {
+            command "bash"
+            args "-lc" "exec minikube tunnel"
+        }
+
+        pane {
+            command "/usr/local/bin/kubectl"
+            args "port-forward" "--address" "192.168.1.121" "svc/efm" "10090:10090" "-n" "cld-streaming"
+        }
+
+        pane {
+            command "/usr/local/bin/kubectl"
+            args "port-forward" "--address" "100.68.113.126" "svc/efm" "10090:10090" "-n" "cld-streaming"
+        }
+        # ... Surveyor, vLLM, cso-operator-app, MiNiFi agent panes follow the same pattern
+    }
+
+    pane split_direction="Horizontal" size="50%" {
+        pane {
+            command "/usr/local/bin/kubectl"
+            args "port-forward" "--address" "192.168.1.121" "svc/my-cluster-kafka-external-bootstrap" "31623:9094" "-n" "cld-streaming"
+        }
+
+        pane {
+            command "/usr/local/bin/kubectl"
+            args "port-forward" "--address" "100.68.113.126" "svc/my-cluster-kafka-external-bootstrap" "31623:9094" "-n" "cld-streaming"
+        }
+        # ... same LAN + Tailscale pair repeated for my-cluster-combined-0/1/2
+    }
+}
+```
+
+Each Kafka/EFM service gets one pane bound to the LAN IP (`192.168.1.121`, for NvidiaNano and anything else on the local network) and a second pane bound to the Tailscale IP (`100.68.113.126`, for array machines outside the LAN — like the Beelink on Starlink). Same `svc` and port, different `--address`.
+
 ---
 
 ## {{ page.title }}

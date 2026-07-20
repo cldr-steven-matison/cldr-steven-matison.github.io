@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          1 minute read
+          3 minute read
         
       </span>
     
@@ -424,6 +424,52 @@
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zellij <span class="nt">--layout</span> kube-service-ports-mac-cso-observability
 </code></pre></div></div>
+
+<h2 id="update-split_direction-is-backwards-from-what-youd-guess">Update: split_direction is backwards from what you’d guess</h2>
+
+<p>I have a second layout on the Windows gaming PC (via WSL2) that fronts the <code class="language-plaintext highlighter-rouge">cld-streaming</code> cluster’s EFM and Kafka external access for the rest of my array — <code class="language-plaintext highlighter-rouge">~/.config/zellij/layouts/kube-service-ports-efm.kdl</code>. It grew to 15 panes once I added Tailscale-bound forwards for a third array machine (a Beelink on Starlink): Kafka needs 4 separate forwards (bootstrap + one per broker), each doubled for LAN + Tailscale, plus EFM doubled the same way. All of that was <code class="language-plaintext highlighter-rouge">split_direction "Horizontal"</code>-stacked into one unreadable column.</p>
+
+<p><strong>The gotcha</strong>: <code class="language-plaintext highlighter-rouge">Horizontal</code> stacks panes top-to-bottom (splits along rows). <code class="language-plaintext highlighter-rouge">Vertical</code> puts panes side-by-side (splits along columns) — backwards from what the name suggests if your instinct is tmux’s <code class="language-plaintext highlighter-rouge">-h</code>/<code class="language-plaintext highlighter-rouge">-v</code>. Confirmed straight from zellij’s own source (<code class="language-plaintext highlighter-rouge">pane_size.rs</code>: <code class="language-plaintext highlighter-rouge">SplitDirection::Vertical =&gt; self.cols.is_percent()</code>, <code class="language-plaintext highlighter-rouge">SplitDirection::Horizontal =&gt; self.rows.is_percent()</code>) and the bundled <code class="language-plaintext highlighter-rouge">strider.kdl</code> example, which uses <code class="language-plaintext highlighter-rouge">split_direction="Vertical"</code> to put a narrow file-explorer sidebar next to a main pane.</p>
+
+<p>To get a real left/right split — services on the left, all the Kafka forwards grouped on the right — nest a <code class="language-plaintext highlighter-rouge">pane</code> with its own <code class="language-plaintext highlighter-rouge">split_direction</code> inside a top-level pane. The container pane doesn’t run a command itself; its children do:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>layout {
+    split_direction "Vertical"
+
+    pane split_direction="Horizontal" size="50%" {
+        pane {
+            command "bash"
+            args "-lc" "exec minikube tunnel"
+        }
+
+        pane {
+            command "/usr/local/bin/kubectl"
+            args "port-forward" "--address" "192.168.1.121" "svc/efm" "10090:10090" "-n" "cld-streaming"
+        }
+
+        pane {
+            command "/usr/local/bin/kubectl"
+            args "port-forward" "--address" "100.68.113.126" "svc/efm" "10090:10090" "-n" "cld-streaming"
+        }
+        # ... Surveyor, vLLM, cso-operator-app, MiNiFi agent panes follow the same pattern
+    }
+
+    pane split_direction="Horizontal" size="50%" {
+        pane {
+            command "/usr/local/bin/kubectl"
+            args "port-forward" "--address" "192.168.1.121" "svc/my-cluster-kafka-external-bootstrap" "31623:9094" "-n" "cld-streaming"
+        }
+
+        pane {
+            command "/usr/local/bin/kubectl"
+            args "port-forward" "--address" "100.68.113.126" "svc/my-cluster-kafka-external-bootstrap" "31623:9094" "-n" "cld-streaming"
+        }
+        # ... same LAN + Tailscale pair repeated for my-cluster-combined-0/1/2
+    }
+}
+</code></pre></div></div>
+
+<p>Each Kafka/EFM service gets one pane bound to the LAN IP (<code class="language-plaintext highlighter-rouge">192.168.1.121</code>, for NvidiaNano and anything else on the local network) and a second pane bound to the Tailscale IP (<code class="language-plaintext highlighter-rouge">100.68.113.126</code>, for array machines outside the LAN — like the Beelink on Starlink). Same <code class="language-plaintext highlighter-rouge">svc</code> and port, different <code class="language-plaintext highlighter-rouge">--address</code>.</p>
 
 <hr>
 
