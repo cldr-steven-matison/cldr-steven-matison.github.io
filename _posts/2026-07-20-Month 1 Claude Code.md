@@ -51,7 +51,7 @@ A series of X articles covering Day 1 through Now:
 - [Week 3 — 4 — Claude Code](https://x.com/StevenMatison/status/2071571634322862180)
 - [Month 1-2 — Claude Code](https://x.com/StevenMatison/status/2079188005135196561)
 
-:racing_car: **Speedy!** You can see above how fast things are speeding up with Claude!! 
+:truck: **Speedy!** You can see above how fast things are speeding up with Claude!! 
 {: .notice--warning}
 
 Find all of my Articles on X: [https://x.com/StevenMatison/articles](https://x.com/StevenMatison/articles)
