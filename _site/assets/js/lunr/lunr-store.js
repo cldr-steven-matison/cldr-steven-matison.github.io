@@ -574,4 +574,10 @@ var store = [{
         "tags": ["cloudera","edge","ai","nifi","minifi","data in motion","dummies"],
         "url": "/blog/Edge-to-AI-for-Dummies/",
         "teaser": "/assets/images/edge_to_ai_for_dummies.jpeg"
+      },{
+        "title": "Month 1: Claude Code",
+        "excerpt":"Summary It has been a month since Day 1: Claude Code. What started as a brew install and a handful of curious questions about a single repo has turned into a daily driver across everything I touch — Cloudera Streaming Operators, NiFi, MiNiFi, EFM on Kubernetes, Flink, Kafka, GPU workloads...","categories": ["blog"],
+        "tags": ["claude","claude-code","ai","cloudera"],
+        "url": "/blog/Month-1-Claude-Code/",
+        "teaser": "/assets/images/month1_claude_code.jpg"
       }]

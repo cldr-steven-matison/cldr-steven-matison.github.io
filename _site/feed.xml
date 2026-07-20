@@ -6,9 +6,20 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Month 1: Claude Code</title>
+        <link>https://cldr-steven-matison.github.io/blog/Month-1-Claude-Code/</link>
+        <pubDate>Mon, 20 Jul 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/month1_claude_code.jpg</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/month1_claude_code.jpg" medium="image" />
+        
+        <description>One month in with Claude Code — a summary of the work completed since Day 1, with pointers to the daily X articles that captured each step along the way.</description>
+      </item>
+    
+      <item>
         <title>Edge to AI for Dummies</title>
         <link>https://cldr-steven-matison.github.io/blog/Edge-to-AI-for-Dummies/</link>
-        <pubDate>Mon, 20 Jul 2026 00:00:00 -0400</pubDate>
+        <pubDate>Fri, 17 Jul 2026 00:00:00 -0400</pubDate>
         
           <image>https://cldr-steven-matison.github.io/assets/images/edge_to_ai_for_dummies.jpeg</image>
           <media:content url="https://cldr-steven-matison.github.io/assets/images/edge_to_ai_for_dummies.jpeg" medium="image" />
@@ -106,18 +117,6 @@ The Cloudera Data Lineage team is pleased to announce that we’ve enhanced the 
           <media:content url="https://cldr-steven-matison.github.io/assets/images/NiFi_Registry_on_Kubernetes.png" medium="image" />
         
         <description>A quick how to guide for installing NiFi Registry on minikube with the CFM Operator</description>
-      </item>
-    
-      <item>
-        <title>Cloudera Flow Management Operator for Kubernetes 3.1</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.1/</link>
-        <pubDate>Mon, 01 Jun 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/kubernetes-logo.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/kubernetes-logo.png" medium="image" />
-        
-        <description>The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.1. This release introduces powerful new security and automation features, focusing on programmatic identity and access management, automated certificate generation, and intelligent cluster lifecycle enhancements that significantly reduce admin overhead and streamline user onboarding.
-</description>
       </item>
     
   </channel>
