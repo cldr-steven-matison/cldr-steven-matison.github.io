@@ -1,8 +1,15 @@
 - name: "DesktopShare"
   description: "Share spot for Macbook & Windows MD & Test Files"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 7929
+  size: 13058
   lang: "Python"
+  updated: "2026-07-19"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 134045
+  lang: "HTML"
   updated: "2026-07-19"
   fork: false
 - name: "cso-operator-app"
@@ -10,13 +17,6 @@
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
   size: 1299
   lang: "Python"
-  updated: "2026-07-18"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 134044
-  lang: "HTML"
   updated: "2026-07-18"
   fork: false
 - name: "cldr-steven-matison"
