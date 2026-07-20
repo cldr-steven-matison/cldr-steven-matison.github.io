@@ -32,11 +32,12 @@ A non-exhaustive list of the things Claude Code helped me build, break, fix, or 
 - Drove day-to-day repo work across `DesktopShare`, `ClouderaStreamingOperators`, `NiFi-Templates`, `Flink-Kubernetes-Playground`, and this blog
 - Iterated dozens of markdown plans from AI-drafted → tested → published — the [Edge to AI for Dummies](/blog/Edge-to-AI-for-Dummies/), [Cloudera Edge Flow Manager on Kubernetes](/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/), and [Using Kftray and Zellij](/blog/Using-Kftray-and-Zellij/) posts are recent examples
 - Stood up and tore down countless minikube clusters — CSO, EFM, NiFi, Kafka, Flink, Postgres, Prometheus, Grafana — while Claude Code drove `kubectl`, `helm`, and `minikube tunnel`
-- Wired up custom skills, hooks, agents, and workflows for the pieces of the workflow that repeat
-- Kept the Telegram bot bridge alive so I can operate remotely
-- Wrote, reviewed, and shipped this blog's posts directly from the terminal
+- Created Streamers (App with Live Streamer Clip Bot) with audio transcription and LLM generated commentary
+- Created StreamerChat (Nifi Bot on Twitch with chat enabled stream screen loader) multi device, multi network using Tailscan and Starlink
+- Wired up custom skills, dataflows, agents, and multi system workflows for operational building blocks
+- Kept the Telegram bot bridge alive and educated so I can operate claude and apps remotely
+- Wrote, reviewed, and shipped this blog's post's and bot created X posts
 
-Full narrative of how each of these landed lives in the X articles below.
 
 ## Resources
 
@@ -46,7 +47,7 @@ Full narrative of how each of these landed lives in the X articles below.
 
 ## Suggested Reading
 
-The full X article series covering Day 1 through Now:
+A series of X articles covering Day 1 through Now:
 
 - [Day 1 — Claude Code](https://x.com/StevenMatison/status/2066925481044099322)
 - [Day 2 — Claude Code](https://x.com/StevenMatison/status/2067328817190797564)
