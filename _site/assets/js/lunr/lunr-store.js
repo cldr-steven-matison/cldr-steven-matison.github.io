@@ -568,4 +568,10 @@ var store = [{
         "tags": ["cloudera","efm","edge flow manager","minifi","kubernetes","cem","Cloudera Edge Manager"],
         "url": "/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/",
         "teaser": "/assets/images/EFM_on_Kubernetes.png"
+      },{
+        "title": "Edge to AI for Dummies",
+        "excerpt":"If you have ever wondered how data actually gets from a sensor sitting out in the field all the way to a real-time AI model making a decision, this book walks the whole path — and it does it in classic For Dummies style, one plain-language chapter at a time....","categories": ["blog"],
+        "tags": ["cloudera","edge","ai","nifi","minifi","data in motion","dummies"],
+        "url": "/blog/Edge-to-AI-for-Dummies/",
+        "teaser": "/assets/images/edge_to_ai_for_dummies.jpeg"
       }]
