@@ -20,11 +20,6 @@ It has been a month since [Day 1: Claude Code](/blog/Day-1-Claude-Code/). What s
 
 Rather than replay every step here, I have been publishing the progress on X as it happens — Day 2 through Month 1-2 and beyond organized into X articles. This post is the index into that stream, so you can pick up wherever you like.
 
-<figure>
-  <img src="/assets/images/streamChat.png" alt="Claude Code built StreamChat Bot Architecture">
-  <figcaption>Claude built StreamChat Bot Architecture</figcaption>
-</figure>
-
 ## What got done in Month 1
 
 A non-exhaustive list of the things Claude Code helped me build, break, fix, or publish over the last thirty-plus days:
@@ -56,7 +51,7 @@ A series of X articles covering Day 1 through Now:
 - [Week 3 — 4 — Claude Code](https://x.com/StevenMatison/status/2071571634322862180)
 - [Month 1-2 — Claude Code](https://x.com/StevenMatison/status/2079188005135196561)
 
-:trophy: **Pro Tip!** You can see above how fast things are speeding up with Claude!! 
+:race_car: **Speedy!** You can see above how fast things are speeding up with Claude!! 
 {: .notice--warning}
 
 Find all of my Articles on X: [https://x.com/StevenMatison/articles](https://x.com/StevenMatison/articles)
