@@ -17,7 +17,7 @@ tags:
 
 If you have ever wondered how data actually gets from a sensor sitting out in the field all the way to a real-time AI model making a decision, this book walks the whole path — and it does it in classic *For Dummies* style, one plain-language chapter at a time.
 
-[Edge to AI For Dummies](https://www.cloudera.com/content/dam/www/marketing/resources/ebooks/edge-to-ai-for-dummies.pdf.landing.html) is a Cloudera Special Edition ebook that offers a practical roadmap for transforming data from edge devices into real-time AI use cases, along with best practices, implementation tips, and tactical insights on common architectures, tooling options, and the tradeoffs between them.
+[Edge to AI For Dummies](https://www.cloudera.com/campaign/edge-to-ai-for-dummies.html) is a Cloudera Special Edition ebook that offers a practical roadmap for transforming data from edge devices into real-time AI use cases, along with best practices, implementation tips, and tactical insights on common architectures, tooling options, and the tradeoffs between them.
 
 Inside you will learn how to:
 
@@ -29,7 +29,7 @@ The topics line up directly with the work I do every day — [Cloudera Edge Flow
 
 If you are looking for the Edge to AI For Dummies book you can download it here:
 
-[Edge to AI For Dummies](https://www.cloudera.com/content/dam/www/marketing/resources/ebooks/edge-to-ai-for-dummies.pdf.landing.html)
+[Edge to AI For Dummies](https://www.cloudera.com/campaign/edge-to-ai-for-dummies.html)
 
 ---
 
