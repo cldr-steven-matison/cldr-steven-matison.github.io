@@ -1,37 +1,37 @@
+- name: "DesktopShare"
+  description: "Share spot for Macbook & Windows MD & Test Files"
+  url: "https://github.com/cldr-steven-matison/DesktopShare"
+  size: 12797
+  lang: "Python"
+  updated: "2026-07-22"
+  fork: false
+- name: "ClouderaStreamingOperators"
+  description: "Repo for yaml used in installing Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
+  size: 82
+  lang: ""
+  updated: "2026-07-21"
+  fork: false
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 1359
+  lang: "Python"
+  updated: "2026-07-21"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 140443
+  lang: "HTML"
+  updated: "2026-07-21"
+  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
   size: 41
   lang: ""
   updated: "2026-07-21"
-  fork: false
-- name: "DesktopShare"
-  description: "Share spot for Macbook & Windows MD & Test Files"
-  url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 13084
-  lang: "Python"
-  updated: "2026-07-20"
-  fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 1329
-  lang: "Python"
-  updated: "2026-07-20"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 140435
-  lang: "HTML"
-  updated: "2026-07-20"
-  fork: false
-- name: "ClouderaStreamingOperators"
-  description: "Repo for yaml used in installing Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 78
-  lang: ""
-  updated: "2026-07-14"
   fork: false
 - name: "andrej-karpathy-skills"
   description: "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
