@@ -1,0 +1,866 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Day 37 : Claude Code - Cloudera Solutions Engineer</title>
+<meta name="description" content="A previous Claude Code session fanned out six planning subagents and every one of them died on the same 401. Here’s how I found the corpse, diagnosed the model-auth mismatch, re-ran the whole fan-out, and caught the subagents inventing a processor count during review — the day agentic doc cleanup actually shipped.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Day 37 : Claude Code">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Day-37-Claude-Code/">
+
+
+  <meta property="og:description" content="A previous Claude Code session fanned out six planning subagents and every one of them died on the same 401. Here’s how I found the corpse, diagnosed the model-auth mismatch, re-ran the whole fan-out, and caught the subagents inventing a processor count during review — the day agentic doc cleanup actually shipped.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/Day_37_Claude_Code.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-07-23T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Day-37-Claude-Code/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Day 37 : Claude Code">
+    <meta itemprop="description" content="A previous Claude Code session fanned out six planning subagents and every one of them died on the same 401. Here’s how I found the corpse, diagnosed the model-auth mismatch, re-ran the whole fan-out, and caught the subagents inventing a processor count during review — the day agentic doc cleanup actually shipped.">
+    <meta itemprop="datePublished" content="2026-07-23T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Day-37-Claude-Code/" class="u-url" itemprop="url">Day 37 : Claude Code
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+    
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-07-23T00:00:00-04:00">
+            July 23, 2026
+          </time>
+        </p>
+      
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Most of my “Day N with Claude Code” posts are about building something. This one is about a session that had already failed — twice — before I sat back down at the keyboard. I’d asked Claude to fan out a batch of planning subagents to clean up my sprawling DesktopShare doc library. When I came back, nothing had been written. No error I could see, no half-finished files, just an empty <code class="language-plaintext highlighter-rouge">~/.claude/plans/</code> and a vague memory that “the agents did something.”</p>
+
+<p>This is the story of resuming that session from disk, finding out why it died, re-running the whole thing, and — the part I care most about — catching one of the subagents quietly making up a number during review. If you’re running multi-agent workflows against a gateway-hosted API key, the root cause here is one you will hit too.</p>
+
+<h2 id="the-setup--six-planning-subagents-zero-output">The setup — six planning subagents, zero output</h2>
+
+<p>The plan had been to fan out <strong>six read-only “eval + plan” subagents</strong>, each one auditing a chunk of my docs and writing a single plan file to <code class="language-plaintext highlighter-rouge">~/.claude/plans/</code>:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">task1-minifi-playground-processors.md</code> — split the C++/Java MiNiFi processor doc</li>
+  <li><code class="language-plaintext highlighter-rouge">task2-agent-commands-split.md</code></li>
+  <li><code class="language-plaintext highlighter-rouge">task3-cso-operator-app-mds.md</code></li>
+  <li><code class="language-plaintext highlighter-rouge">task4-efm-binaries-mds.md</code></li>
+  <li><code class="language-plaintext highlighter-rouge">task5-flink-minikube.md</code></li>
+  <li><code class="language-plaintext highlighter-rouge">task6-how-to-nifi-and-ai-reorg.md</code></li>
+</ol>
+
+<p>When I picked the work back up, none of those files existed. The plans directory only had two unrelated files, and I couldn’t remember whether the session had even run. My instinct was <code class="language-plaintext highlighter-rouge">claude --resume</code> and scroll — but the session state was still on disk, so Claude went and read it directly instead.</p>
+
+<h2 id="diagnosis--everything-on-disk-including-the-corpse">Diagnosis — everything on disk, including the corpse</h2>
+
+<p>The previous session’s transcript was right where it should be:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.claude/projects/-Users-steven-matison/a57e3e1c-....jsonl   (1.2 MB)
+</code></pre></div></div>
+
+<p>1.2 MB, last modified at 10:49 — minutes before the new session started at 10:53. Next to it was a <code class="language-plaintext highlighter-rouge">subagents/</code> folder with <strong>seven</strong> transcripts (one explore agent plus the six planners). That’s the “5–6 agent subtasks” I half-remembered. Rather than pull all 1.2 MB into context, Claude tailed the last line of each subagent transcript. Every single one ended the same way:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>API Error: 401 key not allowed to access model.
+This key can only access models=['claude-opus-4-7'].
+Tried to access claude-sonnet...
+</code></pre></div></div>
+
+<p>There it was. My subagents were configured to run on <code class="language-plaintext highlighter-rouge">claude-sonnet</code>, but the API key — I run Claude Code through a gateway, not the public Anthropic endpoint — was only allowed to reach <code class="language-plaintext highlighter-rouge">claude-opus-4-7</code>. The <strong>main</strong> session’s model was allowed, so the top-level loop worked fine and looked healthy. The subagents, on a different model, hit a hard 401 and died instantly. No plan files, no obvious failure in the main transcript. That was the “.env problem” I’d burned two sessions on without ever seeing the actual error.</p>
+
+<p>The fix was already in place by the time I looked: the key now allows <code class="language-plaintext highlighter-rouge">opus-4-8</code>, and <code class="language-plaintext highlighter-rouge">CLAUDE_CODE_SUBAGENT_MODEL</code> is set to <code class="language-plaintext highlighter-rouge">claude-sonnet-4-6</code>, which is also in the allowlist. The lesson is the kind that’s worth writing down permanently:</p>
+
+<blockquote>
+  <p>On a gateway-hosted key, the main model and the subagent model are separate env vars checked against one allowlist. A mismatch breaks <em>only</em> the subagents, silently, while the main loop keeps humming. Before you fan out, confirm <code class="language-plaintext highlighter-rouge">CLAUDE_CODE_SUBAGENT_MODEL</code> is in the key’s allowlist — or smoke-test a single subagent first.</p>
+</blockquote>
+
+<h2 id="re-running--smoke-test-then-fan-out">Re-running — smoke test, then fan out</h2>
+
+<p>Because this exact fan-out was what had 401’d, I didn’t want to launch six agents into another wall of identical failures. So: <strong>one smoke test first.</strong> Claude pulled the full, verbatim prompts for all six tasks out of the old transcript, then dispatched just the smallest one (Task 2) on the default subagent model.</p>
+
+<p>It came back clean — no 401, plan file written. Auth confirmed. Then the other five went out in parallel:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Task 1: C++/Java processors split plan · 24 tool uses · 90.7k tokens
+Task 3: cso-operator-app MDs cleanup plan · 55 tool uses · 72.9k tokens
+Task 4: efm-binaries MDs cleanup plan · 33 tool uses · 63.4k tokens
+Task 5: flink-minikube cleanup + plan · 47 tool uses · 81.3k tokens
+Task 6: how-to-nifi-and-ai reorganize plan · 11 tool uses · 47.8k tokens
+</code></pre></div></div>
+
+<p>All six plan files landed in <code class="language-plaintext highlighter-rouge">~/.claude/plans/</code>. The session that had failed twice was, finally, un-stuck.</p>
+
+<h2 id="reviewing-before-executing">Reviewing before executing</h2>
+
+<p>I told Claude the headlines looked good and to review the plans properly before touching anything. This is where multi-agent work earns its keep or falls apart — a plan that reads well can still be quietly wrong. A few things surfaced:</p>
+
+<ul>
+  <li><strong>Task 3 (cso-operator-app docs)</strong> came back as effectively a no-op: keep all six files separate, no merges justified, defer a session-history split until the file crosses ~2,000 lines. A good “do nothing yet” answer is still an answer.</li>
+  <li><strong>Task 4 (efm-binaries)</strong> was a clean rename — <code class="language-plaintext highlighter-rouge">efm-binaries-claude.md</code> → <code class="language-plaintext highlighter-rouge">efm-binaries-windows-python.md</code>, because the <code class="language-plaintext highlighter-rouge">-claude</code> suffix recorded <em>where</em> the file was written, not <em>what it’s about</em>.</li>
+  <li><strong>Task 5 (Flink)</strong> confirmed my GPU experiment was a one-time proof of concept on the gaming PC’s RTX 4060, with no live CUDA anywhere in the array today — so both GPU docs get archived and a fresh <code class="language-plaintext highlighter-rouge">flink-plan.md</code> gets written grounded in what’s actually running.</li>
+  <li><strong>Task 6 (the big reorg)</strong> proposed splitting an overgrown section so the “wild processors stacked on top of each other” canvas-layout note I’d flagged becomes a first-class section instead of a buried paragraph.</li>
+</ul>
+
+<p>Execution order: quick wins first (the split and the rename), then the two big authoring jobs, then the reorg last.</p>
+
+<h2 id="executing--and-catching-the-subagent-making-things-up">Executing — and catching the subagent making things up</h2>
+
+<p>The quick wins went in cleanly. The two big authoring tasks — a new Flink plan and the split of my MiNiFi processor doc into a C++ doc and a Java doc — I handed to subagents, then reviewed the output before committing. That review is the whole point of this section.</p>
+
+<p>The MiNiFi C++ doc has a <strong>verified processor catalog</strong> — the exact list of processors present in Cloudera’s stock <code class="language-plaintext highlighter-rouge">apacheminificpp:latest</code> image. When I diffed the subagent’s new catalog against the source, it claimed <strong>“75 entries”</strong> with a confused note about the source “listing 55.” Neither number was right. The actual source lists <strong>74 processors</strong>. The subagent had inherited a wrong figure from the plan, gotten confused reconciling it against reality, <strong>dropped <code class="language-plaintext highlighter-rouge">ConsumeJournald</code></strong>, and mislabeled a whole section (“Kafka Ecosystem” — containing processors that have nothing to do with Kafka).</p>
+
+<p>So I diffed it properly, both directions:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># every processor name in the source</span>
+<span class="nb">sed</span> <span class="nt">-n</span> <span class="s1">'14,87p'</span> C++-processors.md | <span class="nb">sed</span> <span class="nt">-E</span> <span class="s1">'s/^- ## //'</span> | <span class="nb">sort</span> <span class="nt">-u</span> <span class="o">&gt;</span> src.txt
+<span class="c"># every processor name the new doc put in its catalog</span>
+<span class="nb">grep</span> <span class="nt">-oE</span> <span class="s1">'^- \*\*[A-Za-z0-9]+\*\*'</span> minifi-playground-cpp-processors.md <span class="se">\</span>
+  | <span class="nb">sed</span> <span class="nt">-E</span> <span class="s1">'s/^- \*\*//; s/\*\*//'</span> | <span class="nb">sort</span> <span class="nt">-u</span> <span class="o">&gt;</span> doc.txt
+<span class="nb">comm</span> <span class="nt">-23</span> src.txt doc.txt   <span class="c"># in source, missing from doc</span>
+<span class="nb">comm</span> <span class="nt">-13</span> src.txt doc.txt   <span class="c"># in doc, not in source (inventions)</span>
+</code></pre></div></div>
+
+<p>The good news: <strong>zero invented names</strong> — every processor in the new doc traced back to the source. The bad news was exactly one omission (<code class="language-plaintext highlighter-rouge">ConsumeJournald</code>) and a wrong count. I restored the missing processor, fixed the count to 74, corrected the mislabeled section, and reworded four dead citations to the old filename that the subagent had left dangling.</p>
+
+<p>That’s the takeaway I keep relearning: <strong>subagents are fast and mostly right, and “mostly right” is not the same as shippable.</strong> The 401 earlier was a loud failure — it stopped everything. This was a quiet failure: a plausible, confidently-written number that happened to be wrong. Loud failures cost you time. Quiet ones cost you credibility if they ship. The diff took two minutes and was worth every second.</p>
+
+<p>The rest went in as five clean commits:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Commit</th>
+      <th>What landed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ca5b5e5</code></td>
+      <td>Split the Streamers commands into their own file; added the missing PublishClip start/stop commands</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">4371a50</code></td>
+      <td>Renamed <code class="language-plaintext highlighter-rouge">efm-binaries-claude.md</code> → <code class="language-plaintext highlighter-rouge">efm-binaries-windows-python.md</code>; fixed all three references</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">4de9036</code></td>
+      <td>Split the processor doc into a C++ doc and a Java doc; updated cross-links</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">d967bbd</code></td>
+      <td>New <code class="language-plaintext highlighter-rouge">flink-plan.md</code>; archived the GPU experiment docs</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">85fe80d</code></td>
+      <td>Reorganized the NiFi/AI playbook for external readability</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Then, once I’d read it all: <code class="language-plaintext highlighter-rouge">git push</code>. <code class="language-plaintext highlighter-rouge">ef7a4b7..85fe80d</code>, local matches remote.</p>
+
+<h2 id="summary--what-this-day-was-really-about">Summary — what this day was really about</h2>
+
+<p>None of the five commits are dramatic on their own. The story is the <em>shape</em> of the work: a session that failed silently, got resurrected from its own on-disk transcript, diagnosed down to a one-line auth mismatch, re-run with a smoke test before the fan-out, and then reviewed hard enough to catch a subagent inventing a number.</p>
+
+<p>Three things I’m taking forward:</p>
+
+<ol>
+  <li><strong>Gateway keys make the model/subagent split a real failure mode.</strong> The main loop working tells you nothing about whether your subagents can authenticate. Smoke-test one before you fan out six.</li>
+  <li><strong>The transcript on disk is the real save file.</strong> I didn’t need <code class="language-plaintext highlighter-rouge">--resume</code> and a lot of scrolling — the previous session, its subagent transcripts, and its exact failure were all sitting in <code class="language-plaintext highlighter-rouge">~/.claude/projects/</code>, readable and greppable. When a session “disappears,” it usually didn’t.</li>
+  <li><strong>Fan-out for speed, review for truth.</strong> Six agents wrote six plans in parallel in a couple of minutes. But the value showed up in the review pass — the diff that proved zero inventions and caught the one real omission. Trusting the summary would have shipped a wrong processor count to a doc I intend to publish.</li>
+</ol>
+
+<p>Agentic coding isn’t “the model does it and you watch.” It’s the model doing the wide, fast, parallel part, and you owning the narrow, slow, adversarial part where correctness actually lives. Day 37 was a good reminder of exactly where that line sits.</p>
+
+<p><em>Raw session capture that this post is <a href="https://github.com/cldr-steven-matison/DesktopShare/blob/main/blog/claude-day-37.md">here</a>.</em></p>
+
+<h2 id="day-37--claude-code">Day 37 : Claude Code</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Day 37 : Claude Code please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#agentic" class="page__taxonomy-item p-category" rel="tag">agentic</a><span class="sep">, </span>
+    
+      <a href="/tags/#ai" class="page__taxonomy-item p-category" rel="tag">ai</a><span class="sep">, </span>
+    
+      <a href="/tags/#anthropic" class="page__taxonomy-item p-category" rel="tag">anthropic</a><span class="sep">, </span>
+    
+      <a href="/tags/#claude-code" class="page__taxonomy-item p-category" rel="tag">claude-code</a><span class="sep">, </span>
+    
+      <a href="/tags/#documentation" class="page__taxonomy-item p-category" rel="tag">documentation</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#subagents" class="page__taxonomy-item p-category" rel="tag">subagents</a><span class="sep">, </span>
+    
+      <a href="/tags/#workflow" class="page__taxonomy-item p-category" rel="tag">workflow</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-07-23T00:00:00-04:00">July 23, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Day+37+%3A+Claude+Code%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FDay-37-Claude-Code%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FDay-37-Claude-Code%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Month-1-Claude-Code/" class="pagination--pager" title="Month 1: Claude Code
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/month1_claude_code.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Month-1-Claude-Code/" rel="permalink">Month 1: Claude Code
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    One month in with Claude Code — a summary of the work completed since Day 1, with pointers to the daily X articles that captured each step along the way.
+
+    <a href="/blog/Month-1-Claude-Code/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/edge_to_ai_for_dummies.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Edge-to-AI-for-Dummies/" rel="permalink">Edge to AI for Dummies
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    A practical roadmap for transforming data from edge devices into real-time AI use cases — architectures, tooling options, and tradeoffs.
+
+    <a href="/blog/Edge-to-AI-for-Dummies/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/EFM_on_Kubernetes.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/" rel="permalink">Cloudera Edge Flow Manager on Kubernetes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    A full recipe for running Cloudera Edge Flow Manager (EFM) on minikube with everything — agent classes, flows, agent binaries, and uploaded resources — survi...
+    <a href="/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/SRM.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Using-Kftray-and-Zellij/" rel="permalink">Using Kftray and Zellij
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Two small tools that make working against a Kubernetes cluster feel less like a chore — kftray for reusable port-forward configs, and Zellij for pinning ever...
+    <a href="/blog/Using-Kftray-and-Zellij/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>

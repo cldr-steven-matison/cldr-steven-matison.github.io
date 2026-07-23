@@ -580,4 +580,10 @@ var store = [{
         "tags": ["claude","claude-code","ai","cloudera"],
         "url": "/blog/Month-1-Claude-Code/",
         "teaser": "/assets/images/month1_claude_code.jpg"
+      },{
+        "title": "Day 37 : Claude Code",
+        "excerpt":"Most of my “Day N with Claude Code” posts are about building something. This one is about a session that had already failed — twice — before I sat back down at the keyboard. I’d asked Claude to fan out a batch of planning subagents to clean up my sprawling...","categories": ["blog"],
+        "tags": ["claude-code","anthropic","ai","agentic","subagents","workflow","documentation","nifi"],
+        "url": "/blog/Day-37-Claude-Code/",
+        "teaser": "/assets/images/Day_37_Claude_Code.jpg"
       }]

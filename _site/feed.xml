@@ -6,6 +6,17 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Day 37 : Claude Code</title>
+        <link>https://cldr-steven-matison.github.io/blog/Day-37-Claude-Code/</link>
+        <pubDate>Thu, 23 Jul 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/Day_37_Claude_Code.jpg</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/Day_37_Claude_Code.jpg" medium="image" />
+        
+        <description>A previous Claude Code session fanned out six planning subagents and every one of them died on the same 401. Here&apos;s how I found the corpse, diagnosed the model-auth mismatch, re-ran the whole fan-out, and caught the subagents inventing a processor count during review — the day agentic doc cleanup actually shipped.</description>
+      </item>
+    
+      <item>
         <title>Month 1: Claude Code</title>
         <link>https://cldr-steven-matison.github.io/blog/Month-1-Claude-Code/</link>
         <pubDate>Mon, 20 Jul 2026 00:00:00 -0400</pubDate>
@@ -106,17 +117,6 @@ The Cloudera Data Lineage team is pleased to announce that we’ve enhanced the 
           <media:content url="https://cldr-steven-matison.github.io/assets/images/SRM.png" medium="image" />
         
         <description>AI dump of markdown discussing top 10 kubernetes technologies in terms of nifi kafka and flink as operators.</description>
-      </item>
-    
-      <item>
-        <title>How To Install NiFi Registry on Kubernetes with CFM Operator</title>
-        <link>https://cldr-steven-matison.github.io/blog/How-To-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/</link>
-        <pubDate>Wed, 03 Jun 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/NiFi_Registry_on_Kubernetes.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/NiFi_Registry_on_Kubernetes.png" medium="image" />
-        
-        <description>A quick how to guide for installing NiFi Registry on minikube with the CFM Operator</description>
       </item>
     
   </channel>
