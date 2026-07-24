@@ -1,35 +1,35 @@
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 41
+  lang: ""
+  updated: "2026-07-24"
+  fork: false
 - name: "DesktopShare"
-  description: "Share spot for Macbook & Windows MD & Test Files"
+  description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 12881
+  size: 13400
   lang: "Python"
-  updated: "2026-07-22"
+  updated: "2026-07-24"
+  fork: false
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 1396
+  lang: "Python"
+  updated: "2026-07-23"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 140438
+  size: 155233
   lang: "HTML"
-  updated: "2026-07-22"
+  updated: "2026-07-23"
   fork: false
 - name: "ClouderaStreamingOperators"
   description: "Repo for yaml used in installing Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
   size: 82
-  lang: ""
-  updated: "2026-07-21"
-  fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 1359
-  lang: "Python"
-  updated: "2026-07-21"
-  fork: false
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 41
   lang: ""
   updated: "2026-07-21"
   fork: false
