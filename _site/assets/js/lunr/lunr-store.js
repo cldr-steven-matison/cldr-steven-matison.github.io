@@ -586,4 +586,10 @@ var store = [{
         "tags": ["claude-code","anthropic","ai","agentic","subagents","workflow","documentation","nifi"],
         "url": "/blog/Day-37-Claude-Code/",
         "teaser": "/assets/images/Day_37_Claude_Code.jpg"
+      },{
+        "title": "How to Install a Public Certificate for NiFi",
+        "excerpt":"Every fresh Apache NiFi install lands you at https://&lt;host&gt;:8443/nifi/ with a self-signed cert, and the first thing every browser tells you is that the site is unsafe. That’s fine for a laptop but not for anything you want to hand a link to. This post walks through swapping that keystore...","categories": ["blog"],
+        "tags": ["nifi","apache","tls","ssl","lets-encrypt","certbot","security"],
+        "url": "/blog/How-to-Install-a-Public-Certificate-for-NiFi/",
+        "teaser": "/assets/images/nifi-logo.png"
       }]

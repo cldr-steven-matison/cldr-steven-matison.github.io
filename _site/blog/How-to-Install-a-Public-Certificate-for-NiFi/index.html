@@ -1,0 +1,1063 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>How to Install a Public Certificate for NiFi - Cloudera Solutions Engineer</title>
+<meta name="description" content="Swap out NiFi’s default self-signed keystore for a real Let’s Encrypt certificate on a host-native Apache NiFi install so the browser padlock goes solid, no more NET::ERR_CERT_AUTHORITY_INVALID.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="How to Install a Public Certificate for NiFi">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/How-to-Install-a-Public-Certificate-for-NiFi/">
+
+
+  <meta property="og:description" content="Swap out NiFi’s default self-signed keystore for a real Let’s Encrypt certificate on a host-native Apache NiFi install so the browser padlock goes solid, no more NET::ERR_CERT_AUTHORITY_INVALID.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/nifi-logo.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-07-27T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/How-to-Install-a-Public-Certificate-for-NiFi/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How to Install a Public Certificate for NiFi">
+    <meta itemprop="description" content="Swap out NiFi’s default self-signed keystore for a real Let’s Encrypt certificate on a host-native Apache NiFi install so the browser padlock goes solid, no more NET::ERR_CERT_AUTHORITY_INVALID.">
+    <meta itemprop="datePublished" content="2026-07-27T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/How-to-Install-a-Public-Certificate-for-NiFi/" class="u-url" itemprop="url">How to Install a Public Certificate for NiFi
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+    
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-07-27T00:00:00-04:00">
+            July 27, 2026
+          </time>
+        </p>
+      
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Every fresh Apache NiFi install lands you at <code class="language-plaintext highlighter-rouge">https://&lt;host&gt;:8443/nifi/</code> with a self-signed cert, and the first thing every browser tells you is that the site is unsafe. That’s fine for a laptop but not for anything you want to hand a link to. This post walks through swapping that keystore for a real Let’s Encrypt(LE) cert on a <strong>host-native</strong> NiFi install — no Kubernetes, no reverse proxy, NiFi keeps serving <code class="language-plaintext highlighter-rouge">:8443</code> and it just presents a browser-trusted cert.</p>
+
+<p>Validated against <strong>Apache NiFi 2.0.0</strong> (open-source, build <code class="language-plaintext highlighter-rouge">2f13b60</code>, branch <code class="language-plaintext highlighter-rouge">NIFI-13915-RC2</code>) on Ubuntu 24.04, with certbot 2.9 driving Let’s Encrypt.</p>
+
+<hr />
+
+<h2 id="secure-nifi-optional-paths">Secure NiFi Optional Paths</h2>
+
+<p>There are two ways to get a trusted cert in front of NiFi: put a reverse proxy in front and terminate TLS there, or load the real cert straight into NiFi’s own keystore. This post takes the second path — no proxy, no ingress, no extra moving parts. NiFi itself serves the trusted cert.</p>
+
+<p>The trade-off worth naming upfront: the cert’s DN becomes <code class="language-plaintext highlighter-rouge">CN=&lt;your-nifi-host&gt;</code>. On a single-node install that’s a non-issue — you’re not doing mTLS between nodes. On a real cluster, that DN becomes each node’s identity too, which gets awkward. Everything below is written for single-node NiFi.</p>
+
+<p>The moving parts:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Piece</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>certbot + DNS-01 or HTTP-01</strong></td>
+      <td>Obtains and renews the LE cert</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">openssl pkcs12 -export</code></strong></td>
+      <td>Bundles the LE cert + key into a PKCS12 keystore NiFi understands</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">nifi.properties</code></strong></td>
+      <td>Points NiFi’s <code class="language-plaintext highlighter-rouge">nifi.security.keystore*</code> at the new p12</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">authorizers.xml</code></strong></td>
+      <td>Gets the new DN if the old self-signed DN was serving as an admin/node identity</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">/etc/letsencrypt/renewal-hooks/deploy/nifi-reload.sh</code></strong></td>
+      <td>Rebuilds the p12 and restarts NiFi automatically every 60 days</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>A <strong>public DNS name</strong> pointed at the host — LE only signs for names it can validate. For this walkthrough that name is <code class="language-plaintext highlighter-rouge">nifi.sceneserver.net</code>, an A record at DigitalOcean pointed at a droplet. Substitute your own everywhere below.</li>
+  <li>NiFi installed directly on the host (not containerized), with a known <code class="language-plaintext highlighter-rouge">NIFI_HOME</code>. In my case that’s <code class="language-plaintext highlighter-rouge">/root/nifi-2.0.0</code>, with <code class="language-plaintext highlighter-rouge">NIFI_HOME/conf/nifi.properties</code> as the source of truth for TLS settings.</li>
+  <li>The user NiFi runs as, and how NiFi is started. On my droplet that’s <code class="language-plaintext highlighter-rouge">root</code> via <code class="language-plaintext highlighter-rouge">bin/nifi.sh start</code> — no systemd unit. If you’re on systemd, substitute <code class="language-plaintext highlighter-rouge">systemctl restart nifi</code> for the manual restart command later.</li>
+  <li>Port <code class="language-plaintext highlighter-rouge">80</code> reachable from the internet <strong>or</strong> API access to your DNS provider. HTTP-01 uses port 80 to prove domain control; DNS-01 uses the provider’s API. Either works.</li>
+</ul>
+
+<hr />
+
+<h2 id="step-1--inventory-the-current-tls-setup">Step 1 — Inventory the current TLS setup</h2>
+
+<p>Before touching anything, capture what NiFi is doing today. This is the source of truth for the keystore password, the paths NiFi expects, and the DNs currently baked into <code class="language-plaintext highlighter-rouge">authorizers.xml</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">NIFI_HOME</span><span class="o">=</span>/root/nifi-2.0.0
+<span class="nv">NIFI_CONF</span><span class="o">=</span><span class="nv">$NIFI_HOME</span>/conf
+
+<span class="c"># What TLS config is NiFi reading?</span>
+<span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"^nifi</span><span class="se">\.</span><span class="s2">security</span><span class="se">\.</span><span class="s2">|^nifi</span><span class="se">\.</span><span class="s2">web</span><span class="se">\.</span><span class="s2">https|^nifi</span><span class="se">\.</span><span class="s2">web</span><span class="se">\.</span><span class="s2">proxy"</span> <span class="nv">$NIFI_CONF</span>/nifi.properties
+
+<span class="c"># What does the current (self-signed) cert look like?</span>
+<span class="nb">ls</span> <span class="nt">-l</span> <span class="nv">$NIFI_CONF</span>/keystore.<span class="k">*</span> <span class="nv">$NIFI_CONF</span>/truststore.<span class="k">*</span>
+keytool <span class="nt">-list</span> <span class="nt">-v</span> <span class="nt">-keystore</span> <span class="nv">$NIFI_CONF</span>/keystore.p12 <span class="nt">-storepass</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">grep</span> <span class="s1">'^nifi.security.keystorePasswd='</span> <span class="nv">$NIFI_CONF</span>/nifi.properties | <span class="nb">cut</span> <span class="nt">-d</span><span class="o">=</span> <span class="nt">-f2-</span><span class="si">)</span><span class="s2">"</span> 2&gt;/dev/null | <span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"Alias|Owner|Issuer|Valid"</span>
+
+<span class="c"># What identities is NiFi currently using?</span>
+<span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"^nifi</span><span class="se">\.</span><span class="s2">security</span><span class="se">\.</span><span class="s2">user</span><span class="se">\.</span><span class="s2">(oidc|ldap|login</span><span class="se">\.</span><span class="s2">identity|authorizer)"</span> <span class="nv">$NIFI_CONF</span>/nifi.properties
+<span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"Initial Admin|Node Identity"</span> <span class="nv">$NIFI_CONF</span>/authorizers.xml
+</code></pre></div></div>
+
+<p>Write down:</p>
+<ul>
+  <li>Current keystore path and password (may be plain in <code class="language-plaintext highlighter-rouge">nifi.properties</code>, or <code class="language-plaintext highlighter-rouge">enc{...}</code> and decrypted via <code class="language-plaintext highlighter-rouge">bootstrap.conf</code>’s sensitive key)</li>
+  <li>Current cert <code class="language-plaintext highlighter-rouge">Owner:</code> DN — you’ll need this if it appears anywhere in <code class="language-plaintext highlighter-rouge">authorizers.xml</code></li>
+  <li>Whether user login goes through OIDC/LDAP/single-user (if yes, the DN swap is invisible to browser users — much easier)</li>
+</ul>
+
+<p><strong>Confirm from outside the host that today’s cert is self-signed</strong>, so we have a clear “before” state:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl s_client <span class="nt">-connect</span> nifi.sceneserver.net:8443 <span class="nt">-servername</span> nifi.sceneserver.net &lt;/dev/null 2&gt;&amp;1 <span class="se">\</span>
+  | openssl x509 <span class="nt">-noout</span> <span class="nt">-issuer</span> <span class="nt">-subject</span>
+<span class="c"># issuer=CN=nifi-cert  ← self-signed</span>
+<span class="c"># subject=CN=nifi-cert</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="step-2--take-a-snapshot-for-backup">Step 2 — Take a Snapshot For Backup</h2>
+
+<p>The rollback path is a directory copy. Take it before you edit a byte.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$NIFI_HOME</span>
+<span class="nb">cp</span> <span class="nt">-a</span> conf conf.pre-le.<span class="si">$(</span><span class="nb">date</span> <span class="nt">-u</span> +%Y%m%d<span class="si">)</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> /root/backup
+<span class="nb">cp</span> <span class="nt">-a</span> <span class="nv">$NIFI_CONF</span>/keystore.<span class="k">*</span> <span class="nv">$NIFI_CONF</span>/truststore.<span class="k">*</span> <span class="nv">$NIFI_CONF</span>/authorizers.xml /root/backup/ 2&gt;/dev/null
+</code></pre></div></div>
+
+<p>If Step 4 or 5 goes sideways, rollback is one line: stop NiFi, <code class="language-plaintext highlighter-rouge">cp -a conf.pre-le.YYYYMMDD/* conf/</code>, start NiFi.</p>
+
+<hr />
+
+<h2 id="step-3--issue-the-lets-encrypt-cert">Step 3 — Issue the Let’s Encrypt Cert</h2>
+
+<p>Two flavors of certbot challenge work here. Pick based on what’s easier for you:</p>
+
+<ul>
+  <li><strong>HTTP-01</strong> — certbot spins up a temporary listener on port 80 to answer the LE challenge. Requires port 80 reachable from the internet. This is what I used on the droplet because DO’s firewall was already open on 80 and there was nothing else answering there.</li>
+  <li><strong>DNS-01</strong> — certbot writes a TXT record via your DNS provider’s API. Doesn’t require any inbound ports. Best if the host is behind NAT or port 80 is unavailable.</li>
+</ul>
+
+<h3 id="http-01-what-i-ran-on-the-droplet">HTTP-01 (what I ran on the droplet)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt update
+apt <span class="nb">install</span> <span class="nt">-y</span> certbot
+
+<span class="c"># One-shot standalone issuance — certbot binds :80 briefly, answers the challenge, exits</span>
+certbot certonly <span class="se">\</span>
+  <span class="nt">--standalone</span> <span class="se">\</span>
+  <span class="nt">-d</span> nifi.sceneserver.net <span class="se">\</span>
+  <span class="nt">--agree-tos</span> <span class="nt">-m</span> you@example.com <span class="nt">--non-interactive</span>
+</code></pre></div></div>
+
+<p>If NiFi doesn’t already own port 80, that’s it. If something else is on :80, use <code class="language-plaintext highlighter-rouge">--webroot</code> and point certbot at that server’s docroot.</p>
+
+<h3 id="dns-01-alternative-cloudflare-example">DNS-01 Alternative (Cloudflare Example)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install</span> <span class="nt">-y</span> certbot python3-certbot-dns-cloudflare
+
+<span class="nb">mkdir</span> <span class="nt">-p</span> /root/.secrets
+<span class="nb">tee</span> /root/.secrets/cloudflare.ini <span class="o">&gt;</span>/dev/null <span class="o">&lt;&lt;</span><span class="sh">'</span><span class="no">EOF</span><span class="sh">'
+dns_cloudflare_api_token = &lt;api-token-scoped-to-your-zone&gt;
+</span><span class="no">EOF
+</span><span class="nb">chmod </span>600 /root/.secrets/cloudflare.ini
+
+certbot certonly <span class="se">\</span>
+  <span class="nt">--dns-cloudflare</span> <span class="se">\</span>
+  <span class="nt">--dns-cloudflare-credentials</span> /root/.secrets/cloudflare.ini <span class="se">\</span>
+  <span class="nt">-d</span> nifi.sceneserver.net <span class="se">\</span>
+  <span class="nt">--agree-tos</span> <span class="nt">-m</span> you@example.com <span class="nt">--non-interactive</span>
+</code></pre></div></div>
+
+<p>Substitute the equivalent plugin for your DNS host (<code class="language-plaintext highlighter-rouge">certbot-dns-route53</code>, <code class="language-plaintext highlighter-rouge">certbot-dns-digitalocean</code>, <code class="language-plaintext highlighter-rouge">certbot-dns-rfc2136</code>, etc.).</p>
+
+<h3 id="le-rate-limit">LE Rate-limit</h3>
+
+<p>Let’s Encrypt caps you at <strong>5 duplicate certs per 168h</strong> per exact set of hostnames. If you expect to iterate — trying different keystore configs, restarting NiFi, re-running — do the first issuance against staging to avoid burning your prod quota:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>certbot certonly <span class="nt">--standalone</span> <span class="nt">--staging</span> <span class="nt">-d</span> nifi.sceneserver.net <span class="se">\</span>
+  <span class="nt">--agree-tos</span> <span class="nt">-m</span> you@example.com <span class="nt">--non-interactive</span>
+</code></pre></div></div>
+
+<p>Staging certs are untrusted (the chain says “STAGING Let’s Encrypt”) but the issuance flow is identical, so you can prove the pipeline end-to-end before touching prod.</p>
+
+<p>Either way, cert files land at:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/etc/letsencrypt/live/nifi.sceneserver.net/fullchain.pem</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/etc/letsencrypt/live/nifi.sceneserver.net/privkey.pem</code></li>
+</ul>
+
+<hr />
+
+<h2 id="step-4--bundle-the-cert-into-a-pkcs12-keystore">Step 4 — Bundle the Cert into a PKCS12 Keystore</h2>
+
+<p>NiFi 2.x prefers PKCS12 over JKS. <code class="language-plaintext highlighter-rouge">openssl pkcs12 -export</code> bundles the LE cert and key into a <code class="language-plaintext highlighter-rouge">.p12</code> file NiFi loads natively:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">KEYSTORE_PASS</span><span class="o">=</span><span class="s1">'&lt;use the same value from nifi.security.keystorePasswd&gt;'</span>
+<span class="nv">NIFI_CONF</span><span class="o">=</span>/root/nifi-2.0.0/conf
+
+openssl pkcs12 <span class="nt">-export</span> <span class="se">\</span>
+  <span class="nt">-in</span>  /etc/letsencrypt/live/nifi.sceneserver.net/fullchain.pem <span class="se">\</span>
+  <span class="nt">-inkey</span> /etc/letsencrypt/live/nifi.sceneserver.net/privkey.pem <span class="se">\</span>
+  <span class="nt">-name</span> nifi <span class="se">\</span>
+  <span class="nt">-out</span> <span class="nv">$NIFI_CONF</span>/keystore.p12 <span class="se">\</span>
+  <span class="nt">-password</span> pass:<span class="s2">"</span><span class="nv">$KEYSTORE_PASS</span><span class="s2">"</span>
+
+<span class="nb">chown </span>root:root <span class="nv">$NIFI_CONF</span>/keystore.p12
+<span class="nb">chmod </span>600 <span class="nv">$NIFI_CONF</span>/keystore.p12
+</code></pre></div></div>
+
+<p>Reuse the existing keystore password. If you change it, you have to update <code class="language-plaintext highlighter-rouge">nifi.properties</code> too — no upside to breaking that link.</p>
+
+<p>If the current password lives inside <code class="language-plaintext highlighter-rouge">bootstrap.conf</code> as <code class="language-plaintext highlighter-rouge">enc{...}</code> (encrypted via a sensitive-props key), you have two options: decrypt it with <code class="language-plaintext highlighter-rouge">nifi-toolkit</code>’s <code class="language-plaintext highlighter-rouge">encrypt-config</code> and use the plain value here, or leave the encrypted values and just make sure the p12 uses the same underlying password. PKCS12 uses the same password for both <code class="language-plaintext highlighter-rouge">keystorePasswd</code> and <code class="language-plaintext highlighter-rouge">keyPasswd</code>, so pick one and stick with it across all three fields.</p>
+
+<p>Confirm the p12 loads before you touch NiFi:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>keytool <span class="nt">-list</span> <span class="nt">-keystore</span> <span class="nv">$NIFI_CONF</span>/keystore.p12 <span class="nt">-storetype</span> PKCS12 <span class="nt">-storepass</span> <span class="s2">"</span><span class="nv">$KEYSTORE_PASS</span><span class="s2">"</span>
+<span class="c"># Expect: Alias name: nifi, Entry type: PrivateKeyEntry</span>
+<span class="c"># Certificate chain length: 2 or 3 (leaf + LE intermediate(s))</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="step-5--point-nifiproperties-at-new-keystore">Step 5 — Point <code class="language-plaintext highlighter-rouge">nifi.properties</code> at New Keystore</h2>
+
+<p>Edit <code class="language-plaintext highlighter-rouge">$NIFI_CONF/nifi.properties</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nifi.security.keystore=./conf/keystore.p12
+nifi.security.keystoreType=PKCS12
+nifi.security.keystorePasswd=&lt;KEYSTORE_PASS&gt;
+nifi.security.keyPasswd=&lt;KEYSTORE_PASS&gt;
+</code></pre></div></div>
+
+<p>Leave <code class="language-plaintext highlighter-rouge">nifi.security.truststore*</code> alone — that controls which client CAs NiFi trusts on <strong>inbound</strong> connections. It has nothing to do with the server cert the browser sees.</p>
+
+<hr />
+
+<h2 id="step-6--update-authorizersxml-if-the-old-dn-was-an-identity">Step 6 — Update <code class="language-plaintext highlighter-rouge">authorizers.xml</code> if the old DN was an identity</h2>
+
+<p>Skip this step entirely if NiFi’s browser login goes through OIDC / LDAP / single-user — the cert DN never touches user auth in that case.</p>
+
+<p>If the old self-signed DN was serving as the Initial Admin Identity or a Node Identity, you need to add the new DN. On a single-node NiFi with OIDC or single-user auth, this is usually a no-op. On a single-node NiFi authenticated by client cert, you’re looking at:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- authorizers.xml, inside file-user-group-provider / file-access-policy-provider --&gt;</span>
+<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"Initial User Identity 1"</span><span class="nt">&gt;</span>CN=nifi.sceneserver.net<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"Node Identity 1"</span><span class="nt">&gt;</span>CN=nifi.sceneserver.net<span class="nt">&lt;/property&gt;</span>
+</code></pre></div></div>
+
+<p>Keep any existing user entries in place — you’re adding, not replacing. If <code class="language-plaintext highlighter-rouge">users.xml</code> already has policies attached to the old self-signed DN, either rename that identity to the new DN inside <code class="language-plaintext highlighter-rouge">users.xml</code> (safer), or add the new DN as a second Initial User and migrate policies through the UI once NiFi is back up.</p>
+
+<hr />
+
+<h2 id="step-7--restart-nifi">Step 7 — Restart NiFi</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Manual install (my droplet)</span>
+<span class="nb">sudo</span> <span class="nt">-u</span> root /root/nifi-2.0.0/bin/nifi.sh restart
+<span class="nb">tail</span> <span class="nt">-f</span> /root/nifi-2.0.0/logs/nifi-app.log
+
+<span class="c"># Or on systemd:</span>
+<span class="c"># systemctl restart nifi</span>
+<span class="c"># journalctl -u nifi -f</span>
+</code></pre></div></div>
+
+<p>NiFi takes 60–120 seconds to come back. First browser hit right after “Started Server on port 8443” can 502 briefly — that’s NiFi still finishing internal boot, not the cert.</p>
+
+<hr />
+
+<h2 id="step-8--verify-the-padlock">Step 8 — Verify the Padlock</h2>
+
+<p>External TLS:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl s_client <span class="nt">-connect</span> nifi.sceneserver.net:8443 <span class="nt">-servername</span> nifi.sceneserver.net &lt;/dev/null 2&gt;&amp;1 <span class="se">\</span>
+  | openssl x509 <span class="nt">-noout</span> <span class="nt">-issuer</span> <span class="nt">-subject</span> <span class="nt">-dates</span>
+<span class="c"># issuer=C=US, O=Let's Encrypt, CN=R11    ← real LE intermediate</span>
+<span class="c"># subject=CN=nifi.sceneserver.net</span>
+<span class="c"># notAfter=~90 days from now</span>
+
+curl <span class="nt">-v</span> https://nifi.sceneserver.net:8443/nifi-api/access/config 2&gt;&amp;1 | <span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"HTTP/|subject|issuer"</span>
+<span class="c"># HTTP/2 200 — no -k needed</span>
+</code></pre></div></div>
+
+<p>Browser: open a <strong>fresh incognito window</strong> — Chrome and Firefox cache TLS sessions, and the old self-signed cert will linger if you reuse a window that already talked to <code class="language-plaintext highlighter-rouge">:8443</code>. In incognito the padlock is solid, no “Not secure” chip, and the cert viewer shows <code class="language-plaintext highlighter-rouge">Issued by: Let's Encrypt</code> / <code class="language-plaintext highlighter-rouge">Subject: nifi.sceneserver.net</code>.</p>
+
+<p>Log in, load a canvas, poke a flow. Auth still works because the DN change only affects the server cert, not the browser session token.</p>
+
+<hr />
+
+<h2 id="step-9--auto-renewal">Step 9 — Auto-Renewal</h2>
+
+<p>LE certs are valid for 90 days. certbot’s <code class="language-plaintext highlighter-rouge">certbot.timer</code> (systemd) or <code class="language-plaintext highlighter-rouge">/etc/cron.d/certbot</code> handles the renewal on its own. What’s left is a <strong>deploy hook</strong> that rebuilds the p12 and restarts NiFi every time certbot renews.</p>
+
+<p>Create the hook script:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tee</span> /etc/letsencrypt/renewal-hooks/deploy/nifi-reload.sh <span class="o">&gt;</span>/dev/null <span class="o">&lt;&lt;</span><span class="sh">'</span><span class="no">EOF</span><span class="sh">'
+#!/bin/bash
+set -euo pipefail
+
+DOMAIN="nifi.sceneserver.net"
+LIVE="/etc/letsencrypt/live/</span><span class="nv">$DOMAIN</span><span class="sh">"
+NIFI_HOME="/root/nifi-2.0.0"
+NIFI_CONF="</span><span class="nv">$NIFI_HOME</span><span class="sh">/conf"
+
+# Password from a root-only env file — don't inline it here
+source /root/.secrets/nifi-keystore.env    # exports KEYSTORE_PASS=...
+
+# Only act on our cert, not any other cert in this letsencrypt install
+[[ "</span><span class="nv">$RENEWED_LINEAGE</span><span class="sh">" == "</span><span class="nv">$LIVE</span><span class="sh">" ]] || exit 0
+
+openssl pkcs12 -export </span><span class="se">\</span><span class="sh">
+  -in  "</span><span class="nv">$LIVE</span><span class="sh">/fullchain.pem" </span><span class="se">\</span><span class="sh">
+  -inkey "</span><span class="nv">$LIVE</span><span class="sh">/privkey.pem" </span><span class="se">\</span><span class="sh">
+  -name nifi </span><span class="se">\</span><span class="sh">
+  -out "</span><span class="nv">$NIFI_CONF</span><span class="sh">/keystore.p12" </span><span class="se">\</span><span class="sh">
+  -password pass:"</span><span class="nv">$KEYSTORE_PASS</span><span class="sh">"
+
+chown root:root "</span><span class="nv">$NIFI_CONF</span><span class="sh">/keystore.p12"
+chmod 600 "</span><span class="nv">$NIFI_CONF</span><span class="sh">/keystore.p12"
+
+# Restart — manual install:
+"</span><span class="nv">$NIFI_HOME</span><span class="sh">/bin/nifi.sh" restart
+# Or systemd: systemctl restart nifi
+</span><span class="no">EOF
+
+</span><span class="nb">chmod</span> +x /etc/letsencrypt/renewal-hooks/deploy/nifi-reload.sh
+</code></pre></div></div>
+
+<p>Password file, root-readable only:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tee</span> /root/.secrets/nifi-keystore.env <span class="o">&gt;</span>/dev/null <span class="o">&lt;&lt;</span><span class="sh">'</span><span class="no">EOF</span><span class="sh">'
+export KEYSTORE_PASS='&lt;same value as nifi.properties&gt;'
+</span><span class="no">EOF
+</span><span class="nb">chmod </span>600 /root/.secrets/nifi-keystore.env
+</code></pre></div></div>
+
+<p>Prove the whole chain works <strong>now</strong>, don’t wait 60 days to find out it doesn’t:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>certbot renew <span class="nt">--dry-run</span>
+</code></pre></div></div>
+
+<p>certbot runs a full dry-run renewal against LE staging. On success it invokes the deploy hook against your actual cert lineage — meaning your <code class="language-plaintext highlighter-rouge">nifi-reload.sh</code> will rebuild the p12 and restart NiFi as part of the dry-run. If NiFi comes back healthy and the cert on <code class="language-plaintext highlighter-rouge">:8443</code> is still valid afterwards, the renewal flow is proven end-to-end.</p>
+
+<hr />
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<ul>
+  <li><strong>Keystore load fails at NiFi startup</strong>: password mismatch between <code class="language-plaintext highlighter-rouge">nifi.properties</code> and the p12. Run the <code class="language-plaintext highlighter-rouge">keytool -list</code> from Step 4 against the new p12 before restarting — if it can open, NiFi will too.</li>
+  <li><strong>Cert renews, browser still sees old</strong>: TLS session cache. Fresh incognito window, or restart NiFi a second time to force new sessions.</li>
+  <li><strong>Deploy hook doesn’t fire on renewal</strong>: check <code class="language-plaintext highlighter-rouge">$RENEWED_LINEAGE</code> in the hook — if the guard is wrong for your domain, the hook silently skips. <code class="language-plaintext highlighter-rouge">journalctl -u certbot</code> will confirm the hook ran.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">Could not load module</code> after restart, in the logs</strong>: unrelated to certs — that’s the well-known NiFi Python-extensions symptom fixed by chowning the extensions dir to uid <code class="language-plaintext highlighter-rouge">10001</code>, not something the TLS swap causes.</li>
+  <li><strong>Login broken after restart</strong>: the old self-signed DN was actually an admin identity in <code class="language-plaintext highlighter-rouge">authorizers.xml</code>. Restore from the Step 2 snapshot, add the new DN as an additional Initial User Identity, restart.</li>
+</ul>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<p>This is the fastest path I know to a real cert on a host-native NiFi, with automatic renewal, no reverse proxy, no keystore drift, and no manual work between now and the eventual 5-year-out server retirement. The whole thing is ~40 minutes end-to-end on a fresh droplet, and once the deploy hook is in place there’s nothing to do at renewal time.</p>
+
+<p>The same shape works for any Java service that reads a PKCS12 keystore — Schema Registry, Kafka broker TLS, SSB, an internal Spring Boot service. The only thing that changes is the properties file the p12 gets wired into.</p>
+
+<hr />
+
+<h2 id="how-to-install-a-public-certificate-for-nifi">How to Install a Public Certificate for NiFi</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about How to Install a Public Certificate for NiFi please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#apache" class="page__taxonomy-item p-category" rel="tag">apache</a><span class="sep">, </span>
+    
+      <a href="/tags/#certbot" class="page__taxonomy-item p-category" rel="tag">certbot</a><span class="sep">, </span>
+    
+      <a href="/tags/#lets-encrypt" class="page__taxonomy-item p-category" rel="tag">lets-encrypt</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#security" class="page__taxonomy-item p-category" rel="tag">security</a><span class="sep">, </span>
+    
+      <a href="/tags/#ssl" class="page__taxonomy-item p-category" rel="tag">ssl</a><span class="sep">, </span>
+    
+      <a href="/tags/#tls" class="page__taxonomy-item p-category" rel="tag">tls</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-07-27T00:00:00-04:00">July 27, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=How+to+Install+a+Public+Certificate+for+NiFi%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-to-Install-a-Public-Certificate-for-NiFi%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-to-Install-a-Public-Certificate-for-NiFi%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Day-37-Claude-Code/" class="pagination--pager" title="Day 37 : Claude Code
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Day_37_Claude_Code.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Day-37-Claude-Code/" rel="permalink">Day 37 : Claude Code
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    A previous Claude Code session fanned out six planning subagents and every one of them died on the same 401. Here’s how I found the corpse, diagnosed the mod...
+    <a href="/blog/Day-37-Claude-Code/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/month1_claude_code.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Month-1-Claude-Code/" rel="permalink">Month 1: Claude Code
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    One month in with Claude Code — a summary of the work completed since Day 1, with pointers to the daily X articles that captured each step along the way.
+
+    <a href="/blog/Month-1-Claude-Code/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/edge_to_ai_for_dummies.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Edge-to-AI-for-Dummies/" rel="permalink">Edge to AI for Dummies
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    A practical roadmap for transforming data from edge devices into real-time AI use cases — architectures, tooling options, and tradeoffs.
+
+    <a href="/blog/Edge-to-AI-for-Dummies/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/EFM_on_Kubernetes.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/" rel="permalink">Cloudera Edge Flow Manager on Kubernetes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    A full recipe for running Cloudera Edge Flow Manager (EFM) on minikube with everything — agent classes, flows, agent binaries, and uploaded resources — survi...
+    <a href="/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>
