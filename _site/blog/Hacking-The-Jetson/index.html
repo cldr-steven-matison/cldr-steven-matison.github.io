@@ -1,0 +1,1203 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Hacking The Jetson - Cloudera Solutions Engineer</title>
+<meta name="description" content="Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Hacking The Jetson">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Hacking-The-Jetson/">
+
+
+  <meta property="og:description" content="Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-07-30T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Hacking-The-Jetson/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Hacking The Jetson">
+    <meta itemprop="description" content="Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI">
+    <meta itemprop="datePublished" content="2026-07-30T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Hacking-The-Jetson/" class="u-url" itemprop="url">Hacking The Jetson
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          22 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-07-30T00:00:00-04:00">
+            July 30, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article. Content and code are updating frequently until this notice is removed. The environment-sensor section in particular is paused on a hardware RMA.</p>
+
+<p>I bought an NVIDIA Jetson Orin Nano developer kit, dropped it into a Yahboom CubeNano case, and then spent a few weeks turning it into something between a desk toy and a real edge-AI node. It runs a MiNiFi C++ agent that reports into Cloudera Edge Flow Manager and produces to Kafka. It has a tiny OLED on the case that I hacked into a sci-fi strobe. It falls into a Matrix digital-rain screensaver when it’s idle. And it answers HTTP requests that launch things on its own physical display. This post is the whole build — the box, the hacks, the edge-AI plumbing, what broke, and what I’d do next. Every path, port, bus number, and I2C address below is real and taken off the live device (hostname <code class="language-plaintext highlighter-rouge">tunastreet</code>, an ARM Cortex-A78AE / Ampere Jetson Orin Nano on Ubuntu 24.04, JetPack/L4T R39).</p>
+
+<p><img src="/assets/images/Hack-The-Jetson.jpg" alt="Cloudera EFM with NVIDIA Jetson Orin Nano" width="640"></p>
+
+<p>This is the <em>build</em> post. The deep enterprise integration — persisted EFM on Kubernetes, MiNiFi binaries for Windows/Linux/Jetson, the full CSO stack next to it, model metrics into Prometheus — lives in its own companion writeups linked at the end. Here I’m showing you the box and everything I bolted onto it.</p>
+
+<h2 id="the-hardware">The hardware</h2>
+
+<p>Three parts stack up on my desk:</p>
+
+<ul>
+  <li>
+<strong><a href="https://www.amazon.com/dp/B0BZJTQ5YP">NVIDIA Jetson Orin Nano Super Developer Kit</a></strong> — the compute, and the reason this whole thing is worth doing. <strong>67 TOPS</strong> (Sparse INT8), a 1024-core Ampere GPU with 32 Tensor Cores, a 6-core Arm Cortex-A78AE CPU up to 1.7 GHz, 8GB of 128-bit LPDDR5 at 102 GB/s, in a 7W–25W envelope. NVIDIA lists it at <strong>$249</strong>. That’s a data-center-shaped AI stack on a board that draws less than a light bulb — plenty to run MiNiFi, drive a display, and front a nearby inference server at the same time.</li>
+  <li>
+<strong><a href="https://www.amazon.com/dp/B0GDFTZ64S">Jetson MINI Cube Nano case</a></strong> — the case (supports Jetson Nano / Orin Nano / Orin NX / Xavier NX / TX2 NX), with a 40-pin passthrough, a fan, and a small <strong>128×32 SSD1306 OLED</strong> on the header. The OLED is the thing that makes this build fun.</li>
+  <li>
+<strong><a href="https://www.amazon.com/dp/B08YDBKLDV">Waveshare Environment Sensor module</a></strong> — an I2C sensor board (ambient light, temp/humidity/pressure, 9-DOF IMU, UV, VOC) with its own 1.3” OLED, designed to stack on the Jetson Nano 40-pin header. This one is currently paused on an RMA — more on that below.</li>
+</ul>
+
+<p class="notice--info"><img class="emoji" title=":information_source:" alt=":information_source:" src="https://github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20"> <strong>Confirmed parts.</strong> Jetson Orin Nano Super Developer Kit — NVIDIA, ASIN B0BZJTQ5YP, $249, 67 TOPS. Jetson MINI Cube Nano case — ASIN B0GDFTZ64S. Waveshare Environment Sensors Module for Jetson Nano (I2C, 1.3” OLED) — ASIN B08YDBKLDV, also documented on the <a href="https://www.waveshare.com/wiki/Environment_Sensor_for_Jetson_Nano">Waveshare wiki</a>.</p>
+
+<h2 id="hack-1--the-cubenano-oled-from-stats-display-to-cordy-cept-strobe">Hack #1 — the CubeNano OLED, from stats display to CORDY CEPT strobe</h2>
+
+<p>The CubeNano case puts a 128×32 SSD1306 OLED on the 40-pin header, driven over I2C at <code class="language-plaintext highlighter-rouge">/dev/i2c-7</code>, address <code class="language-plaintext highlighter-rouge">0x3c</code>. Yahboom ships a stats loop for it. Mine lives in <code class="language-plaintext highlighter-rouge">~/CubeNano/oled.py</code>: it auto-probes I2C buses <code class="language-plaintext highlighter-rouge">[1, 0, 7, 8]</code> until it finds the panel, then writes four lines — CPU%, time, RAM, disk, IP — refreshing about 10× a second, managed by a systemd unit (<code class="language-plaintext highlighter-rouge">yahboom_oled.service</code>, enabled so it survives reboot).</p>
+
+<p>That’s the baseline. On top of it I built a second display mode: a full-screen black/white strobe at 0.25s intervals with bold, letter-spaced sci-fi text reading <strong><code class="language-plaintext highlighter-rouge">C O R D Y</code></strong> / <strong><code class="language-plaintext highlighter-rouge">C E P T</code></strong> in the Orbitron font. That’s <code class="language-plaintext highlighter-rouge">~/CubeNano/oled_strobe.py</code>.</p>
+
+<h3 id="symptom-an-os-update-wiped-the-strobe">Symptom: an OS update wiped the strobe</h3>
+
+<p>I ran an <code class="language-plaintext highlighter-rouge">apt</code> batch that pulled a glibc upgrade, which needs a reboot to take. Rebooted — and the OLED came back showing the plain CPU/RAM/IP stats screen, not my CORDY strobe.</p>
+
+<p>First instinct is “did I kill the panel?” I ruled out hardware in 30 seconds: <code class="language-plaintext highlighter-rouge">i2cdetect -y -r 7</code> still showed <code class="language-plaintext highlighter-rouge">0x3c</code> acking, and a live <code class="language-plaintext highlighter-rouge">Adafruit_SSD1306.begin()</code> against bus 7 succeeded with no exceptions. The panel and bus were never the problem.</p>
+
+<h3 id="diagnosis-i-never-made-the-strobe-survive-a-reboot">Diagnosis: I never made the strobe survive a reboot</h3>
+
+<p><code class="language-plaintext highlighter-rouge">yahboom_oled.service</code> is the only thing wired into systemd, and it runs <code class="language-plaintext highlighter-rouge">oled.py</code> (the stats display). <code class="language-plaintext highlighter-rouge">oled_strobe.py</code> I had only ever started by hand with <code class="language-plaintext highlighter-rouge">python3 oled_strobe.py &amp;</code>. A bare <code class="language-plaintext highlighter-rouge">&amp;</code> backgrounds a process in the current shell’s process group — which gets torn down when that shell exits. The reboot killed it, and only the systemd-managed stats display came back. Nothing to do with glibc; <em>any</em> reboot would have done it.</p>
+
+<h3 id="fix-detach-it-then-give-it-its-own-systemd-unit">Fix: detach it, then give it its own systemd unit</h3>
+
+<p>Immediate fix — kill the stats process and start the strobe fully detached so it survives the shell:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkill <span class="nt">-f</span> <span class="s2">"python3 /home/tunastreet/CubeNano/oled.py"</span>
+<span class="nb">cd</span> ~/CubeNano
+setsid <span class="nb">nohup </span>python3 <span class="nt">-u</span> oled_strobe.py <span class="o">&gt;</span> /tmp/oled_strobe.log 2&gt;&amp;1 &lt; /dev/null &amp;
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">setsid</code> is the part that matters — it puts the process in its own session so it doesn’t die with the launching shell. But that’s still just a background process; the next reboot blanks it again. The real fix is a dedicated systemd unit and retiring the stats one so they can’t fight over the same OLED on boot.</p>
+
+<p><code class="language-plaintext highlighter-rouge">~/CubeNano/cordy_oled.service</code>:</p>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Unit]</span>
+<span class="py">Description</span><span class="p">=</span><span class="s">cordy_oled strobe service</span>
+<span class="py">After</span><span class="p">=</span><span class="s">multi-user.target</span>
+
+<span class="nn">[Service]</span>
+<span class="py">Type</span><span class="p">=</span><span class="s">idle</span>
+<span class="py">User</span><span class="p">=</span><span class="s">tunastreet</span>
+<span class="py">ExecStart</span><span class="p">=</span><span class="s">/bin/sh -c "python3 /home/tunastreet/CubeNano/oled_strobe.py"</span>
+<span class="py">WorkingDirectory</span><span class="p">=</span><span class="s">/home/tunastreet</span>
+<span class="py">Restart</span><span class="p">=</span><span class="s">on-failure</span>
+<span class="py">RestartSec</span><span class="p">=</span><span class="s">2</span>
+
+<span class="nn">[Install]</span>
+<span class="py">WantedBy</span><span class="p">=</span><span class="s">multi-user.target</span>
+</code></pre></div></div>
+
+<p>Install it and disable the stats unit in one pass (<code class="language-plaintext highlighter-rouge">~/CubeNano/install_cordy_oled_service.sh</code>):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl disable <span class="nt">--now</span> yahboom_oled.service
+pkill <span class="nt">-f</span> oled_strobe.py
+<span class="nb">sudo cp</span> /home/tunastreet/CubeNano/cordy_oled.service /etc/systemd/system/cordy_oled.service
+<span class="nb">sudo </span>systemctl daemon-reload
+<span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="nt">--now</span> cordy_oled.service
+</code></pre></div></div>
+
+<p>To flip back to the stats display:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl disable <span class="nt">--now</span> cordy_oled.service
+<span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="nt">--now</span> yahboom_oled.service
+</code></pre></div></div>
+
+<p>I keep a few other renders in <code class="language-plaintext highlighter-rouge">~/CubeNano/</code> for the same panel: <code class="language-plaintext highlighter-rouge">oled_cordy.py</code> (static two-line CORDY/CEPT), <code class="language-plaintext highlighter-rouge">oled_cool.py</code> (a typewriter-reveal “WAKE UP… THE MATRIX HAS YOU…” boot message), and <code class="language-plaintext highlighter-rouge">oled_basic_test.py</code> (raw black/white/black sanity check to confirm the panel is healthy).</p>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Don’t persist a display process with a bare <code class="language-plaintext highlighter-rouge">&amp;</code>.</strong> It looks alive right up until the next reboot or logout, then it’s gone with no error anywhere to point at. If you want it to survive, it needs <code class="language-plaintext highlighter-rouge">setsid</code> (for the current session) and ultimately a systemd unit (for boot). And before you assume a blanked OLED is dead hardware, check whether the <em>right process</em> is even running — <code class="language-plaintext highlighter-rouge">i2cdetect</code> plus a live <code class="language-plaintext highlighter-rouge">begin()</code> is 30 seconds that saves you pulling the board off the header.</p>
+
+<p class="notice--info"><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> <strong><code class="language-plaintext highlighter-rouge">sudo</code> needs a real TTY.</strong> Every install step here is wrapped in a <code class="language-plaintext highlighter-rouge">bash ~/CubeNano/install_*.sh</code> one-liner on purpose — the automation driving this box can’t type a sudo password into an interactive prompt, so the <code class="language-plaintext highlighter-rouge">sudo</code> calls get committed into a script and run in one shot. Same pattern shows up everywhere on this device.</p>
+
+<h2 id="hack-2--a-matrix-digital-rain-screensaver-done-without-xscreensaver">Hack #2 — a Matrix digital-rain screensaver, done without xscreensaver</h2>
+
+<p>When the Jetson sits idle for two minutes, its monitor falls into a full-screen Matrix-style falling-code effect (binary <code class="language-plaintext highlighter-rouge">0</code>/<code class="language-plaintext highlighter-rouge">1</code>, canvas-based, with a small glowing clock in the corner). It’s a self-contained HTML file rendered by Chromium in kiosk mode, driven by a standalone idle-watcher — deliberately <em>not</em> xscreensaver.</p>
+
+<h3 id="why-not-xscreensaver">Why not xscreensaver</h3>
+
+<p>I started with xscreensaver’s <code class="language-plaintext highlighter-rouge">programs:</code> hack mechanism to launch Chromium. It was janky. xscreensaver hacks are supposed to render <em>into</em> a window ID that xscreensaver hands them so they stay correctly stacked. Chromium’s kiosk mode always opens its own independent top-level window, so it rendered <em>underneath</em> xscreensaver’s black saver window. The screen just looked black, and moving the mouse flashed the scene for a moment right before xscreensaver killed the child.</p>
+
+<p>So I ditched the hack model. <code class="language-plaintext highlighter-rouge">xscreensaver</code> is stopped, <code class="language-plaintext highlighter-rouge">~/.xscreensaver</code> has <code class="language-plaintext highlighter-rouge">mode: off</code>, and a systemd <em>user</em> service polls real idle time and manages Chromium directly — no competing window ever gets created.</p>
+
+<h3 id="the-pieces">The pieces</h3>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">~/matrix-screensaver.html</code> — the scene, self-contained, no network calls, works as a <code class="language-plaintext highlighter-rouge">file://</code> URL.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">~/.local/bin/lofi-idle-watcher.sh</code> — polls <code class="language-plaintext highlighter-rouge">xprintidle</code>; once idle crosses the threshold it launches Chromium kiosk at the HTML file and force-fullscreens the window. Kills Chromium the moment activity resumes.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">~/.config/systemd/user/lofi-idle-watcher.service</code> — runs the watcher as a persistent user service; inherits <code class="language-plaintext highlighter-rouge">DISPLAY</code>/<code class="language-plaintext highlighter-rouge">XAUTHORITY</code> from the systemd user environment.</li>
+</ul>
+
+<p>Current idle threshold is 2 minutes (<code class="language-plaintext highlighter-rouge">IDLE_THRESHOLD_MS</code> in the watcher).</p>
+
+<p>The rain itself is written to be cheap on the Nano’s GPU. An early version redrew a 90-character trail every frame across ~200 columns — roughly 15k <code class="language-plaintext highlighter-rouge">fillText</code> calls per frame — and visibly bogged down. The current version draws exactly one new glyph per column per frame and lets a very faint semi-transparent black overlay (<code class="language-plaintext highlighter-rouge">rgba(0,0,0,0.035)</code>) fade the trail. That’s the actual technique behind the original effect, and it’s roughly 60× cheaper per frame while still producing a long, slow-fading trail. Runs at a fixed 24 FPS via <code class="language-plaintext highlighter-rouge">setInterval</code> (not <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code>) to keep the draw rate cheap and independent of monitor refresh.</p>
+
+<h3 id="three-failure-modes-worth-knowing-all-fixed-all-verified">Three failure modes worth knowing (all fixed, all verified)</h3>
+
+<p>Chromium under kiosk mode fought me three separate ways, and every fix is worth carrying to any Chromium-kiosk build:</p>
+
+<ol>
+  <li>
+<strong>Silent failure to launch — no window, no error.</strong> Chromium was using its default shared snap profile. Every kill was an abrupt <code class="language-plaintext highlighter-rouge">pkill</code>, which could leave a stale <code class="language-plaintext highlighter-rouge">SingletonLock</code> pointing at a dead PID. On the next launch Chromium tried to hand the URL to what it thought was a live instance over a dead socket, failed silently, and just exited. <strong>Fix:</strong> give the kiosk its own isolated <code class="language-plaintext highlighter-rouge">--user-data-dir</code> (<code class="language-plaintext highlighter-rouge">~/snap/chromium/common/lofi-screensaver-profile</code>) and clear stale <code class="language-plaintext highlighter-rouge">Singleton*</code> files before each launch. The profile dir has to live somewhere the snap confinement can write — <code class="language-plaintext highlighter-rouge">~/snap/chromium/common/</code> works, <code class="language-plaintext highlighter-rouge">/run/user/1000/</code> does not (Chromium throws a “Failed To Create Data Directory” dialog storm and silently falls back to the shared profile).</li>
+  <li>
+<strong>Stacked/duplicate windows.</strong> <code class="language-plaintext highlighter-rouge">stop_saver()</code> matched the kill on the target URL (<code class="language-plaintext highlighter-rouge">pkill -f matrix-screensaver.html</code>) — but that string only appears in the top-level browser process’s argv, not its zygote/renderer/gpu children. So a kill removed only the parent; the children and their window survived, and the next tick launched a second instance on top. <strong>Fix:</strong> match/kill on <code class="language-plaintext highlighter-rouge">--user-data-dir=$PROFILE_DIR</code> instead — every process in Chromium’s tree carries that flag, so one <code class="language-plaintext highlighter-rouge">pkill -f</code> takes down the whole tree.</li>
+  <li>
+<strong>Window comes up the wrong size.</strong> Chromium’s own <code class="language-plaintext highlighter-rouge">--kiosk</code>/<code class="language-plaintext highlighter-rouge">--start-fullscreen</code>/<code class="language-plaintext highlighter-rouge">--window-position=0,0</code> flags don’t reliably get Mutter to grant real X11 fullscreen — the window came up at, say, <code class="language-plaintext highlighter-rouge">1854×1011</code> at <code class="language-plaintext highlighter-rouge">80,118</code> instead of <code class="language-plaintext highlighter-rouge">1920×1080</code> at <code class="language-plaintext highlighter-rouge">0,0</code>. <strong>Fix:</strong> after launch, poll for the window and force <code class="language-plaintext highlighter-rouge">_NET_WM_STATE_FULLSCREEN</code> with <code class="language-plaintext highlighter-rouge">wmctrl</code>. The poll has to be patient — right after a reboot, or with apt/snap updates running, Chromium can take 7+ seconds to create its window, well past a naive 5-second timeout. I extended the poll loop to up to a minute (240 × 0.25s).</li>
+</ol>
+
+<p>To tweak it (glyph size/speed/color, or the idle threshold) edit the HTML or the watcher script, then:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nt">--user</span> restart lofi-idle-watcher.service
+</code></pre></div></div>
+
+<h2 id="the-edge-ai-plumbing--minifi-c--cloudera-efm--kafka">The edge-AI plumbing — MiNiFi C++ + Cloudera EFM + Kafka</h2>
+
+<p>This is where the Jetson stops being a toy. It runs a <strong>MiNiFi C++ agent</strong> (<code class="language-plaintext highlighter-rouge">nifi-minifi-cpp-1.26.02</code>, agent class <code class="language-plaintext highlighter-rouge">NvidiaNano</code>) that reports into a remote Cloudera <strong>Edge Flow Manager</strong> for centralized flow management, and produces data to Kafka. EFM and Kafka run on my Windows desktop across the LAN; the Jetson enrolls over the network and shows up in the EFM UI as a manageable agent.</p>
+
+<p>Install layout on the device:</p>
+
+<ul>
+  <li>Install dir: <code class="language-plaintext highlighter-rouge">/home/tunastreet/nifi-minifi-cpp-1.26.02</code>, binary <code class="language-plaintext highlighter-rouge">bin/minifi</code>
+</li>
+  <li>Managed by systemd (<code class="language-plaintext highlighter-rouge">minifi.service</code>, enabled, starts on boot)</li>
+  <li>Config in <code class="language-plaintext highlighter-rouge">conf/</code>: <code class="language-plaintext highlighter-rouge">minifi.properties</code> (C2/EFM settings), <code class="language-plaintext highlighter-rouge">minifi.properties.d/</code> drop-ins, and <code class="language-plaintext highlighter-rouge">config.yml</code> (the actual flow definition)</li>
+</ul>
+
+<p>EFM (C2) connection:</p>
+
+<ul>
+  <li>Server: <code class="language-plaintext highlighter-rouge">http://192.168.1.121:10090/efm/api</code> (heartbeat at <code class="language-plaintext highlighter-rouge">.../c2-protocol/heartbeat</code>)</li>
+  <li>Agent class <code class="language-plaintext highlighter-rouge">NvidiaNano</code>, heartbeat period 5000ms</li>
+  <li>Kafka bootstrap <code class="language-plaintext highlighter-rouge">192.168.1.121:31623</code>, producer client id <code class="language-plaintext highlighter-rouge">minifi-agent-nvidia</code>
+</li>
+</ul>
+
+<p>Health check from the device:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl status minifi <span class="nt">--no-pager</span>
+<span class="nb">tail</span> <span class="nt">-f</span> /home/tunastreet/nifi-minifi-cpp-1.26.02/logs/minifi-app.log | <span class="nb">grep</span> <span class="nt">-i</span> <span class="s2">"heartbeat</span><span class="se">\|</span><span class="s2">kafka"</span>
+
+<span class="c"># port reachability, no nc needed</span>
+<span class="nb">timeout </span>3 bash <span class="nt">-c</span> <span class="s2">"cat &lt; /dev/null &gt; /dev/tcp/192.168.1.121/10090"</span> <span class="o">&amp;&amp;</span> <span class="nb">echo </span>open <span class="o">||</span> <span class="nb">echo </span>closed
+<span class="nb">timeout </span>3 bash <span class="nt">-c</span> <span class="s2">"cat &lt; /dev/null &gt; /dev/tcp/192.168.1.121/31623"</span> <span class="o">&amp;&amp;</span> <span class="nb">echo </span>open <span class="o">||</span> <span class="nb">echo </span>closed
+</code></pre></div></div>
+
+<p>This build carries a few extra C++ extensions staged into it — <code class="language-plaintext highlighter-rouge">execute-process</code>, <code class="language-plaintext highlighter-rouge">lua-script</code>, <code class="language-plaintext highlighter-rouge">python-script</code>, <code class="language-plaintext highlighter-rouge">opc</code>, and <code class="language-plaintext highlighter-rouge">llamacpp</code> — which pushes it to <strong>79 processors versus the stock 74</strong>. The <code class="language-plaintext highlighter-rouge">python-script</code> and <code class="language-plaintext highlighter-rouge">llamacpp</code> extensions are the ones that make “AI at the edge” real: you can run Python inside the agent, or point it at a local model.</p>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>A remote EFM/Kafka restart has a recognizable signature — don’t chase it.</strong> When I restart the stack on the Windows side, the Jetson’s <code class="language-plaintext highlighter-rouge">minifi-app.log</code> fills with Kafka <code class="language-plaintext highlighter-rouge">Connection refused</code> on every broker, sometimes with a <code class="language-plaintext highlighter-rouge">"verify that security.protocol is correctly configured"</code> hint. That hint is noise from the broker bouncing, not an auth change. It settles on its own within ~15–20 minutes of the ports reopening. No Jetson-side action needed.</p>
+
+<p>For the full install story — persisted EFM on Kubernetes, staging the Windows/Linux/Jetson binaries, the WSL2 mirrored-vs-NAT networking that lets the Jetson reach EFM across the LAN — see the companion posts linked at the end. Here I care about what the agent <em>does</em>.</p>
+
+<h2 id="python-over-http--making-the-edge-box-do-things-on-command">Python over HTTP — making the edge box do things on command</h2>
+
+<p>The most fun endpoint on this Jetson: <code class="language-plaintext highlighter-rouge">POST :8081/streamChatListener</code> with a body of <code class="language-plaintext highlighter-rouge">{"streamer":"&lt;name&gt;"}</code> opens Chromium to <code class="language-plaintext highlighter-rouge">https://www.twitch.tv/&lt;name&gt;</code> on the Jetson’s <em>physical</em> display, fullscreen. It’s a MiNiFi <code class="language-plaintext highlighter-rouge">ListenHTTP</code> processor feeding an <code class="language-plaintext highlighter-rouge">ExecuteScript</code> that runs <code class="language-plaintext highlighter-rouge">launch_stream.py</code>. Simple idea. It took four stacked bugs to get right, and each one is a lesson.</p>
+
+<h3 id="bug-1--listenhttp-dropped-the-request-before-python-ever-saw-it">Bug 1 — <code class="language-plaintext highlighter-rouge">ListenHTTP</code> dropped the request before Python ever saw it</h3>
+
+<p>The endpoint returned an HTTP response but Chromium never opened. The log had the answer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[warning] ListenHTTP buffer is NOT full 1/5, 'POST' request for
+'/streamChatListener' uri was dropped
+</code></pre></div></div>
+
+<p>I’d copy-configured the listener from another endpoint with <code class="language-plaintext highlighter-rouge">Batch Size: 5</code> / <code class="language-plaintext highlighter-rouge">Buffer Size: 5</code>. MiNiFi won’t turn a request into a FlowFile until the buffer fills — so a single test POST just sat there and got dropped. The endpoint I copied from “worked” only because it gets hammered with back-to-back requests that fill the buffer. <strong>Fix:</strong> <code class="language-plaintext highlighter-rouge">Batch Size: 1</code> / <code class="language-plaintext highlighter-rouge">Buffer Size: 1</code>, pushed via EFM.</p>
+
+<h3 id="bug-2--an-xauthority-placeholder-that-was-never-filled-in">Bug 2 — an <code class="language-plaintext highlighter-rouge">XAUTHORITY</code> placeholder that was never filled in</h3>
+
+<p>The script had a literal, angle-brackets-and-all placeholder:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">env</span><span class="p">[</span><span class="s">"XAUTHORITY"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"/home/&lt;jetson-desktop-user&gt;/.Xauthority"</span>  <span class="c1"># fill in real desktop user
+</span></code></pre></div></div>
+
+<p>That path never existed. The real values, pulled from the live GNOME session’s own process environment:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">env</span><span class="p">[</span><span class="s">"DISPLAY"</span><span class="p">]</span> <span class="o">=</span> <span class="s">":0"</span>
+<span class="n">env</span><span class="p">[</span><span class="s">"XAUTHORITY"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"/run/user/1000/gdm/Xauthority"</span>
+</code></pre></div></div>
+
+<h3 id="bug-3--the-agent-ran-as-root-the-desktop-is-uid-1000">Bug 3 — the agent ran as root, the desktop is uid 1000</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ps</code> showed <code class="language-plaintext highlighter-rouge">minifi</code> running as <code class="language-plaintext highlighter-rouge">root</code> (no <code class="language-plaintext highlighter-rouge">User=</code> in the unit), while the GNOME/X11 session belongs to <code class="language-plaintext highlighter-rouge">tunastreet</code> (uid 1000). Root’s environment has no <code class="language-plaintext highlighter-rouge">XDG_RUNTIME_DIR</code> or D-Bus session address, which snap-confined Chromium needs. <strong>Fix:</strong> add <code class="language-plaintext highlighter-rouge">User=tunastreet</code> to the systemd unit. That immediately caused a follow-on: the service crash-looped with <code class="language-plaintext highlighter-rouge">Failed opening file .../minifi-app.log for writing: Permission denied</code>, because the logs and RocksDB state dirs had been created <code class="language-plaintext highlighter-rouge">root:root</code> while the agent ran as root. <code class="language-plaintext highlighter-rouge">sudo chown -R tunastreet:tunastreet /home/tunastreet/nifi-minifi-cpp-1.26.02</code> and a restart brought it up clean.</p>
+
+<h3 id="bug-4--chromium-opened-but-wouldnt-go-fullscreen">Bug 4 — Chromium opened but wouldn’t go fullscreen</h3>
+
+<p>Same failure mode as the screensaver: Chromium’s own fullscreen flags don’t get Mutter to grant real X11 fullscreen. The window came up at <code class="language-plaintext highlighter-rouge">912×991</code> at <code class="language-plaintext highlighter-rouge">88,122</code> on a 1920×1080 screen. The fix has the same shape as the screensaver’s — after launch, background a detached poller that waits (up to 240 × 0.25s) for a window title ending in <code class="language-plaintext highlighter-rouge">" - Twitch - Chromium"</code>, then <code class="language-plaintext highlighter-rouge">wmctrl -r "&lt;title&gt;" -b add,fullscreen</code>, then <code class="language-plaintext highlighter-rouge">xdotool</code> clicks the video center and sends <code class="language-plaintext highlighter-rouge">f</code> to trigger Twitch’s own player fullscreen. Two things I learned live:</p>
+
+<ul>
+  <li>The poll-and-fullscreen step <strong>must</strong> be a backgrounded/detached subprocess, not inline in <code class="language-plaintext highlighter-rouge">onTrigger</code>. MiNiFi’s <code class="language-plaintext highlighter-rouge">ExecuteScript</code> runs on a single shared thread — a blocking wait of up to a minute would stall the whole flow (heartbeats, Kafka, the other listener).</li>
+  <li>Forcing fullscreen via <code class="language-plaintext highlighter-rouge">wmctrl</code> bypasses Chromium’s own fullscreen toggle, so <strong>F11/Esc won’t undo it</strong>. If a test window gets stuck fullscreen, the escape hatch is <code class="language-plaintext highlighter-rouge">wmctrl -r "&lt;title&gt;" -b remove,fullscreen</code>, not the keyboard.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">xdotool</code> wasn’t installed on this Jetson (only <code class="language-plaintext highlighter-rouge">wmctrl</code> was) — <code class="language-plaintext highlighter-rouge">sudo apt-get install -y xdotool</code> fixed that. Verified end to end: <code class="language-plaintext highlighter-rouge">curl -X POST :8081/streamChatListener -d '{"streamer":"xqc"}'</code> → HTTP 200 → a real fullscreen Chromium window on the Jetson’s display, both window-manager and Twitch-player fullscreen applied, no manual steps.</p>
+
+<p class="notice--info"><img class="emoji" title=":information_source:" alt=":information_source:" src="https://github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20"> <strong><code class="language-plaintext highlighter-rouge">ListenHTTP</code> on MiNiFi C++ is fire-and-forget.</strong> There’s no <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code>/<code class="language-plaintext highlighter-rouge">HandleHttpResponse</code> pair — that’s Java-NiFi only. The caller gets its response the instant the request lands, <em>before</em> your script runs. Design for async: don’t wait on the HTTP response for the result of the work. My “How to AI with MiNiFi” post goes deep on this and on the two different Python paths (<code class="language-plaintext highlighter-rouge">ExecuteScript</code> vs <code class="language-plaintext highlighter-rouge">ExecutePythonProcessor</code>) that trip everyone up.</p>
+
+<h2 id="the-environment-sensor--honest-status-paused-on-an-rma">The environment sensor — honest status: paused on an RMA</h2>
+
+<p>I wanted the Jetson to read its own environment — temp, humidity, pressure, light, UV, motion, air quality — so I added a Waveshare Environment Sensor module (I2C, with its own 1.3” OLED) on the same header. Most of it works. The board’s OLED does not, and after a full diagnosis I’m treating it as a dead unit.</p>
+
+<p>What responds on I2C bus 7:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Chip</th>
+      <th>Function</th>
+      <th>Address</th>
+      <th>Working?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TSL25911FN</td>
+      <td>ambient light</td>
+      <td><code class="language-plaintext highlighter-rouge">0x29</code></td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>BME280</td>
+      <td>temp / humidity / pressure</td>
+      <td><code class="language-plaintext highlighter-rouge">0x76</code></td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>ICM20948</td>
+      <td>9-DOF IMU</td>
+      <td><code class="language-plaintext highlighter-rouge">0x68</code></td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>LTR390-UV</td>
+      <td>UV / IR</td>
+      <td><code class="language-plaintext highlighter-rouge">0x53</code></td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>SGP40</td>
+      <td>VOC gas</td>
+      <td><code class="language-plaintext highlighter-rouge">0x59</code></td>
+      <td>Needs a wake command (not a fault)</td>
+    </tr>
+    <tr>
+      <td>SH1106</td>
+      <td>1.3” OLED</td>
+      <td><code class="language-plaintext highlighter-rouge">0x3C</code></td>
+      <td><strong>No — hard NACK, every method</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The OLED never ACKs at the I2C protocol level — a hard NACK, meaning zero bytes reach the chip’s registers. I ruled out software three ways (the vendor’s own driver with its full GPIO reset sequence, the modern <code class="language-plaintext highlighter-rouge">luma.oled</code> driver, and manual <code class="language-plaintext highlighter-rouge">i2cget</code>/<code class="language-plaintext highlighter-rouge">i2cdetect</code> probing) — all fail identically with <code class="language-plaintext highlighter-rouge">OSError: [Errno 121] Remote I/O error</code>. That’s not a driver bug; nothing in software can produce an ACK from a chip that isn’t listening. On this board the SGP40 (<code class="language-plaintext highlighter-rouge">0x59</code>) was also dead on an earlier unit, and the schematic shows the OLED sits on a separate sub-board joined by a 5-pin ribbon (5V/GND/SDA/SCL/RST) with its own local 3.3V regulator — a bad ribbon contact or dead sub-board matches the symptom exactly. Two independent components dead on a fresh board points at a DOA/defective unit, not config.</p>
+
+<p>There were real, reusable software fixes along the way, kept for the replacement unit: the vendor demo is Python 2 written against Raspberry Pi assumptions, so every driver hardcodes <code class="language-plaintext highlighter-rouge">smbus.SMBus(1)</code> (patched to <code class="language-plaintext highlighter-rouge">SMBus(7)</code> for the Jetson’s bus), and <code class="language-plaintext highlighter-rouge">SH1106.py</code> used Python-2-only <code class="language-plaintext highlighter-rouge">xrange</code> and float division (<code class="language-plaintext highlighter-rouge">self.height / 8</code> → <code class="language-plaintext highlighter-rouge">// 8</code>).</p>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Two OLEDs on one bus will collide.</strong> The CubeNano OLED and the Waveshare OLED both default to <code class="language-plaintext highlighter-rouge">0x3C</code>. When a healthy Waveshare unit arrives and I stack both, one of them has to move to <code class="language-plaintext highlighter-rouge">0x3D</code> via its D/C# address jumper. Not a problem today only because the Waveshare OLED is dead — it’ll be real the moment there are two live panels on <code class="language-plaintext highlighter-rouge">/dev/i2c-7</code>.</p>
+
+<p>Status today: the Waveshare board is set aside, the Yahboom CubeNano board is restacked alone, <code class="language-plaintext highlighter-rouge">yahboom_oled.service</code> (or the CORDY strobe) is back on its OLED, and a replacement Waveshare unit is inbound. The four working sensors are ready to feed data whenever I wire them into a MiNiFi flow.</p>
+
+<h2 id="whats-next">What’s next</h2>
+
+<p>The build isn’t done. The direction it’s going:</p>
+
+<ul>
+  <li>
+<strong>Environment data into the flow.</strong> Wire BME280 / TSL2591 / LTR390 / ICM20948 readings into a MiNiFi Python processor and produce them to Kafka alongside everything else — the Jetson reporting its own room conditions to the same stack it manages flows from.</li>
+  <li>
+<strong>A buzzer and more I2C peripherals</strong> on the header for physical alerts driven by flow conditions.</li>
+  <li>
+<strong>Robotics and messaging.</strong> App-to-robot messaging over Telegram, a robot camera streamed to Twitch, live-streaming robots — the <code class="language-plaintext highlighter-rouge">streamChat</code> HTTP-to-display pattern already proves the shape: an HTTP endpoint that makes the physical device do something.</li>
+  <li>
+<strong>Metrics and analytics.</strong> System + processor + model metrics from the edge agent into the Prometheus instance inside the CSO stack, the same way the enterprise integration post does it for the cluster.</li>
+  <li>
+<strong>Bigger local models.</strong> The <code class="language-plaintext highlighter-rouge">llamacpp</code> extension is already staged in this agent. The natural next step up the ladder is a real local-AI workstation (an NVIDIA DGX Spark class box) for the heavy inference, with the Jetson as the always-on edge node in front of it.</li>
+</ul>
+
+<h2 id="what-not-to-do--the-traps-in-one-place">What NOT to do — the traps in one place</h2>
+
+<ul>
+  <li>
+<strong>Don’t persist a display process with a bare <code class="language-plaintext highlighter-rouge">&amp;</code>.</strong> It survives until the next reboot/logout, then vanishes with no error. Use <code class="language-plaintext highlighter-rouge">setsid</code>, then a systemd unit.</li>
+  <li>
+<strong>Don’t assume a blank OLED is dead hardware</strong> before checking whether the right <em>process</em> is running and whether the address ACKs (<code class="language-plaintext highlighter-rouge">i2cdetect -y -r 7</code>).</li>
+  <li>
+<strong>Don’t copy a <code class="language-plaintext highlighter-rouge">ListenHTTP</code> config with <code class="language-plaintext highlighter-rouge">Buffer Size &gt; 1</code></strong> onto an endpoint that gets single requests — MiNiFi drops the request until the buffer fills.</li>
+  <li>
+<strong>Don’t run the agent as root against a user’s desktop session.</strong> Set <code class="language-plaintext highlighter-rouge">User=</code> to the desktop uid, and fix the log/state dir ownership afterward.</li>
+  <li>
+<strong>Don’t block inside <code class="language-plaintext highlighter-rouge">ExecuteScript</code></strong> — its thread is shared with the whole flow. Background anything that waits.</li>
+  <li>
+<strong>Don’t force fullscreen with <code class="language-plaintext highlighter-rouge">wmctrl</code> and expect Esc to undo it</strong> — use <code class="language-plaintext highlighter-rouge">wmctrl ... -b remove,fullscreen</code>.</li>
+  <li>
+<strong>Don’t stack two <code class="language-plaintext highlighter-rouge">0x3C</code> OLEDs</strong> without moving one to <code class="language-plaintext highlighter-rouge">0x3D</code> first.</li>
+</ul>
+
+<h2 id="terminal-history">Terminal History</h2>
+
+<p>The recipe above is the clean path. Here’s the real trail off the device — the actual commands, in roughly the order I ran them, wrong turns and all. Every path, port, and bus number is live.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> CubeNano OLED: is the panel even there? <span class="nt">---</span>
+<span class="gp">i2cdetect -y -r 7                                 #</span><span class="w"> </span>0x3c ack <span class="o">=</span> SSD1306 present on bus 7
+<span class="gp">python3 ~/CubeNano/oled.py debug                  #</span><span class="w"> </span>init prints <span class="k">for </span>the stats loop
+<span class="gp">python3 ~/CubeNano/oled.py clear                  #</span><span class="w"> </span>blank it
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> the CORDY strobe, and why it kept vanishing on reboot <span class="nt">---</span>
+<span class="gp">python3 oled_strobe.py &amp;                          #</span><span class="w"> </span>&lt;- the mistake: bare &amp; dies with the shell on reboot
+<span class="gp">#</span><span class="w"> </span>after a glibc-upgrade reboot the stats screen came back, not the strobe. ruled out hardware first:
+<span class="gp">i2cdetect -y -r 7                                 #</span><span class="w"> </span>0x3c still acks -&gt; panel/bus fine, it was the process
+<span class="go">pkill -f "python3 /home/tunastreet/CubeNano/oled.py"
+cd ~/CubeNano
+</span><span class="gp">setsid nohup python3 -u oled_strobe.py &gt;</span><span class="w"> </span>/tmp/oled_strobe.log 2&gt;&amp;1 &lt; /dev/null &amp;   <span class="c"># setsid = survives the shell</span>
+<span class="gp">#</span><span class="w"> </span>real fix: give the strobe its own unit, retire the stats one <span class="o">(</span><span class="nb">sudo </span>scripted - no TTY <span class="k">for </span>the password<span class="o">)</span>
+<span class="go">bash ~/CubeNano/install_cordy_oled_service.sh
+</span><span class="gp">systemctl is-active cordy_oled.service ;</span><span class="w"> </span>systemctl is-enabled cordy_oled.service
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> Matrix screensaver <span class="o">(</span>systemd USER service, not root<span class="o">)</span> <span class="nt">---</span>
+<span class="go">systemctl --user status lofi-idle-watcher.service
+</span><span class="gp">systemctl --user restart lofi-idle-watcher.service    #</span><span class="w"> </span>after editing the html or IDLE_THRESHOLD_MS
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> MiNiFi C++ agent health <span class="nt">---</span>
+<span class="go">systemctl status minifi --no-pager
+tail -f /home/tunastreet/nifi-minifi-cpp-1.26.02/logs/minifi-app.log | grep -i "heartbeat\|kafka"
+</span><span class="gp">#</span><span class="w"> </span>EFM + Kafka live on the Windows desktop across the LAN - check the ports, no nc needed:
+<span class="gp">timeout 3 bash -c "cat &lt; /dev/null &gt;</span><span class="w"> </span>/dev/tcp/192.168.1.121/10090<span class="s2">" &amp;&amp; echo open || echo closed   # EFM
+</span><span class="gp">timeout 3 bash -c "cat &lt; /dev/null &gt;</span><span class="w"> </span><span class="s2">/dev/tcp/192.168.1.121/31623"</span> <span class="o">&amp;&amp;</span> <span class="nb">echo </span>open <span class="o">||</span> <span class="nb">echo </span>closed   <span class="c"># Kafka bootstrap</span>
+<span class="gp">#</span><span class="w"> </span>note: a burst of Kafka <span class="s2">"Connection refused"</span> right after a remote restart is NOT an auth problem - it settles <span class="k">in</span> ~15-20 min
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> native Prometheus publisher on the edge <span class="o">(</span>port 9936 on the Nano itself<span class="o">)</span> <span class="nt">---</span>
+<span class="go">ss -tlnp | grep 9936
+</span><span class="gp">curl -s http://127.0.0.1:9936/metrics | wc -l     #</span><span class="w"> </span>204 lines <span class="o">=</span> publisher up
+<span class="gp">sudo systemctl restart minifi                     #</span><span class="w"> </span>only reliable apply path - needs the interactive <span class="nb">sudo </span>password
+<span class="go">
+</span><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> streamChat: HTTP -&gt; Chromium -&gt; Twitch on the physical display <span class="nt">---</span>
+<span class="gp">sudo apt-get install -y xdotool                   #</span><span class="w"> </span>only wmctrl was installed<span class="p">;</span> the fullscreen fix needs both
+<span class="go">curl -X POST http://localhost:8081/streamChatListener -d '{"streamer":"xqc"}'
+</span><span class="gp">ps -ef | grep chromium                            #</span><span class="w"> </span>confirm it launched as tunastreet, not root
+<span class="gp">wmctrl -l                                          #</span><span class="w"> </span>find the <span class="s2">"&lt;name&gt; - Twitch - Chromium"</span> window
+<span class="go">wmctrl -r "xQc - Twitch - Chromium" -b add,fullscreen
+</span><span class="gp">wmctrl -r "xQc - Twitch - Chromium" -b remove,fullscreen   #</span><span class="w"> </span>&lt;- ESCAPE HATCH: Esc/F11 won<span class="s1">'t undo a wmctrl fullscreen
+</span><span class="go">
+</span><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> Waveshare <span class="nb">env </span>sensor: diagnosing the dead OLED <span class="nt">---</span>
+<span class="gp">i2cdetect -y -r 7                                  #</span><span class="w"> </span>0x29/0x53/0x68/0x76 answer<span class="p">;</span> 0x3c NACKs every <span class="nb">time</span>
+<span class="gp">sudo shutdown -h now                               #</span><span class="w"> </span>pull the Yahboom board to <span class="nb">test </span>the Waveshare OLED alone
+<span class="gp">pip3 install --user --break-system-packages luma.oled   #</span><span class="w"> </span>2nd independent driver - fails identically <span class="o">(</span>Errno 121<span class="o">)</span>
+<span class="gp">gpioinfo | grep -i PY.03                            #</span><span class="w"> </span>confirm BCM24/OLED_RST line is free, not held <span class="k">in </span>reset
+<span class="gp">#</span><span class="w"> </span>conclusion: hard I2C NACK before any driver runs <span class="o">=</span> DOA unit, not software. RMA it.
+</code></pre></div></div>
+
+<h2 id="appendix">Appendix</h2>
+
+<p>The reusable operational pieces, grouped by purpose. These are the “your exact command” forms — copy-paste ready.</p>
+
+<h4 id="1-install-the-cordy-strobe-as-a-service-retire-the-stats-display">1. Install the CORDY strobe as a service, retire the stats display</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl disable <span class="nt">--now</span> yahboom_oled.service
+pkill <span class="nt">-f</span> oled_strobe.py
+<span class="nb">sudo cp</span> /home/tunastreet/CubeNano/cordy_oled.service /etc/systemd/system/cordy_oled.service
+<span class="nb">sudo </span>systemctl daemon-reload
+<span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="nt">--now</span> cordy_oled.service
+</code></pre></div></div>
+
+<p>Flip back to the stats display:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl disable <span class="nt">--now</span> cordy_oled.service
+<span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="nt">--now</span> yahboom_oled.service
+</code></pre></div></div>
+
+<h4 id="2-minifi-agent-service-control">2. MiNiFi agent service control</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># minifi.sh (preferred) — both the script and systemctl work</span>
+<span class="nb">sudo</span> /home/tunastreet/nifi-minifi-cpp-1.26.02/bin/minifi.sh start
+<span class="nb">sudo</span> /home/tunastreet/nifi-minifi-cpp-1.26.02/bin/minifi.sh stop
+<span class="nb">sudo</span> /home/tunastreet/nifi-minifi-cpp-1.26.02/bin/minifi.sh restart
+<span class="nb">sudo</span> /home/tunastreet/nifi-minifi-cpp-1.26.02/bin/minifi.sh status
+
+<span class="nb">sudo </span>systemctl restart minifi        <span class="c"># the only reliable apply-a-config-change path</span>
+systemctl status minifi <span class="nt">--no-pager</span>
+</code></pre></div></div>
+
+<h4 id="3-full-clean-reinstall-of-the-minifi-agent">3. Full clean reinstall of the MiNiFi agent</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># remove completely</span>
+<span class="nb">sudo </span>pkill <span class="nt">-9</span> minifi
+<span class="nb">sudo </span>systemctl stop minifi 2&gt;/dev/null
+<span class="nb">sudo </span>systemctl disable minifi 2&gt;/dev/null
+<span class="nb">sudo rm</span> <span class="nt">-f</span> /usr/local/lib/systemd/system/minifi.service
+<span class="nb">sudo </span>systemctl daemon-reload
+<span class="nb">sudo rm</span> <span class="nt">-rf</span> /home/tunastreet/nifi-minifi-cpp-1.26.02
+<span class="nb">rm</span> <span class="nt">-rf</span> ~/.cache/minifi ~/.config/minifi ~/.local/share/minifi
+<span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/minifi 2&gt;/dev/null
+
+<span class="c"># reinstall (after re-extracting the tarball to the same path)</span>
+<span class="nb">sudo</span> /home/tunastreet/nifi-minifi-cpp-1.26.02/bin/minifi.sh <span class="nb">install</span>
+
+<span class="c"># run as the desktop user (uid 1000), not root — add `User=tunastreet` to the unit, then fix ownership</span>
+<span class="nb">sudo chown</span> <span class="nt">-R</span> tunastreet:tunastreet /home/tunastreet/nifi-minifi-cpp-1.26.02
+<span class="nb">sudo </span>systemctl daemon-reload
+<span class="nb">sudo </span>systemctl restart minifi
+</code></pre></div></div>
+
+<h4 id="4-native-prometheus-publisher-on-the-edge-agent">4. Native Prometheus publisher on the edge agent</h4>
+
+<p><code class="language-plaintext highlighter-rouge">conf/minifi.properties.d/95-metrics.properties</code> (drop-in — don’t edit <code class="language-plaintext highlighter-rouge">minifi.properties</code> directly):</p>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">nifi.metrics.publisher.agent.identifier</span><span class="p">=</span><span class="s">4ca82a0d-8e04-4ede-b59d-379de1495f2b</span>
+<span class="py">nifi.metrics.publisher.class</span><span class="p">=</span><span class="s">PrometheusMetricsPublisher</span>
+<span class="py">nifi.metrics.publisher.PrometheusMetricsPublisher.port</span><span class="p">=</span><span class="s">9936</span>
+<span class="py">nifi.metrics.publisher.metrics</span><span class="p">=</span><span class="s">QueueMetrics,RepositoryMetrics,DeviceInfoNode,FlowInformation</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl restart minifi
+ss <span class="nt">-tlnp</span> | <span class="nb">grep </span>9936
+curl <span class="nt">-s</span> http://127.0.0.1:9936/metrics | <span class="nb">wc</span> <span class="nt">-l</span>
+</code></pre></div></div>
+
+<h4 id="5-trigger-streamchat-manually-and-the-fullscreen-escape-hatch">5. Trigger streamChat manually, and the fullscreen escape hatch</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST http://localhost:8081/streamChatListener <span class="nt">-d</span> <span class="s1">'{"streamer":"xqc"}'</span>
+wmctrl <span class="nt">-l</span>                                                     <span class="c"># find the window title</span>
+wmctrl <span class="nt">-r</span> <span class="s2">"xQc - Twitch - Chromium"</span> <span class="nt">-b</span> add,fullscreen         <span class="c"># force it fullscreen</span>
+wmctrl <span class="nt">-r</span> <span class="s2">"xQc - Twitch - Chromium"</span> <span class="nt">-b</span> remove,fullscreen      <span class="c"># undo — Esc/F11 will NOT</span>
+</code></pre></div></div>
+
+<h4 id="6-env-sensor-bring-up-check-for-the-replacement-unit">6. Env-sensor bring-up check (for the replacement unit)</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>i2cdetect <span class="nt">-y</span> <span class="nt">-r</span> 7        <span class="c"># does 0x3c show up at all? that alone tells you in 5s if the OLED is healthy</span>
+</code></pre></div></div>
+
+<h2 id="nvidia-jetson-developer-resources">NVIDIA Jetson developer resources</h2>
+
+<ul>
+  <li>
+<a href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/">NVIDIA Jetson Orin family</a> — the Orin Nano Super Developer Kit specs live here</li>
+  <li>
+<a href="https://developer.nvidia.com/embedded/jetpack">JetPack SDK</a> (Linux for Tegra / L4T)</li>
+  <li>
+<a href="https://forums.developer.nvidia.com/c/agx-autonomous-machines/jetson-embedded-systems/">NVIDIA Jetson developer forums</a> and <a href="https://developer.nvidia.com/embedded/develop/software">Jetson developer resources</a>
+</li>
+  <li>Waveshare Environment Sensor for Jetson Nano — <a href="https://www.waveshare.com/wiki/Environment_Sensor_for_Jetson_Nano">wiki</a> / <a href="https://files.waveshare.com/upload/2/27/Environment-Sensor-for-Jetson-Nano-Schematic.pdf">schematic PDF</a>
+</li>
+</ul>
+
+<h3 id="companion-posts">Companion posts</h3>
+
+<ul>
+  <li>
+<strong>How to AI with MiNiFi</strong> — the “using EFM” post: driving AI flows onto edge agents, the <code class="language-plaintext highlighter-rouge">ListenHTTP</code> fire-and-forget model, the two Python paths.</li>
+  <li>
+<strong>Working with EFM Binaries</strong> — staging MiNiFi Java &amp; C++ binaries for Windows, Linux, and Jetson.</li>
+  <li>
+<strong>Cloudera Edge Flow Manager with Jetson Orin Nano for AI at the Edge</strong> — the deep enterprise integration: persisted EFM on Kubernetes next to the full CSO stack, model execution inside MiNiFi, metrics into Prometheus.</li>
+</ul>
+
+<h2 id="hacking-the-jetson">Hacking The Jetson</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Hacking The Jetson please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ai" class="page__taxonomy-item p-category" rel="tag">ai</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#edge" class="page__taxonomy-item p-category" rel="tag">edge</a><span class="sep">, </span>
+    
+      <a href="/tags/#efm" class="page__taxonomy-item p-category" rel="tag">efm</a><span class="sep">, </span>
+    
+      <a href="/tags/#i2c" class="page__taxonomy-item p-category" rel="tag">i2c</a><span class="sep">, </span>
+    
+      <a href="/tags/#jetson" class="page__taxonomy-item p-category" rel="tag">jetson</a><span class="sep">, </span>
+    
+      <a href="/tags/#minifi" class="page__taxonomy-item p-category" rel="tag">minifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#nvidia" class="page__taxonomy-item p-category" rel="tag">nvidia</a><span class="sep">, </span>
+    
+      <a href="/tags/#oled" class="page__taxonomy-item p-category" rel="tag">oled</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-07-30T00:00:00-04:00">July 30, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Hacking+The+Jetson%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHacking-The-Jetson%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHacking-The-Jetson%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/How-to-Install-a-Public-Certificate-for-NiFi/" class="pagination--pager" title="How to Install a Public Certificate for NiFi
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/nifi-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-to-Install-a-Public-Certificate-for-NiFi/" rel="permalink">How to Install a Public Certificate for NiFi
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Swap out NiFi’s default self-signed keystore for a real Let’s Encrypt certificate on a host-native Apache NiFi install so the browser padlock goes solid, no ...
+    <a href="/blog/How-to-Install-a-Public-Certificate-for-NiFi/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Day_37_Claude_Code.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Day-37-Claude-Code/" rel="permalink">Day 37 : Claude Code
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    A previous Claude Code session fanned out six planning subagents and every one of them died on the same 401. Here’s how I found the corpse, diagnosed the mod...
+    <a href="/blog/Day-37-Claude-Code/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/month1_claude_code.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Month-1-Claude-Code/" rel="permalink">Month 1: Claude Code
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    One month in with Claude Code — a summary of the work completed since Day 1, with pointers to the daily X articles that captured each step along the way.
+
+    <a href="/blog/Month-1-Claude-Code/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/edge_to_ai_for_dummies.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Edge-to-AI-for-Dummies/" rel="permalink">Edge to AI for Dummies
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    A practical roadmap for transforming data from edge devices into real-time AI use cases — architectures, tooling options, and tradeoffs.
+
+    <a href="/blog/Edge-to-AI-for-Dummies/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>

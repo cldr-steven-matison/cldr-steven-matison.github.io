@@ -6,6 +6,14 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Hacking The Jetson</title>
+        <link>https://cldr-steven-matison.github.io/blog/Hacking-The-Jetson/</link>
+        <pubDate>Thu, 30 Jul 2026 00:00:00 -0400</pubDate>
+        
+        <description>Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI</description>
+      </item>
+    
+      <item>
         <title>How to Install a Public Certificate for NiFi</title>
         <link>https://cldr-steven-matison.github.io/blog/How-to-Install-a-Public-Certificate-for-NiFi/</link>
         <pubDate>Mon, 27 Jul 2026 00:00:00 -0400</pubDate>
@@ -104,19 +112,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/Day1ClaudeCode.png" medium="image" />
         
         <description>First day with Claude Code on the MacBook — install, a few questions about my DesktopShare repo, and a commit + push, end to end from the terminal.</description>
-      </item>
-    
-      <item>
-        <title>Cloudera Data Lineage Custom Lineage Connector Relaunch</title>
-        <link>https://cldr-steven-matison.github.io/blog/Cloudera-Data-Lineage-Custom-Lineage-Connector-Relaunch/</link>
-        <pubDate>Mon, 08 Jun 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-02-03-cloudera_data_lineage.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-02-03-cloudera_data_lineage.png" medium="image" />
-        
-        <description>Executive Summary
-The Cloudera Data Lineage team is pleased to announce that we’ve enhanced the Custom Lineage Connector (F.K.A Universal Connector) to support inner system lineage and transformations. This update effectively closes the visibility gap for source systems we don’t natively support yet.
-</description>
       </item>
     
   </channel>
