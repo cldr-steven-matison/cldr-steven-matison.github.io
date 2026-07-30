@@ -417,11 +417,11 @@ i2cdetect -y -r 7        # does 0x3c show up at all? that alone tells you in 5s 
 - [NVIDIA Jetson developer forums](https://forums.developer.nvidia.com/c/agx-autonomous-machines/jetson-embedded-systems/) and [Jetson developer resources](https://developer.nvidia.com/embedded/develop/software)
 - Waveshare Environment Sensor for Jetson Nano — [wiki](https://www.waveshare.com/wiki/Environment_Sensor_for_Jetson_Nano) / [schematic PDF](https://files.waveshare.com/upload/2/27/Environment-Sensor-for-Jetson-Nano-Schematic.pdf)
 
-### Companion posts
+### Companion Posts
 
-- **How to AI with MiNiFi** — the "using EFM" post: driving AI flows onto edge agents, the `ListenHTTP` fire-and-forget model, the two Python paths.
-- **Working with EFM Binaries** — staging MiNiFi Java & C++ binaries for Windows, Linux, and Jetson.
-- **Cloudera Edge Flow Manager with Jetson Orin Nano for AI at the Edge** — the deep enterprise integration: persisted EFM on Kubernetes next to the full CSO stack, model execution inside MiNiFi, metrics into Prometheus.
+- **[How to AI with NiFi and Python](/blog/How-to-AI-with-NiFi-and-Python/)** — Custom Python Processor success with AI with examples
+- **[Edge to AI For Dummies](/blog/Edge-to-AI-for-Dummies/)** — Go grab a copy of this and give it a read
+- **[Cloudera Edge Flow Manager on Kubernetes](/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/)** — the deep enterprise integration: persisted EFM on Kubernetes next to the full CSO stack, model execution inside MiNiFi, metrics into Prometheus.
 
 ## {{ page.title }}
 If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about {{ page.title }} please reach out to schedule a discussion.
