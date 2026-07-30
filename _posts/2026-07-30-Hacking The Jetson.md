@@ -18,7 +18,7 @@ tags:
   - cloudera
 ---
 
-:warning: **Danger!** This is a Work in Progress article. Content and code are updating frequently until this notice is removed. The environment-sensor section in particular is paused on a hardware RMA.
+:warning: **Danger!** This is a Work in Progress article. Content and code are updating frequently until this notice is removed.
 {: .notice--danger}
 
 I bought an NVIDIA Jetson Orin Nano developer kit, dropped it into a Yahboom CubeNano case, and then spent a few weeks turning it into something between a desk toy and a real edge-AI node. It runs a MiNiFi C++ agent that reports into Cloudera Edge Flow Manager and produces to Kafka. It has a tiny OLED on the case that I hacked into a sci-fi strobe. It falls into a Matrix digital-rain screensaver when it's idle. And it answers HTTP requests that launch things on its own physical display. This post is the whole build — the box, the hacks, the edge-AI plumbing, what broke, and what I'd do next. Every path, port, bus number, and I2C address below is real and taken off the live device (hostname `tunastreet`, an ARM Cortex-A78AE / Ampere Jetson Orin Nano on Ubuntu 24.04, JetPack/L4T R39).
@@ -29,13 +29,14 @@ This is the *build* post. The deep enterprise integration — persisted EFM on K
 
 ## The hardware
 
-Three parts stack up on my desk:
+Two parts stack up on my desk:
 
 - **[NVIDIA Jetson Orin Nano Super Developer Kit](https://www.amazon.com/dp/B0BZJTQ5YP)** — the compute, and the reason this whole thing is worth doing. **67 TOPS** (Sparse INT8), a 1024-core Ampere GPU with 32 Tensor Cores, a 6-core Arm Cortex-A78AE CPU up to 1.7 GHz, 8GB of 128-bit LPDDR5 at 102 GB/s, in a 7W–25W envelope. NVIDIA lists it at **$249**. That's a data-center-shaped AI stack on a board that draws less than a light bulb — plenty to run MiNiFi, drive a display, and front a nearby inference server at the same time.
 - **[Jetson MINI Cube Nano case](https://www.amazon.com/dp/B0GDFTZ64S)** — the case (supports Jetson Nano / Orin Nano / Orin NX / Xavier NX / TX2 NX), with a 40-pin passthrough, a fan, and a small **128×32 SSD1306 OLED** on the header. The OLED is the thing that makes this build fun.
-- **[Waveshare Environment Sensor module](https://www.amazon.com/dp/B08YDBKLDV)** — an I2C sensor board (ambient light, temp/humidity/pressure, 9-DOF IMU, UV, VOC) with its own 1.3" OLED, designed to stack on the Jetson Nano 40-pin header. This one is currently paused on an RMA — more on that below.
 
-:information_source: **Confirmed parts.** Jetson Orin Nano Super Developer Kit — NVIDIA, ASIN B0BZJTQ5YP, $249, 67 TOPS. Jetson MINI Cube Nano case — ASIN B0GDFTZ64S. Waveshare Environment Sensors Module for Jetson Nano (I2C, 1.3" OLED) — ASIN B08YDBKLDV, also documented on the [Waveshare wiki](https://www.waveshare.com/wiki/Environment_Sensor_for_Jetson_Nano).
+I also tried a Waveshare Environment Sensor module on the same header — it didn't make the cut, and the short version of why is in [The environment sensor I didn't ship](#the-environment-sensor-i-didnt-ship) below.
+
+:information_source: **Confirmed parts.** Jetson Orin Nano Super Developer Kit — NVIDIA, ASIN B0BZJTQ5YP, $249, 67 TOPS. Jetson MINI Cube Nano case — ASIN B0GDFTZ64S.
 {: .notice--info}
 
 ## Hack #1 — the CubeNano OLED, from stats display to CORDY CEPT strobe
@@ -224,35 +225,17 @@ Same failure mode as the screensaver: Chromium's own fullscreen flags don't get 
 :information_source: **`ListenHTTP` on MiNiFi C++ is fire-and-forget.** There's no `HandleHttpRequest`/`HandleHttpResponse` pair — that's Java-NiFi only. The caller gets its response the instant the request lands, *before* your script runs. Design for async: don't wait on the HTTP response for the result of the work. My "How to AI with MiNiFi" post goes deep on this and on the two different Python paths (`ExecuteScript` vs `ExecutePythonProcessor`) that trip everyone up.
 {: .notice--info}
 
-## The environment sensor — honest status: paused on an RMA
+## The environment sensor I didn't ship
 
-I wanted the Jetson to read its own environment — temp, humidity, pressure, light, UV, motion, air quality — so I added a Waveshare Environment Sensor module (I2C, with its own 1.3" OLED) on the same header. Most of it works. The board's OLED does not, and after a full diagnosis I'm treating it as a dead unit.
+I wanted the Jetson to read its own environment — temp, humidity, pressure, light, UV, motion, air quality — so I tried a Waveshare Environment Sensor module (I2C, with its own 1.3" OLED) on the same header. The four core sensors — BME280 (temp/humidity/pressure), TSL2591 (light), LTR390 (UV), ICM20948 (9-DOF IMU) — all read fine over I2C bus 7. The board's onboard OLED never did: address `0x3C` returned a hard I2C NACK on every driver and every probe, so zero bytes ever reached the chip. A replacement unit through Waveshare's RMA showed the identical symptom out of the box. Two dead OLEDs on two boards is a hardware pattern, not a config problem — so I returned both and left the sensor out of this build.
 
-What responds on I2C bus 7:
-
-| Chip | Function | Address | Working? |
-|---|---|---|---|
-| TSL25911FN | ambient light | `0x29` | Yes |
-| BME280 | temp / humidity / pressure | `0x76` | Yes |
-| ICM20948 | 9-DOF IMU | `0x68` | Yes |
-| LTR390-UV | UV / IR | `0x53` | Yes |
-| SGP40 | VOC gas | `0x59` | Needs a wake command (not a fault) |
-| SH1106 | 1.3" OLED | `0x3C` | **No — hard NACK, every method** |
-
-The OLED never ACKs at the I2C protocol level — a hard NACK, meaning zero bytes reach the chip's registers. I ruled out software three ways (the vendor's own driver with its full GPIO reset sequence, the modern `luma.oled` driver, and manual `i2cget`/`i2cdetect` probing) — all fail identically with `OSError: [Errno 121] Remote I/O error`. That's not a driver bug; nothing in software can produce an ACK from a chip that isn't listening. On this board the SGP40 (`0x59`) was also dead on an earlier unit, and the schematic shows the OLED sits on a separate sub-board joined by a 5-pin ribbon (5V/GND/SDA/SCL/RST) with its own local 3.3V regulator — a bad ribbon contact or dead sub-board matches the symptom exactly. Two independent components dead on a fresh board points at a DOA/defective unit, not config.
-
-There were real, reusable software fixes along the way, kept for the replacement unit: the vendor demo is Python 2 written against Raspberry Pi assumptions, so every driver hardcodes `smbus.SMBus(1)` (patched to `SMBus(7)` for the Jetson's bus), and `SH1106.py` used Python-2-only `xrange` and float division (`self.height / 8` → `// 8`).
-
-:warning: **Two OLEDs on one bus will collide.** The CubeNano OLED and the Waveshare OLED both default to `0x3C`. When a healthy Waveshare unit arrives and I stack both, one of them has to move to `0x3D` via its D/C# address jumper. Not a problem today only because the Waveshare OLED is dead — it'll be real the moment there are two live panels on `/dev/i2c-7`.
-{: .notice--warning}
-
-Status today: the Waveshare board is set aside, the Yahboom CubeNano board is restacked alone, `yahboom_oled.service` (or the CORDY strobe) is back on its OLED, and a replacement Waveshare unit is inbound. The four working sensors are ready to feed data whenever I wire them into a MiNiFi flow.
+The full diagnostic trail — schematic reading, the Python-2-to-3 driver patches, and every ruled-out theory — is kept in my internal notes in case a future board on this SKU shows the same symptom. It's a dead end for this build, not a mystery worth re-solving.
 
 ## What's next
 
 The build isn't done. The direction it's going:
 
-- **Environment data into the flow.** Wire BME280 / TSL2591 / LTR390 / ICM20948 readings into a MiNiFi Python processor and produce them to Kafka alongside everything else — the Jetson reporting its own room conditions to the same stack it manages flows from.
+- **Environment data into the flow.** Wire a working I2C sensor into a MiNiFi Python processor and produce readings to Kafka alongside everything else — the Jetson reporting its own room conditions to the same stack it manages flows from. This is the piece the Waveshare board was meant to fill; I'll pick a different sensor.
 - **A buzzer and more I2C peripherals** on the header for physical alerts driven by flow conditions.
 - **Robotics and messaging.** App-to-robot messaging over Telegram, a robot camera streamed to Twitch, live-streaming robots — the `streamChat` HTTP-to-display pattern already proves the shape: an HTTP endpoint that makes the physical device do something.
 - **Metrics and analytics.** System + processor + model metrics from the edge agent into the Prometheus instance inside the CSO stack, the same way the enterprise integration post does it for the cluster.
@@ -261,12 +244,11 @@ The build isn't done. The direction it's going:
 ## What NOT to do — the traps in one place
 
 - **Don't persist a display process with a bare `&`.** It survives until the next reboot/logout, then vanishes with no error. Use `setsid`, then a systemd unit.
-- **Don't assume a blank OLED is dead hardware** before checking whether the right *process* is running and whether the address ACKs (`i2cdetect -y -r 7`).
+- **Don't assume a blank OLED is dead hardware** before checking whether the right *process* is running and whether the address ACKs (`i2cdetect -y -r 7`). The converse also holds: a *hard NACK* on every driver — like the Waveshare OLED — really is dead, and no software fixes that.
 - **Don't copy a `ListenHTTP` config with `Buffer Size > 1`** onto an endpoint that gets single requests — MiNiFi drops the request until the buffer fills.
 - **Don't run the agent as root against a user's desktop session.** Set `User=` to the desktop uid, and fix the log/state dir ownership afterward.
 - **Don't block inside `ExecuteScript`** — its thread is shared with the whole flow. Background anything that waits.
 - **Don't force fullscreen with `wmctrl` and expect Esc to undo it** — use `wmctrl ... -b remove,fullscreen`.
-- **Don't stack two `0x3C` OLEDs** without moving one to `0x3D` first.
 
 ## Terminal History
 
@@ -314,12 +296,9 @@ wmctrl -l                                          # find the "<name> - Twitch -
 wmctrl -r "xQc - Twitch - Chromium" -b add,fullscreen
 wmctrl -r "xQc - Twitch - Chromium" -b remove,fullscreen   # <- ESCAPE HATCH: Esc/F11 won't undo a wmctrl fullscreen
 
-# --- Waveshare env sensor: diagnosing the dead OLED ---
-i2cdetect -y -r 7                                  # 0x29/0x53/0x68/0x76 answer; 0x3c NACKs every time
-sudo shutdown -h now                               # pull the Yahboom board to test the Waveshare OLED alone
-pip3 install --user --break-system-packages luma.oled   # 2nd independent driver - fails identically (Errno 121)
-gpioinfo | grep -i PY.03                            # confirm BCM24/OLED_RST line is free, not held in reset
-# conclusion: hard I2C NACK before any driver runs = DOA unit, not software. RMA it.
+# --- Waveshare env sensor: the OLED that never ACKed (dropped from the build) ---
+i2cdetect -y -r 7                                  # sensors at 0x29/0x53/0x68/0x76 answer; 0x3c NACKs every time
+# same hard NACK on the vendor driver, on luma.oled, and on a raw i2cget - and identical on the RMA unit -> DOA, returned
 ```
 
 ## Appendix
@@ -404,18 +383,11 @@ wmctrl -r "xQc - Twitch - Chromium" -b add,fullscreen         # force it fullscr
 wmctrl -r "xQc - Twitch - Chromium" -b remove,fullscreen      # undo — Esc/F11 will NOT
 ```
 
-#### 6. Env-sensor bring-up check (for the replacement unit)
-
-```bash
-i2cdetect -y -r 7        # does 0x3c show up at all? that alone tells you in 5s if the OLED is healthy
-```
-
 ## NVIDIA Jetson developer resources
 
 - [NVIDIA Jetson Orin family](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/) — the Orin Nano Super Developer Kit specs live here
 - [JetPack SDK](https://developer.nvidia.com/embedded/jetpack) (Linux for Tegra / L4T)
 - [NVIDIA Jetson developer forums](https://forums.developer.nvidia.com/c/agx-autonomous-machines/jetson-embedded-systems/) and [Jetson developer resources](https://developer.nvidia.com/embedded/develop/software)
-- Waveshare Environment Sensor for Jetson Nano — [wiki](https://www.waveshare.com/wiki/Environment_Sensor_for_Jetson_Nano) / [schematic PDF](https://files.waveshare.com/upload/2/27/Environment-Sensor-for-Jetson-Nano-Schematic.pdf)
 
 ### Companion Posts
 
