@@ -1,36 +1,43 @@
-- name: "ClouderaStreamingOperators"
-  description: "Repo for yaml used in installing Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 84
-  lang: ""
-  updated: "2026-07-28"
-  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 14944
+  size: 18924
   lang: "Python"
-  updated: "2026-07-28"
+  updated: "2026-07-30"
+  fork: false
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 1030
+  lang: "Python"
+  updated: "2026-07-30"
+  fork: false
+- name: "MiNiFi-Kubernetes-Playground"
+  description: "A repository I am using to play with minifi on kubernetes."
+  url: "https://github.com/cldr-steven-matison/MiNiFi-Kubernetes-Playground"
+  size: 43
+  lang: "Dockerfile"
+  updated: "2026-07-30"
+  fork: false
+- name: "ClouderaStreamingOperators"
+  description: "Repo for yaml used in installing Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
+  size: 89
+  lang: ""
+  updated: "2026-07-29"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 155518
+  lang: "HTML"
+  updated: "2026-07-29"
   fork: false
 - name: "NiFi2-Processor-Playground"
   description: "A place to play around with NiFi 2.0 Processors"
   url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
   size: 285
   lang: "Python"
-  updated: "2026-07-28"
-  fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 994
-  lang: "Python"
-  updated: "2026-07-28"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 155519
-  lang: "HTML"
   updated: "2026-07-28"
   fork: false
 - name: "cldr-steven-matison"
@@ -257,13 +264,6 @@
   lang: ""
   updated: "2026-04-02"
   fork: true
-- name: "MiNiFi-Kubernetes-Playground"
-  description: "A repository I am using to play with minifi on kubernetes."
-  url: "https://github.com/cldr-steven-matison/MiNiFi-Kubernetes-Playground"
-  size: 43
-  lang: "Dockerfile"
-  updated: "2026-03-31"
-  fork: false
 - name: "insanely-fast-whisper"
   description: ""
   url: "https://github.com/cldr-steven-matison/insanely-fast-whisper"
