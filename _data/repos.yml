@@ -1,22 +1,36 @@
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 42
+  lang: ""
+  updated: "2026-07-31"
+  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 18924
+  size: 19555
   lang: "Python"
-  updated: "2026-07-30"
+  updated: "2026-07-31"
   fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 1030
-  lang: "Python"
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 161725
+  lang: "HTML"
   updated: "2026-07-30"
   fork: false
 - name: "MiNiFi-Kubernetes-Playground"
   description: "A repository I am using to play with minifi on kubernetes."
   url: "https://github.com/cldr-steven-matison/MiNiFi-Kubernetes-Playground"
-  size: 43
-  lang: "Dockerfile"
+  size: 58
+  lang: "Java"
+  updated: "2026-07-30"
+  fork: false
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 1124
+  lang: "Python"
   updated: "2026-07-30"
   fork: false
 - name: "ClouderaStreamingOperators"
@@ -26,25 +40,11 @@
   lang: ""
   updated: "2026-07-29"
   fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 155518
-  lang: "HTML"
-  updated: "2026-07-29"
-  fork: false
 - name: "NiFi2-Processor-Playground"
   description: "A place to play around with NiFi 2.0 Processors"
   url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
   size: 285
   lang: "Python"
-  updated: "2026-07-28"
-  fork: false
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 42
-  lang: ""
   updated: "2026-07-28"
   fork: false
 - name: "andrej-karpathy-skills"
