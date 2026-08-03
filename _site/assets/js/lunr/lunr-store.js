@@ -597,5 +597,11 @@ var store = [{
         "excerpt":":warning: Danger! This is a Work in Progress article. Content and code are updating frequently until this notice is removed. I bought an NVIDIA Jetson Orin Nano developer kit, dropped it into a Yahboom CubeNano case, and then spent a few weeks turning it into something between a desk toy...","categories": ["blog"],
         "tags": ["nvidia","jetson","minifi","efm","edge","ai","oled","i2c","cloudera"],
         "url": "/blog/Hacking-The-Jetson/",
-        "teaser": null
+        "teaser": "/assets/images/efm-nvidia-jetson.png"
+      },{
+        "title": "Cloudera Community Edition on AWS in One Command",
+        "excerpt":"Cloudera has a lot of ways to get a cluster. Almost none of them are “one command on your laptop.” cloudera-labs/cloudera-ce-aws is the exception: a Terraform + Ansible bundle that stands up a full Cloudera Private Cloud Community Edition cluster on AWS — Cloudera Manager, Kerberos, Auto-TLS, a real storage/compute...","categories": ["blog"],
+        "tags": ["cloudera","aws","ansible","terraform","community-edition","cdp"],
+        "url": "/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/",
+        "teaser": "/assets/images/cloudera-ce-cm-cluster.png"
       }]

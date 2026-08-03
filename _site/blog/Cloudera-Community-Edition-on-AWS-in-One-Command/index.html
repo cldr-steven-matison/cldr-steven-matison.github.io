@@ -1,0 +1,1026 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Cloudera Community Edition on AWS in One Command - Cloudera Solutions Engineer</title>
+<meta name="description" content="Cloudera has a lot of ways to get a cluster. Almost none of them are “one command on your laptop.” cloudera-labs/cloudera-ce-aws is the exception: a Terraform + Ansible bundle that stands up a full Cloudera Private Cloud Community Edition cluster on AWS — Cloudera Manager, Kerberos, Auto-TLS, a real storage/compute topology — from a single ansible-navigator run. This post is me taking my freshly-released fork from zero to a running Ozone cluster, and the handful of real snags between the README and a green Cloudera Manager.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Cloudera Community Edition on AWS in One Command">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/">
+
+
+  <meta property="og:description" content="Cloudera has a lot of ways to get a cluster. Almost none of them are “one command on your laptop.” cloudera-labs/cloudera-ce-aws is the exception: a Terraform + Ansible bundle that stands up a full Cloudera Private Cloud Community Edition cluster on AWS — Cloudera Manager, Kerberos, Auto-TLS, a real storage/compute topology — from a single ansible-navigator run. This post is me taking my freshly-released fork from zero to a running Ozone cluster, and the handful of real snags between the README and a green Cloudera Manager.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/cloudera-ce-cm-cluster.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-03T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Cloudera Community Edition on AWS in One Command">
+    <meta itemprop="description" content="Cloudera has a lot of ways to get a cluster. Almost none of them are “one command on your laptop.” cloudera-labs/cloudera-ce-aws is the exception: a Terraform + Ansible bundle that stands up a full Cloudera Private Cloud Community Edition cluster on AWS — Cloudera Manager, Kerberos, Auto-TLS, a real storage/compute topology — from a single ansible-navigator run. This post is me taking my freshly-released fork from zero to a running Ozone cluster, and the handful of real snags between the README and a green Cloudera Manager.">
+    <meta itemprop="datePublished" content="2026-08-03T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/" class="u-url" itemprop="url">Cloudera Community Edition on AWS in One Command
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-08-03T00:00:00-04:00">
+            August 03, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Cloudera has a lot of ways to get a cluster. Almost none of them are “one command on your laptop.” <a href="https://github.com/cloudera-labs/cloudera-ce-aws"><code class="language-plaintext highlighter-rouge">cloudera-labs/cloudera-ce-aws</code></a> is the exception: a Terraform + Ansible bundle that stands up a full <strong>Cloudera Private Cloud Community Edition</strong> cluster on AWS — Cloudera Manager, Kerberos, Auto-TLS, a real storage/compute topology — from a single <code class="language-plaintext highlighter-rouge">ansible-navigator run</code>. This post is me taking my freshly-released fork from zero to a running Ozone cluster, and the handful of real snags between the README and a green Cloudera Manager.</p>
+
+<p>Everything here is field-run against <code class="language-plaintext highlighter-rouge">cloudera-ce-aws</code> <strong>v1.0.0</strong>, deploying <strong>Cloudera Manager 7.13.2 / Runtime 7.3.2</strong>, from an Apple-Silicon Mac into AWS account <code class="language-plaintext highlighter-rouge">AWS SE</code> in <code class="language-plaintext highlighter-rouge">us-east-2</code>.</p>
+
+<hr>
+
+<h2 id="what-it-actually-deploys">What it actually deploys</h2>
+
+<p>A ring-fenced cluster — ~11 EC2 nodes — with everything a real Cloudera deployment has and a laptop demo usually fakes:</p>
+
+<ul>
+  <li>
+<strong>Cloudera Manager</strong> with Kerberos and Auto-TLS</li>
+  <li>Self-contained <strong>DNS, Kerberos (FreeIPA), PostgreSQL, and TLS</strong> (ACME-managed certs on a Caddy reverse proxy)</li>
+  <li>A selectable <strong>topology</strong> — Ozone, Kafka, Flink, NiFi, CSA, or ECS — each its own playbook</li>
+  <li>Reverse HTTPS proxies + SSH as the only ways in; the cluster is otherwise sealed</li>
+</ul>
+
+<p>The whole thing is idempotent: re-running produces no unintended changes. The node roles and default sizing (<code class="language-plaintext highlighter-rouge">t3a</code> for most, one <code class="language-plaintext highlighter-rouge">r5a.xlarge</code> for CMS):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Count</th>
+      <th>Instance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gateway</td>
+      <td>1</td>
+      <td>t3a.medium</td>
+    </tr>
+    <tr>
+      <td>services</td>
+      <td>1</td>
+      <td>t3a.large</td>
+    </tr>
+    <tr>
+      <td>masters</td>
+      <td>3</td>
+      <td>t3a.xlarge</td>
+    </tr>
+    <tr>
+      <td>workers</td>
+      <td>4</td>
+      <td>t3a.xlarge</td>
+    </tr>
+    <tr>
+      <td>cms</td>
+      <td>1</td>
+      <td>r5a.xlarge</td>
+    </tr>
+    <tr>
+      <td>sdx</td>
+      <td>1</td>
+      <td>t3a.xlarge</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>At on-demand rates that’s roughly <strong>~$2/hr / ~$45/day</strong> — worth a <code class="language-plaintext highlighter-rouge">pause.yml</code> between sessions (stops EC2, keeps EBS) if you’re leaving it up.</p>
+
+<p><img src="/assets/images/cloudera-ce-aws-instances.png" alt="AWS EC2 console — the ~11 EC2 instances the deployment provisions, one per cluster role (gateway, services, masters, workers, cms, sdx)"></p>
+
+<hr>
+
+<h2 id="the-setup-is-genuinely-minimal">The setup is genuinely minimal</h2>
+
+<p>Every dependency — Terraform, Ansible, all the collections — is baked into an <strong>Ansible execution-environment container image</strong>. Locally you need almost nothing:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/cloudera-labs/cloudera-ce-aws.git
+<span class="nb">cd </span>cloudera-ce-aws
+python <span class="nt">-m</span> venv ~/cdp-navigator <span class="o">&amp;&amp;</span> <span class="nb">source</span> ~/cdp-navigator/bin/activate
+pip <span class="nb">install </span>ansible-core ansible-navigator
+</code></pre></div></div>
+
+<p>Plus a container runtime (Docker or Podman) and two credentials: <strong>AWS SSO</strong> and a <strong>Cloudera license <code class="language-plaintext highlighter-rouge">.txt</code></strong>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># AWS SSO — the config uses your SSO profile to mint short-lived creds</span>
+aws sso login <span class="nt">--profile</span> YOUR_PROFILE
+
+<span class="c"># Cloudera Private Cloud license — the text file, NOT the .zip</span>
+<span class="nb">export </span><span class="nv">CDP_LICENSE_FILE</span><span class="o">=</span>/path/to/license.txt
+</code></pre></div></div>
+
+<p>Then a three-line <code class="language-plaintext highlighter-rouge">config.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name_prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">steven-ce"</span>
+<span class="na">infra_region</span><span class="pi">:</span> <span class="s2">"</span><span class="s">us-east-2"</span>
+<span class="na">common_password</span><span class="pi">:</span> <span class="s2">"</span><span class="s">&lt;min</span><span class="nv"> </span><span class="s">8</span><span class="nv"> </span><span class="s">chars,</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">number&gt;"</span>
+<span class="na">owner_email</span><span class="pi">:</span> <span class="s2">"</span><span class="s">you@cloudera.com"</span>
+</code></pre></div></div>
+
+<p>And the one command that does everything:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-navigator run playbooks/infrastructure.yml playbooks/services.yml <span class="se">\</span>
+  playbooks/cms.yml playbooks/ozone-cluster.yml <span class="nt">-e</span> @config.yml <span class="nt">-m</span> stdout
+</code></pre></div></div>
+
+<p>Four playbooks, four stages: <strong>Terraform provisions the AWS infra → Ansible configures DNS/Kerberos/DB/TLS → Cloudera Manager comes up → the Ozone cluster deploys.</strong></p>
+
+<hr>
+
+<h2 id="the-snags-between-readme-and-a-running-cluster">The snags between README and a running cluster</h2>
+
+<p>The quickstart is clean, but seven things cost me time — exactly the stuff a reveal post should call out. The first four are one-time setup friction; the last three are genuine traps in the v1.0.0 release.</p>
+
+<h3 id="1-the-latest-ee-image-tag-isnt-published">1. The <code class="language-plaintext highlighter-rouge">:latest</code> EE image tag isn’t published</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ansible-navigator.yml</code> points the execution environment at <code class="language-plaintext highlighter-rouge">ghcr.io/cloudera-labs/cloudera-ce-aws:latest</code>. That tag doesn’t exist — the registry only publishes <code class="language-plaintext highlighter-rouge">1.0.0-amd64</code>:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error response from daemon: failed to resolve reference
+"ghcr.io/cloudera-labs/cloudera-ce-aws:latest": not found
+</code></pre></div></div>
+
+<p>Fix — pin the real tag in <code class="language-plaintext highlighter-rouge">ansible-navigator.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">image</span><span class="pi">:</span> <span class="s">ghcr.io/cloudera-labs/cloudera-ce-aws:1.0.0-amd64</span>
+</code></pre></div></div>
+
+<h3 id="2-the-ee-image-is-amd64-only--on-apple-silicon-it-runs-emulated">2. The EE image is amd64-only — on Apple Silicon it runs emulated</h3>
+
+<p>The only published arch is <code class="language-plaintext highlighter-rouge">-amd64</code>. On an M-series Mac the image runs under emulation; make it explicit so Docker doesn’t guess:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">container-options</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">--network=host"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">--platform=linux/amd64"</span>
+</code></pre></div></div>
+
+<p>The EE is an orchestration controller — it drives Terraform and SSHes to the nodes; it isn’t doing heavy local compute — so emulation is a non-issue for throughput here.</p>
+
+<h3 id="3-logged-into-aws-console--aws-cli-has-credentials">3. “Logged into AWS” (console) ≠ AWS CLI has credentials</h3>
+
+<p>I was logged into the AWS access portal in the browser, but the CLI had <strong>no profile, no cached token, nothing</strong> — <code class="language-plaintext highlighter-rouge">NoCredentials</code>. The fix is <code class="language-plaintext highlighter-rouge">aws configure sso</code>, but the trap is subtler: after setup my <code class="language-plaintext highlighter-rouge">default</code> profile carried the <code class="language-plaintext highlighter-rouge">sso_session</code> but was <strong>missing <code class="language-plaintext highlighter-rouge">sso_account_id</code> and <code class="language-plaintext highlighter-rouge">sso_role_name</code></strong>, so it still couldn’t resolve credentials. A complete profile:</p>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[sso-session Cloudera-Main-SSO]</span>
+<span class="py">sso_start_url</span> <span class="p">=</span> <span class="s">https://d-xxxxxxxxxx.awsapps.com/start#/</span>
+<span class="py">sso_region</span> <span class="p">=</span> <span class="s">us-east-1</span>
+<span class="py">sso_registration_scopes</span> <span class="p">=</span> <span class="s">sso:account:access</span>
+
+<span class="nn">[profile cldr-se]</span>
+<span class="py">sso_session</span> <span class="p">=</span> <span class="s">Cloudera-Main-SSO</span>
+<span class="py">sso_account_id</span> <span class="p">=</span> <span class="s">007856030109</span>
+<span class="py">sso_role_name</span> <span class="p">=</span> <span class="s">cldr_poweruser</span>
+<span class="py">region</span> <span class="p">=</span> <span class="s">us-east-2</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">aws sts get-caller-identity --profile cldr-se</code> should return your assumed-role ARN. That token is cached on disk, so it survives across shells — which matters because the deploy consumes the creds via <code class="language-plaintext highlighter-rouge">aws configure export-credentials</code>.</p>
+
+<h3 id="4-common_password-and-configyml-are-secrets-in-a-public-repo">4. <code class="language-plaintext highlighter-rouge">common_password</code> and <code class="language-plaintext highlighter-rouge">config.yml</code> are secrets in a public repo</h3>
+
+<p><code class="language-plaintext highlighter-rouge">config.yml</code> holds a plaintext password and your fork is public. It’s in <code class="language-plaintext highlighter-rouge">.gitignore</code> (alongside <code class="language-plaintext highlighter-rouge">*.pem</code> and <code class="language-plaintext highlighter-rouge">*.tfstate</code>) — confirm that before you commit anything, because a leaked <code class="language-plaintext highlighter-rouge">common_password</code> there unlocks every service in the cluster.</p>
+
+<h3 id="5-keep-common_password-alphanumeric--special-characters-break-service-enrollment">5. Keep <code class="language-plaintext highlighter-rouge">common_password</code> alphanumeric — special characters break service enrollment</h3>
+
+<p class="notice--danger"><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Hint — this one cost me a full teardown.</strong> Make <code class="language-plaintext highlighter-rouge">common_password</code> <strong>letters and digits only</strong>. Cloudera’s automation sets service admin passwords through basic-auth API calls shaped like <code class="language-plaintext highlighter-rouge">https://admin:PASSWORD@host/...</code>, so an <code class="language-plaintext highlighter-rouge">@</code> or <code class="language-plaintext highlighter-rouge">#</code> <em>inside</em> the password corrupts the URL’s userinfo section and enrollment fails — and the task is <code class="language-plaintext highlighter-rouge">no_log</code>, so the error is censored and you can’t see why. Alphanumeric still satisfies the “min 8 chars, 1 number” rule; you lose nothing.</p>
+
+<p>My first run had <code class="language-plaintext highlighter-rouge">common_password</code> full of special characters (<code class="language-plaintext highlighter-rouge">#</code>, <code class="language-plaintext highlighter-rouge">@</code>). The deploy sailed through Terraform and most of the services stage, then died on:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TASK [cloudera.exe.grafana : Set Grafana admin password if API login fails]
+fatal: [&lt;services-node&gt;]: FAILED! =&gt; {"censored": "... 'no_log: true' ..."}
+</code></pre></div></div>
+
+<p>The result is censored (<code class="language-plaintext highlighter-rouge">no_log</code>), but the cause is the password: <code class="language-plaintext highlighter-rouge">common_password</code> feeds service admin passwords that get set via <strong>basic-auth API calls</strong> (<code class="language-plaintext highlighter-rouge">https://admin:PASSWORD@host/...</code>). An <code class="language-plaintext highlighter-rouge">@</code> <em>inside</em> the password breaks URL userinfo parsing, so the API login/set fails. The same password later feeds CM, Ranger, Knox, Hue, and SMM — so this isn’t a Grafana quirk, it’s a landmine for every API-set credential downstream.</p>
+
+<p><strong>Fix: keep <code class="language-plaintext highlighter-rouge">common_password</code> alphanumeric</strong> (letters + digits, meets the “min 8, 1 number” rule without <code class="language-plaintext highlighter-rouge">@ # $ / :</code>). Because the password is baked into FreeIPA/DB/services as they’re provisioned, the clean fix is a teardown + redeploy with the safe password, not an in-place change.</p>
+
+<h3 id="6-enable_prometheus-is-declared-twice--grafana-runs-even-when-you-think-its-off">6. <code class="language-plaintext highlighter-rouge">enable_prometheus</code> is declared twice — Grafana runs even when you think it’s off</h3>
+
+<p><code class="language-plaintext highlighter-rouge">config-template.yml</code> implies Prometheus/Grafana is off by default (<code class="language-plaintext highlighter-rouge"># enable_prometheus: false</code>). But <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code> defines the key <strong>twice</strong> — <code class="language-plaintext highlighter-rouge">false</code>, then <code class="language-plaintext highlighter-rouge">true</code> further down — and last-wins in YAML, so the effective default is <strong><code class="language-plaintext highlighter-rouge">true</code></strong>. That’s why the Grafana tasks ran (and hit gotcha #5) even though I never enabled them. If you don’t want the monitoring stack, set <code class="language-plaintext highlighter-rouge">enable_prometheus: false</code> explicitly in your <code class="language-plaintext highlighter-rouge">config.yml</code> so it overrides the duplicate.</p>
+
+<h3 id="7-tee-ing-an-ansible-navigator-run-hides-the-real-exit-code">7. <code class="language-plaintext highlighter-rouge">tee</code>-ing an <code class="language-plaintext highlighter-rouge">ansible-navigator</code> run hides the real exit code</h3>
+
+<p>The EE launches with <code class="language-plaintext highlighter-rouge">--tty</code>, so piping the run through <code class="language-plaintext highlighter-rouge">tee</code> sends output to the container’s PTY (the pipe stays empty) <strong>and</strong> reports the pipeline’s exit code (tee’s <code class="language-plaintext highlighter-rouge">0</code>) rather than ansible’s. A run that actually failed looked like it succeeded. Watch the run with <code class="language-plaintext highlighter-rouge">docker logs -f &lt;ansible_runner_container&gt;</code> instead, and trust the <code class="language-plaintext highlighter-rouge">PLAY RECAP</code> <code class="language-plaintext highlighter-rouge">failed=</code> counts, not the shell exit code.</p>
+
+<hr>
+
+<h2 id="the-deploy-stage-by-stage">The deploy, stage by stage</h2>
+
+<p>One <code class="language-plaintext highlighter-rouge">ansible-navigator run</code> chains four playbooks. On my run — Apple-Silicon Mac, amd64 EE under emulation, default instance sizes — the full stand-up took about <strong>2.5 hours</strong> end to end. The long poles are parcel distribution and bringing 14 Kerberized services up, <em>not</em> the Terraform infra (which was ~10 min); native amd64 and larger nodes would cut this down.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Playbook</th>
+      <th>What happens</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><code class="language-plaintext highlighter-rouge">infrastructure.yml</code></td>
+      <td>Terraform: VPC, security groups, 11 EC2 nodes, generated SSH key</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><code class="language-plaintext highlighter-rouge">services.yml</code></td>
+      <td>FreeIPA (DNS + Kerberos), PostgreSQL, Caddy/TLS, Node Exporter, Prometheus/Grafana</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><code class="language-plaintext highlighter-rouge">cms.yml</code></td>
+      <td>Cloudera Manager install + license, CM agents, AutoTLS, CM Kerberos</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><code class="language-plaintext highlighter-rouge">ozone-cluster.yml</code></td>
+      <td>CM builds the cluster: distribute/activate parcels, assign roles, start services</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Every stage ended <code class="language-plaintext highlighter-rouge">failed=0</code>. The final recap across all 11 hosts:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLAY RECAP
+steven-ce-base-master-01.cldr.internal : ok=197 changed=75  unreachable=0 failed=0
+steven-ce-base-master-02.cldr.internal : ok=197 changed=75  unreachable=0 failed=0
+steven-ce-base-master-03.cldr.internal : ok=197 changed=75  unreachable=0 failed=0
+steven-ce-base-worker-01.cldr.internal : ok=197 changed=75  unreachable=0 failed=0
+   ... workers 02–04 identical ...
+steven-ce-gateway-01.cldr.internal     : ok=93  changed=55  unreachable=0 failed=0
+steven-ce-manager-01.cldr.internal     : ok=182 changed=79  unreachable=0 failed=0
+steven-ce-sdx-01.cldr.internal         : ok=196 changed=75  unreachable=0 failed=0
+steven-ce-services-01.cldr.internal    : ok=205 changed=121 unreachable=0 failed=0
+</code></pre></div></div>
+
+<p>One thing worth knowing: right after the Ozone stage completes, the CM cluster can briefly show <code class="language-plaintext highlighter-rouge">BAD_HEALTH</code> while ZooKeeper’s startup canary settles — it flips to <code class="language-plaintext highlighter-rouge">GOOD</code> on its own within a couple minutes. Don’t panic-restart it.</p>
+
+<p><img src="/assets/images/cloudera-ce-cm-hosts.png" alt="Cloudera Manager → All Hosts — every node in the cluster reporting Good Health and Commissioned"></p>
+
+<hr>
+
+<h2 id="what-you-get-at-the-end">What you get at the end</h2>
+
+<p>A <code class="language-plaintext highlighter-rouge">GOOD_HEALTH</code> <code class="language-plaintext highlighter-rouge">ozone-base-cluster</code> on <strong>Cloudera Runtime 7.3.2</strong>, reachable through the Caddy reverse proxy on the single public node (the gateway) via a <code class="language-plaintext highlighter-rouge">nip.io</code> hostname:</p>
+
+<ul>
+  <li>
+<strong>Cloudera Manager:</strong> <code class="language-plaintext highlighter-rouge">https://cm.&lt;gateway-public-ip&gt;.nip.io</code> — <code class="language-plaintext highlighter-rouge">admin</code> / your <code class="language-plaintext highlighter-rouge">common_password</code>
+</li>
+  <li>
+<strong>Cluster health (straight from the CM API):</strong> cluster <code class="language-plaintext highlighter-rouge">GOOD_HEALTH</code>; <strong>all 14 services GOOD</strong> — HDFS, Ozone, Kafka, YARN, Hive, Hive-on-Tez, HBase, Ranger, Knox, Atlas, Solr, ZooKeeper, Tez, Core Settings.</li>
+  <li>Only the gateway node has a public IP; every other node is private and reached through the proxy — the ring-fenced design the README promises.</li>
+</ul>
+
+<p><img src="/assets/images/cloudera-ce-cm-cluster.png" alt="Cloudera Manager home — ozone-base-cluster healthy on Cloudera Runtime 7.3.2 (Parcels), 8 hosts, every service green, with live cluster CPU / disk / network / HDFS charts"></p>
+
+<hr>
+
+<h2 id="cost-control--pause-resume-tear-down">Cost control — pause, resume, tear down</h2>
+
+<p>The cluster bills ~$2/hr while it runs, so know the exits up front. All three are the same one-command shape:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Pause — stop the EC2 instances, keep the EBS volumes + cluster state (cheapest way to keep it around)</span>
+ansible-navigator run playbooks/pause.yml <span class="nt">-e</span> @config.yml <span class="nt">-m</span> stdout
+
+<span class="c"># Resume — start the instances back up</span>
+ansible-navigator run playbooks/resume.yml <span class="nt">-e</span> @config.yml <span class="nt">-m</span> stdout
+
+<span class="c"># Tear down — Terraform destroys everything: instances, volumes, VPC</span>
+ansible-navigator run playbooks/infrastructure-teardown.yml <span class="nt">-e</span> @config.yml <span class="nt">-m</span> stdout
+</code></pre></div></div>
+
+<p>Teardown is a <code class="language-plaintext highlighter-rouge">terraform destroy</code> under the hood and finishes in a few minutes with a clean recap:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLAY RECAP
+localhost : ok=3 changed=1 unreachable=0 failed=0
+</code></pre></div></div>
+
+<p>Then confirm nothing is left billing before you walk away — Terraform state should be empty and AWS should report zero instances:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws ec2 describe-instances <span class="nt">--profile</span> &lt;your-profile&gt; <span class="nt">--region</span> us-east-2 <span class="se">\</span>
+  <span class="nt">--filters</span> <span class="s2">"Name=tag:deployment,Values=&lt;name_prefix&gt;"</span> <span class="se">\</span>
+            <span class="s2">"Name=instance-state-name,Values=running,pending,stopping,stopped"</span> <span class="se">\</span>
+  <span class="nt">--query</span> <span class="s1">'length(Reservations[].Instances[])'</span> <span class="nt">--output</span> text
+<span class="c"># -&gt; 0</span>
+</code></pre></div></div>
+
+<hr>
+
+<h2 id="what-not-to-do">What NOT to do</h2>
+
+<ul>
+  <li>
+<strong>Don’t trust the <code class="language-plaintext highlighter-rouge">:latest</code> EE tag</strong> — pin <code class="language-plaintext highlighter-rouge">1.0.0-amd64</code>.</li>
+  <li>
+<strong>Don’t assume console login = CLI creds</strong> — configure an SSO profile with account <em>and</em> role.</li>
+  <li>
+<strong>Don’t commit <code class="language-plaintext highlighter-rouge">config.yml</code></strong> — it holds a plaintext password; keep it gitignored.</li>
+  <li>
+<strong>Don’t use the license <code class="language-plaintext highlighter-rouge">.zip</code></strong> — <code class="language-plaintext highlighter-rouge">CDP_LICENSE_FILE</code> wants the <code class="language-plaintext highlighter-rouge">.txt</code>.</li>
+  <li>
+<strong>Don’t leave it running unwatched</strong> — <code class="language-plaintext highlighter-rouge">pause.yml</code> or <code class="language-plaintext highlighter-rouge">infrastructure-teardown.yml</code> when you’re done.</li>
+</ul>
+
+<h2 id="cloudera-community-edition-on-aws-in-one-command">Cloudera Community Edition on AWS in One Command</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Cloudera Community Edition on AWS in One Command please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ansible" class="page__taxonomy-item p-category" rel="tag">ansible</a><span class="sep">, </span>
+    
+      <a href="/tags/#aws" class="page__taxonomy-item p-category" rel="tag">aws</a><span class="sep">, </span>
+    
+      <a href="/tags/#cdp" class="page__taxonomy-item p-category" rel="tag">cdp</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#community-edition" class="page__taxonomy-item p-category" rel="tag">community-edition</a><span class="sep">, </span>
+    
+      <a href="/tags/#terraform" class="page__taxonomy-item p-category" rel="tag">terraform</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-03T00:00:00-04:00">August 3, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Cloudera+Community+Edition+on+AWS+in+One+Command%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FCloudera-Community-Edition-on-AWS-in-One-Command%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FCloudera-Community-Edition-on-AWS-in-One-Command%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Hacking-The-Jetson/" class="pagination--pager" title="Hacking The Jetson
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/efm-nvidia-jetson.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Hacking-The-Jetson/" rel="permalink">Hacking The Jetson
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI
+
+    <a href="/blog/Hacking-The-Jetson/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/nifi-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-to-Install-a-Public-Certificate-for-NiFi/" rel="permalink">How to Install a Public Certificate for NiFi
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Swap out NiFi’s default self-signed keystore for a real Let’s Encrypt certificate on a host-native Apache NiFi install so the browser padlock goes solid, no ...
+    <a href="/blog/How-to-Install-a-Public-Certificate-for-NiFi/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Day_37_Claude_Code.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Day-37-Claude-Code/" rel="permalink">Day 37 : Claude Code
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    A previous Claude Code session fanned out six planning subagents and every one of them died on the same 401. Here’s how I found the corpse, diagnosed the mod...
+    <a href="/blog/Day-37-Claude-Code/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/month1_claude_code.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Month-1-Claude-Code/" rel="permalink">Month 1: Claude Code
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    One month in with Claude Code — a summary of the work completed since Day 1, with pointers to the daily X articles that captured each step along the way.
+
+    <a href="/blog/Month-1-Claude-Code/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>
