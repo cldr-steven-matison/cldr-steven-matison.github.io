@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          20 minute read
+          30 minute read
         
       </span>
     
@@ -322,7 +322,7 @@
         
         <p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> This is a Work in Progress article. Content and code are updating frequently until this notice is removed.</p>
 
-<p>I bought an NVIDIA Jetson Orin Nano developer kit, dropped it into a Yahboom CubeNano case, and then spent a few weeks turning it into something between a desk toy and a real edge-AI node. It runs a MiNiFi C++ agent that reports into Cloudera Edge Flow Manager and produces to Kafka. It has a tiny OLED on the case that I hacked into a sci-fi strobe. It falls into a Matrix digital-rain screensaver when it’s idle. And it answers HTTP requests that launch things on its own physical display. This post is the whole build — the box, the hacks, the edge-AI plumbing, what broke, and what I’d do next. Every path, port, bus number, and I2C address below is real and taken off the live device (hostname <code class="language-plaintext highlighter-rouge">tunastreet</code>, an ARM Cortex-A78AE / Ampere Jetson Orin Nano on Ubuntu 24.04, JetPack/L4T R39).</p>
+<p>I bought an NVIDIA Jetson Orin Nano developer kit, dropped it into a Yahboom CubeNano case, and then spent a few weeks turning it into something between a desk toy and a real edge-AI node. It runs a MiNiFi C++ agent that reports into Cloudera Edge Flow Manager and produces to Kafka. It has a tiny OLED on the case that I hacked into a sci-fi strobe. It falls into a Matrix digital-rain screensaver when it’s idle. It answers HTTP requests that launch things on its own physical display. And it runs a real GPU vision model behind an HTTP endpoint, classifying images in single-digit milliseconds. This post is the whole build — the box, the hacks, the edge-AI plumbing, what broke, and what I’d do next. Every path, port, bus number, and I2C address below is real and taken off the live device (hostname <code class="language-plaintext highlighter-rouge">tunastreet</code>, an ARM Cortex-A78AE / Ampere Jetson Orin Nano on Ubuntu 24.04, JetPack/L4T R39).</p>
 
 <p><img src="/assets/images/Hack-The-Jetson.jpg" alt="Cloudera EFM with NVIDIA Jetson Orin Nano" width="640"></p>
 
@@ -484,7 +484,7 @@ pkill <span class="nt">-f</span> oled_strobe.py
 <span class="nb">timeout </span>3 bash <span class="nt">-c</span> <span class="s2">"cat &lt; /dev/null &gt; /dev/tcp/192.168.1.121/31623"</span> <span class="o">&amp;&amp;</span> <span class="nb">echo </span>open <span class="o">||</span> <span class="nb">echo </span>closed
 </code></pre></div></div>
 
-<p>This build carries a few extra C++ extensions staged into it — <code class="language-plaintext highlighter-rouge">execute-process</code>, <code class="language-plaintext highlighter-rouge">lua-script</code>, <code class="language-plaintext highlighter-rouge">python-script</code>, <code class="language-plaintext highlighter-rouge">opc</code>, and <code class="language-plaintext highlighter-rouge">llamacpp</code> — which pushes it to <strong>79 processors versus the stock 74</strong>. The <code class="language-plaintext highlighter-rouge">python-script</code> and <code class="language-plaintext highlighter-rouge">llamacpp</code> extensions are the ones that make “AI at the edge” real: you can run Python inside the agent, or point it at a local model.</p>
+<p>This build carries a few extra C++ extensions staged into it — <code class="language-plaintext highlighter-rouge">execute-process</code>, <code class="language-plaintext highlighter-rouge">lua-script</code>, <code class="language-plaintext highlighter-rouge">python-script</code>, <code class="language-plaintext highlighter-rouge">opc</code>, and <code class="language-plaintext highlighter-rouge">llamacpp</code> — which pushes it to <strong>79 processors versus the stock 74</strong>. The <code class="language-plaintext highlighter-rouge">python-script</code> and <code class="language-plaintext highlighter-rouge">llamacpp</code> extensions are the ones that make “AI at the edge” real: you can run Python inside the agent, or point it at a local model. <strong><a href="#hack-3--real-gpu-inference-at-the-edge-three-front-doors">Hack #3</a> below is where that stops being a promise</strong> — a real MobileNetV2 engine doing GPU classification at 4 ms, reached three different ways.</p>
 
 <p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>A remote EFM/Kafka restart has a recognizable signature — don’t chase it.</strong> When I restart the stack on the Windows side, the Jetson’s <code class="language-plaintext highlighter-rouge">minifi-app.log</code> fills with Kafka <code class="language-plaintext highlighter-rouge">Connection refused</code> on every broker, sometimes with a <code class="language-plaintext highlighter-rouge">"verify that security.protocol is correctly configured"</code> hint. That hint is noise from the broker bouncing, not an auth change. It settles on its own within ~15–20 minutes of the ports reopening. No Jetson-side action needed.</p>
 
@@ -534,6 +534,116 @@ pkill <span class="nt">-f</span> oled_strobe.py
 
 <p class="notice--info"><img class="emoji" title=":information_source:" alt=":information_source:" src="https://github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20"> <strong><code class="language-plaintext highlighter-rouge">ListenHTTP</code> on MiNiFi C++ is fire-and-forget.</strong> There’s no <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code>/<code class="language-plaintext highlighter-rouge">HandleHttpResponse</code> pair — that’s Java-NiFi only. The caller gets its response the instant the request lands, <em>before</em> your script runs. Design for async: don’t wait on the HTTP response for the result of the work. My “How to AI with MiNiFi” post goes deep on this and on the two different Python paths (<code class="language-plaintext highlighter-rouge">ExecuteScript</code> vs <code class="language-plaintext highlighter-rouge">ExecutePythonProcessor</code>) that trip everyone up.</p>
 
+<h2 id="hack-3--real-gpu-inference-at-the-edge-three-front-doors">Hack #3 — real GPU inference at the edge, three front doors</h2>
+
+<p>For months the “AI” on this agent was a lie. The <code class="language-plaintext highlighter-rouge">ExecuteScript</code> everyone pointed at as “the TensorRT processor” did exactly this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">logger</span> <span class="o">=</span> <span class="n">trt</span><span class="p">.</span><span class="nc">Logger</span><span class="p">(</span><span class="n">trt</span><span class="p">.</span><span class="n">Logger</span><span class="p">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">tensorrt_info</span> <span class="o">=</span> <span class="p">{</span><span class="s">"version"</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">trt</span><span class="p">.</span><span class="n">__version__</span><span class="p">),</span> <span class="s">"status"</span><span class="p">:</span> <span class="s">"Active"</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>It imported <code class="language-plaintext highlighter-rouge">tensorrt</code> and reported the version string. A smoke test wearing an AI costume. This hack replaces it with a real <strong>MobileNetV2 FP16</strong> engine doing real GPU classification at <strong>4 ms</strong>, reachable three different ways — from <code class="language-plaintext highlighter-rouge">ExecuteScript</code>, from a first-class custom Python processor, and from a Java agent that can’t run Python at all — with <strong>zero new pip packages</strong> on a box with 18 GB of disk left.</p>
+
+<h3 id="the-obvious-design-is-wrong">The obvious design is wrong</h3>
+
+<p>The obvious move is <code class="language-plaintext highlighter-rouge">import tensorrt</code> in the processor, deserialize the <code class="language-plaintext highlighter-rouge">.engine</code>, run inference. It doesn’t work, for a reason that isn’t in any doc I’d read: <strong>MiNiFi C++’s <code class="language-plaintext highlighter-rouge">ExecuteScript</code> re-reads its script file on every trigger.</strong> That’s the feature that lets you edit the <code class="language-plaintext highlighter-rouge">.py</code> and have the next FlowFile pick it up with no restart — but it also means nothing stays resident, so a <code class="language-plaintext highlighter-rouge">.engine</code> deserialized per request costs far more than the inference it’s there to do.</p>
+
+<p>The custom-processor route has the same problem from the other end: it can hold state, but <code class="language-plaintext highlighter-rouge">PythonCreator</code> only scans the processor dir at boot, so every model change becomes a full agent restart of the process that also drives this box’s matrix screensaver and stream launcher. And the Java agent can’t run Python at all — its <code class="language-plaintext highlighter-rouge">ExecuteScript</code> is Groovy/Clojure only.</p>
+
+<p>Three consumers, three separate reasons the engine can’t live in the processor.</p>
+
+<h3 id="the-box-had-already-solved-it">The box had already solved it</h3>
+
+<p><code class="language-plaintext highlighter-rouge">launch_stream.py</code> (the streamChat hack above) is a nine-line <code class="language-plaintext highlighter-rouge">ExecuteScript</code> that POSTs to <code class="language-plaintext highlighter-rouge">127.0.0.1:5902</code> and gets out of the way; the thing that owns state — a persistent mpv process — lives in a systemd <em>user</em> service. Same shape for inference: one resident daemon, three thin front doors.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                          ┌────────────────────────────────────────┐
+                          │ trt_infer_server.py  127.0.0.1:5910     │
+  3 front doors ────────▶ │ mobilenetv2.fp16.engine resident        │
+                          │ TRT context + CUDA buffers allocated 1× │
+                          │ POST /classify    GET /health           │
+                          └────────────────────────────────────────┘
+  1. C++ ExecuteScript      :8080 → PublishKafka
+  2. C++ custom processor   ClassifyImageTensorRT, first-class type in EFM Designer
+  3. Java agent             HandleHttpRequest → InvokeHTTP → HandleHttpResponse
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">systemctl --user restart trt-infer</code> reloads the model without going near MiNiFi. I verified it: restarted the daemon mid-session, the production C++ agent (pid 2616) never noticed, and the next POST classified normally.</p>
+
+<h3 id="no-new-packages--thats-the-whole-trick">No new packages — that’s the whole trick</h3>
+
+<p>The gap in “run TensorRT from Python” is device-memory allocation, and everyone reaches for torch or pycuda for it. On this box <code class="language-plaintext highlighter-rouge">torch</code> on PyPI is a 427 MB generic aarch64 wheel that isn’t a JetPack/CUDA build, and <code class="language-plaintext highlighter-rouge">onnxruntime-gpu</code> has no aarch64/py3.12 distribution at all. You need neither — <code class="language-plaintext highlighter-rouge">ctypes</code> against <code class="language-plaintext highlighter-rouge">libcudart</code> is four functions wide (<code class="language-plaintext highlighter-rouge">cudaMalloc</code>, <code class="language-plaintext highlighter-rouge">cudaMemcpyAsync</code>, <code class="language-plaintext highlighter-rouge">cudaStreamCreate</code>, <code class="language-plaintext highlighter-rouge">cudaStreamSynchronize</code>). <code class="language-plaintext highlighter-rouge">tensorrt</code> 10.16.2.10, <code class="language-plaintext highlighter-rouge">numpy</code>, and <code class="language-plaintext highlighter-rouge">cv2</code> were already installed. Total added footprint: a 14 MB ONNX and a 7.5 MB engine.</p>
+
+<p>Build the engine on the box — it’s bound to this GPU and this TensorRT version, so it stays out of git:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trtexec <span class="nt">--onnx</span><span class="o">=</span>mobilenetv2-12.onnx <span class="nt">--saveEngine</span><span class="o">=</span>mobilenetv2.fp16.engine <span class="nt">--fp16</span>
+</code></pre></div></div>
+
+<p>About 2 minutes on an Orin Nano. <code class="language-plaintext highlighter-rouge">trtexec</code>’s own benchmark on the result: <strong>674 qps</strong>, median GPU compute time 1.37 ms.</p>
+
+<h3 id="what-it-costs-measured">What it costs, measured</h3>
+
+<p>100 iterations against the live daemon, using a Samoyed photo from the PyTorch hub so the right answer is known:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>p50</th>
+      <th>p95</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+<code class="language-plaintext highlighter-rouge">inference_ms</code> (GPU)</td>
+      <td><strong>4.05 ms</strong></td>
+      <td>7.21 ms</td>
+    </tr>
+    <tr>
+      <td>
+<code class="language-plaintext highlighter-rouge">preprocess_ms</code> (CPU)</td>
+      <td>32.6 ms</td>
+      <td>36.0 ms</td>
+    </tr>
+    <tr>
+      <td>end-to-end</td>
+      <td>38.9 ms</td>
+      <td>43.8 ms</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Preprocessing costs 8× the inference.</strong> The GPU is not the bottleneck — CPU-side JPEG decode is. Send a smaller image and it collapses: a 640 px input drops preprocess to 8 ms and end-to-end to <strong>14.9 ms</strong>, and confidence actually went <em>up</em> (0.72 vs 0.64) because the resize path is shorter. So the rule for callers is <strong>send ~640 px</strong> — 67 req/s single-threaded instead of 26. <code class="language-plaintext highlighter-rouge">tegrastats</code> showed <code class="language-plaintext highlighter-rouge">GR3D_FREQ</code> at 47–60% during the loop against a 0% idle baseline, which is the proof the GPU is doing the work and not falling back to CPU.</p>
+
+<h3 id="the-three-front-doors">The three front doors</h3>
+
+<p><strong>1 — <code class="language-plaintext highlighter-rouge">ExecuteScript</code>.</strong> <code class="language-plaintext highlighter-rouge">gpu_nifi_tensorRT-4.py</code> has no <code class="language-plaintext highlighter-rouge">import tensorrt</code> at all: it reads the FlowFile as <em>bytes</em> (the old stub decoded UTF-8, which throws on any real JPEG), POSTs to the daemon, and lifts the top-1 prediction into FlowFile attributes on the way to <code class="language-plaintext highlighter-rouge">PublishKafka</code>. Wired by changing one property on the live flow — <code class="language-plaintext highlighter-rouge">Script File</code> from <code class="language-plaintext highlighter-rouge">-3.py</code> to <code class="language-plaintext highlighter-rouge">-4.py</code> — then validate and publish. The agent hot-reloaded on the next heartbeat, no restart.</p>
+
+<p><strong>2 — a first-class processor type.</strong> <code class="language-plaintext highlighter-rouge">ClassifyImageTensorRT</code> shows up in the agent manifest under its own name with its own properties (<code class="language-plaintext highlighter-rouge">Inference Endpoint</code>, <code class="language-plaintext highlighter-rouge">Top K</code>, <code class="language-plaintext highlighter-rouge">Request Timeout</code>, <code class="language-plaintext highlighter-rouge">Image Source</code>) and wires in the EFM Designer like any stock processor. I validated it on a <em>disposable</em> sandbox agent — a second <code class="language-plaintext highlighter-rouge">1.26.02</code> install under <code class="language-plaintext highlighter-rouge">~/minifi-pytest/</code>, never the production one — because <code class="language-plaintext highlighter-rouge">PythonCreator</code> only scans at boot and I wasn’t going to restart the agent that drives the desktop automation. <code class="language-plaintext highlighter-rouge">ListenHTTP(:9096) → ClassifyImageTensorRT → LogAttribute</code>, three images POSTed, 3/3 classified (<code class="language-plaintext highlighter-rouge">inference.label = Samoyed</code>, <code class="language-plaintext highlighter-rouge">inference.ms = 5.51</code>).</p>
+
+<p><strong>3 — the Java agent, for a real answer back.</strong> The <code class="language-plaintext highlighter-rouge">:8081</code> streamChat endpoint above is fire-and-forget — that’s all MiNiFi C++ can do. But the sensor round-trip I’m building toward needs a <em>real answer in the response body</em>, and that’s <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code>/<code class="language-plaintext highlighter-rouge">HandleHttpResponse</code>, which is Java-only. <code class="language-plaintext highlighter-rouge">NvidiaNanoJava</code> is <code class="language-plaintext highlighter-rouge">HandleHttpRequest(:8090) → InvokeHTTP → HandleHttpResponse</code>, POSTing straight through to the daemon. One catch: there was <strong>no JRE on this Jetson at all</strong> — none installed, none in the tarball — so the agent had never actually run despite being recorded elsewhere as “online.” <code class="language-plaintext highlighter-rouge">sudo apt install -y openjdk-21-jre-headless</code> and it came up in 4.9 s. The round trip:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--data-binary</span> @dog-640.jpg <span class="nt">-H</span> <span class="s2">"Content-Type: application/octet-stream"</span> <span class="se">\</span>
+<span class="go">       http://127.0.0.1:8090/classify
+{"ok": true, "model": "mobilenetv2-12 (ImageNet-1k, FP16)",
+ "predictions": [{"label": "Samoyed", "class_id": 258, "confidence": 0.723496}, ...],
+ "preprocess_ms": 6.53, "inference_ms": 4.12}
+HTTP 200
+</span></code></pre></div></div>
+
+<p>One POST, a real classification back — no Kafka, no fire-and-forget ack. The Java agent adds ~117 ms over the daemon-direct number (FlowFile repository, scheduling, Jetty); worth it for an EFM-managed flow, worth knowing before anyone promises a latency figure. The error path <em>returns</em> 502 in 28 ms instead of hanging, which matters when the caller is a microcontroller with a fixed timeout — but only because I set <code class="language-plaintext highlighter-rouge">InvokeHTTP</code>’s timeouts deliberately (<code class="language-plaintext highlighter-rouge">Connection 5s</code>, <code class="language-plaintext highlighter-rouge">Socket Read/Write 10s</code>) instead of leaving the 15 s framework default that cost most of a session on another agent.</p>
+
+<h3 id="the-drop-warning-that-lies">The drop-warning that lies</h3>
+
+<p>Every POST to the <code class="language-plaintext highlighter-rouge">ExecuteScript</code> door logs this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ListenHTTP] [warning] ListenHTTP buffer is NOT full 1/1, 'POST' request for '/contentListener' uri was dropped
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Buffer Size</code> and <code class="language-plaintext highlighter-rouge">Batch Size</code> are both already <code class="language-plaintext highlighter-rouge">1</code>, so this reads like every request is being dropped. <strong>It isn’t.</strong> Controlled run, counting at both ends: 20 POSTs sent, 20 reached the daemon, 20 “was dropped” warnings — 20 of 20 classified. The warning is spurious and fires on requests that are delivered and processed normally. Anyone diagnosing this leg by grepping the log will conclude the exact opposite of the truth. It’s the same warning string the streamChat listener throws in Bug 1 above — except there, at <code class="language-plaintext highlighter-rouge">Buffer Size 5</code>, the drop was real; here at <code class="language-plaintext highlighter-rouge">1/1</code> it’s noise.</p>
+
+<p class="notice--success"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>The engine lives in a daemon, not the processor — and that’s the reusable idea.</strong> Three different MiNiFi consumers (C++ <code class="language-plaintext highlighter-rouge">ExecuteScript</code>, a custom Python processor, a Java <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code> flow) all reach one resident TensorRT process over loopback. Reload the model with <code class="language-plaintext highlighter-rouge">systemctl --user restart trt-infer</code> and no agent restarts. Same shape as the persistent-mpv stream launcher this box already ran — when the box has already solved a problem once, copy the shape.</p>
+
 <h2 id="the-environment-sensor-i-didnt-ship">The environment sensor I didn’t ship</h2>
 
 <p>I wanted the Jetson to read its own environment — temp, humidity, pressure, light, UV, motion, air quality — so I tried a Waveshare Environment Sensor module (I2C, with its own 1.3” OLED) on the same header. The four core sensors — BME280 (temp/humidity/pressure), TSL2591 (light), LTR390 (UV), ICM20948 (9-DOF IMU) — all read fine over I2C bus 7. The board’s onboard OLED never did: address <code class="language-plaintext highlighter-rouge">0x3C</code> returned a hard I2C NACK on every driver and every probe, so zero bytes ever reached the chip. A replacement unit through Waveshare’s RMA showed the identical symptom out of the box. Two dead OLEDs on two boards is a hardware pattern, not a config problem — so I returned both and left the sensor out of this build.</p>
@@ -546,6 +656,8 @@ pkill <span class="nt">-f</span> oled_strobe.py
 
 <ul>
   <li>
+<strong>Wire the inference into a full router flow.</strong> Hack #3 proves the <em>services</em> work — three front doors, all measured. What’s left is assembling them into an end-to-end <code class="language-plaintext highlighter-rouge">NvidiaNanoAI</code> EFM class and router flow, with the Jetson acting as the front door to its own AI services: a XIAO sensor on the LAN POSTs an image to the Jetson’s <code class="language-plaintext highlighter-rouge">:8090</code> endpoint and gets a real classification back, not a fire-and-forget ack. The round-trip primitive is proven (front door 3); turning it into an EFM-managed flow is the piece still to build.</li>
+  <li>
 <strong>Environment data into the flow.</strong> Wire a working I2C sensor into a MiNiFi Python processor and produce readings to Kafka alongside everything else — the Jetson reporting its own room conditions to the same stack it manages flows from. This is the piece the Waveshare board was meant to fill; I’ll pick a different sensor.</li>
   <li>
 <strong>A buzzer and more I2C peripherals</strong> on the header for physical alerts driven by flow conditions.</li>
@@ -554,7 +666,7 @@ pkill <span class="nt">-f</span> oled_strobe.py
   <li>
 <strong>Metrics and analytics.</strong> System + processor + model metrics from the edge agent into the Prometheus instance inside the CSO stack, the same way the enterprise integration post does it for the cluster.</li>
   <li>
-<strong>Bigger local models.</strong> The <code class="language-plaintext highlighter-rouge">llamacpp</code> extension is already staged in this agent. The natural next step up the ladder is a real local-AI workstation (an NVIDIA DGX Spark class box) for the heavy inference, with the Jetson as the always-on edge node in front of it.</li>
+<strong>Bigger local models.</strong> MobileNet classification runs on the box today (Hack #3). The <code class="language-plaintext highlighter-rouge">llamacpp</code> extension is already staged for the step up to a local LLM, and the natural ceiling is a real local-AI workstation (an NVIDIA DGX Spark class box) for the heavy inference, with the Jetson as the always-on edge node in front of it.</li>
 </ul>
 
 <h2 id="what-not-to-do--the-traps-in-one-place">What NOT to do — the traps in one place</h2>
@@ -572,6 +684,16 @@ pkill <span class="nt">-f</span> oled_strobe.py
 <strong>Don’t block inside <code class="language-plaintext highlighter-rouge">ExecuteScript</code></strong> — its thread is shared with the whole flow. Background anything that waits.</li>
   <li>
 <strong>Don’t force fullscreen with <code class="language-plaintext highlighter-rouge">wmctrl</code> and expect Esc to undo it</strong> — use <code class="language-plaintext highlighter-rouge">wmctrl ... -b remove,fullscreen</code>.</li>
+  <li>
+<strong>Don’t <code class="language-plaintext highlighter-rouge">import tensorrt</code> inside an <code class="language-plaintext highlighter-rouge">ExecuteScript</code>.</strong> The script is re-read every trigger, so the engine can’t stay resident and you pay deserialization per request. Hold it in a resident daemon and POST to it.</li>
+  <li>
+<strong>Don’t reach for torch or pycuda on a Jetson just to get device memory.</strong> <code class="language-plaintext highlighter-rouge">torch</code> on PyPI for aarch64/py3.12 is a 427 MB generic build with no Orin CUDA validation, and <code class="language-plaintext highlighter-rouge">onnxruntime-gpu</code> has no matching distribution at all. <code class="language-plaintext highlighter-rouge">ctypes</code> against <code class="language-plaintext highlighter-rouge">libcudart</code> is already installed and is four functions.</li>
+  <li>
+<strong>Don’t commit the <code class="language-plaintext highlighter-rouge">.engine</code>.</strong> It’s bound to this exact GPU and TensorRT version. Commit the <code class="language-plaintext highlighter-rouge">trtexec</code> line that builds it instead.</li>
+  <li>
+<strong>Don’t trust <code class="language-plaintext highlighter-rouge">ListenHTTP buffer is NOT full 1/1 ... was dropped</code>.</strong> Measured 20/20 delivered while it fired on every one. Count at the far end before believing it.</li>
+  <li>
+<strong>Don’t leave <code class="language-plaintext highlighter-rouge">InvokeHTTP</code>’s timeouts at the framework default</strong> when the target is a local daemon answering in milliseconds — 15 s of default socket-read timeout is 15 s the caller hangs on a failure that was knowable immediately.</li>
 </ul>
 
 <h2 id="terminal-history">Terminal History</h2>
@@ -618,6 +740,21 @@ tail -f /home/tunastreet/nifi-minifi-cpp-1.26.02/logs/minifi-app.log | grep -i "
 <span class="gp">wmctrl -l                                          #</span><span class="w"> </span>find the <span class="s2">"&lt;name&gt; - Twitch - Chromium"</span> window
 <span class="go">wmctrl -r "xQc - Twitch - Chromium" -b add,fullscreen
 </span><span class="gp">wmctrl -r "xQc - Twitch - Chromium" -b remove,fullscreen   #</span><span class="w"> </span>&lt;- ESCAPE HATCH: Esc/F11 won<span class="s1">'t undo a wmctrl fullscreen
+</span><span class="go">
+</span><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> real GPU inference: build the engine, stand up the daemon, hit all 3 front doors <span class="nt">---</span>
+<span class="gp">python3 -c "import tensorrt, numpy, cv2;</span><span class="w"> </span>print<span class="o">(</span>tensorrt.__version__<span class="o">)</span><span class="s2">"   # 10.16.2.10 - all 3 already installed, no pip needed
+</span><span class="gp">trtexec --onnx=mobilenetv2-12.onnx --saveEngine=mobilenetv2.fp16.engine --fp16   #</span><span class="w"> </span><span class="s2">~2 min on the Orin, 674 qps
+</span><span class="gp">systemctl --user enable --now trt-infer            #</span><span class="w"> </span><span class="s2">resident daemon on 127.0.0.1:5910, no root
+</span><span class="gp">curl -s http://127.0.0.1:5910/health               #</span><span class="w"> </span><span class="s2">{"</span>ok<span class="s2">": true, ...}
+</span><span class="gp">systemctl --user restart trt-infer                 #</span><span class="w"> </span><span class="s2">reload the model - agent (pid 2616) never notices
+</span><span class="gp">#</span><span class="w"> </span><span class="s2">front door 1 (C++ ExecuteScript -&gt; Kafka): flipped Script File -3.py -&gt; -4.py in EFM, validate+publish, hot-reloaded
+</span><span class="go">tail -f logs/minifi-app.log | grep -i "reload\|ListenHTTP"
+</span><span class="gp">#</span><span class="w"> </span>NOTE: <span class="s2">"ListenHTTP buffer is NOT full 1/1 ... was dropped"</span> fires on EVERY post but 20/20 were classified - the warning lies
+<span class="gp">#</span><span class="w"> </span>front door 3 <span class="o">(</span>Java agent, real answer back<span class="o">)</span>: no JRE on the box at all - agent had never run
+<span class="gp">which java || sudo apt install -y openjdk-21-jre-headless   #</span><span class="w"> </span>3 pkgs, needs the interactive <span class="nb">sudo </span>password
+<span class="gp">cd ~/minifi-java-nano/minifi-2.24.08.0-19 &amp;&amp; ./bin/minifi.sh start   #</span><span class="w"> </span>up <span class="k">in </span>4.9s
+<span class="gp">curl --data-binary @dog-640.jpg -H "Content-Type: application/octet-stream" http://127.0.0.1:8090/classify   #</span><span class="w"> </span>Samoyed 0.72, HTTP 200
+<span class="gp">curl --data-binary "definitely not an image" http://127.0.0.1:8090/classify   #</span><span class="w"> </span>HTTP 502 <span class="k">in </span>0.028s - returns, doesn<span class="s1">'t hang
 </span><span class="go">
 </span><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> Waveshare <span class="nb">env </span>sensor: the OLED that never ACKed <span class="o">(</span>dropped from the build<span class="o">)</span> <span class="nt">---</span>
 <span class="gp">i2cdetect -y -r 7                                  #</span><span class="w"> </span>sensors at 0x29/0x53/0x68/0x76 answer<span class="p">;</span> 0x3c NACKs every <span class="nb">time</span>
@@ -699,6 +836,29 @@ wmctrl <span class="nt">-r</span> <span class="s2">"xQc - Twitch - Chromium"</sp
 wmctrl <span class="nt">-r</span> <span class="s2">"xQc - Twitch - Chromium"</span> <span class="nt">-b</span> remove,fullscreen      <span class="c"># undo — Esc/F11 will NOT</span>
 </code></pre></div></div>
 
+<h4 id="6-real-gpu-inference--build-the-engine-run-the-daemon-test-all-three-doors">6. Real GPU inference — build the engine, run the daemon, test all three doors</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># build the FP16 engine on the box (bound to this GPU + TRT version, kept out of git)</span>
+<span class="nb">cd</span> ~/trt-infer/models
+curl <span class="nt">-sSL</span> <span class="nt">-o</span> mobilenetv2-12.onnx <span class="se">\</span>
+  https://github.com/onnx/models/raw/main/validated/vision/classification/mobilenet/model/mobilenetv2-12.onnx
+trtexec <span class="nt">--onnx</span><span class="o">=</span>mobilenetv2-12.onnx <span class="nt">--saveEngine</span><span class="o">=</span>mobilenetv2.fp16.engine <span class="nt">--fp16</span>
+
+<span class="c"># install the resident daemon as a user service (no root; this box runs a lingering user manager)</span>
+<span class="nb">cp </span>files/trt_infer_server.py ~/DesktopShare/files/
+<span class="nb">cp </span>files/trt-infer.service ~/.config/systemd/user/
+systemctl <span class="nt">--user</span> daemon-reload
+systemctl <span class="nt">--user</span> <span class="nb">enable</span> <span class="nt">--now</span> trt-infer
+curl <span class="nt">-s</span> http://127.0.0.1:5910/health
+
+<span class="c"># reload the model without touching MiNiFi</span>
+systemctl <span class="nt">--user</span> restart trt-infer
+
+<span class="c"># front door 3 — Java agent round-trip (a real classification in the response body)</span>
+curl <span class="nt">--data-binary</span> @dog-640.jpg <span class="nt">-H</span> <span class="s2">"Content-Type: application/octet-stream"</span> <span class="se">\</span>
+     http://127.0.0.1:8090/classify
+</code></pre></div></div>
+
 <h2 id="nvidia-jetson-developer-resources">NVIDIA Jetson developer resources</h2>
 
 <ul>
@@ -748,7 +908,11 @@ wmctrl <span class="nt">-r</span> <span class="s2">"xQc - Twitch - Chromium"</sp
     
       <a href="/tags/#efm" class="page__taxonomy-item p-category" rel="tag">efm</a><span class="sep">, </span>
     
+      <a href="/tags/#gpu" class="page__taxonomy-item p-category" rel="tag">gpu</a><span class="sep">, </span>
+    
       <a href="/tags/#i2c" class="page__taxonomy-item p-category" rel="tag">i2c</a><span class="sep">, </span>
+    
+      <a href="/tags/#inference" class="page__taxonomy-item p-category" rel="tag">inference</a><span class="sep">, </span>
     
       <a href="/tags/#jetson" class="page__taxonomy-item p-category" rel="tag">jetson</a><span class="sep">, </span>
     
@@ -756,7 +920,9 @@ wmctrl <span class="nt">-r</span> <span class="s2">"xQc - Twitch - Chromium"</sp
     
       <a href="/tags/#nvidia" class="page__taxonomy-item p-category" rel="tag">nvidia</a><span class="sep">, </span>
     
-      <a href="/tags/#oled" class="page__taxonomy-item p-category" rel="tag">oled</a>
+      <a href="/tags/#oled" class="page__taxonomy-item p-category" rel="tag">oled</a><span class="sep">, </span>
+    
+      <a href="/tags/#tensorrt" class="page__taxonomy-item p-category" rel="tag">tensorrt</a>
     
     </span>
   </p>
