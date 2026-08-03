@@ -1,16 +1,23 @@
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 28856
+  size: 29449
   lang: "Python"
-  updated: "2026-08-01"
+  updated: "2026-08-03"
   fork: false
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 1165
+  size: 1686
   lang: "Python"
-  updated: "2026-08-01"
+  updated: "2026-08-02"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 161729
+  lang: "HTML"
+  updated: "2026-08-02"
   fork: false
 - name: "cloudera-ce-aws"
   description: "Cloudera on premise Community Edition on AWS"
@@ -19,13 +26,6 @@
   lang: ""
   updated: "2026-08-01"
   fork: true
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 161728
-  lang: "HTML"
-  updated: "2026-08-01"
-  fork: false
 - name: "MiNiFi-Kubernetes-Playground"
   description: "A repository I am using to play with minifi on kubernetes."
   url: "https://github.com/cldr-steven-matison/MiNiFi-Kubernetes-Playground"
