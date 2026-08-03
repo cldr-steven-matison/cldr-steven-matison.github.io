@@ -4,7 +4,7 @@ title: "Hacking The Jetson"
 excerpt: "Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI"
 header:
   teaser: "/assets/images/efm-nvidia-jetson.png"
-date: 2026-07-30
+date: 2026-08-03
 classes: wide
 categories:
   - blog
