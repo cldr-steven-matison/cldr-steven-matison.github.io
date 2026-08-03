@@ -595,7 +595,7 @@ var store = [{
       },{
         "title": "Hacking The Jetson",
         "excerpt":":warning: Danger! This is a Work in Progress article. Content and code are updating frequently until this notice is removed. I bought an NVIDIA Jetson Orin Nano developer kit, dropped it into a Yahboom CubeNano case, and then spent a few weeks turning it into something between a desk toy...","categories": ["blog"],
-        "tags": ["nvidia","jetson","minifi","efm","edge","ai","oled","i2c","cloudera"],
+        "tags": ["nvidia","jetson","minifi","efm","edge","ai","oled","i2c","cloudera","tensorrt","gpu","inference"],
         "url": "/blog/Hacking-The-Jetson/",
         "teaser": "/assets/images/efm-nvidia-jetson.png"
       },{
