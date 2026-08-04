@@ -536,13 +536,13 @@ pkill <span class="nt">-f</span> oled_strobe.py
 
 <h2 id="hack-3--real-gpu-inference-at-the-edge-three-front-doors">Hack #3 — real GPU inference at the edge, three front doors</h2>
 
-<p>For months the “AI” on this agent was a lie. The <code class="language-plaintext highlighter-rouge">ExecuteScript</code> everyone pointed at as “the TensorRT processor” did exactly this:</p>
+<p>Up to this point the “AI” on this agent was a smoke test. The <code class="language-plaintext highlighter-rouge">ExecuteScript</code> everyone pointed at as “the TensorRT processor” did exactly this:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">logger</span> <span class="o">=</span> <span class="n">trt</span><span class="p">.</span><span class="nc">Logger</span><span class="p">(</span><span class="n">trt</span><span class="p">.</span><span class="n">Logger</span><span class="p">.</span><span class="n">INFO</span><span class="p">)</span>
 <span class="n">tensorrt_info</span> <span class="o">=</span> <span class="p">{</span><span class="s">"version"</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">trt</span><span class="p">.</span><span class="n">__version__</span><span class="p">),</span> <span class="s">"status"</span><span class="p">:</span> <span class="s">"Active"</span><span class="p">}</span>
 </code></pre></div></div>
 
-<p>It imported <code class="language-plaintext highlighter-rouge">tensorrt</code> and reported the version string. A smoke test wearing an AI costume. This hack replaces it with a real <strong>MobileNetV2 FP16</strong> engine doing real GPU classification at <strong>4 ms</strong>, reachable three different ways — from <code class="language-plaintext highlighter-rouge">ExecuteScript</code>, from a first-class custom Python processor, and from a Java agent that can’t run Python at all — with <strong>zero new pip packages</strong> on a box with 18 GB of disk left.</p>
+<p>It imported <code class="language-plaintext highlighter-rouge">tensorrt</code> and reported the version string — a real working test that proved the TensorRT toolchain loads on the GPU box and the full <code class="language-plaintext highlighter-rouge">ListenHTTP → ExecuteScript → PublishKafka</code> chain runs end to end on the Jetson, just not inference yet. This hack builds real inference on that foundation with a <strong>MobileNetV2 FP16</strong> engine doing real GPU classification at <strong>4 ms</strong>, reachable three different ways — from <code class="language-plaintext highlighter-rouge">ExecuteScript</code>, from a first-class custom Python processor, and from a Java agent that can’t run Python at all — with <strong>zero new pip packages</strong> on a box with 18 GB of disk left.</p>
 
 <h3 id="the-obvious-design-is-wrong">The obvious design is wrong</h3>
 
