@@ -232,14 +232,14 @@ Same failure mode as the screensaver: Chromium's own fullscreen flags don't get 
 
 ## Hack #3 — real GPU inference at the edge, three front doors
 
-For months the "AI" on this agent was a lie. The `ExecuteScript` everyone pointed at as "the TensorRT processor" did exactly this:
+Up to this point the "AI" on this agent was a smoke test. The `ExecuteScript` everyone pointed at as "the TensorRT processor" did exactly this:
 
 ```python
 logger = trt.Logger(trt.Logger.INFO)
 tensorrt_info = {"version": str(trt.__version__), "status": "Active"}
 ```
 
-It imported `tensorrt` and reported the version string. A smoke test wearing an AI costume. This hack replaces it with a real **MobileNetV2 FP16** engine doing real GPU classification at **4 ms**, reachable three different ways — from `ExecuteScript`, from a first-class custom Python processor, and from a Java agent that can't run Python at all — with **zero new pip packages** on a box with 18 GB of disk left.
+It imported `tensorrt` and reported the version string — a real working test that proved the TensorRT toolchain loads on the GPU box and the full `ListenHTTP → ExecuteScript → PublishKafka` chain runs end to end on the Jetson, just not inference yet. This hack builds real inference on that foundation with a **MobileNetV2 FP16** engine doing real GPU classification at **4 ms**, reachable three different ways — from `ExecuteScript`, from a first-class custom Python processor, and from a Java agent that can't run Python at all — with **zero new pip packages** on a box with 18 GB of disk left.
 
 ### The obvious design is wrong
 
