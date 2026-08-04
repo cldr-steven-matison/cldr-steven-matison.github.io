@@ -1,7 +1,21 @@
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 43
+  lang: ""
+  updated: "2026-08-04"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 162517
+  lang: "HTML"
+  updated: "2026-08-04"
+  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 29449
+  size: 29686
   lang: "Python"
   updated: "2026-08-03"
   fork: false
@@ -10,13 +24,6 @@
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
   size: 1686
   lang: "Python"
-  updated: "2026-08-02"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 161729
-  lang: "HTML"
   updated: "2026-08-02"
   fork: false
 - name: "cloudera-ce-aws"
@@ -31,13 +38,6 @@
   url: "https://github.com/cldr-steven-matison/MiNiFi-Kubernetes-Playground"
   size: 62
   lang: "Java"
-  updated: "2026-07-31"
-  fork: false
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 43
-  lang: ""
   updated: "2026-07-31"
   fork: false
 - name: "ClouderaStreamingOperators"
