@@ -604,4 +604,10 @@ var store = [{
         "tags": ["cloudera","aws","ansible","terraform","community-edition","cdp"],
         "url": "/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/",
         "teaser": "/assets/images/cloudera-ce-cm-cluster.png"
+      },{
+        "title": "Disposable Clusters on One Box: The minikube Profile Swap",
+        "excerpt":"I had 123 days of a Cloudera stack running on one minikube node — NiFi, EFM, Kafka, Flink, SSB, Prometheus, a whole RAG app, MiNiFi Agents, and more — and I needed to prove out MiNiFi → NiFi Site-to-Site without risking any of it. The obvious move, standing up another...","categories": ["blog"],
+        "tags": ["minikube","kubernetes","cloudera","cfm","nifi","efm","minifi"],
+        "url": "/blog/Disposable-Clusters-on-One-Box-The-minikube-Profile-Swap/",
+        "teaser": "/assets/images/Minikube-Profile-Swap.jpg"
       }]
