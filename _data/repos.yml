@@ -1,44 +1,58 @@
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 43
+  lang: ""
+  updated: "2026-08-06"
+  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 29824
+  size: 37139
   lang: "Python"
   updated: "2026-08-05"
   fork: false
-- name: "MiNiFi-Kubernetes-Playground"
-  description: "A repository I am using to play with minifi on kubernetes."
-  url: "https://github.com/cldr-steven-matison/MiNiFi-Kubernetes-Playground"
-  size: 62
+- name: "NiFi-Templates"
+  description: "NiFI Templates of example flows I share with the community."
+  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
+  size: 1044
   lang: "Python"
   updated: "2026-08-05"
   fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 1826
-  lang: "Python"
-  updated: "2026-08-05"
-  fork: false
-- name: "NiFi2-Processor-Playground"
-  description: "A place to play around with NiFi 2.0 Processors"
-  url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
-  size: 285
+- name: "EdgeFlowManager"
+  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
+  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
+  size: 16717
   lang: "Python"
   updated: "2026-08-05"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 162517
+  size: 162893
   lang: "HTML"
-  updated: "2026-08-04"
+  updated: "2026-08-05"
   fork: false
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 43
-  lang: ""
-  updated: "2026-08-04"
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 1827
+  lang: "Python"
+  updated: "2026-08-05"
+  fork: false
+- name: "MiNiFi-Kubernetes-Playground"
+  description: "A repository I am using to play with minifi on kubernetes."
+  url: "https://github.com/cldr-steven-matison/MiNiFi-Kubernetes-Playground"
+  size: 76
+  lang: "Python"
+  updated: "2026-08-05"
+  fork: false
+- name: "NiFi2-Processor-Playground"
+  description: "A place to play around with NiFi 2.0 Processors"
+  url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
+  size: 288
+  lang: "Python"
+  updated: "2026-08-05"
   fork: false
 - name: "cloudera-ce-aws"
   description: "Cloudera on premise Community Edition on AWS"
@@ -61,13 +75,6 @@
   lang: ""
   updated: "2026-06-23"
   fork: true
-- name: "NiFi-Templates"
-  description: "NiFI Templates of example flows I share with the community."
-  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 922
-  lang: "Python"
-  updated: "2026-06-17"
-  fork: false
 - name: "litellm"
   description: "Python SDK, Proxy Server (AI Gateway) to call 100+ LLM APIs in OpenAI (or native) format, with cost tracking, guardrails, loadbalancing and logging. [Bedrock, Azure, OpenAI, VertexAI, Cohere, Anthropic, Sagemaker, HuggingFace, VLLM, NVIDIA NIM]"
   url: "https://github.com/cldr-steven-matison/litellm"
