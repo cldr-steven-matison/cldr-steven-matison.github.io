@@ -1,36 +1,43 @@
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 43
-  lang: ""
-  updated: "2026-08-06"
-  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 37139
+  size: 37390
   lang: "Python"
-  updated: "2026-08-05"
-  fork: false
-- name: "NiFi-Templates"
-  description: "NiFI Templates of example flows I share with the community."
-  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 1044
-  lang: "Python"
-  updated: "2026-08-05"
+  updated: "2026-08-06"
   fork: false
 - name: "EdgeFlowManager"
   description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
   url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
-  size: 16717
+  size: 17250
   lang: "Python"
-  updated: "2026-08-05"
+  updated: "2026-08-06"
+  fork: false
+- name: "NiFiandAi"
+  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
+  url: "https://github.com/cldr-steven-matison/NiFiandAi"
+  size: 53
+  lang: ""
+  updated: "2026-08-06"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
   size: 162893
   lang: "HTML"
+  updated: "2026-08-06"
+  fork: false
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 44
+  lang: ""
+  updated: "2026-08-06"
+  fork: false
+- name: "NiFi-Templates"
+  description: "NiFI Templates of example flows I share with the community."
+  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
+  size: 1044
+  lang: "Python"
   updated: "2026-08-05"
   fork: false
 - name: "cso-operator-app"
