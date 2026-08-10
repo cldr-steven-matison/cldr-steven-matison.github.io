@@ -1,0 +1,1390 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Persistence with Cloudera Flow Management Operator - Cloudera Solutions Engineer</title>
+<meta name="description" content="How to make everything CFM writes to disk on Kubernetes — flow definitions, FlowFiles, content, provenance, cluster state, custom NARs, and Python extensions — survive pod restarts, rolling updates, and cluster reboots. Includes the migration from a fragile minikube mount at /extensions to a proper PersistentVolumeClaim.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Persistence with Cloudera Flow Management Operator">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Flow-Management-Operator/">
+
+
+  <meta property="og:description" content="How to make everything CFM writes to disk on Kubernetes — flow definitions, FlowFiles, content, provenance, cluster state, custom NARs, and Python extensions — survive pod restarts, rolling updates, and cluster reboots. Includes the migration from a fragile minikube mount at /extensions to a proper PersistentVolumeClaim.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/CFM-Cloudera_Flow_Management_Operator.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-10T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Flow-Management-Operator/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Persistence with Cloudera Flow Management Operator">
+    <meta itemprop="description" content="How to make everything CFM writes to disk on Kubernetes — flow definitions, FlowFiles, content, provenance, cluster state, custom NARs, and Python extensions — survive pod restarts, rolling updates, and cluster reboots. Includes the migration from a fragile minikube mount at /extensions to a proper PersistentVolumeClaim.">
+    <meta itemprop="datePublished" content="2026-08-10T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Flow-Management-Operator/" class="u-url" itemprop="url">Persistence with Cloudera Flow Management Operator
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          15 minute read
+        
+      </span>
+    
+    
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-08-10T00:00:00-04:00">
+            August 10, 2026
+          </time>
+        </p>
+      
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h1 id="persistence-with-cloudera-flow-management-operator-on-kubernetes">Persistence with Cloudera Flow Management Operator on Kubernetes</h1>
+
+<p>Cloudera Flow Management (CFM) Operator makes it easy to stand up an Apache NiFi cluster on Kubernetes with a single <code class="language-plaintext highlighter-rouge">Nifi</code> custom resource. What isn’t obvious the first time you deploy it is that a “working” install still loses state in <strong>five</strong> different places the moment a pod restarts, plus a sixth surface — Python extensions — that most people patch with a <code class="language-plaintext highlighter-rouge">minikube mount</code> and then quietly curse every time the mount dies.</p>
+
+<p>This post walks through fixing all of them in one pass, using the same <code class="language-plaintext highlighter-rouge">cfm-streaming</code> minikube cluster the rest of my Cloudera Streaming Operators (CSO) demos run in. Everything here is validated against <strong>CFM Operator <code class="language-plaintext highlighter-rouge">3.2.0-b39</code></strong> with NiFi 2.6.0 on minikube v1.37.0 / k8s v1.34.0.</p>
+
+<p>Companion post covering the same thing for SQL Stream Builder + Flink under the CSA Operator: <a href="/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/">Persistence with Cloudera Streaming Analytics Operator</a>.</p>
+
+<hr />
+
+<h2 id="what-cfm-actually-stores-and-where">What CFM actually stores, and where</h2>
+
+<p>Before touching any YAML, this is the layout you’re aiming for:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>Where the operator puts it</th>
+      <th>Path in pod</th>
+      <th>Persisted by</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">flow.xml.gz</code>, <code class="language-plaintext highlighter-rouge">authorizers.xml</code>, users, state.xml</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">data</code> repo</td>
+      <td><code class="language-plaintext highlighter-rouge">/opt/nifi/nifi-current/data</code></td>
+      <td>PVC per pod via <code class="language-plaintext highlighter-rouge">spec.persistence.data</code></td>
+    </tr>
+    <tr>
+      <td><strong>In-flight FlowFiles</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">flowfileRepo</code></td>
+      <td><code class="language-plaintext highlighter-rouge">/opt/nifi/nifi-current/flowfile-repository</code></td>
+      <td>PVC per pod via <code class="language-plaintext highlighter-rouge">spec.persistence.flowfileRepo</code></td>
+    </tr>
+    <tr>
+      <td><strong>Payload content</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">contentRepo</code></td>
+      <td><code class="language-plaintext highlighter-rouge">/opt/nifi/nifi-current/content-repository</code></td>
+      <td>PVC per pod via <code class="language-plaintext highlighter-rouge">spec.persistence.contentRepo</code></td>
+    </tr>
+    <tr>
+      <td><strong>Provenance / lineage</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">provenanceRepo</code></td>
+      <td><code class="language-plaintext highlighter-rouge">/opt/nifi/nifi-current/provenance-repository</code></td>
+      <td>PVC per pod via <code class="language-plaintext highlighter-rouge">spec.persistence.provenanceRepo</code></td>
+    </tr>
+    <tr>
+      <td><strong>Node runtime state, leader election</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">state</code></td>
+      <td><code class="language-plaintext highlighter-rouge">/opt/nifi/nifi-current/state</code></td>
+      <td>PVC per pod via <code class="language-plaintext highlighter-rouge">spec.persistence.state</code></td>
+    </tr>
+    <tr>
+      <td><strong>Custom Java NARs</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">narProvider</code></td>
+      <td><code class="language-plaintext highlighter-rouge">/opt/nifi/nifi-current/nar-provider</code> (Cloudera-specific)</td>
+      <td>Shared PVC via <code class="language-plaintext highlighter-rouge">spec.narProvider.volumes</code></td>
+    </tr>
+    <tr>
+      <td><strong>Python extensions (processors)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">statefulset.volumes</code></td>
+      <td><code class="language-plaintext highlighter-rouge">/opt/nifi/nifi-current/python/extensions</code></td>
+      <td>Shared PVC via <code class="language-plaintext highlighter-rouge">spec.statefulset.volumes</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Rows 1–5 come from <code class="language-plaintext highlighter-rouge">NifiPersistenceSpec</code> (documented in the CFM Operator Helm/CR reference). Rows 6 and 7 need extra care — row 7 in particular is where the “minikube mount” trap sits.</p>
+
+<p>The good news: the operator already knows how to manage all of this via <code class="language-plaintext highlighter-rouge">volumeClaimTemplates</code> on the underlying StatefulSet. You just need to declare the storage in the right places on the <code class="language-plaintext highlighter-rouge">Nifi</code> CR.</p>
+
+<hr />
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>StorageClass that supports <strong>ReadWriteOnce (RWO)</strong> — this is what minikube’s <code class="language-plaintext highlighter-rouge">standard</code> class gives you, and what almost every cloud provisioner (<code class="language-plaintext highlighter-rouge">gp3</code>, <code class="language-plaintext highlighter-rouge">standard</code>, <code class="language-plaintext highlighter-rouge">longhorn</code>, <code class="language-plaintext highlighter-rouge">openebs</code>, etc.) defaults to. RWO is fine for repos and state (they’re per-pod). Custom NARs / Python extensions <strong>need RWX</strong> if you scale NiFi beyond a single node — more on that below.</li>
+  <li>CFM Operator installed in the same namespace as (or a namespace that watches) the target <code class="language-plaintext highlighter-rouge">Nifi</code> CR.</li>
+  <li>CFM Operator version <code class="language-plaintext highlighter-rouge">3.2.0-b39</code> for this walkthrough — the images are:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/cfm-operator:3.2.0-b39</code></li>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/cfm-nifi-k8s:3.1.0-b129-nifi_2.6.0.4.12.0.1-9</code> (NiFi 2.x)</li>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/cfm-tini:3.2.0-b39</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Important notes before starting:</strong></p>
+
+<ul>
+  <li>PVCs created by <code class="language-plaintext highlighter-rouge">volumeClaimTemplates</code> are <strong>per-pod</strong> (named like <code class="language-plaintext highlighter-rouge">&lt;name&gt;-&lt;repo&gt;-&lt;ordinal&gt;</code>, e.g. <code class="language-plaintext highlighter-rouge">data-mynifi-0</code>). They are <strong>not</strong> deleted when you update the CR or roll the pod. That’s what makes this work — the operator hands the same PVC back to the new pod after a restart.</li>
+  <li>Operator handles data offloading during scale-down automatically.</li>
+  <li>No changes to <code class="language-plaintext highlighter-rouge">nifi.properties</code> or ConfigMaps needed — the operator injects the mounts.</li>
+  <li>Tested / validated pattern against CFM Operator 3.2.</li>
+</ul>
+
+<hr />
+
+<h2 id="step-1--prepare-your-storageclass">Step 1 — Prepare your StorageClass</h2>
+
+<p>Confirm your default StorageClass works, or create a named one so you can point specific repos at it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get storageclass
+kubectl describe storageclass &lt;your-storageclass-name&gt;
+</code></pre></div></div>
+
+<p>Look for the <code class="language-plaintext highlighter-rouge">provisioner</code> — on minikube it’s <code class="language-plaintext highlighter-rouge">k8s.io/minikube-hostpath</code>; yours may be different. If you want a dedicated class for NiFi repos, save this as <code class="language-plaintext highlighter-rouge">nifi-storage-class.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">storage.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">StorageClass</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nifi-storage</span>
+<span class="na">provisioner</span><span class="pi">:</span> <span class="s">k8s.io/minikube-hostpath</span>
+<span class="na">reclaimPolicy</span><span class="pi">:</span> <span class="s">Retain</span>
+<span class="na">volumeBindingMode</span><span class="pi">:</span> <span class="s">Immediate</span>
+<span class="na">allowVolumeExpansion</span><span class="pi">:</span> <span class="kc">true</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">allowVolumeExpansion: true</code> matters — you’ll thank yourself the day the content repo fills up and you want to bump it without redeploying NiFi.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> nifi-storage-class.yaml
+</code></pre></div></div>
+
+<p>Export your current <code class="language-plaintext highlighter-rouge">Nifi</code> CR for backup and diffing before touching anything:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get nifi mynifi <span class="nt">-n</span> cfm-streaming <span class="nt">-o</span> yaml <span class="o">&gt;</span> nifi-base-backup.yaml
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="step-2--persist-the-five-nifi-repos-specpersistence">Step 2 — Persist the five NiFi repos (<code class="language-plaintext highlighter-rouge">spec.persistence</code>)</h2>
+
+<p>Edit your <code class="language-plaintext highlighter-rouge">Nifi</code> CR file (mine is <code class="language-plaintext highlighter-rouge">nifi-cluster-30-nifi2x-python.yaml</code>, yours might be named differently). Add — or expand — the <code class="language-plaintext highlighter-rouge">persistence</code> block under <code class="language-plaintext highlighter-rouge">spec:</code>, at the same level as <code class="language-plaintext highlighter-rouge">replicas</code>, <code class="language-plaintext highlighter-rouge">image</code>, <code class="language-plaintext highlighter-rouge">security</code>, etc.</p>
+
+<p><strong>Recommended minimal configuration for flows + good durability:</strong></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+  <span class="c1"># ... your existing settings (replicas, image, etc.) ...</span>
+
+  <span class="na">persistence</span><span class="pi">:</span>
+    <span class="c1"># Global defaults (applied to any repo not explicitly overridden)</span>
+    <span class="na">size</span><span class="pi">:</span> <span class="s">10Gi</span>
+    <span class="na">storageClass</span><span class="pi">:</span> <span class="s">nifi-storage</span>
+
+    <span class="c1"># === CRITICAL FOR FLOWS ===</span>
+    <span class="na">data</span><span class="pi">:</span>                     <span class="c1"># ← persists flow.xml.gz + configs</span>
+      <span class="na">size</span><span class="pi">:</span> <span class="s">20Gi</span>              <span class="c1"># bump if you have large / complex flows</span>
+      <span class="na">storageClass</span><span class="pi">:</span> <span class="s">nifi-storage</span>
+
+    <span class="c1"># Highly recommended companions</span>
+    <span class="na">state</span><span class="pi">:</span>                    <span class="c1"># node runtime state, leader election, etc.</span>
+      <span class="na">size</span><span class="pi">:</span> <span class="s">5Gi</span>
+      <span class="na">storageClass</span><span class="pi">:</span> <span class="s">nifi-storage</span>
+
+    <span class="na">flowfileRepo</span><span class="pi">:</span>             <span class="c1"># in-flight FlowFiles</span>
+      <span class="na">size</span><span class="pi">:</span> <span class="s">20Gi</span>
+      <span class="na">storageClass</span><span class="pi">:</span> <span class="s">nifi-storage</span>
+
+    <span class="na">contentRepo</span><span class="pi">:</span>              <span class="c1"># actual payload content</span>
+      <span class="na">size</span><span class="pi">:</span> <span class="s">50Gi</span>              <span class="c1"># often the largest</span>
+      <span class="na">storageClass</span><span class="pi">:</span> <span class="s">nifi-storage</span>
+
+    <span class="na">provenanceRepo</span><span class="pi">:</span>           <span class="c1"># lineage / audit data</span>
+      <span class="na">size</span><span class="pi">:</span> <span class="s">30Gi</span>
+      <span class="na">storageClass</span><span class="pi">:</span> <span class="s">nifi-storage</span>
+</code></pre></div></div>
+
+<p><strong>Why the <code class="language-plaintext highlighter-rouge">data</code> repo is the one to focus on:</strong> the base / evaluation <code class="language-plaintext highlighter-rouge">Nifi</code> CRs you’ll see in Cloudera samples (or the pattern in <code class="language-plaintext highlighter-rouge">nifi-cluster-30-nifi2x-python.yaml</code> before this change) often omit full persistence or use ephemeral storage for simplicity. That causes <strong>flow loss on StatefulSet re-rolls</strong> — the single most annoying failure mode in this whole stack. The <code class="language-plaintext highlighter-rouge">data</code> repo is what stores <code class="language-plaintext highlighter-rouge">flow.xml.gz</code>, so persisting it is the direct fix. Everything else (state, flowfile, content, provenance) is durability for FlowFiles in-flight and lineage records — set them too if you care about surviving a re-roll mid-run.</p>
+
+<hr />
+
+<h2 id="step-3--delete-and-re-apply-the-cr">Step 3 — Delete and re-apply the CR</h2>
+
+<p>If NiFi is already deployed on the ephemeral StatefulSet, delete it. <strong>This is the last time you have to re-create your flows.</strong> Once persistence is in place, the same PVCs will get handed back to every future pod.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete nifi mynifi <span class="nt">-n</span> cfm-streaming
+kubectl apply <span class="nt">-f</span> nifi-cluster-30-nifi2x-python.yaml <span class="nt">-n</span> cfm-streaming
+</code></pre></div></div>
+
+<p>The operator will re-roll NiFi and new PVCs will be created automatically. Watch:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods <span class="nt">-n</span> cfm-streaming <span class="nt">-l</span> app.kubernetes.io/name<span class="o">=</span>nifi <span class="nt">-w</span>
+kubectl get pvc  <span class="nt">-n</span> cfm-streaming <span class="nt">-w</span>
+</code></pre></div></div>
+
+<p>You should see PVCs like this appear and go <code class="language-plaintext highlighter-rouge">Bound</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME                             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+content-repository-mynifi-0      Bound    pvc-ed5daf31-...                           50Gi       RWO            nifi-storage   3m
+data-mynifi-0                    Bound    pvc-d6054f5e-...                           20Gi       RWO            nifi-storage   3m
+flowfile-repository-mynifi-0     Bound    pvc-ea2041f6-...                           20Gi       RWO            nifi-storage   3m
+provenance-repository-mynifi-0   Bound    pvc-8fc752e8-...                           30Gi       RWO            nifi-storage   3m
+state-mynifi-0                   Bound    pvc-37bdae77-...                           5Gi        RWO            nifi-storage   3m
+</code></pre></div></div>
+
+<p>That output is copy-pasted from this laptop’s actual <code class="language-plaintext highlighter-rouge">cfm-streaming</code> namespace — this is what a working install looks like.</p>
+
+<hr />
+
+<h2 id="step-4--prove-flow-persistence-works">Step 4 — Prove flow persistence works</h2>
+
+<p>The real test — deploy a flow, force a re-roll, confirm the flow’s still there:</p>
+
+<ol>
+  <li>Open the NiFi UI, build a small flow, start it, confirm it runs.</li>
+  <li>
+    <p>Force a re-roll (this is the safest way, it re-schedules the pod without deleting the CR):</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> kubectl rollout restart statefulset mynifi <span class="nt">-n</span> cfm-streaming
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Wait for the pod to be Running / Ready again:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> kubectl rollout status statefulset/mynifi <span class="nt">-n</span> cfm-streaming <span class="nt">--timeout</span><span class="o">=</span>180s
+</code></pre></div>    </div>
+  </li>
+  <li>Refresh the NiFi UI — <strong>your test flow must still be there</strong>.</li>
+</ol>
+
+<p>If it’s not, check the pod’s mounts and PVC bindings:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-n</span> cfm-streaming mynifi-0 <span class="nt">-c</span> nifi <span class="nt">--</span> mount | <span class="nb">grep </span>nifi-current
+kubectl describe pod <span class="nt">-n</span> cfm-streaming mynifi-0 | <span class="nb">grep</span> <span class="nt">-A2</span> <span class="nt">-iE</span> <span class="s2">"flowfile|content|provenance|state|data"</span>
+kubectl logs <span class="nt">-n</span> cfm-streaming mynifi-0 <span class="nt">-c</span> nifi | <span class="nb">grep</span> <span class="nt">-i</span> persist
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="step-5--persist-custom-java-nars-narprovider">Step 5 — Persist custom Java NARs (<code class="language-plaintext highlighter-rouge">narProvider</code>)</h2>
+
+<p>CFM Operator has a first-class field for custom NARs — you don’t have to wire this into the StatefulSet by hand. Add a <code class="language-plaintext highlighter-rouge">narProvider</code> block to <code class="language-plaintext highlighter-rouge">spec:</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+  <span class="c1"># ... persistence block from step 2 ...</span>
+  <span class="na">narProvider</span><span class="pi">:</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">volumeClaimName</span><span class="pi">:</span> <span class="s">custom-nars</span>
+</code></pre></div></div>
+
+<p>And create the PVC once, ahead of the CR apply:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">custom-nars</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cfm-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">storageClassName</span><span class="pi">:</span> <span class="s2">"</span><span class="s">standard"</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">resources</span><span class="pi">:</span>
+    <span class="na">requests</span><span class="pi">:</span>
+      <span class="na">storage</span><span class="pi">:</span> <span class="s">100Mi</span>
+</code></pre></div></div>
+
+<p>Drop your <code class="language-plaintext highlighter-rouge">.nar</code> files into it — the simplest way is a one-shot loader pod, same pattern as Step 6 below. Once they’re on the PVC, the operator mounts them into every NiFi pod under <code class="language-plaintext highlighter-rouge">/opt/nifi/nifi-current/nar-provider/&lt;pvc-name&gt;/</code> (in this example, <code class="language-plaintext highlighter-rouge">/opt/nifi/nifi-current/nar-provider/custom-nars/</code>) and NiFi picks up the components on the next restart. The subdirectory is named after the PVC, which matters if you’re wiring up multiple NAR sources.</p>
+
+<p>Confirm the PVC has what you expect:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl run tmp-inspect <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--restart</span><span class="o">=</span>Never <span class="nt">--image</span><span class="o">=</span>busybox <span class="nt">-n</span> cfm-streaming <span class="se">\</span>
+  <span class="nt">--overrides</span><span class="o">=</span><span class="s1">'{"spec":{"containers":[{"name":"tmp-inspect","image":"busybox","command":["ls","-la","/mnt/nars"],
+    "volumeMounts":[{"name":"n","mountPath":"/mnt/nars"}]}],
+    "volumes":[{"name":"n","persistentVolumeClaim":{"claimName":"custom-nars"}}]}}'</span>
+</code></pre></div></div>
+
+<p>Output on this laptop:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>total 136
+-rw-r--r-- 1 501 staff   1957 Apr  8 17:22 custom-transaction-generator.nar
+-rw-r--r-- 1 501 staff 126892 Apr  9 12:57 nifi-mycustom-nar-1.0.0-SNAPSHOT.nar
+</code></pre></div></div>
+
+<p>If you scale NiFi to more than one node, swap the StorageClass for an RWX one (Longhorn, NFS, cloud file-share). RWO is fine for a single-node minikube demo.</p>
+
+<hr />
+
+<h2 id="step-6--persist-python-extensions-moving-off-the-minikube-mount-trap">Step 6 — Persist Python extensions (moving off the <code class="language-plaintext highlighter-rouge">minikube mount</code> trap)</h2>
+
+<p>This is the piece the current <code class="language-plaintext highlighter-rouge">cfm-persisted-volume.md</code> didn’t cover, and the piece I’ve been fighting the longest.</p>
+
+<h3 id="the-trap">The trap</h3>
+
+<p>When you first stand up NiFi 2.x with custom Python processors on minikube, the natural thing to do is drop them onto a folder on your Mac and mount it into the minikube VM:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minikube mount ~/nifi-custom-processors:/extensions &amp;
+</code></pre></div></div>
+
+<p>…and reference <code class="language-plaintext highlighter-rouge">/extensions</code> from the <code class="language-plaintext highlighter-rouge">Nifi</code> CR as a <code class="language-plaintext highlighter-rouge">hostPath</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+  <span class="na">statefulset</span><span class="pi">:</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">python-extensions</span>
+        <span class="na">hostPath</span><span class="pi">:</span>
+          <span class="na">path</span><span class="pi">:</span> <span class="s">/extensions</span>
+    <span class="na">volumeMounts</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">python-extensions</span>
+        <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/opt/nifi/nifi-current/python/extensions</span>
+</code></pre></div></div>
+
+<p>This works. It’s also fragile:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">minikube mount</code> runs a 9p filesystem over the minikube network. Inspecting <code class="language-plaintext highlighter-rouge">mount</code> inside the NiFi pod shows exactly that: <code class="language-plaintext highlighter-rouge">192.168.65.254 on /opt/nifi/nifi-current/python/extensions type 9p (rw,relatime,dfltuid=10001,dfltgid=10001,...)</code>. That’s a network mount, not real storage.</li>
+  <li>The 9p connection dies on <code class="language-plaintext highlighter-rouge">minikube stop / start</code>, on network flaps, and every time the mount command’s background process is killed. When it dies, NiFi’s Python processors go missing — sometimes with <code class="language-plaintext highlighter-rouge">Could not load module</code>, sometimes silently.</li>
+  <li>It only works because the developer running the demo remembered to run <code class="language-plaintext highlighter-rouge">minikube mount</code>. Nothing in the cluster references it or restarts it.</li>
+  <li>It doesn’t survive being moved to any real cluster — there is no <code class="language-plaintext highlighter-rouge">/extensions</code> on your production nodes.</li>
+</ul>
+
+<h3 id="the-fix--a-real-pvc-seeded-by-a-loader-pod">The fix — a real PVC, seeded by a loader pod</h3>
+
+<p>Save this as <code class="language-plaintext highlighter-rouge">python-extensions-loader.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">custom-python-extensions</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cfm-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">storageClassName</span><span class="pi">:</span> <span class="s2">"</span><span class="s">standard"</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">resources</span><span class="pi">:</span>
+    <span class="na">requests</span><span class="pi">:</span>
+      <span class="na">storage</span><span class="pi">:</span> <span class="s">100Mi</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">python-extensions-loader</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cfm-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ubuntu</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu:latest</span>
+      <span class="na">command</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">/bin/bash"</span><span class="pi">]</span>
+      <span class="na">stdin</span><span class="pi">:</span> <span class="kc">true</span>
+      <span class="na">tty</span><span class="pi">:</span> <span class="kc">true</span>
+      <span class="na">volumeMounts</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">custom-python-extensions-vol</span>
+          <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/home/ubuntu/extensions</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">custom-python-extensions-vol</span>
+      <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+        <span class="na">claimName</span><span class="pi">:</span> <span class="s">custom-python-extensions</span>
+</code></pre></div></div>
+
+<p>Apply, then copy your Python processors in:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> python-extensions-loader.yaml <span class="nt">-n</span> cfm-streaming
+kubectl <span class="nb">wait</span> <span class="nt">--for</span><span class="o">=</span><span class="nv">condition</span><span class="o">=</span>Ready pod/python-extensions-loader <span class="nt">-n</span> cfm-streaming <span class="nt">--timeout</span><span class="o">=</span>60s
+
+<span class="c"># Copy your extensions folder into the PVC via the loader pod</span>
+kubectl <span class="nb">cp</span> ~/nifi-custom-processors/. <span class="se">\</span>
+  cfm-streaming/python-extensions-loader:/home/ubuntu/extensions/
+
+<span class="c"># Sanity check</span>
+kubectl <span class="nb">exec</span> <span class="nt">-n</span> cfm-streaming python-extensions-loader <span class="nt">--</span> <span class="nb">ls</span> <span class="nt">-la</span> /home/ubuntu/extensions/
+</code></pre></div></div>
+
+<p>Then — and this bit isn’t optional — <strong>fix ownership</strong> so NiFi’s non-root user (uid <code class="language-plaintext highlighter-rouge">10001</code>) can read and write. <code class="language-plaintext highlighter-rouge">kubectl cp</code> from macOS drops files owned by the source-machine’s UID (typically <code class="language-plaintext highlighter-rouge">501:staff</code>), which the pod then can’t touch:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-n</span> cfm-streaming python-extensions-loader <span class="nt">--</span> <span class="se">\</span>
+  <span class="nb">chown</span> <span class="nt">-R</span> 10001:10001 /home/ubuntu/extensions/
+</code></pre></div></div>
+
+<p>Skip this and NiFi silently fails to load the module — with logs that only tell you “Could not load module” and no <code class="language-plaintext highlighter-rouge">chmod</code> hint.</p>
+
+<p>The loader stays running so you can <code class="language-plaintext highlighter-rouge">kubectl cp</code> more files in later without re-applying anything. Delete it when you’re done editing extensions:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete pod python-extensions-loader <span class="nt">-n</span> cfm-streaming
+</code></pre></div></div>
+
+<p>The PVC and its contents stay behind — that’s the whole point.</p>
+
+<h3 id="point-nifi-at-the-pvc-instead-of-extensions">Point NiFi at the PVC instead of <code class="language-plaintext highlighter-rouge">/extensions</code></h3>
+
+<p>Update the <code class="language-plaintext highlighter-rouge">Nifi</code> CR’s <code class="language-plaintext highlighter-rouge">statefulset.volumes</code> block: swap the <code class="language-plaintext highlighter-rouge">hostPath</code> for the PVC. This is the diff, in place:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+  <span class="na">statefulset</span><span class="pi">:</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">python-extensions</span>
+        <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="na">claimName</span><span class="pi">:</span> <span class="s">custom-python-extensions</span>      <span class="c1"># ← was: hostPath.path: /extensions</span>
+    <span class="na">volumeMounts</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">python-extensions</span>
+        <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/opt/nifi/nifi-current/python/extensions</span>
+</code></pre></div></div>
+
+<p>Re-apply the CR and roll. The full CR YAML that pairs with this walkthrough lives in <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators"><code class="language-plaintext highlighter-rouge">cldr-steven-matison/ClouderaStreamingOperators</code></a> as <code class="language-plaintext highlighter-rouge">nifi-cluster-32-nifi2x-pvc.yaml</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> nifi-cluster-32-nifi2x-pvc.yaml <span class="nt">-n</span> cfm-streaming
+kubectl rollout restart statefulset mynifi <span class="nt">-n</span> cfm-streaming
+kubectl rollout status  statefulset/mynifi <span class="nt">-n</span> cfm-streaming <span class="nt">--timeout</span><span class="o">=</span>180s
+</code></pre></div></div>
+
+<p><strong>Tip:</strong> run <code class="language-plaintext highlighter-rouge">kubectl diff -f nifi-cluster-32-nifi2x-pvc.yaml</code> first. If your live NiFi is healthy and only <code class="language-plaintext highlighter-rouge">/extensions</code> needs to change, the diff should be a single volume replacement — nothing else. If you see repo PVCs, images, or security blocks moving, stop and reconcile the YAML with the live CR before applying.</p>
+
+<p>You can also kill the <code class="language-plaintext highlighter-rouge">minikube mount</code> process now — nothing needs it anymore.</p>
+
+<p>Verify inside the pod that the extensions path is a real block device (backed by the PVC) instead of a 9p network mount:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-n</span> cfm-streaming mynifi-0 <span class="nt">-c</span> nifi <span class="nt">--</span> mount | <span class="nb">grep</span> <span class="s1">'python/extensions'</span>
+<span class="c"># Expect: /dev/... on /opt/nifi/nifi-current/python/extensions type ext4 (rw,relatime,discard)</span>
+<span class="c"># NOT:    192.168.65.254 on /opt/nifi/nifi-current/python/extensions type 9p ...</span>
+</code></pre></div></div>
+
+<p>That’s the signal — real disk, not a fragile mount.</p>
+
+<p><strong>Multi-node caveat:</strong> just like custom NARs, if you scale NiFi beyond one pod, <code class="language-plaintext highlighter-rouge">custom-python-extensions</code> must be on an RWX StorageClass (Longhorn, NFS, cloud file-share). RWO works fine on single-node minikube.</p>
+
+<hr />
+
+<h2 id="full-cr--put-it-all-together">Full CR — put it all together</h2>
+
+<p>For copy-paste, this is a complete <code class="language-plaintext highlighter-rouge">nifi-cluster-32-nifi2x-pvc.yaml</code> covering steps 2–6 — the same file lives in <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators"><code class="language-plaintext highlighter-rouge">cldr-steven-matison/ClouderaStreamingOperators</code></a> alongside <code class="language-plaintext highlighter-rouge">python-extensions-loader.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">cfm.cloudera.com/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Nifi</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">mynifi</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cfm-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">nifiVersion</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.6.0"</span>
+  <span class="na">image</span><span class="pi">:</span>
+    <span class="na">repository</span><span class="pi">:</span> <span class="s">container.repository.cloudera.com/cloudera/cfm-nifi-k8s</span>
+    <span class="na">tag</span><span class="pi">:</span> <span class="s">3.1.0-b129-nifi_2.6.0.4.12.0.1-9</span>
+    <span class="na">pullSecret</span><span class="pi">:</span> <span class="s">cloudera-creds</span>
+  <span class="na">tiniImage</span><span class="pi">:</span>
+    <span class="na">repository</span><span class="pi">:</span> <span class="s">container.repository.cloudera.com/cloudera/cfm-tini</span>
+    <span class="na">tag</span><span class="pi">:</span> <span class="s">3.2.0-b39</span>
+    <span class="na">pullSecret</span><span class="pi">:</span> <span class="s">cloudera-creds</span>
+
+  <span class="c1"># === Step 2 — five NiFi repos ===</span>
+  <span class="na">persistence</span><span class="pi">:</span>
+    <span class="na">size</span><span class="pi">:</span> <span class="s">10Gi</span>
+    <span class="na">storageClass</span><span class="pi">:</span> <span class="s">nifi-storage</span>
+    <span class="na">data</span><span class="pi">:</span>           <span class="pi">{</span> <span class="nv">size</span><span class="pi">:</span> <span class="nv">20Gi</span><span class="pi">,</span> <span class="nv">storageClass</span><span class="pi">:</span> <span class="nv">nifi-storage</span> <span class="pi">}</span>
+    <span class="na">state</span><span class="pi">:</span>          <span class="pi">{</span> <span class="nv">size</span><span class="pi">:</span>  <span class="nv">5Gi</span><span class="pi">,</span> <span class="nv">storageClass</span><span class="pi">:</span> <span class="nv">nifi-storage</span> <span class="pi">}</span>
+    <span class="na">flowfileRepo</span><span class="pi">:</span>   <span class="pi">{</span> <span class="nv">size</span><span class="pi">:</span> <span class="nv">20Gi</span><span class="pi">,</span> <span class="nv">storageClass</span><span class="pi">:</span> <span class="nv">nifi-storage</span> <span class="pi">}</span>
+    <span class="na">contentRepo</span><span class="pi">:</span>    <span class="pi">{</span> <span class="nv">size</span><span class="pi">:</span> <span class="nv">50Gi</span><span class="pi">,</span> <span class="nv">storageClass</span><span class="pi">:</span> <span class="nv">nifi-storage</span> <span class="pi">}</span>
+    <span class="na">provenanceRepo</span><span class="pi">:</span> <span class="pi">{</span> <span class="nv">size</span><span class="pi">:</span> <span class="nv">30Gi</span><span class="pi">,</span> <span class="nv">storageClass</span><span class="pi">:</span> <span class="nv">nifi-storage</span> <span class="pi">}</span>
+
+  <span class="c1"># === Step 5 — custom Java NARs ===</span>
+  <span class="na">narProvider</span><span class="pi">:</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">volumeClaimName</span><span class="pi">:</span> <span class="s">custom-nars</span>
+
+  <span class="c1"># === Step 6 — Python extensions on a PVC (not a minikube mount) ===</span>
+  <span class="na">statefulset</span><span class="pi">:</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">python-extensions</span>
+        <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="na">claimName</span><span class="pi">:</span> <span class="s">custom-python-extensions</span>
+    <span class="na">volumeMounts</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">python-extensions</span>
+        <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/opt/nifi/nifi-current/python/extensions</span>
+
+  <span class="na">hostName</span><span class="pi">:</span> <span class="s">mynifi-web.mynifi.cfm-streaming.svc.cluster.local</span>
+  <span class="na">uiConnection</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">Ingress</span>
+    <span class="na">ingressConfig</span><span class="pi">:</span>
+      <span class="na">hostname</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="na">annotations</span><span class="pi">:</span>
+      <span class="na">nginx.ingress.kubernetes.io/affinity</span><span class="pi">:</span> <span class="s">cookie</span>
+      <span class="na">nginx.ingress.kubernetes.io/affinity-mode</span><span class="pi">:</span> <span class="s">persistent</span>
+      <span class="na">nginx.ingress.kubernetes.io/backend-protocol</span><span class="pi">:</span> <span class="s">HTTPS</span>
+      <span class="na">nginx.ingress.kubernetes.io/ssl-passthrough</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+      <span class="na">nginx.ingress.kubernetes.io/ssl-redirect</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+  <span class="na">security</span><span class="pi">:</span>
+    <span class="na">initialAdminIdentity</span><span class="pi">:</span> <span class="s2">"</span><span class="s">admin"</span>
+    <span class="na">nodeCertGen</span><span class="pi">:</span>
+      <span class="na">issuerRef</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">cfm-operator-ca-issuer-signed</span>
+        <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterIssuer</span>
+    <span class="na">singleUserAuth</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
+      <span class="na">credentialsSecretName</span><span class="pi">:</span> <span class="s2">"</span><span class="s">nifi-admin-creds"</span>
+  <span class="na">configOverride</span><span class="pi">:</span>
+    <span class="na">nifiProperties</span><span class="pi">:</span>
+      <span class="na">upsert</span><span class="pi">:</span>
+        <span class="na">nifi.cluster.leader.election.implementation</span><span class="pi">:</span> <span class="s2">"</span><span class="s">KubernetesLeaderElectionManager"</span>
+  <span class="na">stateManagement</span><span class="pi">:</span>
+    <span class="na">clusterProvider</span><span class="pi">:</span>
+      <span class="na">id</span><span class="pi">:</span> <span class="s">kubernetes-provider</span>
+      <span class="na">class</span><span class="pi">:</span> <span class="s">org.apache.nifi.kubernetes.state.provider.KubernetesConfigMapStateProvider</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="the-full-persistence-test">The full persistence test</h2>
+
+<p>Bounce NiFi and confirm every piece of state survives:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Baseline</span>
+kubectl <span class="nb">exec</span> <span class="nt">-n</span> cfm-streaming mynifi-0 <span class="nt">-c</span> nifi <span class="nt">--</span> <span class="se">\</span>
+  <span class="nb">ls</span> /opt/nifi/nifi-current/data /opt/nifi/nifi-current/python/extensions
+
+<span class="c"># 2. Roll the StatefulSet</span>
+kubectl rollout restart statefulset/mynifi <span class="nt">-n</span> cfm-streaming
+kubectl rollout status  statefulset/mynifi <span class="nt">-n</span> cfm-streaming <span class="nt">--timeout</span><span class="o">=</span>180s
+
+<span class="c"># 3. Same files? Flow still visible in the UI?</span>
+kubectl <span class="nb">exec</span> <span class="nt">-n</span> cfm-streaming mynifi-0 <span class="nt">-c</span> nifi <span class="nt">--</span> <span class="se">\</span>
+  <span class="nb">ls</span> /opt/nifi/nifi-current/data /opt/nifi/nifi-current/python/extensions
+
+<span class="c"># 4. Every mount is a real block device, no 9p, no emptyDir</span>
+kubectl <span class="nb">exec</span> <span class="nt">-n</span> cfm-streaming mynifi-0 <span class="nt">-c</span> nifi <span class="nt">--</span> mount | <span class="se">\</span>
+  <span class="nb">grep</span> <span class="nt">-E</span> <span class="s1">'nifi-current|nar-provider'</span>
+</code></pre></div></div>
+
+<p>Refresh the NiFi UI — every flow, every custom Java NAR, every Python processor should be exactly where you left it.</p>
+
+<hr />
+
+<h2 id="failure-modes-ive-hit">Failure modes I’ve hit</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Symptom</th>
+      <th>Cause</th>
+      <th>Fix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Flow disappears after a StatefulSet re-roll</td>
+      <td><code class="language-plaintext highlighter-rouge">data</code> repo not persisted (ephemeral or <code class="language-plaintext highlighter-rouge">emptyDir</code>)</td>
+      <td>Step 2 — add <code class="language-plaintext highlighter-rouge">spec.persistence.data</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Could not load module</code> on Python processors after <code class="language-plaintext highlighter-rouge">minikube stop / start</code></td>
+      <td>The <code class="language-plaintext highlighter-rouge">minikube mount</code> 9p filesystem died with the VM</td>
+      <td>Step 6 — move to a PVC</td>
+    </tr>
+    <tr>
+      <td>Python processors work locally but the same CR fails on a “real” cluster</td>
+      <td><code class="language-plaintext highlighter-rouge">hostPath: /extensions</code> doesn’t exist on those nodes</td>
+      <td>Step 6 — the PVC pattern works everywhere</td>
+    </tr>
+    <tr>
+      <td>Custom NAR appears in <code class="language-plaintext highlighter-rouge">custom-nars</code> PVC but NiFi UI doesn’t show the processor</td>
+      <td><code class="language-plaintext highlighter-rouge">narProvider</code> block missing from the CR (or the operator hasn’t rolled)</td>
+      <td>Step 5, then <code class="language-plaintext highlighter-rouge">kubectl rollout restart statefulset/mynifi</code></td>
+    </tr>
+    <tr>
+      <td>PVCs stuck <code class="language-plaintext highlighter-rouge">Pending</code> — <code class="language-plaintext highlighter-rouge">no volume plugin matched</code></td>
+      <td>StorageClass name typo, or default class not set on the cluster</td>
+      <td><code class="language-plaintext highlighter-rouge">kubectl get storageclass</code>; check spelling and default annotation</td>
+    </tr>
+    <tr>
+      <td>Content repo fills up mid-demo and the pod goes <code class="language-plaintext highlighter-rouge">OOMKilled</code>-adjacent</td>
+      <td><code class="language-plaintext highlighter-rouge">contentRepo</code> too small</td>
+      <td>With <code class="language-plaintext highlighter-rouge">allowVolumeExpansion: true</code> on the class, <code class="language-plaintext highlighter-rouge">kubectl edit pvc content-repository-mynifi-0</code>, bump <code class="language-plaintext highlighter-rouge">spec.resources.requests.storage</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">helm uninstall</code> on the operator wipes NiFi state</td>
+      <td>It shouldn’t — the PVCs are labelled to survive, but confirm</td>
+      <td><code class="language-plaintext highlighter-rouge">kubectl get pvc -n cfm-streaming</code> after uninstall; they should still be <code class="language-plaintext highlighter-rouge">Bound</code></td>
+    </tr>
+    <tr>
+      <td>Scaling NiFi to <code class="language-plaintext highlighter-rouge">replicas: 2+</code> fails to schedule the second pod</td>
+      <td><code class="language-plaintext highlighter-rouge">custom-nars</code> / <code class="language-plaintext highlighter-rouge">custom-python-extensions</code> on an RWO class</td>
+      <td>Move both to an RWX StorageClass (Longhorn, NFS, cloud file-share)</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="expected-outcome">Expected outcome</h2>
+
+<p>After all six steps, this is what you get:</p>
+
+<ul>
+  <li><strong>Flows</strong> survive <code class="language-plaintext highlighter-rouge">kubectl rollout restart</code>, <code class="language-plaintext highlighter-rouge">minikube stop / start</code>, node failures, and CFM Operator upgrades.</li>
+  <li><strong>In-flight FlowFiles</strong> and <strong>content</strong> survive the same events — no data loss mid-pipeline.</li>
+  <li><strong>Provenance</strong> history is preserved across restarts, so lineage queries still return real answers after a bounce.</li>
+  <li><strong>Custom Java NARs</strong> and <strong>Python processors</strong> are cluster-native — no hostPath, no <code class="language-plaintext highlighter-rouge">minikube mount</code>, no manual re-syncing. The same YAML that works on your laptop works on a real cluster.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">/extensions</code> is no longer a minikube trap.</strong> It’s a first-class PVC with a documented loader-pod pattern for adding new processors.</li>
+</ul>
+
+<p>That last one is the big win. It’s the difference between a demo that works on the presenter’s laptop and a recipe you can ship.</p>
+
+<hr />
+
+<h2 id="reference">Reference</h2>
+
+<p>Everything in this post was validated against <strong>CFM Operator <code class="language-plaintext highlighter-rouge">3.2.0-b39</code></strong> on <strong>minikube v1.37.0 / k8s v1.34.0</strong>, with NiFi 2.6.0. The CFM Operator installs into <code class="language-plaintext highlighter-rouge">cfm-streaming</code> and manages the <code class="language-plaintext highlighter-rouge">mynifi</code> <code class="language-plaintext highlighter-rouge">Nifi</code> CR referenced throughout.</p>
+
+<h3 id="cloudera-flow-management-cfm">Cloudera Flow Management (CFM)</h3>
+
+<ul>
+  <li><a href="https://docs.cloudera.com/cfm-operator/3.2.0/index.html">CFM Operator 3.2 documentation</a></li>
+  <li><a href="https://docs.cloudera.com/cfm-operator/3.2.0/installation/topics/cfm-op-install-cfm-op.html">CFM Operator 3.2 — install the operator</a></li>
+  <li><a href="https://docs.cloudera.com/cfm-operator/3.2.0/nifi-deployment-configuration/topics/cfm-op-deploy-nifi-cluster.html">CFM Operator 3.2 — deploy a NiFi cluster</a></li>
+  <li><a href="https://docs.cloudera.com/cfm-operator/3.2.0/registry-deployment-configuration/topics/cfm-op-nifi-registry-deployment.html">CFM Operator 3.2 — NiFi Registry deployment</a></li>
+  <li><a href="https://docs.cloudera.com/cfm-operator/3.2.0/release-notes/topics/cfm-op-whats-new-320.html">CFM Operator 3.2 — what’s new</a></li>
+  <li><a href="https://docs.cloudera.com/cfm-operator/3.2.0/release-notes/topics/cfm-op-component-versions.html">CFM Operator 3.2 — component versions</a></li>
+  <li>Related posts on this blog:
+    <ul>
+      <li><a href="/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.1/">Cloudera Flow Management Operator for Kubernetes 3.1</a></li>
+      <li><a href="/blog/Cloudera-Apache-NiFi-Operator/">Cloudera Apache NiFi Operator</a></li>
+      <li><a href="/blog/How-To-Install-NiFi-Registry-on-Kubernetes-with-CFM-Operator/">How To Install NiFi Registry on Kubernetes with CFM Operator</a></li>
+      <li><a href="/blog/How-to-AI-with-NiFi-and-Python/">How to AI with NiFi and Python</a> — where the Python processors this post persists come from</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="companion-persistence-posts-same-cld-streaming--cfm-streaming-cluster">Companion persistence posts (same <code class="language-plaintext highlighter-rouge">cld-streaming</code> / <code class="language-plaintext highlighter-rouge">cfm-streaming</code> cluster)</h3>
+
+<ul>
+  <li><a href="/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/">Persistence with Cloudera Streaming Analytics Operator</a> — SSB metadata, user artifacts, Flink checkpoints / savepoints / HA.</li>
+  <li><a href="/blog/Persiting-Schema-with-Schema-Registry/">Persisting Schema Registry with PostgreSQL</a> — piggyback Schema Registry on the same Postgres pod CSA sets up.</li>
+  <li><a href="/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/">Cloudera Edge Flow Manager on Kubernetes</a> — full EFM persistence recipe.</li>
+  <li><a href="/blog/Observability-with-Cloudera-Streaming-Operators/">Observability with Cloudera Streaming Operators</a> — Prometheus + Grafana for the same NiFi / Kafka / Flink stack.</li>
+</ul>
+
+<h3 id="the-rest-of-the-cloudera-streaming-operators-family-cso">The rest of the Cloudera Streaming Operators family (CSO)</h3>
+
+<ul>
+  <li><strong>Cloudera Streaming Analytics (CSA) Operator — Flink / SSB:</strong>
+    <ul>
+      <li><a href="https://docs.cloudera.com/csa-operator/1.5/index.html">CSA Operator 1.5 documentation</a></li>
+      <li><a href="/release/Cloudera-Streaming-Analytics-1.17.0/">Announcing Cloudera Streaming Analytics 1.17.0</a></li>
+    </ul>
+  </li>
+  <li><strong>Cloudera Streams Messaging (CSM) Operator — Kafka / Schema Registry / SMM:</strong>
+    <ul>
+      <li><a href="https://docs.cloudera.com/csm-operator/latest/index.html">CSM Operator documentation</a></li>
+      <li><a href="/release/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/">Cloudera Streams Messaging Kubernetes Operator 1.6</a></li>
+    </ul>
+  </li>
+  <li><strong>Cloudera Edge Flow Manager (EFM) / CEM:</strong>
+    <ul>
+      <li><a href="https://docs.cloudera.com/cem/latest/index.html">Cloudera Edge Manager documentation</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="repos-and-images">Repos and images</h3>
+
+<ul>
+  <li>Helm chart (OCI): <code class="language-plaintext highlighter-rouge">oci://container.repository.cloudera.com/cloudera-helm/cfm-operator/cfm-operator</code></li>
+  <li>Container images (validated against CFM Operator 3.2.0-b39):
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/cfm-operator:3.2.0-b39</code></li>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/cfm-tini:3.2.0-b39</code></li>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/cfm-nifi-k8s:3.1.0-b129-nifi_2.6.0.4.12.0.1-9</code> (NiFi 2.x)</li>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/cfm-nifi-k8s:3.1.0-b129-nifi_1.28.1.2.3.17.0-9</code> (NiFi 1.x)</li>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/cfm-nifiregistry-k8s:3.1.0-b129-nifi_2.6.0.4.12.0.1-9</code> (Registry, NiFi 2.x)</li>
+    </ul>
+  </li>
+  <li>Sample YAMLs and helm values I use across the CSO stack: <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators"><code class="language-plaintext highlighter-rouge">cldr-steven-matison/ClouderaStreamingOperators</code></a></li>
+</ul>
+
+<hr />
+
+<h2 id="persistence-with-cloudera-flow-management-operator">Persistence with Cloudera Flow Management Operator</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Persistence with Cloudera Flow Management Operator please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cfm" class="page__taxonomy-item p-category" rel="tag">cfm</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#extensions" class="page__taxonomy-item p-category" rel="tag">extensions</a><span class="sep">, </span>
+    
+      <a href="/tags/#kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      <a href="/tags/#minikube" class="page__taxonomy-item p-category" rel="tag">minikube</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a><span class="sep">, </span>
+    
+      <a href="/tags/#persistence" class="page__taxonomy-item p-category" rel="tag">persistence</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-10T00:00:00-04:00">August 10, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Persistence+with+Cloudera+Flow+Management+Operator%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FPersistence-with-Cloudera-Flow-Management-Operator%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FPersistence-with-Cloudera-Flow-Management-Operator%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Disposable-Clusters-on-One-Box-The-minikube-Profile-Swap/" class="pagination--pager" title="Disposable Clusters on One Box: The minikube Profile Swap
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Minikube-Profile-Swap.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Disposable-Clusters-on-One-Box-The-minikube-Profile-Swap/" rel="permalink">Disposable Clusters on One Box: The minikube Profile Swap
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How I proved MiNiFi → NiFi Site-to-Site without risking 123 days of a live Cloudera stack — a second, disposable minikube profile swapped in and out on the s...
+    <a href="/blog/Disposable-Clusters-on-One-Box-The-minikube-Profile-Swap/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/cloudera-ce-cm-cluster.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/" rel="permalink">Cloudera Community Edition on AWS in One Command
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Cloudera has a lot of ways to get a cluster. Almost none of them are “one command on your laptop.” cloudera-labs/cloudera-ce-aws is the exception: a Terrafor...
+    <a href="/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/efm-nvidia-jetson.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Hacking-The-Jetson/" rel="permalink">Hacking The Jetson
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          30 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI
+
+    <a href="/blog/Hacking-The-Jetson/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/nifi-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-to-Install-a-Public-Certificate-for-NiFi/" rel="permalink">How to Install a Public Certificate for NiFi
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Swap out NiFi’s default self-signed keystore for a real Let’s Encrypt certificate on a host-native Apache NiFi install so the browser padlock goes solid, no ...
+    <a href="/blog/How-to-Install-a-Public-Certificate-for-NiFi/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>

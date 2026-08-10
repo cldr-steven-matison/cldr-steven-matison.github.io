@@ -6,6 +6,17 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Persistence with Cloudera Flow Management Operator</title>
+        <link>https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Flow-Management-Operator/</link>
+        <pubDate>Mon, 10 Aug 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/CFM-Cloudera_Flow_Management_Operator.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/CFM-Cloudera_Flow_Management_Operator.png" medium="image" />
+        
+        <description>How to make everything CFM writes to disk on Kubernetes — flow definitions, FlowFiles, content, provenance, cluster state, custom NARs, and Python extensions — survive pod restarts, rolling updates, and cluster reboots. Includes the migration from a fragile minikube mount at /extensions to a proper PersistentVolumeClaim.</description>
+      </item>
+    
+      <item>
         <title>Disposable Clusters on One Box: The minikube Profile Swap</title>
         <link>https://cldr-steven-matison.github.io/blog/Disposable-Clusters-on-One-Box-The-minikube-Profile-Swap/</link>
         <pubDate>Wed, 05 Aug 2026 00:00:00 -0400</pubDate>
@@ -103,18 +114,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/SRM.png" medium="image" />
         
         <description>Two small tools that make working against a Kubernetes cluster feel less like a chore — kftray for reusable port-forward configs, and Zellij for pinning every long-running dev command into one terminal workspace.</description>
-      </item>
-    
-      <item>
-        <title>Cloudera Flow Management 2.1.7 Service Pack 4 for Cloudera Data Platform 7.1.9 and 7.3.1</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-2.1.7-Service-Pack-4-Release-Announcement/</link>
-        <pubDate>Thu, 25 Jun 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/nifi-logo.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/nifi-logo.png" medium="image" />
-        
-        <description>The Data in Motion team is pleased to announce the release of Cloudera Flow Management 2.1.7 Service Pack 4. This release is based on Apache NiFi 1.28.1 and supports Cloudera on-premises 7.1.9 (all service packs) and Cloudera on-premises 7.3.1 (all service packs).
-</description>
       </item>
     
   </channel>
