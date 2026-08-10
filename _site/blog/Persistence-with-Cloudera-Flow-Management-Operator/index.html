@@ -315,9 +315,7 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <h1 id="persistence-with-cloudera-flow-management-operator-on-kubernetes">Persistence with Cloudera Flow Management Operator on Kubernetes</h1>
-
-<p>Cloudera Flow Management (CFM) Operator makes it easy to stand up an Apache NiFi cluster on Kubernetes with a single <code class="language-plaintext highlighter-rouge">Nifi</code> custom resource. What isn’t obvious the first time you deploy it is that a “working” install still loses state in <strong>five</strong> different places the moment a pod restarts, plus a sixth surface — Python extensions — that most people patch with a <code class="language-plaintext highlighter-rouge">minikube mount</code> and then quietly curse every time the mount dies.</p>
+        <p>Cloudera Flow Management (CFM) Operator makes it easy to stand up an Apache NiFi cluster on Kubernetes with a single <code class="language-plaintext highlighter-rouge">Nifi</code> custom resource. What isn’t obvious the first time you deploy it is that a “working” install still loses state in <strong>five</strong> different places the moment a pod restarts, plus a sixth surface — Python extensions — that most people patch with a <code class="language-plaintext highlighter-rouge">minikube mount</code> and then quietly curse every time the mount dies.</p>
 
 <p>This post walks through fixing all of them in one pass, using the same <code class="language-plaintext highlighter-rouge">cfm-streaming</code> minikube cluster the rest of my Cloudera Streaming Operators (CSO) demos run in. Everything here is validated against <strong>CFM Operator <code class="language-plaintext highlighter-rouge">3.2.0-b39</code></strong> with NiFi 2.6.0 on minikube v1.37.0 / k8s v1.34.0.</p>
 
@@ -1001,19 +999,13 @@ kubectl <span class="nb">exec</span> <span class="nt">-n</span> cfm-streaming my
     
       <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
     
-      <a href="/tags/#extensions" class="page__taxonomy-item p-category" rel="tag">extensions</a><span class="sep">, </span>
-    
       <a href="/tags/#kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
     
       <a href="/tags/#minikube" class="page__taxonomy-item p-category" rel="tag">minikube</a><span class="sep">, </span>
     
       <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a><span class="sep">, </span>
     
-      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a><span class="sep">, </span>
-    
-      <a href="/tags/#persistence" class="page__taxonomy-item p-category" rel="tag">persistence</a><span class="sep">, </span>
-    
-      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
+      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a>
     
     </span>
   </p>

@@ -11,13 +11,8 @@ tags:
   - nifi
   - kubernetes
   - operator
-  - persistence
   - minikube
-  - python
-  - extensions
 ---
-
-# Persistence with Cloudera Flow Management Operator on Kubernetes
 
 Cloudera Flow Management (CFM) Operator makes it easy to stand up an Apache NiFi cluster on Kubernetes with a single `Nifi` custom resource. What isn't obvious the first time you deploy it is that a "working" install still loses state in **five** different places the moment a pod restarts, plus a sixth surface — Python extensions — that most people patch with a `minikube mount` and then quietly curse every time the mount dies.
 

@@ -612,8 +612,8 @@ var store = [{
         "teaser": "/assets/images/Minikube-Profile-Swap.jpg"
       },{
         "title": "Persistence with Cloudera Flow Management Operator",
-        "excerpt":"Persistence with Cloudera Flow Management Operator on Kubernetes Cloudera Flow Management (CFM) Operator makes it easy to stand up an Apache NiFi cluster on Kubernetes with a single Nifi custom resource. What isn’t obvious the first time you deploy it is that a “working” install still loses state in five...","categories": ["blog"],
-        "tags": ["cloudera","cfm","nifi","kubernetes","operator","persistence","minikube","python","extensions"],
+        "excerpt":"Cloudera Flow Management (CFM) Operator makes it easy to stand up an Apache NiFi cluster on Kubernetes with a single Nifi custom resource. What isn’t obvious the first time you deploy it is that a “working” install still loses state in five different places the moment a pod restarts, plus...","categories": ["blog"],
+        "tags": ["cloudera","cfm","nifi","kubernetes","operator","minikube"],
         "url": "/blog/Persistence-with-Cloudera-Flow-Management-Operator/",
         "teaser": "/assets/images/CFM-Cloudera_Flow_Management_Operator.png"
       }]
