@@ -1,16 +1,23 @@
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 162896
-  lang: "HTML"
-  updated: "2026-08-08"
-  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 37390
+  size: 37412
   lang: "Python"
-  updated: "2026-08-06"
+  updated: "2026-08-09"
+  fork: false
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 1869
+  lang: "Python"
+  updated: "2026-08-09"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 162898
+  lang: "HTML"
+  updated: "2026-08-09"
   fork: false
 - name: "EdgeFlowManager"
   description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
@@ -37,13 +44,6 @@
   description: "NiFI Templates of example flows I share with the community."
   url: "https://github.com/cldr-steven-matison/NiFi-Templates"
   size: 1044
-  lang: "Python"
-  updated: "2026-08-05"
-  fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 1827
   lang: "Python"
   updated: "2026-08-05"
   fork: false
