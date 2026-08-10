@@ -616,4 +616,10 @@ var store = [{
         "tags": ["cloudera","cfm","nifi","kubernetes","operator","minikube"],
         "url": "/blog/Persistence-with-Cloudera-Flow-Management-Operator/",
         "teaser": "/assets/images/CFM-Cloudera_Flow_Management_Operator.png"
+      },{
+        "title": "Persistence with Cloudera Streaming Analytics Operator",
+        "excerpt":"CSA on Kubernetes is easy to install with the Cloudera Helm chart. What’s not so obvious the first time you deploy it is that a “working” install still loses state in three separate places the moment a pod restarts: SSB metadata (materialized view definitions, projects, connectors, jobs) lives in Postgres...","categories": ["blog"],
+        "tags": ["cloudera","csa","ssb","flink","kubernetes","operator","minikube"],
+        "url": "/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/",
+        "teaser": "/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png"
       }]

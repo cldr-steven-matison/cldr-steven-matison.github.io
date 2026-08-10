@@ -6,6 +6,17 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Persistence with Cloudera Streaming Analytics Operator</title>
+        <link>https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/</link>
+        <pubDate>Mon, 10 Aug 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png" medium="image" />
+        
+        <description>How to make everything CSA writes to disk — SQL Stream Builder metadata, uploaded user artifacts, and Flink checkpoints, savepoints and HA state — survive pod restarts on Kubernetes.</description>
+      </item>
+    
+      <item>
         <title>Persistence with Cloudera Flow Management Operator</title>
         <link>https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Flow-Management-Operator/</link>
         <pubDate>Mon, 10 Aug 2026 00:00:00 -0400</pubDate>
@@ -103,17 +114,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/EFM_on_Kubernetes.png" medium="image" />
         
         <description>A full recipe for running Cloudera Edge Flow Manager (EFM) on minikube with everything — agent classes, flows, agent binaries, and uploaded resources — surviving pod restarts and cluster reboots.</description>
-      </item>
-    
-      <item>
-        <title>Using Kftray and Zellij</title>
-        <link>https://cldr-steven-matison.github.io/blog/Using-Kftray-and-Zellij/</link>
-        <pubDate>Mon, 13 Jul 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/SRM.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/SRM.png" medium="image" />
-        
-        <description>Two small tools that make working against a Kubernetes cluster feel less like a chore — kftray for reusable port-forward configs, and Zellij for pinning every long-running dev command into one terminal workspace.</description>
       </item>
     
   </channel>

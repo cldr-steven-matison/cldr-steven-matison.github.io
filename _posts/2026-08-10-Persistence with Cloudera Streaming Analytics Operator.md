@@ -12,11 +12,9 @@ tags:
   - flink
   - kubernetes
   - operator
-  - persistence
   - minikube
 ---
 
-# Persistence with Cloudera Streaming Analytics Operator
 
 CSA on Kubernetes is easy to install with the Cloudera Helm chart. What's not so obvious the first time you deploy it is that a "working" install still loses state in three separate places the moment a pod restarts:
 

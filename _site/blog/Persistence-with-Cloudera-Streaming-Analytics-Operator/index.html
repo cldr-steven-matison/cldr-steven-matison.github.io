@@ -1,0 +1,1295 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Persistence with Cloudera Streaming Analytics Operator - Cloudera Solutions Engineer</title>
+<meta name="description" content="How to make everything CSA writes to disk — SQL Stream Builder metadata, uploaded user artifacts, and Flink checkpoints, savepoints and HA state — survive pod restarts on Kubernetes.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Persistence with Cloudera Streaming Analytics Operator">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/">
+
+
+  <meta property="og:description" content="How to make everything CSA writes to disk — SQL Stream Builder metadata, uploaded user artifacts, and Flink checkpoints, savepoints and HA state — survive pod restarts on Kubernetes.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-10T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Persistence with Cloudera Streaming Analytics Operator">
+    <meta itemprop="description" content="How to make everything CSA writes to disk — SQL Stream Builder metadata, uploaded user artifacts, and Flink checkpoints, savepoints and HA state — survive pod restarts on Kubernetes.">
+    <meta itemprop="datePublished" content="2026-08-10T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/" class="u-url" itemprop="url">Persistence with Cloudera Streaming Analytics Operator
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+    
+      
+        <p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-08-10T00:00:00-04:00">
+            August 10, 2026
+          </time>
+        </p>
+      
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>CSA on Kubernetes is easy to install with the Cloudera Helm chart. What’s not so obvious the first time you deploy it is that a “working” install still loses state in three separate places the moment a pod restarts:</p>
+
+<ol>
+  <li><strong>SSB metadata</strong> (materialized view definitions, projects, connectors, jobs) lives in Postgres — the chart already creates a PVC for that, but only 100 Mi and only if you leave <code class="language-plaintext highlighter-rouge">ssb.database.create=true</code>.</li>
+  <li><strong>User artifacts</strong> (Iceberg JAR, custom UDF JARs, Python UDFs, anything you upload from the SSB UI) — by default there is <strong>no</strong> persistent volume mounted at <code class="language-plaintext highlighter-rouge">/persistent</code>, so uploads fail with <code class="language-plaintext highlighter-rouge">Mkdirs failed to create file...</code> and even when they don’t, they disappear on the next re-roll.</li>
+  <li><strong>Flink job state</strong> — checkpoints, savepoints, HA metadata. Without a durable <code class="language-plaintext highlighter-rouge">state.checkpoints.dir</code> and <code class="language-plaintext highlighter-rouge">high-availability.storageDir</code>, a Flink job restart loses exactly-once guarantees and any keyed state you built up.</li>
+</ol>
+
+<p>This post walks through fixing all three, in order, using the same <code class="language-plaintext highlighter-rouge">cld-streaming</code> minikube cluster the rest of my CSA demos run in. Everything here is CSA Operator <code class="language-plaintext highlighter-rouge">1.5.0-b275</code> on minikube v1.37.0 / k8s v1.34.0.</p>
+
+<p>Companion post covering Schema Registry on the same Postgres pod: <a href="/blog/Persiting-Schema-with-Schema-Registry/">Persisting Schema Registry with PostgreSQL</a>. Companion post covering the same thing for NiFi under the CFM Operator: <a href="/blog/Persistence-with-Cloudera-Flow-Management-Operator/">Persistence with Cloudera Flow Management Operator</a>.</p>
+
+<hr />
+
+<h2 id="what-csa-actually-stores-and-where">What CSA actually stores, and where</h2>
+
+<p>Before touching any YAML, this is the layout you’re aiming for:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>Backing store</th>
+      <th>Path in pod</th>
+      <th>Helm value / Flink key</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SSB metadata (projects, MV defs, users, jobs)</td>
+      <td>Postgres <code class="language-plaintext highlighter-rouge">ssb_admin</code> DB in <code class="language-plaintext highlighter-rouge">ssb-postgresql</code></td>
+      <td><code class="language-plaintext highlighter-rouge">/var/lib/postgresql/data</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ssb.database.pvcSpec.resources.requests.storage</code></td>
+    </tr>
+    <tr>
+      <td>Uploaded artifacts (JARs, Python UDFs)</td>
+      <td>PVC <code class="language-plaintext highlighter-rouge">ssb-artifacts-pvc</code></td>
+      <td><code class="language-plaintext highlighter-rouge">/persistent</code> (SSE) + optional Flink mount</td>
+      <td><code class="language-plaintext highlighter-rouge">ssb.storageConfiguration</code> + <code class="language-plaintext highlighter-rouge">podVolumes</code> / <code class="language-plaintext highlighter-rouge">podVolumeMounts</code></td>
+    </tr>
+    <tr>
+      <td>Flink checkpoints</td>
+      <td>S3 / HDFS / PVC</td>
+      <td><code class="language-plaintext highlighter-rouge">state.checkpoints.dir</code></td>
+      <td><code class="language-plaintext highlighter-rouge">flink-conf.yaml → state.checkpoints.dir</code></td>
+    </tr>
+    <tr>
+      <td>Flink savepoints</td>
+      <td>S3 / HDFS / PVC</td>
+      <td><code class="language-plaintext highlighter-rouge">state.savepoints.dir</code></td>
+      <td><code class="language-plaintext highlighter-rouge">flink-conf.yaml → state.savepoints.dir</code></td>
+    </tr>
+    <tr>
+      <td>Flink HA metadata (JobManager leader, JobGraph)</td>
+      <td>S3 / HDFS / PVC</td>
+      <td><code class="language-plaintext highlighter-rouge">high-availability.storageDir</code></td>
+      <td><code class="language-plaintext highlighter-rouge">flink-conf.yaml → high-availability.*</code></td>
+    </tr>
+    <tr>
+      <td>Schema Registry schemas</td>
+      <td>Postgres <code class="language-plaintext highlighter-rouge">registry</code> DB in same <code class="language-plaintext highlighter-rouge">ssb-postgresql</code></td>
+      <td>—</td>
+      <td>See companion post</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The default <code class="language-plaintext highlighter-rouge">helm install</code> gets you row 1 (100 Mi). Rows 2–5 are on you.</p>
+
+<hr />
+
+<h2 id="phase-1--persist-ssb-metadata-postgres">Phase 1 — Persist SSB Metadata (Postgres)</h2>
+
+<p>The chart already provisions this, but 100 Mi runs out fast the moment you register a handful of connectors and start jobs. Bump it before you deploy — resizing a PVC after the fact requires <code class="language-plaintext highlighter-rouge">allowVolumeExpansion: true</code> on the StorageClass and a rollout.</p>
+
+<p><strong>Option A — set at install time via a values file.</strong> Add this to your <code class="language-plaintext highlighter-rouge">csa-values.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ssb</span><span class="pi">:</span>
+  <span class="na">database</span><span class="pi">:</span>
+    <span class="na">create</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">pvcSpec</span><span class="pi">:</span>
+      <span class="na">accessModes</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+      <span class="na">resources</span><span class="pi">:</span>
+        <span class="na">requests</span><span class="pi">:</span>
+          <span class="na">storage</span><span class="pi">:</span> <span class="s">5Gi</span>        <span class="c1"># was 100Mi</span>
+      <span class="c1"># storageClassName: nifi-storage   # optional, if you want a specific class</span>
+    <span class="na">resources</span><span class="pi">:</span>
+      <span class="na">limits</span><span class="pi">:</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1"</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2048Mi"</span>      <span class="c1"># bumped from 1Gi</span>
+      <span class="na">requests</span><span class="pi">:</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">500m"</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024Mi"</span>
+</code></pre></div></div>
+
+<p>Then install (or upgrade) with <code class="language-plaintext highlighter-rouge">-f csa-values.yaml</code>.</p>
+
+<p><strong>Option B — you already installed CSA and just need to prove it’s persisted.</strong> Verify the PVC is bound and points at real storage, not <code class="language-plaintext highlighter-rouge">emptyDir</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pvc <span class="nt">-n</span> cld-streaming ssb-postgresql-db
+kubectl <span class="nb">exec</span> <span class="nt">-n</span> cld-streaming deploy/ssb-postgresql <span class="nt">--</span> <span class="se">\</span>
+  mount | <span class="nb">grep</span> /var/lib/postgresql/data
+</code></pre></div></div>
+
+<p>You should see a real block device on <code class="language-plaintext highlighter-rouge">/var/lib/postgresql/data</code>, not <code class="language-plaintext highlighter-rouge">tmpfs</code>.</p>
+
+<p><strong>Persistence test:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl rollout restart deployment/ssb-postgresql <span class="nt">-n</span> cld-streaming
+kubectl rollout status  deployment/ssb-postgresql <span class="nt">-n</span> cld-streaming <span class="nt">--timeout</span><span class="o">=</span>180s
+<span class="c"># SSB UI → your projects, connectors, MV definitions should all still be there.</span>
+</code></pre></div></div>
+
+<p>If they’re gone, <code class="language-plaintext highlighter-rouge">ssb-postgresql-db</code> is not actually bound to real storage — check its <code class="language-plaintext highlighter-rouge">STATUS</code> and <code class="language-plaintext highlighter-rouge">STORAGECLASS</code>.</p>
+
+<hr />
+
+<h2 id="phase-2--persist-ssb-user-artifacts-persistent">Phase 2 — Persist SSB User Artifacts (<code class="language-plaintext highlighter-rouge">/persistent</code>)</h2>
+
+<p>This is the piece that bit me first: uploading the Iceberg JAR from the SSB UI failed with <code class="language-plaintext highlighter-rouge">Mkdirs failed to create file:/persistent/global/tmp/...</code>. The path doesn’t exist inside the SSE pod at all — the chart never mounts it.</p>
+
+<p>The fix is to create a PV/PVC, mount it into <code class="language-plaintext highlighter-rouge">ssb-sse</code> at <code class="language-plaintext highlighter-rouge">/persistent</code>, open permissions so the <code class="language-plaintext highlighter-rouge">ssb</code> user can write, and tell SSB that’s where artifacts go.</p>
+
+<h3 id="step-21--create-the-pv-and-pvc">Step 2.1 — Create the PV and PVC</h3>
+
+<p>For minikube (<code class="language-plaintext highlighter-rouge">hostPath</code> is fine; for a real cluster use your StorageClass), save this as <code class="language-plaintext highlighter-rouge">ssb-storage.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolume</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">ssb-pv</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">capacity</span><span class="pi">:</span>
+    <span class="na">storage</span><span class="pi">:</span> <span class="s">5Gi</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">hostPath</span><span class="pi">:</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/data/ssb-persistent"</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">ssb-artifacts-pvc</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">cld-streaming</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">resources</span><span class="pi">:</span>
+    <span class="na">requests</span><span class="pi">:</span>
+      <span class="na">storage</span><span class="pi">:</span> <span class="s">5Gi</span>
+</code></pre></div></div>
+
+<p>Apply:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> ssb-storage.yaml
+</code></pre></div></div>
+
+<h3 id="step-22--attach-the-volume-to-ssb-sse">Step 2.2 — Attach the volume to <code class="language-plaintext highlighter-rouge">ssb-sse</code></h3>
+
+<p>The clean way is to add it via Helm (<code class="language-plaintext highlighter-rouge">ssb.podVolumes</code> + <code class="language-plaintext highlighter-rouge">ssb.podVolumeMounts</code> — the same knobs the chart uses to mount Hadoop config or custom truststores), because those mounts are then applied to <strong>both</strong> SSB and every Flink pod SSB spins up. That matters when a Flink job needs to read the JAR you uploaded.</p>
+
+<p>Add to <code class="language-plaintext highlighter-rouge">csa-values.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ssb</span><span class="pi">:</span>
+  <span class="na">podVolumes</span><span class="pi">:</span>
+    <span class="na">create</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">persistent-storage</span>
+        <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="na">claimName</span><span class="pi">:</span> <span class="s">ssb-artifacts-pvc</span>
+  <span class="na">podVolumeMounts</span><span class="pi">:</span>
+    <span class="na">create</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">persistent-storage</span>
+        <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/persistent</span>
+</code></pre></div></div>
+
+<p>Then <code class="language-plaintext highlighter-rouge">helm upgrade</code> to apply.</p>
+
+<p>If you already installed CSA and just want to patch the running deployment (works, but only mounts on <code class="language-plaintext highlighter-rouge">ssb-sse</code>, not on Flink pods — fine for the upload path, not fine for jobs that need the artifact at runtime):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl patch deployment ssb-sse <span class="nt">-n</span> cld-streaming <span class="nt">--patch</span> <span class="s1">'
+{
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [
+          {
+            "name": "ssb-sse",
+            "volumeMounts": [
+              { "name": "persistent-storage", "mountPath": "/persistent" }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "persistent-storage",
+            "persistentVolumeClaim": { "claimName": "ssb-artifacts-pvc" }
+          }
+        ]
+      }
+    }
+  }
+}'</span>
+</code></pre></div></div>
+
+<h3 id="step-23--fix-ownership-on-the-volume-one-time">Step 2.3 — Fix ownership on the volume (one-time)</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">ssb-sse</code> container runs as a non-root <code class="language-plaintext highlighter-rouge">ssb</code> user. A fresh <code class="language-plaintext highlighter-rouge">hostPath</code> volume comes up owned by root, and the UI upload will still fail on the first <code class="language-plaintext highlighter-rouge">mkdir</code> under <code class="language-plaintext highlighter-rouge">/persistent/global/tmp/</code> even after the mount is there. Run a one-shot fixer pod:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl run fix-perms <span class="nt">--image</span><span class="o">=</span>busybox <span class="nt">--restart</span><span class="o">=</span>Never <span class="nt">-n</span> cld-streaming <span class="nt">--rm</span> <span class="nt">-it</span> <span class="se">\</span>
+  <span class="nt">--overrides</span><span class="o">=</span><span class="s1">'
+{
+  "spec": {
+    "containers": [{
+      "name": "fix-perms",
+      "image": "busybox",
+      "command": ["sh","-c","chmod -R 777 /mnt/persistent"],
+      "volumeMounts": [{"name": "p", "mountPath": "/mnt/persistent"}]
+    }],
+    "volumes": [{"name": "p", "persistentVolumeClaim": {"claimName": "ssb-artifacts-pvc"}}]
+  }
+}'</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">777</code> is heavy-handed — on a shared cluster set <code class="language-plaintext highlighter-rouge">fsGroup</code> on the SSE pod’s <code class="language-plaintext highlighter-rouge">securityContext</code> instead and let the kubelet chgrp the volume on mount. For a demo cluster this is fine.</p>
+
+<h3 id="step-24--test-the-upload">Step 2.4 — Test the upload</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl rollout restart deployment/ssb-sse <span class="nt">-n</span> cld-streaming
+kubectl rollout status  deployment/ssb-sse <span class="nt">-n</span> cld-streaming <span class="nt">--timeout</span><span class="o">=</span>180s
+</code></pre></div></div>
+
+<p>SSB UI → <strong>Data Sources</strong> / <strong>Functions</strong> → upload the Iceberg connector JAR (or a custom UDF JAR). No <code class="language-plaintext highlighter-rouge">Mkdirs failed</code> error.</p>
+
+<p>Confirm the bytes are actually on the PVC and not on ephemeral pod storage:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-n</span> cld-streaming deploy/ssb-sse <span class="nt">--</span> <span class="nb">ls</span> <span class="nt">-la</span> /persistent/
+<span class="c"># and from the minikube VM (hostPath backing):</span>
+minikube ssh <span class="nt">--</span> <span class="nb">ls</span> <span class="nt">-la</span> /data/ssb-persistent/
+</code></pre></div></div>
+
+<h3 id="step-25--optional-point-ssb-at-the-volume-as-its-artifact-store">Step 2.5 — (Optional) Point SSB at the volume as its artifact store</h3>
+
+<p>Mounting is enough to make the upload path work, but SSB also has a “remote artifact storage” mode that publishes artifacts to a URI so Flink task managers can pull them without needing the same mount. For a single-cluster minikube demo, <code class="language-plaintext highlighter-rouge">/persistent</code> is enough. For anything real, use S3:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ssb</span><span class="pi">:</span>
+  <span class="na">ssbConfiguration</span><span class="pi">:</span>
+    <span class="na">application.properties</span><span class="pi">:</span> <span class="pi">|+</span>
+      <span class="s">ssb.job-notifications.enabled=false</span>
+      <span class="s">ssb.sse.remote-artifact-storage-dir=sample-bucket/artifacts</span>
+      <span class="s">ssb.sse.remote-artifact-storage-type=s3</span>
+  <span class="na">storageConfiguration</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">s3.access-key: root</span>
+    <span class="s">s3.secret-key: password</span>
+    <span class="s">s3.endpoint: http://minio:9000</span>
+    <span class="s">s3.path.style.access: true</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">storageConfiguration</code> becomes a Secret mounted at <code class="language-plaintext highlighter-rouge">/etc/hadoop-conf/artifact-storage</code> inside both SSB and Flink pods. Put S3 credentials, endpoint overrides, path-style access, and anything else Flink’s <code class="language-plaintext highlighter-rouge">s3</code> filesystem needs in there — never in the values file’s plain text.</p>
+
+<hr />
+
+<h2 id="phase-3--persist-flink-checkpoints-savepoints-and-ha">Phase 3 — Persist Flink Checkpoints, Savepoints, and HA</h2>
+
+<p>The SSE side is now durable. The <strong>Flink jobs SSB runs</strong> are still not. If <code class="language-plaintext highlighter-rouge">ssb-session-admin</code> (the session cluster) restarts, or a <code class="language-plaintext highlighter-rouge">FlinkSessionJob</code> gets re-rolled, whatever keyed state that job had built up is gone unless there’s an externalized checkpoint pointing at durable storage.</p>
+
+<p>Everything here goes into <code class="language-plaintext highlighter-rouge">ssb.flinkConfiguration.flink-conf.yaml</code> in <code class="language-plaintext highlighter-rouge">csa-values.yaml</code>. It’s appended to the default flink-conf and gets applied to every Flink job SSB deploys.</p>
+
+<h3 id="option-a--s3-recommended-for-anything-beyond-a-laptop-demo">Option A — S3 (recommended for anything beyond a laptop demo)</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ssb</span><span class="pi">:</span>
+  <span class="na">flinkConfiguration</span><span class="pi">:</span>
+    <span class="na">flink-conf.yaml</span><span class="pi">:</span> <span class="pi">|+</span>
+      <span class="s"># SSB mounts Hadoop and Kerberos files manually</span>
+      <span class="s">kubernetes.decorator.hadoop-conf-mount.enabled: false</span>
+      <span class="s">kubernetes.decorator.kerberos-mount.enabled: false</span>
+
+      <span class="s"># State backend</span>
+      <span class="s">state.backend.type: rocksdb</span>
+      <span class="s">state.backend.incremental: true</span>
+
+      <span class="s"># Externalized checkpoints — survive job restart</span>
+      <span class="s">execution.checkpointing.interval: 60s</span>
+      <span class="s">execution.checkpointing.mode: EXACTLY_ONCE</span>
+      <span class="s">execution.checkpointing.externalized-checkpoint-retention: RETAIN_ON_CANCELLATION</span>
+      <span class="s">state.checkpoints.dir: s3://sample-bucket/checkpoints/</span>
+      <span class="s">state.savepoints.dir: s3://sample-bucket/savepoints/</span>
+
+      <span class="s"># High availability — survive JobManager restart</span>
+      <span class="s">high-availability.type: kubernetes</span>
+      <span class="s">high-availability.storageDir: s3://sample-bucket/ha/</span>
+</code></pre></div></div>
+
+<p>Pair with the <code class="language-plaintext highlighter-rouge">storageConfiguration</code> block from Phase 2.5 so the <code class="language-plaintext highlighter-rouge">s3://</code> scheme actually authenticates.</p>
+
+<h3 id="option-b--pvc-for-a-single-node-minikube-where-you-dont-want-to-run-minio">Option B — PVC (for a single-node minikube where you don’t want to run MinIO)</h3>
+
+<p>Flink can write checkpoints to any filesystem it can see. Mount a PVC into every Flink pod using the same <code class="language-plaintext highlighter-rouge">podVolumes</code> / <code class="language-plaintext highlighter-rouge">podVolumeMounts</code> mechanism from Phase 2, then point checkpoints at the mount path:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ssb</span><span class="pi">:</span>
+  <span class="na">podVolumes</span><span class="pi">:</span>
+    <span class="na">create</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">persistent-storage</span>
+        <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="na">claimName</span><span class="pi">:</span> <span class="s">ssb-artifacts-pvc</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">flink-state</span>
+        <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="na">claimName</span><span class="pi">:</span> <span class="s">flink-state-pvc</span>      <span class="c1"># RWX-capable StorageClass required</span>
+  <span class="na">podVolumeMounts</span><span class="pi">:</span>
+    <span class="na">create</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">persistent-storage</span>
+        <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/persistent</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">flink-state</span>
+        <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/flink-state</span>
+  <span class="na">flinkConfiguration</span><span class="pi">:</span>
+    <span class="na">flink-conf.yaml</span><span class="pi">:</span> <span class="pi">|+</span>
+      <span class="s">state.backend.type: rocksdb</span>
+      <span class="s">state.backend.incremental: true</span>
+      <span class="s">execution.checkpointing.interval: 60s</span>
+      <span class="s">execution.checkpointing.externalized-checkpoint-retention: RETAIN_ON_CANCELLATION</span>
+      <span class="s">state.checkpoints.dir: file:///flink-state/checkpoints</span>
+      <span class="s">state.savepoints.dir: file:///flink-state/savepoints</span>
+      <span class="s">high-availability.type: kubernetes</span>
+      <span class="s">high-availability.storageDir: file:///flink-state/ha</span>
+</code></pre></div></div>
+
+<p>The catch: RWO PVCs (which is what minikube’s <code class="language-plaintext highlighter-rouge">standard</code> StorageClass gives you) only bind to one node, so this only works if all Flink pods land on that node. For multi-node, you need RWX — Longhorn, NFS, or a cloud provider’s file-share class.</p>
+
+<h3 id="option-c--ephemeral-default-do-this-if-youre-fine-losing-state">Option C — Ephemeral (default, do this if you’re fine losing state)</h3>
+
+<p>Do nothing. Checkpoints go to the local TaskManager working directory, HA is disabled, and a <code class="language-plaintext highlighter-rouge">kubectl rollout restart</code> on <code class="language-plaintext highlighter-rouge">ssb-session-admin</code> erases every running job’s state. Good enough for interactive <code class="language-plaintext highlighter-rouge">SELECT * FROM …</code> exploration; not good enough for any streaming pipeline you’d hand to someone else.</p>
+
+<hr />
+
+<h2 id="full-values-file--put-it-all-together">Full values file — put it all together</h2>
+
+<p>For copy-paste, this is a complete <code class="language-plaintext highlighter-rouge">csa-values.yaml</code> covering Phases 1–3 with S3:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">flink-kubernetes-operator</span><span class="pi">:</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
+  <span class="c1"># clouderaLicense injected via --set-file at helm install time</span>
+
+<span class="na">ssb</span><span class="pi">:</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="kc">true</span>
+
+  <span class="c1"># Phase 1 — Postgres metadata</span>
+  <span class="na">database</span><span class="pi">:</span>
+    <span class="na">create</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">pvcSpec</span><span class="pi">:</span>
+      <span class="na">accessModes</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">ReadWriteOnce</span><span class="pi">]</span>
+      <span class="na">resources</span><span class="pi">:</span>
+        <span class="na">requests</span><span class="pi">:</span>
+          <span class="na">storage</span><span class="pi">:</span> <span class="s">5Gi</span>
+    <span class="na">resources</span><span class="pi">:</span>
+      <span class="na">limits</span><span class="pi">:</span>   <span class="pi">{</span> <span class="nv">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1"</span><span class="pi">,</span> <span class="nv">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2048Mi"</span> <span class="pi">}</span>
+      <span class="na">requests</span><span class="pi">:</span> <span class="pi">{</span> <span class="nv">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">500m"</span><span class="pi">,</span> <span class="nv">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1024Mi"</span> <span class="pi">}</span>
+
+  <span class="c1"># Phase 2 — /persistent mount for uploads, applied to SSE + every Flink pod</span>
+  <span class="na">podVolumes</span><span class="pi">:</span>
+    <span class="na">create</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">persistent-storage</span>
+        <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="na">claimName</span><span class="pi">:</span> <span class="s">ssb-artifacts-pvc</span>
+  <span class="na">podVolumeMounts</span><span class="pi">:</span>
+    <span class="na">create</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">data</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">persistent-storage</span>
+        <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/persistent</span>
+
+  <span class="c1"># Phase 2.5 — S3 credentials for Flink's s3 filesystem, mounted as a Secret</span>
+  <span class="na">storageConfiguration</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">s3.access-key: root</span>
+    <span class="s">s3.secret-key: password</span>
+    <span class="s">s3.endpoint: http://minio.cld-streaming.svc:9000</span>
+    <span class="s">s3.path.style.access: true</span>
+
+  <span class="c1"># SSB tells Flink where to publish artifacts</span>
+  <span class="na">ssbConfiguration</span><span class="pi">:</span>
+    <span class="na">application.properties</span><span class="pi">:</span> <span class="pi">|+</span>
+      <span class="s">ssb.job-notifications.enabled=false</span>
+      <span class="s">ssb.sse.remote-artifact-storage-dir=sample-bucket/artifacts</span>
+      <span class="s">ssb.sse.remote-artifact-storage-type=s3</span>
+
+  <span class="c1"># Phase 3 — Flink checkpoints, savepoints, HA</span>
+  <span class="na">flinkConfiguration</span><span class="pi">:</span>
+    <span class="na">flink-conf.yaml</span><span class="pi">:</span> <span class="pi">|+</span>
+      <span class="s">kubernetes.decorator.hadoop-conf-mount.enabled: false</span>
+      <span class="s">kubernetes.decorator.kerberos-mount.enabled: false</span>
+
+      <span class="s">state.backend.type: rocksdb</span>
+      <span class="s">state.backend.incremental: true</span>
+
+      <span class="s">execution.checkpointing.interval: 60s</span>
+      <span class="s">execution.checkpointing.mode: EXACTLY_ONCE</span>
+      <span class="s">execution.checkpointing.externalized-checkpoint-retention: RETAIN_ON_CANCELLATION</span>
+      <span class="s">state.checkpoints.dir: s3://sample-bucket/checkpoints/</span>
+      <span class="s">state.savepoints.dir: s3://sample-bucket/savepoints/</span>
+
+      <span class="s">high-availability.type: kubernetes</span>
+      <span class="s">high-availability.storageDir: s3://sample-bucket/ha/</span>
+</code></pre></div></div>
+
+<p>Install (or upgrade):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--install</span> csa-operator <span class="se">\</span>
+  <span class="nt">--namespace</span> cld-streaming <span class="se">\</span>
+  <span class="nt">--version</span> 1.5.0-b275 <span class="se">\</span>
+  <span class="nt">-f</span> csa-values.yaml <span class="se">\</span>
+  <span class="nt">--set-file</span> flink-kubernetes-operator.clouderaLicense.fileContent<span class="o">=</span>./license.txt <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'flink-kubernetes-operator.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'ssb.sse.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'ssb.sqlRunner.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'ssb.mve.image.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  <span class="nt">--set</span> <span class="s1">'ssb.database.imagePullSecrets[0].name=cloudera-creds'</span> <span class="se">\</span>
+  oci://container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="the-full-persistence-test">The full persistence test</h2>
+
+<p>Deliberately break every pod in the CSA stack and confirm nothing disappears:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Baseline</span>
+kubectl <span class="nb">exec</span> <span class="nt">-n</span> cld-streaming deploy/ssb-postgresql <span class="nt">--</span> <span class="se">\</span>
+  psql <span class="nt">-U</span> ssb_admin <span class="nt">-c</span> <span class="s2">"SELECT count(*) FROM projects;"</span>
+kubectl <span class="nb">exec</span> <span class="nt">-n</span> cld-streaming deploy/ssb-sse <span class="nt">--</span> <span class="nb">ls</span> <span class="nt">-la</span> /persistent/
+
+<span class="c"># 2. Bounce everything</span>
+kubectl rollout restart deployment/ssb-postgresql <span class="nt">-n</span> cld-streaming
+kubectl rollout restart deployment/ssb-sse        <span class="nt">-n</span> cld-streaming
+kubectl rollout restart deployment/ssb-mve        <span class="nt">-n</span> cld-streaming
+kubectl delete flinkdeployment ssb-session-admin  <span class="nt">-n</span> cld-streaming <span class="nt">--wait</span><span class="o">=</span><span class="nb">false</span>
+<span class="c"># operator re-creates ssb-session-admin from the ConfigMap</span>
+
+kubectl rollout status deployment/ssb-postgresql <span class="nt">-n</span> cld-streaming <span class="nt">--timeout</span><span class="o">=</span>180s
+kubectl rollout status deployment/ssb-sse        <span class="nt">-n</span> cld-streaming <span class="nt">--timeout</span><span class="o">=</span>180s
+
+<span class="c"># 3. Same numbers? Same files?</span>
+kubectl <span class="nb">exec</span> <span class="nt">-n</span> cld-streaming deploy/ssb-postgresql <span class="nt">--</span> <span class="se">\</span>
+  psql <span class="nt">-U</span> ssb_admin <span class="nt">-c</span> <span class="s2">"SELECT count(*) FROM projects;"</span>
+kubectl <span class="nb">exec</span> <span class="nt">-n</span> cld-streaming deploy/ssb-sse <span class="nt">--</span> <span class="nb">ls</span> <span class="nt">-la</span> /persistent/
+
+<span class="c"># 4. Running FlinkSessionJobs resumed from checkpoint?</span>
+kubectl get flinksessionjob <span class="nt">-n</span> cld-streaming
+<span class="c"># LIFECYCLE STATE should still be STABLE, JOB STATUS RUNNING</span>
+</code></pre></div></div>
+
+<p>If all four steps hold, you have real persistence.</p>
+
+<hr />
+
+<h2 id="failure-modes-ive-hit">Failure modes I’ve hit</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Symptom</th>
+      <th>Cause</th>
+      <th>Fix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Mkdirs failed to create file:/persistent/global/tmp/...</code> on JAR upload</td>
+      <td><code class="language-plaintext highlighter-rouge">/persistent</code> not mounted, or mounted but owned by root</td>
+      <td>Phase 2.1 + 2.3</td>
+    </tr>
+    <tr>
+      <td>Upload works but the JAR is gone after <code class="language-plaintext highlighter-rouge">rollout restart</code></td>
+      <td>Mounted <code class="language-plaintext highlighter-rouge">emptyDir</code> instead of PVC (double-check the patch)</td>
+      <td>Phase 2.2, verify with <code class="language-plaintext highlighter-rouge">kubectl describe pod ssb-sse-... \| grep -A2 persistent-storage</code></td>
+    </tr>
+    <tr>
+      <td>Flink job in SSB fails with <code class="language-plaintext highlighter-rouge">File does not exist: /persistent/...</code></td>
+      <td>You patched the SSE pod only, not the Flink pods. <code class="language-plaintext highlighter-rouge">podVolumes</code>/<code class="language-plaintext highlighter-rouge">podVolumeMounts</code> covers both</td>
+      <td>Move the mount into <code class="language-plaintext highlighter-rouge">ssb.podVolumes</code> in the values file, <code class="language-plaintext highlighter-rouge">helm upgrade</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">s3://</code> checkpoint URLs fail with “No FileSystem for scheme”</td>
+      <td>Missing <code class="language-plaintext highlighter-rouge">storageConfiguration</code> block, or missing S3 filesystem plugin in the Flink image</td>
+      <td>Confirm <code class="language-plaintext highlighter-rouge">flink-s3-fs-*.jar</code> is in the image, and creds live in <code class="language-plaintext highlighter-rouge">storageConfiguration</code></td>
+    </tr>
+    <tr>
+      <td>Postgres pod comes back but SSB UI shows no projects</td>
+      <td>The PVC came back but the DB inside it wasn’t initialized — probably a fresh PVC that never had the schema written</td>
+      <td>Re-run <code class="language-plaintext highlighter-rouge">helm upgrade</code> so the operator re-applies the postgres init ConfigMap</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">state.checkpoints.dir</code> points at <code class="language-plaintext highlighter-rouge">file:///flink-state/...</code> and TaskManagers crashloop on multi-node</td>
+      <td>RWO PVC only bindable to one node</td>
+      <td>Use RWX StorageClass (Longhorn / NFS), or switch to S3</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="reference">Reference</h2>
+
+<p>Everything in this post was validated against <strong>CSA Operator <code class="language-plaintext highlighter-rouge">1.5.0-b275</code></strong> on <strong>minikube v1.37.0 / k8s v1.34.0</strong>. Chart values come straight from <code class="language-plaintext highlighter-rouge">helm show values oci://container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator --version 1.5.0-b275</code>, and the helm-value dictionary in the CSA docs Reference page.</p>
+
+<h3 id="cloudera-streaming-analytics-csa">Cloudera Streaming Analytics (CSA)</h3>
+
+<ul>
+  <li><a href="https://docs.cloudera.com/csa-operator/1.5/index.html">CSA Operator 1.5 documentation</a></li>
+  <li><a href="https://docs.cloudera.com/csa-operator/1.5/reference/topics/csa-op-reference.html">CSA Operator 1.5 Helm chart reference (every helm value, with defaults)</a></li>
+  <li><a href="https://docs.cloudera.com/csa-operator/1.5/installation/topics/csa-op-installation-process-internet.html">CSA Operator 1.5 install (internet)</a> — where the Longhorn <code class="language-plaintext highlighter-rouge">fsGroup: 999</code> note comes from</li>
+  <li><a href="https://docs.cloudera.com/csa-operator/1.5/operator-management/topics/csa-op-removing-resources.html">CSA Operator 1.5 removing resources</a> — the Postgres PVC is intentionally kept on uninstall so your SQL projects survive an operator upgrade</li>
+  <li>Related posts on this blog:
+    <ul>
+      <li><a href="/release/Cloudera-Streaming-Analytics-1.17.0/">Announcing Cloudera Streaming Analytics 1.17.0</a></li>
+      <li><a href="/release/Cloudera-Streaming-Analytics-Kubernetes-Operator-1.3/">Cloudera Streaming Analytics - Kubernetes Operator 1.3</a></li>
+      <li><a href="/release/Cloudera-Streams-Analytics-Kubernetes-Operator-1.2/">Cloudera Streaming Analytics - Kubernetes Operator 1.2</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="companion-persistence-posts-same-cld-streaming-cluster">Companion persistence posts (same <code class="language-plaintext highlighter-rouge">cld-streaming</code> cluster)</h3>
+
+<ul>
+  <li><a href="/blog/Persistence-with-Cloudera-Flow-Management-Operator/">Persistence with Cloudera Flow Management Operator</a> — the NiFi companion to this post: five repos, custom NARs, and Python extensions off the minikube mount.</li>
+  <li><a href="/blog/Persiting-Schema-with-Schema-Registry/">Persisting Schema Registry with PostgreSQL</a> — piggyback Schema Registry on the same <code class="language-plaintext highlighter-rouge">ssb-postgresql</code> pod Phase 1 sets up here.</li>
+  <li><a href="/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/">Cloudera Edge Flow Manager on Kubernetes</a> — full EFM persistence recipe (metadata → same Postgres, plus PVCs for agent binaries and uploaded resources).</li>
+  <li><a href="/blog/Observability-with-Cloudera-Streaming-Operators/">Observability with Cloudera Streaming Operators</a> — Prometheus + Grafana for the same NiFi/Kafka/Flink stack.</li>
+</ul>
+
+<h3 id="the-rest-of-the-cloudera-streaming-operators-family-cso">The rest of the Cloudera Streaming Operators family (CSO)</h3>
+
+<ul>
+  <li><strong>Cloudera Flow Management (CFM) Operator — NiFi:</strong>
+    <ul>
+      <li><a href="https://docs.cloudera.com/cfm-operator/3.2.0/index.html">CFM Operator documentation</a></li>
+      <li><a href="/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.1/">Cloudera Flow Management Operator for Kubernetes 3.1</a></li>
+      <li><a href="/blog/Cloudera-Apache-NiFi-Operator/">Cloudera Apache NiFi Operator</a></li>
+    </ul>
+  </li>
+  <li><strong>Cloudera Streams Messaging (CSM) Operator — Kafka / Schema Registry / Streams Messaging Manager:</strong>
+    <ul>
+      <li><a href="https://docs.cloudera.com/csm-operator/latest/index.html">CSM Operator documentation</a></li>
+      <li><a href="/release/Cloudera-Streams-Messaging-Kubernetes-Operator-1.6/">Cloudera Streams Messaging Kubernetes Operator 1.6</a></li>
+    </ul>
+  </li>
+  <li><strong>Cloudera Edge Flow Manager (EFM) / CEM:</strong>
+    <ul>
+      <li><a href="https://docs.cloudera.com/cem/latest/index.html">Cloudera Edge Manager documentation</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="repos-and-images">Repos and images</h3>
+
+<ul>
+  <li>Helm chart (OCI): <code class="language-plaintext highlighter-rouge">oci://container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator</code></li>
+  <li>Container images (all <code class="language-plaintext highlighter-rouge">1.20.1-csaop1.5.0-b275</code> unless noted):
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/flink-kubernetes-operator:1.13-csaop1.5.0-b275</code></li>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/flink-extended:1.20.1-csaop1.5.0-b275</code></li>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/ssb-sse:1.20.1-csaop1.5.0-b275</code></li>
+      <li><code class="language-plaintext highlighter-rouge">container.repository.cloudera.com/cloudera/ssb-mve:1.20.1-csaop1.5.0-b275</code></li>
+      <li><code class="language-plaintext highlighter-rouge">docker-private.infra.cloudera.com/cloudera_thirdparty/hardened/postgres:18.1-r0-openshift-202601250614</code></li>
+    </ul>
+  </li>
+  <li>Sample YAMLs and helm values I use across the CSO stack: <a href="https://github.com/cldr-steven-matison/ClouderaStreamingOperators"><code class="language-plaintext highlighter-rouge">cldr-steven-matison/ClouderaStreamingOperators</code></a></li>
+</ul>
+
+<hr />
+
+<h2 id="persistence-with-cloudera-streaming-analytics-operator">Persistence with Cloudera Streaming Analytics Operator</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Persistence with Cloudera Streaming Analytics Operator please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#csa" class="page__taxonomy-item p-category" rel="tag">csa</a><span class="sep">, </span>
+    
+      <a href="/tags/#flink" class="page__taxonomy-item p-category" rel="tag">flink</a><span class="sep">, </span>
+    
+      <a href="/tags/#kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      <a href="/tags/#minikube" class="page__taxonomy-item p-category" rel="tag">minikube</a><span class="sep">, </span>
+    
+      <a href="/tags/#operator" class="page__taxonomy-item p-category" rel="tag">operator</a><span class="sep">, </span>
+    
+      <a href="/tags/#ssb" class="page__taxonomy-item p-category" rel="tag">ssb</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-10T00:00:00-04:00">August 10, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Persistence+with+Cloudera+Streaming+Analytics+Operator%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FPersistence-with-Cloudera-Streaming-Analytics-Operator%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FPersistence-with-Cloudera-Streaming-Analytics-Operator%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Persistence-with-Cloudera-Flow-Management-Operator/" class="pagination--pager" title="Persistence with Cloudera Flow Management Operator
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/CFM-Cloudera_Flow_Management_Operator.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Persistence-with-Cloudera-Flow-Management-Operator/" rel="permalink">Persistence with Cloudera Flow Management Operator
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          15 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How to make everything CFM writes to disk on Kubernetes — flow definitions, FlowFiles, content, provenance, cluster state, custom NARs, and Python extensions...
+    <a href="/blog/Persistence-with-Cloudera-Flow-Management-Operator/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Minikube-Profile-Swap.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Disposable-Clusters-on-One-Box-The-minikube-Profile-Swap/" rel="permalink">Disposable Clusters on One Box: The minikube Profile Swap
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How I proved MiNiFi → NiFi Site-to-Site without risking 123 days of a live Cloudera stack — a second, disposable minikube profile swapped in and out on the s...
+    <a href="/blog/Disposable-Clusters-on-One-Box-The-minikube-Profile-Swap/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/cloudera-ce-cm-cluster.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/" rel="permalink">Cloudera Community Edition on AWS in One Command
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Cloudera has a lot of ways to get a cluster. Almost none of them are “one command on your laptop.” cloudera-labs/cloudera-ce-aws is the exception: a Terrafor...
+    <a href="/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/efm-nvidia-jetson.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Hacking-The-Jetson/" rel="permalink">Hacking The Jetson
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          30 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI
+
+    <a href="/blog/Hacking-The-Jetson/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>
