@@ -1,44 +1,72 @@
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 44
-  lang: ""
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 1911
+  lang: "Python"
   updated: "2026-08-11"
   fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 37414
+  size: 37520
   lang: "Python"
-  updated: "2026-08-10"
-  fork: false
-- name: "NiFiandAi"
-  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
-  url: "https://github.com/cldr-steven-matison/NiFiandAi"
-  size: 53
-  lang: ""
-  updated: "2026-08-10"
+  updated: "2026-08-11"
   fork: false
 - name: "EdgeFlowManager"
   description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
   url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
-  size: 17250
+  size: 17272
   lang: "Python"
-  updated: "2026-08-10"
+  updated: "2026-08-11"
   fork: false
+- name: "NiFiandAi"
+  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
+  url: "https://github.com/cldr-steven-matison/NiFiandAi"
+  size: 57
+  lang: ""
+  updated: "2026-08-11"
+  fork: false
+- name: "Pake"
+  description: "🤱🏻 Turn any webpage into a desktop app with one command."
+  url: "https://github.com/cldr-steven-matison/Pake"
+  size: 66583
+  lang: ""
+  updated: "2026-08-11"
+  fork: true
+- name: "Speech"
+  description: "A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)"
+  url: "https://github.com/cldr-steven-matison/Speech"
+  size: 529136
+  lang: ""
+  updated: "2026-08-11"
+  fork: true
+- name: "LongCat-Video"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/LongCat-Video"
+  size: 1366898
+  lang: ""
+  updated: "2026-08-11"
+  fork: true
+- name: "airllm"
+  description: "AirLLM 70B inference with single 4GB GPU"
+  url: "https://github.com/cldr-steven-matison/airllm"
+  size: 5613
+  lang: ""
+  updated: "2026-08-11"
+  fork: true
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
   size: 163512
   lang: "HTML"
-  updated: "2026-08-10"
+  updated: "2026-08-11"
   fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 1869
-  lang: "Python"
-  updated: "2026-08-09"
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 45
+  lang: ""
+  updated: "2026-08-11"
   fork: false
 - name: "NiFi-Templates"
   description: "NiFI Templates of example flows I share with the community."
