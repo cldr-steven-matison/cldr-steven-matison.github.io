@@ -397,10 +397,6 @@
 <lastmod>2026-07-27T00:00:00-04:00</lastmod>
 </url>
 <url>
-<loc>https://cldr-steven-matison.github.io/blog/Hacking-The-Jetson/</loc>
-<lastmod>2026-08-03T00:00:00-04:00</lastmod>
-</url>
-<url>
 <loc>https://cldr-steven-matison.github.io/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/</loc>
 <lastmod>2026-08-03T00:00:00-04:00</lastmod>
 </url>
@@ -415,6 +411,10 @@
 <url>
 <loc>https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/</loc>
 <lastmod>2026-08-10T00:00:00-04:00</lastmod>
+</url>
+<url>
+<loc>https://cldr-steven-matison.github.io/blog/Hacking-The-Jetson/</loc>
+<lastmod>2026-08-13T00:00:00-04:00</lastmod>
 </url>
 <url>
 <loc>https://cldr-steven-matison.github.io/about/</loc>

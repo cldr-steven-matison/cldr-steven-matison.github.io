@@ -593,12 +593,6 @@ var store = [{
         "url": "/blog/How-to-Install-a-Public-Certificate-for-NiFi/",
         "teaser": "/assets/images/nifi-logo.png"
       },{
-        "title": "Hacking The Jetson",
-        "excerpt":":warning: Danger! This is a Work in Progress article. Content and code are updating frequently until this notice is removed. I bought an NVIDIA Jetson Orin Nano developer kit, dropped it into a Yahboom CubeNano case, and then spent a few weeks turning it into something between a desk toy...","categories": ["blog"],
-        "tags": ["nvidia","jetson","minifi","efm","edge","ai","oled","i2c","cloudera","tensorrt","gpu","inference"],
-        "url": "/blog/Hacking-The-Jetson/",
-        "teaser": "/assets/images/efm-nvidia-jetson.png"
-      },{
         "title": "Cloudera Community Edition on AWS in One Command",
         "excerpt":"Cloudera has a lot of ways to get a cluster. Almost none of them are “one command on your laptop.” cloudera-labs/cloudera-ce-aws is the exception: a Terraform + Ansible bundle that stands up a full Cloudera Private Cloud Community Edition cluster on AWS — Cloudera Manager, Kerberos, Auto-TLS, a real storage/compute...","categories": ["blog"],
         "tags": ["cloudera","aws","ansible","terraform","community-edition","cdp"],
@@ -622,4 +616,10 @@ var store = [{
         "tags": ["cloudera","csa","ssb","flink","kubernetes","operator","minikube"],
         "url": "/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/",
         "teaser": "/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png"
+      },{
+        "title": "Hacking The Jetson",
+        "excerpt":":warning: Danger! This is a Work in Progress article. Content and code are updating frequently until this notice is removed. I bought an NVIDIA Jetson Orin Nano developer kit, dropped it into a Yahboom CubeNano case, and then spent a few weeks turning it into something between a desk toy...","categories": ["blog"],
+        "tags": ["nvidia","jetson","minifi","efm","edge","ai","oled","i2c","cloudera","tensorrt","gpu","inference"],
+        "url": "/blog/Hacking-The-Jetson/",
+        "teaser": "/assets/images/efm-nvidia-jetson.png"
       }]

@@ -36,7 +36,7 @@
 
 
 
-  <meta property="article:published_time" content="2026-08-03T00:00:00-04:00">
+  <meta property="article:published_time" content="2026-08-13T00:00:00-04:00">
 
 
 
@@ -273,7 +273,7 @@
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Hacking The Jetson">
     <meta itemprop="description" content="Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI">
-    <meta itemprop="datePublished" content="2026-08-03T00:00:00-04:00">
+    <meta itemprop="datePublished" content="2026-08-13T00:00:00-04:00">
     
 
     <div class="page__inner-wrap">
@@ -297,7 +297,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          30 minute read
+          36 minute read
         
       </span>
     
@@ -306,8 +306,8 @@
         </p>
 <p class="page__date">
           <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
-          <time datetime="2026-08-03T00:00:00-04:00">
-            August 03, 2026
+          <time datetime="2026-08-13T00:00:00-04:00">
+            August 13, 2026
           </time>
         </p>
       
@@ -330,18 +330,18 @@
 
 <h2 id="the-hardware">The hardware</h2>
 
-<p>Two parts stack up on my desk:</p>
+<p>Three parts stack up on my desk:</p>
 
 <ul>
   <li>
 <strong><a href="https://www.amazon.com/dp/B0BZJTQ5YP">NVIDIA Jetson Orin Nano Super Developer Kit</a></strong> — the compute, and the reason this whole thing is worth doing. <strong>67 TOPS</strong> (Sparse INT8), a 1024-core Ampere GPU with 32 Tensor Cores, a 6-core Arm Cortex-A78AE CPU up to 1.7 GHz, 8GB of 128-bit LPDDR5 at 102 GB/s, in a 7W–25W envelope. NVIDIA lists it at <strong>$249</strong>. That’s a data-center-shaped AI stack on a board that draws less than a light bulb — plenty to run MiNiFi, drive a display, and front a nearby inference server at the same time.</li>
   <li>
 <strong><a href="https://www.amazon.com/dp/B0GDFTZ64S">Jetson MINI Cube Nano case</a></strong> — the case (supports Jetson Nano / Orin Nano / Orin NX / Xavier NX / TX2 NX), with a 40-pin passthrough, a fan, and a small <strong>128×32 SSD1306 OLED</strong> on the header. The OLED is the thing that makes this build fun.</li>
+  <li>
+<strong><a href="https://www.amazon.com/dp/B08YDBKLDV">Waveshare Environment Sensor module</a></strong> — an I2C sensor board (ambient light, temp/humidity/pressure, 9-DOF IMU, UV, VOC) with its own 1.3” OLED, designed to stack on the Jetson Nano 40-pin header. It nearly didn’t survive the build — its OLED looked stone dead across two boards — and the fight to bring it back is <a href="#hack-4--the-environment-sensor-that-wasnt-dead">Hack #4</a> below.</li>
 </ul>
 
-<p>I also tried a Waveshare Environment Sensor module on the same header — it didn’t make the cut, and the short version of why is in <a href="#the-environment-sensor-i-didnt-ship">The environment sensor I didn’t ship</a> below.</p>
-
-<p class="notice--info"><img class="emoji" title=":information_source:" alt=":information_source:" src="https://github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20"> <strong>Confirmed parts.</strong> Jetson Orin Nano Super Developer Kit — NVIDIA, ASIN B0BZJTQ5YP, $249, 67 TOPS. Jetson MINI Cube Nano case — ASIN B0GDFTZ64S.</p>
+<p class="notice--info"><img class="emoji" title=":information_source:" alt=":information_source:" src="https://github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20"> <strong>Confirmed parts.</strong> Jetson Orin Nano Super Developer Kit — NVIDIA, ASIN B0BZJTQ5YP, $249, 67 TOPS. Jetson MINI Cube Nano case — ASIN B0GDFTZ64S. Waveshare Environment Sensors Module for Jetson Nano (I2C, 1.3” OLED) — ASIN B08YDBKLDV, also documented on the <a href="https://www.waveshare.com/wiki/Environment_Sensor_for_Jetson_Nano">Waveshare wiki</a>.</p>
 
 <h2 id="hack-1--the-cubenano-oled-from-stats-display-to-cordy-cept-strobe">Hack #1 — the CubeNano OLED, from stats display to CORDY CEPT strobe</h2>
 
@@ -644,11 +644,130 @@ HTTP 200
 
 <p class="notice--success"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>The engine lives in a daemon, not the processor — and that’s the reusable idea.</strong> Three different MiNiFi consumers (C++ <code class="language-plaintext highlighter-rouge">ExecuteScript</code>, a custom Python processor, a Java <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code> flow) all reach one resident TensorRT process over loopback. Reload the model with <code class="language-plaintext highlighter-rouge">systemctl --user restart trt-infer</code> and no agent restarts. Same shape as the persistent-mpv stream launcher this box already ran — when the box has already solved a problem once, copy the shape.</p>
 
-<h2 id="the-environment-sensor-i-didnt-ship">The environment sensor I didn’t ship</h2>
+<h2 id="hack-4--the-environment-sensor-that-wasnt-dead">Hack #4 — the environment sensor that wasn’t dead</h2>
 
-<p>I wanted the Jetson to read its own environment — temp, humidity, pressure, light, UV, motion, air quality — so I tried a Waveshare Environment Sensor module (I2C, with its own 1.3” OLED) on the same header. The four core sensors — BME280 (temp/humidity/pressure), TSL2591 (light), LTR390 (UV), ICM20948 (9-DOF IMU) — all read fine over I2C bus 7. The board’s onboard OLED never did: address <code class="language-plaintext highlighter-rouge">0x3C</code> returned a hard I2C NACK on every driver and every probe, so zero bytes ever reached the chip. A replacement unit through Waveshare’s RMA showed the identical symptom out of the box. Two dead OLEDs on two boards is a hardware pattern, not a config problem — so I returned both and left the sensor out of this build.</p>
+<p>I wanted the Jetson to read its own environment — temp, humidity, pressure, light, UV, motion, air quality — so I stacked a Waveshare Environment Sensor module (I2C, with its own 1.3” OLED) on the same header. The four core sensors — BME280 (temp/humidity/pressure), TSL2591 (light), LTR390 (UV), ICM20948 (9-DOF IMU) — all read fine over I2C bus 7 from the start. The board’s onboard SH1106 OLED did not: address <code class="language-plaintext highlighter-rouge">0x3C</code> returned a hard I2C NACK on every driver and every probe, so zero bytes ever reached the chip. A replacement unit through Waveshare’s RMA showed the identical symptom out of the box.</p>
 
-<p>The full diagnostic trail — schematic reading, the Python-2-to-3 driver patches, and every ruled-out theory — is kept in my internal notes in case a future board on this SKU shows the same symptom. It’s a dead end for this build, not a mystery worth re-solving.</p>
+<p>Two OLEDs stone-dead across two boards from independent manufacturing runs is a hardware pattern, not a config problem — so for a while I wrote both off as DOA. That verdict was wrong. Neither board was ever defective. Here’s what was actually happening.</p>
+
+<h3 id="root-cause-the-reset-pin-was-tristated-at-the-pad">Root cause: the reset pin was tristated at the pad</h3>
+
+<p>The SH1106’s reset line is <code class="language-plaintext highlighter-rouge">OLED_RST</code>, wired to Jetson <strong>BCM 24</strong> — which on this SoC is <code class="language-plaintext highlighter-rouge">PY.03</code>, gpiochip0 line 125, controlled by PADCTL register <code class="language-plaintext highlighter-rouge">0x0243d010</code>. Read that register on a fresh boot:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>busybox devmem 0x0243d010
+0x00000055
+</code></pre></div></div>
+
+<p>Decoded against the pad’s own field layout:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bits</th>
+      <th>Field</th>
+      <th>Value</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1:0</td>
+      <td>PM</td>
+      <td><code class="language-plaintext highlighter-rouge">01</code></td>
+      <td>mux function select</td>
+    </tr>
+    <tr>
+      <td>3:2</td>
+      <td>PULL_DOWN</td>
+      <td><code class="language-plaintext highlighter-rouge">01</code></td>
+      <td><strong>pull-down enabled</strong></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>TRISTATE</td>
+      <td><code class="language-plaintext highlighter-rouge">1</code></td>
+      <td><strong>tristate — output driver disabled</strong></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>E_INPUT</td>
+      <td><code class="language-plaintext highlighter-rouge">1</code></td>
+      <td>input buffer enabled</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>GPIO_SF_SEL</td>
+      <td><code class="language-plaintext highlighter-rouge">0</code></td>
+      <td>GPIO mode, not special-function</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The pad is in GPIO mode, but <strong>tristated with a pull-down</strong> — it can’t drive, so it sits pulled to ground. <code class="language-plaintext highlighter-rouge">OLED_RST</code> is active-low, which means the SH1106 has been held in permanent hardware reset since first power-on. A controller in reset NACKs on I2C while every other chip on the bus answers normally. That single fact reconciles everything the DOA verdict couldn’t: black from the first second with no flicker, <code class="language-plaintext highlighter-rouge">0x3C</code> absent on every bus scan, the board’s own 3.3 V regulator measuring healthy, and two boards failing <em>identically</em>. This is a JetPack-6/Orin pad default that differs from the Jetson Nano the board was designed for — not a fault on either unit.</p>
+
+<p>The fix is one register write:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>busybox
+<span class="nb">sudo </span>busybox devmem 0x0243d010 w 0x000
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">0x3C</code> ACKs on the very next scan, and the panel lights.</p>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>A “stuck reset line” test can lie on a tristated pad.</strong> An earlier pass forced the <em>kernel</em> GPIO line high (<code class="language-plaintext highlighter-rouge">gpioset --mode=time -s 15 gpiochip0 125=1</code>) and saw no change, which looked like proof the reset line was fine. But with TRISTATE set, the pad never followed the kernel line — the two views had diverged. The GPIO layer said “output, high”; the pin was still floating low. Read the PADCTL register directly, don’t trust <code class="language-plaintext highlighter-rouge">gpioinfo</code>.</p>
+
+<h3 id="the-sgp40-was-fine-too">The SGP40 was fine too</h3>
+
+<p>The VOC sensor at <code class="language-plaintext highlighter-rouge">0x59</code> was the other half of the old DOA evidence — it looked dead on an earlier unit. It isn’t: it reports <code class="language-plaintext highlighter-rouge">feature set 0x3240</code> and passes its self-test (<code class="language-plaintext highlighter-rouge">0xd400</code>). It simply doesn’t ACK a plain <code class="language-plaintext highlighter-rouge">i2cdetect</code> probe, which is expected — it needs a wake command, not a repair. With the OLED reset released, the whole board comes up clean:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bme280 T&amp;H I2C address:0X76
+TSL2591 Light I2C address:0X29
+UV I2C address:0x53
+SGP40 VOC I2C address:0X59
+ICM20948 9-DOF I2C address:0X68
+OLED I2C address:0x3c
+</code></pre></div></div>
+
+<p>Live readings, all sane: BME280 969.92 hPa / 30.74 °C / 34.21 %RH, TSL2591 474.70 Lux, LTR390 0 UV (indoors), SGP40 28697 raw VOC, SH1106 128×64 at <code class="language-plaintext highlighter-rouge">0x3c</code>.</p>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Two traps that eat a session.</strong> The vendor <code class="language-plaintext highlighter-rouge">test.py</code> wraps its own <code class="language-plaintext highlighter-rouge">devmem</code> in a <code class="language-plaintext highlighter-rouge">sudo</code> call that <strong>silently no-ops when it isn’t run from a real terminal</strong> (<code class="language-plaintext highlighter-rouge">a terminal is required to read the password</code>) — the check is unchecked, so the program marches on while the pad write never happens and the panel stays dark. Do the <code class="language-plaintext highlighter-rouge">devmem</code> by hand first, or run from a tty. And <code class="language-plaintext highlighter-rouge">cordy_oled.service</code> (the CORDY strobe from Hack #1) drives <code class="language-plaintext highlighter-rouge">0x3c</code> on bus 7 too — leave it enabled and it fights the sensor demo for the same panel. <code class="language-plaintext highlighter-rouge">sudo systemctl disable --now cordy_oled.service</code> while testing.</p>
+
+<h3 id="both-oleds-lit-at-once-on-one-address">Both OLEDs, lit at once, on one address</h3>
+
+<p>The Waveshare board passes the 40-pin header through, so the Yahboom CubeNano panel from Hack #1 stacks with it. Now bus 7 carries the CubeNano MCU, the four Waveshare sensors, and <code class="language-plaintext highlighter-rouge">0x3c</code> — which <strong>both</strong> OLEDs answer to. No address jumper, no second bus reachable through the stack. Two devices on one address both ACK and both accept every write. They still show different content:</p>
+
+<p><img src="/assets/images/Hack-The-Jetson-dual-oled.jpg" alt="Both OLEDs lit at once on the stacked Jetson Orin Nano — Yahboom SSD1306 128x32 and Waveshare SH1106 128x64 on one I2C address" width="420"></p>
+
+<p>The trick is a quirk of the SSD1306. Its die carries a full 128×64 of display RAM, but the Yahboom glass is only 128×32 driven at multiplex 32 — so <strong>only pages 0–3 are ever scanned out, and pages 4–7 are real RAM that is never displayed.</strong> The SH1106 shows all 8 pages. So a write aimed at pages 4–7 lands on the Waveshare alone:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pages</th>
+      <th>Yahboom 128×32</th>
+      <th>Waveshare 128×64</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0–3</td>
+      <td>visible</td>
+      <td>visible (top half)</td>
+    </tr>
+    <tr>
+      <td>4–7</td>
+      <td><strong>absorbed, never scanned</strong></td>
+      <td>visible (bottom half)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">OLED_RST</code> is what makes the setup possible — the same pin from the bug above, used on purpose. The two controllers need different multiplex settings, and that command reaches both, so the SH1106 is held in reset (dropped off the bus entirely) while the SSD1306 is configured, then woken with a command set the SSD1306 either ignores or already agrees with. One trap: the SH1106’s display column 0 is RAM column 2 and the SSD1306’s is not, so content has to stay within columns 0–125 or the SH1106 shifts and the SSD1306 wraps.</p>
+
+<p>It isn’t full independence — pages 0–3 are physically shared, so the Yahboom’s content also appears on the Waveshare’s top half; only the Waveshare’s bottom half is truly its own. That’s the ceiling for this hardware without more work, and the clean fixes are all still on the table: <code class="language-plaintext highlighter-rouge">0x3d</code> is free on bus 7, and <code class="language-plaintext highlighter-rouge">i2c-0</code> (header pins 27/28) carries only the ID EEPROMs, so moving one panel to <code class="language-plaintext highlighter-rouge">0x3d</code> via its SA0 strap, jumpering one to <code class="language-plaintext highlighter-rouge">i2c-0</code>, or adding a TCA9548A mux would give each panel its own space.</p>
+
+<p class="notice--success"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>The reset pin was the whole story — first as the bug, then as the tool.</strong> A tristated PADCTL default held one panel dark and looked exactly like two DOA boards; the same <code class="language-plaintext highlighter-rouge">OLED_RST</code>, driven deliberately, is what lets two same-address OLEDs share one bus and still render different content. Before you RMA an I2C device that NACKs, check whether its reset pin is actually driving.</p>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>The <code class="language-plaintext highlighter-rouge">devmem</code> fix doesn’t survive a reboot.</strong> <code class="language-plaintext highlighter-rouge">0x0243d010</code> returns to <code class="language-plaintext highlighter-rouge">0x55</code> on every boot, so the panel is dark again until the write is repeated — and it now takes down the whole dual-display setup, not just the one panel. Making it stick wants either a systemd unit that runs before anything touches the display, or a proper device-tree pinmux change. That’s the one piece of this still open.</p>
 
 <h2 id="whats-next">What’s next</h2>
 
@@ -658,7 +777,7 @@ HTTP 200
   <li>
 <strong>Wire the inference into a full router flow.</strong> Hack #3 proves the <em>services</em> work — three front doors, all measured. What’s left is assembling them into an end-to-end <code class="language-plaintext highlighter-rouge">NvidiaNanoAI</code> EFM class and router flow, with the Jetson acting as the front door to its own AI services: a XIAO sensor on the LAN POSTs an image to the Jetson’s <code class="language-plaintext highlighter-rouge">:8090</code> endpoint and gets a real classification back, not a fire-and-forget ack. The round-trip primitive is proven (front door 3); turning it into an EFM-managed flow is the piece still to build.</li>
   <li>
-<strong>Environment data into the flow.</strong> Wire a working I2C sensor into a MiNiFi Python processor and produce readings to Kafka alongside everything else — the Jetson reporting its own room conditions to the same stack it manages flows from. This is the piece the Waveshare board was meant to fill; I’ll pick a different sensor.</li>
+<strong>Environment data into the flow.</strong> The Waveshare sensors read fine now (Hack #4), so this is the wiring job it always should have been: BME280 / TSL2591 / LTR390 / ICM20948 / SGP40 into a MiNiFi Python processor, producing readings to Kafka alongside everything else — the Jetson reporting its own room conditions to the same stack it manages flows from.</li>
   <li>
 <strong>A buzzer and more I2C peripherals</strong> on the header for physical alerts driven by flow conditions.</li>
   <li>
@@ -675,7 +794,7 @@ HTTP 200
   <li>
 <strong>Don’t persist a display process with a bare <code class="language-plaintext highlighter-rouge">&amp;</code>.</strong> It survives until the next reboot/logout, then vanishes with no error. Use <code class="language-plaintext highlighter-rouge">setsid</code>, then a systemd unit.</li>
   <li>
-<strong>Don’t assume a blank OLED is dead hardware</strong> before checking whether the right <em>process</em> is running and whether the address ACKs (<code class="language-plaintext highlighter-rouge">i2cdetect -y -r 7</code>). The converse also holds: a <em>hard NACK</em> on every driver — like the Waveshare OLED — really is dead, and no software fixes that.</li>
+<strong>Don’t assume a blank OLED is dead hardware</strong> before checking whether the right <em>process</em> is running and whether the address ACKs (<code class="language-plaintext highlighter-rouge">i2cdetect -y -r 7</code>). And don’t stop at a hard NACK either: the Waveshare OLED NACKed on every driver and looked DOA across two boards, but the reset pin was tristated at the pad the whole time. On a Jetson/Orin, read the reset pin’s PADCTL register with <code class="language-plaintext highlighter-rouge">devmem</code> before you RMA anything.</li>
   <li>
 <strong>Don’t copy a <code class="language-plaintext highlighter-rouge">ListenHTTP</code> config with <code class="language-plaintext highlighter-rouge">Buffer Size &gt; 1</code></strong> onto an endpoint that gets single requests — MiNiFi drops the request until the buffer fills.</li>
   <li>
@@ -756,9 +875,15 @@ tail -f /home/tunastreet/nifi-minifi-cpp-1.26.02/logs/minifi-app.log | grep -i "
 <span class="gp">curl --data-binary @dog-640.jpg -H "Content-Type: application/octet-stream" http://127.0.0.1:8090/classify   #</span><span class="w"> </span>Samoyed 0.72, HTTP 200
 <span class="gp">curl --data-binary "definitely not an image" http://127.0.0.1:8090/classify   #</span><span class="w"> </span>HTTP 502 <span class="k">in </span>0.028s - returns, doesn<span class="s1">'t hang
 </span><span class="go">
-</span><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> Waveshare <span class="nb">env </span>sensor: the OLED that never ACKed <span class="o">(</span>dropped from the build<span class="o">)</span> <span class="nt">---</span>
+</span><span class="gp">#</span><span class="w"> </span><span class="nt">---</span> Waveshare <span class="nb">env </span>sensor: the OLED that <span class="s2">"never ACKed"</span> was held <span class="k">in </span>reset <span class="nt">---</span>
 <span class="gp">i2cdetect -y -r 7                                  #</span><span class="w"> </span>sensors at 0x29/0x53/0x68/0x76 answer<span class="p">;</span> 0x3c NACKs every <span class="nb">time</span>
-<span class="gp">#</span><span class="w"> </span>same hard NACK on the vendor driver, on luma.oled, and on a raw i2cget - and identical on the RMA unit -&gt; DOA, returned
+<span class="go">sudo apt-get install -y busybox
+</span><span class="gp">sudo busybox devmem 0x0243d010                     #</span><span class="w"> </span>OLED_RST pad <span class="o">(</span>BCM24/PY.03<span class="o">)</span>: reads 0x00000055 <span class="o">=</span> TRISTATE + pull-down
+<span class="gp">sudo busybox devmem 0x0243d010 w 0x000             #</span><span class="w"> </span>release the pad -&gt; reset goes high
+<span class="gp">i2cdetect -y -r 7                                  #</span><span class="w"> </span>0x3c now ACKs and stays -&gt; the panel lights
+<span class="gp">python3 test.py                                    #</span><span class="w"> </span>full sensor loop, OLED at 0x3c, no <span class="s2">"Continuing without OLED display"</span>
+<span class="gp">sudo systemctl disable --now cordy_oled.service    #</span><span class="w"> </span>stop the CORDY strobe from fighting <span class="k">for </span>0x3c on bus 7
+<span class="gp">#</span><span class="w"> </span>both panels at once: SSD1306 128x32 only scans pages 0-3, so a write to pages 4-7 lands on the Waveshare alone
 </code></pre></div></div>
 
 <h2 id="appendix">Appendix</h2>
@@ -859,6 +984,21 @@ curl <span class="nt">--data-binary</span> @dog-640.jpg <span class="nt">-H</spa
      http://127.0.0.1:8090/classify
 </code></pre></div></div>
 
+<h4 id="7-waveshare-env-sensor-bring-up--release-the-oled-reset-then-light-both-panels">7. Waveshare env-sensor bring-up — release the OLED reset, then light both panels</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># release the tristated OLED_RST pad so the SH1106 answers on 0x3c (repeat after every reboot)</span>
+<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> busybox
+<span class="nb">sudo </span>busybox devmem 0x0243d010          <span class="c"># confirm it reads 0x00000055 first</span>
+<span class="nb">sudo </span>busybox devmem 0x0243d010 w 0x000
+i2cdetect <span class="nt">-y</span> <span class="nt">-r</span> 7                        <span class="c"># 0x3c now present alongside 0x29/0x53/0x68/0x76</span>
+
+<span class="c"># stop the CORDY strobe from grabbing the same address on bus 7</span>
+<span class="nb">sudo </span>systemctl disable <span class="nt">--now</span> cordy_oled.service
+
+<span class="c"># run the full sensor loop (do the devmem by hand first — test.py's own sudo no-ops without a tty)</span>
+python3 test.py
+</code></pre></div></div>
+
 <h2 id="nvidia-jetson-developer-resources">NVIDIA Jetson developer resources</h2>
 
 <ul>
@@ -947,7 +1087,7 @@ curl <span class="nt">--data-binary</span> @dog-640.jpg <span class="nt">-H</spa
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-03T00:00:00-04:00">August 3, 2026</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-13T00:00:00-04:00">August 13, 2026</time></p>
 
       </footer>
 
@@ -965,12 +1105,11 @@ curl <span class="nt">--data-binary</span> @dog-640.jpg <span class="nt">-H</spa
       
   <nav class="pagination">
     
-      <a href="/blog/How-to-Install-a-Public-Certificate-for-NiFi/" class="pagination--pager" title="How to Install a Public Certificate for NiFi
+      <a href="/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/" class="pagination--pager" title="Persistence with Cloudera Streaming Analytics Operator
 ">Previous</a>
     
     
-      <a href="/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/" class="pagination--pager" title="Cloudera Community Edition on AWS in One Command
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -1065,7 +1204,7 @@ curl <span class="nt">--data-binary</span> @dog-640.jpg <span class="nt">-H</spa
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          16 minute read
+          15 minute read
         
       </span>
     
@@ -1163,7 +1302,7 @@ curl <span class="nt">--data-binary</span> @dog-640.jpg <span class="nt">-H</spa
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          9 minute read
+          8 minute read
         
       </span>
     
