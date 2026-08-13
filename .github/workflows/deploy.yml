@@ -22,6 +22,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Check image sizes (GitHub Camo 5MB limit)
+        # GitHub proxies external images (e.g. blog-post teasers shown on the
+        # profile Recent Blog Posts section) through its Camo proxy, which
+        # 404s anything over 5 MiB and renders it as a broken image. Fail the
+        # build if any image in assets/images/ exceeds a safe 5,000,000-byte
+        # threshold so the problem is caught before deploy, not on the profile.
+        run: |
+          MAX=5000000
+          FAIL=0
+          while IFS= read -r -d '' img; do
+            size=$(stat -c%s "$img")
+            if [ "$size" -gt "$MAX" ]; then
+              printf '::error file=%s::%s is %s bytes (> %s limit); resize it (e.g. sips --resampleWidth 1600) or GitHub Camo will 404 it.\n' "$img" "$img" "$size" "$MAX"
+              FAIL=1
+            fi
+          done < <(find assets/images -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.gif' -o -iname '*.webp' \) -print0)
+          if [ "$FAIL" -ne 0 ]; then
+            echo "One or more images exceed the ${MAX}-byte Camo limit. See errors above."
+            exit 1
+          fi
+          echo "All images are under the ${MAX}-byte Camo limit."
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
