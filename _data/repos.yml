@@ -1,21 +1,42 @@
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 2000
-  lang: "Python"
-  updated: "2026-08-13"
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 45
+  lang: ""
+  updated: "2026-08-14"
   fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 38991
+  size: 41367
   lang: "Python"
   updated: "2026-08-13"
   fork: false
 - name: "NiFi2-Processor-Playground"
   description: "A place to play around with NiFi 2.0 Processors"
   url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
-  size: 308
+  size: 359
+  lang: "Java"
+  updated: "2026-08-13"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 173210
+  lang: "HTML"
+  updated: "2026-08-13"
+  fork: false
+- name: "cdpcurl"
+  description: "curl-like tool with CDP request signing"
+  url: "https://github.com/cldr-steven-matison/cdpcurl"
+  size: 90
+  lang: ""
+  updated: "2026-08-13"
+  fork: true
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 2000
   lang: "Python"
   updated: "2026-08-13"
   fork: false
@@ -24,13 +45,6 @@
   url: "https://github.com/cldr-steven-matison/NiFiandAi"
   size: 69
   lang: ""
-  updated: "2026-08-12"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 163515
-  lang: "HTML"
   updated: "2026-08-12"
   fork: false
 - name: "EdgeFlowManager"
@@ -68,13 +82,6 @@
   lang: ""
   updated: "2026-08-11"
   fork: true
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 45
-  lang: ""
-  updated: "2026-08-11"
-  fork: false
 - name: "NiFi-Templates"
   description: "NiFI Templates of example flows I share with the community."
   url: "https://github.com/cldr-steven-matison/NiFi-Templates"
