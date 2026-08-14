@@ -5,7 +5,7 @@ excerpt: "NiFi's Iceberg bundle is write-only. So I built GetIceberg — a nativ
 date: 2026-09-13
 classes: wide
 header:
-  teaser: "/assets/images/GetIceberg.png"
+  teaser: "/assets/images/QueryFlights.png"
 categories:
   - blog
 tags:
@@ -188,15 +188,21 @@ The NAR hot-loads in ~10 seconds. Search `GetIceberg` in the palette and it's th
 
 No dynamic S3 properties here — the datashare vends the S3 read credentials in the `loadTable` response, unlocked by that always-on vended-credentials header. `GetIceberg` on `poc_uc2.airlines` returns a single FlowFile whose content is a JSON array of the three airline rows — the same rows a Spark or SSB client sees through that catalog, now through a native NiFi processor with no `InvokeHTTP` glue. Validated on CFM `2.6.0.4.3.4.0-234`.
 
+![GetIceberg reading poc_uc2.airlines live on a CDP Data Share — one FlowFile on the success relationship, running on the com.example nifi-iceberg-read-nar bundle](/assets/images/GetIceberg-flow.png)
+
 ## A second processor: `QueryIceberg` — SQL with pushdown
 
 `GetIceberg` reads a whole table. The next thing you want on a real table is to *not* read the whole thing — to run a `WHERE` and have the engine skip the files that can't match. That's `QueryIceberg`, the second processor in the same bundle: same NAR, same `IcebergCatalogService`, same Record Writer, but the `onTrigger` body runs SQL through Apache Calcite with the filter pushed down into the Iceberg scan.
 
 It's shaped like NiFi's stock `QueryRecord`: **each dynamic property is a SQL `SELECT`, and its results route to a relationship of the same name.** Add a property named `delayed` with value `SELECT * FROM flights WHERE dep_delay > 45` and you get a `delayed` relationship carrying exactly those rows. (One wrinkle falls out of the port: `GetIceberg` uses plain dynamic properties for catalog overrides, but here those *are* the queries — so on `QueryIceberg` a catalog override is namespaced `catalog.s3.endpoint`, and everything not prefixed `catalog.` is treated as a query.)
 
+![QueryIceberg on poc_uc2.airlines — three SQL dynamic properties (all, by_dest, filtered) each routed to its own relationship of the same name](/assets/images/QueryIceberg-flow.png)
+
 The pushdown is the whole point. The table is handed to Calcite as a `ProjectableFilterableTable`, whose single `scan(root, filters, projects)` call hands you the projected column ordinals and a **mutable** list of filter conjuncts. A translator turns each conjunct it understands (`=`, `<>`, `<`, `IN`, `IS NULL`, prefix `LIKE`, `AND`/`OR`/`NOT` over string/numeric/boolean/decimal) into a native Iceberg `Expression`, pushes it into the scan, and **removes only what it pushed** from the list — Calcite evaluates whatever's left as a residual filter. So correctness never depends on the translator being complete: an untranslatable predicate like `UPPER(carrier) = 'AA'` simply stays a residual and the rows still come back right. Pushdown only ever changes *how much data is read*, never *which rows come out*.
 
 And you can watch it work, because every FlowFile is stamped with the scan metrics: `iceberg.pushdown.filter` (what actually reached Iceberg — empty means the whole `WHERE` ran as a residual), `iceberg.pushdown.columns` (the projection), and the counters `iceberg.scan.skipped.data.manifests` / `iceberg.scan.result.data.files`. The `test-rig/` seeds a `demo.flights` table of ~120k rows partitioned by month into twelve files; a query with `WHERE flight_month = '2026-03'` comes back with `iceberg.scan.skipped.data.manifests = 11` and `iceberg.scan.result.data.files = 1` — eleven-twelfths of the table never opened, proven on the FlowFile itself, and identical on the local rig and live on the CDP Data Share.
+
+![QueryFlights on the ~120k-row flights table partitioned by flight_month — the pruned / delayed / carrier_stats queries each on their own relationship, WHERE flight_month = '2026-03' reading one data file of twelve](/assets/images/QueryFlights-flow.png)
 
 ## What NOT to do
 
