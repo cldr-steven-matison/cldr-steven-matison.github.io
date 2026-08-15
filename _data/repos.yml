@@ -1,3 +1,31 @@
+- name: "EdgeFlowManager"
+  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
+  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
+  size: 17630
+  lang: "Python"
+  updated: "2026-08-15"
+  fork: false
+- name: "NiFiandAi"
+  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
+  url: "https://github.com/cldr-steven-matison/NiFiandAi"
+  size: 69
+  lang: ""
+  updated: "2026-08-15"
+  fork: false
+- name: "DesktopShare"
+  description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/DesktopShare"
+  size: 43340
+  lang: "Python"
+  updated: "2026-08-15"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 173916
+  lang: "HTML"
+  updated: "2026-08-14"
+  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
@@ -5,25 +33,11 @@
   lang: ""
   updated: "2026-08-14"
   fork: false
-- name: "DesktopShare"
-  description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 41367
-  lang: "Python"
-  updated: "2026-08-13"
-  fork: false
 - name: "NiFi2-Processor-Playground"
   description: "A place to play around with NiFi 2.0 Processors"
   url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
   size: 359
   lang: "Java"
-  updated: "2026-08-13"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 173210
-  lang: "HTML"
   updated: "2026-08-13"
   fork: false
 - name: "cdpcurl"
@@ -39,20 +53,6 @@
   size: 2000
   lang: "Python"
   updated: "2026-08-13"
-  fork: false
-- name: "NiFiandAi"
-  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
-  url: "https://github.com/cldr-steven-matison/NiFiandAi"
-  size: 69
-  lang: ""
-  updated: "2026-08-12"
-  fork: false
-- name: "EdgeFlowManager"
-  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
-  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
-  size: 17272
-  lang: "Python"
-  updated: "2026-08-11"
   fork: false
 - name: "Pake"
   description: "🤱🏻 Turn any webpage into a desktop app with one command."
