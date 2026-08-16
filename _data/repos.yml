@@ -1,21 +1,14 @@
-- name: "EdgeFlowManager"
-  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
-  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
-  size: 17630
-  lang: "Python"
-  updated: "2026-08-15"
-  fork: false
-- name: "NiFiandAi"
-  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
-  url: "https://github.com/cldr-steven-matison/NiFiandAi"
-  size: 69
-  lang: ""
-  updated: "2026-08-15"
-  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 43340
+  size: 44035
+  lang: "Python"
+  updated: "2026-08-15"
+  fork: false
+- name: "EdgeFlowManager"
+  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
+  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
+  size: 18264
   lang: "Python"
   updated: "2026-08-15"
   fork: false
@@ -24,7 +17,14 @@
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
   size: 173916
   lang: "HTML"
-  updated: "2026-08-14"
+  updated: "2026-08-15"
+  fork: false
+- name: "NiFiandAi"
+  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
+  url: "https://github.com/cldr-steven-matison/NiFiandAi"
+  size: 77
+  lang: ""
+  updated: "2026-08-15"
   fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
