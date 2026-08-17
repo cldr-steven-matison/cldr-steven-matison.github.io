@@ -1,7 +1,21 @@
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 2048
+  lang: "Python"
+  updated: "2026-08-16"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 173918
+  lang: "HTML"
+  updated: "2026-08-16"
+  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 44035
+  size: 99389
   lang: "Python"
   updated: "2026-08-15"
   fork: false
@@ -10,13 +24,6 @@
   url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
   size: 18264
   lang: "Python"
-  updated: "2026-08-15"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 173916
-  lang: "HTML"
   updated: "2026-08-15"
   fork: false
 - name: "NiFiandAi"
@@ -47,13 +54,6 @@
   lang: ""
   updated: "2026-08-13"
   fork: true
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 2000
-  lang: "Python"
-  updated: "2026-08-13"
-  fork: false
 - name: "Pake"
   description: "🤱🏻 Turn any webpage into a desktop app with one command."
   url: "https://github.com/cldr-steven-matison/Pake"
