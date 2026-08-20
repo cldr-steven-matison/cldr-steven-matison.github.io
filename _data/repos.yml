@@ -1,15 +1,22 @@
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 2066
-  lang: "Python"
-  updated: "2026-08-19"
-  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 158070
+  size: 158728
   lang: "Python"
+  updated: "2026-08-19"
+  fork: false
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 2127
+  lang: "Python"
+  updated: "2026-08-19"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 173922
+  lang: "HTML"
   updated: "2026-08-19"
   fork: false
 - name: "trino-demo"
@@ -17,13 +24,6 @@
   url: "https://github.com/cldr-steven-matison/trino-demo"
   size: 3
   lang: ""
-  updated: "2026-08-18"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 173920
-  lang: "HTML"
   updated: "2026-08-18"
   fork: false
 - name: "iceberg-rest-catalog-demo"
