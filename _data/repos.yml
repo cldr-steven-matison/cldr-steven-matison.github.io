@@ -1,9 +1,23 @@
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 158728
+  size: 158181
   lang: "Python"
-  updated: "2026-08-19"
+  updated: "2026-08-20"
+  fork: false
+- name: "iceberg-rest-catalog-demo"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
+  size: 1569
+  lang: "Shell"
+  updated: "2026-08-20"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 173923
+  lang: "HTML"
+  updated: "2026-08-20"
   fork: false
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
@@ -12,26 +26,12 @@
   lang: "Python"
   updated: "2026-08-19"
   fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 173922
-  lang: "HTML"
-  updated: "2026-08-19"
-  fork: false
 - name: "trino-demo"
   description: "Provision a Trino Virtual Warehouse on Cloudera Data Warehouse (CDW) with a single cloudera.cloud Ansible playbook."
   url: "https://github.com/cldr-steven-matison/trino-demo"
   size: 3
   lang: ""
   updated: "2026-08-18"
-  fork: false
-- name: "iceberg-rest-catalog-demo"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
-  size: 1564
-  lang: "Shell"
-  updated: "2026-08-17"
   fork: false
 - name: "EdgeFlowManager"
   description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
