@@ -1,15 +1,15 @@
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 173927
+  lang: "HTML"
+  updated: "2026-08-23"
+  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
   size: 158514
   lang: "Python"
-  updated: "2026-08-22"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 173926
-  lang: "HTML"
   updated: "2026-08-22"
   fork: false
 - name: "cso-operator-app"
