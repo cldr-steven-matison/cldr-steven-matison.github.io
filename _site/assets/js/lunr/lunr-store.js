@@ -622,4 +622,10 @@ var store = [{
         "tags": ["nvidia","jetson","minifi","efm","edge","ai","oled","i2c","cloudera","tensorrt","gpu","inference"],
         "url": "/blog/Hacking-The-Jetson/",
         "teaser": "/assets/images/efm-nvidia-jetson.png"
+      },{
+        "title": "How to Develop with the Waveshare AMOLED ESP32-S3",
+        "excerpt":"I bought this AMOLED ESP32-S3 to build Cloudera Edge Flow Manager flows for modern microcontroller. The board runs EFM in the firmware, owns its accelerometer, touch and speaker show up in EFM as processors, and a flow can read the glass and talk back to it — and once you...","categories": ["blog"],
+        "tags": ["esp32","waveshare","brookesia","edge","efm","cloudera","iot"],
+        "url": "/blog/How-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3/",
+        "teaser": "/assets/images/2026-08-25-waveshare-amoled-esp32-s3.png"
       }]

@@ -1,0 +1,969 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>How to Develop with the Waveshare AMOLED ESP32-S3 - Cloudera Solutions Engineer</title>
+<meta name="description" content="I bought this AMOLED ESP32-S3 to build Cloudera Edge Flow Manager flows for modern microcontroller.  The board runs EFM in the firmware, owns its accelerometer, touch and speaker show up in EFM as processors, and a flow can read the glass and talk back to it.  Here’s the development loop, the traps that each cost me an evening, and how the board becomes a fleet citizen.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="How to Develop with the Waveshare AMOLED ESP32-S3">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/How-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3/">
+
+
+  <meta property="og:description" content="I bought this AMOLED ESP32-S3 to build Cloudera Edge Flow Manager flows for modern microcontroller.  The board runs EFM in the firmware, owns its accelerometer, touch and speaker show up in EFM as processors, and a flow can read the glass and talk back to it.  Here’s the development loop, the traps that each cost me an evening, and how the board becomes a fleet citizen.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/2026-08-25-waveshare-amoled-esp32-s3.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-08-25T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/How-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How to Develop with the Waveshare AMOLED ESP32-S3">
+    <meta itemprop="description" content="I bought this AMOLED ESP32-S3 to build Cloudera Edge Flow Manager flows for modern microcontroller.  The board runs EFM in the firmware, owns its accelerometer, touch and speaker show up in EFM as processors, and a flow can read the glass and talk back to it.  Here’s the development loop, the traps that each cost me an evening, and how the board becomes a fleet citizen.">
+    <meta itemprop="datePublished" content="2026-08-25T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/How-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3/" class="u-url" itemprop="url">How to Develop with the Waveshare AMOLED ESP32-S3
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          11 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-08-25T00:00:00-04:00">
+            August 25, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>I bought this AMOLED ESP32-S3 to build Cloudera Edge Flow Manager flows for modern microcontroller.  The board runs EFM in the firmware, owns its accelerometer, touch and speaker show up in EFM as processors, and a flow can read the glass and talk back to it — and once you understand what that means….  Lets Go!</p>
+
+<p>This blog is another of those “what I wish someone had told me on day one” book of lessons. By the end you’ll know how the app package is shaped, how to see your UI before you flash it, the handful of traps that will eat an evening each, and how to make the board a citizen of a Cloudera Edge Flow Manager fleet so a flow can read its motion sensor and talk back to its screen.</p>
+
+<p class="notice--info"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>This is the “developing on it” post, not the “bringing it up” post.</strong> Board bring-up — the QSPI panel init order, the HAL board definition, the first platform flash — is its own story. This one starts from a board that already boots to a launcher.</p>
+
+<h2 id="the-board-has-an-os-and-that-is-the-whole-trick">The board has an OS, and that is the whole trick</h2>
+
+<p>The thing that reframes this hardware: the factory image is a full launcher — home screen, app grid, status bar, gesture navigation. It’s ESP-Brookesia, and it runs a JavaScript runtime. Your app is a directory of files on a <code class="language-plaintext highlighter-rouge">littlefs</code> partition. Drop a new directory in, and a new tile appears on the launcher.</p>
+
+<p>That means the loop is not “edit C++, rebuild ESP-IDF, flash 8 MB, wait.” It’s “edit a <code class="language-plaintext highlighter-rouge">.js</code> file, patch the storage partition, flash 5 MB of <code class="language-plaintext highlighter-rouge">littlefs</code>, watch it appear.” On this board that’s about twenty seconds. The platform and the agent underneath are untouched.</p>
+
+<p>Here’s a complete app — the whole thing, no omissions:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apps/tunastreet.hello/
+├── manifest.json
+├── app/
+│   └── app.js
+└── res/
+    ├── profile.json
+    ├── root.json
+    ├── screens/home.json
+    ├── images/index.json
+    ├── images/launcher_icon.png
+    └── flows/main.json
+</code></pre></div></div>
+
+<p>The manifest is the entire contract with the launcher:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"package"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tunastreet.hello"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"en"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tuna Hello"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"visible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"systems"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"super"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"runtime"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JavaScript"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app/app.js"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"resource_dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"res"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/assets/images/tunastreet.hello.png" alt="The minimal app package running on the panel"></p>
+
+<p><code class="language-plaintext highlighter-rouge">res/screens/home.json</code> is the UI as data — a tree of nodes with absolute or flex boxes, text, images, and event bindings. <code class="language-plaintext highlighter-rouge">app/app.js</code> is the logic: it sets text into named paths, subscribes to actions, runs timers, and makes HTTP requests. As far as I can tell, the <code class="language-plaintext highlighter-rouge">tunastreet.hello</code> package is the first runtime package built for Brookesia v0.8 outside Espressif — upstream ships the runtime but no example package, which is a large part of why the early going was slow.</p>
+
+<h2 id="generate-your-screens-do-not-hand-write-them">Generate your screens. Do not hand-write them.</h2>
+
+<p>My first screens were hand-written JSON. Every one of them had a bug I could only find by flashing.</p>
+
+<p>The fix was a small kit — tokens plus primitives plus a linter — that generates the screen file from Python. Every screen in every app I’ve shipped is generated, and the generator refuses to emit something the panel can’t draw:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pk</span><span class="p">.</span><span class="nf">label</span><span class="p">(</span><span class="s">"post_text"</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">POST_TEXT_Y</span><span class="p">,</span> <span class="mi">336</span><span class="p">,</span> <span class="n">POST_TEXT_H</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="s">"body"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">pk</span><span class="p">.</span><span class="nf">button</span><span class="p">(</span><span class="s">"t_like"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="n">TOOLBAR_H</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">"xviewer.like"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">size=16</code> there isn’t arbitrary, and this is the single most expensive thing I learned about this panel:</p>
+
+<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>There is no FreeType. Font sizes exist only on a compiled ladder: 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48.</strong> An off-ladder size does not scale — it silently rounds <strong>down</strong>. My status bar “at 11sp” was really drawing at 8px, which is the entire reason the clock was illegible. A “15px floor” I set early was really drawing at 12. Ask for 56 and you get 48.</p>
+
+<p>That one fact invalidated a week of UI tuning, because every measurement I took was of a size I wasn’t actually rendering. The generator now raises on any size off the ladder, so it can’t happen again. Same for tap targets: buttons live in a 76–88px band, and asking for 70 is an exception at generation time rather than a mystery on the glass.</p>
+
+<h2 id="see-it-before-you-flash-it">See it before you flash it</h2>
+
+<p>The other half of the kit is a simulator that runs the app’s <strong>real, unmodified</strong> <code class="language-plaintext highlighter-rouge">app.js</code> and screen JSON in a browser at true 368×448, against the real backend.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>amoled-1.8-v2/tools/simulator
+node serve.js <span class="nt">--port</span> 8095 <span class="nt">--proxy</span> 127.0.0.1:8091
+<span class="c"># http://127.0.0.1:8095/?app=tunastreet.xviewer</span>
+</code></pre></div></div>
+
+<p>And the pre-flash gate, which is not optional in my workflow:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node lint.js <span class="nt">--check</span> tunastreet.xviewer
+</code></pre></div></div>
+
+<p>It boots the app under a fixture, hooks the GUI bridge, and reports any call that fails — a <code class="language-plaintext highlighter-rouge">setText</code> to a path you deleted from the screen, an image that will swallow the taps meant for what’s under it, text small enough to be unreadable, a box that escapes 368×448, a label shorter than its own line height, non-ASCII characters the compiled font can’t draw. Exit code is the finding count.</p>
+
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro tip — the harness must never be more permissive than the board.</strong> My shim once upper-cased HTTP methods before calling <code class="language-plaintext highlighter-rouge">fetch()</code>. The browser accepted <code class="language-plaintext highlighter-rouge">"GET"</code>; the device requires exactly <code class="language-plaintext highlighter-rouge">"Get"</code> and silently drops anything else. So the simulator happily green-lit an app that, on the glass, never made a single request in its life. Any place your harness normalises, coerces, or is laxer than the real bridge is a bug it can never catch.</p>
+
+<p>That <code class="language-plaintext highlighter-rouge">"Get"</code> bug cost one app its entire existence. The board’s HTTP service deserialises the method with a strict string-to-enum match on the enumerator name, <code class="language-plaintext highlighter-rouge">Get</code>. The flexible fallback doesn’t save you either: the snake-case conversion of <code class="language-plaintext highlighter-rouge">"GET"</code> is <code class="language-plaintext highlighter-rouge">"g_e_t"</code>, not <code class="language-plaintext highlighter-rouge">"get"</code>. The request struct never deserialises and the fetch never leaves the device — with no error. I found it by diffing the four backends’ access logs for the panel’s IP and noticing that one app had never once appeared in any of them. That comparison is still the fastest way to answer “is the device even asking?”</p>
+
+<h2 id="getting-it-onto-the-glass">Getting it onto the glass</h2>
+
+<p>Build in WSL, flash from Windows. Only the storage partition moves:</p>
+
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">:: runtime apps only -- platform and agent untouched</span>
+<span class="kd">python</span> <span class="na">-m </span><span class="kd">esptool</span> <span class="na">--chip </span><span class="kd">esp32s3</span> <span class="na">--port </span><span class="kd">COM8</span> <span class="na">-b </span><span class="m">460800</span> <span class="kd">write</span><span class="na">-flash </span><span class="mh">0xaa1000</span> <span class="kd">littlefs_data</span>.bin
+</code></pre></div></div>
+
+<p>The offset comes from <code class="language-plaintext highlighter-rouge">partitions_16m.csv</code>, where <code class="language-plaintext highlighter-rouge">littlefs_data</code> is 5000K at <code class="language-plaintext highlighter-rouge">0xaa1000</code>. You can also patch that image directly with <code class="language-plaintext highlighter-rouge">littlefs-python</code> without going near ESP-IDF, which is how I iterate when I’m only changing an app.</p>
+
+<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Anything not staged into the build’s app tree vanishes on a storage flash.</strong> The upstream CMake hook wipes the app stage root once per configure and re-copies only registered packages. A hand-copied app survives exactly until the next configure and then silently disappears — which is how my board once spent a day running a build older than the repo. Register the package properly; don’t hand-copy into the staging tree.</p>
+
+<p>The same “staged at configure time” trap bites audio. Sound files are staged into <code class="language-plaintext highlighter-rouge">littlefs</code> when CMake <em>configures</em>, not when it builds, so adding a <code class="language-plaintext highlighter-rouge">.wav</code> and rebuilding gets you an image that silently still has the old set. <code class="language-plaintext highlighter-rouge">idf.py reconfigure</code> first.</p>
+
+<h2 id="the-traps-that-each-cost-me-an-evening">The traps that each cost me an evening</h2>
+
+<p><strong>A clickable image eats the gesture underneath it.</strong> Images default to clickable. Put one across the middle of your screen and it will quietly swallow every tap or swipe meant for the thing behind it. My countdown app’s launch art ate every single navigation tap until I found it. The linter now fails any image that doesn’t explicitly declare its clickability.</p>
+
+<p><strong>Taps and swipes need one shared clock.</strong> The touch layer emits gesture events continuously while a finger moves, so a 600 ms drag cleared my 350 ms debounce window two or three times and advanced three cards per swipe. The fix isn’t a longer window — it’s stamping the clock on <strong>every</strong> gesture event, accepted or rejected, so a long drag keeps pushing the window out. And the tap guard and the gesture guard must be the same clock: give them separate ones and a single swipe scores once as a tap and again as a gesture, which turned my “fix” for over-swiping into six cards per drag instead of three.</p>
+
+<p><strong>The glass is a rounded rectangle.</strong> Usable width near an edge is less than 368. Text at a normal 16px inset but a few pixels down is inside the corner arc and gets clipped. The fix is to move text <em>down</em> out of the arc rather than inward, which preserves the layout’s alignment.</p>
+
+<p><strong>The V2 amplifier is inaudible below volume 100.</strong> A clip at the default volume of 75 runs to <code class="language-plaintext highlighter-rouge">FINISHED</code> and produces nothing you can hear. I checked pins, power rails, the amp enable GPIO and the codec declaration — all correct. It was just quiet.</p>
+
+<h2 id="making-it-a-fleet-citizen">Making it a fleet citizen</h2>
+
+<p>This is where the board stops being a gadget. Alongside the launcher, the platform image runs an <strong>EFM agent</strong> as a native background component. It adopts the launcher’s WiFi rather than fighting it for the radio, heartbeats to Cloudera <strong>Edge Flow Manager</strong>, and receives flow definitions over C2 — all while the UI keeps running.</p>
+
+<p>The board’s senses are exposed as processors, so a flow author in EFM drives the hardware without touching firmware:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Processor</th>
+      <th>What it gives a flow</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetIMU</code></td>
+      <td>Accelerometer and gyro, with a motion threshold so a bump is an event rather than a stream</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetTouch</code></td>
+      <td>Taps and swipes as events, with coordinates, duration and speed</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CaptureAudio</code></td>
+      <td>Microphone clips out as WAV</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">PlayAudio</code></td>
+      <td>The board fetches a clip by URL and plays it</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DisplayMessage</code></td>
+      <td>A flow-sent string delivered to the device</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Sources and sinks both. A flow can watch the panel get picked up, and a flow can make it speak.</p>
+
+<p><img src="/assets/images/tunastreet.agent.png" alt="The EFM agent's own status, on the device it runs on"></p>
+
+<p>Two things I got wrong here that are worth stealing. First, a FlowFile on this agent carries 256 bytes of content — one second of 16 kHz mono audio is 32 KB, so audio never rides the flow. The clip goes broker-direct over MQTT and a small metadata FlowFile travels the chain instead. Second, and much more painful to debug: <strong>a node with an incoming connection only runs when a FlowFile is queued for it.</strong> There are no idle ticks for sinks. My first audio capture deferred its publish to “the next tick” and therefore never published at all, silently. Record, publish and emit all happen inside one trigger now.</p>
+
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Liveness is not the <code class="language-plaintext highlighter-rouge">lastSeen</code> field.</strong> The agent entity in EFM freezes until some descriptive field changes, so a perfectly healthy agent looks stale. Use the heartbeat counter, or the serial log. I burned real hours on a device that was never actually down.</p>
+
+<h2 id="whats-on-my-panel">What’s on my panel</h2>
+
+<p>Five apps, each in its own public repo, all built on the kit and simulator described above:</p>
+
+<ul>
+  <li>
+<a href="https://github.com/TunaStreetTest/amoled-hello"><code class="language-plaintext highlighter-rouge">amoled-hello</code></a> — the minimal template: one label on a black screen. Start here.</li>
+  <li>
+<a href="https://github.com/TunaStreetTest/amoled-xviewer"><code class="language-plaintext highlighter-rouge">amoled-xviewer</code></a> — swipe an X feed one card at a time, tap to like.</li>
+  <li>
+<a href="https://github.com/TunaStreetTest/amoled-tminus"><code class="language-plaintext highlighter-rouge">amoled-tminus</code></a> — the next rocket launch, counting down.</li>
+  <li>
+<a href="https://github.com/TunaStreetTest/amoled-racing"><code class="language-plaintext highlighter-rouge">amoled-racing</code></a> — a driving game, because the panel deserved one.</li>
+  <li>
+<a href="https://github.com/TunaStreetTest/amoled-agent"><code class="language-plaintext highlighter-rouge">amoled-agent</code></a> — the EFM agent’s own heartbeat and processor status, on the device it’s running on.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/assets/images/tunastreet.xviewer.png" alt="X viewer"></td>
+      <td style="text-align: center"><img src="/assets/images/tunastreet.tminus.png" alt="T-minus"></td>
+      <td style="text-align: center"><img src="/assets/images/tunastreet.racing.png" alt="Racing"></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">swipe a feed, tap to like</td>
+      <td style="text-align: center">the next launch, counting down</td>
+      <td style="text-align: center">and a driving game</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The platform, the UI kit, the simulator and the flash tooling all live in <a href="https://github.com/TunaStreetTest/waveshare-devices"><code class="language-plaintext highlighter-rouge">waveshare-devices</code></a>.</p>
+
+<h2 id="where-this-goes-next-stop-flashing-entirely">Where this goes next: stop flashing entirely</h2>
+
+<p>Twenty seconds is good, but it still resets the board and drops the agent for about fifteen. Brookesia ships an App Store client, and reading its source turns up something better.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">.bpk</code> package is <strong>just a ZIP</strong> with a <code class="language-plaintext highlighter-rouge">manifest.json</code> at its root, named <code class="language-plaintext highlighter-rouge">&lt;package.id&gt;.&lt;debug|release&gt;.&lt;version&gt;.bpk</code>. My five packages are already exactly the right shape — publishing would be zip-and-serve, not a rewrite. The store client reads an <code class="language-plaintext highlighter-rouge">index.json</code> from a server root you can override to a machine on your LAN. Better still, its <strong>Local tab</strong> scans for <code class="language-plaintext highlighter-rouge">.bpk</code> files in the device’s public Download folder on internal storage or SD card: drop a file there, tap install, no server and no cable at all.</p>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>This part is research, not a shipped workflow.</strong> I have read the source and confirmed the package format; I have not yet installed an app this way. One open question decides it: release signature verification is compiled in by default, checking RSA-PSS-SHA256 over the archive — and the packing tool the verification code names doesn’t exist anywhere in the public repository. Whether a debug-type package bypasses it is an on-device experiment I haven’t run.</p>
+
+<h2 id="what-not-to-do">What NOT to do</h2>
+
+<ul>
+  <li>
+<strong>Don’t trust a font size you didn’t check against the ladder.</strong> Off-ladder rounds down, silently. Every UI measurement you take is otherwise of something you aren’t rendering.</li>
+  <li>
+<strong>Don’t hand-write screen JSON.</strong> Generate it, and let the generator refuse what the panel can’t draw.</li>
+  <li>
+<strong>Don’t let your simulator be more permissive than the device.</strong> <code class="language-plaintext highlighter-rouge">"GET"</code> is not <code class="language-plaintext highlighter-rouge">"Get"</code>, and a lax harness certifies broken apps.</li>
+  <li>
+<strong>Don’t hand-copy an app into the build’s staging tree.</strong> It vanishes at the next configure and you’ll be debugging a stale build.</li>
+  <li>
+<strong>Don’t add a <code class="language-plaintext highlighter-rouge">.wav</code> and just rebuild.</strong> Reconfigure, or the image keeps the old sounds.</li>
+  <li>
+<strong>Don’t leave an image clickable</strong> unless you want it eating the gestures underneath.</li>
+  <li>
+<strong>Don’t judge agent liveness by <code class="language-plaintext highlighter-rouge">lastSeen</code>.</strong> It freezes on a healthy device.</li>
+</ul>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li>
+<a href="https://github.com/TunaStreetTest/waveshare-devices"><code class="language-plaintext highlighter-rouge">waveshare-devices</code></a> — the platform, UI kit, simulator and flash tooling.</li>
+  <li>
+<a href="https://github.com/TunaStreetTest/amoled-racing"><code class="language-plaintext highlighter-rouge">amoled-racing</code></a> — the driving game source.</li>
+  <li>
+<a href="https://github.com/TunaStreetTest/amoled-hello"><code class="language-plaintext highlighter-rouge">amoled-hello</code></a> — the minimal app template.</li>
+  <li>
+<a href="https://github.com/TunaStreetTest/amoled-xviewer"><code class="language-plaintext highlighter-rouge">amoled-xviewer</code></a> — swipe an X feed, tap to like.</li>
+  <li>
+<a href="https://github.com/TunaStreetTest/amoled-tminus"><code class="language-plaintext highlighter-rouge">amoled-tminus</code></a> — the next rocket launch, counting down.</li>
+  <li>
+<a href="https://github.com/TunaStreetTest/amoled-agent"><code class="language-plaintext highlighter-rouge">amoled-agent</code></a> — the EFM agent’s heartbeat and processor status.</li>
+</ul>
+
+<h2 id="how-to-develop-with-the-waveshare-amoled-esp32-s3">How to Develop with the Waveshare AMOLED ESP32-S3</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about How to Develop with the Waveshare AMOLED ESP32-S3 please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#brookesia" class="page__taxonomy-item p-category" rel="tag">brookesia</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#edge" class="page__taxonomy-item p-category" rel="tag">edge</a><span class="sep">, </span>
+    
+      <a href="/tags/#efm" class="page__taxonomy-item p-category" rel="tag">efm</a><span class="sep">, </span>
+    
+      <a href="/tags/#esp32" class="page__taxonomy-item p-category" rel="tag">esp32</a><span class="sep">, </span>
+    
+      <a href="/tags/#iot" class="page__taxonomy-item p-category" rel="tag">iot</a><span class="sep">, </span>
+    
+      <a href="/tags/#waveshare" class="page__taxonomy-item p-category" rel="tag">waveshare</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-08-25T00:00:00-04:00">August 25, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=How+to+Develop+with+the+Waveshare+AMOLED+ESP32-S3%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Hacking-The-Jetson/" class="pagination--pager" title="Hacking The Jetson
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/efm-nvidia-jetson.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Hacking-The-Jetson/" rel="permalink">Hacking The Jetson
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          36 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI
+
+    <a href="/blog/Hacking-The-Jetson/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/" rel="permalink">Persistence with Cloudera Streaming Analytics Operator
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How to make everything CSA writes to disk — SQL Stream Builder metadata, uploaded user artifacts, and Flink checkpoints, savepoints and HA state — survive po...
+    <a href="/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/CFM-Cloudera_Flow_Management_Operator.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Persistence-with-Cloudera-Flow-Management-Operator/" rel="permalink">Persistence with Cloudera Flow Management Operator
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          15 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How to make everything CFM writes to disk on Kubernetes — flow definitions, FlowFiles, content, provenance, cluster state, custom NARs, and Python extensions...
+    <a href="/blog/Persistence-with-Cloudera-Flow-Management-Operator/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Minikube-Profile-Swap.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Disposable-Clusters-on-One-Box-The-minikube-Profile-Swap/" rel="permalink">Disposable Clusters on One Box: The minikube Profile Swap
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How I proved MiNiFi → NiFi Site-to-Site without risking 123 days of a live Cloudera stack — a second, disposable minikube profile swapped in and out on the s...
+    <a href="/blog/Disposable-Clusters-on-One-Box-The-minikube-Profile-Swap/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>
