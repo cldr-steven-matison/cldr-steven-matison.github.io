@@ -1,37 +1,44 @@
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 45
-  lang: ""
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 2498
+  lang: "Python"
   updated: "2026-08-26"
   fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 160592
+  size: 160674
   lang: "Python"
-  updated: "2026-08-25"
+  updated: "2026-08-26"
   fork: false
 - name: "NiFiandAi"
   description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
   url: "https://github.com/cldr-steven-matison/NiFiandAi"
-  size: 89
+  size: 90
   lang: ""
-  updated: "2026-08-25"
+  updated: "2026-08-26"
+  fork: false
+- name: "NiFi2-Processor-Playground"
+  description: "A place to play around with NiFi 2.0 Processors"
+  url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
+  size: 384
+  lang: "Java"
+  updated: "2026-08-26"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 174786
+  size: 174785
   lang: "HTML"
-  updated: "2026-08-25"
+  updated: "2026-08-26"
   fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 2418
-  lang: "Python"
-  updated: "2026-08-22"
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 46
+  lang: ""
+  updated: "2026-08-26"
   fork: false
 - name: "iceberg-rest-catalog-demo"
   description: ""
@@ -53,13 +60,6 @@
   size: 18264
   lang: "Python"
   updated: "2026-08-15"
-  fork: false
-- name: "NiFi2-Processor-Playground"
-  description: "A place to play around with NiFi 2.0 Processors"
-  url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
-  size: 359
-  lang: "Java"
-  updated: "2026-08-13"
   fork: false
 - name: "cdpcurl"
   description: "curl-like tool with CDP request signing"
