@@ -617,15 +617,45 @@ var store = [{
         "url": "/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/",
         "teaser": "/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png"
       },{
+        "title": "Announcing Cloudera Streaming Analytics 1.17.1",
+        "excerpt":"We are excited to announce the release of Cloudera Streaming Analytics 1.17.1 for on-premises deployments. This patch update reinforces our commitment to a stable, secure, and high-performance streaming offering. By upgrading key dependencies and refining the Cloudera SQL Stream Builder experience, we’re providing an even more robust foundation for Apache...","categories": ["release"],
+        "tags": ["cloudera","csa","flink"],
+        "url": "/release/Cloudera-Streaming-Analytics-1.17.1/",
+        "teaser": "/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png"
+      },{
         "title": "Hacking The Jetson",
         "excerpt":":warning: Danger! This is a Work in Progress article. Content and code are updating frequently until this notice is removed. I bought an NVIDIA Jetson Orin Nano developer kit, dropped it into a Yahboom CubeNano case, and then spent a few weeks turning it into something between a desk toy...","categories": ["blog"],
         "tags": ["nvidia","jetson","minifi","efm","edge","ai","oled","i2c","cloudera","tensorrt","gpu","inference"],
         "url": "/blog/Hacking-The-Jetson/",
         "teaser": "/assets/images/efm-nvidia-jetson.png"
       },{
+        "title": "Announcing Cloudera Streams Messaging Operator for Kubernetes v1.7",
+        "excerpt":"Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streams Messaging Operator for Kubernetes v1.7. This milestone release centers on a major platform update to Strimzi 1.0.1 and Apache Kafka 4.2.0, a redesigned Cloudera Surveyor experience, mandatory API standardization, and high-availability maintenance tooling with Strimzi...","categories": ["release"],
+        "tags": ["csm","kafka","kubernetes","cloudera"],
+        "url": "/release/Cloudera-Streams-Messaging-Kubernetes-Operator-1.7/",
+        "teaser": "/assets/images/CSM-Cloudera_Streams_Messaging_Operator.png"
+      },{
         "title": "How to Develop with the Waveshare AMOLED ESP32-S3",
         "excerpt":"I bought this AMOLED ESP32-S3 to build Cloudera Edge Flow Manager flows for modern microcontroller. The board runs EFM in the firmware, owns its accelerometer, touch and speaker show up in EFM as processors, and a flow can read the glass and talk back to it — and once you...","categories": ["blog"],
         "tags": ["esp32","waveshare","brookesia","edge","efm","cloudera","iot"],
         "url": "/blog/How-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3/",
         "teaser": "/assets/images/2026-08-25-waveshare-amoled-esp32-s3.png"
+      },{
+        "title": "AI Agents in Data Platforms For Dummies",
+        "excerpt":"If you have ever wondered how an AI agent actually finds the right data, understands its shape, and writes its own queries against an enterprise platform, this book walks the whole path — and it does it in classic For Dummies style, one plain-language chapter at a time. AI Agents...","categories": ["blog"],
+        "tags": ["cloudera","ai","agents","lakehouse","iceberg","data platform","dummies"],
+        "url": "/blog/AI-Agents-in-Data-Platforms-For-Dummies/",
+        "teaser": "/assets/images/ai-agents-in-data-platforms-for-dummies.jpeg"
+      },{
+        "title": "Cloudera Flow Management Operator for Kubernetes 3.3",
+        "excerpt":"The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.3. This release focuses on improving security, streamlining deployments, and enhancing upgrade paths. The core highlights include first-class Apache Ranger authorization, seamless inter-cluster communication, declarative flow deployments, and rolling upgrades for...","categories": ["release"],
+        "tags": ["cloudera","nifi","kubernetes","cfm"],
+        "url": "/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.3/",
+        "teaser": "/assets/images/CFM-Cloudera_Flow_Management_Operator.png"
+      },{
+        "title": "Cloudera Observability for Cloudera AI on Public Cloud is Now Generally Available",
+        "excerpt":"Executive Summary We are excited to announce the General Availability (GA) of Cloudera Observability for Cloudera AI (formerly CML) on Public Cloud. As organizations move from AI experimentation to full-scale production, maintaining visibility into machine learning (ML) lifecycles becomes a major operational challenge. This GA release extends our enterprise-grade observability...","categories": ["release"],
+        "tags": ["cloudera","observability","cdp"],
+        "url": "/release/Cloudera-Observability-for-Cloudera-AI-on-Public-Cloud/",
+        "teaser": "/assets/images/Observability-For-Cloudera-AI.jpeg"
       }]

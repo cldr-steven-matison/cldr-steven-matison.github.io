@@ -6,6 +6,41 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Cloudera Observability for Cloudera AI on Public Cloud is Now Generally Available</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Observability-for-Cloudera-AI-on-Public-Cloud/</link>
+        <pubDate>Mon, 31 Aug 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/Observability-For-Cloudera-AI.jpeg</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/Observability-For-Cloudera-AI.jpeg" medium="image" />
+        
+        <description>Executive Summary
+</description>
+      </item>
+    
+      <item>
+        <title>Cloudera Flow Management Operator for Kubernetes 3.3</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.3/</link>
+        <pubDate>Mon, 31 Aug 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/CFM-Cloudera_Flow_Management_Operator.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/CFM-Cloudera_Flow_Management_Operator.png" medium="image" />
+        
+        <description>The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.3. This release focuses on improving security, streamlining deployments, and enhancing upgrade paths. The core highlights include first-class Apache Ranger authorization, seamless inter-cluster communication, declarative flow deployments, and rolling upgrades for NiFi 2 clusters.
+</description>
+      </item>
+    
+      <item>
+        <title>AI Agents in Data Platforms For Dummies</title>
+        <link>https://cldr-steven-matison.github.io/blog/AI-Agents-in-Data-Platforms-For-Dummies/</link>
+        <pubDate>Fri, 28 Aug 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/ai-agents-in-data-platforms-for-dummies.jpeg</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/ai-agents-in-data-platforms-for-dummies.jpeg" medium="image" />
+        
+        <description>How enterprise lakehouse platforms with open formats like Apache Iceberg support AI agent workloads — discovery, schema inspection, query generation, and the governance that keeps it all in check.</description>
+      </item>
+    
+      <item>
         <title>How to Develop with the Waveshare AMOLED ESP32-S3</title>
         <link>https://cldr-steven-matison.github.io/blog/How-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3/</link>
         <pubDate>Tue, 25 Aug 2026 00:00:00 -0400</pubDate>
@@ -17,6 +52,18 @@
       </item>
     
       <item>
+        <title>Announcing Cloudera Streams Messaging Operator for Kubernetes v1.7</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Streams-Messaging-Kubernetes-Operator-1.7/</link>
+        <pubDate>Mon, 24 Aug 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/CSM-Cloudera_Streams_Messaging_Operator.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/CSM-Cloudera_Streams_Messaging_Operator.png" medium="image" />
+        
+        <description>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streams Messaging Operator for Kubernetes v1.7. This milestone release centers on a major platform update to Strimzi 1.0.1 and Apache Kafka 4.2.0, a redesigned Cloudera Surveyor experience, mandatory API standardization, and high-availability maintenance tooling with Strimzi Drain Cleaner.
+</description>
+      </item>
+    
+      <item>
         <title>Hacking The Jetson</title>
         <link>https://cldr-steven-matison.github.io/blog/Hacking-The-Jetson/</link>
         <pubDate>Thu, 13 Aug 2026 00:00:00 -0400</pubDate>
@@ -25,6 +72,18 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/efm-nvidia-jetson.png" medium="image" />
         
         <description>Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI</description>
+      </item>
+    
+      <item>
+        <title>Announcing Cloudera Streaming Analytics 1.17.1</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Streaming-Analytics-1.17.1/</link>
+        <pubDate>Tue, 11 Aug 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png" medium="image" />
+        
+        <description>We are excited to announce the release of Cloudera Streaming Analytics 1.17.1 for on-premises deployments. This patch update reinforces our commitment to a stable, secure, and high-performance streaming offering. By upgrading key dependencies and refining the Cloudera SQL Stream Builder experience, we’re providing an even more robust foundation for Apache Flink and Cloudera SQL Stream Builder.
+</description>
       </item>
     
       <item>
@@ -58,62 +117,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/Minikube-Profile-Swap.jpg" medium="image" />
         
         <description>How I proved MiNiFi → NiFi Site-to-Site without risking 123 days of a live Cloudera stack — a second, disposable minikube profile swapped in and out on the same box, with the long-lived cluster preserved untouched.</description>
-      </item>
-    
-      <item>
-        <title>Cloudera Community Edition on AWS in One Command</title>
-        <link>https://cldr-steven-matison.github.io/blog/Cloudera-Community-Edition-on-AWS-in-One-Command/</link>
-        <pubDate>Mon, 03 Aug 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/cloudera-ce-cm-cluster.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/cloudera-ce-cm-cluster.png" medium="image" />
-        
-        <description>Cloudera has a lot of ways to get a cluster. Almost none of them are “one command on your laptop.” cloudera-labs/cloudera-ce-aws is the exception: a Terraform + Ansible bundle that stands up a full Cloudera Private Cloud Community Edition cluster on AWS — Cloudera Manager, Kerberos, Auto-TLS, a real storage/compute topology — from a single ansible-navigator run. This post is me taking my freshly-released fork from zero to a running Ozone cluster, and the handful of real snags between the README and a green Cloudera Manager.
-</description>
-      </item>
-    
-      <item>
-        <title>How to Install a Public Certificate for NiFi</title>
-        <link>https://cldr-steven-matison.github.io/blog/How-to-Install-a-Public-Certificate-for-NiFi/</link>
-        <pubDate>Mon, 27 Jul 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/nifi-logo.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/nifi-logo.png" medium="image" />
-        
-        <description>Swap out NiFi&apos;s default self-signed keystore for a real Let&apos;s Encrypt certificate on a host-native Apache NiFi install so the browser padlock goes solid, no more NET::ERR_CERT_AUTHORITY_INVALID.</description>
-      </item>
-    
-      <item>
-        <title>Day 37 : Claude Code</title>
-        <link>https://cldr-steven-matison.github.io/blog/Day-37-Claude-Code/</link>
-        <pubDate>Thu, 23 Jul 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/Day_37_Claude_Code.jpg</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/Day_37_Claude_Code.jpg" medium="image" />
-        
-        <description>A previous Claude Code session fanned out six planning subagents and every one of them died on the same 401. Here&apos;s how I found the corpse, diagnosed the model-auth mismatch, re-ran the whole fan-out, and caught the subagents inventing a processor count during review — the day agentic doc cleanup actually shipped.</description>
-      </item>
-    
-      <item>
-        <title>Month 1: Claude Code</title>
-        <link>https://cldr-steven-matison.github.io/blog/Month-1-Claude-Code/</link>
-        <pubDate>Mon, 20 Jul 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/month1_claude_code.jpg</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/month1_claude_code.jpg" medium="image" />
-        
-        <description>One month in with Claude Code — a summary of the work completed since Day 1, with pointers to the daily X articles that captured each step along the way.</description>
-      </item>
-    
-      <item>
-        <title>Edge to AI for Dummies</title>
-        <link>https://cldr-steven-matison.github.io/blog/Edge-to-AI-for-Dummies/</link>
-        <pubDate>Fri, 17 Jul 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/edge_to_ai_for_dummies.jpeg</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/edge_to_ai_for_dummies.jpeg" medium="image" />
-        
-        <description>A practical roadmap for transforming data from edge devices into real-time AI use cases — architectures, tooling options, and tradeoffs.</description>
       </item>
     
   </channel>
