@@ -1,29 +1,64 @@
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 162974
+  size: 163197
   lang: "Python"
-  updated: "2026-09-02"
+  updated: "2026-09-03"
+  fork: false
+- name: "exllamav3"
+  description: "An optimized quantization and inference library for running LLMs locally on modern consumer-class GPUs "
+  url: "https://github.com/cldr-steven-matison/exllamav3"
+  size: 9079
+  lang: ""
+  updated: "2026-09-03"
+  fork: true
+- name: "cloudera-manager-mcp-server"
+  description: "Thin, read-only MCP server over the Cloudera Manager, YARN, Ranger, and Atlas APIs — live Cloudera Base state for LLM agents."
+  url: "https://github.com/cldr-steven-matison/cloudera-manager-mcp-server"
+  size: 16
+  lang: "Python"
+  updated: "2026-09-03"
   fork: false
 - name: "EdgeFlowManager"
   description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
   url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
-  size: 19566
+  size: 19576
   lang: "Python"
-  updated: "2026-09-02"
+  updated: "2026-09-03"
+  fork: false
+- name: "MicroFi"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/MicroFi"
+  size: 432
+  lang: ""
+  updated: "2026-09-03"
+  fork: true
+- name: "webmcu-vision-web"
+  description: "WebSerial Connection to a on-device XIAO ML Kit Vision Model "
+  url: "https://github.com/cldr-steven-matison/webmcu-vision-web"
+  size: 18936
+  lang: ""
+  updated: "2026-09-03"
+  fork: true
+- name: "on-device-vision-ai"
+  description: "Complete Seeedstudio xiao ml kit esp32s3-sense on device machine learning pipeline"
+  url: "https://github.com/cldr-steven-matison/on-device-vision-ai"
+  size: 23798
+  lang: ""
+  updated: "2026-09-03"
+  fork: true
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 176042
+  lang: "HTML"
+  updated: "2026-09-03"
   fork: false
 - name: "NiFiandAi"
   description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
   url: "https://github.com/cldr-steven-matison/NiFiandAi"
   size: 101
   lang: ""
-  updated: "2026-09-02"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 176039
-  lang: "HTML"
   updated: "2026-09-02"
   fork: false
 - name: "cldr-steven-matison"
