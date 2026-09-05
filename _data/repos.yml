@@ -1,9 +1,23 @@
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 1636
+  lang: "Python"
+  updated: "2026-09-04"
+  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 163197
+  size: 162364
   lang: "Python"
-  updated: "2026-09-03"
+  updated: "2026-09-04"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 176043
+  lang: "HTML"
+  updated: "2026-09-04"
   fork: false
 - name: "exllamav3"
   description: "An optimized quantization and inference library for running LLMs locally on modern consumer-class GPUs "
@@ -47,13 +61,6 @@
   lang: ""
   updated: "2026-09-03"
   fork: true
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 176042
-  lang: "HTML"
-  updated: "2026-09-03"
-  fork: false
 - name: "NiFiandAi"
   description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
   url: "https://github.com/cldr-steven-matison/NiFiandAi"
@@ -73,13 +80,6 @@
   url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
   size: 385
   lang: "Java"
-  updated: "2026-09-01"
-  fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 1633
-  lang: "Python"
   updated: "2026-09-01"
   fork: false
 - name: "iceberg-rest-catalog-demo"
