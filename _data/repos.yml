@@ -1,3 +1,10 @@
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 176045
+  lang: "HTML"
+  updated: "2026-09-05"
+  fork: false
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
@@ -10,13 +17,6 @@
   url: "https://github.com/cldr-steven-matison/DesktopShare"
   size: 162364
   lang: "Python"
-  updated: "2026-09-04"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 176043
-  lang: "HTML"
   updated: "2026-09-04"
   fork: false
 - name: "exllamav3"
