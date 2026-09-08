@@ -1,0 +1,1238 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Hacking the Petru - Cloudera Solutions Engineer</title>
+<meta name="description" content="A desk gadget LED scrolls NOW PLAYING. I wanted TUNA STREET. No source, no schematic, no data USB — just a spare dev board as a probe, five strands of an Ethernet cable, and a 44-byte patch the bootloader accepts.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Hacking the Petru">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/Hacking-the-Petru/">
+
+
+  <meta property="og:description" content="A desk gadget LED scrolls NOW PLAYING. I wanted TUNA STREET. No source, no schematic, no data USB — just a spare dev board as a probe, five strands of an Ethernet cable, and a 44-byte patch the bootloader accepts.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/tuna-street-petru.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-09-08T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/Hacking-the-Petru/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Hacking the Petru">
+    <meta itemprop="description" content="A desk gadget LED scrolls NOW PLAYING. I wanted TUNA STREET. No source, no schematic, no data USB — just a spare dev board as a probe, five strands of an Ethernet cable, and a 44-byte patch the bootloader accepts.">
+    <meta itemprop="datePublished" content="2026-09-08T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/Hacking-the-Petru/" class="u-url" itemprop="url">Hacking the Petru
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          13 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-09-08T00:00:00-04:00">
+            September 08, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>I have a “Now Playing” box on my desk. It listens with a mic, and an LED matrix scrolls <code class="language-plaintext highlighter-rouge">NOW PLAYING</code>. I wanted it to scroll <code class="language-plaintext highlighter-rouge">TUNA STREET</code>. There is no source, no schematic, no datasheet, and nothing about the board anywhere on the internet. The USB-C port turns out to carry no data at all. Here is how I got in anyway: a spare XIAO ESP32-S3 as an electrical probe to map an unlabeled header, the same XIAO as a serial bridge, five strands stripped out of an old Ethernet cable, a full flash dump, and a 44-byte patch the bootloader accepts. The device now runs its own original firmware with different words on the screen, and I can put it back bit-for-bit.</p>
+
+<video src="/assets/videos/2026-09-08-hacking-the-petru.mp4" controls="" width="100%"></video>
+
+<h2 id="the-board">The board</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Board</td>
+      <td>“Now Playing Control V1.1”, custom green PCB, very sparse</td>
+    </tr>
+    <tr>
+      <td>MCU</td>
+      <td>ESP32-WROOM-32 (ESP32-D0WD rev v1.1)</td>
+    </tr>
+    <tr>
+      <td>Flash</td>
+      <td>8 MB GigaDevice GD25Q64 (manufacturer <code class="language-plaintext highlighter-rouge">c8</code>, device <code class="language-plaintext highlighter-rouge">4017</code>)</td>
+    </tr>
+    <tr>
+      <td>Display</td>
+      <td>WS2812-style addressable LED matrix on a 3-wire harness (5V, GND, DATA)</td>
+    </tr>
+    <tr>
+      <td>Inputs</td>
+      <td>Microphone, 3 push-encoder knobs</td>
+    </tr>
+    <tr>
+      <td>USB-C</td>
+      <td>Present. Power only.</td>
+    </tr>
+    <tr>
+      <td>Header</td>
+      <td>
+<code class="language-plaintext highlighter-rouge">P2</code>, 1×6 unpopulated through-holes under the WROOM, pin 1 has the square pad, no signal names on the silkscreen</td>
+    </tr>
+    <tr>
+      <td>Firmware</td>
+      <td>Arduino build on ESP-IDF v4.4.3, no secure boot, no flash encryption</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="symptom-the-host-never-sees-the-device">Symptom: the host never sees the device</h2>
+
+<p>The Windows host reaches USB devices through <code class="language-plaintext highlighter-rouge">usbipd-win</code> into WSL2, so the first check is the Windows side:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">usbipd</span><span class="w"> </span><span class="nx">list</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Plugging the box in produces no enumeration event of any kind. Not a failed driver, not a yellow bang. Nothing. A phone on the same cable and the same port enumerates instantly. That is a board-side problem, not a cable or a port.</p>
+
+<h2 id="diagnosis-the-usb-c-is-power-only-and-the-only-way-in-is-an-unlabeled-header">Diagnosis: the USB-C is power-only, and the only way in is an unlabeled header</h2>
+
+<p>A WROOM-32 has no native USB, so a data-carrying USB-C needs a bridge chip (CP2102, CH340, CH9102, FT232) between the connector and the module. There isn’t one on this board. Between the USB-C and the WROOM there is a regulator and caps. The connector delivers 5V and nothing else. The factory programmed this board through the 6-pin header, and the header has numbers but no names.</p>
+
+<p>A 6-pin header under an ESP32 is some ordering of <code class="language-plaintext highlighter-rouge">{3V3, GND, EN, IO0, TX, RX}</code>. The order is the whole problem. Guess wrong and you can drive 3.3V into a pin that is trying to drive out. I had no multimeter, no jumper wires, and every photo I took got crushed to 383×680 by the phone’s share path before I could read the silkscreen.</p>
+
+<p>What I did have: a XIAO ESP32-S3, and an Ethernet cable.</p>
+
+<h2 id="fix-1-the-xiao-as-an-electrical-probe">Fix 1: the XIAO as an electrical probe</h2>
+
+<p>Every one of those six signals has a different fingerprint if you look at it through a known resistor. The ESP32-S3 has ~45 kΩ internal pull-up and pull-down resistors and a calibrated ADC on the same pin. The probe sketch loops over each hole:</p>
+
+<ol>
+  <li>internal pull-down on, read millivolts</li>
+  <li>internal pull-up on, read millivolts</li>
+  <li>float, read millivolts</li>
+  <li>reconfigure the pin as a 115200-baud UART RX for 350 ms and count bytes</li>
+</ol>
+
+<p>The core of it:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"driver/gpio.h"</span><span class="cp">
+#define PROBE      D2
+#define PROBE_GPIO GPIO_NUM_3
+</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">read_with_pull</span><span class="p">(</span><span class="n">gpio_pull_mode_t</span> <span class="n">mode</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">gpio_set_pull_mode</span><span class="p">(</span><span class="n">PROBE_GPIO</span><span class="p">,</span> <span class="n">mode</span><span class="p">);</span>   <span class="c1">// set pulls AFTER the ADC attach, or the attach clears them</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+  <span class="kt">long</span> <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">acc</span> <span class="o">+=</span> <span class="n">analogReadMilliVolts</span><span class="p">(</span><span class="n">PROBE</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">acc</span> <span class="o">/</span> <span class="mi">8</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">analogReadMilliVolts</span><span class="p">(</span><span class="n">PROBE</span><span class="p">);</span>            <span class="c1">// (re)attach ADC</span>
+  <span class="kt">int</span> <span class="n">pd</span> <span class="o">=</span> <span class="n">read_with_pull</span><span class="p">(</span><span class="n">GPIO_PULLDOWN_ONLY</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="n">pu</span> <span class="o">=</span> <span class="n">read_with_pull</span><span class="p">(</span><span class="n">GPIO_PULLUP_ONLY</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="n">fl</span> <span class="o">=</span> <span class="n">read_with_pull</span><span class="p">(</span><span class="n">GPIO_FLOATING</span><span class="p">);</span>
+  <span class="n">Serial1</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">,</span> <span class="n">SERIAL_8N1</span><span class="p">,</span> <span class="n">PROBE</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+  <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">t0</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span> <span class="o">&lt;</span> <span class="mi">350</span><span class="p">)</span> <span class="k">while</span> <span class="p">(</span><span class="n">Serial1</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="p">{</span> <span class="n">Serial1</span><span class="p">.</span><span class="n">read</span><span class="p">();</span> <span class="n">n</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">Serial1</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"PD=%4d PU=%4d FL=%4d UART=%3d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">pd</span><span class="p">,</span> <span class="n">pu</span><span class="p">,</span> <span class="n">fl</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>What each signal should look like on a WROOM-32 target:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Signal</th>
+      <th>Under pull-down</th>
+      <th>Under pull-up</th>
+      <th>UART bytes</th>
+      <th>Why</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GND</td>
+      <td>~0</td>
+      <td>~0</td>
+      <td>0</td>
+      <td>Pinned to ground, the pull-up loses</td>
+    </tr>
+    <tr>
+      <td>3V3</td>
+      <td>~3100 (ADC saturates)</td>
+      <td>~3100</td>
+      <td>0</td>
+      <td>A rail, the pull-down loses</td>
+    </tr>
+    <tr>
+      <td>TX</td>
+      <td>~3100</td>
+      <td>~3100</td>
+      <td>&gt; 0</td>
+      <td>Driven high, and it talks</td>
+    </tr>
+    <tr>
+      <td>EN</td>
+      <td>~2700</td>
+      <td>~3100</td>
+      <td>0</td>
+      <td>Board’s 10 kΩ pull-up against my 45 kΩ pull-down</td>
+    </tr>
+    <tr>
+      <td>IO0 / RX</td>
+      <td>~1600</td>
+      <td>~3100</td>
+      <td>0</td>
+      <td>Chip’s weak ~45 kΩ pull-up against my 45 kΩ pull-down</td>
+    </tr>
+    <tr>
+      <td>air</td>
+      <td>~0</td>
+      <td>~3100</td>
+      <td>0</td>
+      <td>Nothing there</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Wiring for the probe: XIAO <code class="language-plaintext highlighter-rouge">GND</code> to the WROOM’s metal lid (it is grounded and it is a big target), XIAO <code class="language-plaintext highlighter-rouge">D2</code> touched to each hole in turn, with a lift into the air between holes. The readings stream over USB at two per second, and I segment them on the host by class and duration.</p>
+
+<h3 id="what-the-holes-read">What the holes read</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hole</th>
+      <th>PD (mV)</th>
+      <th>PU (mV)</th>
+      <th>UART</th>
+      <th>Verdict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>3126</td>
+      <td>3126</td>
+      <td>0</td>
+      <td>3V3</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>163</td>
+      <td>175</td>
+      <td>0</td>
+      <td>GND</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>~1659</td>
+      <td>3126</td>
+      <td>0</td>
+      <td>weak pull-up: IO0 or RX</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2767</td>
+      <td>3126</td>
+      <td>0</td>
+      <td>EN</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>1519</td>
+      <td>3126</td>
+      <td>0</td>
+      <td>weak pull-up: RX or IO0</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>3126</td>
+      <td>3126</td>
+      <td>186</td>
+      <td>TX, chattering</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The first pass produced five blips for six holes and no ground anywhere, which read as <code class="language-plaintext highlighter-rouge">3V3 · ? · EN · ? · TX · GND</code> for a few minutes. A second pass on holes 2, 5, 6 with long deliberate lifts showed hole 2 had been missed on the first try, because the wire never bit the plating.</p>
+
+<h3 id="pinout-of-header-p2">Pinout of header P2</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>P2:   1 = 3V3    2 = GND    3 = IO0    4 = EN    5 = RX    6 = TX
+</code></pre></div></div>
+
+<p>Holes 3 and 5 are electrically identical, both weak pull-ups. The tie-break is physical. On the WROOM module RXD0 and TXD0 are adjacent pins, so routing them to adjacent holes 5 and 6 is the natural layout. That makes 5 = RX and 3 = IO0. A wrong guess here is harmless. Everything is 3.3V logic and the bridge only ever pulls EN/IO0 low, never drives them high. The chip either enters download mode or it does not. It did.</p>
+
+<h2 id="fix-2-the-xiao-as-a-serial-bridge">Fix 2: the XIAO as a serial bridge</h2>
+
+<p>A classic ESP32 dev board can be turned into a passthrough by holding its own chip in reset and using the onboard CP2102. The XIAO can’t. Its USB is native to the S3, and there is no separate bridge chip to borrow. So it gets firmware that forwards USB CDC to UART1 at a fixed 115200 and, at its own boot, pulls IO0 low, pulses EN, and releases both. The target lands in ROM download mode with no buttons and no timing.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define PIN_TX  D6    // -&gt; Petru RX  (hole 5)
+#define PIN_RX  D7    // -&gt; Petru TX  (hole 6)
+#define PIN_EN  D0    // -&gt; Petru EN  (hole 4)
+#define PIN_IO0 D1    // -&gt; Petru IO0 (hole 3)
+#define BAUD    115200
+</span>
+<span class="c1">// open-drain style: LOW = pull down, released = hi-Z so the target's own pull-ups win. Never drive HIGH.</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">pull_low</span><span class="p">(</span><span class="kt">int</span> <span class="n">pin</span><span class="p">)</span> <span class="p">{</span> <span class="n">pinMode</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span> <span class="n">digitalWrite</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span> <span class="p">}</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">release</span><span class="p">(</span><span class="kt">int</span> <span class="n">pin</span><span class="p">)</span>  <span class="p">{</span> <span class="n">pinMode</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">target_enter_download</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">pull_low</span><span class="p">(</span><span class="n">PIN_IO0</span><span class="p">);</span> <span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+  <span class="n">pull_low</span><span class="p">(</span><span class="n">PIN_EN</span><span class="p">);</span>  <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+  <span class="n">release</span><span class="p">(</span><span class="n">PIN_EN</span><span class="p">);</span>   <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>    <span class="c1">// ROM samples IO0 as EN rises</span>
+  <span class="n">release</span><span class="p">(</span><span class="n">PIN_IO0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">setRxBufferSize</span><span class="p">(</span><span class="mi">65536</span><span class="p">);</span>    <span class="c1">// USB delivers a 6 KB esptool block in 1 ms; UART drains it in 500 ms</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">BAUD</span><span class="p">);</span>
+  <span class="n">Serial1</span><span class="p">.</span><span class="n">setRxBufferSize</span><span class="p">(</span><span class="mi">8192</span><span class="p">);</span>
+  <span class="n">Serial1</span><span class="p">.</span><span class="n">setTxBufferSize</span><span class="p">(</span><span class="mi">32768</span><span class="p">);</span>
+  <span class="n">Serial1</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">BAUD</span><span class="p">,</span> <span class="n">SERIAL_8N1</span><span class="p">,</span> <span class="n">PIN_RX</span><span class="p">,</span> <span class="n">PIN_TX</span><span class="p">);</span>
+  <span class="n">target_enter_download</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">buf</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span> <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">((</span><span class="n">n</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">())</span>  <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">.</span><span class="n">readBytes</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span>  <span class="n">min</span><span class="p">(</span><span class="n">n</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span> <span class="n">buf</span><span class="p">));</span> <span class="n">Serial1</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span> <span class="p">}</span>
+  <span class="k">while</span> <span class="p">((</span><span class="n">n</span> <span class="o">=</span> <span class="n">Serial1</span><span class="p">.</span><span class="n">available</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">=</span> <span class="n">Serial1</span><span class="p">.</span><span class="n">readBytes</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">min</span><span class="p">(</span><span class="n">n</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span> <span class="n">buf</span><span class="p">));</span> <span class="n">Serial</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Build and flash it onto the XIAO. This step does use esptool’s default reset, because here the S3 is the target:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arduino-cli compile <span class="nt">--fqbn</span> esp32:esp32:XIAO_ESP32S3 <span class="nt">--output-dir</span> xiao_bridge/build xiao_bridge
+usbipd <span class="nb">bind</span> <span class="nt">--busid</span> 1-2           <span class="c"># admin PowerShell, once</span>
+usbipd attach <span class="nt">--wsl</span> <span class="nt">--busid</span> 1-2   <span class="c"># every time the XIAO is replugged</span>
+esptool <span class="nt">--port</span> /dev/ttyACM0 <span class="nt">--baud</span> 921600 write-flash 0x0 xiao_bridge/build/xiao_bridge.ino.merged.bin
+</code></pre></div></div>
+
+<p>Then the wiring, XIAO to the target, with strands stripped out of a CAT5 patch cable and wedged into the holes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>XIAO</th>
+      <th>Target hole</th>
+      <th>Signal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GND</td>
+      <td>2</td>
+      <td>GND</td>
+    </tr>
+    <tr>
+      <td>D1</td>
+      <td>3</td>
+      <td>IO0</td>
+    </tr>
+    <tr>
+      <td>D0</td>
+      <td>4</td>
+      <td>EN</td>
+    </tr>
+    <tr>
+      <td>D6 (TX)</td>
+      <td>5</td>
+      <td>RX</td>
+    </tr>
+    <tr>
+      <td>D7 (RX)</td>
+      <td>6</td>
+      <td>TX</td>
+    </tr>
+    <tr>
+      <td>nothing</td>
+      <td>1</td>
+      <td>3V3. Left empty. The box powers itself from its own USB-C.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/assets/images/2026-09-08-petru-ethernet-strands.jpg" alt="Ethernet strands wired into the header"></p>
+
+<p><img src="/assets/images/2026-09-08-petru-bench.jpg" alt="Bridge and board on the bench"></p>
+
+<p><img src="/assets/images/2026-09-08-petru-wiring-closeup.jpg" alt="Wiring close-up"></p>
+
+<p>Power-up order: box first, XIAO second. The bridge’s pulse has to land on a chip that is already alive.</p>
+
+<p>Two things went wrong with the bridge before it worked.</p>
+
+<p><strong>The S3 resets itself on DTR/RTS.</strong> The ESP32-S3’s USB-Serial/JTAG peripheral reads esptool’s default DTR/RTS reset dance as “reset me into my own bootloader.” Run with <code class="language-plaintext highlighter-rouge">--before default-reset</code> and you knock the bridge offline instead of resetting the target. Everything through the bridge runs with <code class="language-plaintext highlighter-rouge">--before no-reset --after no-reset --baud 115200</code>. Baud is pinned because the S3’s CDC can’t see the host change it.</p>
+
+<p><strong>The first real command overflowed the bridge.</strong> The ROM answered <code class="language-plaintext highlighter-rouge">chip-id</code>, then the stub upload died:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Uploading stub flasher...
+A fatal error occurred: Serial data stream stopped: Possible serial noise or corruption.
+</code></pre></div></div>
+
+<p>esptool sends the stub in ~6 KB blocks. USB delivers a block in a millisecond, the UART drains it in half a second, and the CDC receive buffer was 4 KB. Bytes fell on the floor. A 64 KB buffer on the USB side and a 32 KB UART transmit ring fixed it, and the sketch above has the fixed values.</p>
+
+<h3 id="first-contact">First contact</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">E</span><span class="o">=</span><span class="s2">"esptool --port /dev/ttyACM0 --baud 115200 --before no-reset --after no-reset"</span>
+<span class="nv">$E</span> chip-id
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Detecting chip type... ESP32
+Chip type:          ESP32-D0WD (revision v1.1)
+Crystal frequency:  40MHz
+Stub flasher running.
+</code></pre></div></div>
+
+<p>Pinout right, bridge working, target in download mode. The screen is dark in this state. That is correct, because only the ROM is running.</p>
+
+<h2 id="backup-first-and-make-the-chip-prove-it">Backup first, and make the chip prove it</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$E</span> flash-id
+<span class="c"># Manufacturer: c8   Device: 4017   Detected flash size: 8MB</span>
+
+<span class="nv">$E</span> read-flash 0 ALL petru_backup.bin
+<span class="c"># Read 8388608 bytes from 0x00000000 in 765.0 seconds (87.7 kbit/s)</span>
+
+<span class="nv">$E</span> verify-flash 0 petru_backup.bin
+<span class="c"># Verification successful (digest matched).</span>
+</code></pre></div></div>
+
+<p>Twelve and three-quarter minutes at 115200. <code class="language-plaintext highlighter-rouge">verify-flash</code> makes the chip compute an MD5 of its own flash and compare, so this is not “the bytes I received,” it is a bit-exact image. Save that golden backup in more than one place before touching anything.</p>
+
+<h2 id="where-the-string-lives">Where the string lives</h2>
+
+<p>The partition table at <code class="language-plaintext highlighter-rouge">0x8000</code> is the stock Arduino OTA layout:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvs       data nvs       0x009000    20 KB
+otadata   data ota       0x00e000     8 KB
+app0      app  ota_0     0x010000  1280 KB    &lt;- live program (otadata selects slot 0)
+app1      app  ota_1     0x150000  1280 KB    &lt;- entirely 0xFF
+spiffs    data spiffs    0x290000  1408 KB
+coredump  data coredump  0x3f0000    64 KB
+</code></pre></div></div>
+
+<p>One copy of the program, no ambiguity. The image itself:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>esptool image-info app0.bin
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Entry point: 0x40082f20   Segments: 6
+Checksum: 0x3c (valid)
+Validation hash: b3f5038a... (valid)
+Project name: arduino-lib-builder   ESP-IDF: v4.4.3
+Secure version: 0
+</code></pre></div></div>
+
+<p>No secure boot, no encryption, no anti-rollback. That is what makes a byte patch possible. <code class="language-plaintext highlighter-rouge">hash_appended: 1</code> and the checksum are what make a byte patch brick the board if you forget them: the second-stage bootloader validates both on every boot, and there is no <code class="language-plaintext highlighter-rouge">app1</code> to fall back to.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-obiaE</span> <span class="s2">"now[ _]?playing"</span> petru_backup.bin
+<span class="c"># 66773:NOW PLAYING</span>
+</code></pre></div></div>
+
+<p>Exactly one hit, at <code class="language-plaintext highlighter-rouge">0x104D5</code>. That is <code class="language-plaintext highlighter-rouge">0x4D5</code> bytes into <code class="language-plaintext highlighter-rouge">app0</code>, inside the first segment (DROM, <code class="language-plaintext highlighter-rouge">.rodata</code>): a plain compiler-emitted string constant. The bytes around it:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...\xff\xff\x00\x00\xdc    NOW PLAYING\x00\x05\x07 \x7f\x00\x00...PPP\x00\x00\x00\x00PP\xf8P\xf8P...
+</code></pre></div></div>
+
+<p>The real string is <code class="language-plaintext highlighter-rouge">"    NOW PLAYING"</code>: four leading spaces for scroll-in padding, then the text, then the NUL. Right after it, <code class="language-plaintext highlighter-rouge">05 07 20 7F</code> and glyph rows. That is a 5×7 pixel font table covering <code class="language-plaintext highlighter-rouge">0x20</code> through <code class="language-plaintext highlighter-rouge">0x7F</code>, and <code class="language-plaintext highlighter-rouge">50 50 F8 50 F8 50</code> is the <code class="language-plaintext highlighter-rouge">#</code> glyph. The font has lowercase. I went uppercase anyway.</p>
+
+<h2 id="the-patch-11-letters-1-checksum-byte-32-bytes-of-sha-256">The patch: 11 letters, 1 checksum byte, 32 bytes of SHA-256</h2>
+
+<p><code class="language-plaintext highlighter-rouge">TUNA STREET</code> is 11 characters. <code class="language-plaintext highlighter-rouge">NOW PLAYING</code> is 11 characters. Overwrite in place, leave the four spaces and the NUL alone, then recompute what the bootloader checks. The part of the patch script that matters:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img</span> <span class="o">=</span> <span class="nf">bytearray</span><span class="p">(</span><span class="nf">open</span><span class="p">(</span><span class="s">'app0_original_trimmed.bin'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">).</span><span class="nf">read</span><span class="p">())</span>
+<span class="n">p</span><span class="p">,</span> <span class="n">segs</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span> <span class="p">[]</span>                                   <span class="c1"># 24-byte header, then segments
+</span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">ln</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="nf">unpack</span><span class="p">(</span><span class="s">'&lt;I'</span><span class="p">,</span> <span class="n">img</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="mi">4</span><span class="p">:</span><span class="n">p</span><span class="o">+</span><span class="mi">8</span><span class="p">])[</span><span class="mi">0</span><span class="p">];</span> <span class="n">segs</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">p</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">ln</span><span class="p">));</span> <span class="n">p</span> <span class="o">+=</span> <span class="mi">8</span> <span class="o">+</span> <span class="n">ln</span>
+<span class="n">pad_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">15</span><span class="p">)</span> <span class="o">//</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">16</span>                  <span class="c1"># 16-aligned; checksum is the last pad byte
+</span><span class="n">chk_off</span><span class="p">,</span> <span class="n">sha_off</span> <span class="o">=</span> <span class="n">pad_end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pad_end</span>
+
+<span class="n">off</span> <span class="o">=</span> <span class="n">img</span><span class="p">.</span><span class="nf">index</span><span class="p">(</span><span class="sa">b</span><span class="s">'NOW PLAYING'</span><span class="p">);</span> <span class="n">img</span><span class="p">[</span><span class="n">off</span><span class="p">:</span><span class="n">off</span><span class="o">+</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s">'TUNA STREET'</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="mh">0xEF</span>                                           <span class="c1"># ESP image checksum: XOR of all segment data, seed 0xEF
+</span><span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">ln</span> <span class="ow">in</span> <span class="n">segs</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">img</span><span class="p">[</span><span class="n">s</span><span class="p">:</span><span class="n">s</span><span class="o">+</span><span class="n">ln</span><span class="p">]:</span> <span class="n">c</span> <span class="o">^=</span> <span class="n">b</span>
+<span class="n">img</span><span class="p">[</span><span class="n">chk_off</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+<span class="n">img</span><span class="p">[</span><span class="n">sha_off</span><span class="p">:</span><span class="n">sha_off</span><span class="o">+</span><span class="mi">32</span><span class="p">]</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="nf">sha256</span><span class="p">(</span><span class="nf">bytes</span><span class="p">(</span><span class="n">img</span><span class="p">[:</span><span class="n">sha_off</span><span class="p">])).</span><span class="nf">digest</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 patch_app0.py app0_original_trimmed.bin app0_patched_TUNA_STREET.bin <span class="s2">"NOW PLAYING"</span> <span class="s2">"TUNA STREET"</span>
+esptool image-info app0_patched_TUNA_STREET.bin
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Checksum: 0x21 (valid)
+Validation hash: b58cb8c0... (valid)
+</code></pre></div></div>
+
+<p>44 bytes differ from the original out of 318,080: 11 for the letters, 1 checksum, 32 hash. esptool validates with the same rules the bootloader uses, so this is green before the chip is touched.</p>
+
+<h2 id="write-verify-and-the-dark-screen">Write, verify, and the dark screen</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$E</span> write-flash 0x10000 app0_patched_TUNA_STREET.bin
+<span class="c"># Wrote 318080 bytes (182358 compressed) at 0x00010000 in 16.2 seconds</span>
+<span class="c"># Hash of data verified.</span>
+
+<span class="nv">$E</span> verify-flash 0x10000 app0_patched_TUNA_STREET.bin
+<span class="c"># Verification successful (digest matched).</span>
+</code></pre></div></div>
+
+<p>Only the <code class="language-plaintext highlighter-rouge">app0</code> region is written. <code class="language-plaintext highlighter-rouge">nvs</code>, <code class="language-plaintext highlighter-rouge">spiffs</code>, and everything else are untouched. Rollback is one line: <code class="language-plaintext highlighter-rouge">$E write-flash 0x10000 app0_original_trimmed.bin</code>.</p>
+
+<p>Then I power-cycle the box with the bridge still wired and watch its boot log come through the XIAO:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+load:0x3fff0030,len:1344
+load:0x40078000,len:13836
+load:0x40080400,len:3608
+entry 0x400805f0
+</code></pre></div></div>
+
+<p>Normal boot, bootloader hands off to the app, no <code class="language-plaintext highlighter-rouge">esp_image</code> rejection. And the screen is dark.</p>
+
+<p><code class="language-plaintext highlighter-rouge">chip-id</code> gets no response, so it is not in download mode. The app is running and drawing nothing. Either the bootloader rejected the image silently, or the attached XIAO is interfering with the running app: its TX drives the box’s RX continuously, and its own boot spews ROM text down that wire. I had never once seen the box run normally while wired, because every XIAO boot pulsed it into download mode.</p>
+
+<p>Unplug the XIAO, pull all five wires, power the box alone. <code class="language-plaintext highlighter-rouge">TUNA STREET</code> is scrolling. The wired-up darkness was interference.</p>
+
+<h2 id="what-not-to-do">What NOT to do</h2>
+
+<ul>
+  <li>
+<strong>Don’t judge the display with the bridge attached.</strong> A good boot shows a dark screen while the XIAO is wired. Pull the wires to look.</li>
+  <li>
+<strong>Don’t leave a wired XIAO unpowered.</strong> Its dead GPIO pins clamp the target’s EN line through their protection diodes, and the board looks bricked. It isn’t. Power the XIAO, or unwire it.</li>
+  <li>
+<strong>Don’t open a serial port on the XIAO and expect the target to stay put.</strong> Opening or closing the port toggles DTR/RTS, the S3 resets, the bridge re-fires its pulse, and the target is back in download mode. Every esptool call and every listener does this. It is invisible while flashing and baffling the moment you want a normal boot.</li>
+  <li>
+<strong>Don’t use <code class="language-plaintext highlighter-rouge">--before default-reset</code> through an S3 bridge.</strong> It resets the bridge, not the target.</li>
+  <li>
+<strong>Don’t run the bridge with small buffers.</strong> USB is ~100× faster than a 115200 UART. Anything under one esptool block plus slack drops bytes and you get “Serial data stream stopped.”</li>
+  <li>
+<strong>Don’t fight for a better phone photo of silkscreen.</strong> Chat and share paths crush images to ~400 px. The electrical probe took less time than one more attempt to read 1 mm text.</li>
+  <li>
+<strong>Don’t grow the string.</strong> In-place patches can’t. Same length or shorter, pad with spaces.</li>
+  <li>
+<strong>Don’t skip the checksum and SHA-256.</strong> With <code class="language-plaintext highlighter-rouge">hash_appended: 1</code> and a blank <code class="language-plaintext highlighter-rouge">app1</code>, a bad hash is a dead board until you restore.</li>
+</ul>
+
+<h2 id="repro-cookbook">Repro cookbook</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># tools: arduino-cli + esp32 core 3.3.11, esptool v5.3.1, usbipd-win on the Windows side</span>
+
+<span class="c"># 1. bridge onto the XIAO (default reset is correct here; the S3 itself is the target)</span>
+arduino-cli compile <span class="nt">--fqbn</span> esp32:esp32:XIAO_ESP32S3 <span class="nt">--output-dir</span> xiao_bridge/build xiao_bridge
+usbipd attach <span class="nt">--wsl</span> <span class="nt">--busid</span> 1-2
+esptool <span class="nt">--port</span> /dev/ttyACM0 <span class="nt">--baud</span> 921600 write-flash 0x0 xiao_bridge/build/xiao_bridge.ino.merged.bin
+
+<span class="c"># 2. wire per the table above; power the box, then the XIAO; screen goes dark = download mode</span>
+<span class="nv">E</span><span class="o">=</span><span class="s2">"esptool --port /dev/ttyACM0 --baud 115200 --before no-reset --after no-reset"</span>
+<span class="nv">$E</span> chip-id
+<span class="nv">$E</span> flash-id
+<span class="nv">$E</span> read-flash 0 ALL backup.bin
+<span class="nv">$E</span> verify-flash 0 backup.bin
+
+<span class="c"># 3. patch app0 and validate offline; both lines must say (valid)</span>
+python3 patch_app0.py app0_original_trimmed.bin app0_patched.bin <span class="s2">"NOW PLAYING"</span> <span class="s2">"TUNA STREET"</span>
+esptool image-info app0_patched.bin
+
+<span class="c"># 4. write, verify</span>
+<span class="nv">$E</span> write-flash 0x10000 app0_patched.bin
+<span class="nv">$E</span> verify-flash 0x10000 app0_patched.bin
+
+<span class="c"># 5. unplug the XIAO, pull the wires, power the box alone</span>
+</code></pre></div></div>
+
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>Pro Tip!</strong> The whole way in was an electrical fingerprint. Pull-up, pull-down, and a short UART listen on each pin tell you which is which without a single label on the board. A dev board with an ADC is a multimeter you already own.</p>
+
+<h2 id="hacking-the-petru">Hacking the Petru</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about Hacking the Petru please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#arduino" class="page__taxonomy-item p-category" rel="tag">arduino</a><span class="sep">, </span>
+    
+      <a href="/tags/#embedded" class="page__taxonomy-item p-category" rel="tag">embedded</a><span class="sep">, </span>
+    
+      <a href="/tags/#esp32" class="page__taxonomy-item p-category" rel="tag">esp32</a><span class="sep">, </span>
+    
+      <a href="/tags/#esptool" class="page__taxonomy-item p-category" rel="tag">esptool</a><span class="sep">, </span>
+    
+      <a href="/tags/#reverse-engineering" class="page__taxonomy-item p-category" rel="tag">reverse-engineering</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-09-08T00:00:00-04:00">September 8, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Hacking+the+Petru%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHacking-the-Petru%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHacking-the-Petru%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/release/Cloudera-Observability-for-Cloudera-AI-on-Public-Cloud/" class="pagination--pager" title="Cloudera Observability for Cloudera AI on Public Cloud is Now Generally Available
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Observability-For-Cloudera-AI.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Observability-for-Cloudera-AI-on-Public-Cloud/" rel="permalink">Cloudera Observability for Cloudera AI on Public Cloud is Now Generally Available
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Executive Summary
+
+    <a href="/release/Cloudera-Observability-for-Cloudera-AI-on-Public-Cloud/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/CFM-Cloudera_Flow_Management_Operator.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.3/" rel="permalink">Cloudera Flow Management Operator for Kubernetes 3.3
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.3. This release focuses on improving...
+    <a href="/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.3/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/ai-agents-in-data-platforms-for-dummies.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/AI-Agents-in-Data-Platforms-For-Dummies/" rel="permalink">AI Agents in Data Platforms For Dummies
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How enterprise lakehouse platforms with open formats like Apache Iceberg support AI agent workloads — discovery, schema inspection, query generation, and the...
+    <a href="/blog/AI-Agents-in-Data-Platforms-For-Dummies/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/2026-08-25-waveshare-amoled-esp32-s3.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3/" rel="permalink">How to Develop with the Waveshare AMOLED ESP32-S3
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          11 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    I bought this AMOLED ESP32-S3 to build Cloudera Edge Flow Manager flows for modern microcontroller.  The board runs EFM in the firmware, owns its acceleromet...
+    <a href="/blog/How-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>

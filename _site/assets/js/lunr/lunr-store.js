@@ -658,4 +658,10 @@ var store = [{
         "tags": ["cloudera","observability","cdp"],
         "url": "/release/Cloudera-Observability-for-Cloudera-AI-on-Public-Cloud/",
         "teaser": "/assets/images/Observability-For-Cloudera-AI.jpeg"
+      },{
+        "title": "Hacking the Petru",
+        "excerpt":"I have a “Now Playing” box on my desk. It listens with a mic, and an LED matrix scrolls NOW PLAYING. I wanted it to scroll TUNA STREET. There is no source, no schematic, no datasheet, and nothing about the board anywhere on the internet. The USB-C port turns out...","categories": ["blog"],
+        "tags": ["esp32","reverse-engineering","embedded","esptool","arduino"],
+        "url": "/blog/Hacking-the-Petru/",
+        "teaser": "/assets/images/tuna-street-petru.png"
       }]
