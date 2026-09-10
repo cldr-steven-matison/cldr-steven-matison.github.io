@@ -1,51 +1,65 @@
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 47
-  lang: ""
-  updated: "2026-09-09"
-  fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 164099
+  size: 165503
+  lang: "Python"
+  updated: "2026-09-10"
+  fork: false
+- name: "EdgeFlowManager"
+  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
+  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
+  size: 18616
+  lang: "Python"
+  updated: "2026-09-10"
+  fork: false
+- name: "edge-flow-manager-mcp-server"
+  description: "Thin, read-only MCP server over the Cloudera Edge Flow Manager (EFM/CEM) REST API — live edge/MiNiFi fleet state for LLM agents."
+  url: "https://github.com/cldr-steven-matison/edge-flow-manager-mcp-server"
+  size: 16
+  lang: "Python"
+  updated: "2026-09-09"
+  fork: false
+- name: "NiFiandAi"
+  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
+  url: "https://github.com/cldr-steven-matison/NiFiandAi"
+  size: 122
+  lang: ""
+  updated: "2026-09-09"
+  fork: false
+- name: "cloudera-manager-mcp-server"
+  description: "Thin, read-only MCP server over the Cloudera Manager, YARN, Ranger, and Atlas APIs — live Cloudera Base state for LLM agents."
+  url: "https://github.com/cldr-steven-matison/cloudera-manager-mcp-server"
+  size: 24
+  lang: "Python"
+  updated: "2026-09-09"
+  fork: false
+- name: "iceberg-rest-catalog-demo"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
+  size: 1580
+  lang: "Shell"
+  updated: "2026-09-09"
+  fork: false
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 2005
   lang: "Python"
   updated: "2026-09-09"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 181636
+  size: 181635
   lang: "HTML"
-  updated: "2026-09-08"
+  updated: "2026-09-09"
   fork: false
-- name: "iceberg-rest-catalog-demo"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
-  size: 1573
-  lang: "Shell"
-  updated: "2026-09-08"
-  fork: false
-- name: "NiFiandAi"
-  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
-  url: "https://github.com/cldr-steven-matison/NiFiandAi"
-  size: 115
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 47
   lang: ""
-  updated: "2026-09-08"
-  fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 2002
-  lang: "Python"
-  updated: "2026-09-08"
-  fork: false
-- name: "EdgeFlowManager"
-  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
-  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
-  size: 19562
-  lang: "Python"
-  updated: "2026-09-08"
+  updated: "2026-09-09"
   fork: false
 - name: "exllamav3"
   description: "An optimized quantization and inference library for running LLMs locally on modern consumer-class GPUs "
@@ -54,13 +68,6 @@
   lang: ""
   updated: "2026-09-03"
   fork: true
-- name: "cloudera-manager-mcp-server"
-  description: "Thin, read-only MCP server over the Cloudera Manager, YARN, Ranger, and Atlas APIs — live Cloudera Base state for LLM agents."
-  url: "https://github.com/cldr-steven-matison/cloudera-manager-mcp-server"
-  size: 16
-  lang: "Python"
-  updated: "2026-09-03"
-  fork: false
 - name: "MicroFi"
   description: ""
   url: "https://github.com/cldr-steven-matison/MicroFi"
