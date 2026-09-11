@@ -1,15 +1,22 @@
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 165503
+  size: 165119
   lang: "Python"
   updated: "2026-09-10"
   fork: false
 - name: "EdgeFlowManager"
   description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
   url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
-  size: 18616
+  size: 18634
   lang: "Python"
+  updated: "2026-09-10"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 181638
+  lang: "HTML"
   updated: "2026-09-10"
   fork: false
 - name: "edge-flow-manager-mcp-server"
@@ -45,13 +52,6 @@
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
   size: 2005
   lang: "Python"
-  updated: "2026-09-09"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 181635
-  lang: "HTML"
   updated: "2026-09-09"
   fork: false
 - name: "cldr-steven-matison"
