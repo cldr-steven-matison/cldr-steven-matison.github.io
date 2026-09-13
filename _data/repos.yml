@@ -1,16 +1,23 @@
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 181639
-  lang: "HTML"
-  updated: "2026-09-11"
+- name: "ADMIN-238_Admin_K8s"
+  description: "Exercises for the ADMIN-238 Administrating Kubernetes course"
+  url: "https://github.com/cldr-steven-matison/ADMIN-238_Admin_K8s"
+  size: 341
+  lang: ""
+  updated: "2026-09-13"
   fork: false
 - name: "DesktopShare"
   description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
   url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 165119
+  size: 165193
   lang: "Python"
-  updated: "2026-09-10"
+  updated: "2026-09-12"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 181640
+  lang: "HTML"
+  updated: "2026-09-12"
   fork: false
 - name: "EdgeFlowManager"
   description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
@@ -452,13 +459,6 @@
   size: 5
   lang: ""
   updated: "2026-03-18"
-  fork: false
-- name: "ADMIN-238_Admin_K8s"
-  description: "Exercises for the ADMIN-238 Administrating Kubernetes course"
-  url: "https://github.com/cldr-steven-matison/ADMIN-238_Admin_K8s"
-  size: 341
-  lang: ""
-  updated: "2026-03-11"
   fork: false
 - name: "CHAMP-138-K8s"
   description: "This is the exercise repo for CHAMP-138 Just Enough Kubernetes"
