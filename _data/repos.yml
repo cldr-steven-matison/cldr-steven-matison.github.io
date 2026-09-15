@@ -1,9 +1,37 @@
+- name: "DesktopShare"
+  description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/DesktopShare"
+  size: 165446
+  lang: "Python"
+  updated: "2026-09-14"
+  fork: false
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 2010
+  lang: "Python"
+  updated: "2026-09-14"
+  fork: false
+- name: "trino-demo"
+  description: "Provision a Trino Virtual Warehouse on Cloudera Data Warehouse (CDW) with a single cloudera.cloud Ansible playbook."
+  url: "https://github.com/cldr-steven-matison/trino-demo"
+  size: 4
+  lang: ""
+  updated: "2026-09-14"
+  fork: false
+- name: "iceberg-rest-catalog-demo"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
+  size: 1604
+  lang: "Shell"
+  updated: "2026-09-14"
+  fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 181642
+  size: 181643
   lang: "HTML"
-  updated: "2026-09-13"
+  updated: "2026-09-14"
   fork: false
 - name: "ADMIN-238_Admin_K8s"
   description: "Exercises for the ADMIN-238 Administrating Kubernetes course"
@@ -11,13 +39,6 @@
   size: 341
   lang: ""
   updated: "2026-09-13"
-  fork: false
-- name: "DesktopShare"
-  description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/DesktopShare"
-  size: 165193
-  lang: "Python"
-  updated: "2026-09-12"
   fork: false
 - name: "EdgeFlowManager"
   description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
@@ -44,20 +65,6 @@
   description: "Thin, read-only MCP server over the Cloudera Manager, YARN, Ranger, and Atlas APIs — live Cloudera Base state for LLM agents."
   url: "https://github.com/cldr-steven-matison/cloudera-manager-mcp-server"
   size: 24
-  lang: "Python"
-  updated: "2026-09-09"
-  fork: false
-- name: "iceberg-rest-catalog-demo"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
-  size: 1580
-  lang: "Shell"
-  updated: "2026-09-09"
-  fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 2005
   lang: "Python"
   updated: "2026-09-09"
   fork: false
@@ -102,13 +109,6 @@
   size: 385
   lang: "Java"
   updated: "2026-09-01"
-  fork: false
-- name: "trino-demo"
-  description: "Provision a Trino Virtual Warehouse on Cloudera Data Warehouse (CDW) with a single cloudera.cloud Ansible playbook."
-  url: "https://github.com/cldr-steven-matison/trino-demo"
-  size: 3
-  lang: ""
-  updated: "2026-08-18"
   fork: false
 - name: "cdpcurl"
   description: "curl-like tool with CDP request signing"
