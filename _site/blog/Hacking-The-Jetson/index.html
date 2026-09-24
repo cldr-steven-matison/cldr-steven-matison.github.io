@@ -970,7 +970,7 @@ curl <span class="nt">-sSL</span> <span class="nt">-o</span> mobilenetv2-12.onnx
 trtexec <span class="nt">--onnx</span><span class="o">=</span>mobilenetv2-12.onnx <span class="nt">--saveEngine</span><span class="o">=</span>mobilenetv2.fp16.engine <span class="nt">--fp16</span>
 
 <span class="c"># install the resident daemon as a user service (no root; this box runs a lingering user manager)</span>
-<span class="nb">cp </span>files/trt_infer_server.py ~/DesktopShare/files/
+<span class="nb">cp </span>files/trt_infer_server.py ~/BrainShare/files/
 <span class="nb">cp </span>files/trt-infer.service ~/.config/systemd/user/
 systemctl <span class="nt">--user</span> daemon-reload
 systemctl <span class="nt">--user</span> <span class="nb">enable</span> <span class="nt">--now</span> trt-infer

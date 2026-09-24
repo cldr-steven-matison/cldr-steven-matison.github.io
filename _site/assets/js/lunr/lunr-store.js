@@ -540,7 +540,7 @@ var store = [{
         "teaser": "/assets/images/2026-02-03-cloudera_data_lineage.png"
       },{
         "title": "Day 1: Claude Code",
-        "excerpt":"Summary Day 1 with Claude Code. Installed via brew, pointed it at my DesktopShare repo, and ran a handful of agent tasks end to end from the terminal — answering questions about the project, explaining the folder structure, capturing the session into history/, then committing and pushing the change to...","categories": ["blog"],
+        "excerpt":"Summary Day 1 with Claude Code. Installed via brew, pointed it at my BrainShare repo, and ran a handful of agent tasks end to end from the terminal — answering questions about the project, explaining the folder structure, capturing the session into history/, then committing and pushing the change to...","categories": ["blog"],
         "tags": ["claude","claude-code","ai","cloudera"],
         "url": "/blog/Day-1-Claude-Code/",
         "teaser": "/assets/images/Day1ClaudeCode.png"

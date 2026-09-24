@@ -24,7 +24,7 @@ Rather than replay every step here, I have been publishing the progress on X as 
 
 A non-exhaustive list of the things Claude Code helped me build, break, fix, or publish over the last thirty-plus days:
 
-- Drove day-to-day repo work across `DesktopShare`, `ClouderaStreamingOperators`, `NiFi-Templates`, `Flink-Kubernetes-Playground`, and this blog
+- Drove day-to-day repo work across `BrainShare`, `ClouderaStreamingOperators`, `NiFi-Templates`, `Flink-Kubernetes-Playground`, and this blog
 - Iterated dozens of markdown plans from AI-drafted → tested → published — the [Edge to AI for Dummies](/blog/Edge-to-AI-for-Dummies/), [Cloudera Edge Flow Manager on Kubernetes](/blog/Cloudera-Edge-Flow-Manager-on-Kubernetes/), and [Using Kftray and Zellij](/blog/Using-Kftray-and-Zellij/) posts are recent examples
 - Stood up and tore down countless minikube clusters — CSO, EFM, NiFi, Kafka, Flink, Postgres, Prometheus, Grafana — while Claude Code drove `kubectl`, `helm`, and `minikube tunnel`
 - Created Streamers (App with Live Streamer Clip Bot) with audio transcription and LLM generated commentary

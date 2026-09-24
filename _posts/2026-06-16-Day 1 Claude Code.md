@@ -1,6 +1,6 @@
 ---
 title:  "Day 1: Claude Code"
-excerpt: "First day with Claude Code on the MacBook — install, a few questions about my DesktopShare repo, and a commit + push, end to end from the terminal."
+excerpt: "First day with Claude Code on the MacBook — install, a few questions about my BrainShare repo, and a commit + push, end to end from the terminal."
 header:
   teaser: "/assets/images/Day1ClaudeCode.png"
 categories:
@@ -16,7 +16,7 @@ tags:
 
 ## Summary
 
-Day 1 with Claude Code. Installed via `brew`, pointed it at my `DesktopShare` repo, and ran a handful of agent tasks end to end from the terminal — answering questions about the project, explaining the folder structure, capturing the session into `history/`, then committing and pushing the change to GitHub. By the end of the day, Claude Code was driving the repo work on the MacBook, my Telegram bot was syncing the same repo down to the Windows side, and this very post — the writeup, the front matter, the docs links — was drafted, placed, and published by Claude Code as another agent task. The terminal log below is the raw Day 1 session that kicked it off.
+Day 1 with Claude Code. Installed via `brew`, pointed it at my `BrainShare` repo, and ran a handful of agent tasks end to end from the terminal — answering questions about the project, explaining the folder structure, capturing the session into `history/`, then committing and pushing the change to GitHub. By the end of the day, Claude Code was driving the repo work on the MacBook, my Telegram bot was syncing the same repo down to the Windows side, and this very post — the writeup, the front matter, the docs links — was drafted, placed, and published by Claude Code as another agent task. The terminal log below is the raw Day 1 session that kicked it off.
 
 ## Day 1: Claude Code
 
@@ -31,15 +31,15 @@ steven.matison@FTF3XR2065 ~ % brew install --cask claude-code
 🍺  claude-code was successfully installed!
 
 
-steven.matison@FTF3XR2065 ~ % cd ~/Documents/GitHub/DesktopShare
-steven.matison@FTF3XR2065 DesktopShare % claude
+steven.matison@FTF3XR2065 ~ % cd ~/Documents/GitHub/BrainShare
+steven.matison@FTF3XR2065 BrainShare % claude
 ╭─── Claude Code v2.1.153 ──────────────────────────────────────────────────────────────────────────────────────────╮
 │                 Welcome back!
 ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ❯ /login
 ❯ what does this project do?
   Read 1 file, listed 1 directory (ctrl+o to expand)
-⏺ DesktopShare is your cross-platform workspace (macOS + Windows) for developing, testing, and sharing Markdown docs and supporting assets tied to Cloudera Streaming Operators work.
+⏺ BrainShare is your cross-platform workspace (macOS + Windows) for developing, testing, and sharing Markdown docs and supporting assets tied to Cloudera Streaming Operators work.
   Specifically:
   - Root holds in-progress, AI-drafted (Grok/Gemini) Markdown plans on topics like NiFi, Flink, Kafka, MiNiFi, Minikube/K8s, GPU work, custom processors, RAG, and edge devices (e.g., Jetson Nano).
   - blog/ — polished posts headed to your GitHub Pages blog.
@@ -85,7 +85,7 @@ steven.matison@FTF3XR2065 DesktopShare % claude
 
 ❯ explain the folder structure
 ⏺ Folder Structure
-  DesktopShare/
+  BrainShare/
   ├── README.md                ← Project overview
   │
   ├── *.md (root)              ← In-progress / "living" docs
@@ -204,7 +204,7 @@ steven.matison@FTF3XR2065 DesktopShare % claude
 
 ❯ push that commit
 ⏺ Bash(git push)
-  ⎿  To https://github.com/cldr-steven-matison/DesktopShare.git
+  ⎿  To https://github.com/cldr-steven-matison/BrainShare.git
         35c57c0..03c952e  main -> main
   Pushed — 35c57c0..03c952e is now on origin/main.
 ```
@@ -236,7 +236,7 @@ Wow, ok, I feel like all the work I have done up to this point was for you to re
 
 ## Resources
 
-- [https://github.com/cldr-steven-matison/DesktopShare](https://github.com/cldr-steven-matison/DesktopShare)
+- [https://github.com/cldr-steven-matison/BrainShare](https://github.com/cldr-steven-matison/BrainShare)
 - [https://code.claude.com/docs/en/quickstart](https://code.claude.com/docs/en/quickstart)
 
 ## Suggested Reading

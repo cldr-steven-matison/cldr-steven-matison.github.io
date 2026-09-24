@@ -16,7 +16,7 @@ tags:
   - nifi
 ---
 
-Most of my "Day N with Claude Code" posts are about building something. This one is about a session that had already failed — twice — before I sat back down at the keyboard. I'd asked Claude to fan out a batch of planning subagents to clean up my sprawling DesktopShare doc library. When I came back, nothing had been written. No error I could see, no half-finished files, just an empty `~/.claude/plans/` and a vague memory that "the agents did something."
+Most of my "Day N with Claude Code" posts are about building something. This one is about a session that had already failed — twice — before I sat back down at the keyboard. I'd asked Claude to fan out a batch of planning subagents to clean up my sprawling BrainShare doc library. When I came back, nothing had been written. No error I could see, no half-finished files, just an empty `~/.claude/plans/` and a vague memory that "the agents did something."
 
 This is the story of resuming that session from disk, finding out why it died, re-running the whole thing, and — the part I care most about — catching one of the subagents quietly making up a number during review. If you're running multi-agent workflows against a gateway-hosted API key, the root cause here is one you will hit too.
 
@@ -128,7 +128,7 @@ Three things I'm taking forward:
 
 Agentic coding isn't "the model does it and you watch." It's the model doing the wide, fast, parallel part, and you owning the narrow, slow, adversarial part where correctness actually lives. Day 37 was a good reminder of exactly where that line sits.
 
-*Raw session capture that this post is [here](https://github.com/cldr-steven-matison/DesktopShare/blob/main/blog/claude-day-37.md).*
+*Raw session capture that this post is [here](https://github.com/cldr-steven-matison/BrainShare/blob/main/blog/claude-day-37.md).*
 
 ## {{ page.title }}
 If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about {{ page.title }} please reach out to schedule a discussion.
