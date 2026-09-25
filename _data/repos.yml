@@ -1,10 +1,66 @@
-- name: "BrainShare"
-  description: "Share spot for Multi Device and Multi AI work with Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/BrainShare"
-  size: 173220
-  lang: "Python"
-  updated: "2026-09-23"
+- name: "cldr-steven-matison"
+  description: "Config files for my GitHub profile."
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
+  size: 47
+  lang: ""
+  updated: "2026-09-25"
   fork: false
+- name: "NiFi2-Processor-Playground"
+  description: "A place to play around with NiFi 2.0 Processors"
+  url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
+  size: 421
+  lang: "Java"
+  updated: "2026-09-24"
+  fork: false
+- name: "ClouderaStreamingOperators"
+  description: "Repo for yaml used in installing Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
+  size: 99
+  lang: "Shell"
+  updated: "2026-09-24"
+  fork: false
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 2319
+  lang: "Python"
+  updated: "2026-09-24"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 181673
+  lang: "HTML"
+  updated: "2026-09-24"
+  fork: false
+- name: "MiNiFi-Kubernetes-Playground"
+  description: "A repository I am using to play with minifi on kubernetes."
+  url: "https://github.com/cldr-steven-matison/MiNiFi-Kubernetes-Playground"
+  size: 81
+  lang: "Python"
+  updated: "2026-09-24"
+  fork: false
+- name: "iceberg-rest-catalog-demo"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
+  size: 1606
+  lang: "Shell"
+  updated: "2026-09-24"
+  fork: false
+- name: "EdgeFlowManager"
+  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
+  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
+  size: 18636
+  lang: "Python"
+  updated: "2026-09-24"
+  fork: false
+- name: "hermes-agent"
+  description: "The agent that grows with you"
+  url: "https://github.com/cldr-steven-matison/hermes-agent"
+  size: 844265
+  lang: "Python"
+  updated: "2026-09-24"
+  fork: true
 - name: "cloudera-ce-aws"
   description: "Cloudera on premise Community Edition on AWS"
   url: "https://github.com/cldr-steven-matison/cloudera-ce-aws"
@@ -12,39 +68,11 @@
   lang: "HCL"
   updated: "2026-09-23"
   fork: true
-- name: "NiFi2-Processor-Playground"
-  description: "A place to play around with NiFi 2.0 Processors"
-  url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
-  size: 386
-  lang: "Java"
-  updated: "2026-09-23"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 181655
-  lang: "HTML"
-  updated: "2026-09-23"
-  fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 2010
-  lang: "Python"
-  updated: "2026-09-14"
-  fork: false
 - name: "trino-demo"
   description: "Provision a Trino Virtual Warehouse on Cloudera Data Warehouse (CDW) with a single cloudera.cloud Ansible playbook."
   url: "https://github.com/cldr-steven-matison/trino-demo"
   size: 4
   lang: ""
-  updated: "2026-09-14"
-  fork: false
-- name: "iceberg-rest-catalog-demo"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
-  size: 1604
-  lang: "Shell"
   updated: "2026-09-14"
   fork: false
 - name: "ADMIN-238_Admin_K8s"
@@ -53,13 +81,6 @@
   size: 341
   lang: ""
   updated: "2026-09-13"
-  fork: false
-- name: "EdgeFlowManager"
-  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
-  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
-  size: 18634
-  lang: "Python"
-  updated: "2026-09-10"
   fork: false
 - name: "edge-flow-manager-mcp-server"
   description: "Thin, read-only MCP server over the Cloudera Edge Flow Manager (EFM/CEM) REST API — live edge/MiNiFi fleet state for LLM agents."
@@ -80,13 +101,6 @@
   url: "https://github.com/cldr-steven-matison/cloudera-manager-mcp-server"
   size: 24
   lang: "Python"
-  updated: "2026-09-09"
-  fork: false
-- name: "cldr-steven-matison"
-  description: "Config files for my GitHub profile."
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 47
-  lang: ""
   updated: "2026-09-09"
   fork: false
 - name: "exllamav3"
@@ -155,23 +169,9 @@
 - name: "NiFi-Templates"
   description: "NiFI Templates of example flows I share with the community."
   url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 1044
+  size: 1103
   lang: "Python"
   updated: "2026-08-05"
-  fork: false
-- name: "MiNiFi-Kubernetes-Playground"
-  description: "A repository I am using to play with minifi on kubernetes."
-  url: "https://github.com/cldr-steven-matison/MiNiFi-Kubernetes-Playground"
-  size: 76
-  lang: "Python"
-  updated: "2026-08-05"
-  fork: false
-- name: "ClouderaStreamingOperators"
-  description: "Repo for yaml used in installing Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 89
-  lang: ""
-  updated: "2026-07-29"
   fork: false
 - name: "andrej-karpathy-skills"
   description: "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
@@ -186,13 +186,6 @@
   size: 1122766
   lang: ""
   updated: "2026-06-15"
-  fork: true
-- name: "hermes-agent"
-  description: "The agent that grows with you"
-  url: "https://github.com/cldr-steven-matison/hermes-agent"
-  size: 300882
-  lang: ""
-  updated: "2026-06-04"
   fork: true
 - name: "GenerativeAIExamples"
   description: "Generative AI reference workflows optimized for accelerated infrastructure and microservice architecture."
