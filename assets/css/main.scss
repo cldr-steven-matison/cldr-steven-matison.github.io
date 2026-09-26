@@ -64,7 +64,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ---------- background layers (rendered by _includes/boot.html) ---------- */
-#matrix { position: fixed; inset: 0; z-index: 0; opacity: 0.22; pointer-events: none; }
+#matrix { position: fixed; inset: 0; z-index: 0; opacity: 0.13; pointer-events: none; }
 .grid-floor {
   position: fixed; left: 0; right: 0; bottom: 0; height: 42vh; z-index: 0; pointer-events: none;
   background-image:

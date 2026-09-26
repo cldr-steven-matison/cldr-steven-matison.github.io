@@ -135,7 +135,7 @@
 (function(){
   /* ---------- Matrix rain (always on, behind content) ---------- */
   var c=document.getElementById('matrix'),x=c.getContext('2d'),cols,drops;
-  var chars="アイウエオカキクケコサシスセソタチツテト01SRM<>/{}[]#$%&".split("");
+  var chars="01".split("");
   function resize(){c.width=innerWidth;c.height=innerHeight;
     cols=Math.floor(c.width/14);drops=new Array(cols).fill(1);}
   resize();addEventListener('resize',resize);
@@ -191,23 +191,23 @@
   document.body.classList.add('booting');
   var i=0;
   function typeLine(){
-    if(i>=LINES.length){ timers.push(setTimeout(showLogo,450)); return; }
+    if(i>=LINES.length){ timers.push(setTimeout(showLogo,250)); return; }
     var L=LINES[i++], cls=L.c?' class="'+L.c+'"':'',
         status=L.s?'  <span'+cls+'>'+L.s+'</span>':'';
     log.innerHTML+='<span'+cls+'>'+L.t+'</span>'+status+'\n';
-    timers.push(setTimeout(typeLine,110+Math.random()*150));
+    timers.push(setTimeout(typeLine,55+Math.random()*70));
   }
   function showLogo(){
     log.innerHTML+='<span class="cursor"></span>';
     logo.classList.add('show');
-    var n=0;(function step(){art.textContent=ASCII.slice(0,n);n+=6;
-      if(n<=ASCII.length)timers.push(setTimeout(step,12));})();
-    timers.push(setTimeout(finish,2100));
+    var n=0;(function step(){art.textContent=ASCII.slice(0,n);n+=10;
+      if(n<=ASCII.length)timers.push(setTimeout(step,10));})();
+    timers.push(setTimeout(finish,1300));
   }
   function finish(){ boot.classList.add('done'); document.body.classList.remove('booting'); }
 
   // Safety net: never trap the user if something stalls
-  timers.push(setTimeout(finish,9000));
+  timers.push(setTimeout(finish,4000));
   timers.push(setTimeout(typeLine,200));
 })();
 </script>
