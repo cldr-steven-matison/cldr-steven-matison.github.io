@@ -1,0 +1,1073 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>How to Build a Native NiFi Processor in Java (the Read Side of Iceberg) - Cloudera Solutions Engineer</title>
+<meta name="description" content="NiFi’s Iceberg bundle is write-only. So I built GetIceberg — a native Java/NAR read processor that plugs the same RESTCatalogService and returns real rows from a CDP Data Share table.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="How to Build a Native NiFi Processor in Java (the Read Side of Iceberg)">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/How-to-Build-a-Native-NiFi-Processor-in-Java/">
+
+
+  <meta property="og:description" content="NiFi’s Iceberg bundle is write-only. So I built GetIceberg — a native Java/NAR read processor that plugs the same RESTCatalogService and returns real rows from a CDP Data Share table.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/QueryFlights.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-09-13T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/How-to-Build-a-Native-NiFi-Processor-in-Java/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- Dark theme color-scheme hint (native form controls, scrollbars) -->
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0d1117">
+
+<!-- Modern font stack: Inter (UI/body) + JetBrains Mono (code) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!-- ===== SRM terminal chrome: matrix rain + tron grid + CRT + boot screen ===== -->
+<canvas id="matrix" aria-hidden="true"></canvas>
+<div class="grid-floor" aria-hidden="true"></div>
+
+<div id="boot" aria-hidden="true">
+  <div id="bootlog"></div>
+  <div id="srmlogo">
+    <pre id="asciiart"></pre>
+    <div class="tagline">Steven R. Matison // Systems Online</div>
+  </div>
+</div>
+
+<div class="crt" aria-hidden="true"></div>
+
+<script>
+(function(){
+  /* ---------- Matrix rain (always on, behind content) ---------- */
+  var c=document.getElementById('matrix'),x=c.getContext('2d'),cols,drops;
+  var chars="アイウエオカキクケコサシスセソタチツテト01SRM<>/{}[]#$%&".split("");
+  function resize(){c.width=innerWidth;c.height=innerHeight;
+    cols=Math.floor(c.width/14);drops=new Array(cols).fill(1);}
+  resize();addEventListener('resize',resize);
+  function draw(){
+    x.fillStyle="rgba(5,7,10,0.08)";x.fillRect(0,0,c.width,c.height);
+    x.font="14px 'Share Tech Mono',monospace";
+    for(var i=0;i<cols;i++){
+      var ch=chars[Math.floor(Math.random()*chars.length)],y=drops[i]*14;
+      x.fillStyle=Math.random()>0.975?"#00f0ff":"#00ff41";
+      x.fillText(ch,i*14,y);
+      if(y>c.height&&Math.random()>0.975)drops[i]=0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw,55);
+
+  /* ---------- Boot sequence (once per session) ---------- */
+  var ASCII=
+  "  ███████╗ ██████╗ ███╗   ███╗\n"+
+  "  ██╔════╝ ██╔══██╗████╗ ████║\n"+
+  "  ███████╗ ██████╔╝██╔████╔██║\n"+
+  "  ╚════██║ ██╔══██╗██║╚██╔╝██║\n"+
+  "  ███████║ ██║  ██║██║ ╚═╝ ██║\n"+
+  "  ╚══════╝ ╚═╝  ╚═╝╚═╝     ╚═╝";
+  var LINES=[
+    {t:"SRM BIOS v2.6.26 (c) Matison Systems",c:""},
+    {t:"Detecting hardware...............",c:"ok",s:"[ OK ]"},
+    {t:"CPU: Apache NiFi Quad-Core @ 4.2GHz",c:""},
+    {t:"MEM: 640K conventional... 65536K extended [ OK ]",c:"ok"},
+    {t:"Mounting /dev/cdp ...............",c:"ok",s:"[ OK ]"},
+    {t:"Loading modules: kafka minifi k8s iceberg",c:""},
+    {t:"Establishing edge-to-core link..",c:"warn",s:"[ WARN ]"},
+    {t:"  retrying secure channel......",c:"ok",s:"[ OK ]"},
+    {t:"Starting matrix daemon..........",c:"ok",s:"[ OK ]"},
+    {t:"Authenticating user: srm........",c:"ok",s:"[ OK ]"},
+    {t:"",c:""},
+    {t:"SYSTEM READY. Launching interface_",c:"ok"}
+  ];
+  var boot=document.getElementById('boot'),log=document.getElementById('bootlog'),
+      logo=document.getElementById('srmlogo'),art=document.getElementById('asciiart'),
+      timers=[];
+
+  function skip(){ boot.classList.add('done'); }
+
+  // Respect reduced-motion and session replay
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen;
+  try { seen = sessionStorage.getItem('srm_booted'); } catch(e){ seen = null; }
+
+  if (seen || reduce){ skip(); return; }
+  try { sessionStorage.setItem('srm_booted','1'); } catch(e){}
+
+  document.body.classList.add('booting');
+  var i=0;
+  function typeLine(){
+    if(i>=LINES.length){ timers.push(setTimeout(showLogo,450)); return; }
+    var L=LINES[i++], cls=L.c?' class="'+L.c+'"':'',
+        status=L.s?'  <span'+cls+'>'+L.s+'</span>':'';
+    log.innerHTML+='<span'+cls+'>'+L.t+'</span>'+status+'\n';
+    timers.push(setTimeout(typeLine,110+Math.random()*150));
+  }
+  function showLogo(){
+    log.innerHTML+='<span class="cursor"></span>';
+    logo.classList.add('show');
+    var n=0;(function step(){art.textContent=ASCII.slice(0,n);n+=6;
+      if(n<=ASCII.length)timers.push(setTimeout(step,12));})();
+    timers.push(setTimeout(finish,2100));
+  }
+  function finish(){ boot.classList.add('done'); document.body.classList.remove('booting'); }
+
+  // Safety net: never trap the user if something stalls
+  timers.push(setTimeout(finish,9000));
+  timers.push(setTimeout(typeLine,200));
+})();
+</script>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How to Build a Native NiFi Processor in Java (the Read Side of Iceberg)">
+    <meta itemprop="description" content="NiFi’s Iceberg bundle is write-only. So I built GetIceberg — a native Java/NAR read processor that plugs the same RESTCatalogService and returns real rows from a CDP Data Share table.">
+    <meta itemprop="datePublished" content="2026-09-13T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/How-to-Build-a-Native-NiFi-Processor-in-Java/" class="u-url" itemprop="url">How to Build a Native NiFi Processor in Java (the Read Side of Iceberg)
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-09-13T00:00:00-04:00">
+            September 13, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>This is the third post in the custom-processor series. The first two — <a href="https://cldr-steven-matison.github.io/blog/Custom-Processors-With-Cloudera-Streaming-Operators/">Custom Processors with Cloudera Streaming Operators</a> and <a href="https://cldr-steven-matison.github.io/blog/How-to-AI-with-NiFi-and-Python/">How to Build and Test Custom NiFi Processors with AI</a> — are both the Python path: drop a <code class="language-plaintext highlighter-rouge">.py</code> file into a mounted extensions folder, wait 30 seconds, and NiFi hot-reloads it. That path is unbeatable for glue logic and iteration speed. But it can’t reach a controller service, and it isn’t the JVM. When you need either, you build a <em>native</em> processor: Java compiled into a NAR and loaded as a first-class type. This post is that path end to end, and the worked example is a processor I actually needed and shipped — <code class="language-plaintext highlighter-rouge">GetIceberg</code>, the read counterpart to NiFi’s write-only <code class="language-plaintext highlighter-rouge">PutIceberg</code>, returning real rows from a Cloudera Data Share table.</p>
+
+<h2 id="the-symptom-nifis-iceberg-bundle-cant-read">The symptom: NiFi’s Iceberg bundle can’t read</h2>
+
+<p>NiFi ships <code class="language-plaintext highlighter-rouge">PutIceberg</code> and <code class="language-plaintext highlighter-rouge">PutIcebergCDC</code>. Both write. There is no <code class="language-plaintext highlighter-rouge">GetIceberg</code> — no first-class way to pull the rows of an Iceberg table into a flow. On a CDP Data Share, where the whole point is that a consumer reads a shared table through a REST catalog, that gap is the whole game. You can call the REST Catalog API by hand with <code class="language-plaintext highlighter-rouge">InvokeHTTP</code> and an OAuth token provider — that works, and it’s the zero-dependency path — but it’s HTTP glue, not a processor. What I wanted on the canvas was a processor that takes a catalog service and a table name and emits the rows through a Record Writer, exactly the way <code class="language-plaintext highlighter-rouge">PutIceberg</code> takes them in.</p>
+
+<h2 id="the-diagnosis-build-the-read-counterpart-as-a-nar">The diagnosis: build the read counterpart as a NAR</h2>
+
+<p>The Python bridge can’t do this — it doesn’t do <code class="language-plaintext highlighter-rouge">identifiesControllerService(...)</code>, and <code class="language-plaintext highlighter-rouge">GetIceberg</code> has to plug the <em>same</em> <code class="language-plaintext highlighter-rouge">RESTCatalogService</code> the stock bundle already uses. So it’s Java. And the fastest way to a correct Java processor here wasn’t the empty archetype — it was to <strong>port the one that already exists</strong>. I took the <code class="language-plaintext highlighter-rouge">PutIceberg</code> source, renamed everything <code class="language-plaintext highlighter-rouge">Put</code>→<code class="language-plaintext highlighter-rouge">Get</code>, ripped out the put guts (Kerberos/UGI wrapping, the RecordReader, task writers, commit retries) and dropped in get guts:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>catalog.loadTable(id)  →  IcebergGenerics.read(table)  →  Iceberg-to-NiFi record conversion  →  Record Writer
+</code></pre></div></div>
+
+<p>The result keeps the stock bundle’s module layout, its <code class="language-plaintext highlighter-rouge">success</code>/<code class="language-plaintext highlighter-rouge">failure</code> relationships, and its controller-service contract — so on the canvas the read side and the write side look like siblings.</p>
+
+<h2 id="the-processor-what-makes-it-native">The processor: what makes it native</h2>
+
+<p>Three things a Python processor can’t do show up immediately.</p>
+
+<p><strong>It identifies controller services.</strong> The load-bearing property doesn’t take a string — it takes a controller service:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">static</span> <span class="kd">final</span> <span class="nc">PropertyDescriptor</span> <span class="no">CATALOG</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PropertyDescriptor</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="s">"catalog-service"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">displayName</span><span class="o">(</span><span class="s">"Catalog Service"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">identifiesControllerService</span><span class="o">(</span><span class="nc">IcebergCatalogService</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>   <span class="c1">// dropdown of matching CS instances</span>
+        <span class="o">.</span><span class="na">required</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>That one line is why the same <code class="language-plaintext highlighter-rouge">RESTCatalogService</code> instance feeds both <code class="language-plaintext highlighter-rouge">PutIceberg</code> and <code class="language-plaintext highlighter-rouge">GetIceberg</code>. The Record Writer is the same idea (<code class="language-plaintext highlighter-rouge">identifiesControllerService(RecordSetWriterFactory.class)</code>) — so the output format is whatever writer you drop in: JSON, Avro, Parquet, CSV.</p>
+
+<p><strong>It’s a source, and it says so.</strong> Class-level annotations the framework enforces:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PrimaryNodeOnly</span>
+<span class="nd">@TriggerSerially</span>
+<span class="nd">@InputRequirement</span><span class="o">(</span><span class="nc">InputRequirement</span><span class="o">.</span><span class="na">Requirement</span><span class="o">.</span><span class="na">INPUT_FORBIDDEN</span><span class="o">)</span>   <span class="c1">// no inbound connection — it pulls from the catalog</span>
+<span class="nd">@RequiresInstanceClassLoading</span><span class="o">(</span><span class="n">cloneAncestorResources</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">INPUT_FORBIDDEN</code> makes NiFi reject an inbound connection at design time. <code class="language-plaintext highlighter-rouge">@PrimaryNodeOnly</code> + <code class="language-plaintext highlighter-rouge">@TriggerSerially</code> stop a clustered NiFi from running the same full-table read on every node at once. These compile fine if you get them wrong — they just misbehave in a cluster, which is the worst place to find out.</p>
+
+<p><strong>The read runs through the session.</strong> <code class="language-plaintext highlighter-rouge">onTrigger</code> creates the FlowFile (a source has none to <code class="language-plaintext highlighter-rouge">get()</code>), scans the table, writes every row inside one <code class="language-plaintext highlighter-rouge">session.write</code> callback, stamps <code class="language-plaintext highlighter-rouge">record.count</code> / <code class="language-plaintext highlighter-rouge">iceberg.catalog.namespace</code> / <code class="language-plaintext highlighter-rouge">iceberg.table.name</code>, fires a provenance <code class="language-plaintext highlighter-rouge">RECEIVE</code> on the table location, and transfers to <code class="language-plaintext highlighter-rouge">success</code>. The entire body is wrapped in one <code class="language-plaintext highlighter-rouge">try</code> whose <code class="language-plaintext highlighter-rouge">catch</code> routes a diagnostic FlowFile to <code class="language-plaintext highlighter-rouge">failure</code> carrying the namespace, table, and <code class="language-plaintext highlighter-rouge">iceberg.read.error</code> as attributes — so when a read fails you debug from the flow, not by grepping pod logs.</p>
+
+<h2 id="two-divergences-i-earned-the-hard-way">Two divergences I earned the hard way</h2>
+
+<p>Porting the factory that builds the catalog client (<code class="language-plaintext highlighter-rouge">IcebergCatalogFactory</code>) is where the real lessons are. It diverges from the stock CFM factory in exactly two places, and both came out of debugging the native path on a live cluster.</p>
+
+<p><strong>Null-guard the OAuth token.</strong> The stock factory guards the token <em>service</em> but never the token <em>string</em>. When the Knox OAuth2 provider can’t mint a token — a wedged provider, or a per-user JWT quota hit (<code class="language-plaintext highlighter-rouge">403 token limit exceeded</code>) — the token comes back <code class="language-plaintext highlighter-rouge">null</code> and Iceberg throws a bare <code class="language-plaintext highlighter-rouge">NullPointerException</code> deep inside <code class="language-plaintext highlighter-rouge">EnvironmentUtil.resolveAll</code>. Nothing tells you it’s the token. So the factory checks:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">token</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">token</span><span class="o">.</span><span class="na">isBlank</span><span class="o">())</span> <span class="o">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"The configured OAuth2 token provider returned no access token; "</span>
+            <span class="o">+</span> <span class="s">"check that the provider is enabled and its credentials are valid"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Always request vended credentials.</strong> One header unlocks the datashare’s S3 read credentials on <code class="language-plaintext highlighter-rouge">loadTable</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"header.X-Iceberg-Access-Delegation"</span><span class="o">,</span> <span class="s">"vended-credentials"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Without it the catalog resolves the table metadata but can’t read the data files.</p>
+
+<p class="notice--warning"><img class="emoji" title=":hammer_and_wrench:" alt=":hammer_and_wrench:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6e0.png" height="20" width="20"> <strong>Pro Tip!</strong> These two are also exactly the notes a reviewer will want if you take this upstream: the null-token guard is a genuine robustness fix worth landing; the always-on vended-credentials header is a CDP-datashare assumption that should be made configurable before it goes into <code class="language-plaintext highlighter-rouge">apache/nifi</code>.</p>
+
+<h2 id="prove-it-with-testrunner--no-cluster-no-credentials">Prove it with TestRunner — no cluster, no credentials</h2>
+
+<p><code class="language-plaintext highlighter-rouge">nifi-mock</code> is in the POM, so the processor is testable in-process. The trick that makes the test hermetic: it drives a local <code class="language-plaintext highlighter-rouge">HadoopCatalog</code> over a <code class="language-plaintext highlighter-rouge">@TempDir</code>, seeds the <em>same</em> three airlines the datashare table has (<code class="language-plaintext highlighter-rouge">AA</code> / <code class="language-plaintext highlighter-rouge">DL</code> / <code class="language-plaintext highlighter-rouge">UA</code>) into a real Parquet-backed Iceberg table, then reads them back.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testReadsAllRows</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="n">seedAirlinesTable</span><span class="o">(</span><span class="n">warehouse</span><span class="o">);</span>          <span class="c1">// demo.airlines, 3 rows, real Parquet</span>
+    <span class="n">configureRunner</span><span class="o">(</span><span class="n">warehouse</span><span class="o">);</span>            <span class="c1">// HadoopCatalogServiceStub + JsonRecordSetWriter</span>
+    <span class="n">runner</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+    <span class="n">runner</span><span class="o">.</span><span class="na">assertAllFlowFilesTransferred</span><span class="o">(</span><span class="nc">GetIceberg</span><span class="o">.</span><span class="na">REL_SUCCESS</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="kd">final</span> <span class="nc">MockFlowFile</span> <span class="n">ff</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="na">getFlowFilesForRelationship</span><span class="o">(</span><span class="nc">GetIceberg</span><span class="o">.</span><span class="na">REL_SUCCESS</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="n">ff</span><span class="o">.</span><span class="na">assertAttributeEquals</span><span class="o">(</span><span class="s">"record.count"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">);</span>
+    <span class="n">ff</span><span class="o">.</span><span class="na">assertAttributeEquals</span><span class="o">(</span><span class="s">"mime.type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">);</span>
+    <span class="n">assertTrue</span><span class="o">(</span><span class="n">ff</span><span class="o">.</span><span class="na">getContent</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="s">"American Airlines"</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Three tests cover the paths that matter: the happy read (3 rows, right attributes, JSON), a column projection (<code class="language-plaintext highlighter-rouge">Columns=carrier_code</code> → <code class="language-plaintext highlighter-rouge">AA</code> present, <code class="language-plaintext highlighter-rouge">American Airlines</code> absent), and the failure route (<code class="language-plaintext highlighter-rouge">Table Name=does_not_exist</code> → one FlowFile on <code class="language-plaintext highlighter-rouge">failure</code> with <code class="language-plaintext highlighter-rouge">iceberg.read.error</code> set). <code class="language-plaintext highlighter-rouge">HadoopCatalogServiceStub</code> is a tiny <code class="language-plaintext highlighter-rouge">AbstractControllerService implements IcebergCatalogService</code> — it proves the controller-service contract without a running NiFi. This is the Java version of the Python rule “prove the skeleton before you ship it.”</p>
+
+<h2 id="measure-it--a-coverage-plugin-and-a-gate">Measure it — a coverage plugin, and a gate</h2>
+
+<p>“The tests pass” and “the tests hit the code that matters” are different claims, and a coverage plugin is what separates them: it reports which lines the suite actually runs, so the branch you forgot shows up red instead of hiding behind a green build. Add <a href="https://www.jacoco.org/jacoco/">JaCoCo</a> to the processors module — <code class="language-plaintext highlighter-rouge">prepare-agent</code> to instrument, a <code class="language-plaintext highlighter-rouge">report</code> on the <code class="language-plaintext highlighter-rouge">test</code> phase (HTML/XML/CSV under <code class="language-plaintext highlighter-rouge">target/site/jacoco/</code>), and a <code class="language-plaintext highlighter-rouge">check</code> on <code class="language-plaintext highlighter-rouge">verify</code> that <strong>fails the build</strong> below a bundle line-coverage floor:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;execution&gt;&lt;id&gt;</span>check<span class="nt">&lt;/id&gt;&lt;phase&gt;</span>verify<span class="nt">&lt;/phase&gt;</span>
+  <span class="nt">&lt;goals&gt;&lt;goal&gt;</span>check<span class="nt">&lt;/goal&gt;&lt;/goals&gt;</span>
+  <span class="nt">&lt;configuration&gt;&lt;rules&gt;&lt;rule&gt;</span>
+    <span class="nt">&lt;element&gt;</span>BUNDLE<span class="nt">&lt;/element&gt;</span>
+    <span class="nt">&lt;limits&gt;&lt;limit&gt;&lt;counter&gt;</span>LINE<span class="nt">&lt;/counter&gt;&lt;value&gt;</span>COVEREDRATIO<span class="nt">&lt;/value&gt;&lt;minimum&gt;</span>0.80<span class="nt">&lt;/minimum&gt;&lt;/limit&gt;&lt;/limits&gt;</span>
+  <span class="nt">&lt;/rule&gt;&lt;/rules&gt;&lt;/configuration&gt;</span>
+<span class="nt">&lt;/execution&gt;</span>
+</code></pre></div></div>
+
+<p>Now <code class="language-plaintext highlighter-rouge">mvn clean verify</code> runs the tests <em>and</em> the gate — <code class="language-plaintext highlighter-rouge">All coverage checks have been met. → BUILD SUCCESS</code>. Two things the report taught that the checkmark didn’t. <strong>Drive the tests through the real engine, not around it</strong>: the SQL pushdown path got covered by running more <code class="language-plaintext highlighter-rouge">SELECT</code>s (<code class="language-plaintext highlighter-rouge">IN</code>, <code class="language-plaintext highlighter-rouge">BETWEEN</code>, <code class="language-plaintext highlighter-rouge">IS NULL</code>, <code class="language-plaintext highlighter-rouge">LIKE</code>, <code class="language-plaintext highlighter-rouge">AND</code>/<code class="language-plaintext highlighter-rouge">OR</code>/<code class="language-plaintext highlighter-rouge">NOT</code>, plus the non-pushable predicates that must fall back to a residual filter) through <code class="language-plaintext highlighter-rouge">TestRunner</code> and letting Calcite build the trees — never by hand-assembling parse nodes. And <strong>exclude what you honestly can’t test, out loud</strong>: the catalog factory’s REST branch needs a live endpoint and a real OAuth token, so it’s an explicit <code class="language-plaintext highlighter-rouge">&lt;exclude&gt;</code> on the gate with a comment — a stated decision, not a silent gap. The type converter has no such excuse, so its target is 100%.</p>
+
+<h2 id="build-the-nar--and-the-classloader-trick-that-makes-it-drop-in">Build the NAR — and the classloader trick that makes it drop-in</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>nifi-iceberg-read-bundle
+mvn clean <span class="nb">install</span> <span class="nt">-Denforcer</span>.skip<span class="o">=</span><span class="nb">true</span>     <span class="c"># runs the TestRunner tests: 3 rows</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">-Denforcer.skip=true</code> sidesteps the parent bundle’s dependency-convergence enforcer — not a real problem for a single-processor bundle. The artifact is <code class="language-plaintext highlighter-rouge">nifi-iceberg-read-nar/target/nifi-iceberg-read-nar-1.0.2-SNAPSHOT.nar</code>.</p>
+
+<p>Two things about <em>this</em> NAR are the difference between “loads” and “works,” and they’re the parts that only bite in the field.</p>
+
+<p>The NAR declares CFM’s Iceberg services-api NAR as its <strong>parent</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Nar-Dependency-Group: org.apache.nifi
+Nar-Dependency-Id: nifi-iceberg-services-api-nar
+Nar-Dependency-Version: 2.6.0.4.3.4.0-234
+</code></pre></div></div>
+
+<p>That’s what lets the <code class="language-plaintext highlighter-rouge">RESTCatalogService</code> instance <em>already running</em> on the cluster satisfy <code class="language-plaintext highlighter-rouge">GetIceberg</code>’s <code class="language-plaintext highlighter-rouge">catalog-service</code> property directly. Everything else — Iceberg 1.7.2, parquet, hadoop-common, jackson — is bundled <em>inside</em> the NAR. That bundling is deliberate:</p>
+
+<p class="notice--danger"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Danger!</strong> CFM’s stock bundle pairs <code class="language-plaintext highlighter-rouge">iceberg-core 1.5.2</code> with <code class="language-plaintext highlighter-rouge">jackson-databind 2.20.1</code>, and <code class="language-plaintext highlighter-rouge">1.5.2</code> references <code class="language-plaintext highlighter-rouge">com.fasterxml.jackson.databind.PropertyNamingStrategy$KebabCaseStrategy</code> — a nested class removed after Jackson 2.15. Any catalog call throws <code class="language-plaintext highlighter-rouge">ClassNotFoundException</code> for it. Bundling my own Iceberg 1.7.2 inside the NAR sidesteps the conflict entirely — no jackson-fix image needed for this processor.</p>
+
+<p>The one bootstrap step: the CFM services-api jar isn’t on any public Maven repo, so extract it from the running pod. The jars under <code class="language-plaintext highlighter-rouge">work/nar/extensions/...</code> are <strong>symlinks</strong> into <code class="language-plaintext highlighter-rouge">work/nar-lib/</code>, so stream the real file with <code class="language-plaintext highlighter-rouge">base64</code> — don’t <code class="language-plaintext highlighter-rouge">tar</code> the directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">POD</span><span class="o">=</span>mynifi-0 <span class="nv">NS</span><span class="o">=</span>cfm-streaming <span class="nv">V</span><span class="o">=</span>2.6.0.4.3.4.0-234
+kubectl <span class="nb">exec</span> <span class="nv">$POD</span> <span class="nt">-n</span> <span class="nv">$NS</span> <span class="nt">-c</span> nifi <span class="nt">--</span> <span class="nb">base64</span> <span class="se">\</span>
+  /opt/nifi/nifi-current/work/nar/extensions/nifi-iceberg-services-api-nar-<span class="nv">$V</span>.nar-unpacked/NAR-INF/bundled-dependencies/nifi-iceberg-services-api-<span class="nv">$V</span>.jar <span class="se">\</span>
+  | <span class="nb">base64</span> <span class="nt">-d</span> <span class="o">&gt;</span> nifi-iceberg-services-api.jar
+
+mvn <span class="nb">install</span>:install-file <span class="nt">-Dfile</span><span class="o">=</span>nifi-iceberg-services-api.jar <span class="se">\</span>
+  <span class="nt">-DgroupId</span><span class="o">=</span>org.apache.nifi <span class="nt">-DartifactId</span><span class="o">=</span>nifi-iceberg-services-api <span class="nt">-Dversion</span><span class="o">=</span><span class="nv">$V</span> <span class="se">\</span>
+  <span class="nt">-Dpackaging</span><span class="o">=</span>jar <span class="nt">-DgeneratePom</span><span class="o">=</span><span class="nb">true</span>
+</code></pre></div></div>
+
+<h2 id="deploy--copy-the-nar-no-restart">Deploy — copy the NAR, no restart</h2>
+
+<p>This CFM build autoloads NARs from <code class="language-plaintext highlighter-rouge">nifi.nar.library.autoload.directory</code>, which is <code class="language-plaintext highlighter-rouge">./data/extensions</code>. Copy it straight in:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">cp</span> <span class="nt">-c</span> nifi nifi-iceberg-read-nar/target/nifi-iceberg-read-nar-1.0.2-SNAPSHOT.nar <span class="se">\</span>
+  cfm-streaming/mynifi-0:/opt/nifi/nifi-current/data/extensions/
+</code></pre></div></div>
+
+<p>The NAR hot-loads in ~10 seconds. Search <code class="language-plaintext highlighter-rouge">GetIceberg</code> in the palette and it’s there — no pod restart, no CR edit.</p>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>Watch out.</strong> NiFi will <em>not</em> re-register a same-version overwrite. Edit the code and copy the same <code class="language-plaintext highlighter-rouge">1.0.2-SNAPSHOT</code> NAR back and nothing changes. Bump the bundle version (<code class="language-plaintext highlighter-rouge">1.0.2</code> → <code class="language-plaintext highlighter-rouge">1.0.3</code>), rebuild, recopy, then repoint the processor instance to the new version. That version-bump-to-redeploy rule is the Java analogue of the Python “bump <code class="language-plaintext highlighter-rouge">ProcessorDetails.version</code>” trick — the cost you pay for JVM speed and controller-service access.</p>
+
+<h2 id="read-a-table--local-first-then-live">Read a table — local first, then live</h2>
+
+<p><strong>Local, no CDP credentials.</strong> The bundle ships a <code class="language-plaintext highlighter-rouge">test-rig/</code>: <code class="language-plaintext highlighter-rouge">tabulario/iceberg-rest</code> + MinIO in an <code class="language-plaintext highlighter-rouge">iceberg-demo</code> namespace, a pyiceberg Job that seeds <code class="language-plaintext highlighter-rouge">demo.airlines</code> with the three rows, and a <code class="language-plaintext highlighter-rouge">build-demo-pg.sh</code> that stands up the <code class="language-plaintext highlighter-rouge">GetIcebergDemo</code> process group over the NiFi REST API. The <code class="language-plaintext highlighter-rouge">tabulario</code> fixture doesn’t vend S3 config, so the demo sets <code class="language-plaintext highlighter-rouge">io-impl</code> / <code class="language-plaintext highlighter-rouge">s3.endpoint</code> / <code class="language-plaintext highlighter-rouge">s3.path-style-access</code> / <code class="language-plaintext highlighter-rouge">client.region</code> as <code class="language-plaintext highlighter-rouge">GetIceberg</code> <strong>dynamic properties</strong> — the escape hatch those dynamic props exist for. Result: one FlowFile, <code class="language-plaintext highlighter-rouge">record.count=3</code>, a JSON array of the three airlines, provenance <code class="language-plaintext highlighter-rouge">RECEIVE s3://warehouse/demo/airlines</code>.</p>
+
+<p><strong>Live, against a CDP Data Share.</strong> Same process group shape plus the Knox OAuth chain — three components:</p>
+
+<ol>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">KnoxOAuth2</code></strong> — a <code class="language-plaintext highlighter-rouge">StandardOauth2AccessTokenProvider</code>: authorization server = the Knox token endpoint, grant type <code class="language-plaintext highlighter-rouge">client_credentials</code>, Client Authentication Strategy <code class="language-plaintext highlighter-rouge">REQUEST_BODY</code> (Knox’s 2-step endpoint won’t take Basic). Client id/secret live in a Parameter Context, never a processor property.</li>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">CdpRestCatalog</code></strong> — a <code class="language-plaintext highlighter-rouge">RESTCatalogService</code>: <code class="language-plaintext highlighter-rouge">Catalog URI</code> = the datashare <code class="language-plaintext highlighter-rouge">iceberg-rest</code> endpoint, warehouse = the S3 path, OAuth provider = <code class="language-plaintext highlighter-rouge">KnoxOAuth2</code>.</li>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">GetIceberg</code></strong> — <code class="language-plaintext highlighter-rouge">Catalog Service</code> = <code class="language-plaintext highlighter-rouge">CdpRestCatalog</code>, <code class="language-plaintext highlighter-rouge">Catalog Namespace</code> = <code class="language-plaintext highlighter-rouge">poc_uc2</code>, <code class="language-plaintext highlighter-rouge">Table Name</code> = <code class="language-plaintext highlighter-rouge">airlines</code>, <code class="language-plaintext highlighter-rouge">Record Writer</code> = a <code class="language-plaintext highlighter-rouge">JsonRecordSetWriter</code> → funnel.</li>
+</ol>
+
+<p>No dynamic S3 properties here — the datashare vends the S3 read credentials in the <code class="language-plaintext highlighter-rouge">loadTable</code> response, unlocked by that always-on vended-credentials header. <code class="language-plaintext highlighter-rouge">GetIceberg</code> on <code class="language-plaintext highlighter-rouge">poc_uc2.airlines</code> returns a single FlowFile whose content is a JSON array of the three airline rows — the same rows a Spark or SSB client sees through that catalog, now through a native NiFi processor with no <code class="language-plaintext highlighter-rouge">InvokeHTTP</code> glue. Validated on CFM <code class="language-plaintext highlighter-rouge">2.6.0.4.3.4.0-234</code>.</p>
+
+<p><img src="/assets/images/GetIceberg-flow.png" alt="GetIceberg reading poc_uc2.airlines live on a CDP Data Share — one FlowFile on the success relationship, running on the com.example nifi-iceberg-read-nar bundle"></p>
+
+<h2 id="a-second-processor-queryiceberg--sql-with-pushdown">A second processor: <code class="language-plaintext highlighter-rouge">QueryIceberg</code> — SQL with pushdown</h2>
+
+<p><code class="language-plaintext highlighter-rouge">GetIceberg</code> reads a whole table. The next thing you want on a real table is to <em>not</em> read the whole thing — to run a <code class="language-plaintext highlighter-rouge">WHERE</code> and have the engine skip the files that can’t match. That’s <code class="language-plaintext highlighter-rouge">QueryIceberg</code>, the second processor in the same bundle: same NAR, same <code class="language-plaintext highlighter-rouge">IcebergCatalogService</code>, same Record Writer, but the <code class="language-plaintext highlighter-rouge">onTrigger</code> body runs SQL through Apache Calcite with the filter pushed down into the Iceberg scan.</p>
+
+<p>It’s shaped like NiFi’s stock <code class="language-plaintext highlighter-rouge">QueryRecord</code>: <strong>each dynamic property is a SQL <code class="language-plaintext highlighter-rouge">SELECT</code>, and its results route to a relationship of the same name.</strong> Add a property named <code class="language-plaintext highlighter-rouge">delayed</code> with value <code class="language-plaintext highlighter-rouge">SELECT * FROM flights WHERE dep_delay &gt; 45</code> and you get a <code class="language-plaintext highlighter-rouge">delayed</code> relationship carrying exactly those rows. (One wrinkle falls out of the port: <code class="language-plaintext highlighter-rouge">GetIceberg</code> uses plain dynamic properties for catalog overrides, but here those <em>are</em> the queries — so on <code class="language-plaintext highlighter-rouge">QueryIceberg</code> a catalog override is namespaced <code class="language-plaintext highlighter-rouge">catalog.s3.endpoint</code>, and everything not prefixed <code class="language-plaintext highlighter-rouge">catalog.</code> is treated as a query.)</p>
+
+<p><img src="/assets/images/QueryIceberg-flow.png" alt="QueryIceberg on poc_uc2.airlines — three SQL dynamic properties (all, by_dest, filtered) each routed to its own relationship of the same name"></p>
+
+<p>The pushdown is the whole point. The table is handed to Calcite as a <code class="language-plaintext highlighter-rouge">ProjectableFilterableTable</code>, whose single <code class="language-plaintext highlighter-rouge">scan(root, filters, projects)</code> call hands you the projected column ordinals and a <strong>mutable</strong> list of filter conjuncts. A translator turns each conjunct it understands (<code class="language-plaintext highlighter-rouge">=</code>, <code class="language-plaintext highlighter-rouge">&lt;&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;</code>, <code class="language-plaintext highlighter-rouge">IN</code>, <code class="language-plaintext highlighter-rouge">IS NULL</code>, prefix <code class="language-plaintext highlighter-rouge">LIKE</code>, <code class="language-plaintext highlighter-rouge">AND</code>/<code class="language-plaintext highlighter-rouge">OR</code>/<code class="language-plaintext highlighter-rouge">NOT</code> over string/numeric/boolean/decimal) into a native Iceberg <code class="language-plaintext highlighter-rouge">Expression</code>, pushes it into the scan, and <strong>removes only what it pushed</strong> from the list — Calcite evaluates whatever’s left as a residual filter. So correctness never depends on the translator being complete: an untranslatable predicate like <code class="language-plaintext highlighter-rouge">UPPER(carrier) = 'AA'</code> simply stays a residual and the rows still come back right. Pushdown only ever changes <em>how much data is read</em>, never <em>which rows come out</em>.</p>
+
+<p>And you can watch it work, because every FlowFile is stamped with the scan metrics: <code class="language-plaintext highlighter-rouge">iceberg.pushdown.filter</code> (what actually reached Iceberg — empty means the whole <code class="language-plaintext highlighter-rouge">WHERE</code> ran as a residual), <code class="language-plaintext highlighter-rouge">iceberg.pushdown.columns</code> (the projection), and the counters <code class="language-plaintext highlighter-rouge">iceberg.scan.skipped.data.manifests</code> / <code class="language-plaintext highlighter-rouge">iceberg.scan.result.data.files</code>. The <code class="language-plaintext highlighter-rouge">test-rig/</code> seeds a <code class="language-plaintext highlighter-rouge">demo.flights</code> table of ~120k rows partitioned by month into twelve files; a query with <code class="language-plaintext highlighter-rouge">WHERE flight_month = '2026-03'</code> comes back with <code class="language-plaintext highlighter-rouge">iceberg.scan.skipped.data.manifests = 11</code> and <code class="language-plaintext highlighter-rouge">iceberg.scan.result.data.files = 1</code> — eleven-twelfths of the table never opened, proven on the FlowFile itself, and identical on the local rig and live on the CDP Data Share.</p>
+
+<p><img src="/assets/images/QueryFlights-flow.png" alt="QueryFlights on the ~120k-row flights table partitioned by flight_month — the pruned / delayed / carrier_stats queries each on their own relationship, WHERE flight_month = '2026-03' reading one data file of twelve"></p>
+
+<h2 id="what-not-to-do">What NOT to do</h2>
+
+<ul>
+  <li>
+<strong>Don’t skip the SPI file.</strong> <code class="language-plaintext highlighter-rouge">META-INF/services/org.apache.nifi.processor.Processor</code> must contain <code class="language-plaintext highlighter-rouge">org.apache.nifi.processors.iceberg.GetIceberg</code>. No entry = the NAR loads but the processor never appears.</li>
+  <li>
+<strong>Don’t expect a same-version NAR to reload.</strong> Bump the version.</li>
+  <li>
+<strong>Don’t <code class="language-plaintext highlighter-rouge">tar</code> the pod’s <code class="language-plaintext highlighter-rouge">work/nar/extensions</code> jars</strong> — they’re symlinks. <code class="language-plaintext highlighter-rouge">base64</code> the real file.</li>
+  <li>
+<strong>Don’t rely on the framework’s Iceberg/jackson.</strong> Classloader isolation makes it fragile and you inherit CFM’s version conflict. Bundle your own inside the NAR.</li>
+  <li>
+<strong>Don’t put the OAuth client secret in a processor property.</strong> A non-sensitive property can’t reference a sensitive param anyway — use a Parameter Context wired into the OAuth2 provider.</li>
+</ul>
+
+<h2 id="appendix--reusable-commands">Appendix — reusable commands</h2>
+
+<h4 id="1-build--test-the-nar">1. Build + test the NAR</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>nifi-iceberg-read-bundle
+mvn clean <span class="nb">install</span> <span class="nt">-Denforcer</span>.skip<span class="o">=</span><span class="nb">true</span>
+</code></pre></div></div>
+
+<h4 id="2-bootstrap-the-cfm-services-api-jar-once-per-dev-machine">2. Bootstrap the CFM services-api jar (once per dev machine)</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">POD</span><span class="o">=</span>mynifi-0 <span class="nv">NS</span><span class="o">=</span>cfm-streaming <span class="nv">V</span><span class="o">=</span>2.6.0.4.3.4.0-234
+kubectl <span class="nb">exec</span> <span class="nv">$POD</span> <span class="nt">-n</span> <span class="nv">$NS</span> <span class="nt">-c</span> nifi <span class="nt">--</span> <span class="nb">base64</span> <span class="se">\</span>
+  /opt/nifi/nifi-current/work/nar/extensions/nifi-iceberg-services-api-nar-<span class="nv">$V</span>.nar-unpacked/NAR-INF/bundled-dependencies/nifi-iceberg-services-api-<span class="nv">$V</span>.jar <span class="se">\</span>
+  | <span class="nb">base64</span> <span class="nt">-d</span> <span class="o">&gt;</span> nifi-iceberg-services-api.jar
+mvn <span class="nb">install</span>:install-file <span class="nt">-Dfile</span><span class="o">=</span>nifi-iceberg-services-api.jar <span class="se">\</span>
+  <span class="nt">-DgroupId</span><span class="o">=</span>org.apache.nifi <span class="nt">-DartifactId</span><span class="o">=</span>nifi-iceberg-services-api <span class="nt">-Dversion</span><span class="o">=</span><span class="nv">$V</span> <span class="se">\</span>
+  <span class="nt">-Dpackaging</span><span class="o">=</span>jar <span class="nt">-DgeneratePom</span><span class="o">=</span><span class="nb">true</span>
+</code></pre></div></div>
+
+<h4 id="3-deploy-hot-load-10s-no-restart">3. Deploy (hot-load, ~10s, no restart)</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">cp</span> <span class="nt">-c</span> nifi nifi-iceberg-read-nar/target/nifi-iceberg-read-nar-1.0.2-SNAPSHOT.nar <span class="se">\</span>
+  cfm-streaming/mynifi-0:/opt/nifi/nifi-current/data/extensions/
+kubectl <span class="nb">exec </span>mynifi-0 <span class="nt">-n</span> cfm-streaming <span class="nt">-c</span> nifi <span class="nt">--</span> <span class="nb">ls</span> /opt/nifi/nifi-current/data/extensions/
+</code></pre></div></div>
+
+<h4 id="4-redeploy-after-a-code-change">4. Redeploy after a code change</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># bump &lt;version&gt; in the bundle + module POMs first, then:</span>
+mvn clean <span class="nb">install</span> <span class="nt">-Denforcer</span>.skip<span class="o">=</span><span class="nb">true
+</span>kubectl <span class="nb">cp</span> <span class="nt">-c</span> nifi nifi-iceberg-read-nar/target/nifi-iceberg-read-nar-&lt;newversion&gt;.nar <span class="se">\</span>
+  cfm-streaming/mynifi-0:/opt/nifi/nifi-current/data/extensions/
+<span class="c"># then repoint the processor instance to the new bundle version in the UI</span>
+</code></pre></div></div>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li>
+<a href="https://github.com/cldr-steven-matison/NiFi2-Processor-Playground/tree/main/nifi-iceberg-read-bundle"><code class="language-plaintext highlighter-rouge">nifi-iceberg-read-bundle</code></a> — the full worked bundle: processor, catalog factory, record converter, TestRunner tests, the <code class="language-plaintext highlighter-rouge">test-rig/</code>, and a README with the field detail.</li>
+  <li>
+<a href="https://github.com/cldr-steven-matison/NiFi2-Processor-Playground">NiFi 2.0 Processor Playground</a> — Python and Java processors side by side.</li>
+  <li>
+<a href="https://cldr-steven-matison.github.io/blog/Custom-Processors-With-Cloudera-Streaming-Operators/">Custom Processors with Cloudera Streaming Operators</a> and <a href="https://cldr-steven-matison.github.io/blog/How-to-AI-with-NiFi-and-Python/">How to AI with NiFi and Python</a> — the Python path.</li>
+  <li>
+<a href="https://cwiki.apache.org/confluence/display/NIFI/Contributor+Guide">Apache NiFi Contributor Guide</a> — if your processor belongs upstream.</li>
+</ul>
+
+<h2 id="how-to-build-a-native-nifi-processor-in-java-the-read-side-of-iceberg">How to Build a Native NiFi Processor in Java (the Read Side of Iceberg)</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about How to Build a Native NiFi Processor in Java (the Read Side of Iceberg) please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#custom-processor" class="page__taxonomy-item p-category" rel="tag">custom-processor</a><span class="sep">, </span>
+    
+      <a href="/tags/#iceberg" class="page__taxonomy-item p-category" rel="tag">iceberg</a><span class="sep">, </span>
+    
+      <a href="/tags/#java" class="page__taxonomy-item p-category" rel="tag">java</a><span class="sep">, </span>
+    
+      <a href="/tags/#kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      <a href="/tags/#nar" class="page__taxonomy-item p-category" rel="tag">nar</a><span class="sep">, </span>
+    
+      <a href="/tags/#nifi" class="page__taxonomy-item p-category" rel="tag">nifi</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-09-13T00:00:00-04:00">September 13, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=How+to+Build+a+Native+NiFi+Processor+in+Java+%28the+Read+Side+of+Iceberg%29%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-to-Build-a-Native-NiFi-Processor-in-Java%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-to-Build-a-Native-NiFi-Processor-in-Java%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/Hacking-the-Petru/" class="pagination--pager" title="Hacking the Petru
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/tuna-street-petru.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/Hacking-the-Petru/" rel="permalink">Hacking the Petru
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          13 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    A desk gadget LED scrolls NOW PLAYING. I wanted TUNA STREET. No source, no schematic, no data USB — just a spare dev board as a probe, five strands of an Eth...
+    <a href="/blog/Hacking-the-Petru/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Observability-For-Cloudera-AI.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Observability-for-Cloudera-AI-on-Public-Cloud/" rel="permalink">Cloudera Observability for Cloudera AI on Public Cloud is Now Generally Available
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Executive Summary
+
+    <a href="/release/Cloudera-Observability-for-Cloudera-AI-on-Public-Cloud/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/CFM-Cloudera_Flow_Management_Operator.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.3/" rel="permalink">Cloudera Flow Management Operator for Kubernetes 3.3
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.3. This release focuses on improving...
+    <a href="/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.3/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/ai-agents-in-data-platforms-for-dummies.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/AI-Agents-in-Data-Platforms-For-Dummies/" rel="permalink">AI Agents in Data Platforms For Dummies
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    How enterprise lakehouse platforms with open formats like Apache Iceberg support AI agent workloads — discovery, schema inspection, query generation, and the...
+    <a href="/blog/AI-Agents-in-Data-Platforms-For-Dummies/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>

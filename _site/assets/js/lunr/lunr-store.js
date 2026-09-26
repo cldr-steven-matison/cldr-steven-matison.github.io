@@ -664,4 +664,10 @@ var store = [{
         "tags": ["esp32","reverse-engineering","embedded","esptool","arduino"],
         "url": "/blog/Hacking-the-Petru/",
         "teaser": "/assets/images/tuna-street-petru.png"
+      },{
+        "title": "How to Build a Native NiFi Processor in Java (the Read Side of Iceberg)",
+        "excerpt":"This is the third post in the custom-processor series. The first two — Custom Processors with Cloudera Streaming Operators and How to Build and Test Custom NiFi Processors with AI — are both the Python path: drop a .py file into a mounted extensions folder, wait 30 seconds, and NiFi...","categories": ["blog"],
+        "tags": ["nifi","java","nar","iceberg","cloudera","kubernetes","custom-processor"],
+        "url": "/blog/How-to-Build-a-Native-NiFi-Processor-in-Java/",
+        "teaser": "/assets/images/QueryFlights.png"
       }]

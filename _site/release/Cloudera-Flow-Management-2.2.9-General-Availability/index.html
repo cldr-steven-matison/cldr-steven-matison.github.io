@@ -93,6 +93,15 @@
 
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
+<!-- Dark theme color-scheme hint (native form controls, scrollbars) -->
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0d1117">
+
+<!-- Modern font stack: Inter (UI/body) + JetBrains Mono (code) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+
 <!-- end custom head snippets -->
 
   </head>
@@ -105,6 +114,101 @@
     <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
   </ul>
 </nav>
+
+    <!-- ===== SRM terminal chrome: matrix rain + tron grid + CRT + boot screen ===== -->
+<canvas id="matrix" aria-hidden="true"></canvas>
+<div class="grid-floor" aria-hidden="true"></div>
+
+<div id="boot" aria-hidden="true">
+  <div id="bootlog"></div>
+  <div id="srmlogo">
+    <pre id="asciiart"></pre>
+    <div class="tagline">Steven&nbsp;R.&nbsp;Matison&nbsp;//&nbsp;Systems&nbsp;Online</div>
+  </div>
+</div>
+
+<div class="crt" aria-hidden="true"></div>
+
+<script>
+(function(){
+  /* ---------- Matrix rain (always on, behind content) ---------- */
+  var c=document.getElementById('matrix'),x=c.getContext('2d'),cols,drops;
+  var chars="アイウエオカキクケコサシスセソタチツテト01SRM<>/{}[]#$%&".split("");
+  function resize(){c.width=innerWidth;c.height=innerHeight;
+    cols=Math.floor(c.width/14);drops=new Array(cols).fill(1);}
+  resize();addEventListener('resize',resize);
+  function draw(){
+    x.fillStyle="rgba(5,7,10,0.08)";x.fillRect(0,0,c.width,c.height);
+    x.font="14px 'Share Tech Mono',monospace";
+    for(var i=0;i<cols;i++){
+      var ch=chars[Math.floor(Math.random()*chars.length)],y=drops[i]*14;
+      x.fillStyle=Math.random()>0.975?"#00f0ff":"#00ff41";
+      x.fillText(ch,i*14,y);
+      if(y>c.height&&Math.random()>0.975)drops[i]=0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw,55);
+
+  /* ---------- Boot sequence (once per session) ---------- */
+  var ASCII=
+  "  ███████╗ ██████╗ ███╗   ███╗\n"+
+  "  ██╔════╝ ██╔══██╗████╗ ████║\n"+
+  "  ███████╗ ██████╔╝██╔████╔██║\n"+
+  "  ╚════██║ ██╔══██╗██║╚██╔╝██║\n"+
+  "  ███████║ ██║  ██║██║ ╚═╝ ██║\n"+
+  "  ╚══════╝ ╚═╝  ╚═╝╚═╝     ╚═╝";
+  var LINES=[
+    {t:"SRM BIOS v2.6.26 (c) Matison Systems",c:""},
+    {t:"Detecting hardware...............",c:"ok",s:"[ OK ]"},
+    {t:"CPU: Apache NiFi Quad-Core @ 4.2GHz",c:""},
+    {t:"MEM: 640K conventional... 65536K extended [ OK ]",c:"ok"},
+    {t:"Mounting /dev/cdp ...............",c:"ok",s:"[ OK ]"},
+    {t:"Loading modules: kafka minifi k8s iceberg",c:""},
+    {t:"Establishing edge-to-core link..",c:"warn",s:"[ WARN ]"},
+    {t:"  retrying secure channel......",c:"ok",s:"[ OK ]"},
+    {t:"Starting matrix daemon..........",c:"ok",s:"[ OK ]"},
+    {t:"Authenticating user: srm........",c:"ok",s:"[ OK ]"},
+    {t:"",c:""},
+    {t:"SYSTEM READY. Launching interface_",c:"ok"}
+  ];
+  var boot=document.getElementById('boot'),log=document.getElementById('bootlog'),
+      logo=document.getElementById('srmlogo'),art=document.getElementById('asciiart'),
+      timers=[];
+
+  function skip(){ boot.classList.add('done'); }
+
+  // Respect reduced-motion and session replay
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen;
+  try { seen = sessionStorage.getItem('srm_booted'); } catch(e){ seen = null; }
+
+  if (seen || reduce){ skip(); return; }
+  try { sessionStorage.setItem('srm_booted','1'); } catch(e){}
+
+  document.body.classList.add('booting');
+  var i=0;
+  function typeLine(){
+    if(i>=LINES.length){ timers.push(setTimeout(showLogo,450)); return; }
+    var L=LINES[i++], cls=L.c?' class="'+L.c+'"':'',
+        status=L.s?'  <span'+cls+'>'+L.s+'</span>':'';
+    log.innerHTML+='<span'+cls+'>'+L.t+'</span>'+status+'\n';
+    timers.push(setTimeout(typeLine,110+Math.random()*150));
+  }
+  function showLogo(){
+    log.innerHTML+='<span class="cursor"></span>';
+    logo.classList.add('show');
+    var n=0;(function step(){art.textContent=ASCII.slice(0,n);n+=6;
+      if(n<=ASCII.length)timers.push(setTimeout(step,12));})();
+    timers.push(setTimeout(finish,2100));
+  }
+  function finish(){ boot.classList.add('done'); document.body.classList.remove('booting'); }
+
+  // Safety net: never trap the user if something stalls
+  timers.push(setTimeout(finish,9000));
+  timers.push(setTimeout(typeLine,200));
+})();
+</script>
 
     
 
@@ -474,6 +578,55 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
+        <img src="/assets/images/QueryFlights.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/How-to-Build-a-Native-NiFi-Processor-in-Java/" rel="permalink">How to Build a Native NiFi Processor in Java (the Read Side of Iceberg)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          11 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    NiFi’s Iceberg bundle is write-only. So I built GetIceberg — a native Java/NAR read processor that plugs the same RESTCatalogService and returns real rows fr...
+    <a href="/blog/How-to-Build-a-Native-NiFi-Processor-in-Java/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
         <img src="/assets/images/tuna-street-petru.png" alt="">
       </div>
     
@@ -608,55 +761,6 @@
   <div class="archive__item-excerpt" itemprop="description">
     The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.3. This release focuses on improving...
     <a href="/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.3/" class="read-more-pill">Read More &rarr;</a>
-  </div>
-
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/ai-agents-in-data-platforms-for-dummies.jpeg" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/blog/AI-Agents-in-Data-Platforms-For-Dummies/" rel="permalink">AI Agents in Data Platforms For Dummies
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          1 minute read
-        
-      </span>
-    
-    
-  </p>
-
-
-    
-  <div class="archive__item-excerpt" itemprop="description">
-    How enterprise lakehouse platforms with open formats like Apache Iceberg support AI agent workloads — discovery, schema inspection, query generation, and the...
-    <a href="/blog/AI-Agents-in-Data-Platforms-For-Dummies/" class="read-more-pill">Read More &rarr;</a>
   </div>
 
   </article>

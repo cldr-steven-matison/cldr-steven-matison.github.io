@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Dev Dark skin — dark-only, technical aesthetic (GitHub-dark inspired)
+   ========================================================================== */
+
+/* Colors */
+$gray                       : #8b949e !default; // muted UI gray
+$dark-gray                  : #6e7681 !default;
+$darker-gray                : #484f58 !default;
+$light-gray                 : #30363d !default; // borders / rules
+$lighter-gray               : #21262d !default; // subtle raised surfaces
+
+$body-color                 : #161b22 !default; // content surface (cards, main)
+$background-color           : #0d1117 !default; // page canvas
+$code-background-color      : #161b22 !default;
+$code-background-color-dark : #0d1117 !default;
+$text-color                 : #c9d1d9 !default;
+$muted-text-color           : #8b949e !default;
+$border-color               : #30363d !default;
+$form-background-color      : #0d1117 !default;
+$footer-background-color    : #0d1117 !default;
+
+$primary-color              : #58a6ff !default; // bright accent (blue)
+$success-color              : #3fb950 !default;
+$warning-color              : #d29922 !default;
+$danger-color               : #f85149 !default;
+$info-color                 : #58a6ff !default;
+
+/* links */
+$link-color                 : #58a6ff !default;
+$link-color-hover           : mix(#fff, $link-color, 20%) !default;
+$link-color-visited         : mix(#000, $link-color, 15%) !default;
+$masthead-link-color        : #c9d1d9 !default;
+$masthead-link-color-hover  : #58a6ff !default;
+
+/* notices */
+$notice-background-mix      : 82% !default;
+$code-notice-background-mix : 90% !default;
