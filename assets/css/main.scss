@@ -274,6 +274,13 @@ blockquote {
 .page__footer-copyright { color: $muted; }
 .page__footer-follow .social-icons a:hover { color: $cyan; }
 
+/* GitHub brand color (#171516) is near-invisible on the dark canvas — bias to white */
+.social-icons .fa-github,
+.author__urls .fa-github,
+a .fa-github { color: #f0f6fc !important; }
+.social-icons a:hover .fa-github,
+.author__urls a:hover .fa-github { color: $cyan !important; }
+
 /* ---------- search overlay ---------- */
 .search-content { background: rgba(5,7,10,.96); }
 .search-input {
