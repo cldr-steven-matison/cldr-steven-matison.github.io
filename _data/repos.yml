@@ -1,7 +1,35 @@
+- name: "NiFiandAi"
+  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
+  url: "https://github.com/cldr-steven-matison/NiFiandAi"
+  size: 121
+  lang: ""
+  updated: "2026-09-26"
+  fork: false
+- name: "cso-operator-app"
+  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
+  url: "https://github.com/cldr-steven-matison/cso-operator-app"
+  size: 2456
+  lang: "Python"
+  updated: "2026-09-26"
+  fork: false
+- name: "ClouderaStreamingOperators"
+  description: "Repo for yaml used in installing Cloudera Streaming Operators"
+  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
+  size: 58
+  lang: "Shell"
+  updated: "2026-09-25"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 181674
+  lang: "HTML"
+  updated: "2026-09-25"
+  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 47
+  size: 48
   lang: ""
   updated: "2026-09-25"
   fork: false
@@ -10,27 +38,6 @@
   url: "https://github.com/cldr-steven-matison/NiFi2-Processor-Playground"
   size: 421
   lang: "Java"
-  updated: "2026-09-24"
-  fork: false
-- name: "ClouderaStreamingOperators"
-  description: "Repo for yaml used in installing Cloudera Streaming Operators"
-  url: "https://github.com/cldr-steven-matison/ClouderaStreamingOperators"
-  size: 99
-  lang: "Shell"
-  updated: "2026-09-24"
-  fork: false
-- name: "cso-operator-app"
-  description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
-  url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 2319
-  lang: "Python"
-  updated: "2026-09-24"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 181673
-  lang: "HTML"
   updated: "2026-09-24"
   fork: false
 - name: "MiNiFi-Kubernetes-Playground"
@@ -87,13 +94,6 @@
   url: "https://github.com/cldr-steven-matison/edge-flow-manager-mcp-server"
   size: 16
   lang: "Python"
-  updated: "2026-09-09"
-  fork: false
-- name: "NiFiandAi"
-  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
-  url: "https://github.com/cldr-steven-matison/NiFiandAi"
-  size: 122
-  lang: ""
   updated: "2026-09-09"
   fork: false
 - name: "cloudera-manager-mcp-server"
