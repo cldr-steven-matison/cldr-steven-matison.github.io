@@ -211,7 +211,21 @@ h1, h2, h3, h4, h5, h6,
 }
 .author__name { color: #eafcff; @include glow($cyan-dim, 6px); }
 .author__bio { color: $muted; }
-.author__urls-wrapper button { color: $cyan; border-color: $border; }
+/* Follow button (visible on small screens when sidebar collapses) —
+   grey, legible in every state. Was cyan-on-cyan = invisible until pressed. */
+.author__urls-wrapper button.btn,
+.author__urls-wrapper button {
+  background: #21262d !important;
+  color: #e6edf3 !important;
+  border: 1px solid $border !important;
+  border-radius: 6px;
+}
+.author__urls-wrapper button:hover,
+.author__urls-wrapper button:focus {
+  background: $cyan !important;
+  color: $bg !important;
+  border-color: $cyan !important;
+}
 .author__urls {
   background: $panel; border: 1px solid $border; border-radius: 8px;
 }
