@@ -1,23 +1,23 @@
+- name: "NiFiandAi"
+  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
+  url: "https://github.com/cldr-steven-matison/NiFiandAi"
+  size: 152
+  lang: ""
+  updated: "2026-09-30"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 182463
+  lang: "HTML"
+  updated: "2026-09-30"
+  fork: false
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
   size: 2476
   lang: "TypeScript"
   updated: "2026-09-29"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 182461
-  lang: "HTML"
-  updated: "2026-09-29"
-  fork: false
-- name: "NiFiandAi"
-  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
-  url: "https://github.com/cldr-steven-matison/NiFiandAi"
-  size: 144
-  lang: ""
-  updated: "2026-09-26"
   fork: false
 - name: "ClouderaStreamingOperators"
   description: "Repo for yaml used in installing Cloudera Streaming Operators"
