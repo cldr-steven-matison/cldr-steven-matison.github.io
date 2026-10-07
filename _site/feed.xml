@@ -6,6 +6,112 @@
     <atom:link href="https://cldr-steven-matison.github.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>The Complete Guide to Edge Flow Management</title>
+        <link>https://cldr-steven-matison.github.io/blog/The-Complete-Guide-to-Edge-Flow-Management/</link>
+        <pubDate>Wed, 07 Oct 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/efm-cloudera-edge-management.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/efm-cloudera-edge-management.png" medium="image" />
+        
+        <description>NiFi in the datacenter is well documented. Edge Flow Manager is not, until now. 21 chapters, every one built and run on hardware.</description>
+      </item>
+    
+      <item>
+        <title>How to AI with MiNiFi</title>
+        <link>https://cldr-steven-matison.github.io/blog/How-to-AI-with-MiNiFi/</link>
+        <pubDate>Wed, 07 Oct 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/how-to-ai-with-minifi.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/how-to-ai-with-minifi.png" medium="image" />
+        
+        <description>A MiNiFi edge agent that has no business hosting a model, doing AI work anyway, by routing to one instead of running it.</description>
+      </item>
+    
+      <item>
+        <title>Cloudera Data Services On Premises 1.5.5 SP4 Release</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Data-Services-On-Premises-1.5.5-SP4-Release/</link>
+        <pubDate>Thu, 01 Oct 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/Cloudera-Data-Platform.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/Cloudera-Data-Platform.png" medium="image" />
+        
+        <description>Cloudera Data Services 1.5.5 SP4 is now Generally Available, enhancing business continuity and accelerating AI capabilities across the platform. This release introduces full disaster recovery for Embedded Container Service clusters, native NVIDIA HGX/DGX and Multi-Instance GPU support, and a 100% reduction in known exploited vulnerabilities. Customers on SP2 or later can upgrade directly to SP4 without intermediate steps, ensuring a smoother transition to the latest features.
+</description>
+      </item>
+    
+      <item>
+        <title>Cloudera Data Platform 7.3.2 Service Pack 2</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Data-Platform-7.3.2-Service-Pack-2/</link>
+        <pubDate>Thu, 01 Oct 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/Cloudera-Data-Platform.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/Cloudera-Data-Platform.png" medium="image" />
+        
+        <description>Cloudera is thrilled to announce the General Availability of Cloudera Runtime 7.3.2 Service Pack 2 (SP2), accelerating our vision of AI Anywhere, Cloud Anywhere, and Data Anywhere. This release extends the functionality of our Long-Term Support (LTS) 7.3.2 release to on-premises environments, providing a guaranteed operational runway through March 2032 and building on three strategic pillars: Modern Architectures, Hybrid Cloud, and Platform Fortification.
+</description>
+      </item>
+    
+      <item>
+        <title>Cloudera Data Flow 3.2</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Data-Flow-3.2/</link>
+        <pubDate>Thu, 01 Oct 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/nifi-logo.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/nifi-logo.png" medium="image" />
+        
+        <description>Cloudera is pleased to announce the release of Cloudera Data Flow 3.2 for Cloudera on Cloud, delivering major architectural modernization and eliminating friction across the development lifecycle. This release introduces zero-touch, cross-cluster authentication, smarter cloud resource management, and a massive upgrade to our underlying infrastructure to provide a more resilient, secure, and intuitive data streaming experience.
+</description>
+      </item>
+    
+      <item>
+        <title>Cloudera Streaming Analytics 1.18.0</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Streaming-Analytics-1.18.0/</link>
+        <pubDate>Wed, 30 Sep 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png" medium="image" />
+        
+        <description>We are excited to announce the release of Cloudera Streaming Analytics 1.18.0 for Cloudera on premises 7.3.2.10000. This update reinforces our commitment to a stable, secure, and modern streaming offering by upgrading core components and enhancing source control capabilities.
+</description>
+      </item>
+    
+      <item>
+        <title>Cloudera Streaming Analytics Operator for Kubernetes 1.6.0 and 1.6.1</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Streaming-Analytics-Operator-for-Kubernetes-1.6.0-and-1.6.1/</link>
+        <pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png" medium="image" />
+        
+        <description>We are excited to announce the release of Cloudera Streaming Analytics Operator for Kubernetes 1.6.0, together with the 1.6.1 patch release. These updates reinforce our commitment to a stable, secure, and high-performance streaming offering on Kubernetes by moving to Apache Flink 1.20.5 and Flink Kubernetes Operator 1.13, while expanding deployment flexibility and security options for Apache Flink and Cloudera SQL Stream Builder.
+</description>
+      </item>
+    
+      <item>
+        <title>Cloudera Flow Management Flow Migration Tool 5.1.2</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-Flow-Migration-Tool-5.1.2/</link>
+        <pubDate>Wed, 16 Sep 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/nifi-logo.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/nifi-logo.png" medium="image" />
+        
+        <description>The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management Flow Migration Tool 5.1.2, supporting migrations from Cloudera Flow Management 2.1.7 Service Packs 3 and 4 to Cloudera Flow Management 4.11.0.0 on Cloudera on premises. This release offers new features, automations, and improvements as well as upgraded dependencies.
+</description>
+      </item>
+    
+      <item>
+        <title>Cloudera Edge Management Java Agent 4.12.0.0</title>
+        <link>https://cldr-steven-matison.github.io/release/Cloudera-Edge-Management-Java-Agent-4.12.0.0/</link>
+        <pubDate>Mon, 14 Sep 2026 00:00:00 -0400</pubDate>
+        
+          <image>https://cldr-steven-matison.github.io/assets/images/nifi-logo.png</image>
+          <media:content url="https://cldr-steven-matison.github.io/assets/images/nifi-logo.png" medium="image" />
+        
+        <description>The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Edge Management Java Agent 4.12.0.0. This release offers new features and improvements as well as upgraded dependencies, building upon the same binaries as Cloudera Flow Management 4.12.0.0.
+</description>
+      </item>
+    
+      <item>
         <title>How to Build a Native NiFi Processor in Java (the Read Side of Iceberg)</title>
         <link>https://cldr-steven-matison.github.io/blog/How-to-Build-a-Native-NiFi-Processor-in-Java/</link>
         <pubDate>Sun, 13 Sep 2026 00:00:00 -0400</pubDate>
@@ -14,109 +120,6 @@
           <media:content url="https://cldr-steven-matison.github.io/assets/images/QueryFlights.png" medium="image" />
         
         <description>NiFi&apos;s Iceberg bundle is write-only. So I built GetIceberg — a native Java/NAR read processor that plugs the same RESTCatalogService and returns real rows from a CDP Data Share table.</description>
-      </item>
-    
-      <item>
-        <title>Hacking the Petru</title>
-        <link>https://cldr-steven-matison.github.io/blog/Hacking-the-Petru/</link>
-        <pubDate>Tue, 08 Sep 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/tuna-street-petru.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/tuna-street-petru.png" medium="image" />
-        
-        <description>A desk gadget LED scrolls NOW PLAYING. I wanted TUNA STREET. No source, no schematic, no data USB — just a spare dev board as a probe, five strands of an Ethernet cable, and a 44-byte patch the bootloader accepts.</description>
-      </item>
-    
-      <item>
-        <title>Cloudera Observability for Cloudera AI on Public Cloud is Now Generally Available</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Observability-for-Cloudera-AI-on-Public-Cloud/</link>
-        <pubDate>Mon, 31 Aug 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/Observability-For-Cloudera-AI.jpeg</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/Observability-For-Cloudera-AI.jpeg" medium="image" />
-        
-        <description>Executive Summary
-</description>
-      </item>
-    
-      <item>
-        <title>Cloudera Flow Management Operator for Kubernetes 3.3</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Flow-Management-Operator-for-Kubernetes-3.3/</link>
-        <pubDate>Mon, 31 Aug 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/CFM-Cloudera_Flow_Management_Operator.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/CFM-Cloudera_Flow_Management_Operator.png" medium="image" />
-        
-        <description>The Data In Motion Team is pleased to announce the release of Cloudera Flow Management Operator for Kubernetes version 3.3. This release focuses on improving security, streamlining deployments, and enhancing upgrade paths. The core highlights include first-class Apache Ranger authorization, seamless inter-cluster communication, declarative flow deployments, and rolling upgrades for NiFi 2 clusters.
-</description>
-      </item>
-    
-      <item>
-        <title>AI Agents in Data Platforms For Dummies</title>
-        <link>https://cldr-steven-matison.github.io/blog/AI-Agents-in-Data-Platforms-For-Dummies/</link>
-        <pubDate>Fri, 28 Aug 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/ai-agents-in-data-platforms-for-dummies.jpeg</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/ai-agents-in-data-platforms-for-dummies.jpeg" medium="image" />
-        
-        <description>How enterprise lakehouse platforms with open formats like Apache Iceberg support AI agent workloads — discovery, schema inspection, query generation, and the governance that keeps it all in check.</description>
-      </item>
-    
-      <item>
-        <title>How to Develop with the Waveshare AMOLED ESP32-S3</title>
-        <link>https://cldr-steven-matison.github.io/blog/How-to-Develop-with-the-Waveshare-AMOLED-ESP32-S3/</link>
-        <pubDate>Tue, 25 Aug 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/2026-08-25-waveshare-amoled-esp32-s3.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/2026-08-25-waveshare-amoled-esp32-s3.png" medium="image" />
-        
-        <description>I bought this AMOLED ESP32-S3 to build Cloudera Edge Flow Manager flows for modern microcontroller.  The board runs EFM in the firmware, owns its accelerometer, touch and speaker show up in EFM as processors, and a flow can read the glass and talk back to it.  Here&apos;s the development loop, the traps that each cost me an evening, and how the board becomes a fleet citizen.</description>
-      </item>
-    
-      <item>
-        <title>Announcing Cloudera Streams Messaging Operator for Kubernetes v1.7</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Streams-Messaging-Kubernetes-Operator-1.7/</link>
-        <pubDate>Mon, 24 Aug 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/CSM-Cloudera_Streams_Messaging_Operator.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/CSM-Cloudera_Streams_Messaging_Operator.png" medium="image" />
-        
-        <description>Cloudera’s Data In Motion Team is pleased to announce the release of the Cloudera Streams Messaging Operator for Kubernetes v1.7. This milestone release centers on a major platform update to Strimzi 1.0.1 and Apache Kafka 4.2.0, a redesigned Cloudera Surveyor experience, mandatory API standardization, and high-availability maintenance tooling with Strimzi Drain Cleaner.
-</description>
-      </item>
-    
-      <item>
-        <title>Hacking The Jetson</title>
-        <link>https://cldr-steven-matison.github.io/blog/Hacking-The-Jetson/</link>
-        <pubDate>Thu, 13 Aug 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/efm-nvidia-jetson.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/efm-nvidia-jetson.png" medium="image" />
-        
-        <description>Customize Your NVIDIA Jetson Orin Nano and Turn It Up To the Max With AI</description>
-      </item>
-    
-      <item>
-        <title>Announcing Cloudera Streaming Analytics 1.17.1</title>
-        <link>https://cldr-steven-matison.github.io/release/Cloudera-Streaming-Analytics-1.17.1/</link>
-        <pubDate>Tue, 11 Aug 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png" medium="image" />
-        
-        <description>We are excited to announce the release of Cloudera Streaming Analytics 1.17.1 for on-premises deployments. This patch update reinforces our commitment to a stable, secure, and high-performance streaming offering. By upgrading key dependencies and refining the Cloudera SQL Stream Builder experience, we’re providing an even more robust foundation for Apache Flink and Cloudera SQL Stream Builder.
-</description>
-      </item>
-    
-      <item>
-        <title>Persistence with Cloudera Streaming Analytics Operator</title>
-        <link>https://cldr-steven-matison.github.io/blog/Persistence-with-Cloudera-Streaming-Analytics-Operator/</link>
-        <pubDate>Mon, 10 Aug 2026 00:00:00 -0400</pubDate>
-        
-          <image>https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png</image>
-          <media:content url="https://cldr-steven-matison.github.io/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png" medium="image" />
-        
-        <description>How to make everything CSA writes to disk — SQL Stream Builder metadata, uploaded user artifacts, and Flink checkpoints, savepoints and HA state — survive pod restarts on Kubernetes.</description>
       </item>
     
   </channel>

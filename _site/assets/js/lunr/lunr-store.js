@@ -665,9 +665,75 @@ var store = [{
         "url": "/blog/Hacking-the-Petru/",
         "teaser": "/assets/images/tuna-street-petru.png"
       },{
+        "title": "Hive JDBC Driver 2.6.36",
+        "excerpt":"The latest Hive JDBC Driver (version 2.6.36) is now live from our downloads page. This release updates several third-party libraries to ensure stability and security compliance for your data connectivity needs. Release Highlights Updated third-party libraries: The connector now uses the following third-party libraries: httpcomponents-httpcore5 5.4.3 (previously 5.4.2) log4j-api 2.25.5...","categories": ["release"],
+        "tags": ["cloudera","hive","jdbc"],
+        "url": "/release/Hive-JDBC-Driver-2.6.36/",
+        "teaser": "/assets/images/Cloudera-Data-Platform.png"
+      },{
+        "title": "Impala ODBC Driver 2.10.1",
+        "excerpt":"The latest Impala ODBC Driver (version 2.10.1) is now live on our downloads page. This release introduces several enhancements including PowerShell support, improved logging configurations, and updated third-party libraries. Release Highlights Connector-wide configurations UI enhancement: On Windows, a warning message appears when users without the administrator permissions click Logging Options...","categories": ["release"],
+        "tags": ["cloudera","impala","odbc"],
+        "url": "/release/Impala-ODBC-Driver-2.10.1/",
+        "teaser": "/assets/images/Cloudera-Data-Platform.png"
+      },{
         "title": "How to Build a Native NiFi Processor in Java (the Read Side of Iceberg)",
         "excerpt":"This is the third post in the custom-processor series. The first two — Custom Processors with Cloudera Streaming Operators and How to Build and Test Custom NiFi Processors with AI — are both the Python path: drop a .py file into a mounted extensions folder, wait 30 seconds, and NiFi...","categories": ["blog"],
         "tags": ["nifi","java","nar","iceberg","cloudera","kubernetes","custom-processor"],
         "url": "/blog/How-to-Build-a-Native-NiFi-Processor-in-Java/",
         "teaser": "/assets/images/QueryFlights.png"
+      },{
+        "title": "Cloudera Edge Management Java Agent 4.12.0.0",
+        "excerpt":"The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Edge Management Java Agent 4.12.0.0. This release offers new features and improvements as well as upgraded dependencies, building upon the same binaries as Cloudera Flow Management 4.12.0.0. Release Highlights Based upon Cloudera Flow Management...","categories": ["release"],
+        "tags": ["cloudera","edge-management","minifi"],
+        "url": "/release/Cloudera-Edge-Management-Java-Agent-4.12.0.0/",
+        "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "Cloudera Flow Management Flow Migration Tool 5.1.2",
+        "excerpt":"The Data in Motion Team is pleased to announce the General Availability (GA) release of Cloudera Flow Management Flow Migration Tool 5.1.2, supporting migrations from Cloudera Flow Management 2.1.7 Service Packs 3 and 4 to Cloudera Flow Management 4.11.0.0 on Cloudera on premises. This release offers new features, automations, and...","categories": ["release"],
+        "tags": ["cloudera","nifi","cfm","migration"],
+        "url": "/release/Cloudera-Flow-Management-Flow-Migration-Tool-5.1.2/",
+        "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "Cloudera Streaming Analytics Operator for Kubernetes 1.6.0 and 1.6.1",
+        "excerpt":"We are excited to announce the release of Cloudera Streaming Analytics Operator for Kubernetes 1.6.0, together with the 1.6.1 patch release. These updates reinforce our commitment to a stable, secure, and high-performance streaming offering on Kubernetes by moving to Apache Flink 1.20.5 and Flink Kubernetes Operator 1.13, while expanding deployment...","categories": ["release"],
+        "tags": ["cloudera","csa","kubernetes","flink"],
+        "url": "/release/Cloudera-Streaming-Analytics-Operator-for-Kubernetes-1.6.0-and-1.6.1/",
+        "teaser": "/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png"
+      },{
+        "title": "Cloudera Streaming Analytics 1.18.0",
+        "excerpt":"We are excited to announce the release of Cloudera Streaming Analytics 1.18.0 for Cloudera on premises 7.3.2.10000. This update reinforces our commitment to a stable, secure, and modern streaming offering by upgrading core components and enhancing source control capabilities. Release Highlights Upgraded Flink Runtime: This release is based on Apache...","categories": ["release"],
+        "tags": ["cloudera","csa","flink","iceberg"],
+        "url": "/release/Cloudera-Streaming-Analytics-1.18.0/",
+        "teaser": "/assets/images/CSA-Cloudera_Streaming_Analytics_Operator.png"
+      },{
+        "title": "Cloudera Data Flow 3.2",
+        "excerpt":"Cloudera is pleased to announce the release of Cloudera Data Flow 3.2 for Cloudera on Cloud, delivering major architectural modernization and eliminating friction across the development lifecycle. This release introduces zero-touch, cross-cluster authentication, smarter cloud resource management, and a massive upgrade to our underlying infrastructure to provide a more resilient,...","categories": ["release"],
+        "tags": ["cloudera","data-flow"],
+        "url": "/release/Cloudera-Data-Flow-3.2/",
+        "teaser": "/assets/images/nifi-logo.png"
+      },{
+        "title": "Cloudera Data Platform 7.3.2 Service Pack 2",
+        "excerpt":"Cloudera is thrilled to announce the General Availability of Cloudera Runtime 7.3.2 Service Pack 2 (SP2), accelerating our vision of AI Anywhere, Cloud Anywhere, and Data Anywhere. This release extends the functionality of our Long-Term Support (LTS) 7.3.2 release to on-premises environments, providing a guaranteed operational runway through March 2032...","categories": ["release"],
+        "tags": ["cloudera","cdp"],
+        "url": "/release/Cloudera-Data-Platform-7.3.2-Service-Pack-2/",
+        "teaser": "/assets/images/Cloudera-Data-Platform.png"
+      },{
+        "title": "Cloudera Data Services On Premises 1.5.5 SP4 Release",
+        "excerpt":"Cloudera Data Services 1.5.5 SP4 is now Generally Available, enhancing business continuity and accelerating AI capabilities across the platform. This release introduces full disaster recovery for Embedded Container Service clusters, native NVIDIA HGX/DGX and Multi-Instance GPU support, and a 100% reduction in known exploited vulnerabilities. Customers on SP2 or later...","categories": ["release"],
+        "tags": ["cloudera","cdp","data-services","on-premises"],
+        "url": "/release/Cloudera-Data-Services-On-Premises-1.5.5-SP4-Release/",
+        "teaser": "/assets/images/Cloudera-Data-Platform.png"
+      },{
+        "title": "How to AI with MiNiFi",
+        "excerpt":"The companion post to this one, “How to AI with NiFi and Python,” runs Python inference inside NiFi on a Kubernetes cluster with room to spare. This post is the opposite end of the wire. A MiNiFi agent on a small edge box, say a Beelink mini PC or a...","categories": ["blog"],
+        "tags": ["minifi","efm","edge","ai","cloudera","kubernetes","python"],
+        "url": "/blog/How-to-AI-with-MiNiFi/",
+        "teaser": "/assets/images/how-to-ai-with-minifi.png"
+      },{
+        "title": "The Complete Guide to Edge Flow Management",
+        "excerpt":"NiFi in the datacenter is well documented. Edge Flow Manager is not, until now. EFM is the central manager for agent Classes, Resources, and Edge Flows, and the hard problems are all out at the edge. A MiNiFi agent on a Jetson. A Windows box over Tailscale. A Kubernetes pod...","categories": ["blog"],
+        "tags": ["minifi","efm","edge","nifi","cloudera","kubernetes"],
+        "url": "/blog/The-Complete-Guide-to-Edge-Flow-Management/",
+        "teaser": "/assets/images/efm-cloudera-edge-management.png"
       }]

@@ -1,0 +1,1122 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>How to AI with MiNiFi - Cloudera Solutions Engineer</title>
+<meta name="description" content="A MiNiFi edge agent that has no business hosting a model, doing AI work anyway, by routing to one instead of running it.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+  <meta property="article:author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="How to AI with MiNiFi">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/blog/How-to-AI-with-MiNiFi/">
+
+
+  <meta property="og:description" content="A MiNiFi edge agent that has no business hosting a model, doing AI work anyway, by routing to one instead of running it.">
+
+
+
+  <meta property="og:image" content="https://cldr-steven-matison.github.io/assets/images/how-to-ai-with-minifi.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2026-10-07T00:00:00-04:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/blog/How-to-AI-with-MiNiFi/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- Dark theme color-scheme hint (native form controls, scrollbars) -->
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0d1117">
+
+<!-- Modern font stack: Inter (UI/body) + JetBrains Mono (code) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!-- ===== SRM terminal chrome: matrix rain + tron grid + CRT + boot screen ===== -->
+<canvas id="matrix" aria-hidden="true"></canvas>
+<div class="grid-floor" aria-hidden="true"></div>
+
+<div id="boot" aria-hidden="true">
+  <div id="bootlog"></div>
+  <div id="srmlogo">
+    <pre id="asciiart"></pre>
+    <div class="tagline">Steven R. Matison // Systems Online</div>
+  </div>
+</div>
+
+<div class="crt" aria-hidden="true"></div>
+
+<script>
+(function(){
+  /* ---------- Matrix rain (always on, behind content) ---------- */
+  var c=document.getElementById('matrix'),x=c.getContext('2d'),cols,drops;
+  var chars="01".split("");
+  function resize(){c.width=innerWidth;c.height=innerHeight;
+    cols=Math.floor(c.width/14);drops=new Array(cols).fill(1);}
+  resize();addEventListener('resize',resize);
+  function draw(){
+    x.fillStyle="rgba(5,7,10,0.08)";x.fillRect(0,0,c.width,c.height);
+    x.font="14px 'Share Tech Mono',monospace";
+    for(var i=0;i<cols;i++){
+      var ch=chars[Math.floor(Math.random()*chars.length)],y=drops[i]*14;
+      x.fillStyle=Math.random()>0.975?"#00f0ff":"#00ff41";
+      x.fillText(ch,i*14,y);
+      if(y>c.height&&Math.random()>0.975)drops[i]=0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw,55);
+
+  /* ---------- Boot sequence (once per session) ---------- */
+  var ASCII=
+  "  ███████╗ ██████╗ ███╗   ███╗\n"+
+  "  ██╔════╝ ██╔══██╗████╗ ████║\n"+
+  "  ███████╗ ██████╔╝██╔████╔██║\n"+
+  "  ╚════██║ ██╔══██╗██║╚██╔╝██║\n"+
+  "  ███████║ ██║  ██║██║ ╚═╝ ██║\n"+
+  "  ╚══════╝ ╚═╝  ╚═╝╚═╝     ╚═╝";
+  var LINES=[
+    {t:"SRM BIOS v2.6.26 (c) Matison Systems",c:""},
+    {t:"Detecting hardware...............",c:"ok",s:"[ OK ]"},
+    {t:"CPU: Apache NiFi Quad-Core @ 4.2GHz",c:""},
+    {t:"MEM: 640K conventional... 65536K extended [ OK ]",c:"ok"},
+    {t:"Mounting /dev/cdp ...............",c:"ok",s:"[ OK ]"},
+    {t:"Loading modules: kafka minifi k8s iceberg",c:""},
+    {t:"Establishing edge-to-core link..",c:"warn",s:"[ WARN ]"},
+    {t:"  retrying secure channel......",c:"ok",s:"[ OK ]"},
+    {t:"Starting matrix daemon..........",c:"ok",s:"[ OK ]"},
+    {t:"Authenticating user: srm........",c:"ok",s:"[ OK ]"},
+    {t:"",c:""},
+    {t:"SYSTEM READY. Launching interface_",c:"ok"}
+  ];
+  var boot=document.getElementById('boot'),log=document.getElementById('bootlog'),
+      logo=document.getElementById('srmlogo'),art=document.getElementById('asciiart'),
+      timers=[];
+
+  function skip(){ boot.classList.add('done'); }
+
+  // Respect reduced-motion and session replay
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen;
+  try { seen = sessionStorage.getItem('srm_booted'); } catch(e){ seen = null; }
+
+  if (seen || reduce){ skip(); return; }
+  try { sessionStorage.setItem('srm_booted','1'); } catch(e){}
+
+  document.body.classList.add('booting');
+  var i=0;
+  function typeLine(){
+    if(i>=LINES.length){ timers.push(setTimeout(showLogo,250)); return; }
+    var L=LINES[i++], cls=L.c?' class="'+L.c+'"':'',
+        status=L.s?'  <span'+cls+'>'+L.s+'</span>':'';
+    log.innerHTML+='<span'+cls+'>'+L.t+'</span>'+status+'\n';
+    timers.push(setTimeout(typeLine,55+Math.random()*70));
+  }
+  function showLogo(){
+    log.innerHTML+='<span class="cursor"></span>';
+    logo.classList.add('show');
+    var n=0;(function step(){art.textContent=ASCII.slice(0,n);n+=10;
+      if(n<=ASCII.length)timers.push(setTimeout(step,10));})();
+    timers.push(setTimeout(finish,1300));
+  }
+  function finish(){ boot.classList.add('done'); document.body.classList.remove('booting'); }
+
+  // Safety net: never trap the user if something stalls
+  timers.push(setTimeout(finish,4000));
+  timers.push(setTimeout(typeLine,200));
+})();
+</script>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links">
+<li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li>
+<li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li>
+</ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How to AI with MiNiFi">
+    <meta itemprop="description" content="A MiNiFi edge agent that has no business hosting a model, doing AI work anyway, by routing to one instead of running it.">
+    <meta itemprop="datePublished" content="2026-10-07T00:00:00-04:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://cldr-steven-matison.github.io/blog/How-to-AI-with-MiNiFi/" class="u-url" itemprop="url">How to AI with MiNiFi
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+    
+      
+        </p>
+<p class="page__date">
+          <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> 
+          <time datetime="2026-10-07T00:00:00-04:00">
+            October 07, 2026
+          </time>
+        </p>
+      
+    
+  
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>The companion post to this one, “How to AI with NiFi and Python,” runs Python inference <em>inside</em> NiFi on a Kubernetes cluster with room to spare. This post is the opposite end of the wire. A MiNiFi agent on a small edge box, say a Beelink mini PC or a Windows desktop or a Jetson or a bare Kubernetes pod, has no business hosting a model but still needs to do AI work. The agent almost never runs the model itself. It routes, it transforms, it enrolls, and it ships results back over Kafka. Everything below is the <em>using</em> side of Edge Flow Manager, how you drive AI flows onto agents you have already stood up. Every flow, port, and processor name here comes from running these agents in the field.</p>
+
+<p class="notice--info"><img class="emoji" title=":information_source:" alt=":information_source:" src="https://github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20"> <strong>This is the “using” post, not the “installing” post.</strong> Staging agent binaries, the five-leaf EFM directory layout, the Windows MSI Python black hole, the missing Java NARs, all of that lives in the companion post, <strong>“Working with EFM Binaries.”</strong> Read that one first if your <code class="language-plaintext highlighter-rouge">Deploy Agent</code> button is still handing you a <code class="language-plaintext highlighter-rouge">400</code>. This post assumes you have agents online and asks the next question. What do you make them <em>do</em>?</p>
+
+<h2 id="the-edge-agent-doesnt-run-the-model-it-routes-to-one">The edge agent doesn’t run the model, it routes to one</h2>
+
+<p>The single most useful shape at the edge is a MiNiFi agent that fronts a nearby inference server. The agent is tiny. The GPU box next to it holds the model. My working example is the StarlinkAI router, a MiNiFi <strong>Java</strong> agent on a Beelink SER9 that takes HTTP requests and forwards them to a local Lemonade Server (AMD’s OpenAI-compatible inference server, <code class="language-plaintext highlighter-rouge">llamacpp:vulkan</code> backend on a Radeon 780M iGPU). The whole flow is three stock processors, one port, and no Kafka:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HandleHttpRequest (:8090, any path)
+  → InvokeHTTP        (POST http://localhost:13305${http.request.uri})
+  → HandleHttpResponse (returns Lemonade's real answer synchronously)
+</code></pre></div></div>
+
+<p>No custom code, no per-endpoint branching. The <code class="language-plaintext highlighter-rouge">InvokeHTTP</code> URL is a pure pass-through. Whatever path the client hits is the path forwarded to Lemonade, so one flow fronts all five Lemonade services (chat, embeddings, reranking, TTS, transcription) from a single <code class="language-plaintext highlighter-rouge">ListenHTTP</code>/<code class="language-plaintext highlighter-rouge">InvokeHTTP</code> pair, not one pair per service. The agent doesn’t know what a model is. It accepts a POST, forwards it, and hands the response straight back. The value is the flow, the enrollment, and the transport, not the inference.</p>
+
+<p class="notice--info"><img class="emoji" title=":information_source:" alt=":information_source:" src="https://github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20"> <strong>This replaces an earlier MiNiFi C++ design.</strong> MiNiFi C++’s <code class="language-plaintext highlighter-rouge">ListenHTTP</code> has no synchronous request/response pair. The caller always got an empty <code class="language-plaintext highlighter-rouge">200</code> ack, with the answer shipped out-of-band over Kafka keyed on a client-supplied <code class="language-plaintext highlighter-rouge">request_id</code>. <code class="language-plaintext highlighter-rouge">ListenHTTP</code> also silently dropped multipart POSTs (transcription) at its buffer-full check, a <code class="language-plaintext highlighter-rouge">MINIFICPP-2243</code>-shaped bug I never fully root-caused on the C++ side. MiNiFi <strong>Java</strong> ships <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code>/<code class="language-plaintext highlighter-rouge">HandleHttpResponse</code>, a synchronous response with no Kafka detour, and the multipart drop doesn’t reproduce.</p>
+
+<p>All five endpoints run end-to-end. Chat returns a synchronous completion, embeddings a vector, reranking relevance scores, speech a Kokoro MP3, and transcription a Whisper transcript. Four of them are pure pass-through, the same three processors on the same code path, with only the URL differing. Transcription needs one extra step. <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code> splits a multipart POST into one FlowFile per form field, so a small reassembly branch (<code class="language-plaintext highlighter-rouge">RouteOnAttribute</code> → <code class="language-plaintext highlighter-rouge">ReplaceText</code> × 2 → <code class="language-plaintext highlighter-rouge">MergeContent</code> Defragment) recombines the fragments into valid multipart before <code class="language-plaintext highlighter-rouge">InvokeHTTP</code>. It forks in behind a <code class="language-plaintext highlighter-rouge">RouteOnAttribute-HasFragments</code> gate so nothing else is touched. That leg runs on the production port with no regression to the other four.</p>
+
+<p>One gotcha this design introduced. <code class="language-plaintext highlighter-rouge">InvokeHTTP</code>’s <code class="language-plaintext highlighter-rouge">Socket Read Timeout</code> defaults to <code class="language-plaintext highlighter-rouge">15 secs</code>, and LLM inference routinely takes 10-25s and up. Every request failed silently on that default. A <code class="language-plaintext highlighter-rouge">SocketTimeoutException</code> auto-terminated on <code class="language-plaintext highlighter-rouge">Failure</code> with nothing routed back, so the caller sat until the HTTP context map’s own 60s expiration gave up with a generic 503. Set it to match your slowest endpoint (<code class="language-plaintext highlighter-rouge">10 mins</code> here), not the framework default.</p>
+
+<p><img src="/assets/images/efm-nifi-and-ai-skill-spacing.jpg" alt="WindowsDesktopCpp Flow Designer canvas with parallel ListenHTTP → ExecuteScript → LogAttribute lanes for the Python smoke, load, and matrix tests"></p>
+
+<h2 id="listenhttp-vs-handlehttprequesthandlehttpresponse-the-fork-that-shapes-every-edge-ai-flow">
+<code class="language-plaintext highlighter-rouge">ListenHTTP</code> vs <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code>/<code class="language-plaintext highlighter-rouge">HandleHttpResponse</code>, the fork that shapes every edge AI flow</h2>
+
+<p>The single design decision that decides what an edge AI flow can <em>do</em> is which HTTP entry processor it uses, because the two families answer the caller completely differently.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ListenHTTP</code>, the only HTTP-ingest processor MiNiFi <strong>C++</strong> ships, is <strong>fire-and-forget</strong>. It accepts a POST and immediately returns an empty <code class="language-plaintext highlighter-rouge">200</code> ack. It has no way to send a computed body back on the same connection. If the caller wants the model’s answer, that answer has to arrive out-of-band. The classic shape is <code class="language-plaintext highlighter-rouge">ListenHTTP → … → PublishKafka</code>, with the client polling a Kafka topic keyed on a <code class="language-plaintext highlighter-rouge">request_id</code> it supplied in the request. Two extra moving parts, a broker and a correlation key, exist purely because the front door can’t talk back. <code class="language-plaintext highlighter-rouge">ListenHTTP</code> also carries the <code class="language-plaintext highlighter-rouge">5/5</code> batch/buffer trap and, on some C++ builds, a residual <code class="language-plaintext highlighter-rouge">1/1</code> multipart drop (<code class="language-plaintext highlighter-rouge">MINIFICPP-2243</code>).</p>
+
+<p><img src="/assets/images/efm-starlink-ai-unified-lemonade-flow.png" alt="StarlinkAI, the final unified router flow with one HandleHttpRequest → InvokeHTTP → HandleHttpResponse fronting all five Lemonade endpoints on a single port"></p>
+
+<p><code class="language-plaintext highlighter-rouge">HandleHttpRequest</code> plus <code class="language-plaintext highlighter-rouge">HandleHttpResponse</code>, MiNiFi <strong>Java</strong> with the <code class="language-plaintext highlighter-rouge">StandardHttpContextMap</code> controller service, are a <strong>synchronous pair</strong>. <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code> parks the caller’s connection in the context map keyed by <code class="language-plaintext highlighter-rouge">http.context.identifier</code>, the flow does its work, and <code class="language-plaintext highlighter-rouge">HandleHttpResponse</code> writes the body and status back on that same parked connection. No broker, no polling, no <code class="language-plaintext highlighter-rouge">request_id</code>. The caller gets the model’s answer as the HTTP response to its own request. That is the decisive capability for an HTTP-fronted inference proxy, and it is Java-only.</p>
+
+<h3 id="starlinkai-before-and-after">StarlinkAI, before and after</h3>
+
+<p><strong>Before</strong> (C++ <code class="language-plaintext highlighter-rouge">ListenHTTP</code>, fire-and-forget over Kafka):</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>client → ListenHTTP(:PORT, request_id) → InvokeHTTP(Lemonade) → PublishKafka(results)
+client ← (empty 200 ack)
+client ⟳ polls a Kafka topic for its request_id … eventually reads the answer
+</code></pre></div></div>
+<p>Every service needed its own <code class="language-plaintext highlighter-rouge">ListenHTTP</code>/<code class="language-plaintext highlighter-rouge">InvokeHTTP</code> pair, a Kafka round trip, and client-side correlation, and multipart transcription POSTs were silently dropped at the buffer check.</p>
+
+<p><strong>After</strong> (Java <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code>/<code class="language-plaintext highlighter-rouge">HandleHttpResponse</code>, synchronous):</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>client → HandleHttpRequest(:8090, any path)
+       → InvokeHTTP(POST http://localhost:13305${http.request.uri})
+       → HandleHttpResponse(200) → client   (Lemonade's real answer, inline)
+</code></pre></div></div>
+<p>One flow, one port, no Kafka, no <code class="language-plaintext highlighter-rouge">request_id</code>. All five Lemonade endpoints ride the same three processors, distinguished only by the forwarded path.</p>
+
+<p><img src="/assets/images/efm-NvidiaNano-Flow.png" alt="The final NvidiaNano flow in EFM's Flow Designer, HandleHttpRequest/InvokeHTTP/HandleHttpResponse for classify, streamChat, and matrix, Monitoring Active"></p>
+
+<h3 id="nvidianano-before-and-after">NvidiaNano, before and after</h3>
+
+<p>The Jetson is the same fork seen from the inference side.</p>
+
+<p><strong>Before.</strong> The production ingest listeners (<code class="language-plaintext highlighter-rouge">/streamChatListener</code>, <code class="language-plaintext highlighter-rouge">/matrixListener</code>, <code class="language-plaintext highlighter-rouge">/contentListener</code>) were C++ <code class="language-plaintext highlighter-rouge">ListenHTTP → PublishKafka</code>, fire-and-forget, and prone to silently dropping POSTs at the buffer-full check (a <code class="language-plaintext highlighter-rouge">MINIFICPP-2243</code>-shaped bug). The “AI” processor was worse than fire-and-forget. It was an <code class="language-plaintext highlighter-rouge">ExecuteScript</code> that re-read its script and re-deserialized the TensorRT engine on <em>every trigger</em>, a per-request model load costing far more than the inference it was there to run.</p>
+
+<p><strong>After.</strong> One resident TensorRT daemon (<code class="language-plaintext highlighter-rouge">127.0.0.1:5910</code>, MobileNetV2 FP16, ~4 ms) fronted by a Java MiNiFi agent running three <code class="language-plaintext highlighter-rouge">HandleHttpRequest → InvokeHTTP → HandleHttpResponse</code> legs for <code class="language-plaintext highlighter-rouge">/classify</code>, <code class="language-plaintext highlighter-rouge">/streamChatListener</code>, and <code class="language-plaintext highlighter-rouge">/matrixListener</code>. It is the StarlinkAI shape again, each leg returning a response inline, not an ack-and-hope. <code class="language-plaintext highlighter-rouge">systemctl --user restart trt-infer</code> swaps the model without touching MiNiFi.</p>
+
+<p>The takeaway. <strong>If the caller needs the model’s answer back, that is a <code class="language-plaintext highlighter-rouge">HandleHttpRequest</code>/<code class="language-plaintext highlighter-rouge">HandleHttpResponse</code> flow on a Java agent. If the traffic is fire-and-forget telemetry, <code class="language-plaintext highlighter-rouge">ListenHTTP → PublishKafka</code> on C++ is fine</strong>, as long as you set batch/buffer to <code class="language-plaintext highlighter-rouge">1/1</code> and know the multipart caveat.</p>
+
+<h2 id="when-the-agent-does-need-to-compute-two-python-paths-that-are-not-the-same">When the agent <em>does</em> need to compute, two Python paths that are not the same</h2>
+
+<p>Sometimes routing isn’t enough and you want logic to run on the agent itself, to enrich a FlowFile, call a library, or reshape a payload before it leaves the edge. MiNiFi C++ gives you two ways to run Python, and conflating them is the most common mistake I see (I made it myself in an earlier draft). They are different processors with different reload behavior.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>
+<code class="language-plaintext highlighter-rouge">ExecuteScript</code> (Python engine)</th>
+      <th>Custom Python processor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>What it is</td>
+      <td>
+<strong>One</strong> generic processor you paste a script body into</td>
+      <td>
+<strong>A new processor type</strong> you author in Python</td>
+    </tr>
+    <tr>
+      <td>Identity in the flow</td>
+      <td>Always shows as <code class="language-plaintext highlighter-rouge">ExecuteScript</code>
+</td>
+      <td>Shows under its own name, with its own properties/relationships</td>
+    </tr>
+    <tr>
+      <td>Reload</td>
+      <td>
+<strong>Re-reads the script every trigger</strong>, hot-edit, no restart</td>
+      <td>
+<strong>Not a hot patch</strong>, agent restart to pick up changes</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Pick <code class="language-plaintext highlighter-rouge">ExecuteScript</code> when you want to iterate on a snippet fast. Pick a custom processor when the logic deserves to be a first-class, reusable thing in the palette. The next two sections take each in turn.</p>
+
+<h2 id="executescript-paste-python-into-one-processor">ExecuteScript, paste Python into one processor</h2>
+
+<p><code class="language-plaintext highlighter-rouge">ExecuteScript</code> is the fastest way to run arbitrary Python on the edge. Wire it inline, set <code class="language-plaintext highlighter-rouge">Script Engine: python</code>, and paste a body that implements <code class="language-plaintext highlighter-rouge">onTrigger</code>:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ListenHTTP :18080 /contentListener
+  → ExecuteScript (Script Engine: python)
+  → LogAttribute (Log Payload = true)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">onTrigger</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+    <span class="n">flow_file</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="nf">get</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">flow_file</span><span class="p">:</span>
+        <span class="n">session</span><span class="p">.</span><span class="nf">putAttribute</span><span class="p">(</span><span class="n">flow_file</span><span class="p">,</span> <span class="s">"python.smoke"</span><span class="p">,</span> <span class="s">"edge-executescript-ok"</span><span class="p">)</span>
+        <span class="n">session</span><span class="p">.</span><span class="nf">transfer</span><span class="p">(</span><span class="n">flow_file</span><span class="p">,</span> <span class="n">REL_SUCCESS</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>POST a payload and the attribute lands on <code class="language-plaintext highlighter-rouge">LogAttribute</code>, which shows the extension didn’t only load, it executed. The property that makes <code class="language-plaintext highlighter-rouge">ExecuteScript</code> pleasant to work with is simple. A running C++ agent <strong>re-reads its Script File from disk on every trigger</strong>. Edit the script, POST again, and the new logic runs with no restart and no republish. In EFM Designer flows the C++ FQCN is <code class="language-plaintext highlighter-rouge">org.apache.nifi.minifi.processors.ExecuteScript</code> (note the <code class="language-plaintext highlighter-rouge">minifi</code> in the path, it is <em>not</em> the Java NiFi <code class="language-plaintext highlighter-rouge">org.apache.nifi.processors.standard.ExecuteScript</code>).</p>
+
+<p>Two things bite here, both covered in depth in the companion posts:</p>
+
+<ul>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">ExecuteScript</code> is not in any stock Cloudera binary.</strong> Not the C++ image, not the CEM Java tarball, not the default Windows MSI feature set. The tell is <code class="language-plaintext highlighter-rouge">Could not instantiate: PythonScriptExecutor</code> repeating every 30s in <code class="language-plaintext highlighter-rouge">minifi-app.log</code>, or an EFM designer “not a valid Processor type” rejection. Getting the engine onto the agent is an <em>install</em> problem, and the four paths (C++ extra-extensions injection, source build, Java NAR drop-in, Windows <code class="language-plaintext highlighter-rouge">ADDLOCAL=ALL</code>) are in “Working with EFM Binaries.” One caveat matters for <em>this</em> post. Only three of those four give you the <strong>Python</strong> engine. The Java NAR drop-in gets you <code class="language-plaintext highlighter-rouge">ExecuteScript</code> with <strong>Groovy/Clojure only, no Python</strong>, in the Java NAR build. Python <code class="language-plaintext highlighter-rouge">ExecuteScript</code> at the edge means a C++ agent (or the Windows C++ MSI), not the Java agent. The engine is settled on the C++ K8s pods and on the Jetson through extra-extensions injection.</li>
+  <li>
+<strong>A Windows-service agent can’t drive a visible GUI.</strong> An <code class="language-plaintext highlighter-rouge">ExecuteScript</code> that shells out to launch a window runs green, with a <code class="language-plaintext highlighter-rouge">200</code>, attributes set, and the target process even spawning, but the window never appears, because a default <code class="language-plaintext highlighter-rouge">LocalSystem</code> service lives in Session 0 with no interactive desktop. Run the agent in process-mode (Session 1) for anything that has to show up on screen.</li>
+</ul>
+
+<p>Getting the <em>script</em> onto the agent is its own step, independent of the engine. Two mechanisms:</p>
+
+<ul>
+  <li>
+<strong>EFM Resource Manager API.</strong> <code class="language-plaintext highlighter-rouge">POST /efm/api/resource-manager/resources/file</code>, then <code class="language-plaintext highlighter-rouge">PUT /efm/api/agent-class-resource-manager/{agentClass}/save</code> with <strong>exactly</strong> <code class="language-plaintext highlighter-rouge">{"resourceIdsToBeAssigned":[...],"resourceIdsToBeUnassigned":[...]}</code> (a bare array is silently swallowed). This is the tracked, restart-durable path, and it needs the <code class="language-plaintext highlighter-rouge">efm-resources</code> PVC, or the uploaded bytes die with the pod while the DB row survives pointing at nothing.</li>
+  <li>
+<strong>Raw <code class="language-plaintext highlighter-rouge">kubectl cp</code></strong> onto the agent’s script path. Takes effect on the next trigger, great for fast iteration, but bypasses EFM tracking and does not survive a pod restart.</li>
+</ul>
+
+<h2 id="custom-python-processors-author-your-own-edge-processor-type">Custom Python processors, author your own edge processor type</h2>
+
+<p>When the logic is worth keeping, write it as a processor of its own. A custom Python processor is a <em>new type</em>. It appears in the agent’s manifest under its own name, with its own properties and relationships, and wires into a flow like any stock processor. On the C++ agent you subclass the pre-shipped <code class="language-plaintext highlighter-rouge">nifiapi</code> framework:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">nifiapi.flowfiletransform</span> <span class="kn">import</span> <span class="n">FlowFileTransform</span><span class="p">,</span> <span class="n">FlowFileTransformResult</span>
+
+<span class="k">class</span> <span class="nc">EdgeTagger</span><span class="p">(</span><span class="n">FlowFileTransform</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">ProcessorDetails</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s">"0.0.1"</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s">"Tags a FlowFile with an edge attribute and passes it through."</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">flowfile</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nc">FlowFileTransformResult</span><span class="p">(</span>
+            <span class="n">relationship</span><span class="o">=</span><span class="s">"success"</span><span class="p">,</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="p">{</span><span class="s">"edge.tag"</span><span class="p">:</span> <span class="s">"field-test"</span><span class="p">},</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<p>Drop that <code class="language-plaintext highlighter-rouge">.py</code> into the agent’s configured processor directory (<code class="language-plaintext highlighter-rouge">nifi.python.processor.dir</code>, which ships pointing at <code class="language-plaintext highlighter-rouge">${MINIFI_HOME}/minifi-python/</code>, with authored processors going in the sibling <code class="language-plaintext highlighter-rouge">nifi_python_processors/</code> package) and restart. The agent’s <code class="language-plaintext highlighter-rouge">PythonCreator</code> scans the directory once at boot and registers the type under its own FQCN. <code class="language-plaintext highlighter-rouge">EdgeChromeLoader</code> comes up as <code class="language-plaintext highlighter-rouge">org.apache.nifi.minifi.processors.nifi_python_processors.EdgeChromeLoader</code> in <code class="language-plaintext highlighter-rouge">GET /efm/api/agent-manifests/{id}</code>, with the <code class="language-plaintext highlighter-rouge">typeDescription</code> field carrying the exact text from my class’s <code class="language-plaintext highlighter-rouge">ProcessorDetails.description</code>. The authored <code class="language-plaintext highlighter-rouge">describe()</code> ran, not a placeholder. From there it wires into an EFM Designer flow (<code class="language-plaintext highlighter-rouge">ListenHTTP → EdgeTagger → LogAttribute</code>) like any stock processor, with no special-casing to reference a custom type, and publishes with no validation errors.</p>
+
+<p><img src="/assets/images/efm-custome-python-edge-tagger.jpg" alt="The custom `EdgeTagger` Python processor in a flow, `ListenHTTP-EdgeTagger → EdgeTagger → LogAttribute-EdgeTagger`, the middle node showing under its own name, not `ExecuteScript`"></p>
+
+<p class="notice--warning"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> <strong>A custom processor is not a hot patch.</strong> Because <code class="language-plaintext highlighter-rouge">PythonCreator</code> scans at boot, a <code class="language-plaintext highlighter-rouge">.py</code> dropped in (or edited) after the agent is up is not picked up until the agent restarts. This is the sharp difference from <code class="language-plaintext highlighter-rouge">ExecuteScript</code>, which re-reads every trigger. If your iteration loop is “tweak and re-POST,” use <code class="language-plaintext highlighter-rouge">ExecuteScript</code>. If you are shipping a stable capability, author a processor and accept the restart.</p>
+
+<p>Delivery scales the same two ways as scripts. Bake it into the image or drop it in by hand for a fixed agent, or push it as an <strong>EFM Resource</strong> into the agent’s asset directory over the C2 asset-sync command for the managed path, with no image rebuild and no manual copy. The managed asset-directory delivery runs on the arm64 K8s C++ leg (<code class="language-plaintext highlighter-rouge">EdgeTagger</code> delivered as a resource, synced in ~5s, <code class="language-plaintext highlighter-rouge">.state</code> digest matched, registered as a first-class type, flow green with no drops). The C++ Java-agent path ships a parallel py4j-based framework (<code class="language-plaintext highlighter-rouge">python/api/nifiapi/</code>, <code class="language-plaintext highlighter-rouge">python/framework/</code>) that is structurally present but not yet exercised end-to-end, wired but not yet run.</p>
+
+<p><img src="/assets/images/efm-StarlinkAI-Class.jpg" alt="The StarlinkAI agent class in EFM, the manifest plus published flow every StarlinkAI agent converges to on its next heartbeat"></p>
+
+<p><img src="/assets/images/efm-NvidiaNano-Class.jpg" alt="The NvidiaNano agent class in EFM, the Jetson's class kept parallel to StarlinkAI's so the C++ and Java manifests never collide"></p>
+
+<h2 id="driving-it-all-from-efm-the-designer-write-contract">Driving it all from EFM, the Designer write contract</h2>
+
+<p>Everything above is published to agents through EFM, and the EFM Flow Designer API has one contract that will waste your afternoon if you assume the obvious. <strong>There is no whole-flow PUT.</strong> <code class="language-plaintext highlighter-rouge">PUT /efm/api/designer/flows/{flowId}</code> returns <code class="language-plaintext highlighter-rouge">405 Request method 'PUT' is not supported</code>. You build a flow one component at a time:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create one processor — the server assigns the real identifier; your client UUID is ignored</span>
+POST /efm/api/designer/flows/<span class="o">{</span>flowId<span class="o">}</span>/process-groups/<span class="o">{</span>pgId<span class="o">}</span>/processors
+<span class="c"># wire one connection</span>
+POST /efm/api/designer/flows/<span class="o">{</span>flowId<span class="o">}</span>/connections
+<span class="c"># validate the whole in-progress flow before going live</span>
+GET  /efm/api/designer/flows/<span class="o">{</span>flowId<span class="o">}</span>/validate
+<span class="c"># publish to the agent class</span>
+POST /efm/api/designer/flows/<span class="o">{</span>flowId<span class="o">}</span>/publish
+</code></pre></div></div>
+
+<p>Two gotchas that <code class="language-plaintext highlighter-rouge">GET .../validate</code> catches before publish. New processors don’t get their <code class="language-plaintext highlighter-rouge">autoTerminatedRelationships</code> set for you (an <code class="language-plaintext highlighter-rouge">EvaluateJsonPath</code> needs <code class="language-plaintext highlighter-rouge">failure</code> and <code class="language-plaintext highlighter-rouge">unmatched</code> terminated explicitly, or publish <code class="language-plaintext highlighter-rouge">409</code>s). EFM’s Designer also has no disabled or inert state, so a single invalid or orphaned processor anywhere on the canvas blocks <code class="language-plaintext highlighter-rouge">/publish</code>. Building the StarlinkAI router this way, publishing the flow returned <code class="language-plaintext highlighter-rouge">{"dirty":false,"localChanges":false}</code> and HTTP <code class="language-plaintext highlighter-rouge">200</code>, and the agent bound all five ports on its next heartbeat.</p>
+
+<p>The other EFM rule that catches people is the mapping. <strong>The Designer validates against the agent class to manifest mapping, not against whatever agent is online.</strong> Put a Java agent on a class whose flow was authored for C++ and the Designer rejects the processors, because the FQCNs differ (<code class="language-plaintext highlighter-rouge">org.apache.nifi.minifi.processors.ListenHTTP</code> vs the Java equivalent). When you add NARs or extensions to a running agent, its new processors stay invisible to the Designer until you re-point the class mapping to the agent’s new <code class="language-plaintext highlighter-rouge">agentManifestId</code>. I keep mixed runtimes as parallel classes, <code class="language-plaintext highlighter-rouge">WindowsDesktopCpp</code> separate from the Java <code class="language-plaintext highlighter-rouge">WindowsDesktop</code> and <code class="language-plaintext highlighter-rouge">KubernetesPodJava</code> separate from the C++ <code class="language-plaintext highlighter-rouge">KubernetesPod</code>, so a Java agent never lands on a C++ canvas.</p>
+
+<h3 id="let-the-ai-drive-efm-the-mcp-servers">Let the AI drive EFM, the MCP servers</h3>
+
+<p>Since this post was first written, the fleet gained an MCP front door. My Edge Flow Manager MCP Server (<code class="language-plaintext highlighter-rouge">cldr-steven-matison/edge-flow-manager-mcp-server</code>) is read-only, 12 tools over EFM’s REST API covering agent classes, agents, manifests, designer flows, and resources, reaching EFM on port <code class="language-plaintext highlighter-rouge">10090</code>. MiNiFi has no REST API of its own, so an MCP server that sits over EFM is in effect an MCP server over the whole MiNiFi fleet. Point an assistant at it and it can read the class, the manifest, and the published flow the same way the sections above read them by hand.</p>
+
+<p>On the NiFi side, Cloudera’s NiFi MCP Server (<code class="language-plaintext highlighter-rouge">cloudera/NiFi-MCP-Server</code>) exposes 66 tools, 24 read-only ones on by default and 42 write tools gated behind <code class="language-plaintext highlighter-rouge">NIFI_READONLY=false</code>. The write tools hit the same sensitive-property trap as the raw API, where a read returns a masked value and writing it back destroys the credential, so leave <code class="language-plaintext highlighter-rouge">NIFI_READONLY=true</code> unless you need the write path.</p>
+
+<h2 id="the-nifi-and-ai-skill-the-playbook-these-flows-come-from">The <code class="language-plaintext highlighter-rouge">nifi-and-ai</code> skill, the playbook these flows come from</h2>
+
+<p>Everything above is codified in a Claude skill, <code class="language-plaintext highlighter-rouge">nifi-and-ai</code> (<a href="https://github.com/cldr-steven-matison/BrainShare/blob/main/skills/nifi-and-ai/SKILL.md">skill</a>),  that rides along in the repo. It’s the distilled version of every bug in this post, and for MiNiFi specifically it earns its keep in a few concrete places:</p>
+
+<ul>
+  <li>
+<strong>Flow dev.</strong> The synchronous-router shape, the <code class="language-plaintext highlighter-rouge">ListenHTTP</code> <code class="language-plaintext highlighter-rouge">5/5</code> trap, the <code class="language-plaintext highlighter-rouge">Retry</code>-isn’t-<code class="language-plaintext highlighter-rouge">Failure</code> drop, and the <code class="language-plaintext highlighter-rouge">InvokeHTTP</code>-defaults-to-<code class="language-plaintext highlighter-rouge">GET</code> and 15s-timeout footguns are each a rule, not a rediscovery. Build a new edge flow and the skill already knows the shape and where it silently breaks.</li>
+  <li>
+<strong>API work.</strong> The EFM Flow Designer contract (no whole-flow <code class="language-plaintext highlighter-rouge">PUT</code>, build component-by-component, <code class="language-plaintext highlighter-rouge">GET …/validate</code> before <code class="language-plaintext highlighter-rouge">/publish</code>), the Resource Manager upload body that gets silently swallowed if it is a bare array, and the “dump the running <code class="language-plaintext highlighter-rouge">flow.json</code> before you edit” rule all sit in the skill’s reference files.</li>
+  <li>
+<strong>Knowing what is in the build.</strong> Which processors a given agent <em>has</em> is not a given. C++ and Java ship different manifests, <code class="language-plaintext highlighter-rouge">ExecuteScript</code>’s Python engine is absent from every stock binary, and the Designer validates against the agent-class to manifest mapping and not the running agent. The skill names these so you check the manifest before assuming a processor exists.</li>
+  <li>
+<strong>Layout.</strong> A <code class="language-plaintext highlighter-rouge">references/layout.md</code> with the EFM row and column pitch constants, written because two fresh builds landed cramped at the tighter NiFi pitch before the numbers were pinned.</li>
+  <li>
+<strong>Testing.</strong> Send a payload through the pipeline, dump the running flow, and read <code class="language-plaintext highlighter-rouge">minifi-app.log</code> for the attributes it set. Never edit from a remembered description. The transcription fix above was root-caused by diffing the log against a multipart probe.</li>
+</ul>
+
+<p>A human injection on that fourth bullet. It deserves more than the one line the summary gave it.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**layout** is the item an AI reliably buries. I asked for it explicitly and it still came back as a footnote wedged between API work and testing.  To an AI a flow is a graph and the coordinates are noise. The data moves the same whether the boxes are aligned or stacked on top of each other. You're the one who opens that canvas when a flow is silently dropping data, tracing a single connection through a tangle of overlapping processors to find which `InvokeHTTP` of the four is the one timing out. Readable layout is the difference between reading a flow and excavating it. The unspoken assumption under the covers is that a *properly* built NiFi or MiNiFi flow in production would never need a human's eyes on it :eyes:  Why bother making it legible? Something always breaks, and the first thing someone else might do is look at your flow. Spend the two minutes on the pitch and the alignment; the future-you is the one who benefits.
+</code></pre></div></div>
+
+<p><img src="/assets/images/flow-agent-layout.png" alt="Before, the same flow at the default pitch, processors crowding and connections crossing"></p>
+
+<p><img src="/assets/images/flow-agent-layout-with-skill.png" alt="After, re-laid using the skill's `references/layout.md` row and column pitch constants, each lane readable at a glance"></p>
+
+<h3 id="efm-directed-vs-direct-on-agent">EFM-directed vs direct-on-agent</h3>
+
+<p>There are two ways to change what an agent does, and they are not interchangeable:</p>
+
+<ul>
+  <li>
+<strong>EFM-directed.</strong> Author the flow in the EFM Flow Designer and <em>publish</em> it to the agent class over C2, and the agent picks it up on its next heartbeat. This is the tracked, durable, fleet-wide path. The flow is versioned in EFM, survives agent restarts, and applies to every agent in the class. It is also the only path with a write contract to respect (component-by-component, validate, publish) and a class-to-manifest gate that rejects a C++ flow published onto a Java class.</li>
+  <li>
+<strong>Direct-on-agent.</strong> Touch the box itself. <code class="language-plaintext highlighter-rouge">kubectl cp</code> a script onto the agent’s script path, drop a <code class="language-plaintext highlighter-rouge">.py</code> into the processor directory, or edit <code class="language-plaintext highlighter-rouge">config.yml</code>. Immediate and ideal for iteration, but it bypasses EFM entirely, so nothing is tracked and a pod restart or C2 reconcile can wipe it. Worse, EFM <em>owns</em> some agent properties. A hand-edit to a <code class="language-plaintext highlighter-rouge">minifi.properties</code> key EFM manages gets regenerated (often empty) on the next boot, and some properties are denylisted from C2 push altogether.</li>
+</ul>
+
+<p class="notice--warning"><img class="emoji" title=":trophy:" alt=":trophy:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c6.png" height="20" width="20"> <strong>The rule of thumb.</strong> <strong>Iterate direct-on-agent, ship EFM-directed.</strong> Prototype a script with <code class="language-plaintext highlighter-rouge">kubectl cp</code> because it hot-reloads. Once it is stable, deliver it as a tracked EFM Resource so it survives a restart.</p>
+
+<h2 id="a-few-more-concepts-that-kept-surfacing">A few more concepts that kept surfacing</h2>
+
+<p>Beyond the flow mechanics, the high-level ideas that cost time until they were named:</p>
+
+<ul>
+  <li>
+<strong>An agent class is not one machine.</strong> A class is a manifest plus a published flow, and any number of agents can join it. Publish once and every agent in the class converges. Mixed runtimes (C++ vs Java) must be <em>parallel</em> classes or the FQCNs collide.</li>
+  <li>
+<strong>The running flow is the only truth.</strong> The canvas drifts from your notes faster than you would think, so dump <code class="language-plaintext highlighter-rouge">GET /efm/api/designer/flows/{id}</code> or the agent’s <code class="language-plaintext highlighter-rouge">config.yml</code> before editing, every time.</li>
+  <li>
+<strong>Persistence has layers.</strong> The flow (EFM/C2), the scripts and assets (Resource Manager, needs the <code class="language-plaintext highlighter-rouge">efm-resources</code> PVC or the bytes die with the pod), and the agent’s own state are three different stores with three different lifetimes. “It’s saved” means naming <em>which</em> store.</li>
+  <li>
+<strong>EFM holds write authority over agent properties.</strong> This is why direct file edits revert, and why a metrics endpoint you can’t open through config might still be reachable another way, for example by relaying over Site-to-Site to a NiFi that already has the API open, not by opening one on a headless agent.</li>
+  <li>
+<strong>Manifest staleness bites silently.</strong> Change a processor’s properties without changing its name and the Designer can serve a cached manifest. The new field won’t appear until the class is re-pointed at the agent’s new <code class="language-plaintext highlighter-rouge">agentManifestId</code>.</li>
+</ul>
+
+<h2 id="the-lessons-that-save-you-a-debugging-session">The lessons that save you a debugging session</h2>
+
+<p>These are the ones I’ve paid for more than once, the distilled version of my NiFi/MiNiFi playbook, the traps that make a flow silently drop data without erroring:</p>
+
+<ul>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">ListenHTTP</code> <code class="language-plaintext highlighter-rouge">Batch Size</code>/<code class="language-plaintext highlighter-rouge">Buffer Size</code> default to <code class="language-plaintext highlighter-rouge">5/5</code>.</strong> A single request never fills the buffer and is dropped with <code class="language-plaintext highlighter-rouge">buffer is NOT full 1/5</code>. Set both to <code class="language-plaintext highlighter-rouge">1</code> (MINIFICPP-2243 off-by-one). This is the first thing to check when a flow “does nothing.”</li>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">InvokeHTTP</code>’s <code class="language-plaintext highlighter-rouge">HTTP Method</code> silently stays <code class="language-plaintext highlighter-rouge">GET</code>.</strong> Even when you meant <code class="language-plaintext highlighter-rouge">POST</code>. Every Lemonade call was a bodyless GET until I set it explicitly.</li>
+  <li>
+    <p><strong>A broker hands the client the address to reconnect on, and it has to be one the client can reach.</strong> This bit me on Kafka but it is a general edge lesson. The first connection succeeds, then the broker advertises the endpoint clients should use for ongoing traffic. If that advertised address is an internal cluster hostname or a raw pod IP, an agent <em>outside</em> the cluster can’t route to it and the connection silently stalls. From outside, point clients at an externally reachable endpoint (a NodePort, a LoadBalancer, or an ingress) and make the broker advertise <em>that</em> address, not its in-cluster service name. The rule generalizes past Kafka. Any service that redirects a client to a second address has to advertise one that is reachable from the network the client is on.</p>
+  </li>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">Retry</code> is not <code class="language-plaintext highlighter-rouge">Failure</code>.</strong> Auto-terminating <code class="language-plaintext highlighter-rouge">InvokeHTTP</code>’s <code class="language-plaintext highlighter-rouge">Retry</code> relationship silently drops every transient 5xx/429. Self-loop <code class="language-plaintext highlighter-rouge">Retry</code> with a bounded <code class="language-plaintext highlighter-rouge">FlowFile Expiration</code> and route <code class="language-plaintext highlighter-rouge">Failure</code> to a log processor.</li>
+  <li>
+<strong>The running flow is truth.</strong> Before editing a running agent’s flow, pull what is there (<code class="language-plaintext highlighter-rouge">GET /efm/api/designer/flows/{id}</code>, or dump the agent’s <code class="language-plaintext highlighter-rouge">config.yml</code>). Don’t edit from a remembered description. The running canvas has drifted from your notes more often than not.</li>
+  <li>
+<strong>Never GET-then-PUT a processor that has sensitive properties.</strong> EFM/NiFi returns <code class="language-plaintext highlighter-rouge">********</code> for a sensitive value on read. PUT it back and you write that literal over the credential. Bind secrets to a Parameter Context, or use a narrow-scope endpoint. (The router’s processors have none, which is why the three full-entity PUTs to fix relationships were safe.)</li>
+</ul>
+
+<h2 id="what-not-to-do">What NOT to do</h2>
+
+<ul>
+  <li>
+<strong>Don’t wait on the <code class="language-plaintext highlighter-rouge">ListenHTTP</code> response for your model output.</strong> MiNiFi C++ is fire-and-forget. The answer comes back on Kafka keyed by <code class="language-plaintext highlighter-rouge">request_id</code>, not in the HTTP reply.</li>
+  <li>
+<strong>Don’t conflate <code class="language-plaintext highlighter-rouge">ExecuteScript</code> with a custom Python processor.</strong> One hot-reloads every trigger. The other needs a restart. Reach for the wrong one and your iteration loop fights you.</li>
+  <li>
+<strong>Don’t expect <code class="language-plaintext highlighter-rouge">ExecuteScript</code> to exist in a stock agent.</strong> It’s a build-time or feature-time capability. See “Working with EFM Binaries” to get the engine on the agent first.</li>
+  <li>
+<strong>Don’t drive a GUI from a <code class="language-plaintext highlighter-rouge">LocalSystem</code> service agent.</strong> Session 0 has no interactive desktop. The process spawns but no window ever appears. Use process-mode.</li>
+  <li>
+<strong>Don’t <code class="language-plaintext highlighter-rouge">PUT</code> a whole flow to the Designer.</strong> There’s no whole-flow PUT (<code class="language-plaintext highlighter-rouge">405</code>). Build it component by component and <code class="language-plaintext highlighter-rouge">GET .../validate</code> before <code class="language-plaintext highlighter-rouge">/publish</code>.</li>
+  <li>
+<strong>Don’t publish onto a class whose manifest doesn’t match the agent’s runtime.</strong> The Designer validates against the class-to-manifest mapping. A C++ flow on a Java-mapped class (or vice versa) gets rejected FQCNs and phantom processors.</li>
+  <li>
+<strong>Don’t leave <code class="language-plaintext highlighter-rouge">ListenHTTP</code> at <code class="language-plaintext highlighter-rouge">5/5</code> or <code class="language-plaintext highlighter-rouge">InvokeHTTP</code> at <code class="language-plaintext highlighter-rouge">GET</code>.</strong> The two defaults that drop or neuter more edge flows than anything else.</li>
+  <li>
+<strong>Don’t point MCP Inspector <code class="language-plaintext highlighter-rouge">@0.14.0</code> at a v1 EFM MCP server and trust an empty Tools pane.</strong> The version mismatch renders no tools even when the server is healthy. Pin a compatible Inspector version.</li>
+</ul>
+
+<h2 id="how-to-ai-with-minifi">How to AI with MiNiFi</h2>
+<p>If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about How to AI with MiNiFi please reach out to schedule a discussion.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ai" class="page__taxonomy-item p-category" rel="tag">ai</a><span class="sep">, </span>
+    
+      <a href="/tags/#cloudera" class="page__taxonomy-item p-category" rel="tag">cloudera</a><span class="sep">, </span>
+    
+      <a href="/tags/#edge" class="page__taxonomy-item p-category" rel="tag">edge</a><span class="sep">, </span>
+    
+      <a href="/tags/#efm" class="page__taxonomy-item p-category" rel="tag">efm</a><span class="sep">, </span>
+    
+      <a href="/tags/#kubernetes" class="page__taxonomy-item p-category" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      <a href="/tags/#minifi" class="page__taxonomy-item p-category" rel="tag">minifi</a><span class="sep">, </span>
+    
+      <a href="/tags/#python" class="page__taxonomy-item p-category" rel="tag">python</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#blog" class="page__taxonomy-item p-category" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-10-07T00:00:00-04:00">October 7, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=How+to+AI+with+MiNiFi%20https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-to-AI-with-MiNiFi%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fcldr-steven-matison.github.io%2Fblog%2FHow-to-AI-with-MiNiFi%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/release/Cloudera-Data-Services-On-Premises-1.5.5-SP4-Release/" class="pagination--pager" title="Cloudera Data Services On Premises 1.5.5 SP4 Release
+">Previous</a>
+    
+    
+      <a href="/blog/The-Complete-Guide-to-Edge-Flow-Management/" class="pagination--pager" title="The Complete Guide to Edge Flow Management
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/efm-cloudera-edge-management.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/The-Complete-Guide-to-Edge-Flow-Management/" rel="permalink">The Complete Guide to Edge Flow Management
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    NiFi in the datacenter is well documented. Edge Flow Manager is not, until now. 21 chapters, every one built and run on hardware.
+
+    <a href="/blog/The-Complete-Guide-to-Edge-Flow-Management/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Cloudera-Data-Platform.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Data-Services-On-Premises-1.5.5-SP4-Release/" rel="permalink">Cloudera Data Services On Premises 1.5.5 SP4 Release
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Cloudera Data Services 1.5.5 SP4 is now Generally Available, enhancing business continuity and accelerating AI capabilities across the platform. This release...
+    <a href="/release/Cloudera-Data-Services-On-Premises-1.5.5-SP4-Release/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Cloudera-Data-Platform.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Data-Platform-7.3.2-Service-Pack-2/" rel="permalink">Cloudera Data Platform 7.3.2 Service Pack 2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Cloudera is thrilled to announce the General Availability of Cloudera Runtime 7.3.2 Service Pack 2 (SP2), accelerating our vision of AI Anywhere, Cloud Anywh...
+    <a href="/release/Cloudera-Data-Platform-7.3.2-Service-Pack-2/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/nifi-logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/release/Cloudera-Data-Flow-3.2/" rel="permalink">Cloudera Data Flow 3.2
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    Cloudera is pleased to announce the release of Cloudera Data Flow 3.2 for Cloudera on Cloud, delivering major architectural modernization and eliminating fri...
+    <a href="/release/Cloudera-Data-Flow-3.2/" class="read-more-pill">Read More →</a>
+  </div>
+
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+  </form>
+  <div id="results" class="results"></div>
+</div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>

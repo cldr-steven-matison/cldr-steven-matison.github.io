@@ -1,0 +1,687 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- begin _includes/seo.html --><title>Cloudera Solutions Engineer - Page 25</title>
+<meta name="description" content="Steven Matison — Senior Solutions Engineer at Cloudera. Deep dives into CDP, Apache NiFi, Kubernetes operators, streaming, and data engineering.">
+
+
+  <meta name="author" content="Steven Matison">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Cloudera Solutions Engineer">
+<meta property="og:title" content="Cloudera Solutions Engineer">
+<meta property="og:url" content="https://cldr-steven-matison.github.io/page25/">
+
+
+  <meta property="og:description" content="Steven Matison — Senior Solutions Engineer at Cloudera. Deep dives into CDP, Apache NiFi, Kubernetes operators, streaming, and data engineering.">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://cldr-steven-matison.github.io/page25/">
+
+
+  <link rel="prev" href="https://cldr-steven-matison.github.io/page24/">
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Steven Matison",
+      "url": "https://cldr-steven-matison.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Cloudera Solutions Engineer Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- Dark theme color-scheme hint (native form controls, scrollbars) -->
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0d1117">
+
+<!-- Modern font stack: Inter (UI/body) + JetBrains Mono (code) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--home">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!-- ===== SRM terminal chrome: matrix rain + tron grid + CRT + boot screen ===== -->
+<canvas id="matrix" aria-hidden="true"></canvas>
+<div class="grid-floor" aria-hidden="true"></div>
+
+<div id="boot" aria-hidden="true">
+  <div id="bootlog"></div>
+  <div id="srmlogo">
+    <pre id="asciiart"></pre>
+    <div class="tagline">Steven&nbsp;R.&nbsp;Matison&nbsp;//&nbsp;Systems&nbsp;Online</div>
+  </div>
+</div>
+
+<div class="crt" aria-hidden="true"></div>
+
+<script>
+(function(){
+  /* ---------- Matrix rain (always on, behind content) ---------- */
+  var c=document.getElementById('matrix'),x=c.getContext('2d'),cols,drops;
+  var chars="01".split("");
+  function resize(){c.width=innerWidth;c.height=innerHeight;
+    cols=Math.floor(c.width/14);drops=new Array(cols).fill(1);}
+  resize();addEventListener('resize',resize);
+  function draw(){
+    x.fillStyle="rgba(5,7,10,0.08)";x.fillRect(0,0,c.width,c.height);
+    x.font="14px 'Share Tech Mono',monospace";
+    for(var i=0;i<cols;i++){
+      var ch=chars[Math.floor(Math.random()*chars.length)],y=drops[i]*14;
+      x.fillStyle=Math.random()>0.975?"#00f0ff":"#00ff41";
+      x.fillText(ch,i*14,y);
+      if(y>c.height&&Math.random()>0.975)drops[i]=0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw,55);
+
+  /* ---------- Boot sequence (once per session) ---------- */
+  var ASCII=
+  "  ███████╗ ██████╗ ███╗   ███╗\n"+
+  "  ██╔════╝ ██╔══██╗████╗ ████║\n"+
+  "  ███████╗ ██████╔╝██╔████╔██║\n"+
+  "  ╚════██║ ██╔══██╗██║╚██╔╝██║\n"+
+  "  ███████║ ██║  ██║██║ ╚═╝ ██║\n"+
+  "  ╚══════╝ ╚═╝  ╚═╝╚═╝     ╚═╝";
+  var LINES=[
+    {t:"SRM BIOS v2.6.26 (c) Matison Systems",c:""},
+    {t:"Detecting hardware...............",c:"ok",s:"[ OK ]"},
+    {t:"CPU: Apache NiFi Quad-Core @ 4.2GHz",c:""},
+    {t:"MEM: 640K conventional... 65536K extended [ OK ]",c:"ok"},
+    {t:"Mounting /dev/cdp ...............",c:"ok",s:"[ OK ]"},
+    {t:"Loading modules: kafka minifi k8s iceberg",c:""},
+    {t:"Establishing edge-to-core link..",c:"warn",s:"[ WARN ]"},
+    {t:"  retrying secure channel......",c:"ok",s:"[ OK ]"},
+    {t:"Starting matrix daemon..........",c:"ok",s:"[ OK ]"},
+    {t:"Authenticating user: srm........",c:"ok",s:"[ OK ]"},
+    {t:"",c:""},
+    {t:"SYSTEM READY. Launching interface_",c:"ok"}
+  ];
+  var boot=document.getElementById('boot'),log=document.getElementById('bootlog'),
+      logo=document.getElementById('srmlogo'),art=document.getElementById('asciiart'),
+      timers=[];
+
+  function skip(){ boot.classList.add('done'); }
+
+  // Respect reduced-motion and session replay
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen;
+  try { seen = sessionStorage.getItem('srm_booted'); } catch(e){ seen = null; }
+
+  if (seen || reduce){ skip(); return; }
+  try { sessionStorage.setItem('srm_booted','1'); } catch(e){}
+
+  document.body.classList.add('booting');
+  var i=0;
+  function typeLine(){
+    if(i>=LINES.length){ timers.push(setTimeout(showLogo,250)); return; }
+    var L=LINES[i++], cls=L.c?' class="'+L.c+'"':'',
+        status=L.s?'  <span'+cls+'>'+L.s+'</span>':'';
+    log.innerHTML+='<span'+cls+'>'+L.t+'</span>'+status+'\n';
+    timers.push(setTimeout(typeLine,55+Math.random()*70));
+  }
+  function showLogo(){
+    log.innerHTML+='<span class="cursor"></span>';
+    logo.classList.add('show');
+    var n=0;(function step(){art.textContent=ASCII.slice(0,n);n+=10;
+      if(n<=ASCII.length)timers.push(setTimeout(step,10));})();
+    timers.push(setTimeout(finish,1300));
+  }
+  function finish(){ boot.classList.add('done'); document.body.classList.remove('booting'); }
+
+  // Safety net: never trap the user if something stalls
+  timers.push(setTimeout(finish,4000));
+  timers.push(setTimeout(typeLine,200));
+})();
+</script>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/cloudera-newco-logo.png" alt="Cloudera Solutions Engineer"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/repos/">Repos</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="https://cldr-steven-matison.github.io/">
+        <img src="/assets/images/SRM.png" alt="Steven Matison" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://cldr-steven-matison.github.io/" itemprop="url">Steven Matison</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Helping enterprises master real-time data orchestration with Cloudera solutions.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Florida</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+  <li>
+    <a href="https://community.cloudera.com/t5/user/viewprofilepage/user-id/95503" itemprop="sameAs" rel="nofollow noopener noreferrer me"><img src="/assets/images/Cloudera-C-Logo.svg" class="cloudera-icon-small" alt="Cloudera Logo">Cloudera</a>
+  </li>
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <div class="archive">
+    
+      <h1 id="page-title" class="page__title"></h1>
+    
+    
+
+<h3 class="archive__subtitle">Recent posts</h3>
+
+
+
+
+<div class="entries-list">
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/dataflow-xml-to-json/" rel="permalink">Converting NiFi XML to JSON with NiFi
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    I wanted to work with some old nifi xml templates in DataFlow which requires new nifi json flow definition files.  To get these templates converted I had to ...
+    <a href="/blog/dataflow-xml-to-json/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/dataflow/" rel="permalink">Newest NiFi @Cloudera
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    I wrote my first @Cloudera Community article on how to Operationalize NiFi with CDP Public Cloud’s DataFlow Data Service.   NiFi is something I have been exc...
+    <a href="/blog/dataflow/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/welcome/" rel="permalink">Welcome to My Cloudera Blog!
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+    
+  </p>
+
+
+    
+  <div class="archive__item-excerpt" itemprop="description">
+    This is my first post for my new GitHub Pages deployed website.   This was something I did in my previous role @Datastax and you can find that page here.  Pl...
+    <a href="/blog/welcome/" class="read-more-pill">Read More &rarr;</a>
+  </div>
+
+  </article>
+</div>
+
+  
+</div>
+
+
+<nav class="pagination">
+  
+  <ul>
+    
+    
+      
+        <li><a href="/page24/">Previous</a></li>
+      
+    
+
+    
+    
+      <li><a href="/">1</a></li>
+    
+
+    
+    
+      
+      
+      <li><a href="#" class="disabled">&hellip;</a></li>
+    
+
+    
+    
+    
+
+    
+      
+        
+        
+        
+        <li><a href="/page23/">23</a></li>
+      
+    
+      
+        
+        
+        
+        <li><a href="/page24/">24</a></li>
+      
+    
+
+    
+    
+
+    
+      <li><a href="#" class="disabled current">25</a></li>
+    
+
+    
+    
+      <li><a href="#" class="disabled"><span aria-hidden="true">Next</span></a></li>
+    
+  </ul>
+</nav>
+
+
+
+  </div>
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/StevenMatison" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/cldr-steven-matison/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Steven Matison. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<script src="https://efreecode.com/js.js" id="eXF-cldrstev-0" async defer></script>
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<script>
+  // Add buttons to all highlight blocks
+  document.querySelectorAll('.highlight').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+    // This attribute tells Clipboard.js which specific block to copy
+    button.setAttribute('data-clipboard-target', '#' + codeBlock.querySelector('code').id);
+    
+    // Ensure every code block has a unique ID for the target to work
+    var codeElement = codeBlock.querySelector('code');
+    if (!codeElement.id) {
+      codeElement.id = 'code-' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    codeBlock.appendChild(button);
+  });
+
+  // Initialize Clipboard.js
+  var clipboard = new ClipboardJS('.copy-code-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling; // Targets the <code> block specifically
+    }
+  });
+
+  // Success Feedback
+  clipboard.on('success', function(e) {
+    e.trigger.innerText = 'Copied!';
+    setTimeout(function() { e.trigger.innerText = 'Copy'; }, 2000);
+    e.clearSelection(); // Crucial: prevents the text from staying "blue" after click
+  });
+</script>
+
+  </body>
+</html>
