@@ -1,16 +1,23 @@
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 182521
-  lang: "HTML"
-  updated: "2026-10-06"
-  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
   size: 50
   lang: ""
-  updated: "2026-10-06"
+  updated: "2026-10-08"
+  fork: false
+- name: "EdgeFlowManager"
+  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
+  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
+  size: 18867
+  lang: "Python"
+  updated: "2026-10-07"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 192505
+  lang: "HTML"
+  updated: "2026-10-07"
   fork: false
 - name: "NiFiandAi"
   description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
@@ -52,13 +59,6 @@
   url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
   size: 1606
   lang: "Shell"
-  updated: "2026-09-24"
-  fork: false
-- name: "EdgeFlowManager"
-  description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
-  url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
-  size: 18636
-  lang: "Python"
   updated: "2026-09-24"
   fork: false
 - name: "hermes-agent"
