@@ -1,3 +1,10 @@
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 192512
+  lang: "HTML"
+  updated: "2026-10-12"
+  fork: false
 - name: "NiFiandAi"
   description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
   url: "https://github.com/cldr-steven-matison/NiFiandAi"
@@ -17,13 +24,6 @@
   url: "https://github.com/cldr-steven-matison/EdgeFlowManager"
   size: 18867
   lang: "Python"
-  updated: "2026-10-11"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 192510
-  lang: "HTML"
   updated: "2026-10-11"
   fork: false
 - name: "cldr-steven-matison"
