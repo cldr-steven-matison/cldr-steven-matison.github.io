@@ -1,9 +1,9 @@
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 192513
+  size: 192514
   lang: "HTML"
-  updated: "2026-10-13"
+  updated: "2026-10-14"
   fork: false
 - name: "NiFiandAi"
   description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
