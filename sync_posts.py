@@ -1,4 +1,5 @@
 import os
+import sys
 import glob
 import re
 import markdown2
@@ -46,6 +47,8 @@ def sync_posts():
     if not post_files:
         print("No markdown files found.")
         return
+
+    failures = 0
 
     for file_path in post_files:
         if not os.path.exists(file_path):
@@ -125,6 +128,11 @@ def sync_posts():
                 print(f"✨ Created: {title}")
         except Exception as e:
             print(f"❌ Failed to sync {title}: {e}")
+            failures += 1
+
+    if failures:
+        print(f"\n{failures} post(s) failed to sync.")
+        sys.exit(1)
 
 if __name__ == "__main__":
     sync_posts()

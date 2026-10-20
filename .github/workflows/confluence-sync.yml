@@ -22,7 +22,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install atlassian-python-api markdown2 python-frontmatter
+          pip install "atlassian-python-api==3.41.19" markdown2 python-frontmatter
 
       - name: Run Sync Script
         env:
