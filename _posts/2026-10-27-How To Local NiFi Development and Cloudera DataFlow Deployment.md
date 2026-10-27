@@ -21,7 +21,7 @@ header:
 
 Cloudera DataFlow does not expose the NiFi REST API. You cannot build a flow there from a script, and you cannot build one there with the AI. Every DataFlow build happens by hand in Flow Designer. So I build somewhere I *can* drive the API, on a NiFi I run myself in the same NiFi 2.x family as DataFlow, prove the flow end to end, export it, and carry it over. The only things that change on the other side are the Parameter Context and where the JDBC drivers come from. This post is that whole loop, with one flow as the example: vehicle events read from a warehouse, enriched, and written to HBase through Phoenix for fast point reads by VIN.
 
-## The flow
+## The Flow
 
 The customer wants VIN-curated rows in HBase so a lookup by VIN is a single point read, with the history of each VIN preserved. Five stages, all stock NiFi 2.x record processors:
 
@@ -35,7 +35,7 @@ QueryDatabaseTableRecord   read vehicle events (incremental on event_id)
 
 There is no `PutPhoenix` or `PutHBase` to drag onto the canvas. NiFi 2.x dropped the native HBase, Hive, and Phoenix bundles, which is exactly why the write looks unsupported. It is not. Phoenix is a JDBC SQL layer over HBase, so writing a Phoenix table *is* writing HBase, and the stock `PutDatabaseRecord` over a Phoenix JDBC connection pool does it.
 
-## Build it where you have the API
+## Build It Where You Have the API
 
 I build on CFM-operator NiFi 2.6.0 running on a minikube cluster. That version is the same NiFi 2.x family as DataFlow, so a flow definition exported here imports into Flow Designer without a version fight. It is also API-drivable, which means I build the flow component by component over REST instead of clicking, and I keep the whole build in a script.
 
@@ -69,7 +69,7 @@ Every stage builds from the `nifi-and-ai` skill over that API: component by comp
 
 ![The five-stage VIN flow on local NiFi 2.6.0](/assets/images/vin-curation-local-nifi.png)
 
-## Writing to Phoenix: schema, not database, and time as BIGINT
+## Writing to Phoenix: Schema, Not Database, and Time as BIGINT
 
 Two settings make the Phoenix write land on Cloudera Operational Database. Both come from the fact that COD publishes the Phoenix Query Server over Knox, so the pool uses the Phoenix **thin** client:
 
@@ -104,11 +104,11 @@ CREATE TABLE VIN.VIN_CURATED (
 
 `(VIN, EVENT_TS DESC)` physically orders a VIN's rows newest first in HBase. The latest snapshot is a single-row point read, the full history is a short prefix scan, and re-running the flow UPSERTs the same `(VIN, EVENT_TS)` rows without duplicating them.
 
-## What changes for DataFlow
+## What Changes for DataFlow
 
 The flow I just built runs unchanged on DataFlow. Three things differ, and none of them is a processor or a wire.
 
-The first is the one that sent me here: there is no API, so I build and prove on the local NiFi and import the exported definition into Flow Designer.
+The first is the one that sent me here: there is no API, so I build and prove on the local NiFi and import the exported definition into the DataFlow Catalog. For this flow I skip Flow Designer completely.
 
 The second is drivers. On my local NiFi each connection pool reads its JDBC jar from a filesystem path on the pod. A DataFlow node has no such path and no jar sitting on it. The fix is to make the driver location a parameter and upload the jars as DataFlow assets. In the connection pool, `Database Driver Location(s)` becomes a parameter reference:
 
@@ -131,13 +131,13 @@ The third is the Parameter Context, which is the only environment-specific surfa
 
 Because those are the only values that move, porting the flow is a context swap and a driver upload, not a rebuild.
 
-## The DataFlow deployment
+## The DataFlow Deployment
 
-In Flow Designer I import the flow definition, upload the three driver jars as assets and map the `*.Jar` parameters to them, fill in the Parameter Context from the warehouse and COD Connect tabs, enter the workload credentials as sensitive parameters, and deploy. The same five processors read from the warehouse, enrich, and UPSERT into the same `VIN.VIN_CURATED`.
+In the DataFlow Deployment Wizard I import the flow definition, upload the three driver jars as assets and map the `*.Jar` parameters to them, fill in the Parameter Context from the warehouse and COD Connect tabs, enter the workload credentials as sensitive parameters, and deploy. The same five processors read from the warehouse, enrich, and UPSERT into the same `VIN.VIN_CURATED`.
 
 ![The same flow deployed on Cloudera DataFlow](/assets/images/vin-curation-dataflow.png)
 
-## Reading it back
+## Reading It Back
 
 History is preserved on both sides, read the same way:
 
@@ -156,7 +156,7 @@ SELECT * FROM VIN.VIN_CURATED WHERE VIN = '1FTFW1ET5DFC00001' LIMIT 1;
 | 1FTFW1ET5DFC00001 | 2026-10-20 06:20:00 | 120480 | DRIVING | Ford | F-150 |
 | 1FTFW1ET5DFC00001 | 2026-10-19 06:00:00 | 120300 | PARKED | Ford | F-150 |
 
-## What not to do
+## What Not to Do
 
 - Don't hunt for `PutPhoenix` or `PutHBase` in NiFi 2.x. There isn't one. `PutDatabaseRecord` over a Phoenix JDBC pool is the write path, and the rows land in HBase.
 - Don't set Database Name or a dotted table name for the COD thin-client write. Schema Name plus Table Name.
