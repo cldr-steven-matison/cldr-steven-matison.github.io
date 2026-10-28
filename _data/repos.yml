@@ -1,16 +1,23 @@
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 192540
-  lang: "HTML"
-  updated: "2026-10-26"
-  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
   size: 52
   lang: ""
-  updated: "2026-10-23"
+  updated: "2026-10-28"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 193564
+  lang: "HTML"
+  updated: "2026-10-27"
+  fork: false
+- name: "NiFi-Templates"
+  description: "NiFI Templates of example flows I share with the community."
+  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
+  size: 1112
+  lang: "Python"
+  updated: "2026-10-27"
   fork: false
 - name: "EdgeFlowManager"
   description: "The Complete Guide to Edge Flow Management — MiNiFi/EFM at the edge, built on real hardware"
@@ -23,13 +30,6 @@
   description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
   url: "https://github.com/cldr-steven-matison/NiFiandAi"
   size: 206
-  lang: "Python"
-  updated: "2026-10-11"
-  fork: false
-- name: "NiFi-Templates"
-  description: "NiFI Templates of example flows I share with the community."
-  url: "https://github.com/cldr-steven-matison/NiFi-Templates"
-  size: 1103
   lang: "Python"
   updated: "2026-10-11"
   fork: false
