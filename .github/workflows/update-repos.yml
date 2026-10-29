@@ -31,7 +31,7 @@ jobs:
             exit 1
           fi
 
-          echo "$response" | jq -r '.[] | "- name: \"\(.name)\"\n  description: \"\(.description // "")\"\n  url: \"\(.html_url)\"\n  size: \(.size)\n  lang: \"\(.language // "")\"\n  updated: \"\(.updated_at | split("T")[0])\"\n  fork: \(.fork)"' > _data/repos.yml
+          echo "$response" | jq -r '.[] | "- name: \(.name | tojson)\n  description: \(.description // "" | tojson)\n  url: \"\(.html_url)\"\n  size: \(.size)\n  lang: \(.language // "" | tojson)\n  updated: \"\(.updated_at | split("T")[0])\"\n  fork: \(.fork)"' > _data/repos.yml
 
       - name: Commit and Push
         run: |
