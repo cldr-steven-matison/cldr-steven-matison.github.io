@@ -65,9 +65,11 @@ open -na "Google Chrome" --args \
 
 The `.local` name would otherwise go to mDNS and never read `/etc/hosts`. `--host-resolver-rules` maps the exact name to `127.0.0.1` inside Chrome, so the request rides the tunnel while the real name still travels as SNI and Host, the cert validates, and the ingress routes it.
 
-Every stage builds from the `nifi-and-ai` skill over that API: component by component, never a whole-flow PUT, and never a GET-then-PUT of a processor that holds a secret, because the GET hands you `********` and the PUT writes that back over the credential. Secrets live only in the Parameter Context. The source and write connection pools stay disabled in the committed flow until I type the CDP workload password into the UI, so no credential is ever in the file.
+Every stage builds from the [`nifi-and-ai`](https://github.com/cldr-steven-matison/NiFiandAi) skill over that API: component by component, never a whole-flow PUT, and never a GET-then-PUT of a processor that holds a secret, because the GET hands you `********` and the PUT writes that back over the credential. Secrets live only in the Parameter Context. The source and write connection pools stay disabled in the committed flow until I type the CDP workload password into the UI, so no credential is ever in the file.
 
 ![The five-stage VIN flow on local NiFi 2.6.0](/assets/images/vin-curation-local-nifi.png)
+
+The local flow is in my NiFi Templates repo as [VIN_Curation_HBase_Phoenix.json](https://github.com/cldr-steven-matison/NiFi-Templates/blob/main/VIN_Curation_HBase_Phoenix.json). Upload it as a process group on any NiFi 2.x, fill in the Parameter Context, and point the three driver paths at jars on your node.
 
 ## Writing to Phoenix: Schema, Not Database, and Time as BIGINT
 
@@ -137,6 +139,8 @@ In the DataFlow Deployment Wizard I import the flow definition, upload the three
 
 ![The same flow deployed on Cloudera DataFlow](/assets/images/vin-curation-dataflow.png)
 
+The DataFlow version, with the driver locations already parameterized for assets, is [VIN_Curation_HBase_Phoenix_DataFlow.json](https://github.com/cldr-steven-matison/NiFi-Templates/blob/main/VIN_Curation_HBase_Phoenix_DataFlow.json). Import that file into the Catalog as a new flow definition.
+
 ## Reading It Back
 
 History is preserved on both sides, read the same way:
@@ -164,6 +168,42 @@ SELECT * FROM VIN.VIN_CURATED WHERE VIN = '1FTFW1ET5DFC00001' LIMIT 1;
 - Don't leave `Database Driver Location(s)` as a filesystem path and expect DataFlow to have the jar. Parameterize it and upload the jar as an asset.
 - Don't PUT a whole flow, and don't GET-then-PUT a processor that holds a secret. Build component by component and bind secrets to the Parameter Context.
 - After you drop and recreate a Phoenix table, wait a few seconds before the first write. The Query Server's column metadata lags, and a write in that window fails to find the columns.
+
+## Reference
+
+### NiFi Templates
+
+- [VIN_Curation_HBase_Phoenix.json](https://github.com/cldr-steven-matison/NiFi-Templates/blob/main/VIN_Curation_HBase_Phoenix.json): the local NiFi 2.6.0 flow
+- [VIN_Curation_HBase_Phoenix_DataFlow.json](https://github.com/cldr-steven-matison/NiFi-Templates/blob/main/VIN_Curation_HBase_Phoenix_DataFlow.json): the DataFlow flow, drivers as asset parameters
+- [NiFi Templates repo](https://github.com/cldr-steven-matison/NiFi-Templates)
+- [nifi-and-ai skill](https://github.com/cldr-steven-matison/NiFiandAi)
+
+### Cloudera DataFlow
+
+- [DataFlow documentation](https://docs.cloudera.com/dataflow/cloud/index.html)
+- [Importing a flow definition from NiFi](https://docs.cloudera.com/dataflow/cloud/import-flow-definitions/topics/cdf-import-flow-definition.html)
+- [Deploying a flow definition from the Catalog](https://docs.cloudera.com/dataflow/cloud/deploy-flows/topics/cdf-deploy-flow-catalog.html)
+- [Deployment Wizard: setting parameters](https://docs.cloudera.com/dataflow/cloud/deploy-flows/topics/cdf-deploy-flow-new-deployment.html)
+- [Creating a Parameter Context](https://docs.cloudera.com/dataflow/cloud/develop-flow-definitions/topics/cdf-create-parameter-context.html)
+
+### Cloudera Operational Database and Phoenix
+
+- [COD JDBC support](https://docs.cloudera.com/operational-database/cloud/application-support/topics/cod-jdbc-support.html)
+- [Running an application with the Phoenix thin client](https://docs.cloudera.com/operational-database/cloud/compiling-application/topics/cod-example-run-application-phoenix-thin-client.html)
+- [Apache Phoenix namespace mapping](https://phoenix.apache.org/namspace_mapping.html)
+- [Apache Phoenix Query Server](https://phoenix.apache.org/server.html)
+- [Apache Phoenix data types](https://phoenix.apache.org/language/datatypes.html)
+
+### Apache NiFi and CFM
+
+- [PutDatabaseRecord](https://nifi.apache.org/components/org.apache.nifi.processors.standard.PutDatabaseRecord/)
+- [DBCPConnectionPool](https://nifi.apache.org/components/org.apache.nifi.dbcp.DBCPConnectionPool/)
+- [LookupRecord](https://nifi.apache.org/components/org.apache.nifi.processors.standard.LookupRecord/)
+- [CFM Operator documentation](https://docs.cloudera.com/cfm-operator/3.4/index.html)
+- Related posts on this blog:
+  - [Persistence with Cloudera Flow Management Operator](/blog/Persistence-with-Cloudera-Flow-Management-Operator/)
+  - [How to Install a Public Certificate for NiFi](/blog/How-to-Install-a-Public-Certificate-for-NiFi/)
+  - [How to AI with NiFi and Python](/blog/How-to-AI-with-NiFi-and-Python/)
 
 ## {{ page.title }}
 If you would like a deeper dive, hands on experience, demos, or are interested in speaking with me further about {{ page.title }} please reach out to schedule a discussion.
