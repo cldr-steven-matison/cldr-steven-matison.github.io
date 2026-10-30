@@ -1,3 +1,31 @@
+- name: "NiFiandAi"
+  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
+  url: "https://github.com/cldr-steven-matison/NiFiandAi"
+  size: 220
+  lang: "Python"
+  updated: "2026-10-29"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 193584
+  lang: "HTML"
+  updated: "2026-10-29"
+  fork: false
+- name: "colibri"
+  description: "Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immense model. 🐦"
+  url: "https://github.com/cldr-steven-matison/colibri"
+  size: 37262
+  lang: ""
+  updated: "2026-10-29"
+  fork: true
+- name: "Soup"
+  description: "Fine-tune LLMs from one YAML. Layer streaming trains an 8B model on a 4 GB laptop GPU."
+  url: "https://github.com/cldr-steven-matison/Soup"
+  size: 32027
+  lang: ""
+  updated: "2026-10-29"
+  fork: true
 - name: "NanoTax"
   description: "Created to help you \"TAX\" your Nvidia Nano"
   url: "https://github.com/cldr-steven-matison/NanoTax"
@@ -5,13 +33,6 @@
   lang: ""
   updated: "2026-10-28"
   fork: true
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 193570
-  lang: "HTML"
-  updated: "2026-10-28"
-  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
@@ -32,13 +53,6 @@
   size: 18880
   lang: "Python"
   updated: "2026-10-16"
-  fork: false
-- name: "NiFiandAi"
-  description: "The nifi-and-ai Claude skill — build, deploy, and debug Apache NiFi 2.x / MiNiFi / EFM data flows"
-  url: "https://github.com/cldr-steven-matison/NiFiandAi"
-  size: 206
-  lang: "Python"
-  updated: "2026-10-11"
   fork: false
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
