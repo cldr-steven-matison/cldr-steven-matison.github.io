@@ -1,3 +1,24 @@
+- name: "trino-demo"
+  description: "Provision a Trino Virtual Warehouse on Cloudera Data Warehouse (CDW) with a single cloudera.cloud Ansible playbook."
+  url: "https://github.com/cldr-steven-matison/trino-demo"
+  size: 5
+  lang: ""
+  updated: "2026-11-05"
+  fork: false
+- name: "iceberg-rest-catalog-demo"
+  description: ""
+  url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
+  size: 1613
+  lang: "Shell"
+  updated: "2026-11-05"
+  fork: false
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 193606
+  lang: "HTML"
+  updated: "2026-11-05"
+  fork: false
 - name: "cloudera-ce-ecs-aws"
   description: ""
   url: "https://github.com/cldr-steven-matison/cloudera-ce-ecs-aws"
@@ -5,13 +26,6 @@
   lang: ""
   updated: "2026-11-04"
   fork: true
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 193604
-  lang: "HTML"
-  updated: "2026-11-04"
-  fork: false
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
@@ -89,13 +103,6 @@
   lang: "Python"
   updated: "2026-09-24"
   fork: false
-- name: "iceberg-rest-catalog-demo"
-  description: ""
-  url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
-  size: 1606
-  lang: "Shell"
-  updated: "2026-09-24"
-  fork: false
 - name: "hermes-agent"
   description: "The agent that grows with you"
   url: "https://github.com/cldr-steven-matison/hermes-agent"
@@ -110,13 +117,6 @@
   lang: "HCL"
   updated: "2026-09-23"
   fork: true
-- name: "trino-demo"
-  description: "Provision a Trino Virtual Warehouse on Cloudera Data Warehouse (CDW) with a single cloudera.cloud Ansible playbook."
-  url: "https://github.com/cldr-steven-matison/trino-demo"
-  size: 4
-  lang: ""
-  updated: "2026-09-14"
-  fork: false
 - name: "ADMIN-238_Admin_K8s"
   description: "Exercises for the ADMIN-238 Administrating Kubernetes course"
   url: "https://github.com/cldr-steven-matison/ADMIN-238_Admin_K8s"
