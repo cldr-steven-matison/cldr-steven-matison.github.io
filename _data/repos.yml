@@ -1,3 +1,10 @@
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 193608
+  lang: "HTML"
+  updated: "2026-11-06"
+  fork: false
 - name: "trino-demo"
   description: "Provision a Trino Virtual Warehouse on Cloudera Data Warehouse (CDW) with a single cloudera.cloud Ansible playbook."
   url: "https://github.com/cldr-steven-matison/trino-demo"
@@ -10,13 +17,6 @@
   url: "https://github.com/cldr-steven-matison/iceberg-rest-catalog-demo"
   size: 1613
   lang: "Shell"
-  updated: "2026-11-05"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 193606
-  lang: "HTML"
   updated: "2026-11-05"
   fork: false
 - name: "cloudera-ce-ecs-aws"
