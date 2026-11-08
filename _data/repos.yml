@@ -1,9 +1,9 @@
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 193608
+  size: 193609
   lang: "HTML"
-  updated: "2026-11-06"
+  updated: "2026-11-07"
   fork: false
 - name: "trino-demo"
   description: "Provision a Trino Virtual Warehouse on Cloudera Data Warehouse (CDW) with a single cloudera.cloud Ansible playbook."
