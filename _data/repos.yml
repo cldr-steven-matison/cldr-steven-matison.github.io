@@ -1,15 +1,15 @@
+- name: "cldr-steven-matison.github.io"
+  description: "My github pages for Cloudera"
+  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
+  size: 193616
+  lang: "HTML"
+  updated: "2026-11-12"
+  fork: false
 - name: "MiNiFi-C-Object-Detection"
   description: "A demo of MiNiFi c++ new object detection capabilities: TractModelService DetectObject DrawBoundingBoxes ClassifyImage "
   url: "https://github.com/cldr-steven-matison/MiNiFi-C-Object-Detection"
   size: 21582
   lang: "Python"
-  updated: "2026-11-11"
-  fork: false
-- name: "cldr-steven-matison.github.io"
-  description: "My github pages for Cloudera"
-  url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 193614
-  lang: "HTML"
   updated: "2026-11-11"
   fork: false
 - name: "trino-demo"
@@ -29,7 +29,7 @@
 - name: "cloudera-ce-ecs-aws"
   description: ""
   url: "https://github.com/cldr-steven-matison/cloudera-ce-ecs-aws"
-  size: 647
+  size: 653
   lang: ""
   updated: "2026-11-04"
   fork: true
