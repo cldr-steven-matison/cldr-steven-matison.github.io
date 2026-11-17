@@ -1,14 +1,14 @@
 - name: "srm-runbook-cloudera-ce-ecs-aws"
   description: ""
   url: "https://github.com/cldr-steven-matison/srm-runbook-cloudera-ce-ecs-aws"
-  size: 17
+  size: 33
   lang: "Shell"
   updated: "2026-11-13"
   fork: false
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 193620
+  size: 193621
   lang: "HTML"
   updated: "2026-11-12"
   fork: false
@@ -36,7 +36,7 @@
 - name: "cloudera-ce-ecs-aws"
   description: ""
   url: "https://github.com/cldr-steven-matison/cloudera-ce-ecs-aws"
-  size: 654
+  size: 667
   lang: ""
   updated: "2026-11-04"
   fork: true
