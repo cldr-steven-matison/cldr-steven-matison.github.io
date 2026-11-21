@@ -1,3 +1,10 @@
+- name: "srm-claudera"
+  description: "Claude Code home base for Cloudera Operators, NiFi, MiNiFi and EFM work"
+  url: "https://github.com/cldr-steven-matison/srm-claudera"
+  size: 10
+  lang: "Shell"
+  updated: "2026-11-20"
+  fork: false
 - name: "srm-runbook-cloudera-ce-ecs-aws"
   description: ""
   url: "https://github.com/cldr-steven-matison/srm-runbook-cloudera-ce-ecs-aws"
@@ -8,7 +15,7 @@
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 193682
+  size: 193681
   lang: "HTML"
   updated: "2026-11-12"
   fork: false
@@ -43,7 +50,7 @@
 - name: "cldr-steven-matison"
   description: "Config files for my GitHub profile."
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison"
-  size: 53
+  size: 54
   lang: ""
   updated: "2026-11-04"
   fork: false
