@@ -15,7 +15,7 @@
 - name: "cldr-steven-matison.github.io"
   description: "My github pages for Cloudera"
   url: "https://github.com/cldr-steven-matison/cldr-steven-matison.github.io"
-  size: 193685
+  size: 193875
   lang: "HTML"
   updated: "2026-11-12"
   fork: false
@@ -99,7 +99,7 @@
 - name: "cso-operator-app"
   description: "Demo control panel for the Cloudera Streaming Operators RAG + Audio Transcription stack on Minikube"
   url: "https://github.com/cldr-steven-matison/cso-operator-app"
-  size: 2476
+  size: 2477
   lang: "TypeScript"
   updated: "2026-09-29"
   fork: false
